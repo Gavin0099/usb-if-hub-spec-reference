@@ -1,0 +1,21 @@
+name: usb-if-hub-spec-reference-contract
+plugin_version: "1.0.0"
+framework_interface_version: "1"
+framework_compatible: ">=1.0.0,<2.0.0"
+domain: usb-if-spec
+documents:
+  - AGENTS.base.md
+  - PLAN.md
+  - governance/TESTING.md
+  - governance/ARCHITECTURE.md
+  - specs/hub_descriptor.md
+  - specs/port_status_bits.md
+  - specs/hub_class_requests.md
+  - specs/transaction_translator.md
+  - specs/escalation_table.md
+ai_behavior_override:
+  - AGENTS.md
+  - AGENTS.base.md
+rule_roots:
+  - governance/rules
+validators: []
