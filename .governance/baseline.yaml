@@ -11,9 +11,9 @@
 # ── PROVENANCE ────────────────────────────────────────────────────────────────
 schema_version: "1"
 baseline_version: 1.0.0
-source_commit: unknown
-framework_root: D:\Hearth\ai-governance-framework
-initialized_at: 2026-05-29T17:40:36Z
+source_commit: a17e28c1ca6f918f3cde1dfcfc940ba3c2864cc7
+framework_root: D:\usb-if-hub-spec-reference
+initialized_at: 2026-05-29T17:59:06Z
 initialized_by: governance_tools/adopt_governance.py
 
 # ── INTEGRITY ─────────────────────────────────────────────────────────────────
