@@ -44,6 +44,7 @@ VALID_USB_SCOPES = {"usb20", "usb21", "usb32", "usb4"}
 VALID_CLAIM_LEVELS = {"normative", "verified", "inferred", "provisional", "draft", "rejected"}
 HIGH_CLAIM_LEVELS = {"normative", "verified"}
 NORMATIVE_OFFICIAL = "normative_official"
+VALID_APPLIES_TO = {"all_hubs", "hub_only", "port_only", "hub_with_tt_only", "reserved_or_unsupported"}
 REQUIRED_ENTRY_FIELDS = {
     "request_id", "request_name", "usb_version_scope", "setup",
     "recipient", "topic", "source_refs", "authority_level",
@@ -159,6 +160,15 @@ def main() -> int:
             add_error(
                 "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE",
                 f"{eid}: claim_level '{claim_level}' requires ≥1 source_ref with authority_level 'normative_official'",
+            )
+
+        # R9: applies_to must be valid enum if present
+        applies_to = entry.get("applies_to")
+        if applies_to is not None and applies_to not in VALID_APPLIES_TO:
+            add_error(
+                "APPLIES_TO_INVALID",
+                f"{eid}: applies_to '{applies_to}' is not a valid value "
+                f"(expected one of: {', '.join(sorted(VALID_APPLIES_TO))})",
             )
 
         # R8: unique request_id

@@ -5,8 +5,8 @@
   "does_not_parse_pdf": true,
   "does_not_validate_usb_semantics": true,
   "result": "PASS",
-  "matrix_id": "usb_hub_class_request_matrix",
-  "entry_count": 10,
+  "matrix_id": "fixture_usb20_tt_family_matrix",
+  "entry_count": 2,
   "error_count": 0,
   "errors": [],
   "findings": []

@@ -6,7 +6,7 @@ scope:
 status: draft
 # Phase 3B: GET_STATUS hub/port entries added.
 # Phase 3C: SET_FEATURE / CLEAR_FEATURE hub/port entries added.
-# Phase 3D: TT request family — NEXT.
+# Phase 3D: TT request family added. applies_to field introduced.
 entries:
 
   - request_id: usb20_get_status_hub
@@ -15,6 +15,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: hub
+    applies_to: all_hubs
     setup:
       direction: device_to_host
       type: class
@@ -41,6 +42,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: port
+    applies_to: all_hubs
     setup:
       direction: device_to_host
       type: class
@@ -68,6 +70,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: hub
+    applies_to: all_hubs
     setup:
       direction: host_to_device
       type: class
@@ -94,6 +97,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: port
+    applies_to: all_hubs
     setup:
       direction: host_to_device
       type: class
@@ -120,6 +124,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: hub
+    applies_to: all_hubs
     setup:
       direction: host_to_device
       type: class
@@ -146,6 +151,7 @@ entries:
       - usb20
     topic: class_specific_request
     recipient: port
+    applies_to: all_hubs
     setup:
       direction: host_to_device
       type: class
@@ -165,3 +171,116 @@ entries:
       bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
       wValue=feature_selector (port feature selectors deferred to feature_selector_matrix).
       wIndex=1-based port number. wLength=0.
+
+  - request_id: usb20_clear_tt_buffer
+    request_name: CLEAR_TT_BUFFER
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: hub_with_tt_only
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: CLEAR_TT_BUFFER
+      wValue: spec_defined
+      wIndex: spec_defined
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
+      wValue carries endpoint address, device address, and endpoint type fields
+      (deferred to TT buffer matrix — spec_defined until section-level review).
+      wIndex carries TT port number / TT context (spec_defined).
+      Only valid on HS hubs with an embedded Transaction Translator.
+
+  - request_id: usb20_reset_tt
+    request_name: RESET_TT
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: hub_with_tt_only
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: RESET_TT
+      wValue: "0x0000"
+      wIndex: spec_defined
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
+      wValue=0. wIndex=TT port number (spec_defined pending section review).
+      Hub must complete ongoing split transactions before resetting.
+      Only valid on HS hubs with an embedded Transaction Translator.
+
+  - request_id: usb20_get_tt_state
+    request_name: GET_TT_STATE
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: hub_with_tt_only
+    setup:
+      direction: device_to_host
+      type: class
+      recipient: other
+      bRequest: GET_TT_STATE
+      wValue: "0x0000"
+      wIndex: spec_defined
+      wLength: spec_defined
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other).
+      wValue=0. wIndex=TT port/context (spec_defined).
+      wLength=TT state data length (spec_defined — do not hardcode without section review).
+      Returns TT diagnostic state data. Only valid on HS hubs with embedded TT.
+
+  - request_id: usb20_stop_tt
+    request_name: STOP_TT
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: hub_with_tt_only
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: STOP_TT
+      wValue: "0x0000"
+      wIndex: spec_defined
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
+      wValue=0. wIndex=TT port number (spec_defined pending section review).
+      Stops processing split transactions on the TT.
+      Only valid on HS hubs with an embedded Transaction Translator.

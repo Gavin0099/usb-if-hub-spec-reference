@@ -63,6 +63,12 @@ CASES = [
         "expected_error_codes": [],
         "note": "Phase 3C: SET/CLEAR_FEATURE hub + port inferred entries → PASS",
     },
+    {
+        "name": "valid_usb20_tt_request_family",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "Phase 3D: TT request family with applies_to=hub_with_tt_only → PASS",
+    },
 ]
 
 
