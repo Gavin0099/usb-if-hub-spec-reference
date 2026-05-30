@@ -1,0 +1,22 @@
+{
+  "validator": "validate_usb_signals.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "note": "PASS does not imply USB-IF normative content correctness. Checks structural claim/source/drift invariants only.",
+  "result": "FAIL",
+  "checked_signals": [
+    "sig-fixture-invalid-usb21-base"
+  ],
+  "error_count": 1,
+  "errors": [
+    {
+      "code": "USB21_SCOPE_ROLE_MUST_NOT_BE_BASE",
+      "message": "sig-fixture-invalid-usb21-base: usb21 in usb_version_scope requires scope_role != 'base' (usb21 is a delta, not a standalone base spec)"
+    }
+  ],
+  "findings": [
+    {
+      "code": "USB21_SCOPE_ROLE_MUST_NOT_BE_BASE",
+      "message": "sig-fixture-invalid-usb21-base: usb21 in usb_version_scope requires scope_role != 'base' (usb21 is a delta, not a standalone base spec)"
+    }
+  ]
+}

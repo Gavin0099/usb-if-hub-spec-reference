@@ -1,0 +1,86 @@
+{
+  "validator": "validate_usb_signals.py",
+  "smoke_runner": "smoke_validate_usb_signals_fixtures.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "total_cases": 5,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "fixture": "valid_normative_usb20.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_reason_codes": [],
+      "actual_reason_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\usb_signals_fixtures\\valid_normative_usb20_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Signal authority validation PASSED\n- checked signals: 1\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_normative_from_community.json",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "NORMATIVE_CLAIM_REQUIRES_NORMATIVE_OFFICIAL"
+      ],
+      "actual_reason_codes": [
+        "NORMATIVE_CLAIM_REQUIRES_NORMATIVE_OFFICIAL"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\usb_signals_fixtures\\invalid_normative_from_community_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Signal authority validation FAILED\n- [NORMATIVE_CLAIM_REQUIRES_NORMATIVE_OFFICIAL] sig-fixture-invalid-normative-community: claim_level 'normative' requires authority_level 'normative_official', got 'community_reference'\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_unresolved_drift_verified.json",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "UNRESOLVED_DRIFT_INCOMPATIBLE_WITH_CLAIM_LEVEL"
+      ],
+      "actual_reason_codes": [
+        "UNRESOLVED_DRIFT_INCOMPATIBLE_WITH_CLAIM_LEVEL"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\usb_signals_fixtures\\invalid_unresolved_drift_verified_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Signal authority validation FAILED\n- [UNRESOLVED_DRIFT_INCOMPATIBLE_WITH_CLAIM_LEVEL] sig-fixture-invalid-drift-verified: drift_status 'unresolved' is incompatible with claim_level 'verified'\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_usb21_base_scope.json",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "USB21_SCOPE_ROLE_MUST_NOT_BE_BASE"
+      ],
+      "actual_reason_codes": [
+        "USB21_SCOPE_ROLE_MUST_NOT_BE_BASE"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\usb_signals_fixtures\\invalid_usb21_base_scope_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Signal authority validation FAILED\n- [USB21_SCOPE_ROLE_MUST_NOT_BE_BASE] sig-fixture-invalid-usb21-base: usb21 in usb_version_scope requires scope_role != 'base' (usb21 is a delta, not a standalone base spec)\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_usb4_hub_equivalence.json",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "USB4_HUB_CLASS_EQUIVALENCE_INVALID"
+      ],
+      "actual_reason_codes": [
+        "USB4_HUB_CLASS_EQUIVALENCE_INVALID"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\usb_signals_fixtures\\invalid_usb4_hub_equivalence_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Signal authority validation FAILED\n- [USB4_HUB_CLASS_EQUIVALENCE_INVALID] sig-fixture-invalid-usb4-hubequiv: usb4 scope with assumption_type 'hub_class_equivalence' is not supported until section-level evidence is registered\n",
+      "stderr": ""
+    }
+  ]
+}

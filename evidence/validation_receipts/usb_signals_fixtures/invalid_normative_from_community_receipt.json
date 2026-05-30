@@ -1,0 +1,22 @@
+{
+  "validator": "validate_usb_signals.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "note": "PASS does not imply USB-IF normative content correctness. Checks structural claim/source/drift invariants only.",
+  "result": "FAIL",
+  "checked_signals": [
+    "sig-fixture-invalid-normative-community"
+  ],
+  "error_count": 1,
+  "errors": [
+    {
+      "code": "NORMATIVE_CLAIM_REQUIRES_NORMATIVE_OFFICIAL",
+      "message": "sig-fixture-invalid-normative-community: claim_level 'normative' requires authority_level 'normative_official', got 'community_reference'"
+    }
+  ],
+  "findings": [
+    {
+      "code": "NORMATIVE_CLAIM_REQUIRES_NORMATIVE_OFFICIAL",
+      "message": "sig-fixture-invalid-normative-community: claim_level 'normative' requires authority_level 'normative_official', got 'community_reference'"
+    }
+  ]
+}

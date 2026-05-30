@@ -1,0 +1,15 @@
+{
+  "signal_id": "sig-fixture-invalid-usb21-base",
+  "source_id": "usb21_lpm_addenda",
+  "topic": "hub_descriptor",
+  "usb_version_scope": ["usb21"],
+  "authority_level": "normative_official",
+  "claim_level": "inferred",
+  "evidence_status": "review_required",
+  "drift_status": "not_monitored",
+  "integrity_band": "MEDIUM",
+  "section_anchor": null,
+  "scope_role": "base",
+  "assumption_type": "none",
+  "notes": "Fixture: USB 2.1 signal with scope_role=base — should fail Rule 3."
+}

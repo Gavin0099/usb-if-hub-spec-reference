@@ -1,0 +1,22 @@
+{
+  "validator": "validate_usb_signals.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "note": "PASS does not imply USB-IF normative content correctness. Checks structural claim/source/drift invariants only.",
+  "result": "FAIL",
+  "checked_signals": [
+    "sig-fixture-invalid-drift-verified"
+  ],
+  "error_count": 1,
+  "errors": [
+    {
+      "code": "UNRESOLVED_DRIFT_INCOMPATIBLE_WITH_CLAIM_LEVEL",
+      "message": "sig-fixture-invalid-drift-verified: drift_status 'unresolved' is incompatible with claim_level 'verified'"
+    }
+  ],
+  "findings": [
+    {
+      "code": "UNRESOLVED_DRIFT_INCOMPATIBLE_WITH_CLAIM_LEVEL",
+      "message": "sig-fixture-invalid-drift-verified: drift_status 'unresolved' is incompatible with claim_level 'verified'"
+    }
+  ]
+}

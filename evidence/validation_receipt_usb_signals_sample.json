@@ -1,0 +1,12 @@
+{
+  "validator": "validate_usb_signals.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "note": "PASS does not imply USB-IF normative content correctness. Checks structural claim/source/drift invariants only.",
+  "result": "PASS",
+  "checked_signals": [
+    "sig-usb20-hubdesc-0001"
+  ],
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

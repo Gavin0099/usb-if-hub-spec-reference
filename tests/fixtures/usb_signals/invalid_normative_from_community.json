@@ -1,0 +1,15 @@
+{
+  "signal_id": "sig-fixture-invalid-normative-community",
+  "source_id": "osdev_usb_hubs",
+  "topic": "hub_descriptor",
+  "usb_version_scope": ["usb20"],
+  "authority_level": "community_reference",
+  "claim_level": "normative",
+  "evidence_status": "unverified",
+  "drift_status": "not_monitored",
+  "integrity_band": "LOW",
+  "section_anchor": null,
+  "scope_role": "explanation",
+  "assumption_type": "none",
+  "notes": "Fixture: normative claim from community_reference — should fail Rule 1."
+}

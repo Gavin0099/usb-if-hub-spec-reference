@@ -1,0 +1,15 @@
+{
+  "signal_id": "sig-fixture-invalid-usb4-hubequiv",
+  "source_id": "usb4_spec_page",
+  "topic": "usb4_boundary",
+  "usb_version_scope": ["usb4"],
+  "authority_level": "official_index",
+  "claim_level": "provisional",
+  "evidence_status": "unverified",
+  "drift_status": "not_monitored",
+  "integrity_band": "LOW",
+  "section_anchor": null,
+  "scope_role": "boundary",
+  "assumption_type": "hub_class_equivalence",
+  "notes": "Fixture: USB4 signal with assumption_type=hub_class_equivalence — should fail Rule 4."
+}

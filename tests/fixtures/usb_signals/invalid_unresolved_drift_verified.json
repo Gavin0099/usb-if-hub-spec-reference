@@ -1,0 +1,15 @@
+{
+  "signal_id": "sig-fixture-invalid-drift-verified",
+  "source_id": "usb20_spec",
+  "topic": "port_status",
+  "usb_version_scope": ["usb20"],
+  "authority_level": "normative_official",
+  "claim_level": "verified",
+  "evidence_status": "review_required",
+  "drift_status": "unresolved",
+  "integrity_band": "MEDIUM",
+  "section_anchor": "USB 2.0 Spec §11.24.2.7.1",
+  "scope_role": "base",
+  "assumption_type": "none",
+  "notes": "Fixture: verified claim with unresolved drift — should fail Rule 5."
+}

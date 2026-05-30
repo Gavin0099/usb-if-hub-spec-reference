@@ -94,6 +94,20 @@
     },
     "notes": {
       "type": "string"
+    },
+    "section_anchor": {
+      "type": ["string", "null"],
+      "description": "Spec section reference (e.g. 'USB 2.0 Spec §11.23.2.1'). Required for verified/normative claims."
+    },
+    "scope_role": {
+      "type": ["string", "null"],
+      "enum": ["base", "delta", "boundary", "validation", "explanation", null],
+      "description": "Role of this signal's usb_version_scope. USB 2.1 must not use 'base'."
+    },
+    "assumption_type": {
+      "type": ["string", "null"],
+      "enum": ["none", "hub_class_equivalence", "topology_boundary", "implementation_note", null],
+      "description": "Type of assumption carried by this signal. USB4 + hub_class_equivalence is invalid at MVP."
     }
   },
   "additionalProperties": false

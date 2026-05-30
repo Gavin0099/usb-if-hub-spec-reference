@@ -1,0 +1,22 @@
+{
+  "validator": "validate_usb_signals.py",
+  "authority_ceiling": "claim_authority_invariants_only",
+  "note": "PASS does not imply USB-IF normative content correctness. Checks structural claim/source/drift invariants only.",
+  "result": "FAIL",
+  "checked_signals": [
+    "sig-fixture-invalid-usb4-hubequiv"
+  ],
+  "error_count": 1,
+  "errors": [
+    {
+      "code": "USB4_HUB_CLASS_EQUIVALENCE_INVALID",
+      "message": "sig-fixture-invalid-usb4-hubequiv: usb4 scope with assumption_type 'hub_class_equivalence' is not supported until section-level evidence is registered"
+    }
+  ],
+  "findings": [
+    {
+      "code": "USB4_HUB_CLASS_EQUIVALENCE_INVALID",
+      "message": "sig-fixture-invalid-usb4-hubequiv: usb4 scope with assumption_type 'hub_class_equivalence' is not supported until section-level evidence is registered"
+    }
+  ]
+}
