@@ -1,0 +1,105 @@
+{
+  "validator": "validate_class_request_matrix.py",
+  "smoke_runner": "smoke_validate_class_request_matrix_fixtures.py",
+  "authority_ceiling": "class_request_matrix_structural_validation_only",
+  "total_cases": 6,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_verified_usb20_get_status",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\valid_verified_usb20_get_status_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation PASSED\n- matrix_id: fixture_matrix\n- entries: 1\n",
+      "stderr": "",
+      "note": "verified entry with normative_official source and section_anchor \u2192 PASS"
+    },
+    {
+      "name": "invalid_verified_without_section_anchor",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "HIGH_CLAIM_LEVEL_MISSING_SECTION_ANCHOR"
+      ],
+      "actual_error_codes": [
+        "HIGH_CLAIM_LEVEL_MISSING_SECTION_ANCHOR"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\invalid_verified_without_section_anchor_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation FAILED\n- [HIGH_CLAIM_LEVEL_MISSING_SECTION_ANCHOR] get_status_hub_usb20: claim_level 'verified' requires a non-empty section_anchor\n",
+      "stderr": "",
+      "note": "verified entry missing section_anchor \u2192 structural FAIL (R5)"
+    },
+    {
+      "name": "invalid_unknown_source_ref",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "SOURCE_REF_NOT_IN_REGISTRY"
+      ],
+      "actual_error_codes": [
+        "SOURCE_REF_NOT_IN_REGISTRY",
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\invalid_unknown_source_ref_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation FAILED\n- [SOURCE_REF_NOT_IN_REGISTRY] get_status_hub_usb20: source_ref 'nonexistent_source' not found in source_registry\n- [HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE] get_status_hub_usb20: claim_level 'verified' requires \u22651 source_ref with authority_level 'normative_official'\n",
+      "stderr": "",
+      "note": "source_ref not in registry \u2192 structural FAIL (R6)"
+    },
+    {
+      "name": "invalid_verified_with_official_index_only",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "actual_error_codes": [
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\invalid_verified_with_official_index_only_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation FAILED\n- [HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE] get_status_hub_usb20: claim_level 'verified' requires \u22651 source_ref with authority_level 'normative_official'\n",
+      "stderr": "",
+      "note": "verified entry with only official_index source \u2192 structural FAIL (R7)"
+    },
+    {
+      "name": "invalid_duplicate_request_id",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "DUPLICATE_REQUEST_ID"
+      ],
+      "actual_error_codes": [
+        "DUPLICATE_REQUEST_ID"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\invalid_duplicate_request_id_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation FAILED\n- [DUPLICATE_REQUEST_ID] get_status_hub_usb20: request_id is duplicated\n",
+      "stderr": "",
+      "note": "duplicate request_id \u2192 structural FAIL (R8)"
+    },
+    {
+      "name": "draft_without_section_anchor_pass",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\draft_without_section_anchor_pass_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation PASSED\n- matrix_id: fixture_matrix\n- entries: 1\n",
+      "stderr": "",
+      "note": "draft entry without section_anchor \u2192 PASS (R5 only applies to verified/normative)"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB Hub Class Request Matrix",
+  "description": "Governed extraction table for USB hub class-specific requests. Each entry represents one request variant (hub or port recipient, specific USB version scope).",
+  "type": "object",
+  "required": ["matrix_id", "scope", "status", "entries"],
+  "properties": {
+    "matrix_id": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["usb_versions", "topic"],
+      "properties": {
+        "usb_versions": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "topic": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "review_required", "complete", "deprecated"] },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "request_id", "request_name", "usb_version_scope", "setup",
+          "recipient", "topic", "source_refs", "authority_level",
+          "claim_level", "evidence_status", "drift_status"
+        ],
+        "properties": {
+          "request_id": { "type": "string" },
+          "request_name": { "type": "string" },
+          "usb_version_scope": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+            "minItems": 1
+          },
+          "setup": {
+            "type": "object",
+            "required": ["direction", "type", "recipient", "bRequest", "wValue", "wIndex", "wLength"],
+            "properties": {
+              "direction": { "type": "string", "enum": ["host_to_device", "device_to_host"] },
+              "type": { "type": "string", "enum": ["standard", "class", "vendor"] },
+              "recipient": { "type": "string", "enum": ["device", "interface", "endpoint", "other"] },
+              "bRequest": { "type": "string" },
+              "wValue": { "type": "string" },
+              "wIndex": { "type": "string" },
+              "wLength": { "type": ["integer", "string"] }
+            }
+          },
+          "recipient": { "type": "string", "enum": ["hub", "port", "hub_and_port"] },
+          "topic": { "type": "string" },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "section_anchor": { "type": ["string", "null"] },
+          "authority_level": { "type": "string" },
+          "claim_level": {
+            "type": "string",
+            "enum": ["normative", "verified", "inferred", "provisional", "draft", "rejected"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["complete", "section_anchor_missing", "source_missing", "review_required", "unverified"]
+          },
+          "drift_status": {
+            "type": "string",
+            "enum": ["clean", "changed", "unresolved", "not_monitored"]
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

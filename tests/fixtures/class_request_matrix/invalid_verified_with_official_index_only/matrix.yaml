@@ -1,0 +1,29 @@
+matrix_id: fixture_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: class_specific_request
+status: draft
+entries:
+  - request_id: get_status_hub_usb20
+    request_name: GET_STATUS
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    source_refs:
+      - fix_index_src
+    authority_level: official_index
+    claim_level: verified
+    evidence_status: complete
+    drift_status: clean
+    section_anchor: "USB 2.0 Spec §11.24.2"
+    setup:
+      direction: device_to_host
+      type: class
+      recipient: device
+      bRequest: GET_STATUS
+      wValue: '0'
+      wIndex: '0'
+      wLength: 4
+    notes: fixture entry

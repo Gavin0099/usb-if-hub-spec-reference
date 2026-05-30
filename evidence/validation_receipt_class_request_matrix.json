@@ -1,0 +1,13 @@
+{
+  "validator": "validate_class_request_matrix.py",
+  "authority_ceiling": "class_request_matrix_structural_validation_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_validate_usb_semantics": true,
+  "result": "PASS",
+  "matrix_id": "usb_hub_class_request_matrix",
+  "entry_count": 0,
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

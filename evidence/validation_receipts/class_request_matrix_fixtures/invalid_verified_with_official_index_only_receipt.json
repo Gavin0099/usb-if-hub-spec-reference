@@ -1,0 +1,23 @@
+{
+  "validator": "validate_class_request_matrix.py",
+  "authority_ceiling": "class_request_matrix_structural_validation_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_validate_usb_semantics": true,
+  "result": "FAIL",
+  "matrix_id": "fixture_matrix",
+  "entry_count": 1,
+  "error_count": 1,
+  "errors": [
+    {
+      "code": "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE",
+      "message": "get_status_hub_usb20: claim_level 'verified' requires \u22651 source_ref with authority_level 'normative_official'"
+    }
+  ],
+  "findings": [
+    {
+      "code": "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE",
+      "message": "get_status_hub_usb20: claim_level 'verified' requires \u22651 source_ref with authority_level 'normative_official'"
+    }
+  ]
+}
