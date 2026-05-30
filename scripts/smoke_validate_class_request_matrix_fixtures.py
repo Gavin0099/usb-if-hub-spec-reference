@@ -57,6 +57,12 @@ CASES = [
         "expected_error_codes": [],
         "note": "Phase 3B: GET_STATUS hub + port inferred entries with real source_id → PASS",
     },
+    {
+        "name": "valid_usb20_set_clear_feature_hub_and_port",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "Phase 3C: SET/CLEAR_FEATURE hub + port inferred entries → PASS",
+    },
 ]
 
 

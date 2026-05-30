@@ -5,8 +5,8 @@ scope:
   topic: class_specific_request
 status: draft
 # Phase 3B: GET_STATUS hub/port entries added.
-# Phase 3C: SET_FEATURE / CLEAR_FEATURE.
-# Phase 3D: TT request family.
+# Phase 3C: SET_FEATURE / CLEAR_FEATURE hub/port entries added.
+# Phase 3D: TT request family — NEXT.
 entries:
 
   - request_id: usb20_get_status_hub
@@ -61,3 +61,107 @@ entries:
       bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other).
       wIndex=1-based port number. Port status/change bits defined separately
       in port_status_matrix (Phase 4A).
+
+  - request_id: usb20_set_feature_hub
+    request_name: SET_FEATURE
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: device
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
+      wValue=feature_selector (hub feature selectors deferred to feature_selector_matrix).
+      wIndex=0 (hub itself). wLength=0.
+
+  - request_id: usb20_set_feature_port
+    request_name: SET_FEATURE
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: port
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
+      wValue=feature_selector (port feature selectors deferred to feature_selector_matrix).
+      wIndex=1-based port number. wLength=0.
+
+  - request_id: usb20_clear_feature_hub
+    request_name: CLEAR_FEATURE
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: device
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
+      wValue=feature_selector (hub feature selectors deferred to feature_selector_matrix).
+      wIndex=0. wLength=0.
+
+  - request_id: usb20_clear_feature_port
+    request_name: CLEAR_FEATURE
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: port
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
+      wValue=feature_selector (port feature selectors deferred to feature_selector_matrix).
+      wIndex=1-based port number. wLength=0.

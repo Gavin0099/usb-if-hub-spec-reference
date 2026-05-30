@@ -2,7 +2,7 @@
   "validator": "validate_class_request_matrix.py",
   "smoke_runner": "smoke_validate_class_request_matrix_fixtures.py",
   "authority_ceiling": "class_request_matrix_structural_validation_only",
-  "total_cases": 7,
+  "total_cases": 8,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -113,6 +113,19 @@
       "stdout": "Class request matrix validation PASSED\n- matrix_id: fixture_usb20_get_status_matrix\n- entries: 2\n",
       "stderr": "",
       "note": "Phase 3B: GET_STATUS hub + port inferred entries with real source_id \u2192 PASS"
+    },
+    {
+      "name": "valid_usb20_set_clear_feature_hub_and_port",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_matrix_fixtures\\valid_usb20_set_clear_feature_hub_and_port_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request matrix validation PASSED\n- matrix_id: fixture_usb20_set_clear_feature_matrix\n- entries: 4\n",
+      "stderr": "",
+      "note": "Phase 3C: SET/CLEAR_FEATURE hub + port inferred entries \u2192 PASS"
     }
   ]
 }

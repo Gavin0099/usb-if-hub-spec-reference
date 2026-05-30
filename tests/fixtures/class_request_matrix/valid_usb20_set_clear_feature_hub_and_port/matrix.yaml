@@ -1,0 +1,91 @@
+matrix_id: fixture_usb20_set_clear_feature_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: class_specific_request
+status: draft
+entries:
+
+  - request_id: usb20_set_feature_hub
+    request_name: SET_FEATURE
+    usb_version_scope: [usb20]
+    topic: class_specific_request
+    recipient: hub
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: device
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    source_refs: [usb20_spec]
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: "bmRequestType=0x20. Feature selector semantics deferred to feature_selector_matrix."
+
+  - request_id: usb20_set_feature_port
+    request_name: SET_FEATURE
+    usb_version_scope: [usb20]
+    topic: class_specific_request
+    recipient: port
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    source_refs: [usb20_spec]
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: "bmRequestType=0x23. wIndex=1-based port number. Feature selector semantics deferred."
+
+  - request_id: usb20_clear_feature_hub
+    request_name: CLEAR_FEATURE
+    usb_version_scope: [usb20]
+    topic: class_specific_request
+    recipient: hub
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: device
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    source_refs: [usb20_spec]
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: "bmRequestType=0x20. Feature selector semantics deferred to feature_selector_matrix."
+
+  - request_id: usb20_clear_feature_port
+    request_name: CLEAR_FEATURE
+    usb_version_scope: [usb20]
+    topic: class_specific_request
+    recipient: port
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: other
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    source_refs: [usb20_spec]
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: "bmRequestType=0x23. wIndex=1-based port number. Feature selector semantics deferred."
