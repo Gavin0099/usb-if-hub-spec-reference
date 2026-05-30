@@ -1,0 +1,26 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "does_not_validate_semantic_correctness": true,
+  "result": "FAIL",
+  "coverage_id": "fix_coverage",
+  "expected_count": 0,
+  "covered_count": 0,
+  "missing_count": 0,
+  "derived_covered": [],
+  "error_count": 1,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "EXPECTED_FAMILIES_EMPTY",
+      "message": "expected_request_families must not be empty"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "EXPECTED_FAMILIES_EMPTY",
+      "message": "expected_request_families must not be empty"
+    }
+  ]
+}

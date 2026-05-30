@@ -1,0 +1,19 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "does_not_validate_semantic_correctness": true,
+  "result": "PASS",
+  "coverage_id": "fix_coverage",
+  "expected_count": 3,
+  "covered_count": 2,
+  "missing_count": 1,
+  "derived_covered": [
+    "GET_STATUS",
+    "SET_FEATURE"
+  ],
+  "error_count": 0,
+  "advisory_count": 0,
+  "errors": [],
+  "advisories": [],
+  "findings": []
+}

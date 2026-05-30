@@ -1,0 +1,14 @@
+last_updated: '2026-05-30'
+schema_version: 1
+sources:
+- authority_level: normative_official
+  claim_usage: allowed_normative
+  monitor_status: planned
+  source_id: usb20_spec
+  title: USB 2.0
+  topics:
+  - class_specific_request
+  url: https://example.com
+  url_type: official_document_page
+  usb_version_scope:
+  - usb20

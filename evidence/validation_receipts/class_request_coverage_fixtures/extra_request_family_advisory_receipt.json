@@ -1,0 +1,30 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "does_not_validate_semantic_correctness": true,
+  "result": "PASS",
+  "coverage_id": "fix_extra_coverage",
+  "expected_count": 2,
+  "covered_count": 3,
+  "missing_count": 0,
+  "derived_covered": [
+    "GET_STATUS",
+    "SET_FEATURE",
+    "UNKNOWN_EXTRA"
+  ],
+  "error_count": 0,
+  "advisory_count": 1,
+  "errors": [],
+  "advisories": [
+    {
+      "code": "ADVISORY_EXTRA_FAMILIES_IN_MATRIX",
+      "message": "matrix contains request_family values not in expected list: ['UNKNOWN_EXTRA'] \u2014 verify these are intentional"
+    }
+  ],
+  "findings": [
+    {
+      "code": "ADVISORY_EXTRA_FAMILIES_IN_MATRIX",
+      "message": "matrix contains request_family values not in expected list: ['UNKNOWN_EXTRA'] \u2014 verify these are intentional"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+entries: []
+matrix_id: fix_matrix
+scope:
+  topic: class_specific_request
+  usb_versions:
+  - usb20
+status: draft

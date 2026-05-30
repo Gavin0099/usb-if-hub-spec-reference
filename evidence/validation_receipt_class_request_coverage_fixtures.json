@@ -1,0 +1,97 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "smoke_runner": "smoke_validate_class_request_coverage_fixtures.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "total_cases": 5,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "complete_coverage_pass",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_coverage_fixtures\\complete_coverage_pass_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request coverage validation PASSED\n- coverage_id: fix_coverage\n- 3 expected / 3 covered / 0 missing\n- coverage_status: complete\n",
+      "stderr": "",
+      "note": "all expected families in matrix, missing=[] \u2192 complete PASS"
+    },
+    {
+      "name": "partial_coverage_pass",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_coverage_fixtures\\partial_coverage_pass_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request coverage validation PASSED\n- coverage_id: fix_coverage\n- 3 expected / 2 covered / 1 missing\n- coverage_status: partial\n",
+      "stderr": "",
+      "note": "some missing, correctly declared \u2192 partial PASS"
+    },
+    {
+      "name": "missing_calculation_mismatch_fail",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "MISSING_FAMILIES_INVARIANT_VIOLATED"
+      ],
+      "actual_error_codes": [
+        "MISSING_FAMILIES_INVARIANT_VIOLATED"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_coverage_fixtures\\missing_calculation_mismatch_fail_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request coverage validation FAILED\n- [MISSING_FAMILIES_INVARIANT_VIOLATED] expected == covered + missing violated: computed missing=['CLEAR_FEATURE', 'SET_FEATURE'], declared missing=['CLEAR_FEATURE', 'EXTRA_WRONG', 'SET_FEATURE']\n",
+      "stderr": "",
+      "note": "declared missing != computed missing \u2192 invariant FAIL (R3)"
+    },
+    {
+      "name": "extra_request_family_advisory",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [
+        "ADVISORY_EXTRA_FAMILIES_IN_MATRIX"
+      ],
+      "actual_advisory_codes": [
+        "ADVISORY_EXTRA_FAMILIES_IN_MATRIX"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_coverage_fixtures\\extra_request_family_advisory_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request coverage validation PASSED\n- coverage_id: fix_extra_coverage\n- 2 expected / 3 covered / 0 missing\n- coverage_status: complete\n- 1 advisory finding(s):\n  ~ [ADVISORY_EXTRA_FAMILIES_IN_MATRIX] matrix contains request_family values not in expected list: ['UNKNOWN_EXTRA'] \u2014 verify these are intentional\n",
+      "stderr": "",
+      "note": "matrix has family not in expected \u2192 advisory A1, PASS"
+    },
+    {
+      "name": "empty_expected_fail",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "EXPECTED_FAMILIES_EMPTY"
+      ],
+      "actual_error_codes": [
+        "EXPECTED_FAMILIES_EMPTY"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\class_request_coverage_fixtures\\empty_expected_fail_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Class request coverage validation FAILED\n- [EXPECTED_FAMILIES_EMPTY] expected_request_families must not be empty\n",
+      "stderr": "",
+      "note": "expected_request_families is empty \u2192 structural FAIL (R1)"
+    }
+  ]
+}

@@ -71,6 +71,10 @@
             "enum": ["clean", "changed", "unresolved", "not_monitored"]
           },
           "notes": { "type": "string" },
+          "request_family": {
+            "type": ["string", "null"],
+            "description": "Canonical request family name used for coverage reporting (e.g. GET_STATUS, SET_FEATURE). Must match entries in class_request_coverage JSON."
+          },
           "applies_to": {
             "type": ["string", "null"],
             "enum": ["all_hubs", "hub_only", "port_only", "hub_with_tt_only", "reserved_or_unsupported", null],

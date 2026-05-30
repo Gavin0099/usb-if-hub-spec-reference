@@ -1,0 +1,38 @@
+{
+  "coverage_id": "usb20_hub_class_request_coverage",
+  "source_ref": "usb20_spec",
+  "section_anchor": "USB 2.0 Specification Rev 2.0 §11.24.2",
+  "scope": {
+    "usb_version": "usb20",
+    "topic": "class_specific_request"
+  },
+  "expected_request_families": [
+    "GET_STATUS",
+    "CLEAR_FEATURE",
+    "SET_FEATURE",
+    "GET_DESCRIPTOR",
+    "SET_DESCRIPTOR",
+    "CLEAR_TT_BUFFER",
+    "RESET_TT",
+    "GET_TT_STATE",
+    "STOP_TT"
+  ],
+  "covered_request_families": [
+    "GET_STATUS",
+    "CLEAR_FEATURE",
+    "SET_FEATURE",
+    "CLEAR_TT_BUFFER",
+    "RESET_TT",
+    "GET_TT_STATE",
+    "STOP_TT"
+  ],
+  "missing_request_families": [
+    "GET_DESCRIPTOR",
+    "SET_DESCRIPTOR"
+  ],
+  "coverage_status": "partial",
+  "claim_level": "inferred",
+  "evidence_status": "review_required",
+  "does_not_validate_semantic_correctness": true,
+  "notes": "GET_DESCRIPTOR and SET_DESCRIPTOR are USB 2.0 §11.24.2 hub class requests not yet added to class_request_matrix. Deferred to Phase 3F."
+}

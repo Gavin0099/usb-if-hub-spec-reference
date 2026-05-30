@@ -10,6 +10,7 @@ status: draft
 entries:
 
   - request_id: usb20_get_status_hub
+    request_family: GET_STATUS
     request_name: GET_STATUS
     usb_version_scope:
       - usb20
@@ -37,6 +38,7 @@ entries:
       wIndex=0 (hub itself). Hub status bits defined separately in hub_status_matrix.
 
   - request_id: usb20_get_status_port
+    request_family: GET_STATUS
     request_name: GET_STATUS
     usb_version_scope:
       - usb20
@@ -65,6 +67,7 @@ entries:
       in port_status_matrix (Phase 4A).
 
   - request_id: usb20_set_feature_hub
+    request_family: SET_FEATURE
     request_name: SET_FEATURE
     usb_version_scope:
       - usb20
@@ -92,6 +95,7 @@ entries:
       wIndex=0 (hub itself). wLength=0.
 
   - request_id: usb20_set_feature_port
+    request_family: SET_FEATURE
     request_name: SET_FEATURE
     usb_version_scope:
       - usb20
@@ -119,6 +123,7 @@ entries:
       wIndex=1-based port number. wLength=0.
 
   - request_id: usb20_clear_feature_hub
+    request_family: CLEAR_FEATURE
     request_name: CLEAR_FEATURE
     usb_version_scope:
       - usb20
@@ -146,6 +151,7 @@ entries:
       wIndex=0. wLength=0.
 
   - request_id: usb20_clear_feature_port
+    request_family: CLEAR_FEATURE
     request_name: CLEAR_FEATURE
     usb_version_scope:
       - usb20
@@ -173,6 +179,7 @@ entries:
       wIndex=1-based port number. wLength=0.
 
   - request_id: usb20_clear_tt_buffer
+    request_family: CLEAR_TT_BUFFER
     request_name: CLEAR_TT_BUFFER
     usb_version_scope:
       - usb20
@@ -202,6 +209,7 @@ entries:
       Only valid on HS hubs with an embedded Transaction Translator.
 
   - request_id: usb20_reset_tt
+    request_family: RESET_TT
     request_name: RESET_TT
     usb_version_scope:
       - usb20
@@ -230,6 +238,7 @@ entries:
       Only valid on HS hubs with an embedded Transaction Translator.
 
   - request_id: usb20_get_tt_state
+    request_family: GET_TT_STATE
     request_name: GET_TT_STATE
     usb_version_scope:
       - usb20
@@ -258,6 +267,7 @@ entries:
       Returns TT diagnostic state data. Only valid on HS hubs with embedded TT.
 
   - request_id: usb20_stop_tt
+    request_family: STOP_TT
     request_name: STOP_TT
     usb_version_scope:
       - usb20

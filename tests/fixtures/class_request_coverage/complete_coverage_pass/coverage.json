@@ -1,0 +1,24 @@
+{
+  "coverage_id": "fix_coverage",
+  "source_ref": "usb20_spec",
+  "section_anchor": "USB 2.0 \u00a711.24.2",
+  "scope": {
+    "usb_version": "usb20",
+    "topic": "class_specific_request"
+  },
+  "expected_request_families": [
+    "GET_STATUS",
+    "SET_FEATURE",
+    "CLEAR_FEATURE"
+  ],
+  "covered_request_families": [
+    "GET_STATUS",
+    "SET_FEATURE",
+    "CLEAR_FEATURE"
+  ],
+  "missing_request_families": [],
+  "coverage_status": "complete",
+  "claim_level": "inferred",
+  "evidence_status": "review_required",
+  "does_not_validate_semantic_correctness": true
+}

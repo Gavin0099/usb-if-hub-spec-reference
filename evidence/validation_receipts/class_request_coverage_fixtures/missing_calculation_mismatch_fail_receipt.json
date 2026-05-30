@@ -1,0 +1,28 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "does_not_validate_semantic_correctness": true,
+  "result": "FAIL",
+  "coverage_id": "fix_coverage",
+  "expected_count": 3,
+  "covered_count": 1,
+  "missing_count": 3,
+  "derived_covered": [
+    "GET_STATUS"
+  ],
+  "error_count": 1,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "MISSING_FAMILIES_INVARIANT_VIOLATED",
+      "message": "expected == covered + missing violated: computed missing=['CLEAR_FEATURE', 'SET_FEATURE'], declared missing=['CLEAR_FEATURE', 'EXTRA_WRONG', 'SET_FEATURE']"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "MISSING_FAMILIES_INVARIANT_VIOLATED",
+      "message": "expected == covered + missing violated: computed missing=['CLEAR_FEATURE', 'SET_FEATURE'], declared missing=['CLEAR_FEATURE', 'EXTRA_WRONG', 'SET_FEATURE']"
+    }
+  ]
+}

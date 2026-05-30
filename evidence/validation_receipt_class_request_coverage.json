@@ -1,0 +1,24 @@
+{
+  "validator": "validate_class_request_coverage.py",
+  "authority_ceiling": "class_request_family_coverage_structural_only",
+  "does_not_validate_semantic_correctness": true,
+  "result": "PASS",
+  "coverage_id": "usb20_hub_class_request_coverage",
+  "expected_count": 9,
+  "covered_count": 7,
+  "missing_count": 2,
+  "derived_covered": [
+    "CLEAR_FEATURE",
+    "CLEAR_TT_BUFFER",
+    "GET_STATUS",
+    "GET_TT_STATE",
+    "RESET_TT",
+    "SET_FEATURE",
+    "STOP_TT"
+  ],
+  "error_count": 0,
+  "advisory_count": 0,
+  "errors": [],
+  "advisories": [],
+  "findings": []
+}

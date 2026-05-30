@@ -1,0 +1,76 @@
+entries:
+- applies_to: all_hubs
+  authority_level: normative_official
+  claim_level: inferred
+  drift_status: clean
+  evidence_status: review_required
+  recipient: hub
+  request_family: GET_STATUS
+  request_id: usb20_get_status_hub
+  request_name: GET_STATUS
+  section_anchor: USB 2.0 §11.24.2
+  setup:
+    bRequest: GET_STATUS
+    direction: host_to_device
+    recipient: device
+    type: class
+    wIndex: '0'
+    wLength: 0
+    wValue: '0'
+  source_refs:
+  - usb20_spec
+  topic: class_specific_request
+  usb_version_scope:
+  - usb20
+- applies_to: all_hubs
+  authority_level: normative_official
+  claim_level: inferred
+  drift_status: clean
+  evidence_status: review_required
+  recipient: hub
+  request_family: SET_FEATURE
+  request_id: usb20_set_feature_hub
+  request_name: SET_FEATURE
+  section_anchor: USB 2.0 §11.24.2
+  setup:
+    bRequest: SET_FEATURE
+    direction: host_to_device
+    recipient: device
+    type: class
+    wIndex: '0'
+    wLength: 0
+    wValue: '0'
+  source_refs:
+  - usb20_spec
+  topic: class_specific_request
+  usb_version_scope:
+  - usb20
+- applies_to: all_hubs
+  authority_level: normative_official
+  claim_level: inferred
+  drift_status: clean
+  evidence_status: review_required
+  recipient: hub
+  request_family: CLEAR_FEATURE
+  request_id: usb20_clear_feature_hub
+  request_name: CLEAR_FEATURE
+  section_anchor: USB 2.0 §11.24.2
+  setup:
+    bRequest: CLEAR_FEATURE
+    direction: host_to_device
+    recipient: device
+    type: class
+    wIndex: '0'
+    wLength: 0
+    wValue: '0'
+  source_refs:
+  - usb20_spec
+  topic: class_specific_request
+  usb_version_scope:
+  - usb20
+matrix_id: fix_matrix
+scope:
+  topic: class_specific_request
+  usb_versions:
+  - usb20
+status: draft
