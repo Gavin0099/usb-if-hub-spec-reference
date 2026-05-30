@@ -1,0 +1,16 @@
+{
+  "monitor": "usbif_source_monitor.py",
+  "authority_ceiling": "drift_observation_only",
+  "note": "Drift events record observation only. does_not_change_claim_level=true. Manual review required on drift.",
+  "checked_at": "2026-05-30T07:54:46.711627+00:00",
+  "skip_network": true,
+  "sources_checked": 1,
+  "new_snapshots": 1,
+  "new_drift_events": 0,
+  "advisories": [
+    "fixture_source_unreachable: Name or service not known (advisory only, no drift event)"
+  ],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

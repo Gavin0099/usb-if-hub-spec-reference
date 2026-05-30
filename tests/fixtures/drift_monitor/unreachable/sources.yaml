@@ -1,0 +1,8 @@
+schema_version: 1
+sources:
+  - id: fixture_source_unreachable
+    title: Fixture Unreachable Source
+    url: https://this-host-does-not-exist.invalid/spec.pdf
+    authority_level: normative_official
+    scope:
+      - hub_descriptor

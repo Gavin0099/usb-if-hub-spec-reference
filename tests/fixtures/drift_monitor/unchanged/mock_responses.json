@@ -1,0 +1,10 @@
+{
+  "fixture_source_unchanged": {
+    "reachable": true,
+    "http_status": 200,
+    "content_hash": "sha256:aaaa1111",
+    "content_length": 1000,
+    "etag": null,
+    "last_modified": null
+  }
+}

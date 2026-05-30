@@ -1,0 +1,10 @@
+{
+  "fixture_source_baseline": {
+    "reachable": true,
+    "http_status": 200,
+    "content_hash": "sha256:cccc3333",
+    "content_length": 2000,
+    "etag": null,
+    "last_modified": null
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "fixture_source_unreachable": {
+    "reachable": false,
+    "http_status": null,
+    "content_hash": null,
+    "content_length": null,
+    "etag": null,
+    "last_modified": null,
+    "advisory_note": "Name or service not known"
+  }
+}

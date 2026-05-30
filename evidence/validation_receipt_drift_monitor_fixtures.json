@@ -1,0 +1,62 @@
+{
+  "monitor": "usbif_source_monitor.py",
+  "smoke_runner": "smoke_usbif_drift_monitor_fixtures.py",
+  "authority_ceiling": "drift_observation_only",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "unchanged",
+      "expected_drift_events": 0,
+      "actual_drift_events": 0,
+      "expected_new_snapshots": 1,
+      "actual_new_snapshots": 1,
+      "monitor_exit": 0,
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\drift_monitor_fixtures\\unchanged_receipt.json",
+      "stdout": "Monitor run complete: 1 snapshots, 0 drift events\n",
+      "stderr": "",
+      "note": "same hash \u2192 no drift event"
+    },
+    {
+      "name": "changed_hash",
+      "expected_drift_events": 1,
+      "actual_drift_events": 1,
+      "expected_new_snapshots": 1,
+      "actual_new_snapshots": 1,
+      "monitor_exit": 0,
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\drift_monitor_fixtures\\changed_hash_receipt.json",
+      "stdout": "Monitor run complete: 1 snapshots, 1 drift events\n",
+      "stderr": "",
+      "note": "different hash \u2192 drift event produced"
+    },
+    {
+      "name": "missing_previous",
+      "expected_drift_events": 0,
+      "actual_drift_events": 0,
+      "expected_new_snapshots": 1,
+      "actual_new_snapshots": 1,
+      "monitor_exit": 0,
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\drift_monitor_fixtures\\missing_previous_receipt.json",
+      "stdout": "Monitor run complete: 1 snapshots, 0 drift events\n",
+      "stderr": "",
+      "note": "no previous snapshot \u2192 baseline only, no drift event"
+    },
+    {
+      "name": "unreachable",
+      "expected_drift_events": 0,
+      "actual_drift_events": 0,
+      "expected_new_snapshots": 1,
+      "actual_new_snapshots": 1,
+      "monitor_exit": 0,
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\drift_monitor_fixtures\\unreachable_receipt.json",
+      "stdout": "Monitor run complete: 1 snapshots, 0 drift events\n- 1 advisory note(s) (unreachable sources):\n  ~ fixture_source_unreachable: Name or service not known (advisory only, no drift event)\n",
+      "stderr": "",
+      "note": "unreachable source \u2192 advisory only, snapshot written, no drift event"
+    }
+  ]
+}
