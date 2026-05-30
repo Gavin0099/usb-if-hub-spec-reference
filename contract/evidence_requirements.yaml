@@ -1,0 +1,45 @@
+schema_version: 1
+title: USB Hub Evidence Requirements
+last_updated: 2026-05-30
+
+required_fields_for_each_entry:
+  - topic
+  - usb_version_scope
+  - source_document_title
+  - source_url
+  - source_authority_level
+  - source_type
+  - section_reference_or_section_unknown
+  - extraction_status
+  - claim_level
+
+rules:
+  - id: normative_claim_must_have_level_A
+    condition: claim_level == normative
+    requirement: source_authority_level == A
+
+  - id: verified_requires_section_reference
+    condition: extraction_status == verified
+    requirement: section_reference_or_section_unknown != section_unknown
+
+  - id: section_unknown_forces_provisional
+    condition: section_reference_or_section_unknown == section_unknown
+    requirement: claim_level == provisional
+
+  - id: usb21_requires_usb20_base_link
+    condition: usb_version_scope == usb_2_1
+    requirement: base_reference == usb_2_0
+
+  - id: usb4_requires_boundary_tag
+    condition: usb_version_scope == usb4
+    requirement: boundary_tag in [topology_context, non_equivalent_to_legacy_hub_unless_proven]
+
+extraction_status_values:
+  - verified
+  - provisional
+  - blocked
+
+claim_level_values:
+  - normative
+  - inferred
+  - provisional

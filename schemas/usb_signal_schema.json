@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB Authority Wiki Signal",
+  "type": "object",
+  "required": [
+    "signal_id",
+    "source_id",
+    "topic",
+    "usb_version_scope",
+    "authority_level",
+    "claim_level",
+    "evidence_status",
+    "drift_status",
+    "integrity_band"
+  ],
+  "properties": {
+    "signal_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "hub_descriptor",
+        "port_status",
+        "class_specific_request",
+        "transaction_translator",
+        "usb4_boundary",
+        "source_monitor"
+      ]
+    },
+    "usb_version_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "usb20",
+          "usb21",
+          "usb32",
+          "usb4"
+        ]
+      },
+      "minItems": 1
+    },
+    "authority_level": {
+      "type": "string",
+      "enum": [
+        "normative_official",
+        "official_validation",
+        "official_index",
+        "community_reference",
+        "archive_fallback"
+      ]
+    },
+    "claim_level": {
+      "type": "string",
+      "enum": [
+        "normative",
+        "verified",
+        "inferred",
+        "provisional",
+        "draft",
+        "rejected"
+      ]
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "section_anchor_missing",
+        "source_missing",
+        "review_required",
+        "unverified"
+      ]
+    },
+    "drift_status": {
+      "type": "string",
+      "enum": [
+        "clean",
+        "changed",
+        "unresolved",
+        "not_monitored"
+      ]
+    },
+    "integrity_band": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

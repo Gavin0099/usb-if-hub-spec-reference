@@ -1,0 +1,58 @@
+schema_version: 1
+title: USB Hub Claim Rules
+last_updated: 2026-05-30
+
+allowed_claims:
+  - id: usb20_normative_hub_field
+    requires:
+      authority_level: A
+      source_version: usb_2_0
+      section_reference: required
+      extraction_status: verified
+    examples:
+      - USB 2.0 defines this hub descriptor field as follows.
+      - USB 2.0 hub class request semantics specify this behavior.
+
+  - id: usb21_delta_claim
+    requires:
+      authority_level: A
+      source_version: usb_2_1
+      source_type:
+        - ECN
+        - addendum
+      base_reference_required: usb_2_0
+      extraction_status: verified
+    examples:
+      - USB 2.1 is treated as USB 2.0 baseline plus applicable LPM-related updates.
+
+  - id: usb32_delta_claim
+    requires:
+      authority_level: A
+      source_version: usb_3_2
+      section_reference: required
+      boundary_tag_required: true
+      extraction_status: verified
+
+  - id: usb4_boundary_claim
+    requires:
+      authority_level: A
+      source_version: usb4
+      section_reference: required
+      boundary_tag_required: true
+      extraction_status: verified
+
+forbidden_claims:
+  - id: usb21_as_independent_base_spec
+    reason: USB 2.1 must not be treated as an independent base specification unless registered with an official standalone base document.
+
+  - id: compliance_as_normative_definition
+    reason: Compliance/test documents must not be used as the sole source for descriptor/request/bit normative definitions.
+
+  - id: index_page_as_normative
+    reason: Document library/search/index pages are discovery sources, not normative evidence.
+
+  - id: community_source_as_final_authority
+    reason: Community and mirror sources cannot be final authority when official USB-IF sources are available.
+
+  - id: usb4_equals_usb2_usb3_hub_semantics
+    reason: USB4 topology/router behavior must not be assumed equivalent to USB 2.0 or USB 3.x hub class semantics without section-level proof.

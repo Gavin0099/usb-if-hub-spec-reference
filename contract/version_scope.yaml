@@ -1,0 +1,34 @@
+schema_version: 1
+title: USB Hub Version Scope Contract
+last_updated: 2026-05-30
+
+versions:
+  usb_2_0:
+    role: base_hub_model
+    normative_source_required: true
+    includes:
+      - hub_descriptor
+      - port_status_and_change_bits
+      - hub_class_specific_requests
+      - transaction_translator
+
+  usb_2_1:
+    role: usb_2_0_plus_ecns_addenda
+    standalone_base_spec: false
+    requires_base:
+      - usb_2_0
+    delta_only: true
+    note: Treat as USB 2.0 baseline plus applicable ECN/addendum evidence unless an independent official base specification is registered.
+
+  usb_3_2:
+    role: superspeed_hub_delta
+    normative_source_required: true
+    requires_boundary_note: true
+    must_not_override_usb_2_0_without_evidence: true
+
+  usb4:
+    role: topology_router_reference
+    normative_source_required: true
+    hub_class_equivalence_assumption_allowed: false
+    requires_boundary_note: true
+    note: Do not assume USB 2.0 or USB 3.x hub class request semantics map one-to-one to USB4 without section-level evidence.

@@ -1,0 +1,37 @@
+schema_version: 1
+title: Source Drift and Staleness Rules
+last_updated: 2026-05-30
+
+principle: Source monitoring detects drift risk, not semantic correctness.
+
+staleness_rules:
+  unresolved_normative_source_drift:
+    applies_to_authority_levels:
+      - A
+    effect:
+      claim_level_max: provisional
+      require_disclaimer: true
+      block_new_normative_claims: true
+
+  official_index_page_changed:
+    applies_to_authority_levels:
+      - C
+    effect:
+      claim_level_max: verified
+      require_review: true
+      block_new_normative_claims: false
+
+  official_validation_source_changed:
+    applies_to_authority_levels:
+      - B
+    effect:
+      claim_level_max: inferred
+      require_review: true
+      block_new_normative_claims: false
+
+  community_or_mirror_changed:
+    applies_to_authority_levels:
+      - D
+    effect:
+      claim_level_max: unchanged
+      require_review: false
