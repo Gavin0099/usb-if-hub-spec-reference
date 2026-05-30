@@ -1,0 +1,63 @@
+{
+  "validator": "validate_source_reachability.py",
+  "authority_ceiling": "source_reachability_and_metadata_consistency_only",
+  "validation_surface": "source_reachability_metadata_consistency",
+  "checked_at": "2026-05-30T07:33:16.931456+00:00",
+  "time_bound": true,
+  "skip_network": true,
+  "result": "PASS",
+  "note": "PASS does not imply source correctness or normative content accuracy. Reachability results are advisory and time-bound.",
+  "metadata_error_count": 0,
+  "metadata_errors": [],
+  "reachability_results": [
+    {
+      "source_id": "usb20_spec",
+      "url": "https://www.usb.org/document-library/usb-20-specification",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    },
+    {
+      "source_id": "usb21_lpm_addenda",
+      "url": "https://www.usb.org/document-library/usb-20-specification",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    },
+    {
+      "source_id": "usb32_spec_page",
+      "url": "https://www.usb.org/usb-32-0",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    },
+    {
+      "source_id": "usb4_spec_page",
+      "url": "https://www.usb.org/document-library/usb4r-specification-v20",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    },
+    {
+      "source_id": "osdev_usb_hubs",
+      "url": "https://wiki.osdev.org/USB_Hubs",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    },
+    {
+      "source_id": "archive_usb20_pdf",
+      "url": "https://archive.org/download/USB-2.0/Universal%20Serial%20Bus%20Specification%2C%20Revision%202.0.pdf",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    }
+  ],
+  "findings": []
+}

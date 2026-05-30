@@ -44,3 +44,21 @@ authority_levels:
       - unavailable_official_document_backup
     forbidden_for:
       - primary_normative_claim_when_official_available
+
+url_type_allowlist:
+  normative_official:
+    - official_document_page
+    - official_pdf
+    - official_addendum
+  official_validation:
+    - official_document_page
+    - official_pdf
+  official_index:
+    - official_index_page
+  community_reference:
+    - community_wiki
+    - community_page
+    - github
+  archive_fallback:
+    - archive_mirror
+    - archive_page

@@ -1,0 +1,15 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: fixture_url_type_mismatch
+    title: Fixture URL Type Mismatch
+    authority_level: normative_official
+    usb_version_scope:
+      - usb20
+    topics:
+      - hub_descriptor
+    url: https://wiki.osdev.org/USB_Hubs
+    url_type: community_wiki
+    monitor_status: not_required
+    claim_usage: allowed_normative

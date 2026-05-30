@@ -1,0 +1,15 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: fixture_unreachable
+    title: Fixture Unreachable Source
+    authority_level: normative_official
+    usb_version_scope:
+      - usb20
+    topics:
+      - hub_descriptor
+    url: https://this-host-does-not-exist.invalid/spec.pdf
+    url_type: official_pdf
+    monitor_status: planned
+    claim_usage: allowed_normative

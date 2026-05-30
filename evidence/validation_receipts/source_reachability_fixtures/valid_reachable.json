@@ -1,0 +1,23 @@
+{
+  "validator": "validate_source_reachability.py",
+  "authority_ceiling": "source_reachability_and_metadata_consistency_only",
+  "validation_surface": "source_reachability_metadata_consistency",
+  "checked_at": "2026-05-30T07:33:10.330257+00:00",
+  "time_bound": true,
+  "skip_network": true,
+  "result": "PASS",
+  "note": "PASS does not imply source correctness or normative content accuracy. Reachability results are advisory and time-bound.",
+  "metadata_error_count": 0,
+  "metadata_errors": [],
+  "reachability_results": [
+    {
+      "source_id": "fixture_reachable",
+      "url": "https://www.usb.org/document-library/usb-20-specification",
+      "reachability_status": "skipped",
+      "http_status": null,
+      "claim_effect": "advisory_only",
+      "does_not_change_claim_level": true
+    }
+  ],
+  "findings": []
+}

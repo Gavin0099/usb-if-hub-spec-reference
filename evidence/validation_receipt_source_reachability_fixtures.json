@@ -1,0 +1,51 @@
+{
+  "validator": "validate_source_reachability.py",
+  "smoke_runner": "smoke_validate_source_reachability_fixtures.py",
+  "authority_ceiling": "source_reachability_and_metadata_consistency_only",
+  "total_cases": 3,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "fixture": "valid_reachable.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_reason_codes": [],
+      "actual_reason_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_reachability_fixtures\\valid_reachable.json",
+      "receipt_parse_error": "",
+      "stdout": "Metadata validation PASSED\n- checked sources: 1\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_unreachable.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_reason_codes": [],
+      "actual_reason_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_reachability_fixtures\\invalid_unreachable.json",
+      "receipt_parse_error": "",
+      "stdout": "Metadata validation PASSED\n- checked sources: 1\n",
+      "stderr": "",
+      "note": "unreachable URL only affects advisory reachability, not metadata PASS/FAIL"
+    },
+    {
+      "fixture": "invalid_url_type_mismatch.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "URL_TYPE_NOT_ALLOWED_FOR_AUTHORITY"
+      ],
+      "actual_reason_codes": [
+        "URL_TYPE_NOT_ALLOWED_FOR_AUTHORITY"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_reachability_fixtures\\invalid_url_type_mismatch.json",
+      "receipt_parse_error": "",
+      "stdout": "Metadata validation FAILED\n- [URL_TYPE_NOT_ALLOWED_FOR_AUTHORITY] fixture_url_type_mismatch: url_type 'community_wiki' not in allowlist for authority_level 'normative_official' (allowed: official_document_page, official_pdf, official_addendum)\n",
+      "stderr": ""
+    }
+  ]
+}
