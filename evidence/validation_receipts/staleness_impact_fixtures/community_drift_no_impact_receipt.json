@@ -1,0 +1,19 @@
+{
+  "validator": "validate_staleness_impact.py",
+  "authority_ceiling": "drift_to_claim_level_impact_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "uses_observed_drift_events": true,
+  "time_bound": true,
+  "result": "PASS",
+  "checked_pages": [
+    "hub_page.md"
+  ],
+  "total_unresolved_drift_sources": 1,
+  "structural_fail_count": 0,
+  "advisory_count": 0,
+  "structural_fails": [],
+  "advisories": [],
+  "findings": []
+}

@@ -1,0 +1,1 @@
+{"event_id": "drift-fix_index_src-1", "source_id": "fix_index_src", "detected_at": "2026-05-30T00:00:00+00:00", "change_type": "content_hash_changed", "resolution_status": "unresolved", "affected_scopes": ["usb32"], "required_action": "review_required", "time_bound": true, "observation_only": true, "does_not_change_claim_level": true}

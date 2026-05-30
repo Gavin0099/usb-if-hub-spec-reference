@@ -1,0 +1,41 @@
+{
+  "validator": "validate_staleness_impact.py",
+  "authority_ceiling": "drift_to_claim_level_impact_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "uses_observed_drift_events": true,
+  "time_bound": true,
+  "result": "PASS",
+  "checked_pages": [
+    "hub_page.md"
+  ],
+  "total_unresolved_drift_sources": 1,
+  "structural_fail_count": 0,
+  "advisory_count": 1,
+  "structural_fails": [],
+  "advisories": [
+    {
+      "page": "hub_page.md",
+      "page_path": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\staleness_impact\\official_index_drift_advisory\\wiki_pages\\hub_page.md",
+      "source_ref": "fix_index_src",
+      "source_authority_level": "official_index",
+      "current_claim_level": "normative",
+      "drift_event_count": 1,
+      "impact": "advisory",
+      "reason": "source 'fix_index_src' (authority: official_index) has unresolved drift; advisory only \u2014 does not block this claim level"
+    }
+  ],
+  "findings": [
+    {
+      "page": "hub_page.md",
+      "page_path": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\staleness_impact\\official_index_drift_advisory\\wiki_pages\\hub_page.md",
+      "source_ref": "fix_index_src",
+      "source_authority_level": "official_index",
+      "current_claim_level": "normative",
+      "drift_event_count": 1,
+      "impact": "advisory",
+      "reason": "source 'fix_index_src' (authority: official_index) has unresolved drift; advisory only \u2014 does not block this claim level"
+    }
+  ]
+}

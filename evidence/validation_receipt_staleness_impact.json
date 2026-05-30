@@ -1,0 +1,26 @@
+{
+  "validator": "validate_staleness_impact.py",
+  "authority_ceiling": "drift_to_claim_level_impact_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "uses_observed_drift_events": true,
+  "time_bound": true,
+  "result": "PASS",
+  "checked_pages": [
+    "class_specific_requests.md",
+    "hub_descriptor.md",
+    "port_status.md",
+    "transaction_translator.md",
+    "usb20.md",
+    "usb21.md",
+    "usb32.md",
+    "usb4.md"
+  ],
+  "total_unresolved_drift_sources": 0,
+  "structural_fail_count": 0,
+  "advisory_count": 0,
+  "structural_fails": [],
+  "advisories": [],
+  "findings": []
+}

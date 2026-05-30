@@ -1,0 +1,43 @@
+{
+  "validator": "validate_staleness_impact.py",
+  "authority_ceiling": "drift_to_claim_level_impact_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "uses_observed_drift_events": true,
+  "time_bound": true,
+  "result": "FAIL",
+  "checked_pages": [
+    "hub_page.md"
+  ],
+  "total_unresolved_drift_sources": 1,
+  "structural_fail_count": 1,
+  "advisory_count": 0,
+  "structural_fails": [
+    {
+      "page": "hub_page.md",
+      "page_path": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\staleness_impact\\unresolved_normative_blocks_normative\\wiki_pages\\hub_page.md",
+      "source_ref": "fix_norm_src2",
+      "source_authority_level": "normative_official",
+      "current_claim_level": "normative",
+      "max_allowed_claim_level": "provisional",
+      "drift_event_count": 1,
+      "impact": "structural_fail",
+      "reason": "claim_level 'normative' exceeds max allowed 'provisional' due to unresolved drift on 'fix_norm_src2' (authority: normative_official)"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "page": "hub_page.md",
+      "page_path": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\staleness_impact\\unresolved_normative_blocks_normative\\wiki_pages\\hub_page.md",
+      "source_ref": "fix_norm_src2",
+      "source_authority_level": "normative_official",
+      "current_claim_level": "normative",
+      "max_allowed_claim_level": "provisional",
+      "drift_event_count": 1,
+      "impact": "structural_fail",
+      "reason": "claim_level 'normative' exceeds max allowed 'provisional' due to unresolved drift on 'fix_norm_src2' (authority: normative_official)"
+    }
+  ]
+}

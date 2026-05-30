@@ -1,0 +1,12 @@
+schema_version: 1
+last_updated: 2026-05-30
+sources:
+  - source_id: fix_clean_src
+    title: Fixture Clean
+    authority_level: normative_official
+    usb_version_scope: [usb20]
+    topics: [hub_descriptor]
+    url: https://example.com/spec
+    url_type: official_document_page
+    monitor_status: planned
+    claim_usage: allowed_normative

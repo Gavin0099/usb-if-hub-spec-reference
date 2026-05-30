@@ -8,6 +8,7 @@ staleness_rules:
   unresolved_normative_source_drift:
     applies_to_authority_levels:
       - normative_official
+    impact_type: structural
     effect:
       claim_level_max: provisional
       require_disclaimer: true
@@ -16,23 +17,16 @@ staleness_rules:
   official_index_page_changed:
     applies_to_authority_levels:
       - official_index
+    impact_type: advisory
     effect:
-      claim_level_max: verified
       require_review: true
       block_new_normative_claims: false
 
   official_validation_source_changed:
     applies_to_authority_levels:
       - official_validation
+    impact_type: structural
     effect:
       claim_level_max: inferred
       require_review: true
       block_new_normative_claims: false
-
-  community_or_mirror_changed:
-    applies_to_authority_levels:
-      - community_reference
-      - archive_fallback
-    effect:
-      claim_level_max: unchanged
-      require_review: false
