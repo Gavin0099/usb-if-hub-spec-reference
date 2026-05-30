@@ -1,14 +1,10 @@
-matrix_id: usb_hub_class_request_matrix
+matrix_id: fixture_usb20_get_status_matrix
 scope:
   usb_versions:
     - usb20
   topic: class_specific_request
 status: draft
-# Phase 3B: GET_STATUS hub/port entries added.
-# Phase 3C: SET_FEATURE / CLEAR_FEATURE.
-# Phase 3D: TT request family.
 entries:
-
   - request_id: usb20_get_status_hub
     request_name: GET_STATUS
     usb_version_scope:
@@ -30,10 +26,7 @@ entries:
     claim_level: inferred
     evidence_status: review_required
     drift_status: clean
-    notes: >
-      Returns wHubStatus (2 bytes) + wHubChange (2 bytes). Total wLength=4.
-      bmRequestType=0xA0 (D7=1 D2H, D6:5=01 class, D4:0=00000 device).
-      wIndex=0 (hub itself). Hub status bits defined separately in hub_status_matrix.
+    notes: "Returns wHubStatus (2 bytes) + wHubChange (2 bytes). bmRequestType=0xA0."
 
   - request_id: usb20_get_status_port
     request_name: GET_STATUS
@@ -56,8 +49,4 @@ entries:
     claim_level: inferred
     evidence_status: review_required
     drift_status: clean
-    notes: >
-      Returns wPortStatus (2 bytes) + wPortChange (2 bytes). Total wLength=4.
-      bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other).
-      wIndex=1-based port number. Port status/change bits defined separately
-      in port_status_matrix (Phase 4A).
+    notes: "Returns wPortStatus (2 bytes) + wPortChange (2 bytes). bmRequestType=0xA3. wIndex=1-based port number."

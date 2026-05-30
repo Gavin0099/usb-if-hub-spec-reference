@@ -51,6 +51,12 @@ CASES = [
         "expected_error_codes": [],
         "note": "draft entry without section_anchor → PASS (R5 only applies to verified/normative)",
     },
+    {
+        "name": "valid_usb20_get_status_hub_and_port",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "Phase 3B: GET_STATUS hub + port inferred entries with real source_id → PASS",
+    },
 ]
 
 
