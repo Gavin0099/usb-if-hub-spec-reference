@@ -1,0 +1,27 @@
+{
+  "validator": "validate_wiki_source_coverage.py",
+  "authority_ceiling": "wiki_source_reference_coverage_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "does_not_validate_semantic_correctness": true,
+  "result": "FAIL",
+  "checked_pages": [
+    "page.md"
+  ],
+  "error_count": 1,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "HIGH_CLAIM_LEVEL_MISSING_SOURCE_REFS",
+      "message": "page.md: claim_level 'verified' requires non-empty source_refs"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "HIGH_CLAIM_LEVEL_MISSING_SOURCE_REFS",
+      "message": "page.md: claim_level 'verified' requires non-empty source_refs"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ usb_versions:
 authority_required: normative_official
 claim_level: verified
 source_refs:
-  - usb_if_usb_20_spec_page
+  - usb21_lpm_addenda
 status: draft
 last_reviewed: 2026-05-30
 ---

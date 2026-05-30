@@ -1,0 +1,12 @@
+schema_version: 1
+last_updated: 2026-05-30
+sources:
+  - source_id: fix_community_src
+    title: Fixture Community Source
+    authority_level: community_reference
+    usb_version_scope: [usb20]
+    topics: [hub_descriptor]
+    url: https://wiki.example.com/hub
+    url_type: community_wiki
+    monitor_status: not_required
+    claim_usage: non_normative_only

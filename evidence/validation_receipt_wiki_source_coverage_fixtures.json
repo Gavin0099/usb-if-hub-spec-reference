@@ -1,0 +1,123 @@
+{
+  "validator": "validate_wiki_source_coverage.py",
+  "smoke_runner": "smoke_validate_wiki_source_coverage_fixtures.py",
+  "authority_ceiling": "wiki_source_reference_coverage_only",
+  "total_cases": 6,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_verified_with_normative_source",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\valid_verified_with_normative_source_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation PASSED\n- checked pages: 1\n",
+      "stderr": "",
+      "note": "verified + normative_official source \u2192 PASS"
+    },
+    {
+      "name": "invalid_verified_without_source_refs",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "HIGH_CLAIM_LEVEL_MISSING_SOURCE_REFS"
+      ],
+      "actual_error_codes": [
+        "HIGH_CLAIM_LEVEL_MISSING_SOURCE_REFS"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\invalid_verified_without_source_refs_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation FAILED\n- [HIGH_CLAIM_LEVEL_MISSING_SOURCE_REFS] page.md: claim_level 'verified' requires non-empty source_refs\n",
+      "stderr": "",
+      "note": "verified + no source_refs \u2192 structural FAIL (R1)"
+    },
+    {
+      "name": "invalid_normative_with_unknown_source_ref",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "SOURCE_REF_NOT_IN_REGISTRY"
+      ],
+      "actual_error_codes": [
+        "SOURCE_REF_NOT_IN_REGISTRY",
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\invalid_normative_with_unknown_source_ref_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation FAILED\n- [SOURCE_REF_NOT_IN_REGISTRY] page.md: source_ref 'nonexistent_source_id' not found in source_registry\n- [HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE] page.md: claim_level 'normative' requires at least one source_ref with authority_level 'normative_official'\n",
+      "stderr": "",
+      "note": "normative + source_ref not in registry \u2192 structural FAIL (R2)"
+    },
+    {
+      "name": "invalid_normative_with_community_only",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "actual_error_codes": [
+        "SOURCE_REF_INSUFFICIENT_AUTHORITY",
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\invalid_normative_with_community_only_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation FAILED\n- [SOURCE_REF_INSUFFICIENT_AUTHORITY] page.md: source_ref 'fix_community_src' has authority_level 'community_reference' which does not satisfy authority_required 'normative_official'\n- [HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE] page.md: claim_level 'normative' requires at least one source_ref with authority_level 'normative_official'\n",
+      "stderr": "",
+      "note": "normative + community_reference only \u2192 structural FAIL (R4)"
+    },
+    {
+      "name": "invalid_verified_with_official_index_only",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "actual_error_codes": [
+        "SOURCE_REF_INSUFFICIENT_AUTHORITY",
+        "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\invalid_verified_with_official_index_only_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation FAILED\n- [SOURCE_REF_INSUFFICIENT_AUTHORITY] page.md: source_ref 'fix_index_src' has authority_level 'official_index' which does not satisfy authority_required 'normative_official'\n- [HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE] page.md: claim_level 'verified' requires at least one source_ref with authority_level 'normative_official'\n",
+      "stderr": "",
+      "note": "verified + official_index only \u2192 structural FAIL (R4)"
+    },
+    {
+      "name": "provisional_without_source_refs_advisory",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [
+        "ADVISORY_LOW_CLAIM_WITHOUT_SOURCE_REFS"
+      ],
+      "actual_advisory_codes": [
+        "ADVISORY_LOW_CLAIM_WITHOUT_SOURCE_REFS"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_source_coverage_fixtures\\provisional_without_source_refs_advisory_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki source coverage validation PASSED\n- checked pages: 1\n- 1 advisory finding(s):\n  ~ [ADVISORY_LOW_CLAIM_WITHOUT_SOURCE_REFS] page.md: claim_level 'provisional' has no source_refs \u2014 acceptable for drafts\n",
+      "stderr": "",
+      "note": "provisional + no source_refs \u2192 PASS with advisory (A1)"
+    }
+  ]
+}

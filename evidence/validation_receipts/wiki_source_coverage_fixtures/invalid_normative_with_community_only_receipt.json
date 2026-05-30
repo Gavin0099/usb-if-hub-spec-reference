@@ -1,0 +1,35 @@
+{
+  "validator": "validate_wiki_source_coverage.py",
+  "authority_ceiling": "wiki_source_reference_coverage_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "does_not_validate_semantic_correctness": true,
+  "result": "FAIL",
+  "checked_pages": [
+    "page.md"
+  ],
+  "error_count": 2,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "SOURCE_REF_INSUFFICIENT_AUTHORITY",
+      "message": "page.md: source_ref 'fix_community_src' has authority_level 'community_reference' which does not satisfy authority_required 'normative_official'"
+    },
+    {
+      "code": "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE",
+      "message": "page.md: claim_level 'normative' requires at least one source_ref with authority_level 'normative_official'"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "SOURCE_REF_INSUFFICIENT_AUTHORITY",
+      "message": "page.md: source_ref 'fix_community_src' has authority_level 'community_reference' which does not satisfy authority_required 'normative_official'"
+    },
+    {
+      "code": "HIGH_CLAIM_LEVEL_NO_NORMATIVE_OFFICIAL_SOURCE",
+      "message": "page.md: claim_level 'normative' requires at least one source_ref with authority_level 'normative_official'"
+    }
+  ]
+}

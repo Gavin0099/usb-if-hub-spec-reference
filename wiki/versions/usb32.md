@@ -3,10 +3,10 @@ title: USB 3.2 Version Scope
 topic: version_scope
 usb_versions:
   - usb_3_2
-authority_required: normative_official
-claim_level: verified
+authority_required: official_index
+claim_level: inferred
 source_refs:
-  - usb_if_usb_32_page
+  - usb32_spec_page
 status: draft
 last_reviewed: 2026-05-30
 ---
