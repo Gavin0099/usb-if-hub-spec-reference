@@ -1,0 +1,19 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_file": "D:\\usb-if-hub-spec-reference\\contract\\authority_levels.yaml",
+  "registry_file": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\source_registry\\invalid_usb_version_scope.yaml",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "FAIL",
+  "checked_authority_levels": 5,
+  "checked_sources": 1,
+  "error_count": 1,
+  "errors": [
+    "bad_scope: invalid usb_version_scope value(s): usb5"
+  ],
+  "findings": [
+    {
+      "code": "USB_VERSION_SCOPE_INVALID",
+      "message": "bad_scope: invalid usb_version_scope value(s): usb5"
+    }
+  ]
+}

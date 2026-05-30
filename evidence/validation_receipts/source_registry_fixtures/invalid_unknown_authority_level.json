@@ -1,0 +1,19 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_file": "D:\\usb-if-hub-spec-reference\\contract\\authority_levels.yaml",
+  "registry_file": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\source_registry\\invalid_unknown_authority_level.yaml",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "FAIL",
+  "checked_authority_levels": 5,
+  "checked_sources": 1,
+  "error_count": 1,
+  "errors": [
+    "bad_authority: authority_level 'made_up_authority' not defined in contract/authority_levels.yaml"
+  ],
+  "findings": [
+    {
+      "code": "UNKNOWN_AUTHORITY_LEVEL",
+      "message": "bad_authority: authority_level 'made_up_authority' not defined in contract/authority_levels.yaml"
+    }
+  ]
+}

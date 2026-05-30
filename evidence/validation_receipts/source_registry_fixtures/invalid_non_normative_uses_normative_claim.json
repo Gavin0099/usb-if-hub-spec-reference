@@ -1,0 +1,19 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_file": "D:\\usb-if-hub-spec-reference\\contract\\authority_levels.yaml",
+  "registry_file": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\source_registry\\invalid_non_normative_uses_normative_claim.yaml",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "FAIL",
+  "checked_authority_levels": 5,
+  "checked_sources": 1,
+  "error_count": 1,
+  "errors": [
+    "bad_claim_usage: claim_usage 'allowed_normative' is not allowed for authority_level 'official_index'"
+  ],
+  "findings": [
+    {
+      "code": "NORMATIVE_CLAIM_USAGE_FOR_NON_NORMATIVE_AUTHORITY",
+      "message": "bad_claim_usage: claim_usage 'allowed_normative' is not allowed for authority_level 'official_index'"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_file": "D:\\usb-if-hub-spec-reference\\contract\\authority_levels.yaml",
+  "registry_file": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\source_registry\\invalid_missing_required_field.yaml",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "FAIL",
+  "checked_authority_levels": 5,
+  "checked_sources": 1,
+  "error_count": 2,
+  "errors": [
+    "missing_url: missing required field(s): url",
+    "missing_url: url must be a non-empty string"
+  ],
+  "findings": [
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "missing_url: missing required field(s): url"
+    },
+    {
+      "code": "URL_EMPTY",
+      "message": "missing_url: url must be a non-empty string"
+    }
+  ]
+}

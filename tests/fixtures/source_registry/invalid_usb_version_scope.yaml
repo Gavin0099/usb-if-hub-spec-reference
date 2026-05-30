@@ -1,0 +1,15 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: bad_scope
+    title: Invalid Scope Example
+    authority_level: normative_official
+    usb_version_scope:
+      - usb5
+    topics:
+      - hub_descriptor
+    url: https://example.com/invalid-scope
+    url_type: external_page
+    monitor_status: planned
+    claim_usage: allowed_normative

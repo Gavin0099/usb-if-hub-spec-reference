@@ -1,0 +1,15 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: bad_claim_usage
+    title: Non-normative with normative claim usage
+    authority_level: official_index
+    usb_version_scope:
+      - usb32
+    topics:
+      - topology
+    url: https://www.usb.org/documents
+    url_type: official_index_page
+    monitor_status: planned
+    claim_usage: allowed_normative

@@ -1,0 +1,87 @@
+{
+  "validator": "validate_source_registry.py",
+  "smoke_runner": "smoke_validate_source_registry_fixtures.py",
+  "authority_ceiling": "structural_registry_validation_only",
+  "total_cases": 5,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "fixture": "valid_minimal.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_reason_codes": [],
+      "actual_reason_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_registry_fixtures\\valid_minimal.json",
+      "receipt_parse_error": "",
+      "stdout": "Validation PASSED\n- checked authority levels: 5\n- checked sources: 1\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_unknown_authority_level.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "UNKNOWN_AUTHORITY_LEVEL"
+      ],
+      "actual_reason_codes": [
+        "UNKNOWN_AUTHORITY_LEVEL"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_registry_fixtures\\invalid_unknown_authority_level.json",
+      "receipt_parse_error": "",
+      "stdout": "Validation FAILED\n- bad_authority: authority_level 'made_up_authority' not defined in contract/authority_levels.yaml\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_usb_version_scope.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "USB_VERSION_SCOPE_INVALID"
+      ],
+      "actual_reason_codes": [
+        "USB_VERSION_SCOPE_INVALID"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_registry_fixtures\\invalid_usb_version_scope.json",
+      "receipt_parse_error": "",
+      "stdout": "Validation FAILED\n- bad_scope: invalid usb_version_scope value(s): usb5\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_non_normative_uses_normative_claim.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "NORMATIVE_CLAIM_USAGE_FOR_NON_NORMATIVE_AUTHORITY"
+      ],
+      "actual_reason_codes": [
+        "NORMATIVE_CLAIM_USAGE_FOR_NON_NORMATIVE_AUTHORITY"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_registry_fixtures\\invalid_non_normative_uses_normative_claim.json",
+      "receipt_parse_error": "",
+      "stdout": "Validation FAILED\n- bad_claim_usage: claim_usage 'allowed_normative' is not allowed for authority_level 'official_index'\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_missing_required_field.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "actual_reason_codes": [
+        "REQUIRED_FIELD_MISSING",
+        "URL_EMPTY"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_registry_fixtures\\invalid_missing_required_field.json",
+      "receipt_parse_error": "",
+      "stdout": "Validation FAILED\n- missing_url: missing required field(s): url\n- missing_url: url must be a non-empty string\n",
+      "stderr": ""
+    }
+  ]
+}

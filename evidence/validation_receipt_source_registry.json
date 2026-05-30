@@ -1,0 +1,12 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_file": "D:\\usb-if-hub-spec-reference\\contract\\authority_levels.yaml",
+  "registry_file": "D:\\usb-if-hub-spec-reference\\evidence\\source_registry.yaml",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "PASS",
+  "checked_authority_levels": 5,
+  "checked_sources": 6,
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

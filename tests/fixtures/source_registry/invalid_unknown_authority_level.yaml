@@ -1,0 +1,15 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: bad_authority
+    title: Unknown Authority Example
+    authority_level: made_up_authority
+    usb_version_scope:
+      - usb20
+    topics:
+      - hub_descriptor
+    url: https://example.com/unknown-authority
+    url_type: external_page
+    monitor_status: planned
+    claim_usage: non_normative_only

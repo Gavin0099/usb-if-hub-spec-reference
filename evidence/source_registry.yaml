@@ -1,0 +1,90 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - source_id: usb20_spec
+    title: USB 2.0 Specification
+    authority_level: normative_official
+    usb_version_scope:
+      - usb20
+    topics:
+      - hub_descriptor
+      - port_status
+      - class_specific_request
+      - transaction_translator
+    url: https://www.usb.org/document-library/usb-20-specification
+    url_type: official_document_page
+    monitor_status: planned
+    claim_usage: allowed_normative
+
+  - source_id: usb21_lpm_addenda
+    title: USB 2.0 LPM / USB 2.1 Addenda
+    authority_level: normative_official
+    usb_version_scope:
+      - usb21
+    topics:
+      - lpm_delta
+      - hub_behavior_delta
+    url: https://www.usb.org/document-library/usb-20-specification
+    url_type: official_addendum
+    monitor_status: planned
+    claim_usage: delta_only
+
+  - source_id: usb32_spec_page
+    title: USB 3.2 Specification / Technology Page
+    authority_level: official_index
+    usb_version_scope:
+      - usb32
+    topics:
+      - superspeed_hub_delta
+      - link_state
+      - topology
+    url: https://www.usb.org/usb-32-0
+    url_type: official_index_page
+    monitor_status: planned
+    claim_usage: discovery_only_until_download_registered
+
+  - source_id: usb4_spec_page
+    title: USB4 Specification Page
+    authority_level: official_index
+    usb_version_scope:
+      - usb4
+    topics:
+      - usb4_boundary
+      - topology
+      - router
+    url: https://www.usb.org/document-library/usb4r-specification-v20
+    url_type: official_index_page
+    monitor_status: planned
+    claim_usage: boundary_context_only
+
+  - source_id: osdev_usb_hubs
+    title: OSDev Wiki - USB Hubs
+    authority_level: community_reference
+    usb_version_scope:
+      - usb20
+      - usb32
+    topics:
+      - explanation_aid
+      - cross_check
+    url: https://wiki.osdev.org/USB_Hubs
+    url_type: community_wiki
+    monitor_status: not_required
+    claim_usage: non_normative_only
+
+  - source_id: archive_usb20_pdf
+    title: Archived USB 2.0 PDF Mirror
+    authority_level: archive_fallback
+    usb_version_scope:
+      - usb20
+    topics:
+      - hub_descriptor
+      - port_status
+      - class_specific_request
+    url: https://archive.org/download/USB-2.0/Universal%20Serial%20Bus%20Specification%2C%20Revision%202.0.pdf
+    url_type: archive_mirror
+    monitor_status: optional
+    claim_usage: fallback_only
+
+notes:
+  - This registry maps source authority and intended claim usage before runtime monitor/validator integration.
