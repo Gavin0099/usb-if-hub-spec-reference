@@ -1,0 +1,46 @@
+schema_version: 1
+last_updated: 2026-05-30
+
+sources:
+  - id: usb20_spec_page
+    title: USB 2.0 Specification
+    url: https://www.usb.org/document-library/usb-20-specification
+    authority_level: A
+    scope:
+      - usb_2_0
+      - hub_descriptor
+      - port_status
+      - class_specific_requests
+      - transaction_translator
+    drift_policy:
+      on_change: mark_dependent_claims_needs_review
+
+  - id: usb32_page
+    title: USB 3.2
+    url: https://www.usb.org/usb-32-0
+    authority_level: C
+    scope:
+      - usb_3_2
+      - superspeed_hub_delta
+    drift_policy:
+      on_change: mark_scope_needs_review
+
+  - id: usb4_v20_page
+    title: USB4 Specification v2.0
+    url: https://www.usb.org/document-library/usb4r-specification-v20
+    authority_level: A
+    scope:
+      - usb4
+      - topology_router_boundary
+    drift_policy:
+      on_change: mark_dependent_claims_needs_review
+
+  - id: usb_if_document_index
+    title: USB-IF Document Index
+    url: https://www.usb.org/documents
+    authority_level: C
+    scope:
+      - discovery
+      - lineage
+    drift_policy:
+      on_change: review_registry_links

@@ -1,0 +1,14 @@
+{
+  "signal_id": "sig-usb20-hubdesc-0001",
+  "source_id": "usb20_spec",
+  "topic": "hub_descriptor",
+  "usb_version_scope": [
+    "usb20"
+  ],
+  "authority_level": "normative_official",
+  "claim_level": "verified",
+  "evidence_status": "complete",
+  "drift_status": "clean",
+  "integrity_band": "HIGH",
+  "notes": "Sample verified signal for schema/validator smoke check."
+}
