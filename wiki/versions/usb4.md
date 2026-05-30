@@ -3,7 +3,7 @@ title: USB4 Version Scope
 topic: version_scope
 usb_versions:
   - usb4
-authority_required: A
+authority_required: normative_official
 claim_level: verified
 source_refs:
   - usb_if_usb4_v20_page

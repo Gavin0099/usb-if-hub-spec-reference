@@ -7,7 +7,7 @@ principle: Source monitoring detects drift risk, not semantic correctness.
 staleness_rules:
   unresolved_normative_source_drift:
     applies_to_authority_levels:
-      - A
+      - normative_official
     effect:
       claim_level_max: provisional
       require_disclaimer: true
@@ -15,7 +15,7 @@ staleness_rules:
 
   official_index_page_changed:
     applies_to_authority_levels:
-      - C
+      - official_index
     effect:
       claim_level_max: verified
       require_review: true
@@ -23,7 +23,7 @@ staleness_rules:
 
   official_validation_source_changed:
     applies_to_authority_levels:
-      - B
+      - official_validation
     effect:
       claim_level_max: inferred
       require_review: true
@@ -31,7 +31,8 @@ staleness_rules:
 
   community_or_mirror_changed:
     applies_to_authority_levels:
-      - D
+      - community_reference
+      - archive_fallback
     effect:
       claim_level_max: unchanged
       require_review: false

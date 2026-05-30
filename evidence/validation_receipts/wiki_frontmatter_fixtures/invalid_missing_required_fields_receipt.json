@@ -1,0 +1,40 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "note": "PASS does not imply USB spec content accuracy. Validates frontmatter structure only.",
+  "result": "FAIL",
+  "checked_pages": [
+    "invalid_missing_required_fields.md"
+  ],
+  "error_count": 3,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'claim_level'"
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'last_reviewed'"
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'title'"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'claim_level'"
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'last_reviewed'"
+    },
+    {
+      "code": "REQUIRED_FIELD_MISSING",
+      "message": "invalid_missing_required_fields.md: missing or empty required field 'title'"
+    }
+  ]
+}

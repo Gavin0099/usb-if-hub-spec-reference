@@ -4,7 +4,7 @@ topic: hub_descriptor
 usb_versions:
   - usb_2_0
   - usb_3_2
-authority_required: A
+authority_required: normative_official
 claim_level: draft
 source_refs:
   - usb_if_usb_20_spec_page

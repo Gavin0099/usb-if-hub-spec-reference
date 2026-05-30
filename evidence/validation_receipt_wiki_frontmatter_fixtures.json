@@ -1,0 +1,81 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "smoke_runner": "smoke_validate_wiki_frontmatter_fixtures.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "fixture": "valid_concept.md",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_frontmatter_fixtures\\valid_concept_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki frontmatter validation PASSED\n- checked pages: 1\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_missing_required_fields.md",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "actual_error_codes": [
+        "REQUIRED_FIELD_MISSING",
+        "REQUIRED_FIELD_MISSING",
+        "REQUIRED_FIELD_MISSING"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_frontmatter_fixtures\\invalid_missing_required_fields_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki frontmatter validation FAILED\n- [REQUIRED_FIELD_MISSING] invalid_missing_required_fields.md: missing or empty required field 'claim_level'\n- [REQUIRED_FIELD_MISSING] invalid_missing_required_fields.md: missing or empty required field 'last_reviewed'\n- [REQUIRED_FIELD_MISSING] invalid_missing_required_fields.md: missing or empty required field 'title'\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "invalid_bad_authority_level.md",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "AUTHORITY_REQUIRED_INVALID"
+      ],
+      "actual_error_codes": [
+        "AUTHORITY_REQUIRED_INVALID"
+      ],
+      "expected_advisory_codes": [],
+      "actual_advisory_codes": [],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_frontmatter_fixtures\\invalid_bad_authority_level_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki frontmatter validation FAILED\n- [AUTHORITY_REQUIRED_INVALID] invalid_bad_authority_level.md: authority_required 'A' is not a canonical authority level (expected one of: archive_fallback, community_reference, normative_official, official_index, official_validation)\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "advisory_normative_draft.md",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "expected_advisory_codes": [
+        "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS"
+      ],
+      "actual_advisory_codes": [
+        "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS"
+      ],
+      "result": "PASS",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_frontmatter_fixtures\\advisory_normative_draft_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "Wiki frontmatter validation PASSED\n- checked pages: 1\n- 1 advisory finding(s):\n  ~ [ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS] advisory_normative_draft.md: claim_level 'normative' with status 'draft' \u2014 consider promoting status when claim is ready\n",
+      "stderr": "",
+      "note": "advisory finding recorded but does not cause FAIL"
+    }
+  ]
+}

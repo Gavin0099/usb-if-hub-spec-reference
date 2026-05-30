@@ -1,0 +1,24 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "note": "PASS does not imply USB spec content accuracy. Validates frontmatter structure only.",
+  "result": "FAIL",
+  "checked_pages": [
+    "invalid_bad_authority_level.md"
+  ],
+  "error_count": 1,
+  "advisory_count": 0,
+  "errors": [
+    {
+      "code": "AUTHORITY_REQUIRED_INVALID",
+      "message": "invalid_bad_authority_level.md: authority_required 'A' is not a canonical authority level (expected one of: archive_fallback, community_reference, normative_official, official_index, official_validation)"
+    }
+  ],
+  "advisories": [],
+  "findings": [
+    {
+      "code": "AUTHORITY_REQUIRED_INVALID",
+      "message": "invalid_bad_authority_level.md: authority_required 'A' is not a canonical authority level (expected one of: archive_fallback, community_reference, normative_official, official_index, official_validation)"
+    }
+  ]
+}

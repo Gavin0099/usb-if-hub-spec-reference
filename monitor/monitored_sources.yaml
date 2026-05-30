@@ -5,7 +5,7 @@ sources:
   - id: usb20_spec_page
     title: USB 2.0 Specification
     url: https://www.usb.org/document-library/usb-20-specification
-    authority_level: A
+    authority_level: normative_official
     scope:
       - usb_2_0
       - hub_descriptor
@@ -18,7 +18,7 @@ sources:
   - id: usb32_page
     title: USB 3.2
     url: https://www.usb.org/usb-32-0
-    authority_level: C
+    authority_level: official_index
     scope:
       - usb_3_2
       - superspeed_hub_delta
@@ -28,7 +28,7 @@ sources:
   - id: usb4_v20_page
     title: USB4 Specification v2.0
     url: https://www.usb.org/document-library/usb4r-specification-v20
-    authority_level: A
+    authority_level: normative_official
     scope:
       - usb4
       - topology_router_boundary
@@ -38,7 +38,7 @@ sources:
   - id: usb_if_document_index
     title: USB-IF Document Index
     url: https://www.usb.org/documents
-    authority_level: C
+    authority_level: official_index
     scope:
       - discovery
       - lineage

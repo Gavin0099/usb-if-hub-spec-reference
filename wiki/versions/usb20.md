@@ -3,7 +3,7 @@ title: USB 2.0 Version Scope
 topic: version_scope
 usb_versions:
   - usb_2_0
-authority_required: A
+authority_required: normative_official
 claim_level: normative
 source_refs:
   - usb_if_usb_20_spec_page

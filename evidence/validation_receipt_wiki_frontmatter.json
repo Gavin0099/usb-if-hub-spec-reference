@@ -1,0 +1,55 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "note": "PASS does not imply USB spec content accuracy. Validates frontmatter structure only.",
+  "result": "PASS",
+  "checked_pages": [
+    "class_specific_requests.md",
+    "hub_descriptor.md",
+    "port_status.md",
+    "transaction_translator.md",
+    "usb20.md",
+    "usb21.md",
+    "usb32.md",
+    "usb4.md"
+  ],
+  "error_count": 0,
+  "advisory_count": 4,
+  "errors": [],
+  "advisories": [
+    {
+      "code": "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb20.md: claim_level 'normative' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb21.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb32.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb4.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    }
+  ],
+  "findings": [
+    {
+      "code": "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb20.md: claim_level 'normative' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb21.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb32.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    },
+    {
+      "code": "ADVISORY_VERIFIED_CLAIM_WITH_DRAFT_STATUS",
+      "message": "usb4.md: claim_level 'verified' with status 'draft' \u2014 consider promoting status when claim is ready"
+    }
+  ]
+}

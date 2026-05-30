@@ -1,0 +1,24 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "note": "PASS does not imply USB spec content accuracy. Validates frontmatter structure only.",
+  "result": "PASS",
+  "checked_pages": [
+    "advisory_normative_draft.md"
+  ],
+  "error_count": 0,
+  "advisory_count": 1,
+  "errors": [],
+  "advisories": [
+    {
+      "code": "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS",
+      "message": "advisory_normative_draft.md: claim_level 'normative' with status 'draft' \u2014 consider promoting status when claim is ready"
+    }
+  ],
+  "findings": [
+    {
+      "code": "ADVISORY_NORMATIVE_CLAIM_WITH_DRAFT_STATUS",
+      "message": "advisory_normative_draft.md: claim_level 'normative' with status 'draft' \u2014 consider promoting status when claim is ready"
+    }
+  ]
+}

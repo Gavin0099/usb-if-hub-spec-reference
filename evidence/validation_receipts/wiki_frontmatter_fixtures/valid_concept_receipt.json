@@ -1,0 +1,14 @@
+{
+  "validator": "validate_wiki_frontmatter.py",
+  "authority_ceiling": "wiki_frontmatter_structural_consistency_only",
+  "note": "PASS does not imply USB spec content accuracy. Validates frontmatter structure only.",
+  "result": "PASS",
+  "checked_pages": [
+    "valid_concept.md"
+  ],
+  "error_count": 0,
+  "advisory_count": 0,
+  "errors": [],
+  "advisories": [],
+  "findings": []
+}

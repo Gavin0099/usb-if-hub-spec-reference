@@ -3,7 +3,7 @@ title: USB 2.1 Version Scope
 topic: version_scope
 usb_versions:
   - usb_2_1
-authority_required: A
+authority_required: normative_official
 claim_level: verified
 source_refs:
   - usb_if_usb_20_spec_page
