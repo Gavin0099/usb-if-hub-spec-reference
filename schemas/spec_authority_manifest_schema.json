@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spec Authority Manifest",
+  "description": "Minimal schema for a governed table export manifest. Establishes machine-readable access path and claim ceiling. Does not enforce consumer-side behavior.",
+  "type": "object",
+  "required": [
+    "manifest_id",
+    "manifest_version",
+    "export_type",
+    "authority_surface",
+    "claim_ceiling",
+    "consumer_usage",
+    "evidence_state"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "export_type": {
+      "type": "string",
+      "enum": ["governed_table_reference"]
+    },
+    "authority_surface": {
+      "type": "object",
+      "required": ["topic", "usb_version_scope", "table_path", "schema_path", "validator_path"],
+      "additionalProperties": false,
+      "properties": {
+        "topic": { "type": "string", "minLength": 1 },
+        "usb_version_scope": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "table_path": { "type": "string", "minLength": 1 },
+        "schema_path": { "type": "string", "minLength": 1 },
+        "validator_path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "claim_ceiling": {
+      "type": "object",
+      "required": ["default", "cannot_establish"],
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": ["spec_reference_only"]
+        },
+        "cannot_establish": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "contains": { "const": "firmware_behavior" }
+        }
+      }
+    },
+    "consumer_usage": {
+      "type": "object",
+      "required": ["intended_for", "must_not"],
+      "additionalProperties": false,
+      "properties": {
+        "intended_for": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "must_not": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "evidence_state": {
+      "type": "object",
+      "required": ["claim_level", "evidence_status", "semantic_pdf_verification"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_level": {
+          "type": "string",
+          "enum": ["inferred", "provisional", "verified", "normative"]
+        },
+        "evidence_status": {
+          "type": "string",
+          "enum": ["review_required", "reviewed", "verified"]
+        },
+        "semantic_pdf_verification": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

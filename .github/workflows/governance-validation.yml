@@ -1,0 +1,160 @@
+name: Governance Validation
+
+# Two-tier CI:
+#   fixture-smoke   — required gate. Deterministic. No network. Protects validator logic.
+#   advisory        — informational. Real repo content. Does not block PRs.
+#
+# Authority ceiling: fixture-smoke certifies validator logic only.
+#                    advisory certifies nothing — receipts are evidence artifacts, not semantic correctness claims.
+# See: docs/local_governance_freeze_point.md
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "tables/**"
+      - "exports/**"
+      - "evidence/source_registry.yaml"
+      - "contract/**"
+      - "specs/**"
+      - "wiki/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "tables/**"
+      - "exports/**"
+      - "evidence/source_registry.yaml"
+      - "contract/**"
+      - "specs/**"
+      - "wiki/**"
+  workflow_dispatch:
+
+jobs:
+  # ── Required gate ──────────────────────────────────────────────────────────
+  # Runs all fixture smoke tests. These are deterministic and hit no network.
+  # A failure here means validator logic has regressed — block the PR.
+  fixture-smoke:
+    name: Fixture Smoke (Required)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Source registry fixture smoke
+        run: python scripts/smoke_validate_source_registry_fixtures.py
+
+      - name: Source reachability fixture smoke
+        run: python scripts/smoke_validate_source_reachability_fixtures.py
+
+      - name: USB signals fixture smoke
+        run: python scripts/smoke_validate_usb_signals_fixtures.py
+
+      - name: Wiki frontmatter fixture smoke
+        run: python scripts/smoke_validate_wiki_frontmatter_fixtures.py
+
+      - name: Drift monitor fixture smoke
+        run: python scripts/smoke_usbif_drift_monitor_fixtures.py
+
+      - name: Staleness impact fixture smoke
+        run: python scripts/smoke_validate_staleness_impact_fixtures.py
+
+      - name: Wiki source coverage fixture smoke
+        run: python scripts/smoke_validate_wiki_source_coverage_fixtures.py
+
+      - name: Class request matrix fixture smoke
+        run: python scripts/smoke_validate_class_request_matrix_fixtures.py
+
+      - name: Class request coverage fixture smoke
+        run: python scripts/smoke_validate_class_request_coverage_fixtures.py
+
+  # ── Advisory job ───────────────────────────────────────────────────────────
+  # Runs real validators against actual repo content.
+  # Each step uses continue-on-error so all validators run regardless of individual failures.
+  # Results are uploaded as artifacts — they are evidence records, not semantic correctness claims.
+  # This job does NOT block PRs.
+  #
+  # NOT included: validate_source_reachability.py — hits USB-IF network, unsuitable as CI gate.
+  advisory-validation:
+    name: Advisory Real Content Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: fixture-smoke
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Create receipt output directory
+        run: mkdir -p ci-receipts
+
+      - name: Wiki frontmatter validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_wiki_frontmatter.py \
+            --dir specs/ \
+            --receipt-out ci-receipts/wiki_frontmatter.json
+
+      - name: Wiki source coverage validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_wiki_source_coverage.py \
+            --source-registry evidence/source_registry.yaml \
+            --wiki-dir specs/ \
+            --receipt-out ci-receipts/wiki_source_coverage.json
+
+      - name: Staleness impact validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_staleness_impact.py \
+            --drift-events evidence/drift_events.jsonl \
+            --source-registry evidence/source_registry.yaml \
+            --staleness-rules contract/staleness_rules.yaml \
+            --wiki-dir specs/ \
+            --receipt-out ci-receipts/staleness_impact.json
+
+      - name: Class request matrix validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_class_request_matrix.py \
+            --matrix tables/class_request_matrix.yaml \
+            --source-registry evidence/source_registry.yaml \
+            --receipt-out ci-receipts/class_request_matrix.json
+
+      - name: Class request coverage validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_class_request_coverage.py \
+            --matrix tables/class_request_matrix.yaml \
+            --receipt-out ci-receipts/class_request_coverage.json
+
+      - name: Spec authority manifest validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_spec_authority_manifest.py \
+            --manifest exports/usb20_hub_class_request_manifest.yaml \
+            --receipt-out ci-receipts/spec_authority_manifest.json
+
+      - name: Upload advisory receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advisory-validation-receipts
+          path: ci-receipts/
+          if-no-files-found: ignore

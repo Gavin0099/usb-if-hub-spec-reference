@@ -1,0 +1,8 @@
+{
+  "validator": "validate_spec_authority_manifest",
+  "manifest": "D:\\usb-if-hub-spec-reference\\exports\\usb20_hub_class_request_manifest.yaml",
+  "verdict": "PASS",
+  "failures": [],
+  "advisories": [],
+  "authority_ceiling": "spec_authority_manifest_structural_validation_only"
+}
