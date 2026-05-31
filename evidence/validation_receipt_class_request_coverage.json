@@ -5,14 +5,16 @@
   "result": "PASS",
   "coverage_id": "usb20_hub_class_request_coverage",
   "expected_count": 9,
-  "covered_count": 7,
-  "missing_count": 2,
+  "covered_count": 9,
+  "missing_count": 0,
   "derived_covered": [
     "CLEAR_FEATURE",
     "CLEAR_TT_BUFFER",
+    "GET_DESCRIPTOR",
     "GET_STATUS",
     "GET_TT_STATE",
     "RESET_TT",
+    "SET_DESCRIPTOR",
     "SET_FEATURE",
     "STOP_TT"
   ],

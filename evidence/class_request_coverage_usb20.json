@@ -21,18 +21,17 @@
     "GET_STATUS",
     "CLEAR_FEATURE",
     "SET_FEATURE",
+    "GET_DESCRIPTOR",
+    "SET_DESCRIPTOR",
     "CLEAR_TT_BUFFER",
     "RESET_TT",
     "GET_TT_STATE",
     "STOP_TT"
   ],
-  "missing_request_families": [
-    "GET_DESCRIPTOR",
-    "SET_DESCRIPTOR"
-  ],
-  "coverage_status": "partial",
+  "missing_request_families": [],
+  "coverage_status": "complete",
   "claim_level": "inferred",
   "evidence_status": "review_required",
   "does_not_validate_semantic_correctness": true,
-  "notes": "GET_DESCRIPTOR and SET_DESCRIPTOR are USB 2.0 §11.24.2 hub class requests not yet added to class_request_matrix. Deferred to Phase 3F."
+  "notes": "All 9 USB 2.0 §11.24.2 hub class request families are present in class_request_matrix. Coverage is at request_family level only. All entries carry claim_level=inferred and evidence_status=review_required. No PDF section-level verification has been performed. Semantic correctness is not certified by this coverage report."
 }
