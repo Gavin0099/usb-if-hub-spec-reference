@@ -79,6 +79,11 @@
             "type": ["string", "null"],
             "enum": ["all_hubs", "hub_only", "port_only", "hub_with_tt_only", "reserved_or_unsupported", null],
             "description": "Applicability constraint. hub_with_tt_only means only valid on HS hubs with an embedded Transaction Translator."
+          },
+          "request_context": {
+            "type": ["string", "null"],
+            "enum": ["hub_class_specific", "standard_request", "vendor_specific", null],
+            "description": "Distinguishes hub-class-specific usage from generic standard or vendor requests with the same bRequest code. Use hub_class_specific for GET_DESCRIPTOR / SET_DESCRIPTOR in hub class context to avoid conflation with standard USB descriptor requests."
           }
         },
         "additionalProperties": false

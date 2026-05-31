@@ -294,3 +294,66 @@ entries:
       wValue=0. wIndex=TT port number (spec_defined pending section review).
       Stops processing split transactions on the TT.
       Only valid on HS hubs with an embedded Transaction Translator.
+
+  # Phase 3F: GET_DESCRIPTOR / SET_DESCRIPTOR — E-04 gap
+  - request_id: usb20_get_descriptor_hub
+    request_family: GET_DESCRIPTOR
+    request_name: GET_DESCRIPTOR
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: all_hubs
+    request_context: hub_class_specific
+    setup:
+      direction: device_to_host
+      type: class
+      recipient: device
+      bRequest: GET_DESCRIPTOR
+      wValue: spec_defined
+      wIndex: "0x0000"
+      wLength: spec_defined
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      Hub class-specific context. Not to be confused with standard USB GET_DESCRIPTOR
+      (bmRequestType type=standard). request_context=hub_class_specific marks this distinction.
+      bmRequestType=0xA0 (D7=1 D2H, D6:5=01 class, D4:0=00000 device) pending section review.
+      wValue encodes hub descriptor type (0x29) and index — spec_defined until section review.
+      wLength depends on hub descriptor size — spec_defined until section review.
+
+  - request_id: usb20_set_descriptor_hub
+    request_family: SET_DESCRIPTOR
+    request_name: SET_DESCRIPTOR
+    usb_version_scope:
+      - usb20
+    topic: class_specific_request
+    recipient: hub
+    applies_to: all_hubs
+    request_context: hub_class_specific
+    setup:
+      direction: host_to_device
+      type: class
+      recipient: device
+      bRequest: SET_DESCRIPTOR
+      wValue: spec_defined
+      wIndex: "0x0000"
+      wLength: spec_defined
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    drift_status: clean
+    notes: >
+      Hub class-specific context. Optional request; implementation support is not mandatory.
+      request_context=hub_class_specific distinguishes from generic standard SET_DESCRIPTOR.
+      bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device) pending section review.
+      wValue encodes descriptor type and index — spec_defined until section review.
+      wLength depends on descriptor payload size — spec_defined until section review.
