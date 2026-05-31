@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB Hub Feature Selector Matrix",
+  "description": "Governed extraction table for USB hub feature selectors. Establishes the standard selector namespace (port: 0-22, hub: known values). All entries carry claim_level and evidence_status.",
+  "type": "object",
+  "required": ["matrix_id", "scope", "status", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "matrix_id": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["usb_versions", "topic"],
+      "additionalProperties": false,
+      "properties": {
+        "usb_versions": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "topic": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "review_required", "complete", "deprecated"] },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "selector_id", "selector_value", "selector_name",
+          "applies_to", "request_usage", "source_refs",
+          "claim_level", "evidence_status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "selector_id": { "type": "string", "minLength": 1 },
+          "selector_value": { "type": "integer", "minimum": 0 },
+          "selector_name": { "type": "string" },
+          "applies_to": {
+            "type": "string",
+            "enum": ["hub", "port", "reserved", "hub_and_port", "unknown"]
+          },
+          "request_usage": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "section_anchor": { "type": ["string", "null"] },
+          "authority_level": { "type": ["string", "null"] },
+          "claim_level": {
+            "type": "string",
+            "enum": ["normative", "verified", "inferred", "provisional", "draft", "rejected"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["complete", "review_required", "unverified"]
+          },
+          "notes": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

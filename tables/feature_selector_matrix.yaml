@@ -1,0 +1,361 @@
+matrix_id: usb_hub_feature_selector_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: feature_selector
+status: draft
+# Phase 3G: Feature selector minimum boundary for E-05
+# Standard port selector range 0-22 defines the boundary that vendor selectors must not overlap.
+# Hub selectors share numerical values with port selectors but target a different recipient.
+# All entries: claim_level=inferred, evidence_status=review_required
+entries:
+
+  # ── Hub feature selectors ──────────────────────────────────────────────────
+  # Used in SetFeature/ClearFeature with recipient=device (hub class requests).
+  # Separate from port selector namespace.
+
+  - selector_id: usb20_hub_c_hub_local_power
+    selector_value: 0
+    selector_name: C_HUB_LOCAL_POWER
+    applies_to: hub
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Hub change bit: local power change condition. ClearFeature target on hub recipient."
+
+  - selector_id: usb20_hub_c_hub_over_current
+    selector_value: 1
+    selector_name: C_HUB_OVER_CURRENT
+    applies_to: hub
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Hub change bit: over-current change condition. ClearFeature target on hub recipient."
+
+  # ── Port feature selectors (standard range 0-22) ───────────────────────────
+  # Used in SetFeature/ClearFeature/GetStatus with recipient=other (port class requests).
+  # This is the E-05 boundary: vendor selectors must not overlap values 0-22.
+
+  - selector_id: usb20_port_connection
+    selector_value: 0
+    selector_name: PORT_CONNECTION
+    applies_to: port
+    request_usage:
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Read-only in wPortStatus bit 0. Not a direct SetFeature/ClearFeature target. Listed to complete namespace."
+
+  - selector_id: usb20_port_enable
+    selector_value: 1
+    selector_name: PORT_ENABLE
+    applies_to: port
+    request_usage:
+      - SetFeature
+      - ClearFeature
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_suspend
+    selector_value: 2
+    selector_name: PORT_SUSPEND
+    applies_to: port
+    request_usage:
+      - SetFeature
+      - ClearFeature
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_over_current
+    selector_value: 3
+    selector_name: PORT_OVER_CURRENT
+    applies_to: port
+    request_usage:
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Read-only in wPortStatus bit 3. Not a direct SetFeature/ClearFeature target."
+
+  - selector_id: usb20_port_reset
+    selector_value: 4
+    selector_name: PORT_RESET
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_5
+    selector_value: 5
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_6
+    selector_value: 6
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_7
+    selector_value: 7
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_power
+    selector_value: 8
+    selector_name: PORT_POWER
+    applies_to: port
+    request_usage:
+      - SetFeature
+      - ClearFeature
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_low_speed
+    selector_value: 9
+    selector_name: PORT_LOW_SPEED
+    applies_to: port
+    request_usage:
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Speed indication in wPortStatus. Not directly settable via SetFeature."
+
+  - selector_id: usb20_port_high_speed
+    selector_value: 10
+    selector_name: PORT_HIGH_SPEED
+    applies_to: port
+    request_usage:
+      - GetStatus_context
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Speed indication in wPortStatus. Not directly settable via SetFeature."
+
+  - selector_id: usb20_port_reserved_11
+    selector_value: 11
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_12
+    selector_value: 12
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_13
+    selector_value: 13
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_14
+    selector_value: 14
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_15
+    selector_value: 15
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_c_port_connection
+    selector_value: 16
+    selector_name: C_PORT_CONNECTION
+    applies_to: port
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Change bit selector: connection change. ClearFeature clears the change condition."
+
+  - selector_id: usb20_c_port_enable
+    selector_value: 17
+    selector_name: C_PORT_ENABLE
+    applies_to: port
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Change bit selector: enable change."
+
+  - selector_id: usb20_c_port_suspend
+    selector_value: 18
+    selector_name: C_PORT_SUSPEND
+    applies_to: port
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Change bit selector: suspend change."
+
+  - selector_id: usb20_c_port_over_current
+    selector_value: 19
+    selector_name: C_PORT_OVER_CURRENT
+    applies_to: port
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Change bit selector: over-current change."
+
+  - selector_id: usb20_c_port_reset
+    selector_value: 20
+    selector_name: C_PORT_RESET
+    applies_to: port
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "Change bit selector: reset change."
+
+  - selector_id: usb20_port_test
+    selector_value: 21
+    selector_name: PORT_TEST
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_indicator
+    selector_value: 22
+    selector_name: PORT_INDICATOR
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: review_required

@@ -1,0 +1,29 @@
+matrix_id: test_invalid_duplicate_selector_id
+scope:
+  usb_versions:
+    - usb20
+  topic: feature_selector
+status: draft
+# Fixture: two entries share selector_id → structural FAIL (R1)
+entries:
+  - selector_id: usb20_port_enable
+    selector_value: 1
+    selector_name: PORT_ENABLE
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_enable
+    selector_value: 2
+    selector_name: PORT_SUSPEND
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    claim_level: inferred
+    evidence_status: review_required

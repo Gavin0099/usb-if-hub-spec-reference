@@ -78,6 +78,9 @@ jobs:
       - name: Class request coverage fixture smoke
         run: python scripts/smoke_validate_class_request_coverage_fixtures.py
 
+      - name: Feature selector matrix fixture smoke
+        run: python scripts/smoke_validate_feature_selector_matrix_fixtures.py
+
   # ── Advisory job ───────────────────────────────────────────────────────────
   # Runs real validators against actual repo content.
   # Each step uses continue-on-error so all validators run regardless of individual failures.
@@ -150,6 +153,14 @@ jobs:
           python scripts/validate_spec_authority_manifest.py \
             --manifest exports/usb20_hub_class_request_manifest.yaml \
             --receipt-out ci-receipts/spec_authority_manifest.json
+
+      - name: Feature selector matrix validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_feature_selector_matrix.py \
+            --matrix tables/feature_selector_matrix.yaml \
+            --source-registry evidence/source_registry.yaml \
+            --receipt-out ci-receipts/feature_selector_matrix.json
 
       - name: Upload advisory receipts
         if: always()

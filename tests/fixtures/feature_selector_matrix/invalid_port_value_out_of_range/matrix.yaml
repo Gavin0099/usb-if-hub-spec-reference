@@ -1,0 +1,19 @@
+matrix_id: test_invalid_port_value_out_of_range
+scope:
+  usb_versions:
+    - usb20
+  topic: feature_selector
+status: draft
+# Fixture: port entry with selector_value=23 (> 22) → structural FAIL (R4)
+entries:
+  - selector_id: usb20_port_vendor_test
+    selector_value: 23
+    selector_name: VENDOR_TEST_INVALID
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    claim_level: inferred
+    evidence_status: review_required
+    notes: "selector_value=23 is outside the standard range 0-22. This fixture tests R4."

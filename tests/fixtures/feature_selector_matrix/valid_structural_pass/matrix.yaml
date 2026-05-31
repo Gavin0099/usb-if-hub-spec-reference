@@ -1,0 +1,45 @@
+matrix_id: test_valid_structural_pass
+scope:
+  usb_versions:
+    - usb20
+  topic: feature_selector
+status: draft
+# Fixture: 3 entries — hub(0), port(1), reserved(5). Structural rules pass.
+# Port coverage is partial (advisory only, not fail).
+entries:
+  - selector_id: usb20_hub_c_hub_local_power
+    selector_value: 0
+    selector_name: C_HUB_LOCAL_POWER
+    applies_to: hub
+    request_usage:
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 §11.24.2"
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_enable
+    selector_value: 1
+    selector_name: PORT_ENABLE
+    applies_to: port
+    request_usage:
+      - SetFeature
+      - ClearFeature
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 §11.24.2"
+    claim_level: inferred
+    evidence_status: review_required
+
+  - selector_id: usb20_port_reserved_5
+    selector_value: 5
+    selector_name: reserved
+    applies_to: reserved
+    request_usage:
+      - reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 §11.24.2"
+    claim_level: inferred
+    evidence_status: review_required

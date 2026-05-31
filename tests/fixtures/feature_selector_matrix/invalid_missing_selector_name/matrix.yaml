@@ -1,0 +1,18 @@
+matrix_id: test_invalid_missing_selector_name
+scope:
+  usb_versions:
+    - usb20
+  topic: feature_selector
+status: draft
+# Fixture: selector_name is empty string → structural FAIL (R2)
+entries:
+  - selector_id: usb20_port_enable
+    selector_value: 1
+    selector_name: ""
+    applies_to: port
+    request_usage:
+      - SetFeature
+    source_refs:
+      - usb20_spec
+    claim_level: inferred
+    evidence_status: review_required
