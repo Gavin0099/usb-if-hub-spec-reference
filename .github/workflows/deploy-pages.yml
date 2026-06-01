@@ -8,6 +8,7 @@ on:
       - ".vitepress/**"
       - "package.json"
       - "package-lock.json"
+  workflow_dispatch:
 
 permissions:
   contents: read
