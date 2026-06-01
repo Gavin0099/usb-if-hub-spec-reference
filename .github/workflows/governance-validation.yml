@@ -81,6 +81,12 @@ jobs:
       - name: Feature selector matrix fixture smoke
         run: python scripts/smoke_validate_feature_selector_matrix_fixtures.py
 
+      - name: Port status bit matrix fixture smoke
+        run: python scripts/smoke_validate_port_status_bit_matrix_fixtures.py
+
+      - name: Manifest access contract fixture smoke
+        run: python scripts/smoke_validate_usb20_hub_class_request_manifest_fixtures.py
+
   # ── Advisory job ───────────────────────────────────────────────────────────
   # Runs real validators against actual repo content.
   # Each step uses continue-on-error so all validators run regardless of individual failures.

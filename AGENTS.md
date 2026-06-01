@@ -62,3 +62,30 @@ Forbidden in this repo:
 - `specs/hub_class_requests.md` — Hub class request semantics (USB 2.0 spec 11.24.2)
 - `specs/transaction_translator.md` — TT rules summary
 - `specs/escalation_table.md` — Standard Escalation trigger table for consuming repos
+
+## Review Tasks
+
+If the agent is asked to perform `review` or `audit` work:
+
+- The agent must read `governance/REVIEW_CRITERIA.md` before producing review output.
+- The agent must not skip that read step.
+- The final review output must include a `Review Inputs Checked` block.
+
+## Commit Checkpoint (Reporting Convention)
+
+This is a reporting convention only, not a mandatory pause gate.
+
+When reporting a completed work chunk, include:
+
+- `Commit Checkpoint: <short hash or NO_COMMIT>`
+- `Scope: <files or area covered>`
+- `Validation: <checks run or NONE>`
+- `Risk: <open risk or NONE>`
+
+## Canonical Memory Writer Rule
+
+Only canonical session closeout is allowed to write under `memory/`.
+
+- Non-closeout phases must not write memory records.
+- If closeout evidence is missing, memory write claims are non-admissible.
+- Any attempt to bypass canonical closeout memory write flow is a governance violation.
