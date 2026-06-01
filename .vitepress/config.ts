@@ -6,12 +6,12 @@ const ROOT = join(__dirname, "..");
 const SPECS_DIR = join(ROOT, "specs");
 
 const PAGE_LABELS: Record<string, string> = {
-  hub_class_requests: "Hub Class Requests",
-  hub_descriptor: "Hub Descriptor",
-  port_status_bits: "Port Status Bits",
+  hub_class_requests: "Hub 類別請求",
+  hub_descriptor: "Hub 描述符",
+  port_status_bits: "連接埠狀態位元",
   transaction_translator: "Transaction Translator",
-  version_source_map: "Version Source Map",
-  escalation_table: "Escalation Table",
+  version_source_map: "版本來源對應",
+  escalation_table: "升級觸發表",
 };
 
 function buildSidebar() {
@@ -30,7 +30,7 @@ function buildSidebar() {
 
   return [
     {
-      text: "Spec Reference",
+      text: "規格參考",
       collapsed: false,
       items: files,
     },
@@ -38,24 +38,37 @@ function buildSidebar() {
 }
 
 export default defineConfig({
-  title: "USB-IF Hub Spec Reference",
-  description: "Governed USB hub specification reference — claim_level: inferred",
+  title: "USB-IF Hub 規格參考",
+  description: "USB Hub 治理規格參考文件 — claim_level: inferred",
   srcDir: "./specs",
+  lang: "zh-TW",
 
   themeConfig: {
-    search: { provider: "local" },
+    search: {
+      provider: "local",
+      options: {
+        translations: {
+          button: { buttonText: "搜尋", buttonAriaLabel: "搜尋文件" },
+          modal: {
+            noResultsText: "找不到相關結果",
+            resetButtonTitle: "清除搜尋",
+            footer: { selectText: "選擇", navigateText: "切換", closeText: "關閉" },
+          },
+        },
+      },
+    },
 
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Hub Class Requests", link: "/hub_class_requests" },
-      { text: "Port Status Bits", link: "/port_status_bits" },
+      { text: "首頁", link: "/" },
+      { text: "Hub 類別請求", link: "/hub_class_requests" },
+      { text: "連接埠狀態位元", link: "/port_status_bits" },
     ],
 
     sidebar: buildSidebar(),
 
     footer: {
       message:
-        "claim_level: inferred · semantic_verification_claimed: false · USB 2.0 semantic correctness not claimed",
+        "claim_level: inferred · semantic_verification_claimed: false · 不主張 USB 2.0 語意正確性",
     },
   },
 
