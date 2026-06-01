@@ -1,0 +1,34 @@
+{
+  "probe": "probe_wiki_consistency.py",
+  "authority_ceiling": "wiki_specs_governed_table_cross_reference_observation_only",
+  "table_id": "partial_coverage",
+  "table_path": "tests\\fixtures\\wiki_consistency\\partial_coverage\\table.yaml",
+  "wiki_page": "tests\\fixtures\\wiki_consistency\\partial_coverage\\page.md",
+  "name_field": "request_name",
+  "result": "PASS",
+  "total_names": 2,
+  "found_count": 1,
+  "missing_count": 1,
+  "coverage_pct": 50.0,
+  "advisory_count": 1,
+  "error_count": 0,
+  "found": [
+    "GET_STATUS"
+  ],
+  "missing": [
+    "UNKNOWN_REQUEST_XYZ"
+  ],
+  "advisories": [
+    {
+      "code": "A1_NAME_NOT_IN_PAGE",
+      "table_id": "partial_coverage",
+      "name": "UNKNOWN_REQUEST_XYZ",
+      "page": "page.md",
+      "message": "'UNKNOWN_REQUEST_XYZ' from partial_coverage (request_name) not found as token in page.md"
+    }
+  ],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

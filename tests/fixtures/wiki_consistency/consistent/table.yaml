@@ -1,0 +1,5 @@
+matrix_id: test_consistent
+entries:
+  - request_name: GET_STATUS
+  - request_name: SET_FEATURE
+  - request_name: CLEAR_FEATURE

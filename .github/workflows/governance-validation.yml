@@ -90,6 +90,9 @@ jobs:
       - name: Table fingerprint fixture smoke
         run: python scripts/smoke_probe_table_fingerprint_fixtures.py
 
+      - name: Wiki consistency fixture smoke
+        run: python scripts/smoke_probe_wiki_consistency_fixtures.py
+
   # ── Advisory job ───────────────────────────────────────────────────────────
   # Runs real validators against actual repo content.
   # Each step uses continue-on-error so all validators run regardless of individual failures.
@@ -193,6 +196,36 @@ jobs:
             --manifest exports/usb20_hub_class_request_manifest.yaml \
             --baseline-in evidence/table_fingerprint_baseline.jsonl \
             --receipt-out ci-receipts/table_fingerprint_drift.json
+
+      - name: Wiki consistency probe — class request matrix
+        continue-on-error: true
+        run: |
+          python scripts/probe_wiki_consistency.py \
+            --table tables/class_request_matrix.yaml \
+            --name-field request_name \
+            --page specs/hub_class_requests.md \
+            --table-id class_request_matrix \
+            --receipt-out ci-receipts/wiki_consistency_class_request_matrix.json
+
+      - name: Wiki consistency probe — port status bit matrix
+        continue-on-error: true
+        run: |
+          python scripts/probe_wiki_consistency.py \
+            --table tables/port_status_bit_matrix.yaml \
+            --name-field name \
+            --page specs/port_status_bits.md \
+            --table-id port_status_bit_matrix \
+            --receipt-out ci-receipts/wiki_consistency_port_status_bit_matrix.json
+
+      - name: Wiki consistency probe — feature selector matrix
+        continue-on-error: true
+        run: |
+          python scripts/probe_wiki_consistency.py \
+            --table tables/feature_selector_matrix.yaml \
+            --name-field selector_name \
+            --page specs/hub_class_requests.md \
+            --table-id feature_selector_matrix \
+            --receipt-out ci-receipts/wiki_consistency_feature_selector_matrix.json
 
       - name: Upload advisory receipts
         if: always()

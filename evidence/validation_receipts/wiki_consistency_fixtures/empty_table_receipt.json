@@ -1,0 +1,22 @@
+{
+  "probe": "probe_wiki_consistency.py",
+  "authority_ceiling": "wiki_specs_governed_table_cross_reference_observation_only",
+  "table_id": "empty_table",
+  "table_path": "tests\\fixtures\\wiki_consistency\\empty_table\\table.yaml",
+  "wiki_page": "tests\\fixtures\\wiki_consistency\\empty_table\\page.md",
+  "name_field": "request_name",
+  "result": "PASS",
+  "total_names": 0,
+  "found_count": 0,
+  "missing_count": 0,
+  "coverage_pct": 100.0,
+  "advisory_count": 0,
+  "error_count": 0,
+  "found": [],
+  "missing": [],
+  "advisories": [],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

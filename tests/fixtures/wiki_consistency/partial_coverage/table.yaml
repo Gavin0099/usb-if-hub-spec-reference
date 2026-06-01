@@ -1,0 +1,4 @@
+matrix_id: test_partial
+entries:
+  - request_name: GET_STATUS
+  - request_name: UNKNOWN_REQUEST_XYZ

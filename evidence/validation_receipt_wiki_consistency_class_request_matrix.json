@@ -1,0 +1,32 @@
+{
+  "probe": "probe_wiki_consistency.py",
+  "authority_ceiling": "wiki_specs_governed_table_cross_reference_observation_only",
+  "table_id": "class_request_matrix",
+  "table_path": "tables\\class_request_matrix.yaml",
+  "wiki_page": "specs\\hub_class_requests.md",
+  "name_field": "request_name",
+  "result": "PASS",
+  "total_names": 9,
+  "found_count": 9,
+  "missing_count": 0,
+  "coverage_pct": 100.0,
+  "advisory_count": 0,
+  "error_count": 0,
+  "found": [
+    "GET_STATUS",
+    "SET_FEATURE",
+    "CLEAR_FEATURE",
+    "CLEAR_TT_BUFFER",
+    "RESET_TT",
+    "GET_TT_STATE",
+    "STOP_TT",
+    "GET_DESCRIPTOR",
+    "SET_DESCRIPTOR"
+  ],
+  "missing": [],
+  "advisories": [],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}
