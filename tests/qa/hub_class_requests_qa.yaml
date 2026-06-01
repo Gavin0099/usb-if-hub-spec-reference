@@ -1,0 +1,75 @@
+qa_id: hub_class_requests_qa
+wiki_page: specs/hub_class_requests.md
+authority_ceiling: hub_class_request_wiki_qa_observation_only
+note: >
+  Questions are bounded to content present in hub_class_requests.md only.
+  Expected keywords are terms that should appear in a correct answer given
+  that page. MISS does not imply wiki incorrectness — it indicates a
+  coverage gap or LLM interpretation gap. All results are advisory.
+
+questions:
+  - id: Q1
+    question: >
+      According to this wiki page, which governed request family is used
+      to retrieve hub or port status?
+    expected_keywords:
+      - GET_STATUS
+    match_any: false
+
+  - id: Q2
+    question: >
+      According to this wiki page, which governed request family is used
+      to clear a feature on a hub or port?
+    expected_keywords:
+      - CLEAR_FEATURE
+    match_any: false
+
+  - id: Q3
+    question: >
+      According to this wiki page, which governed request family is used
+      to set or assert a feature on a hub or port?
+    expected_keywords:
+      - SET_FEATURE
+    match_any: false
+
+  - id: Q4
+    question: >
+      According to this wiki page, which governed request family retrieves
+      the hub class descriptor?
+    expected_keywords:
+      - GET_DESCRIPTOR
+    match_any: false
+
+  - id: Q5
+    question: >
+      Does this wiki page claim USB 2.0 semantic verification?
+    expected_keywords:
+      - "false"
+      - not
+      - "no"
+    match_any: true
+
+  - id: Q6
+    question: >
+      According to this wiki page, which governed table should be consulted
+      for hub class request family definitions?
+    expected_keywords:
+      - class_request_matrix
+    match_any: false
+
+  - id: Q7
+    question: >
+      According to this wiki page, which related governed table contains
+      port status bit field definitions?
+    expected_keywords:
+      - port_status_bit_matrix
+    match_any: false
+
+  - id: Q8
+    question: >
+      Does this wiki page verify bit-level USB 2.0 behaviors or timing?
+    expected_keywords:
+      - not
+      - "no"
+      - "false"
+    match_any: true

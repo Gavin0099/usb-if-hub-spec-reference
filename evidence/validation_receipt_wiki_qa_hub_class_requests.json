@@ -1,0 +1,12 @@
+{
+  "probe": "probe_wiki_qa.py",
+  "authority_ceiling": "hub_class_request_wiki_qa_observation_only",
+  "result": "SKIPPED",
+  "skip_reason": "ANTHROPIC_API_KEY env var not set",
+  "wiki_page": "specs\\hub_class_requests.md",
+  "qa_spec": "tests\\qa\\hub_class_requests_qa.yaml",
+  "model": "claude-haiku-4-5-20251001",
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

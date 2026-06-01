@@ -227,6 +227,16 @@ jobs:
             --table-id feature_selector_matrix \
             --receipt-out ci-receipts/wiki_consistency_feature_selector_matrix.json
 
+      - name: Wiki QA probe — hub class requests (observation-only, requires ANTHROPIC_API_KEY secret)
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python scripts/probe_wiki_qa.py \
+            --page specs/hub_class_requests.md \
+            --qa-spec tests/qa/hub_class_requests_qa.yaml \
+            --receipt-out ci-receipts/wiki_qa_hub_class_requests.json
+
       - name: Upload advisory receipts
         if: always()
         uses: actions/upload-artifact@v4
