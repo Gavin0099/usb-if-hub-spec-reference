@@ -1,0 +1,31 @@
+matrix_id: test_valid_port_status_bit_matrix
+source_spec:
+  spec: USB 2.0
+  section: "11.24.2.7"
+claim_level: inferred
+evidence_status: review_required
+status: draft
+entries:
+  - field: wHubStatus
+    bit: 0
+    name: HUB_LOCAL_POWER
+    status: defined
+    description: Hub local power status
+
+  - field: wHubChange
+    bit: 1
+    name: C_HUB_OVER_CURRENT
+    status: defined
+    description: Hub over-current change
+
+  - field: wPortStatus
+    bit: 15
+    name: PORT_STATUS_BOUNDARY
+    status: reserved
+    description: Boundary placeholder
+
+  - field: wPortChange
+    bit: 0
+    name: C_PORT_CONNECTION
+    status: defined
+    description: Port connection change

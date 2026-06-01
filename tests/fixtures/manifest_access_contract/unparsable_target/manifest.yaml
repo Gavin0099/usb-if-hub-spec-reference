@@ -1,0 +1,4 @@
+manifest_id: fixture_manifest_unparsable_target
+governed_tables:
+  - id: broken
+    path: tests/fixtures/manifest_access_contract/unparsable_target/table.yaml

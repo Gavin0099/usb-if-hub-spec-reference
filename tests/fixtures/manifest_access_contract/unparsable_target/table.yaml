@@ -1,0 +1,4 @@
+matrix_id: broken
+entries:
+  - name: ok
+    bad: [1, 2

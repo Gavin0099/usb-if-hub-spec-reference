@@ -1,0 +1,19 @@
+matrix_id: test_invalid_duplicate_field_bit
+source_spec:
+  spec: USB 2.0
+  section: "11.24.2.7"
+claim_level: inferred
+evidence_status: review_required
+status: draft
+entries:
+  - field: wPortStatus
+    bit: 1
+    name: PORT_ENABLE
+    status: defined
+    description: Port enabled status
+
+  - field: wPortStatus
+    bit: 1
+    name: PORT_ENABLE_DUPLICATE
+    status: reserved
+    description: Duplicate for structural fail

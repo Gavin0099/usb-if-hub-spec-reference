@@ -1,0 +1,4 @@
+manifest_id: fixture_manifest_missing
+governed_tables:
+  - id: fixture_missing
+    path: tests/fixtures/manifest_access_contract/missing_table_path/not_found.yaml

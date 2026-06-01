@@ -36,3 +36,11 @@ evidence_state:
   claim_level: inferred
   evidence_status: review_required
   semantic_pdf_verification: false
+
+governed_tables:
+  - id: usb_hub_class_request_matrix
+    path: tables/class_request_matrix.yaml
+  - id: usb_hub_feature_selector_matrix
+    path: tables/feature_selector_matrix.yaml
+  - id: usb20_hub_port_status_bit_matrix
+    path: tables/port_status_bit_matrix.yaml

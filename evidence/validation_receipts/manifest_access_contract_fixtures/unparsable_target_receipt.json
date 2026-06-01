@@ -1,0 +1,11 @@
+{
+  "validator": "validate_usb20_hub_class_request_manifest",
+  "manifest": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\unparsable_target\\manifest.yaml",
+  "result": "FAIL",
+  "errors": [
+    {
+      "code": "TARGET_UNPARSABLE",
+      "message": "governed_tables[0]: target YAML parse failed: tests/fixtures/manifest_access_contract/unparsable_target/table.yaml (while parsing a flow sequence\n  in \"E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\unparsable_target\\table.yaml\", line 4, column 10\nexpected ',' or ']', but got '<stream end>'\n  in \"E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\unparsable_target\\table.yaml\", line 5, column 1)"
+    }
+  ]
+}

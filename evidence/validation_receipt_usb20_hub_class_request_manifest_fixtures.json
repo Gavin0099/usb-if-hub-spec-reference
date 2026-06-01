@@ -1,0 +1,52 @@
+{
+  "validator": "validate_usb20_hub_class_request_manifest.py",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_manifest",
+      "result": "PASS",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": []
+    },
+    {
+      "name": "missing_table_path",
+      "result": "PASS",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "PATH_NOT_FOUND"
+      ],
+      "actual_error_codes": [
+        "PATH_NOT_FOUND"
+      ]
+    },
+    {
+      "name": "id_mismatch",
+      "result": "PASS",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "ID_MISMATCH"
+      ],
+      "actual_error_codes": [
+        "ID_MISMATCH"
+      ]
+    },
+    {
+      "name": "unparsable_target",
+      "result": "PASS",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "TARGET_UNPARSABLE"
+      ],
+      "actual_error_codes": [
+        "TARGET_UNPARSABLE"
+      ]
+    }
+  ]
+}

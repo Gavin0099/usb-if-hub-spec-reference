@@ -1,0 +1,13 @@
+matrix_id: test_invalid_bit_range
+source_spec:
+  spec: USB 2.0
+  section: "11.24.2.7"
+claim_level: inferred
+evidence_status: review_required
+status: draft
+entries:
+  - field: wPortChange
+    bit: 16
+    name: INVALID_BIT_16
+    status: defined
+    description: Bit out of range must fail

@@ -1,0 +1,98 @@
+matrix_id: usb20_hub_port_status_bit_matrix
+source_spec:
+  spec: USB 2.0
+  section: "11.24.2.7 / hub and port status change fields"
+claim_level: inferred
+evidence_status: review_required
+status: draft
+
+entries:
+  - field: wHubStatus
+    bit: 0
+    name: HUB_LOCAL_POWER
+    status: defined
+    description: Hub local power status
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: true
+
+  - field: wHubStatus
+    bit: 1
+    name: HUB_OVER_CURRENT
+    status: defined
+    description: Hub over-current status
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: true
+
+  - field: wHubChange
+    bit: 0
+    name: C_HUB_LOCAL_POWER
+    status: defined
+    description: Hub local power status change
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: true
+
+  - field: wHubChange
+    bit: 1
+    name: C_HUB_OVER_CURRENT
+    status: defined
+    description: Hub over-current status change
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: true
+
+  - field: wPortStatus
+    bit: 0
+    name: PORT_CONNECTION
+    status: defined
+    description: Port connection status
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: true
+
+  - field: wPortStatus
+    bit: 1
+    name: PORT_ENABLE
+    status: defined
+    description: Port enabled status
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: true
+
+  - field: wPortStatus
+    bit: 15
+    name: PORT_STATUS_HIGH_BIT_BOUNDARY
+    status: reserved
+    description: Boundary placeholder for 16-bit status field
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: true
+
+  - field: wPortChange
+    bit: 0
+    name: C_PORT_CONNECTION
+    status: defined
+    description: Port connection status change
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: true
+
+  - field: wPortChange
+    bit: 1
+    name: C_PORT_ENABLE
+    status: defined
+    description: Port enable status change
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: true
+
+  - field: wPortChange
+    bit: 15
+    name: PORT_CHANGE_HIGH_BIT_BOUNDARY
+    status: reserved
+    description: Boundary placeholder for 16-bit change field
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: true

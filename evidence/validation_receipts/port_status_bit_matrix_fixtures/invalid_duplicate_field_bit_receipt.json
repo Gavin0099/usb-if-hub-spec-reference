@@ -1,0 +1,12 @@
+{
+  "validator": "validate_port_status_bit_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_duplicate_field_bit\\matrix.yaml",
+  "result": "FAIL",
+  "authority_ceiling": "status_bit_namespace_only",
+  "errors": [
+    {
+      "code": "DUPLICATE_FIELD_BIT",
+      "message": "entry[1]: duplicate field+bit pair (wPortStatus, 1)"
+    }
+  ]
+}

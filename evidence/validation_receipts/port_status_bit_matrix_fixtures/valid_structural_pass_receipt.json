@@ -1,0 +1,7 @@
+{
+  "validator": "validate_port_status_bit_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\valid_structural_pass\\matrix.yaml",
+  "result": "PASS",
+  "authority_ceiling": "status_bit_namespace_only",
+  "errors": []
+}

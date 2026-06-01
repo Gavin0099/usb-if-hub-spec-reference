@@ -1,0 +1,12 @@
+{
+  "validator": "validate_port_status_bit_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_field\\matrix.yaml",
+  "result": "FAIL",
+  "authority_ceiling": "status_bit_namespace_only",
+  "errors": [
+    {
+      "code": "INVALID_FIELD",
+      "message": "entry[0]: field 'wPortFeature' is not in ['wHubChange', 'wHubStatus', 'wPortChange', 'wPortStatus']"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "validator": "validate_port_status_bit_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_bit_range\\matrix.yaml",
+  "result": "FAIL",
+  "authority_ceiling": "status_bit_namespace_only",
+  "errors": [
+    {
+      "code": "BIT_OUT_OF_RANGE",
+      "message": "entry[0]: bit '16' is not in 0-15"
+    }
+  ]
+}

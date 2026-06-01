@@ -1,0 +1,40 @@
+{
+  "phase": "Phase 4",
+  "status": "done",
+  "claim": "consumer_discovered_governed_table_access_gaps_closed",
+  "claim_ceiling": "machine_readable_namespace_and_access_contract_only",
+  "semantic_verification_claimed": false,
+  "generated_at_utc": "2026-06-01T03:05:25.120483+00:00",
+  "governed_tables": [
+    {
+      "id": "usb_hub_class_request_matrix",
+      "path": "tables/class_request_matrix.yaml",
+      "validator": "scripts/validate_class_request_coverage.py",
+      "status": "pass"
+    },
+    {
+      "id": "usb_hub_feature_selector_matrix",
+      "path": "tables/feature_selector_matrix.yaml",
+      "validator": "scripts/validate_feature_selector_matrix.py",
+      "status": "pass"
+    },
+    {
+      "id": "usb20_hub_port_status_bit_matrix",
+      "path": "tables/port_status_bit_matrix.yaml",
+      "validator": "scripts/validate_port_status_bit_matrix.py",
+      "status": "pass"
+    }
+  ],
+  "manifest_contract": {
+    "path": "exports/usb20_hub_class_request_manifest.yaml",
+    "validator": "scripts/validate_usb20_hub_class_request_manifest.py",
+    "status": "pass"
+  },
+  "non_claims": [
+    "USB 2.0 semantic behavior verification",
+    "PDF page-level extraction completeness",
+    "SET_FEATURE/CLEAR_FEATURE behavioral transition validation",
+    "GET_STATUS response semantic completeness",
+    "full USB 2.0 hub compliance"
+  ]
+}

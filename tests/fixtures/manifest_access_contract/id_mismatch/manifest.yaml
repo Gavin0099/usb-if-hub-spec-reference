@@ -1,0 +1,4 @@
+manifest_id: fixture_manifest_id_mismatch
+governed_tables:
+  - id: fixture_declared_id
+    path: tests/fixtures/manifest_access_contract/id_mismatch/table.yaml

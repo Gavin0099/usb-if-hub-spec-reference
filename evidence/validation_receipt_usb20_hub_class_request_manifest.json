@@ -1,0 +1,6 @@
+{
+  "validator": "validate_usb20_hub_class_request_manifest",
+  "manifest": "exports\\usb20_hub_class_request_manifest.yaml",
+  "result": "PASS",
+  "errors": []
+}

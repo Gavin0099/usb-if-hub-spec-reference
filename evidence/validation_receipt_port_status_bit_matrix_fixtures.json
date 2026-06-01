@@ -1,0 +1,74 @@
+{
+  "validator": "validate_port_status_bit_matrix.py",
+  "smoke_runner": "smoke_validate_port_status_bit_matrix_fixtures.py",
+  "authority_ceiling": "status_bit_namespace_only",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_structural_pass",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_structural_pass_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nPort status bit matrix validation PASS\n",
+      "stderr": "",
+      "note": "valid scaffold entries with allowed fields and bit range"
+    },
+    {
+      "name": "invalid_duplicate_field_bit",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "DUPLICATE_FIELD_BIT"
+      ],
+      "actual_error_codes": [
+        "DUPLICATE_FIELD_BIT"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_duplicate_field_bit_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] DUPLICATE_FIELD_BIT: entry[1]: duplicate field+bit pair (wPortStatus, 1)\n\nPort status bit matrix validation FAIL\n",
+      "stderr": "",
+      "note": "duplicate field+bit pair must fail"
+    },
+    {
+      "name": "invalid_field",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "INVALID_FIELD"
+      ],
+      "actual_error_codes": [
+        "INVALID_FIELD"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_field_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] INVALID_FIELD: entry[0]: field 'wPortFeature' is not in ['wHubChange', 'wHubStatus', 'wPortChange', 'wPortStatus']\n\nPort status bit matrix validation FAIL\n",
+      "stderr": "",
+      "note": "unknown field value must fail"
+    },
+    {
+      "name": "invalid_bit_range",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "BIT_OUT_OF_RANGE"
+      ],
+      "actual_error_codes": [
+        "BIT_OUT_OF_RANGE"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_bit_range_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] BIT_OUT_OF_RANGE: entry[0]: bit '16' is not in 0-15\n\nPort status bit matrix validation FAIL\n",
+      "stderr": "",
+      "note": "bit outside 0-15 must fail"
+    }
+  ]
+}

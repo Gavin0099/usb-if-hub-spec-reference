@@ -1,0 +1,11 @@
+{
+  "validator": "validate_usb20_hub_class_request_manifest",
+  "manifest": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\id_mismatch\\manifest.yaml",
+  "result": "FAIL",
+  "errors": [
+    {
+      "code": "ID_MISMATCH",
+      "message": "governed_tables[0]: manifest id 'fixture_declared_id' != target id 'fixture_actual_id' (tests/fixtures/manifest_access_contract/id_mismatch/table.yaml)"
+    }
+  ]
+}

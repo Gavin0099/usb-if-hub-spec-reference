@@ -1,0 +1,6 @@
+manifest_id: fixture_manifest
+governed_tables:
+  - id: fixture_table_a
+    path: tests/fixtures/manifest_access_contract/valid_manifest/table_a.yaml
+  - id: fixture_table_b
+    path: tests/fixtures/manifest_access_contract/valid_manifest/table_b.yaml
