@@ -1,3 +1,15 @@
+---
+title: Hub Class Requests
+claim_level: inferred
+status: review_required
+last_reviewed: "2026-06-01"
+usb_versions:
+  - usb_2_0
+source_refs:
+  - usb20_spec
+semantic_verification_claimed: false
+---
+
 # Hub Class Requests
 
 > Source: USB 2.0 Specification, Revision 2.0, Section 11.24.2

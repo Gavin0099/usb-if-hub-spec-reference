@@ -1,3 +1,15 @@
+---
+title: Port Status and Change Bits
+claim_level: inferred
+status: review_required
+last_reviewed: "2026-06-01"
+usb_versions:
+  - usb_2_0
+source_refs:
+  - usb20_spec
+semantic_verification_claimed: false
+---
+
 # Port Status and Change Bits
 
 > Source: USB 2.0 Specification, Revision 2.0, Section 11.24.2.7.1 and 11.24.2.7.2

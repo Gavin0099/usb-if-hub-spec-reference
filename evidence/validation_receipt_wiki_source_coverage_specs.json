@@ -1,0 +1,22 @@
+{
+  "validator": "validate_wiki_source_coverage.py",
+  "authority_ceiling": "wiki_source_reference_coverage_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_modify_wiki": true,
+  "does_not_validate_semantic_correctness": true,
+  "result": "PASS",
+  "checked_pages": [
+    "escalation_table.md",
+    "hub_class_requests.md",
+    "hub_descriptor.md",
+    "port_status_bits.md",
+    "transaction_translator.md",
+    "version_source_map.md"
+  ],
+  "error_count": 0,
+  "advisory_count": 0,
+  "errors": [],
+  "advisories": [],
+  "findings": []
+}

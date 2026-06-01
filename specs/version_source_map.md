@@ -1,3 +1,15 @@
+---
+title: USB Version Source Map (Hub-Focused)
+claim_level: inferred
+status: review_required
+last_reviewed: "2026-06-01"
+usb_versions:
+  - usb_2_0
+source_refs:
+  - usb20_spec
+semantic_verification_claimed: false
+---
+
 # USB Version Source Map (Hub-Focused)
 
 > Usage: Reference layer only. Do not use to override confirmed project facts.
