@@ -1,5 +1,5 @@
 ---
-title: Port Status and Change Bits
+title: 連接埠狀態與變更位元
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,49 +10,49 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# Port Status and Change Bits
+# 連接埠狀態與變更位元
 
-> Source: USB 2.0 Specification, Revision 2.0, Section 11.24.2.7.1 and 11.24.2.7.2
-> Usage: Reference layer only. Do not use to override confirmed project facts.
+> 來源：USB 2.0 規格書 Revision 2.0，第 11.24.2.7.1 與 11.24.2.7.2 節
+> 用途：僅供語意參考層使用。不可用於覆蓋已確認的專案事實。
 
-## Port Status Field (wPortStatus)
+## 連接埠狀態欄位（wPortStatus）
 
-Returned by GET_PORT_STATUS request. 16-bit field.
+由 GET_PORT_STATUS 請求回傳，16 位元欄位。
 
-| Bit | Name | Meaning when set |
-|-----|------|-----------------|
-| 0 | PORT_CONNECTION | Device is present on this port |
-| 1 | PORT_ENABLE | Port is enabled |
-| 2 | PORT_SUSPEND | Port is suspended |
-| 3 | PORT_OVER_CURRENT | Over-current condition detected |
-| 4 | PORT_RESET | Port is in reset |
-| 7:5 | Reserved | Must be 0 |
-| 8 | PORT_POWER | Port power is on |
-| 9 | PORT_LOW_SPEED | Low-speed device attached (0 = full-speed) |
-| 10 | PORT_HIGH_SPEED | High-speed device attached |
-| 11 | PORT_TEST | Port is in test mode |
-| 12 | PORT_INDICATOR | Port indicator is controlled by software |
-| 15:13 | Reserved | Must be 0 |
+| 位元 | 名稱 | 設定時的含義 |
+|------|------|------------|
+| 0 | PORT_CONNECTION | 此連接埠已連接裝置 |
+| 1 | PORT_ENABLE | 連接埠已啟用 |
+| 2 | PORT_SUSPEND | 連接埠已暫停 |
+| 3 | PORT_OVER_CURRENT | 偵測到過電流狀態 |
+| 4 | PORT_RESET | 連接埠正在重置 |
+| 7:5 | 保留 | 必須為 0 |
+| 8 | PORT_POWER | 連接埠電源已開啟 |
+| 9 | PORT_LOW_SPEED | 已連接低速裝置（0 = 全速） |
+| 10 | PORT_HIGH_SPEED | 已連接高速裝置 |
+| 11 | PORT_TEST | 連接埠處於測試模式 |
+| 12 | PORT_INDICATOR | 連接埠指示燈由軟體控制 |
+| 15:13 | 保留 | 必須為 0 |
 
-## Port Change Field (wPortChange)
+## 連接埠變更欄位（wPortChange）
 
-Tracks changes since last read. Cleared by CLEAR_FEATURE.
+記錄自上次讀取以來的狀態變更，由 CLEAR_FEATURE 清除。
 
-| Bit | Name | Clears with |
-|-----|------|------------|
+| 位元 | 名稱 | 清除方式 |
+|------|------|---------|
 | 0 | C_PORT_CONNECTION | C_PORT_CONNECTION feature |
 | 1 | C_PORT_ENABLE | C_PORT_ENABLE feature |
 | 2 | C_PORT_SUSPEND | C_PORT_SUSPEND feature |
 | 3 | C_PORT_OVER_CURRENT | C_PORT_OVER_CURRENT feature |
 | 4 | C_PORT_RESET | C_PORT_RESET feature |
-| 15:5 | Reserved | — |
+| 15:5 | 保留 | — |
 
-## Standard Conflict Notes
+## 標準衝突說明
 
-- **Bit 3 (PORT_OVER_CURRENT)**: Standard defines this as a hardware-detected condition.
-  If a project uses this bit for an internal cascade hub status signal, that is a
-  confirmed Project Implementation Constraint — do not replace with generic standard behavior.
-- **Bits 15:13 and 7:5**: USB-IF reserves these bits as 0. If a project uses any of these
-  bits for vendor-specific purposes, flag for Standard Escalation Mode.
-- **PORT_HIGH_SPEED (bit 10)**: Only valid for high-speed capable hubs. Full-speed-only
-  hub firmware must not set or test this bit.
+- **位元 3（PORT_OVER_CURRENT）**：規格定義為硬體偵測到的過電流狀態。
+  若專案將此位元用於內部級聯 hub 狀態訊號，屬於已確認的 Project Implementation
+  Constraint，不可以通用標準行為替換。
+- **位元 15:13 與 7:5**：USB-IF 保留這些位元，必須為 0。若專案將
+  任何保留位元用於廠商自訂目的，須觸發 Standard Escalation Mode。
+- **PORT_HIGH_SPEED（位元 10）**：僅適用於高速能力的 hub。全速專用
+  hub 的韌體不得設定或測試此位元。

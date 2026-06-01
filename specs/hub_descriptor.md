@@ -1,5 +1,5 @@
 ---
-title: Hub Descriptor Fields
+title: Hub 描述符欄位
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,41 +10,41 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# Hub Descriptor Fields
+# Hub 描述符欄位
 
-> Source: USB 2.0 Specification, Revision 2.0, Section 11.23.2.1
-> Usage: Reference layer only. Do not use to override confirmed project facts.
+> 來源：USB 2.0 規格書 Revision 2.0，第 11.23.2.1 節
+> 用途：僅供語意參考層使用。不可用於覆蓋已確認的專案事實。
 
-## Hub Descriptor Format
+## Hub 描述符格式
 
-The Hub Descriptor is returned by a GET_DESCRIPTOR request with Descriptor Type = 0x29 (Hub).
+Hub 描述符由 GET_DESCRIPTOR 請求（Descriptor Type = 0x29，Hub）回傳。
 
-| Offset | Field | Size (bytes) | Description |
-|--------|-------|-------------|-------------|
-| 0 | bDescLength | 1 | Number of bytes in this descriptor |
-| 1 | bDescriptorType | 1 | Hub descriptor type (0x29) |
-| 2 | bNbrPorts | 1 | Number of downstream-facing ports |
-| 3 | wHubCharacteristics | 2 | Hub characteristics (see below) |
-| 5 | bPwrOn2PwrGood | 1 | Time (in 2ms units) from power-on to power-good |
-| 6 | bHubContrCurrent | 1 | Maximum current requirement of hub controller (mA) |
-| 7 | DeviceRemovable | variable | Indicates if a port has a non-removable device |
-| 7+x | PortPwrCtrlMask | variable | Reserved (set to 0xFF) |
+| 偏移 | 欄位 | 大小（位元組）| 說明 |
+|------|------|-------------|------|
+| 0 | bDescLength | 1 | 此描述符的位元組總數 |
+| 1 | bDescriptorType | 1 | Hub 描述符型別（0x29） |
+| 2 | bNbrPorts | 1 | 下行連接埠數量 |
+| 3 | wHubCharacteristics | 2 | Hub 特性（見下表） |
+| 5 | bPwrOn2PwrGood | 1 | 電源開啟至穩定所需時間（單位：2ms） |
+| 6 | bHubContrCurrent | 1 | Hub 控制器最大電流需求（mA） |
+| 7 | DeviceRemovable | 可變 | 指示各連接埠是否連接不可拔除裝置 |
+| 7+x | PortPwrCtrlMask | 可變 | 保留（設定為 0xFF） |
 
-## wHubCharacteristics Bit Definitions
+## wHubCharacteristics 位元定義
 
-| Bits | Field | Values |
-|------|-------|--------|
-| 1:0 | Logical Power Switching Mode | 00=ganged, 01=individual port, 10-11=reserved |
-| 2 | Compound Device | 0=not compound, 1=compound |
-| 4:3 | Over-current Protection Mode | 00=global, 01=individual port, 10-11=no protection |
-| 6:5 | TT Think Time | 00=8 FS bit times, 01=16, 10=24, 11=32 |
-| 7 | Port Indicators Supported | 0=not supported, 1=supported |
-| 15:8 | Reserved | 0 |
+| 位元 | 欄位 | 數值說明 |
+|------|------|---------|
+| 1:0 | Logical Power Switching Mode | 00=群組切換, 01=個別連接埠, 10-11=保留 |
+| 2 | Compound Device | 0=非複合裝置, 1=複合裝置 |
+| 4:3 | Over-current Protection Mode | 00=全域, 01=個別連接埠, 10-11=無過電流保護 |
+| 6:5 | TT Think Time | 00=8 FS 位元時間, 01=16, 10=24, 11=32 |
+| 7 | Port Indicators Supported | 0=不支援, 1=支援 |
+| 15:8 | 保留 | 0 |
 
-## Standard Conflict Notes
+## 標準衝突說明
 
-- `bNbrPorts` is a standard field. If a project uses a different port count in firmware
-  than this field reports, flag for Standard Escalation Mode.
-- `bPwrOn2PwrGood` timing is project-specific. Do not override with a generic value.
-- `wHubCharacteristics[1:0]` power switching mode must match the project's confirmed
-  power switching mode fact. Conflict → escalate.
+- `bNbrPorts` 為標準欄位。若韌體使用的連接埠數與此欄位不符，
+  須觸發 Standard Escalation Mode。
+- `bPwrOn2PwrGood` 時序為專案特定值，不可用通用數值覆蓋。
+- `wHubCharacteristics[1:0]` 電源切換模式，必須與專案已確認的
+  電源切換事實相符。若有衝突 → 觸發升級。
