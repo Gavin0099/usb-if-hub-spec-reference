@@ -18,6 +18,22 @@
 - [ ] Standard Escalation trigger table — not started
 - Claim ceiling: inferred / review_required. No PDF section-level verification performed.
 
+[x] Phase 2A : Specs wiki frontmatter bootstrap
+- Added YAML frontmatter to all 6 specs/*.md pages
+- Fields: title, claim_level: inferred, status: review_required, semantic_verification_claimed: false
+- Wiki frontmatter validator: 6/6 PASS
+- Claim ceiling: wiki_frontmatter_structural_consistency_only
+
+[x] Phase 2B : Wiki consistency probe (observation-only)
+- probe_wiki_consistency.py: regex token-search, governed table names vs specs page content
+- Fixture smoke: 3/3 PASS (consistent, partial_coverage, empty_table)
+- Real-table advisory results: class_request 100% · port_status 40% · feature_selector 88.9%
+- Advisory findings are expected — specs pages are stubs; not blocking, not semantic incorrectness
+- CI: fixture-smoke gate + 3 advisory steps wired
+- Claim ceiling: wiki_table_token_consistency_observation_only
+- Capability: "wiki/table lexical consistency is observable" — semantic correctness NOT proven
+- Next trigger: advisory findings reviewed by consuming repo AND content expansion requested
+
 [x] Phase 4 : Machine-readable consumer access contract
 - Export manifest (exports/usb20_hub_class_request_manifest.yaml) listing governed tables
 - Validators: validate_class_request_matrix, validate_feature_selector_matrix,
