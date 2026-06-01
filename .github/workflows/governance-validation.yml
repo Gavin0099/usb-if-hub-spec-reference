@@ -87,6 +87,9 @@ jobs:
       - name: Manifest access contract fixture smoke
         run: python scripts/smoke_validate_usb20_hub_class_request_manifest_fixtures.py
 
+      - name: Table fingerprint fixture smoke
+        run: python scripts/smoke_probe_table_fingerprint_fixtures.py
+
   # ── Advisory job ───────────────────────────────────────────────────────────
   # Runs real validators against actual repo content.
   # Each step uses continue-on-error so all validators run regardless of individual failures.
@@ -167,6 +170,29 @@ jobs:
             --matrix tables/feature_selector_matrix.yaml \
             --source-registry evidence/source_registry.yaml \
             --receipt-out ci-receipts/feature_selector_matrix.json
+
+      - name: Port status bit matrix validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_port_status_bit_matrix.py \
+            --matrix tables/port_status_bit_matrix.yaml \
+            --receipt-out ci-receipts/port_status_bit_matrix.json
+
+      - name: Manifest access contract validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb20_hub_class_request_manifest.py \
+            --manifest exports/usb20_hub_class_request_manifest.yaml \
+            --receipt-out ci-receipts/usb20_hub_class_request_manifest.json
+
+      - name: Table fingerprint drift check
+        continue-on-error: true
+        run: |
+          python scripts/probe_table_fingerprint.py \
+            --mode check \
+            --manifest exports/usb20_hub_class_request_manifest.yaml \
+            --baseline-in evidence/table_fingerprint_baseline.jsonl \
+            --receipt-out ci-receipts/table_fingerprint_drift.json
 
       - name: Upload advisory receipts
         if: always()
