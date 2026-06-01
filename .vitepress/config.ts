@@ -42,6 +42,10 @@ export default defineConfig({
   description: "USB Hub 治理規格參考文件 — claim_level: inferred",
   srcDir: "./specs",
   lang: "zh-TW",
+  base: process.env.BASE_URL ?? "/",
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+  ],
 
   themeConfig: {
     search: {

@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import AskAI from './components/AskAI.vue'
 import { h } from 'vue'
+import './custom.css'
 
 export default {
   extends: DefaultTheme,

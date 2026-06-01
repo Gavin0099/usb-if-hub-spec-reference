@@ -1,0 +1,12 @@
+/* Fix: table first column (E-01..E-10) must not wrap on hyphen */
+.vp-doc table td:first-child,
+.vp-doc table th:first-child {
+  white-space: nowrap;
+}
+
+/* Fix: code block long lines should wrap instead of overflow */
+.vp-doc pre,
+.vp-doc pre code {
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+}
