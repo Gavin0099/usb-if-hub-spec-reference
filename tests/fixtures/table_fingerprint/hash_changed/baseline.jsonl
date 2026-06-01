@@ -1,0 +1,1 @@
+{"table_id": "fixture_table_b", "path": "tests/fixtures/table_fingerprint/hash_changed/tables/test_table_b.yaml", "content_hash": "sha256:3891833203585a3f96aea9bbe4a4982d28d1ebbca4b2ba841d82c2a51a1c99cd", "recorded_at": "2026-05-31T00:00:00+00:00", "time_bound": true, "observation_only": true, "does_not_change_claim_level": true}

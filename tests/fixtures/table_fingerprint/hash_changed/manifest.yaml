@@ -1,0 +1,4 @@
+manifest_id: fixture_hash_changed
+governed_tables:
+  - id: fixture_table_b
+    path: tables/test_table_b.yaml

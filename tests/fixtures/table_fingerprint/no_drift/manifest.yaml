@@ -1,0 +1,4 @@
+manifest_id: fixture_no_drift
+governed_tables:
+  - id: fixture_table_a
+    path: tables/test_table_a.yaml

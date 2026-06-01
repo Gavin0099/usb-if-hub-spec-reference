@@ -1,0 +1,26 @@
+{
+  "probe": "probe_table_fingerprint.py",
+  "authority_ceiling": "table_content_fingerprint_drift_only",
+  "mode": "check",
+  "result": "DRIFT_DETECTED",
+  "checked_at": "2026-06-01T06:20:34.061096+00:00",
+  "tables_checked": 1,
+  "drift_count": 1,
+  "error_count": 0,
+  "findings": [
+    {
+      "table_id": "fixture_table_b",
+      "path": "tests\\fixtures\\table_fingerprint\\hash_changed\\tables\\test_table_b.yaml",
+      "impact": "drift_detected",
+      "baseline_hash": "sha256:3891833203585a3f96aea9bbe4a4982d28d1ebbca4b2ba841d82c2a51a1c99cd",
+      "current_hash": "sha256:b492301f1e01eacac9f57e4ab8c73a8df31430916b89991b7eaf9c1c24580c8f",
+      "baseline_recorded_at": "2026-05-31T00:00:00+00:00",
+      "checked_at": "2026-06-01T06:20:34.061096+00:00",
+      "required_action": "review_required"
+    }
+  ],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

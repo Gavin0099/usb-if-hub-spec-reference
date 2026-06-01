@@ -1,0 +1,41 @@
+{
+  "probe": "probe_table_fingerprint.py",
+  "authority_ceiling": "table_content_fingerprint_drift_only",
+  "mode": "baseline",
+  "result": "PASS",
+  "recorded_at": "2026-06-01T06:20:17.673545+00:00",
+  "tables_fingerprinted": 3,
+  "entries": [
+    {
+      "table_id": "usb_hub_class_request_matrix",
+      "path": "tables\\class_request_matrix.yaml",
+      "content_hash": "sha256:df751073f2458a2c5373e3f096f5a1ae3f0a819d58167c3b55a8c95501766cee",
+      "recorded_at": "2026-06-01T06:20:17.673545+00:00",
+      "time_bound": true,
+      "observation_only": true,
+      "does_not_change_claim_level": true
+    },
+    {
+      "table_id": "usb_hub_feature_selector_matrix",
+      "path": "tables\\feature_selector_matrix.yaml",
+      "content_hash": "sha256:9b951b9ce4800117fbec5c9727cddbd459c277306723c0ee000e2bb39fddc0d4",
+      "recorded_at": "2026-06-01T06:20:17.673545+00:00",
+      "time_bound": true,
+      "observation_only": true,
+      "does_not_change_claim_level": true
+    },
+    {
+      "table_id": "usb20_hub_port_status_bit_matrix",
+      "path": "tables\\port_status_bit_matrix.yaml",
+      "content_hash": "sha256:0ac192a4652a17d8db692399e3e594f86b328a42a4466a4b951eb452a1f4731d",
+      "recorded_at": "2026-06-01T06:20:17.673545+00:00",
+      "time_bound": true,
+      "observation_only": true,
+      "does_not_change_claim_level": true
+    }
+  ],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

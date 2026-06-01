@@ -1,0 +1,4 @@
+manifest_id: fixture_baseline_fresh
+governed_tables:
+  - id: fixture_table_c
+    path: tables/test_table_c.yaml

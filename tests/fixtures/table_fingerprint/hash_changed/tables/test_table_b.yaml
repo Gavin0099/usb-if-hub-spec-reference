@@ -1,0 +1,5 @@
+matrix_id: fixture_table_b
+entries:
+  - id: TEST_FIELD_BIT0
+    bit: 0
+    status: defined
