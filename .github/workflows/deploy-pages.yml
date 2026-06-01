@@ -41,7 +41,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BASE_URL: /${{ github.event.repository.name }}/
+          BASE_URL: /usb-if-hub-spec-reference/
 
       - uses: actions/upload-pages-artifact@v3
         with:
