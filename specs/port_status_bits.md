@@ -1,5 +1,5 @@
 ---
-title: 連接埠狀態位元
+title: Port Status Bits
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-02"
@@ -13,17 +13,17 @@ semantic_verification_claimed: false
 # 連接埠狀態位元
 
 > 來源範圍：USB 2.0 Specification Rev 2.0，Section 11.24.2.7。  
-> 本頁目前是 reference summary，不是完整的逐 bit verified 規格重建。
+> 本頁仍是 reference summary，不是完整逐 bit verified 的規格重建。
 
 ## Status Field Model
 
-- `GET_STATUS` 可能回傳 hub 層級的 `wHubStatus` / `wHubChange`，或 port 層級的 `wPortStatus` / `wPortChange`。
-- `Status` bits 描述目前狀態；`Change` bits 描述自上次清除以來是否發生過對應變化。
-- 對 change bits 而言，`CLEAR_FEATURE` 最好理解成「確認並清除此變更事件紀錄」。
+- `GET_STATUS` 可回傳 hub 層級的 `wHubStatus` / `wHubChange`，或 port 層級的 `wPortStatus` / `wPortChange`。
+- `Status` bits 描述目前狀態；`Change` bits 描述自上次清除以來是否發生過變化。
+- 對 change bits 來說，`CLEAR_FEATURE` 最好理解成「host 已確認此變更事件，並清除此事件紀錄」。
 
 ## Hub-Level Bits
 
-| 欄位 | Bit | 名稱 | 意義 |
+| Field | Bit | Name | Meaning |
 |---|---|---|---|
 | `wHubStatus` | 0 | `HUB_LOCAL_POWER` | Hub local power status |
 | `wHubStatus` | 1 | `HUB_OVER_CURRENT` | Hub over-current status |
@@ -32,7 +32,7 @@ semantic_verification_claimed: false
 
 ## Minimum Port-Level Boundary
 
-| 欄位 | Bit | 名稱 | 狀態 | 意義 |
+| Field | Bit | Name | State | Meaning |
 |---|---|---|---|---|
 | `wPortStatus` | 0 | `PORT_CONNECTION` | defined | Port connection status |
 | `wPortStatus` | 1 | `PORT_ENABLE` | defined | Port enabled status |
@@ -41,43 +41,70 @@ semantic_verification_claimed: false
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | 記錄 enable status 是否自上次清除以來發生變化 |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field boundary placeholder |
 
-## Change Bits 與 `CLEAR_FEATURE`
+## Phase 8E Live Verified Pilot
 
-可以把 `wPortChange` / `wHubChange` 理解成 latched change-event flags：
+目前只有一筆 live governed entry 已升級為 `verified`：
 
-- bit = `1`：對應狀態自上次清除後至少變化過一次
-- bit = `0`：自上次清除後沒有記錄到這類變化
-- `CLEAR_FEATURE(...)`：host 確認該事件後，清除這個記錄用的 change bit
+- `tables/port_status_bit_matrix.yaml` 中的 `wPortStatus.bit0.PORT_CONNECTION`
+
+這筆 verified 的範圍非常窄，只包含：
+
+- bit 名稱：`PORT_CONNECTION`
+- bit 位置：`wPortStatus` 的 bit 0
+
+這筆 verified **不代表**：
+
+- `PORT_CONNECTION` 的 debounce、timing、reset 或 state-transition 行為已驗證
+- `GET_STATUS` / `CLEAR_FEATURE` 的 host-side semantic behavior 已驗證
+- 本頁或整張 `port_status_bit_matrix` 已升級為 page-level / table-level verified
+
+所以本頁 frontmatter 仍維持：
+
+- `claim_level: inferred`
+- `status: review_required`
+- `semantic_verification_claimed: false`
+
+## Change Bits and `CLEAR_FEATURE`
+
+可以把 `wPortChange` / `wHubChange` 想成 latched change-event flags：
+
+- bit = `1`：對應狀態自上次清除以來至少變化過一次
+- bit = `0`：自上次清除以來沒有記錄到此類變化
+- `CLEAR_FEATURE(...)`：host 確認該事件後，清除此變更紀錄 bit
 
 例子：
 
 - `C_PORT_CONNECTION = 1` 表示 connection state 自上次清除後有變化
 - host 讀完 `GET_STATUS` 之後，可以送 `CLEAR_FEATURE(C_PORT_CONNECTION)` 來清除此事件紀錄
-- 若之後 connection 再次變化，這個 bit 仍可重新被設為 `1`
+- 如果之後又發生新的連接變化，該 bit 仍可再次變成 `1`
 
-## 速度位元必須合併解碼
+## Speed Bits Must Be Decoded Together
 
-`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 不能獨立解讀，它們共同構成速度編碼：
+`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 不能各自獨立解讀，它們必須合併成速度編碼：
 
-| `PORT_LOW_SPEED` | `PORT_HIGH_SPEED` | 解讀 |
+| `PORT_LOW_SPEED` | `PORT_HIGH_SPEED` | Interpretation |
 |---|---|---|
 | 0 | 0 | Full-speed |
 | 1 | 0 | Low-speed |
 | 0 | 1 | High-speed |
 | 1 | 1 | Reserved / unexpected combination |
 
-所以像「`PORT_LOW_SPEED = 0` 表示 full-speed」這種說法本身不完整。只有在 `PORT_HIGH_SPEED` 也為 `0` 時，才是 full-speed。
+因此像「`PORT_LOW_SPEED = 0` 表示 full-speed」這種說法本身不完整。只有在 `PORT_HIGH_SPEED` 也為 `0` 時，才是 full-speed。
 
-## Section Anchor Pilot Note
+## Section Anchor and Verified-Scope Boundary
 
-Phase 7B 已在 `tables/port_status_bit_matrix.yaml` 的部分 entry 掛上 `section_refs`，用途是測試 entry-level anchor metadata 是否能安全附著。
+本 repo 現在同時存在兩層不同訊號：
 
-這代表：
+- `section_refs`：evidence attachment metadata
+- 單一 entry 的 live `verified` promotion
 
-- pilot entries 現在可以帶 `section_refs`
-- 但 `claim_level` 仍然是 `inferred`
-- `evidence_status` 仍然是 `review_required`
-- 這不等於 USB 2.0 PDF bit-level semantic verification 已完成
+這兩者不能混為一談。
+
+目前成立的是：
+
+- 部分 pilot entries 帶有 `section_refs`
+- 只有 `wPortStatus.bit0.PORT_CONNECTION` 被升為 live `verified`
+- 該 verified scope 仍限於 `bit_name_and_position_only`
 
 如果未來要在 wiki claim block 掛 `section_refs`，應採用 Phase 7A 定義的結構，例如：
 
@@ -94,6 +121,6 @@ section_refs:
 
 ## Usage Notes
 
-- 本頁不是完整的 bit encyclopedia；它是目前已進入 machine-readable layer 的最小摘要面。
-- `PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、速度指示位元與其他細節，仍需要更強的 PDF-level verification。
-- `Reserved` bits 不應被 firmware 靜默重用；若有此情況，屬於 escalation condition。
+- 本頁不是完整 bit encyclopedia；它只整理目前 machine-readable layer 已暴露的核心表面。
+- `PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、速度相關位元與其他細節，仍需要更強的 PDF-level verification。
+- `Reserved` bits 不應被 firmware 靜默挪作它用；若發生這種情況，應視為 escalation condition。

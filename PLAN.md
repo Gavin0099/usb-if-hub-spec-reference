@@ -99,6 +99,11 @@
 - Verified scope remains `bit_name_and_position_only`
 - Page-level and table-level verified promotion remain disallowed
 
+[x] Phase 8F : Wiki verified-scope propagation
+- `specs/port_status_bits.md` and `specs/en/port_status_bits.md` now explicitly describe the single live verified pilot entry
+- Wiki pages remain `claim_level: inferred` and do not inherit table-level promotion
+- Chinese port-status page encoding repaired while preserving the verification boundary
+
 [ ] Phase 3 (deferred) : Wire cross-repo reference
 - Register as referenced spec source in `USB-Hub-Firmware-Architecture-Contract`
 - Define allowed usage boundary: clarify semantics only, never override confirmed project facts

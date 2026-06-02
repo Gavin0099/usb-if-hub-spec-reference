@@ -13,7 +13,7 @@ semantic_verification_claimed: false
 # Port Status Bits
 
 > Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.  
-> This page is currently a reference summary, not a complete bit-by-bit verified rendering of the source spec.
+> This page remains a reference summary, not a full bit-by-bit verified reconstruction of the source spec.
 
 ## Status Field Model
 
@@ -40,6 +40,29 @@ semantic_verification_claimed: false
 | `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | Records whether connection status has changed since the last clear |
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | Records whether enable status has changed since the last clear |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit field |
+
+## Phase 8E Live Verified Pilot
+
+There is now exactly one live governed entry promoted to `verified`:
+
+- `wPortStatus.bit0.PORT_CONNECTION` in `tables/port_status_bit_matrix.yaml`
+
+That verified scope is intentionally narrow. It covers only:
+
+- the bit name `PORT_CONNECTION`
+- the bit position `bit 0` within `wPortStatus`
+
+It does **not** mean that this repo has verified:
+
+- debounce, timing, reset, or state-transition behavior for `PORT_CONNECTION`
+- host-side `GET_STATUS` / `CLEAR_FEATURE` semantics
+- the full page or the full `port_status_bit_matrix` table
+
+So this page frontmatter still remains:
+
+- `claim_level: inferred`
+- `status: review_required`
+- `semantic_verification_claimed: false`
 
 ## Change Bits and `CLEAR_FEATURE`
 
@@ -68,16 +91,21 @@ Example:
 
 So wording like “`PORT_LOW_SPEED = 0` means full-speed” is incomplete by itself. It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
 
-## Section Anchor Pilot Note
+## Section Anchor and Verified-Scope Boundary
 
-Phase 7B attaches `section_refs` to selected entries in `tables/port_status_bit_matrix.yaml` as an entry-level anchor pilot.
+This repo now carries two different evidence-related signals:
 
-That means:
+- `section_refs` as evidence attachment metadata
+- one live `verified` promotion for a single entry
 
-- pilot entries can now carry `section_refs`
-- `claim_level` still remains `inferred`
-- `evidence_status` still remains `review_required`
-- this does not mean USB 2.0 PDF bit-level semantic verification is complete
+They should not be conflated.
+
+Current state:
+
+- selected pilot entries carry `section_refs`
+- only `wPortStatus.bit0.PORT_CONNECTION` is live `verified`
+- that verified scope still remains `bit_name_and_position_only`
+- this still does not mean USB 2.0 PDF semantic verification is complete
 
 If a future wiki claim block needs `section_refs`, it should use the Phase 7A structure, for example:
 
@@ -94,6 +122,6 @@ That metadata block is evidence attachment only. It does not automatically promo
 
 ## Usage Notes
 
-- This page is not a complete bit encyclopedia; it is the subset currently promoted into the machine-readable layer.
-- Semantics for `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, speed-indication bits, and related details still need stronger PDF-level verification.
-- Reserved bits should not be repurposed silently by firmware; if they are, that is an escalation condition.
+- This page is not a complete bit encyclopedia; it only summarizes the core surface currently exposed through the machine-readable layer.
+- Semantics for `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, speed-related bits, and adjacent details still need stronger PDF-level verification.
+- Reserved bits should not be silently repurposed by firmware; if they are, that is an escalation condition.
