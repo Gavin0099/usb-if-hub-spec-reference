@@ -14,16 +14,19 @@ const ZH_LABELS: Labels = {
   hub_descriptor: "Hub 描述符",
   port_status_bits: "連接埠狀態位元",
   transaction_translator: "Transaction Translator",
+  verification_status: "驗證狀態",
   version_source_map: "版本來源對應",
 };
 
 const EN_LABELS: Labels = {
   escalation_table: "Escalation Table",
+  feature_selectors: "Feature Selectors",
   glossary: "Glossary",
   hub_class_requests: "Hub Class Requests",
   hub_descriptor: "Hub Descriptor",
   port_status_bits: "Port Status Bits",
   transaction_translator: "Transaction Translator",
+  verification_status: "Verification Status",
   version_source_map: "Version Source Map",
 };
 

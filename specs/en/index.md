@@ -35,6 +35,9 @@ features:
   - title: Escalation Table
     details: Lists when a consuming firmware repository should enter Standard Escalation Mode.
     link: /en/escalation_table
+  - title: Verification Status
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 1 verified out of 47 tracked entries.
+    link: /en/verification_status
 ---
 
 > **Important boundary:** All content on this site currently remains `claim_level: inferred` and `semantic_verification_claimed: false`.

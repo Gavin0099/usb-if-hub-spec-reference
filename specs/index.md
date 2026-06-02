@@ -35,6 +35,9 @@ features:
   - title: 升級觸發表
     details: 列出 consuming firmware repo 何時應進入 Standard Escalation Mode。
     link: /escalation_table
+  - title: 驗證狀態
+    details: 查看目前 entry-level 驗證成熟度、reviewed packet 狀態與非宣告範圍。目前 47 個 tracked entries 中有 1 個 verified。
+    link: /verification_status
 ---
 
 > **重要邊界：** 本站所有內容目前仍為 `claim_level: inferred`，且 `semantic_verification_claimed: false`。  
