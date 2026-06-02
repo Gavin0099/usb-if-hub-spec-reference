@@ -22,6 +22,12 @@ CASES = [
         "note": "valid scaffold entries with allowed fields and bit range",
     },
     {
+        "name": "valid_verified_pilot",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "single reviewed pilot verified entry is structurally allowed",
+    },
+    {
         "name": "invalid_duplicate_field_bit",
         "expected_exit": 1,
         "expected_error_codes": ["DUPLICATE_FIELD_BIT"],
@@ -38,6 +44,12 @@ CASES = [
         "expected_exit": 1,
         "expected_error_codes": ["BIT_OUT_OF_RANGE"],
         "note": "bit outside 0-15 must fail",
+    },
+    {
+        "name": "invalid_verified_nonpilot",
+        "expected_exit": 1,
+        "expected_error_codes": ["VERIFIED_NOT_ALLOWED"],
+        "note": "non-pilot verified entry must still fail",
     },
 ]
 

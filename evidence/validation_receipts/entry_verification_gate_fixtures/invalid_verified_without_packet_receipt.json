@@ -1,0 +1,14 @@
+{
+  "validator": "validate_entry_verification_gate",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\matrix.yaml",
+  "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets",
+  "result": "FAIL",
+  "authority_ceiling": "entry_level_verified_gate_only",
+  "errors": [
+    {
+      "code": "VERIFIED_ENTRY_MISSING_PACKET",
+      "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: verified promotion requires a matching evidence packet in E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets"
+    }
+  ],
+  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+}

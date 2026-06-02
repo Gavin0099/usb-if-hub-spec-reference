@@ -2,7 +2,7 @@
   "validator": "validate_port_status_bit_matrix.py",
   "smoke_runner": "smoke_validate_port_status_bit_matrix_fixtures.py",
   "authority_ceiling": "status_bit_namespace_only",
-  "total_cases": 4,
+  "total_cases": 6,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -18,6 +18,19 @@
       "stdout": "\nPort status bit matrix validation PASS\n",
       "stderr": "",
       "note": "valid scaffold entries with allowed fields and bit range"
+    },
+    {
+      "name": "valid_verified_pilot",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_verified_pilot_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nPort status bit matrix validation PASS\n",
+      "stderr": "",
+      "note": "single reviewed pilot verified entry is structurally allowed"
     },
     {
       "name": "invalid_duplicate_field_bit",
@@ -69,6 +82,23 @@
       "stdout": "[FAIL] BIT_OUT_OF_RANGE: entry[0]: bit '16' is not in 0-15\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
       "note": "bit outside 0-15 must fail"
+    },
+    {
+      "name": "invalid_verified_nonpilot",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "VERIFIED_NOT_ALLOWED"
+      ],
+      "actual_error_codes": [
+        "VERIFIED_NOT_ALLOWED"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_verified_nonpilot_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] VERIFIED_NOT_ALLOWED: entry[0]: only pilot entry 'wPortStatus.bit0.PORT_CONNECTION' may use claim_level=verified\n\nPort status bit matrix validation FAIL\n",
+      "stderr": "",
+      "note": "non-pilot verified entry must still fail"
     }
   ]
 }

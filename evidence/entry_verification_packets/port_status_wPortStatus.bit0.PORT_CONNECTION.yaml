@@ -1,5 +1,5 @@
 packet_version: 1
-status: human_reviewable_pilot
+status: reviewed_pilot
 created_at: 2026-06-02
 
 target:
@@ -23,16 +23,16 @@ evidence:
     bit position 0. This packet does not claim reset, debounce, timing, or any
     host-side interpretation behavior.
   reviewer_note: >
-    Phase 8D human-reviewable packet pilot. A reviewer can compare the cited
-    USB 2.0 section against the packet summary and confirm that the packet stays
-    at bit-name and bit-position scope only. No live table promotion is
-    performed in this slice.
+    Reviewed against the cited USB 2.0 section for the narrow claim that
+    `wPortStatus.bit0.PORT_CONNECTION` names the port-connection status bit at
+    bit position 0. This review does not extend to timing, debounce, reset,
+    state transitions, `ClearPortFeature`, or host-side interpretation.
 
 review_checklist:
   - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port status fields.
   - Confirm the packet stays limited to `PORT_CONNECTION` bit name and bit position.
   - Confirm no timing, state-transition, or `ClearPortFeature` semantics are claimed.
-  - Confirm the governed table remains unchanged in this slice.
+  - Confirm any live promotion remains limited to one governed table entry only.
 
 verification_scope:
   claim: bit_name_and_position_only
@@ -43,16 +43,15 @@ verification_scope:
     - full USB compliance
 
 result:
-  eligible_for_verified: false
-  evidence_status: review_required
+  eligible_for_verified: true
+  evidence_status: reviewed
   promotion_note: >
-    Promotion remains disabled in Phase 8D because this slice only prepares a
-    human-reviewable packet. A separate reviewed evidence step and a distinct
-    promotion slice are still required before any live `claim_level: verified`
-    change is considered.
+    Eligible for a single-entry Phase 8E promotion only. The allowed verified
+    scope remains limited to bit name and bit position for
+    `wPortStatus.bit0.PORT_CONNECTION`. No page-level or table-level verified
+    promotion is authorized by this packet.
 
 non_claims:
-  - This packet does not promote the entry to verified.
   - This packet does not verify downstream port behavior.
   - This packet does not verify host-stack interpretation.
   - This packet does not establish page-level or table-level verification.

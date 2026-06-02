@@ -48,16 +48,18 @@ entries:
     name: PORT_CONNECTION
     status: defined
     description: Port connection status
+    claim_level: verified
+    evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
-        evidence_status: review_required
-        applies_to: "wPortStatus bit 0 summary"
-        note: "Phase 7B pilot attachment only; claim_level remains inferred."
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 0 name and position"
+        note: "Phase 8E pilot verified promotion is limited to bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
-      review_required: true
+      review_required: false
 
   - field: wPortStatus
     bit: 1

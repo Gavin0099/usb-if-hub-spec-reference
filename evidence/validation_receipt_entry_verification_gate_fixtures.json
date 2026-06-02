@@ -1,0 +1,70 @@
+{
+  "validator": "validate_entry_verification_gate.py",
+  "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
+  "authority_ceiling": "entry_level_verified_gate_only",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "no_verified_entries_pass",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\no_verified_entries_pass_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "no entry-level verified promotion present; gate should pass"
+    },
+    {
+      "name": "invalid_verified_without_packet",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "VERIFIED_ENTRY_MISSING_PACKET"
+      ],
+      "actual_error_codes": [
+        "VERIFIED_ENTRY_MISSING_PACKET"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_without_packet_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] VERIFIED_ENTRY_MISSING_PACKET: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: verified promotion requires a matching evidence packet in E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets\n\nEntry verification gate validation FAIL\n",
+      "stderr": "",
+      "note": "verified entry without packet must fail"
+    },
+    {
+      "name": "invalid_verified_wrong_scope",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "PACKET_SCOPE_TOO_BROAD"
+      ],
+      "actual_error_codes": [
+        "PACKET_SCOPE_TOO_BROAD"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_wrong_scope_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] PACKET_SCOPE_TOO_BROAD: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'\n\nEntry verification gate validation FAIL\n",
+      "stderr": "",
+      "note": "verified entry with a packet but broad scope must fail"
+    },
+    {
+      "name": "valid_verified_pilot",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_pilot_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "pilot entry with reviewed, eligible, narrow packet may pass the gate"
+    }
+  ]
+}

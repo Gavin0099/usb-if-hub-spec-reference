@@ -23,14 +23,32 @@ def run_validator(cmd: list[str]) -> str:
     return "pass" if result.returncode == 0 else "fail"
 
 
+def run_validators(cmds: list[list[str]]) -> str:
+    return "pass" if all(run_validator(cmd) == "pass" for cmd in cmds) else "fail"
+
+
 def main() -> int:
     manifest_doc = yaml.safe_load(MANIFEST.read_text(encoding="utf-8")) or {}
     governed_tables = manifest_doc.get("governed_tables", [])
 
     table_validators = {
-        "usb_hub_class_request_matrix": ["python", "scripts/validate_class_request_coverage.py", "--matrix", "tables/class_request_matrix.yaml"],
-        "usb_hub_feature_selector_matrix": ["python", "scripts/validate_feature_selector_matrix.py", "--matrix", "tables/feature_selector_matrix.yaml"],
-        "usb20_hub_port_status_bit_matrix": ["python", "scripts/validate_port_status_bit_matrix.py", "--matrix", "tables/port_status_bit_matrix.yaml"],
+        "usb_hub_class_request_matrix": [
+            ["python", "scripts/validate_class_request_coverage.py", "--matrix", "tables/class_request_matrix.yaml"]
+        ],
+        "usb_hub_feature_selector_matrix": [
+            ["python", "scripts/validate_feature_selector_matrix.py", "--matrix", "tables/feature_selector_matrix.yaml"]
+        ],
+        "usb20_hub_port_status_bit_matrix": [
+            ["python", "scripts/validate_port_status_bit_matrix.py", "--matrix", "tables/port_status_bit_matrix.yaml"],
+            [
+                "python",
+                "scripts/validate_entry_verification_gate.py",
+                "--matrix",
+                "tables/port_status_bit_matrix.yaml",
+                "--packet-dir",
+                "evidence/entry_verification_packets",
+            ],
+        ],
     }
 
     table_rows = []
@@ -38,12 +56,12 @@ def main() -> int:
         table_id = entry.get("id", "")
         table_path = entry.get("path", "")
         cmd = table_validators.get(table_id)
-        status = run_validator(cmd) if cmd else "unknown"
+        status = run_validators(cmd) if cmd else "unknown"
         table_rows.append(
             {
                 "id": table_id,
                 "path": table_path,
-                "validator": (cmd[1] if cmd else "unknown"),
+                "validator": (", ".join(cmd_item[1] for cmd_item in cmd) if cmd else "unknown"),
                 "status": status,
             }
         )

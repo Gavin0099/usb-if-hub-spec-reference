@@ -90,11 +90,14 @@
 - Gate only permits future verified promotion for the pilot entry when a reviewed, eligible, narrow-scope packet exists
 - Page-level and table-level verified promotion remain disallowed
 
-[ ] Phase 8D (future) : PDF-backed entry-level verification pilot
-- Perform human-reviewable PDF comparison for a very small bounded USB 2.0 entry set
-- Use `section_refs` plus evidence packet plus gate; do not use anchors as automatic promotion logic
-- Allow only entry-level or claim-block-level verification, not page-level blanket promotion
-- Prerequisite: USB 2.0 Rev 2.0 PDF access plus explicit review workflow
+[x] Phase 8D : Human-reviewable PDF evidence packet pilot
+- Pilot packet for `wPortStatus.bit0.PORT_CONNECTION` upgraded to human-reviewable form (`3bc241c`)
+- Packet remains narrow and preserves non-claims beyond bit name and bit position
+
+[x] Phase 8E : First entry-level verified promotion
+- `tables/port_status_bit_matrix.yaml` now promotes only `wPortStatus.bit0.PORT_CONNECTION`
+- Verified scope remains `bit_name_and_position_only`
+- Page-level and table-level verified promotion remain disallowed
 
 [ ] Phase 3 (deferred) : Wire cross-repo reference
 - Register as referenced spec source in `USB-Hub-Firmware-Architecture-Contract`

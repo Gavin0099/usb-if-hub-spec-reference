@@ -1,0 +1,12 @@
+{
+  "validator": "validate_port_status_bit_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_verified_nonpilot\\matrix.yaml",
+  "result": "FAIL",
+  "authority_ceiling": "status_bit_namespace_only",
+  "errors": [
+    {
+      "code": "VERIFIED_NOT_ALLOWED",
+      "message": "entry[0]: only pilot entry 'wPortStatus.bit0.PORT_CONNECTION' may use claim_level=verified"
+    }
+  ]
+}

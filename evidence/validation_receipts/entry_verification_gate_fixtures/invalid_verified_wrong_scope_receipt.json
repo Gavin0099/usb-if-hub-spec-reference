@@ -1,0 +1,14 @@
+{
+  "validator": "validate_entry_verification_gate",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_wrong_scope\\matrix.yaml",
+  "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_wrong_scope\\packets",
+  "result": "FAIL",
+  "authority_ceiling": "entry_level_verified_gate_only",
+  "errors": [
+    {
+      "code": "PACKET_SCOPE_TOO_BROAD",
+      "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'"
+    }
+  ],
+  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+}

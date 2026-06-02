@@ -1,0 +1,14 @@
+matrix_id: test_valid_verified_pilot
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - field: wPortStatus
+    bit: 0
+    name: PORT_CONNECTION
+    status: defined
+    description: Port connection status
+    claim_level: verified
+    evidence_status: reviewed
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false

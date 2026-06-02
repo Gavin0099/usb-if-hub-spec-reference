@@ -9,7 +9,7 @@ Structural checks only:
   R3 field must be one of wHubStatus, wHubChange, wPortStatus, wPortChange
   R4 status must be one of defined, reserved, vendor_or_spec_dependent
   R5 claim/evidence must exist at matrix level or entry level
-  R6 claim_level=verified is not allowed in this validator
+  R6 claim_level=verified is only allowed for the gated pilot entry
 """
 
 from __future__ import annotations
@@ -30,11 +30,16 @@ VALID_FIELDS = {"wHubStatus", "wHubChange", "wPortStatus", "wPortChange"}
 VALID_STATUS = {"defined", "reserved", "vendor_or_spec_dependent"}
 VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "verified"}
 VALID_EVIDENCE_STATUS = {"review_required", "reviewed", "unreviewed", "unknown"}
+PILOT_VERIFIED_ENTRY_ID = "wPortStatus.bit0.PORT_CONNECTION"
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
+
+
+def _entry_id(entry: dict[str, Any]) -> str:
+    return f"{entry.get('field')}.bit{entry.get('bit')}.{entry.get('name')}"
 
 
 def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
@@ -106,10 +111,17 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
             if evidence not in VALID_EVIDENCE_STATUS:
                 fail("INVALID_EVIDENCE_STATUS", f"{loc}: evidence_status '{evidence}' is invalid")
             if claim == "verified":
-                fail(
-                    "VERIFIED_NOT_ALLOWED",
-                    f"{loc}: claim_level=verified is not allowed for this table",
-                )
+                entry_id = _entry_id(entry)
+                if entry_id != PILOT_VERIFIED_ENTRY_ID:
+                    fail(
+                        "VERIFIED_NOT_ALLOWED",
+                        f"{loc}: only pilot entry '{PILOT_VERIFIED_ENTRY_ID}' may use claim_level=verified",
+                    )
+                if evidence != "reviewed":
+                    fail(
+                        "VERIFIED_REQUIRES_REVIEWED_EVIDENCE",
+                        f"{loc}: claim_level=verified requires evidence_status='reviewed'",
+                    )
 
     return ("FAIL" if errors else "PASS"), errors
 

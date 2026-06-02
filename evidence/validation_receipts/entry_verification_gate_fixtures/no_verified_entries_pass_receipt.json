@@ -1,0 +1,9 @@
+{
+  "validator": "validate_entry_verification_gate",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\matrix.yaml",
+  "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\packets",
+  "result": "PASS",
+  "authority_ceiling": "entry_level_verified_gate_only",
+  "errors": [],
+  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+}

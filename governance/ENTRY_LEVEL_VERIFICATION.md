@@ -175,3 +175,28 @@ Phase 8D still does **not** allow:
 The intended Phase 8D target remains:
 
 - `wPortStatus.bit0.PORT_CONNECTION`
+
+## Phase 8E First Entry-Level Verified Promotion
+
+The first live promotion remains intentionally narrow.
+
+Allowed live verified surface:
+
+- governed table: `tables/port_status_bit_matrix.yaml`
+- entry: `wPortStatus.bit0.PORT_CONNECTION`
+- scope: `bit_name_and_position_only`
+
+Required promotion conditions:
+
+- packet result sets `eligible_for_verified: true`
+- packet result sets `evidence_status: reviewed`
+- packet scope remains `bit_name_and_position_only`
+- packet exclusions still include timing behavior, state transition behavior, `ClearPortFeature` behavior, and full USB compliance
+
+Phase 8E still does **not** allow:
+
+- any second verified entry
+- page-level verified claims
+- table-level verified claims
+- TT behavior verification
+- reset, debounce, timing, or host-side semantic verification
