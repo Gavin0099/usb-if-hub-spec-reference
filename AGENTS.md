@@ -82,6 +82,28 @@ When reporting a completed work chunk, include:
 - `Validation: <checks run or NONE>`
 - `Risk: <open risk or NONE>`
 
+## Rule 4 Language Note
+
+When using the Rule 4 structured completion format for this repo:
+
+- The session language may follow the user language (for example, Chinese).
+- Fixed field labels remain in English:
+  - `structural`
+  - `build`
+  - `semantic`
+  - `behavioral`
+  - `ext evidence`
+  - `scope drift`
+  - `claim inflation`
+  - `evidence maturity`
+- Fixed status tokens also remain in English:
+  - `PASS`
+  - `FAIL`
+  - `NOT RUN`
+  - `NOT CLAIMED`
+  - `NOT PRESENT`
+- `Cannot claim this session` must always be present, even in Chinese sessions.
+
 ## Canonical Memory Writer Rule
 
 Only canonical session closeout is allowed to write under `memory/`.
