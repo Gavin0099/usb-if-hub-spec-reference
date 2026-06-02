@@ -1,4 +1,6 @@
-name: USB-IF Source Monitor
+﻿name: USB-IF Source Monitor
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 on:
   schedule:
@@ -10,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -29,9 +31,12 @@ jobs:
             --drift-events evidence/drift_events.jsonl
 
       - name: Upload monitor evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: usbif-source-monitor-evidence
           path: |
             evidence/source_snapshots.jsonl
             evidence/drift_events.jsonl
+
+
+

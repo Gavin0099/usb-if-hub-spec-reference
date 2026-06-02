@@ -1,11 +1,13 @@
-name: Governance Validation
+﻿name: Governance Validation
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 # Two-tier CI:
-#   fixture-smoke   — required gate. Deterministic. No network. Protects validator logic.
-#   advisory        — informational. Real repo content. Does not block PRs.
+#   fixture-smoke   ??required gate. Deterministic. No network. Protects validator logic.
+#   advisory        ??informational. Real repo content. Does not block PRs.
 #
 # Authority ceiling: fixture-smoke certifies validator logic only.
-#                    advisory certifies nothing — receipts are evidence artifacts, not semantic correctness claims.
+#                    advisory certifies nothing ??receipts are evidence artifacts, not semantic correctness claims.
 # See: docs/local_governance_freeze_point.md
 
 on:
@@ -34,17 +36,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ── Required gate ──────────────────────────────────────────────────────────
+  # ?? Required gate ??????????????????????????????????????????????????????????
   # Runs all fixture smoke tests. These are deterministic and hit no network.
-  # A failure here means validator logic has regressed — block the PR.
+  # A failure here means validator logic has regressed ??block the PR.
   fixture-smoke:
     name: Fixture Smoke (Required)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -93,13 +95,13 @@ jobs:
       - name: Wiki consistency fixture smoke
         run: python scripts/smoke_probe_wiki_consistency_fixtures.py
 
-  # ── Advisory job ───────────────────────────────────────────────────────────
+  # ?? Advisory job ???????????????????????????????????????????????????????????
   # Runs real validators against actual repo content.
   # Each step uses continue-on-error so all validators run regardless of individual failures.
-  # Results are uploaded as artifacts — they are evidence records, not semantic correctness claims.
+  # Results are uploaded as artifacts ??they are evidence records, not semantic correctness claims.
   # This job does NOT block PRs.
   #
-  # NOT included: validate_source_reachability.py — hits USB-IF network, unsuitable as CI gate.
+  # NOT included: validate_source_reachability.py ??hits USB-IF network, unsuitable as CI gate.
   advisory-validation:
     name: Advisory Real Content Validation
     runs-on: ubuntu-latest
@@ -107,9 +109,9 @@ jobs:
     needs: fixture-smoke
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -197,7 +199,7 @@ jobs:
             --baseline-in evidence/table_fingerprint_baseline.jsonl \
             --receipt-out ci-receipts/table_fingerprint_drift.json
 
-      - name: Wiki consistency probe — class request matrix
+      - name: Wiki consistency probe ??class request matrix
         continue-on-error: true
         run: |
           python scripts/probe_wiki_consistency.py \
@@ -207,7 +209,7 @@ jobs:
             --table-id class_request_matrix \
             --receipt-out ci-receipts/wiki_consistency_class_request_matrix.json
 
-      - name: Wiki consistency probe — port status bit matrix
+      - name: Wiki consistency probe ??port status bit matrix
         continue-on-error: true
         run: |
           python scripts/probe_wiki_consistency.py \
@@ -217,7 +219,7 @@ jobs:
             --table-id port_status_bit_matrix \
             --receipt-out ci-receipts/wiki_consistency_port_status_bit_matrix.json
 
-      - name: Wiki consistency probe — feature selector matrix
+      - name: Wiki consistency probe ??feature selector matrix
         continue-on-error: true
         run: |
           python scripts/probe_wiki_consistency.py \
@@ -227,7 +229,8 @@ jobs:
             --table-id feature_selector_matrix \
             --receipt-out ci-receipts/wiki_consistency_feature_selector_matrix.json
 
-      - name: Wiki QA probe — hub class requests (observation-only, requires ANTHROPIC_API_KEY secret)
+      - name: Wiki QA probe ??hub class requests (observation-only, requires ANTHROPIC_API_KEY secret)
+        if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -239,7 +242,7 @@ jobs:
 
       - name: Upload advisory receipts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: advisory-validation-receipts
           path: ci-receipts/

@@ -5,3 +5,8 @@ __pycache__/
 node_modules/
 .vitepress/cache/
 .vitepress/dist/
+
+# Local tool state
+.claude/settings.local.json
+.codex/
+artifacts/

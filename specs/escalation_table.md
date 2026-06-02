@@ -1,5 +1,5 @@
 ---
-title: Standard Escalation Trigger Table
+title: 標準升級觸發表
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,49 +10,48 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# Standard Escalation Trigger Table
+# 標準升級觸發表
 
-> Usage: This table is for consuming firmware repositories.
-> When any trigger condition is met, Standard Escalation Mode in the consuming repo's
-> AGENTS.md Section 10 must be activated.
+> **用途：** 本表供 consuming firmware repo 使用。
+> 當任何觸發條件成立時，必須啟動 consuming repo 的 AGENTS.md Section 10 所定義的 Standard Escalation Mode。
 
-## Trigger Conditions
+## 觸發條件
 
-| # | Condition | Spec Reference | Escalation Required |
-|---|-----------|---------------|-------------------|
-| E-01 | Firmware bNbrPorts ≠ hub descriptor field value | 11.23.2.1 offset 2 | Yes |
-| E-02 | Port status bit 3 used for non-OC purpose | 11.24.2.7.1 bit 3 | Yes |
-| E-03 | Reserved port status bits (7:5, 15:13) used by firmware | 11.24.2.7.1 | Yes |
-| E-04 | Hub descriptor GET_DESCRIPTOR not supported | 11.24.2 | Yes |
-| E-05 | Vendor command selector overlaps with standard selector (0–22) | 11.24.2 table | Yes |
-| E-06 | TT behavior present in full-speed-only hub | 11.17–11.18 | Yes |
-| E-07 | TT Think Time in descriptor does not match hardware timing | 11.23.2.1 wHubCharacteristics[6:5] | Yes |
-| E-08 | Power switching mode in descriptor ≠ confirmed project fact | 11.23.2.1 wHubCharacteristics[1:0] | Yes |
-| E-09 | PORT_HIGH_SPEED bit tested in full-speed-only hub | 11.24.2.7.1 bit 10 | Yes |
-| E-10 | Hub class request CLEAR_TT_BUFFER/RESET_TT required but not implemented in TT-capable hub | 11.24.2 | Yes |
+| # | 條件 | 規格參考 | 需升級 |
+|---|------|---------|-------|
+| E-01 | 韌體 bNbrPorts ≠ hub descriptor 欄位值 | 11.23.2.1 offset 2 | 是 |
+| E-02 | Port status bit 3 用於非 OC 目的 | 11.24.2.7.1 bit 3 | 是 |
+| E-03 | Reserved port status bits (7:5, 15:13) 被韌體使用 | 11.24.2.7.1 | 是 |
+| E-04 | Hub descriptor GET_DESCRIPTOR 未實作 | 11.24.2 | 是 |
+| E-05 | Vendor command selector 與標準 selector (0–22) 重疊 | 11.24.2 table | 是 |
+| E-06 | Full-speed-only hub 出現 TT 行為 | 11.17–11.18 | 是 |
+| E-07 | Descriptor 中 TT Think Time ≠ 硬體實際時序 | 11.23.2.1 wHubCharacteristics[6:5] | 是 |
+| E-08 | Descriptor 中 Power switching mode ≠ 已確認的專案事實 | 11.23.2.1 wHubCharacteristics[1:0] | 是 |
+| E-09 | Full-speed-only hub 中測試 PORT_HIGH_SPEED bit | 11.24.2.7.1 bit 10 | 是 |
+| E-10 | 具 TT 的 hub 需要 CLEAR_TT_BUFFER / RESET_TT 但未實作 | 11.24.2 | 是 |
 
-## Non-Escalation Cases
+## 不需升級的情況
 
-Standard reference usage that does NOT require escalation:
+以下標準參考用途**不需要**啟動升級模式：
 
-- Using port status bit definitions from `specs/port_status_bits.md` to clarify semantics
-- Using hub class request table from `specs/hub_class_requests.md` for field encoding reference
-- Confirming GET_DESCRIPTOR response format from `specs/hub_descriptor.md`
+- 使用 `specs/port_status_bits.md` 的 port status bit 定義澄清語意
+- 使用 `specs/hub_class_requests.md` 的 hub 類別請求表作為欄位編碼參考
+- 使用 `specs/hub_descriptor.md` 確認 GET_DESCRIPTOR 回應格式
 
-## Escalation Output Format
+## 升級輸出格式
 
-When escalation is triggered, record in the consuming repo's `memory/03_decisions.md`:
+觸發升級時，在 consuming repo 的 `memory/03_decisions.md` 中記錄：
 
 ```
 [Standard Conflict Detected]
 
-Trigger: <E-NN from this table>
+Trigger: <本表的 E-NN>
 
-Standard says: <standard-based interpretation from this repo>
+Standard says: <來自本 repo 的 standard-based interpretation>
 
-Project fact says: <confirmed project-specific behavior>
+Project fact says: <已確認的 project-specific behavior>
 
 Classification: Project Implementation Constraint | Standards Compliance Risk | Documentation Error
 
-Resolution: <chosen path>
+Resolution: <選擇的處理路徑>
 ```

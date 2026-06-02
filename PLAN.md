@@ -15,7 +15,8 @@
 - [x] Port status bit matrix (port_status_bit_matrix.yaml) — 16 entries, wHub*/wPort* bits 0–15, draft
 - [ ] Hub descriptor field definitions (USB 2.0 spec 11.23) — not started
 - [ ] Transaction Translator rules summary — not started
-- [ ] Standard Escalation trigger table — not started
+- [x] Standard Escalation trigger table (`specs/escalation_table.md`) drafted and localized
+- [ ] Hub descriptor / TT / escalation pages remain inferred and review_required until PDF verification
 - Claim ceiling: inferred / review_required. No PDF section-level verification performed.
 
 [x] Phase 2A : Specs wiki frontmatter bootstrap
