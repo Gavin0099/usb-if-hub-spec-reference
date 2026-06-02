@@ -152,3 +152,26 @@ Promotion is still disallowed unless all of the following are true:
 - the packet exclusions still explicitly rule out timing behavior, state-transition behavior, `ClearPortFeature` behavior, and full USB compliance
 
 No page-level or table-level verified promotion is allowed in this phase.
+
+## Phase 8D Human-Reviewable Packet Pilot
+
+The next safe step is to improve one pilot packet into a human-reviewable
+evidence artifact without changing the live governed table.
+
+Recommended additions for a Phase 8D packet:
+
+- `document_ref` to name the preferred source and any fallback source
+- `quoted_surface_summary` as a short reviewer paraphrase
+- `review_checklist` so a human can verify the packet boundaries
+- `promotion_note` explaining why promotion is still blocked or deferred
+
+Phase 8D still does **not** allow:
+
+- direct table promotion
+- page-level verified claims
+- table-level verified claims
+- timing or state-transition verification
+
+The intended Phase 8D target remains:
+
+- `wPortStatus.bit0.PORT_CONNECTION`

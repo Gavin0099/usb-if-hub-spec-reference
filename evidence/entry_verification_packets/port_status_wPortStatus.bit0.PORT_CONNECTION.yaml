@@ -1,5 +1,5 @@
 packet_version: 1
-status: draft
+status: human_reviewable_pilot
 created_at: 2026-06-02
 
 target:
@@ -11,10 +11,28 @@ evidence:
   spec: usb20
   section: "11.24.2.7.1"
   page: null
-  quoted_surface: short_reference_only
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.24.2.7.1 is the port-status field surface used for this
+    packet. For this pilot, the intended narrow claim is only that
+    `wPortStatus.bit0.PORT_CONNECTION` names the port-connection status bit at
+    bit position 0. This packet does not claim reset, debounce, timing, or any
+    host-side interpretation behavior.
   reviewer_note: >
-    Phase 8B pilot packet only. This packet records entry-level section evidence
-    attachment for the named bit entry and keeps promotion eligibility disabled.
+    Phase 8D human-reviewable packet pilot. A reviewer can compare the cited
+    USB 2.0 section against the packet summary and confirm that the packet stays
+    at bit-name and bit-position scope only. No live table promotion is
+    performed in this slice.
+
+review_checklist:
+  - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port status fields.
+  - Confirm the packet stays limited to `PORT_CONNECTION` bit name and bit position.
+  - Confirm no timing, state-transition, or `ClearPortFeature` semantics are claimed.
+  - Confirm the governed table remains unchanged in this slice.
 
 verification_scope:
   claim: bit_name_and_position_only
@@ -27,6 +45,11 @@ verification_scope:
 result:
   eligible_for_verified: false
   evidence_status: review_required
+  promotion_note: >
+    Promotion remains disabled in Phase 8D because this slice only prepares a
+    human-reviewable packet. A separate reviewed evidence step and a distinct
+    promotion slice are still required before any live `claim_level: verified`
+    change is considered.
 
 non_claims:
   - This packet does not promote the entry to verified.

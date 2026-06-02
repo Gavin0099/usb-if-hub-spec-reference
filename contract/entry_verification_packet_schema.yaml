@@ -19,6 +19,7 @@ invariants:
   - A packet may exist while evidence_status remains review_required.
   - eligible_for_verified=false is the safe default.
   - verification_scope must list exclusions explicitly.
+  - Human-reviewable packet fields may exist before promotion occurs.
 
 packet_required_fields:
   - target
@@ -44,6 +45,12 @@ verification_scope_required_fields:
 result_required_fields:
   - eligible_for_verified
   - evidence_status
+
+optional_recommended_fields:
+  - evidence.document_ref
+  - evidence.quoted_surface_summary
+  - review_checklist
+  - result.promotion_note
 
 valid_values:
   target_surface:
@@ -82,6 +89,27 @@ minimal_packet_example:
   result:
     eligible_for_verified: false
     evidence_status: review_required
+
+human_reviewable_packet_guidance:
+  intent:
+    - make the packet reviewable by a human without upgrading the live governed table
+    - capture the exact entry target, source section, and narrow claim scope
+  recommended_additions:
+    evidence:
+      document_ref:
+        primary_source_id: usb20_spec
+        fallback_source_id: archive_usb20_pdf
+      quoted_surface_summary: >
+        Reviewer paraphrase of the relevant USB 2.0 section, kept short and
+        bounded to the entry-level claim surface.
+    review_checklist:
+      - Confirm the cited section matches the target entry field and bit position.
+      - Confirm the paraphrase does not expand into behavior or timing claims.
+      - Confirm promotion remains separate from packet creation.
+    result:
+      promotion_note: >
+        Explain why the packet is or is not yet eligible for a later verified
+        promotion slice.
 
 promotion_boundary:
   rule: >
