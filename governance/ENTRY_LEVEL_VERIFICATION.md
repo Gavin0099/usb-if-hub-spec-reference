@@ -133,3 +133,22 @@ The first intended packet targets:
 - `wPortStatus.bit0.PORT_CONNECTION`
 
 Its first iteration remains non-promoting and review-required.
+
+## Phase 8C Promotion Gate
+
+The next gate is intentionally narrow.
+
+Current allowed promotion scope:
+
+- governed table only: `tables/port_status_bit_matrix.yaml`
+- entry only: `wPortStatus.bit0.PORT_CONNECTION`
+- verification scope only: `bit_name_and_position_only`
+
+Promotion is still disallowed unless all of the following are true:
+
+- a matching evidence packet exists
+- `result.eligible_for_verified` is `true`
+- `result.evidence_status` is `reviewed`
+- the packet exclusions still explicitly rule out timing behavior, state-transition behavior, `ClearPortFeature` behavior, and full USB compliance
+
+No page-level or table-level verified promotion is allowed in this phase.

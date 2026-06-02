@@ -75,9 +75,24 @@
 - Add wiki-side `section_refs` usage note to `specs/port_status_bits.md` and `specs/en/port_status_bits.md` (`7dd0588`)
 - Clarify that wiki claim-block anchor metadata is allowed without verified promotion
 
-[ ] Phase 8 (future) : PDF-backed entry-level verification pilot
-- Select a very small number of bounded USB 2.0 entries for human-reviewable PDF comparison
-- Use `section_refs` as attachment metadata, not as automatic promotion logic
+[x] Phase 8A : Entry verification evidence packet format
+- `contract/entry_verification_packet_schema.yaml` added
+- `governance/ENTRY_LEVEL_VERIFICATION.md` added
+- Packet existence is explicit evidence metadata, not verified promotion
+
+[x] Phase 8B : First evidence packet, no promotion
+- Pilot packet added for `wPortStatus.bit0.PORT_CONNECTION`
+- Target remains `claim_level: inferred`
+- Packet remains reviewable and non-promoting
+
+[x] Phase 8C : Entry-level verified promotion gate
+- `validate_entry_verification_gate.py` added
+- Gate only permits future verified promotion for the pilot entry when a reviewed, eligible, narrow-scope packet exists
+- Page-level and table-level verified promotion remain disallowed
+
+[ ] Phase 8D (future) : PDF-backed entry-level verification pilot
+- Perform human-reviewable PDF comparison for a very small bounded USB 2.0 entry set
+- Use `section_refs` plus evidence packet plus gate; do not use anchors as automatic promotion logic
 - Allow only entry-level or claim-block-level verification, not page-level blanket promotion
 - Prerequisite: USB 2.0 Rev 2.0 PDF access plus explicit review workflow
 

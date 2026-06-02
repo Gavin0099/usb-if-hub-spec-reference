@@ -1,0 +1,19 @@
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortStatus.bit0.PORT_CONNECTION
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: broader_than_allowed
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - ClearPortFeature behavior
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
