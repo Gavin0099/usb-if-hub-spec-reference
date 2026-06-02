@@ -1,7 +1,7 @@
 # Copilot Workspace Instructions
 <!-- AI Governance Framework: copilot-instructions v1.0 -->
 <!-- Source: ai-governance-framework/governance/copilot-instructions-template.md -->
-<!-- Imported into this repo from ai-governance-framework commit 9a449389af595a16e138826085eec9e319ad7643 -->
+<!-- Deploy via: bash scripts/install-hooks.sh --target /path/to/repo -->
 
 ## DONE Boundary Rules (MANDATORY)
 
@@ -11,7 +11,7 @@ When the defined DONE condition is met, stop immediately.
 
 Do NOT automatically continue into:
 - full regression or broad smoke validation
-- governance artifact chains (`triage -> decision -> contract -> gate -> acceptance -> freeze`)
+- governance artifact chains (triage → decision → contract → gate → acceptance → freeze)
 - commit, push, closeout, or status rollup
 - inspection of unrelated dirty or untracked files
 
@@ -19,13 +19,13 @@ Report next options only. Wait for explicit instruction.
 
 ### Rule 2: Scope-Matched Validation
 
-Run targeted validation first.
+Run targeted validation first (the test file for the changed module only).
 
 Do NOT upgrade to full regression or broader smoke unless:
 - the DONE definition explicitly requires it, OR
 - the user explicitly requests it
 
-When broader validation fails: report the failure and classification in one message, then stop.
+When broader validation fails: report the failure and classification in ONE message, then stop.
 Do not build triage/decision/contract chains from a broader validation failure.
 
 ### Rule 3: Dirty Tree Allowlist
@@ -37,14 +37,17 @@ Do not read, explain, stage, or modify unrelated dirty or untracked files.
 
 ### Rule 4: Structured Report Format
 
-When reporting task completion, use this exact format. Fixed vocabulary only; no free-form narrative in these fields.
+When reporting task completion, use this exact format. Fixed vocabulary only — no free-form narrative in these fields.
 
 Vocabulary definitions:
 - `NOT PRESENT` = the mechanism, artifact, or enforcement does not exist
 - `NOT CLAIMED` = the capability or conclusion is not being asserted this session
 - `PASS` = must always include `— <command or source>` (never bare)
 
-```text
+**Language rule:** Content language must match the session language. Sub-field labels (`structural`, `build`, `semantic`, `behavioral`, `ext evidence`, `scope drift`, `claim inflation`, `evidence maturity`) and fixed vocabulary tokens (`PASS`, `FAIL`, `NOT RUN`, `NOT CLAIMED`, `NOT PRESENT`) remain in English regardless of session language. Section headers may be translated.
+
+English format:
+```
 Validation:
 - structural:    PASS — <command> | FAIL — <command> | NOT RUN
 - build:         PASS — <command> | FAIL — <command> | NOT RUN
@@ -63,16 +66,35 @@ Cannot claim this session:
 - [list what was NOT validated, NOT verified, NOT proven]
 ```
 
-Do NOT omit `Cannot claim`. It is required in every completion report.
+Chinese format (when session language is Chinese):
+```
+驗證：
+- structural:    PASS — <指令> | FAIL — <指令> | NOT RUN
+- build:         PASS — <指令> | FAIL — <指令> | NOT RUN
+- semantic:      NOT CLAIMED | PASS — 人工審查：[審查者/日期]
+- behavioral:    NOT PRESENT | 已驗證 — [如何]
+- ext evidence:  NOT PRESENT | [來源與範圍]
 
-### Golden Examples
+風險：
+- scope drift:        none | [說明]
+- claim inflation:    none | [說明]
+- evidence maturity:  [一行說明]
 
-Schema-only change:
+附帶清理：   none | file=[路徑] reason=[原因] semantic_change=no
 
-```text
+本次無法宣告：
+- [列出未驗證、未確認、未證明的項目]
+```
+
+Do NOT omit `Cannot claim` / `本次無法宣告`. It is required in every completion report.
+
+**Examples:**
+
+Schema-only change (markdown, no runtime):
+```
 Validation:
 - structural:    PASS — grep section_refs *.md
-- build:         NOT RUN
+- build:         NOT RUN — markdown-only change
 - semantic:      NOT CLAIMED
 - behavioral:    NOT PRESENT
 - ext evidence:  NOT PRESENT
@@ -86,31 +108,30 @@ Cannot claim this session:
 - PDF-level content verification
 ```
 
-Pilot attachment change:
-
-```text
+Pilot attachment change (build pass, no semantic verification):
+```
 Validation:
 - structural:    PASS — validate_wiki_frontmatter
-- build:         PASS — npm.cmd run build
+- build:         PASS — npm.cmd run build (exit 0)
 - semantic:      NOT CLAIMED
 - behavioral:    NOT PRESENT
 - ext evidence:  NOT PRESENT
 Risk:
-- scope drift:        none — pilot limited to existing entries
+- scope drift:        none — pilot limited to 4 existing entries
 - claim inflation:    none — claim_level unchanged (inferred)
-- evidence maturity:  build-verified only; no PDF-backed semantic verification
+- evidence maturity:  build-verified only; high-risk coverage below original plan
 Incidental cleanup:   none
 Cannot claim this session:
 - bit-level semantic verification of attached spec sections
+- high-risk boundary condition coverage (PORT_OVER_CURRENT not in pilot)
 - verified status upgrade
 ```
 
 Failed / partial validation:
-
-```text
+```
 Validation:
 - structural:    PASS — validate_wiki_frontmatter
-- build:         FAIL — npm.cmd run build
+- build:         FAIL — npm.cmd run build (exit 1, see error above)
 - semantic:      NOT CLAIMED
 - behavioral:    NOT PRESENT
 - ext evidence:  NOT PRESENT
