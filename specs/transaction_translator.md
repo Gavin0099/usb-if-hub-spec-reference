@@ -1,5 +1,5 @@
 ---
-title: Transaction Translator (TT) 規則
+title: Transaction Translator
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,51 +10,48 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# Transaction Translator (TT) 規則
+# Transaction Translator
 
-> 來源：USB 2.0 規格書 Revision 2.0，第 11.17–11.18 節
-> 用途：僅供語意參考層使用。不可用於覆蓋已確認的專案事實。
+> 來源範圍：USB 2.0 Specification Rev 2.0，第 11.17-11.18 節。
+> 本頁為 TT 行為摘要，不代表已完成所有 split transaction 細節的逐段驗證。
 
-## 用途說明
+## 核心概念
 
-Transaction Translator（TT）是高速能力 hub 的必要元件，允許低速與全速
-裝置連接至高速匯流排。
+Transaction Translator（TT）存在於 high-speed hub 中，用來橋接 host 發出的 high-speed split transaction，與 full-speed / low-speed downstream 裝置之間的實際傳輸。
 
-TT 負責緩衝全速／低速交易，並將其轉換為高速上行埠格式。
+- 沒有 TT 的 hub，不應宣稱支援 TT 專屬請求。
+- Full-speed-only hub 不應出現 TT 行為；若出現，屬於 escalation trigger。
+- TT 行為與 `wHubCharacteristics` 中的 TT 類型與 think time 設定密切相關。
 
-## TT 組態
+## TT 類型與 think time
 
-| 組態項目 | wHubCharacteristics 位元 6:5 | 說明 |
-|---------|------------------------------|------|
-| Single TT | — | Hub 所有連接埠共用一個 TT |
-| Multiple TT | — | Hub 每個連接埠各有一個 TT |
-| TT Think Time | 00 | 8 FS 位元時間 |
-| TT Think Time | 01 | 16 FS 位元時間 |
-| TT Think Time | 10 | 24 FS 位元時間 |
-| TT Think Time | 11 | 32 FS 位元時間 |
+| 項目 | 對應欄位 | 摘要 |
+|---|---|---|
+| Single TT | `wHubCharacteristics` TT type | 所有 downstream port 共用同一個 TT |
+| Multiple TT | `wHubCharacteristics` TT type | 每個 port 或 port 群組具獨立 TT |
+| TT Think Time = `00` | `wHubCharacteristics[6:5]` | 8 FS bit times |
+| TT Think Time = `01` | `wHubCharacteristics[6:5]` | 16 FS bit times |
+| TT Think Time = `10` | `wHubCharacteristics[6:5]` | 24 FS bit times |
+| TT Think Time = `11` | `wHubCharacteristics[6:5]` | 32 FS bit times |
 
-## TT 請求行為
+## TT 相關請求
 
-- **CLEAR_TT_BUFFER**：清除特定端點的 TT 緩衝區。在 TT 交易 halt 後
-  用於錯誤恢復。
-- **RESET_TT**：將 TT 重置至已知狀態。Hub 必須完成進行中的交易後才能重置。
-- **GET_TT_STATE**：回傳 TT 狀態，供診斷用途。
-- **STOP_TT**：停止 TT 處理指定埠上的分割交易（Split Transaction）。
+- `CLEAR_TT_BUFFER`：清除 TT 緩衝狀態
+- `RESET_TT`：重設 TT
+- `GET_TT_STATE`：讀取 TT 診斷狀態
+- `STOP_TT`：停止 TT split transaction 處理
 
-## 分割交易概述（Split Transaction）
+這些請求只適用於具內建 TT 的 HS hub，且部分欄位仍維持 `spec_defined`，表示尚未完成 section-level 驗證。
 
-高速 hub 上的全速／低速流量透過分割交易處理：
+## Split transaction 摘要
 
-1. Host 向 Hub 發出 Start Split（SSPLIT）
-2. Hub 緩衝全速／低速交易
-3. Host 發出 Complete Split（CSPLIT）取回結果
-4. Hub 回傳交易狀態或資料
+1. Host 對 HS hub 發出 Start Split。
+2. Hub 內的 TT 轉換為對 FS/LS 裝置可用的交易。
+3. Host 之後再以 Complete Split 取回結果或完成階段。
+4. Hub / TT 彙整結果並回傳 upstream。
 
-## 標準衝突說明
+## 使用注意
 
-- 若專案的 hub 為**全速專用**（無高速上行埠）：TT 不適用。
-  此情況下不應要求 TT 支援。
-- 若專案使用 Single TT，但描述符回報 Multiple TT（或相反）：
-  須觸發 Standard Escalation Mode。
-- TT Think Time 必須符合下行裝置的實際匯流排時序需求。
-  未經硬體驗證證據，不可更改此值。
+- 如果專案已確認使用 Single TT 或 Multiple TT，不能僅憑本 repo 的一般標準摘要覆蓋它。
+- TT Think Time 若與 descriptor 宣告不一致，屬於 escalation trigger。
+- consuming repo 若要依本頁內容調整 TT 行為，應先經過標準衝突檢查與 architecture review。

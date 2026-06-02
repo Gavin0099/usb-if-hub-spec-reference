@@ -1,5 +1,5 @@
 ---
-title: 連接埠狀態與變更位元
+title: 連接埠狀態位元
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,49 +10,66 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# 連接埠狀態與變更位元
+# 連接埠狀態位元
 
-> 來源：USB 2.0 規格書 Revision 2.0，第 11.24.2.7.1 與 11.24.2.7.2 節
-> 用途：僅供語意參考層使用。不可用於覆蓋已確認的專案事實。
+> 來源範圍：USB 2.0 Specification Rev 2.0，第 11.24.2.7 節。
+> 本頁目前是 reference summary，不代表所有 bit 都已完成逐位驗證。
 
-## 連接埠狀態欄位（wPortStatus）
+## 狀態欄位概念
 
-由 GET_PORT_STATUS 請求回傳，16 位元欄位。
+- `GET_STATUS` 可回傳 hub 層級的 `wHubStatus` / `wHubChange`，或 port 層級的 `wPortStatus` / `wPortChange`。
+- `Status` bits 表示目前狀態；`Change` bits 表示「自上次被清除以來是否發生過變化」。
+- 對 change bits 而言，`CLEAR_FEATURE` 的角色不是一般設定命令，而是「清除這個變更紀錄」。
 
-| 位元 | 名稱 | 設定時的含義 |
-|------|------|------------|
-| 0 | PORT_CONNECTION | 此連接埠已連接裝置 |
-| 1 | PORT_ENABLE | 連接埠已啟用 |
-| 2 | PORT_SUSPEND | 連接埠已暫停 |
-| 3 | PORT_OVER_CURRENT | 偵測到過電流狀態 |
-| 4 | PORT_RESET | 連接埠正在重置 |
-| 7:5 | 保留 | 必須為 0 |
-| 8 | PORT_POWER | 連接埠電源已開啟 |
-| 9 | PORT_LOW_SPEED | 已連接低速裝置（0 = 全速） |
-| 10 | PORT_HIGH_SPEED | 已連接高速裝置 |
-| 11 | PORT_TEST | 連接埠處於測試模式 |
-| 12 | PORT_INDICATOR | 連接埠指示燈由軟體控制 |
-| 15:13 | 保留 | 必須為 0 |
+## Hub 層級位元
 
-## 連接埠變更欄位（wPortChange）
+| 欄位 | Bit | 名稱 | 語意 |
+|---|---|---|---|
+| `wHubStatus` | 0 | `HUB_LOCAL_POWER` | Hub local power status |
+| `wHubStatus` | 1 | `HUB_OVER_CURRENT` | Hub over-current status |
+| `wHubChange` | 0 | `C_HUB_LOCAL_POWER` | 記錄 local power 狀態自上次清除後是否發生過變化 |
+| `wHubChange` | 1 | `C_HUB_OVER_CURRENT` | 記錄 over-current 狀態自上次清除後是否發生過變化 |
 
-記錄自上次讀取以來的狀態變更，由 CLEAR_FEATURE 清除。
+## Port 層級最低必要邊界
 
-| 位元 | 名稱 | 清除方式 |
-|------|------|---------|
-| 0 | C_PORT_CONNECTION | C_PORT_CONNECTION feature |
-| 1 | C_PORT_ENABLE | C_PORT_ENABLE feature |
-| 2 | C_PORT_SUSPEND | C_PORT_SUSPEND feature |
-| 3 | C_PORT_OVER_CURRENT | C_PORT_OVER_CURRENT feature |
-| 4 | C_PORT_RESET | C_PORT_RESET feature |
-| 15:5 | 保留 | — |
+| 欄位 | Bit | 名稱 | 狀態 | 說明 |
+|---|---|---|---|---|
+| `wPortStatus` | 0 | `PORT_CONNECTION` | defined | Port connection status |
+| `wPortStatus` | 1 | `PORT_ENABLE` | defined | Port enabled status |
+| `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | 16-bit status field boundary placeholder |
+| `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | 記錄連接狀態自上次清除後是否發生過變化 |
+| `wPortChange` | 1 | `C_PORT_ENABLE` | defined | 記錄 enable 狀態自上次清除後是否發生過變化 |
+| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field boundary placeholder |
 
-## 標準衝突說明
+## Change bits 與 `CLEAR_FEATURE`
 
-- **位元 3（PORT_OVER_CURRENT）**：規格定義為硬體偵測到的過電流狀態。
-  若專案將此位元用於內部級聯 hub 狀態訊號，屬於已確認的 Project Implementation
-  Constraint，不可以通用標準行為替換。
-- **位元 15:13 與 7:5**：USB-IF 保留這些位元，必須為 0。若專案將
-  任何保留位元用於廠商自訂目的，須觸發 Standard Escalation Mode。
-- **PORT_HIGH_SPEED（位元 10）**：僅適用於高速能力的 hub。全速專用
-  hub 的韌體不得設定或測試此位元。
+可以把 `wPortChange` / `wHubChange` 想成「變更事件旗標」：
+
+- bit 被設為 `1`：代表自上次清除以來，該狀態至少變動過一次
+- bit 維持 `0`：代表自上次清除以來，沒有觀測到該類變化
+- 使用對應的 `CLEAR_FEATURE`：清掉這個 change bit，表示 host 已讀取並處理過這個事件
+
+常見理解方式：
+
+- `C_PORT_CONNECTION = 1`：代表連接狀態自上次清除後發生過變化
+- host 讀完 `GET_STATUS` 後，可對該 port 發 `CLEAR_FEATURE(C_PORT_CONNECTION)` 清除此事件紀錄
+- 清除後若再次發生變化，bit 會再被設為 `1`
+
+## 速度位元需要組合判讀
+
+`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 不能各自獨立解讀，必須一起看：
+
+| `PORT_LOW_SPEED` | `PORT_HIGH_SPEED` | 解讀 |
+|---|---|---|
+| 0 | 0 | Full-speed |
+| 1 | 0 | Low-speed |
+| 0 | 1 | High-speed |
+| 1 | 1 | 保留 / 非預期組合 |
+
+因此像「`PORT_LOW_SPEED = 0` 表示全速」這種寫法本身不完整；只有在 `PORT_HIGH_SPEED` 也為 `0` 時，才能解讀成 full-speed。
+
+## 使用注意
+
+- 這份頁面不是完整 bit encyclopedia，而是目前已進入 machine-readable layer 的必要子集。
+- `PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、速度指示 bit 等語意若要作為強依據，仍應回到後續 PDF 驗證計畫。
+- `Reserved` bit 不應被 firmware 任意拿來承載專案私有語意；若已使用，屬於 escalation trigger。

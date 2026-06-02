@@ -1,0 +1,57 @@
+---
+title: Transaction Translator
+claim_level: inferred
+status: review_required
+last_reviewed: "2026-06-01"
+usb_versions:
+  - usb_2_0
+source_refs:
+  - usb20_spec
+semantic_verification_claimed: false
+---
+
+# Transaction Translator
+
+> Source scope: USB 2.0 Specification Rev 2.0, Sections 11.17-11.18.
+> This page is a TT behavior summary and does not claim full split-transaction verification.
+
+## Core Concept
+
+A Transaction Translator (TT) exists inside a high-speed hub to bridge host-issued high-speed split transactions and actual traffic to full-speed or low-speed downstream devices.
+
+- A hub without TT should not claim TT-specific request support.
+- TT behavior should not appear in a full-speed-only hub.
+- TT behavior is tied to descriptor-declared TT type and TT think time settings.
+
+## TT Type and Think Time
+
+| Item | Related Field | Summary |
+|---|---|---|
+| Single TT | TT type in `wHubCharacteristics` | One TT is shared across downstream ports |
+| Multiple TT | TT type in `wHubCharacteristics` | Independent TT instances exist per port or per port group |
+| TT Think Time = `00` | `wHubCharacteristics[6:5]` | 8 FS bit times |
+| TT Think Time = `01` | `wHubCharacteristics[6:5]` | 16 FS bit times |
+| TT Think Time = `10` | `wHubCharacteristics[6:5]` | 24 FS bit times |
+| TT Think Time = `11` | `wHubCharacteristics[6:5]` | 32 FS bit times |
+
+## TT Requests
+
+- `CLEAR_TT_BUFFER`
+- `RESET_TT`
+- `GET_TT_STATE`
+- `STOP_TT`
+
+These requests apply only to HS hubs with embedded TT, and some fields remain `spec_defined` pending section-level verification.
+
+## Split Transaction Flow
+
+1. The host sends a Start Split to the HS hub.
+2. The hub TT translates the request for the downstream FS/LS device.
+3. The host later issues a Complete Split.
+4. The hub / TT aggregates the result and returns it upstream.
+
+## Usage Notes
+
+- This page must not override a confirmed project decision about Single TT vs Multiple TT.
+- A mismatch between TT think time and descriptor-declared settings is an escalation trigger.
+- If firmware behavior would change because of this page, architecture review should happen first.
