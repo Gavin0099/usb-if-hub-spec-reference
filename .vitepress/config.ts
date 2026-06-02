@@ -39,13 +39,11 @@ function buildSidebar() {
 
 export default defineConfig({
   title: "USB-IF Hub 規格參考",
-  description: "USB Hub 治理規格參考文件 — claim_level: inferred",
+  description: "USB Hub 規格參考網站，僅提供標準語意澄清，claim_level: inferred",
   srcDir: "./specs",
   lang: "zh-TW",
   base: process.env.BASE_URL ?? "/",
-  head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-  ],
+  head: [['link', { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }]],
 
   themeConfig: {
     search: {
@@ -54,8 +52,8 @@ export default defineConfig({
         translations: {
           button: { buttonText: "搜尋", buttonAriaLabel: "搜尋文件" },
           modal: {
-            noResultsText: "找不到相關結果",
-            resetButtonTitle: "清除搜尋",
+            noResultsText: "找不到對應結果",
+            resetButtonTitle: "清除搜尋條件",
             footer: { selectText: "選擇", navigateText: "切換", closeText: "關閉" },
           },
         },
@@ -72,7 +70,7 @@ export default defineConfig({
 
     footer: {
       message:
-        "claim_level: inferred · semantic_verification_claimed: false · 不主張 USB 2.0 語意正確性",
+        "claim_level: inferred，semantic_verification_claimed: false，內容尚未完成 USB 2.0 PDF 逐節驗證",
     },
   },
 
