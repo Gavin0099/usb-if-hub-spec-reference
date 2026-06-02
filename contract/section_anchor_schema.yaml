@@ -1,0 +1,94 @@
+schema_version: 1
+title: Section Anchor Schema
+last_updated: 2026-06-02
+status: draft
+
+purpose:
+  - Allow wiki pages and governed-table entries to reference USB 2.0 section/page anchors.
+  - Preserve reviewable evidence structure without automatically upgrading claim_level.
+  - Support future entry-level verification pilots without forcing page-level verified claims.
+
+non_goals:
+  - Does not upgrade claim_level by field presence alone.
+  - Does not require immediate migration of existing legacy section_anchor fields.
+  - Does not define a validator in this phase.
+  - Does not establish PDF correctness by itself.
+
+invariants:
+  - section_refs presence is evidence metadata only.
+  - claim_level may remain inferred when section_refs exists.
+  - evidence_status may remain review_required when section_refs exists.
+  - page-level verified promotion requires separate human-reviewable evidence.
+
+embedding_surfaces:
+  wiki_page:
+    field_name: section_refs
+    allowed_scope:
+      - page_level_summary
+      - claim_block
+  governed_table_entry:
+    field_name: section_refs
+    allowed_scope:
+      - entry_level
+
+legacy_compatibility:
+  legacy_field: section_anchor
+  status: allowed_during_transition
+  note: >
+    Existing governed tables may continue using scalar section_anchor strings.
+    New multi-anchor or page/entry-level evidence should prefer section_refs.
+
+section_ref_required_fields:
+  - spec
+  - section
+  - anchor_type
+  - evidence_status
+
+section_ref_optional_fields:
+  - page
+  - note
+  - applies_to
+  - quoted_surface
+
+valid_values:
+  spec:
+    - usb20
+  anchor_type:
+    - section
+    - page
+    - table
+    - figure
+    - offset
+    - bit_range
+  evidence_status:
+    - review_required
+    - reviewed
+    - unreviewed
+    - unknown
+
+minimal_section_ref_example:
+  spec: usb20
+  section: "11.24.2.7.1"
+  anchor_type: section
+  evidence_status: review_required
+
+wiki_claim_block_example:
+  section_refs:
+    - spec: usb20
+      section: "11.24.2.7.1"
+      anchor_type: section
+      evidence_status: review_required
+      applies_to: "PORT_LOW_SPEED / PORT_HIGH_SPEED combined decoding summary"
+      note: "Anchor recorded for later PDF verification pilot; claim_level remains inferred."
+
+governed_table_entry_example:
+  request_id: usb20_get_status_port
+  claim_level: inferred
+  evidence_status: review_required
+  section_refs:
+    - spec: usb20
+      section: "11.24.2"
+      anchor_type: section
+      evidence_status: review_required
+      applies_to: "request family summary"
+      note: "Entry remains inferred until section-level human review is completed."
