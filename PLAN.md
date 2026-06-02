@@ -104,6 +104,13 @@
 - Wiki pages remain `claim_level: inferred` and do not inherit table-level promotion
 - Chinese port-status page encoding repaired while preserving the verification boundary
 
+[x] Phase 8G : Non-promoting reviewed packet for PORT_ENABLE
+- Evidence packet added for `wPortStatus.bit1.PORT_ENABLE` (same section as pilot)
+- `eligible_for_verified: false` — promotion is deliberately withheld
+- `evidence_status: reviewed` — review completed; non-claims explicit
+- Pilot promotion boundary remains limited to `wPortStatus.bit0.PORT_CONNECTION`
+- Gate and table unchanged; no claim_level upgrade
+
 [ ] Phase 3 (deferred) : Wire cross-repo reference
 - Register as referenced spec source in `USB-Hub-Firmware-Architecture-Contract`
 - Define allowed usage boundary: clarify semantics only, never override confirmed project facts

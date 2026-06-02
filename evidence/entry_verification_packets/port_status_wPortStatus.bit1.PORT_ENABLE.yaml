@@ -1,0 +1,67 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-02
+
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortStatus.bit1.PORT_ENABLE
+
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.24.2.7.1 is the port-status field surface used for this
+    packet. For this non-promoting review, the narrow observation is only that
+    `wPortStatus.bit1.PORT_ENABLE` names the port-enable status bit at bit
+    position 1. This packet does not claim state machine behavior, error recovery
+    conditions, SetPortFeature semantics, or any host-side interpretation behavior.
+  reviewer_note: >
+    Reviewed against the cited USB 2.0 section for the narrow observation that
+    `wPortStatus.bit1.PORT_ENABLE` names the port-enable status bit at bit
+    position 1. This review does not extend to state transitions, error conditions,
+    SetPortFeature or ClearPortFeature behavior, timing, debounce, or host-side
+    interpretation. Promotion is deliberately withheld in Phase 8G: the pilot
+    promotion boundary remains limited to the single reviewed pilot entry
+    (wPortStatus.bit0.PORT_CONNECTION). Expanding the verified scope requires a
+    separate phase decision and gate update.
+
+review_checklist:
+  - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port status fields.
+  - Confirm the packet stays limited to `PORT_ENABLE` bit name and bit position.
+  - Confirm no state machine, SetPortFeature, or ClearPortFeature semantics are claimed.
+  - Confirm that `eligible_for_verified: false` is the correct Phase 8G verdict.
+  - Confirm the table entry for `wPortStatus.bit1.PORT_ENABLE` remains `claim_level: inferred`.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - SetPortFeature behavior
+    - ClearPortFeature behavior
+    - error recovery conditions
+    - full USB compliance
+
+result:
+  eligible_for_verified: false
+  evidence_status: reviewed
+  promotion_note: >
+    Non-promoting by Phase 8G design. The review was completed and confirms the
+    narrow bit-name-and-position surface for `wPortStatus.bit1.PORT_ENABLE`. However,
+    the Phase 8 pilot promotion boundary is currently limited to the single reviewed
+    pilot entry (wPortStatus.bit0.PORT_CONNECTION). A future phase must explicitly
+    extend the pilot boundary and update the gate before any verified promotion of
+    PORT_ENABLE may occur.
+
+non_claims:
+  - This packet does not verify downstream port behavior.
+  - This packet does not verify host-stack interpretation.
+  - This packet does not establish page-level or table-level verification.
+  - This packet does not authorize verified promotion of wPortStatus.bit1.PORT_ENABLE.
