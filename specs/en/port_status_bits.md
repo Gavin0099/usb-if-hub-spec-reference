@@ -2,7 +2,7 @@
 title: Port Status Bits
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-01"
+last_reviewed: "2026-06-02"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -12,7 +12,7 @@ semantic_verification_claimed: false
 
 # Port Status Bits
 
-> Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.
+> Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.  
 > This page is currently a reference summary, not a complete bit-by-bit verified rendering of the source spec.
 
 ## Status Field Model
@@ -67,6 +67,30 @@ Example:
 | 1 | 1 | Reserved / unexpected combination |
 
 So wording like “`PORT_LOW_SPEED = 0` means full-speed” is incomplete by itself. It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
+
+## Section Anchor Pilot Note
+
+Phase 7B attaches `section_refs` to selected entries in `tables/port_status_bit_matrix.yaml` as an entry-level anchor pilot.
+
+That means:
+
+- pilot entries can now carry `section_refs`
+- `claim_level` still remains `inferred`
+- `evidence_status` still remains `review_required`
+- this does not mean USB 2.0 PDF bit-level semantic verification is complete
+
+If a future wiki claim block needs `section_refs`, it should use the Phase 7A structure, for example:
+
+```yaml
+section_refs:
+  - spec: usb20
+    section: "11.24.2.7.1"
+    anchor_type: section
+    evidence_status: review_required
+    applies_to: "PORT_CONNECTION summary block"
+```
+
+That metadata block is evidence attachment only. It does not automatically promote the page or claim block to `verified`.
 
 ## Usage Notes
 
