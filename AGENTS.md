@@ -102,7 +102,12 @@ When using the Rule 4 structured completion format for this repo:
   - `NOT RUN`
   - `NOT CLAIMED`
   - `NOT PRESENT`
-- `Cannot claim this session` must always be present, even in Chinese sessions.
+- Section headers may be translated, for example:
+  - `Validation` -> `驗證`
+  - `Risk` -> `風險`
+  - `Incidental cleanup` -> `附帶清理`
+  - `Cannot claim this session` -> `本次無法宣告`
+- `Cannot claim this session` / `本次無法宣告` must always be present in every completion report.
 
 ## Canonical Memory Writer Rule
 
