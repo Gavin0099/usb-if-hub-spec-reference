@@ -1,0 +1,92 @@
+schema_version: 1
+title: Entry-Level Verification Evidence Packet Schema
+last_updated: 2026-06-02
+status: draft
+
+purpose:
+  - Define the minimum evidence packet required before any entry-level verified promotion is considered.
+  - Separate evidence attachment from verified promotion.
+  - Keep verification scope narrow, explicit, and reviewable.
+
+non_goals:
+  - Does not promote any entry by itself.
+  - Does not define a PDF extraction pipeline.
+  - Does not authorize page-level or table-level verified claims.
+  - Does not replace human review.
+
+invariants:
+  - A packet may exist while the target entry remains claim_level=inferred.
+  - A packet may exist while evidence_status remains review_required.
+  - eligible_for_verified=false is the safe default.
+  - verification_scope must list exclusions explicitly.
+
+packet_required_fields:
+  - target
+  - evidence
+  - verification_scope
+  - result
+
+target_required_fields:
+  - surface
+  - table
+  - entry_id
+
+evidence_required_fields:
+  - spec
+  - section
+  - quoted_surface
+  - reviewer_note
+
+verification_scope_required_fields:
+  - claim
+  - excludes
+
+result_required_fields:
+  - eligible_for_verified
+  - evidence_status
+
+valid_values:
+  target_surface:
+    - governed_table_entry
+    - wiki_claim_block
+  spec:
+    - usb20
+  result_evidence_status:
+    - review_required
+    - reviewed
+    - unreviewed
+    - unknown
+  quoted_surface:
+    - short_reference_only
+    - reviewer_paraphrase_only
+    - bounded_quote
+
+minimal_packet_example:
+  target:
+    surface: governed_table_entry
+    table: port_status_bit_matrix
+    entry_id: wPortStatus.bit0.PORT_CONNECTION
+  evidence:
+    spec: usb20
+    section: "11.24.2.7.1"
+    page: null
+    quoted_surface: short_reference_only
+    reviewer_note: ""
+  verification_scope:
+    claim: bit_name_and_position_only
+    excludes:
+      - timing behavior
+      - state transition behavior
+      - ClearPortFeature behavior
+      - full USB compliance
+  result:
+    eligible_for_verified: false
+    evidence_status: review_required
+
+promotion_boundary:
+  rule: >
+    A valid packet is a prerequisite for promotion consideration, not proof of
+    promotion eligibility. Verified promotion requires a separate gate.
+  page_level_verified_allowed: false
+  table_level_verified_allowed: false
+  default_result: review_required
