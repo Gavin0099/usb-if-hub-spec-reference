@@ -64,8 +64,8 @@ result:
 
 Defines the exact evidence surface.
 
-This prevents ambiguous claims like “the page was reviewed” when the intended unit
-is only one governed table entry.
+This prevents ambiguous claims like "the page was reviewed" when the intended
+unit is only one governed table entry.
 
 ### `evidence`
 
@@ -107,20 +107,29 @@ For Phase 8A:
 
 These are the expected defaults.
 
+## Pilot Packet Inventory
+
+The first non-promoting pilot packet is:
+
+- `evidence/entry_verification_packets/port_status_wPortStatus.bit0.PORT_CONNECTION.yaml`
+
+This pilot exists to prove that a packet can be attached to one governed table
+entry without changing `claim_level` or `evidence_status`.
+
 ## What This Phase Does Not Allow
 
-Phase 8A does not allow:
+Phase 8A/8B do not allow:
 
 - entry promotion to `verified`
 - page-level verified claims
 - table-level verified claims
-- “PDF-backed” wording beyond the existence of a structured packet format
+- "PDF-backed" wording beyond the existence of a structured packet format
 - semantic closure of escalation triggers
 
 ## Intended Follow-up
 
-The first intended packet should target:
+The first intended packet targets:
 
 - `wPortStatus.bit0.PORT_CONNECTION`
 
-and should remain non-promoting in its first iteration.
+Its first iteration remains non-promoting and review-required.

@@ -1,0 +1,35 @@
+packet_version: 1
+status: draft
+created_at: 2026-06-02
+
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortStatus.bit0.PORT_CONNECTION
+
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  page: null
+  quoted_surface: short_reference_only
+  reviewer_note: >
+    Phase 8B pilot packet only. This packet records entry-level section evidence
+    attachment for the named bit entry and keeps promotion eligibility disabled.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - ClearPortFeature behavior
+    - full USB compliance
+
+result:
+  eligible_for_verified: false
+  evidence_status: review_required
+
+non_claims:
+  - This packet does not promote the entry to verified.
+  - This packet does not verify downstream port behavior.
+  - This packet does not verify host-stack interpretation.
+  - This packet does not establish page-level or table-level verification.
