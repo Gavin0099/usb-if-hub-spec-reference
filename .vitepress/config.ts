@@ -9,6 +9,7 @@ type Labels = Record<string, string>;
 
 const ZH_LABELS: Labels = {
   escalation_table: "升級觸發表",
+  glossary: "術語表",
   hub_class_requests: "Hub 類別請求",
   hub_descriptor: "Hub 描述符",
   port_status_bits: "連接埠狀態位元",
@@ -18,6 +19,7 @@ const ZH_LABELS: Labels = {
 
 const EN_LABELS: Labels = {
   escalation_table: "Escalation Table",
+  glossary: "Glossary",
   hub_class_requests: "Hub Class Requests",
   hub_descriptor: "Hub Descriptor",
   port_status_bits: "Port Status Bits",
@@ -65,6 +67,7 @@ export default defineConfig({
           { text: "首頁", link: "/" },
           { text: "Hub 類別請求", link: "/hub_class_requests" },
           { text: "連接埠狀態位元", link: "/port_status_bits" },
+          { text: "術語表", link: "/glossary" },
         ],
         sidebar: buildSidebar(".", ZH_LABELS, "規格參考"),
         search: {
@@ -98,6 +101,7 @@ export default defineConfig({
           { text: "Home", link: "/en/" },
           { text: "Hub Class Requests", link: "/en/hub_class_requests" },
           { text: "Port Status Bits", link: "/en/port_status_bits" },
+          { text: "Glossary", link: "/en/glossary" },
         ],
         sidebar: buildSidebar("en", EN_LABELS, "Specification Reference", "/en"),
         search: {
