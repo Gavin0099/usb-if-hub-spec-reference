@@ -48,6 +48,13 @@ entries:
     name: PORT_CONNECTION
     status: defined
     description: Port connection status
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: review_required
+        applies_to: "wPortStatus bit 0 summary"
+        note: "Phase 7B pilot attachment only; claim_level remains inferred."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: true
@@ -57,6 +64,13 @@ entries:
     name: PORT_ENABLE
     status: defined
     description: Port enabled status
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: review_required
+        applies_to: "wPortStatus bit 1 summary"
+        note: "Phase 7B pilot attachment only; claim_level remains inferred."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: true
@@ -75,6 +89,13 @@ entries:
     name: C_PORT_CONNECTION
     status: defined
     description: Port connection status change
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: review_required
+        applies_to: "wPortChange bit 0 summary"
+        note: "Phase 7B pilot attachment only; claim_level remains inferred."
     evidence:
       source: USB 2.0 hub class request change field
       review_required: true
@@ -84,6 +105,13 @@ entries:
     name: C_PORT_ENABLE
     status: defined
     description: Port enable status change
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: review_required
+        applies_to: "wPortChange bit 1 summary"
+        note: "Phase 7B pilot attachment only; claim_level remains inferred."
     evidence:
       source: USB 2.0 hub class request change field
       review_required: true
