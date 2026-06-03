@@ -60,7 +60,7 @@ semantic_verification_claimed: false
 
 ## Live Verified Entries
 
-目前共有 6 筆 live governed entries 已升級為 `verified`：
+目前共有 8 筆 live governed entries 已升級為 `verified`：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -70,6 +70,8 @@ semantic_verification_claimed: false
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
 | `HUB_OVER_CURRENT` | `wHubStatus` | bit 1 | bit name and bit position only |
+| `C_HUB_LOCAL_POWER` | `wHubChange` | bit 0 | bit name and bit position only |
+| `C_HUB_OVER_CURRENT` | `wHubChange` | bit 1 | bit name and bit position only |
 
 目前 verified scope 仍刻意只涵蓋：
 
@@ -122,14 +124,14 @@ semantic_verification_claimed: false
 這個 repo 目前有兩種 evidence-related signals：
 
 - `section_refs`，作為 evidence attachment metadata
-- live `verified` promotions，目前是 `PORT_CONNECTION`、`PORT_ENABLE`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`
+- live `verified` promotions，目前是 `PORT_CONNECTION`、`PORT_ENABLE`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`
 
 兩者不能混為一談。
 
 目前狀態是：
 
 - 部分 pilot entries 帶有 `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT` 都是 live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 都是 live `verified`
 - 所有 verified scope 仍限定為 `bit_name_and_position_only`
 - 這仍然不代表 USB 2.0 PDF semantic verification 已完成
 

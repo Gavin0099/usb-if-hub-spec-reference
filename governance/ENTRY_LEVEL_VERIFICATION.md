@@ -267,3 +267,41 @@ Phase 8J still does **not** allow:
 - timing, debounce, or event-ordering verification
 - `ClearPortFeature` behavioral verification
 - TT behavior verification
+
+## Phase 8K Hub-Change Pilot Expansion
+
+The live verified set remains narrow, but now includes the first two
+`wHubChange` entries alongside the existing hub-status, port-status, and
+port-change pilot entries.
+
+Allowed live verified surface:
+
+- governed table: `tables/port_status_bit_matrix.yaml`
+- entries:
+  - `wPortStatus.bit0.PORT_CONNECTION`
+  - `wPortStatus.bit1.PORT_ENABLE`
+  - `wPortChange.bit0.C_PORT_CONNECTION`
+  - `wPortChange.bit1.C_PORT_ENABLE`
+  - `wHubStatus.bit0.HUB_LOCAL_POWER`
+  - `wHubStatus.bit1.HUB_OVER_CURRENT`
+  - `wHubChange.bit0.C_HUB_LOCAL_POWER`
+  - `wHubChange.bit1.C_HUB_OVER_CURRENT`
+- scope: `bit_name_and_position_only`
+
+Required promotion conditions remain unchanged:
+
+- matching evidence packet exists
+- packet result sets `eligible_for_verified: true`
+- packet result sets `evidence_status: reviewed`
+- packet scope remains `bit_name_and_position_only`
+- packet exclusions still include timing behavior, state transition behavior,
+  `ClearPortFeature` behavior, and full USB compliance
+
+Phase 8K still does **not** allow:
+
+- page-level verified claims
+- table-level verified claims
+- hub-change event handling semantics verification
+- timing, debounce, or event-ordering verification
+- `ClearPortFeature` behavioral verification
+- TT behavior verification

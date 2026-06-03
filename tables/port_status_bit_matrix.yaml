@@ -52,18 +52,40 @@ entries:
     name: C_HUB_LOCAL_POWER
     status: defined
     description: Hub local power status change
+    claim_level: verified
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wHubChange bit 0 name and position"
+        note: "Phase 8K verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
-      review_required: true
+      review_required: false
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit0.C_HUB_LOCAL_POWER.yaml
 
   - field: wHubChange
     bit: 1
     name: C_HUB_OVER_CURRENT
     status: defined
     description: Hub over-current status change
+    claim_level: verified
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wHubChange bit 1 name and position"
+        note: "Phase 8K verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
-      review_required: true
+      review_required: false
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit1.C_HUB_OVER_CURRENT.yaml
 
   - field: wPortStatus
     bit: 0

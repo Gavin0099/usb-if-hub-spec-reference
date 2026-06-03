@@ -2,13 +2,13 @@ matrix_id: test_invalid_verified_nonpilot
 claim_level: inferred
 evidence_status: review_required
 entries:
-  - field: wHubChange
-    bit: 0
-    name: C_HUB_LOCAL_POWER
-    status: defined
-    description: Hub local power status change
+  - field: wPortStatus
+    bit: 15
+    name: PORT_STATUS_HIGH_BIT_BOUNDARY
+    status: reserved
+    description: Boundary placeholder for 16-bit status field
     claim_level: verified
     evidence_status: reviewed
     evidence:
-      source: USB 2.0 hub class request change field
+      source: USB 2.0 hub class request status field
       review_required: false

@@ -96,9 +96,9 @@
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_verified_nonpilot_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "[FAIL] VERIFIED_NOT_ALLOWED: entry[0]: only pilot entries ['wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may use claim_level=verified\n\nPort status bit matrix validation FAIL\n",
+      "stdout": "[FAIL] VERIFIED_NOT_ALLOWED: entry[0]: only pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may use claim_level=verified\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
-      "note": "entry outside the Phase 8J pilot set must still fail"
+      "note": "entry outside the Phase 8K pilot set must still fail"
     }
   ]
 }

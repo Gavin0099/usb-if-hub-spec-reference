@@ -7,10 +7,12 @@
   "errors": [
     {
       "code": "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE",
-      "message": "verified_entry[0] wHubChange.bit0.C_HUB_LOCAL_POWER: only allowed pilot entries ['wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8J"
+      "message": "verified_entry[0] wPortStatus.bit15.PORT_STATUS_HIGH_BIT_BOUNDARY: only allowed pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8K"
     }
   ],
   "allowed_pilot_entries": [
+    "wHubChange.bit0.C_HUB_LOCAL_POWER",
+    "wHubChange.bit1.C_HUB_OVER_CURRENT",
     "wHubStatus.bit0.HUB_LOCAL_POWER",
     "wHubStatus.bit1.HUB_OVER_CURRENT",
     "wPortChange.bit0.C_PORT_CONNECTION",

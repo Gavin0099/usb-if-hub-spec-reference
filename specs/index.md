@@ -38,7 +38,7 @@ features:
     details: 列出 consuming firmware repo 何時應進入 Standard Escalation Mode。
     link: /escalation_table
   - title: Verification Status
-    details: 目前 entry-level verification maturity、reviewed packet 狀態與 non-claims。47 筆 tracked entries 中已有 6 筆 verified。
+    details: 目前 entry-level verification maturity、reviewed packet 狀態與 non-claims。47 筆 tracked entries 中已有 8 筆 verified。
     link: /verification_status
 ---
 

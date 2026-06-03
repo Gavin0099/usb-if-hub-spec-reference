@@ -92,9 +92,9 @@
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_nonpilot_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "[FAIL] VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE: verified_entry[0] wHubChange.bit0.C_HUB_LOCAL_POWER: only allowed pilot entries ['wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8J\n\nEntry verification gate validation FAIL\n",
+      "stdout": "[FAIL] VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE: verified_entry[0] wPortStatus.bit15.PORT_STATUS_HIGH_BIT_BOUNDARY: only allowed pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8K\n\nEntry verification gate validation FAIL\n",
       "stderr": "",
-      "note": "entry not in the allowed Phase 8J pilot set (C_HUB_LOCAL_POWER) must be rejected"
+      "note": "entry not in the allowed Phase 8K pilot set (PORT_STATUS_HIGH_BIT_BOUNDARY) must be rejected"
     }
   ]
 }

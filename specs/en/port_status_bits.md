@@ -60,7 +60,7 @@ This page is not meant to answer:
 
 ## Live Verified Entries
 
-Six live governed entries are currently promoted to `verified`:
+Eight live governed entries are currently promoted to `verified`:
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -70,6 +70,8 @@ Six live governed entries are currently promoted to `verified`:
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
 | `HUB_OVER_CURRENT` | `wHubStatus` | bit 1 | bit name and bit position only |
+| `C_HUB_LOCAL_POWER` | `wHubChange` | bit 0 | bit name and bit position only |
+| `C_HUB_OVER_CURRENT` | `wHubChange` | bit 1 | bit name and bit position only |
 
 That verified scope is intentionally narrow. It covers only:
 
@@ -122,14 +124,14 @@ It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
 This repo currently carries two different evidence-related signals:
 
 - `section_refs` as evidence attachment metadata
-- live `verified` promotions, currently for `PORT_CONNECTION`, `PORT_ENABLE`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `HUB_LOCAL_POWER`, and `HUB_OVER_CURRENT`
+- live `verified` promotions, currently for `PORT_CONNECTION`, `PORT_ENABLE`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `HUB_LOCAL_POWER`, `HUB_OVER_CURRENT`, `C_HUB_LOCAL_POWER`, and `C_HUB_OVER_CURRENT`
 
 They should not be conflated.
 
 Current state:
 
 - selected pilot entries carry `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, and `wHubStatus.bit1.HUB_OVER_CURRENT` are live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
 - all verified scopes remain `bit_name_and_position_only`
 - this still does not mean USB 2.0 PDF semantic verification is complete
 
