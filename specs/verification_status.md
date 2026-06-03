@@ -69,6 +69,23 @@ verified scope 明確限制在 **bit name** 與 **bit position**。
 - 這份 reference 可覆蓋 consuming repos 的 confirmed project facts
 - 靜態數字已和 YAML tables 自動同步
 
+## Reference Surface Maintenance Rule
+
+當 verification maturity 或 tracked entry count 改變時，以下 visible surfaces 必須一起檢查：
+
+- `specs/index.md`: 首頁上的 tracked / verified 摘要
+- `specs/en/index.md`: 英文首頁上的 tracked / verified 摘要
+- `specs/verification_status.md`: 中文 verification summary、verified entries、non-claims
+- `specs/en/verification_status.md`: 英文 verification summary、verified entries、non-claims
+- 核心 spec pages: 與該 entry family 相關的 `Non-claims` 與 `Governed Linkage`
+
+維護規則：
+
+- 若只改 visible wording，不得改變 YAML source-of-truth 語意
+- 若新增或提升 verified entry，必須同步更新 verification status 與首頁摘要
+- 若 evidence packet count 改變，必須同步更新 evidence packet summary
+- 若只新增 section_refs metadata，不得自動宣告該 page 或 entry 已 verified
+
 ## Static Numbers Note
 
 本頁的 entry counts 與 packet statuses 都是人工維護的靜態摘要。
