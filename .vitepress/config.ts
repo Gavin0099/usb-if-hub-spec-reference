@@ -9,10 +9,11 @@ type Labels = Record<string, string>;
 
 const ZH_LABELS: Labels = {
   escalation_table: "升級觸發表",
-  glossary: "術語表",
+  feature_selectors: "Feature Selectors",
+  glossary: "Glossary",
   hub_class_requests: "Hub 類別請求",
-  hub_descriptor: "Hub 描述符",
-  port_status_bits: "連接埠狀態位元",
+  hub_descriptor: "Hub Descriptor",
+  port_status_bits: "Port Status Bits",
   transaction_translator: "Transaction Translator",
   verification_status: "驗證狀態",
   version_source_map: "版本來源對應",
@@ -54,9 +55,34 @@ function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, 
   ];
 }
 
+const zhReferenceItems = [
+  { text: "Hub 類別請求", link: "/hub_class_requests" },
+  { text: "Feature Selectors", link: "/feature_selectors" },
+  { text: "Port Status Bits", link: "/port_status_bits" },
+  { text: "Hub Descriptor", link: "/hub_descriptor" },
+  { text: "Transaction Translator", link: "/transaction_translator" },
+  { text: "Escalation Table", link: "/escalation_table" },
+  { text: "Version Source Map", link: "/version_source_map" },
+  { text: "Verification Status", link: "/verification_status" },
+  { text: "Glossary", link: "/glossary" },
+];
+
+const enReferenceItems = [
+  { text: "Hub Class Requests", link: "/en/hub_class_requests" },
+  { text: "Feature Selectors", link: "/en/feature_selectors" },
+  { text: "Port Status Bits", link: "/en/port_status_bits" },
+  { text: "Hub Descriptor", link: "/en/hub_descriptor" },
+  { text: "Transaction Translator", link: "/en/transaction_translator" },
+  { text: "Escalation Table", link: "/en/escalation_table" },
+  { text: "Version Source Map", link: "/en/version_source_map" },
+  { text: "Verification Status", link: "/en/verification_status" },
+  { text: "Glossary", link: "/en/glossary" },
+];
+
 export default defineConfig({
-  title: "USB-IF Hub 規格參考",
-  description: "USB Hub 規格參考網站，僅提供標準語意澄清，claim_level: inferred",
+  title: "USB-IF Hub Spec Reference",
+  description:
+    "USB Hub specification reference site for standards clarification only, claim_level: inferred",
   srcDir: "./specs",
   base: process.env.BASE_URL ?? "/",
   head: [["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }]],
@@ -68,9 +94,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "首頁", link: "/" },
-          { text: "Hub 類別請求", link: "/hub_class_requests" },
-          { text: "連接埠狀態位元", link: "/port_status_bits" },
-          { text: "術語表", link: "/glossary" },
+          { text: "Reference", items: zhReferenceItems },
         ],
         sidebar: buildSidebar(".", ZH_LABELS, "規格參考"),
         search: {
@@ -79,8 +103,8 @@ export default defineConfig({
             translations: {
               button: { buttonText: "搜尋", buttonAriaLabel: "搜尋文件" },
               modal: {
-                noResultsText: "找不到對應結果",
-                resetButtonTitle: "清除搜尋條件",
+                noResultsText: "找不到結果",
+                resetButtonTitle: "清除搜尋",
                 footer: { selectText: "選擇", navigateText: "切換", closeText: "關閉" },
               },
             },
@@ -88,7 +112,7 @@ export default defineConfig({
         },
         footer: {
           message:
-            "claim_level: inferred，semantic_verification_claimed: false，內容尚未完成 USB 2.0 PDF 逐節驗證",
+            "claim_level: inferred, semantic_verification_claimed: false, content is not section-level verified against the USB 2.0 PDF",
         },
       },
     },
@@ -102,9 +126,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/en/" },
-          { text: "Hub Class Requests", link: "/en/hub_class_requests" },
-          { text: "Port Status Bits", link: "/en/port_status_bits" },
-          { text: "Glossary", link: "/en/glossary" },
+          { text: "Reference", items: enReferenceItems },
         ],
         sidebar: buildSidebar("en", EN_LABELS, "Specification Reference", "/en"),
         search: {
@@ -112,7 +134,7 @@ export default defineConfig({
         },
         footer: {
           message:
-            "claim_level: inferred, semantic_verification_claimed: false, content is not yet section-level verified against the USB 2.0 PDF",
+            "claim_level: inferred, semantic_verification_claimed: false, content is not section-level verified against the USB 2.0 PDF",
         },
       },
     },
