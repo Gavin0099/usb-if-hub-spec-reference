@@ -6,7 +6,7 @@
   "errors": [
     {
       "code": "VERIFIED_NOT_ALLOWED",
-      "message": "entry[0]: only pilot entry 'wPortStatus.bit0.PORT_CONNECTION' may use claim_level=verified"
+      "message": "entry[0]: only pilot entries ['wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may use claim_level=verified"
     }
   ]
 }

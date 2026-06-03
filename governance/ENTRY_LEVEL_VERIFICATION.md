@@ -200,3 +200,35 @@ Phase 8E still does **not** allow:
 - table-level verified claims
 - TT behavior verification
 - reset, debounce, timing, or host-side semantic verification
+
+## Phase 8I Expanded Change-Bit Pilot
+
+The live verified set remains narrow, but now includes the first two
+`wPortChange` entries alongside the existing `wPortStatus` pair.
+
+Allowed live verified surface:
+
+- governed table: `tables/port_status_bit_matrix.yaml`
+- entries:
+  - `wPortStatus.bit0.PORT_CONNECTION`
+  - `wPortStatus.bit1.PORT_ENABLE`
+  - `wPortChange.bit0.C_PORT_CONNECTION`
+  - `wPortChange.bit1.C_PORT_ENABLE`
+- scope: `bit_name_and_position_only`
+
+Required promotion conditions remain unchanged:
+
+- matching evidence packet exists
+- packet result sets `eligible_for_verified: true`
+- packet result sets `evidence_status: reviewed`
+- packet scope remains `bit_name_and_position_only`
+- packet exclusions still include timing behavior, state transition behavior,
+  `ClearPortFeature` behavior, and full USB compliance
+
+Phase 8I still does **not** allow:
+
+- page-level verified claims
+- table-level verified claims
+- timing, debounce, or event-ordering verification
+- `ClearPortFeature` behavioral verification
+- TT behavior verification

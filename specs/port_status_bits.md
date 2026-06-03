@@ -60,12 +60,14 @@ semantic_verification_claimed: false
 
 ## Live Verified Entries
 
-目前只有兩個 live governed entries 被提升到 `verified`：
+目前有四個 live governed entries 被提升到 `verified`：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | `PORT_CONNECTION` | `wPortStatus` | bit 0 | bit name and bit position only |
 | `PORT_ENABLE` | `wPortStatus` | bit 1 | bit name and bit position only |
+| `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
+| `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 
 這個 verified scope 刻意非常窄，只涵蓋：
 
@@ -118,14 +120,14 @@ semantic_verification_claimed: false
 本 repo 目前有兩種不同的 evidence-related signals：
 
 - `section_refs`：作為 evidence attachment metadata
-- live `verified` promotions：目前只有 `PORT_CONNECTION` 與 `PORT_ENABLE`
+- live `verified` promotions：目前包含 `PORT_CONNECTION`、`PORT_ENABLE`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`
 
 這兩者不能混為一談。
 
 目前狀態：
 
 - 部分 pilot entries 帶有 `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION` 與 `wPortStatus.bit1.PORT_ENABLE` 是 live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE` 是 live `verified`
 - verified scope 仍然只到 `bit_name_and_position_only`
 - 這不等於 USB 2.0 PDF semantic verification 已完成
 

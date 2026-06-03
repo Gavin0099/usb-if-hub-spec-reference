@@ -18,14 +18,14 @@ semantic_verification_claimed: false
 |---|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 |
-| Port status bits | 10 | 2 | 8 | 0 |
-| **Total** | **47** | **2** | **45** | **0** |
+| Port status bits | 10 | 4 | 6 | 0 |
+| **Total** | **47** | **4** | **43** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 2 | Both correspond to promoted verified entries |
+| Entry verification packets | 4 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -35,12 +35,14 @@ Term definitions:
 
 ## Verified Entries
 
-Two entries have completed verified promotion (Phase 8E and Phase 8H):
+Four entries have completed verified promotion (Phase 8E, Phase 8H, and Phase 8I):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
+| C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
+| C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
 
 The verified scope is explicitly limited to **bit name and bit position**.
 

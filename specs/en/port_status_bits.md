@@ -60,12 +60,14 @@ This page is not meant to answer:
 
 ## Live Verified Entries
 
-Only two live governed entries are currently promoted to `verified`:
+Four live governed entries are currently promoted to `verified`:
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | `PORT_CONNECTION` | `wPortStatus` | bit 0 | bit name and bit position only |
 | `PORT_ENABLE` | `wPortStatus` | bit 1 | bit name and bit position only |
+| `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
+| `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 
 That verified scope is intentionally narrow. It covers only:
 
@@ -118,14 +120,14 @@ It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
 This repo currently carries two different evidence-related signals:
 
 - `section_refs` as evidence attachment metadata
-- live `verified` promotions, currently only for `PORT_CONNECTION` and `PORT_ENABLE`
+- live `verified` promotions, currently for `PORT_CONNECTION`, `PORT_ENABLE`, `C_PORT_CONNECTION`, and `C_PORT_ENABLE`
 
 They should not be conflated.
 
 Current state:
 
 - selected pilot entries carry `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION` and `wPortStatus.bit1.PORT_ENABLE` are live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortChange.bit0.C_PORT_CONNECTION`, and `wPortChange.bit1.C_PORT_ENABLE` are live `verified`
 - all verified scopes remain `bit_name_and_position_only`
 - this still does not mean USB 2.0 PDF semantic verification is complete
 

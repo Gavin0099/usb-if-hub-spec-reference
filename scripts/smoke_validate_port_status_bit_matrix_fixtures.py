@@ -49,7 +49,7 @@ CASES = [
         "name": "invalid_verified_nonpilot",
         "expected_exit": 1,
         "expected_error_codes": ["VERIFIED_NOT_ALLOWED"],
-        "note": "non-pilot verified entry must still fail",
+        "note": "entry outside the Phase 8I pilot set must still fail",
     },
 ]
 

@@ -9,7 +9,7 @@ Structural checks only:
   R3 field must be one of wHubStatus, wHubChange, wPortStatus, wPortChange
   R4 status must be one of defined, reserved, vendor_or_spec_dependent
   R5 claim/evidence must exist at matrix level or entry level
-  R6 claim_level=verified is only allowed for the gated pilot entry
+  R6 claim_level=verified is only allowed for the gated Phase 8I pilot set
 """
 
 from __future__ import annotations
@@ -30,7 +30,12 @@ VALID_FIELDS = {"wHubStatus", "wHubChange", "wPortStatus", "wPortChange"}
 VALID_STATUS = {"defined", "reserved", "vendor_or_spec_dependent"}
 VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "verified"}
 VALID_EVIDENCE_STATUS = {"review_required", "reviewed", "unreviewed", "unknown"}
-PILOT_VERIFIED_ENTRY_ID = "wPortStatus.bit0.PORT_CONNECTION"
+ALLOWED_VERIFIED_ENTRY_IDS = {
+    "wPortStatus.bit0.PORT_CONNECTION",
+    "wPortStatus.bit1.PORT_ENABLE",
+    "wPortChange.bit0.C_PORT_CONNECTION",
+    "wPortChange.bit1.C_PORT_ENABLE",
+}
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -112,10 +117,10 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
                 fail("INVALID_EVIDENCE_STATUS", f"{loc}: evidence_status '{evidence}' is invalid")
             if claim == "verified":
                 entry_id = _entry_id(entry)
-                if entry_id != PILOT_VERIFIED_ENTRY_ID:
+                if entry_id not in ALLOWED_VERIFIED_ENTRY_IDS:
                     fail(
                         "VERIFIED_NOT_ALLOWED",
-                        f"{loc}: only pilot entry '{PILOT_VERIFIED_ENTRY_ID}' may use claim_level=verified",
+                        f"{loc}: only pilot entries {sorted(ALLOWED_VERIFIED_ENTRY_IDS)} may use claim_level=verified",
                     )
                 if evidence != "reviewed":
                     fail(

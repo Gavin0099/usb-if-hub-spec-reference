@@ -67,6 +67,7 @@ entries:
     status: defined
     claim_level: verified
     description: Port enabled status
+    evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
@@ -94,32 +95,40 @@ entries:
     name: C_PORT_CONNECTION
     status: defined
     description: Port connection status change
+    claim_level: verified
+    evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
-        evidence_status: review_required
-        applies_to: "wPortChange bit 0 summary"
-        note: "Phase 7B pilot attachment only; claim_level remains inferred."
+        evidence_status: reviewed
+        applies_to: "wPortChange bit 0 name and position"
+        note: "Phase 8I verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
-      review_required: true
+      review_required: false
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit0.C_PORT_CONNECTION.yaml
 
   - field: wPortChange
     bit: 1
     name: C_PORT_ENABLE
     status: defined
     description: Port enable status change
+    claim_level: verified
+    evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
-        evidence_status: review_required
-        applies_to: "wPortChange bit 1 summary"
-        note: "Phase 7B pilot attachment only; claim_level remains inferred."
+        evidence_status: reviewed
+        applies_to: "wPortChange bit 1 name and position"
+        note: "Phase 8I verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
-      review_required: true
+      review_required: false
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit1.C_PORT_ENABLE.yaml
 
   - field: wPortChange
     bit: 15

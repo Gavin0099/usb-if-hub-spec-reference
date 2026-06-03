@@ -1,0 +1,59 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-03
+
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortChange.bit1.C_PORT_ENABLE
+
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.24.2.7.1 is the change-field surface used for this
+    packet. The narrow claim is only that `wPortChange.bit1.C_PORT_ENABLE`
+    names the enable-change bit at bit position 1. This packet does not claim
+    state-machine behavior, error recovery, or ClearPortFeature semantics
+    beyond the existence of the named change bit.
+  reviewer_note: >
+    Reviewed against the cited USB 2.0 section for the narrow claim that
+    `wPortChange.bit1.C_PORT_ENABLE` names the enable-change bit at bit
+    position 1. This review does not extend to state transitions, error
+    recovery, ClearPortFeature behavior, timing, debounce, or host-side
+    interpretation.
+
+review_checklist:
+  - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port change fields.
+  - Confirm the packet stays limited to `C_PORT_ENABLE` bit name and bit position.
+  - Confirm no state-machine, error-recovery, or `ClearPortFeature` semantics are claimed.
+  - Confirm any live promotion remains limited to this governed table entry only.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - ClearPortFeature behavior
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for Phase 8I entry-level verified promotion. Verified scope
+    remains limited to bit name and bit position only for
+    `wPortChange.bit1.C_PORT_ENABLE`. No behavioral, state-machine, or
+    host-side semantics are claimed.
+
+non_claims:
+  - This packet does not verify downstream port behavior.
+  - This packet does not verify host-stack interpretation.
+  - This packet does not establish page-level or table-level verification.
+  - This packet does not claim ClearPortFeature, error recovery, or timing behavior.

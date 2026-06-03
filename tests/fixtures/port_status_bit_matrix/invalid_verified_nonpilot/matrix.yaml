@@ -2,11 +2,11 @@ matrix_id: test_invalid_verified_nonpilot
 claim_level: inferred
 evidence_status: review_required
 entries:
-  - field: wPortStatus
-    bit: 1
-    name: PORT_ENABLE
+  - field: wHubStatus
+    bit: 0
+    name: HUB_LOCAL_POWER
     status: defined
-    description: Port enabled status
+    description: Hub local power status
     claim_level: verified
     evidence_status: reviewed
     evidence:

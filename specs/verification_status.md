@@ -18,14 +18,14 @@ semantic_verification_claimed: false
 |---|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 |
-| Port status bits | 10 | 2 | 8 | 0 |
-| **Total** | **47** | **2** | **45** | **0** |
+| Port status bits | 10 | 4 | 6 | 0 |
+| **Total** | **47** | **4** | **43** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 2 | Both correspond to promoted verified entries |
+| Entry verification packets | 4 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -35,12 +35,14 @@ Term definitions:
 
 ## Verified Entries
 
-目前有 2 個 entries 已完成 verified promotion（Phase 8E 與 Phase 8H）：
+目前有 4 個 entries 已完成 verified promotion（Phase 8E、Phase 8H、Phase 8I）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
+| C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
+| C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
 
 verified scope 明確限制在 **bit name** 與 **bit position**。
 
