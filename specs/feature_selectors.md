@@ -58,14 +58,19 @@ semantic_verification_claimed: false
 - 主要屬於 `CLEAR_FEATURE` family
 - 不得混入 port selector namespace
 
+## Reviewed Linkage Surface
+
 目前 repo-local 已收斂的 reviewed linkage surface 包含：
 
 - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
 - `C_PORT_ENABLE` <-> `wPortChange bit 1`
+- `C_PORT_SUSPEND` <-> 標準 suspend-change selector boundary
+- `C_PORT_OVER_CURRENT` <-> 標準 over-current-change selector boundary
+- `C_PORT_RESET` <-> 標準 reset-change selector boundary
 
-這表示 selector-to-change-bit 的 reference boundary 已做 reviewed surface 收斂，
+這表示 selector-to-change-condition 的 reference boundary 已做 reviewed surface 收斂，
 不代表 host 端 clear sequencing 或更寬的 request behavior 已完成 verified。
 
 ## Port Standard Selector Boundary (`0-22`)

@@ -183,7 +183,8 @@ entries:
       bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
       Reviewed repo-local summary: wValue=feature_selector and links to the
       port-recipient change-selector boundary (`C_PORT_CONNECTION`,
-      `C_PORT_ENABLE`) within the standard port selector namespace.
+      `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`,
+      `C_PORT_RESET`) within the standard port selector namespace.
       wIndex=1-based port number. wLength=0. This remains selector linkage
       review only, not host-side clear sequencing or behavioral verification.
 

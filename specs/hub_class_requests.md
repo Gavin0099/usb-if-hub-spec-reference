@@ -118,7 +118,7 @@ semantic_verification_claimed: false
 
 - Hub 與 port selector spaces 必須分開解讀。
 - Hub-recipient reviewed linkage 目前包含 `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0` 與 `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`。
-- Port-recipient reviewed linkage 目前包含 `C_PORT_CONNECTION` <-> `wPortChange bit 0` 與 `C_PORT_ENABLE` <-> `wPortChange bit 1`。
+- Port-recipient reviewed linkage 目前包含 `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 這組標準 port change-selector boundary。
 - 共通的 change-bit semantics 應和 `GET_STATUS` 一起解讀。
 
 **Reviewed surface**

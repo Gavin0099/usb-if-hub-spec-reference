@@ -303,8 +303,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Change bit selector: suspend change."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the suspend-change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_over_current
     selector_value: 19
@@ -317,8 +317,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Change bit selector: over-current change."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the over-current change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_reset
     selector_value: 20
@@ -331,8 +331,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Change bit selector: reset change."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the reset-change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_port_test
     selector_value: 21

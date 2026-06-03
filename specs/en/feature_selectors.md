@@ -64,6 +64,9 @@ The current repo-local reviewed linkage surface includes:
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
 - `C_PORT_ENABLE` <-> `wPortChange bit 1`
+- `C_PORT_SUSPEND` <-> standard suspend-change selector boundary
+- `C_PORT_OVER_CURRENT` <-> standard over-current-change selector boundary
+- `C_PORT_RESET` <-> standard reset-change selector boundary
 
 This means the selector-to-change-bit boundary has been reviewed as a reference surface.
 It does **not** mean host-side clear sequencing or broader request behavior is verified.

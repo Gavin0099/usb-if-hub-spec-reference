@@ -118,7 +118,7 @@ This page does not answer:
 
 - Hub and port selector spaces must be interpreted separately.
 - Hub-recipient reviewed linkage currently includes `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0` and `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`.
-- Port-recipient reviewed linkage currently includes `C_PORT_CONNECTION` <-> `wPortChange bit 0` and `C_PORT_ENABLE` <-> `wPortChange bit 1`.
+- Port-recipient reviewed linkage currently includes `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` within the standard port change-selector boundary.
 - Common change-bit semantics should be read together with `GET_STATUS`.
 
 **Reviewed surface**
