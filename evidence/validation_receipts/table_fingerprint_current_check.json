@@ -1,0 +1,15 @@
+{
+  "probe": "probe_table_fingerprint.py",
+  "authority_ceiling": "table_content_fingerprint_drift_only",
+  "mode": "check",
+  "result": "PASS",
+  "checked_at": "2026-06-03T09:56:43.470632+00:00",
+  "tables_checked": 3,
+  "drift_count": 0,
+  "error_count": 0,
+  "findings": [],
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}
