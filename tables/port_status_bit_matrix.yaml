@@ -65,17 +65,20 @@ entries:
     bit: 1
     name: PORT_ENABLE
     status: defined
+    claim_level: verified
     description: Port enabled status
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
-        evidence_status: review_required
-        applies_to: "wPortStatus bit 1 summary"
-        note: "Phase 7B pilot attachment only; claim_level remains inferred."
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 1 name and position"
+        note: "Phase 8H verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
-      review_required: true
+      review_required: false
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit1.PORT_ENABLE.yaml
 
   - field: wPortStatus
     bit: 15

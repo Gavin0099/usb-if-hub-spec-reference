@@ -2,7 +2,7 @@
   "validator": "validate_entry_verification_gate.py",
   "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "total_cases": 4,
+  "total_cases": 6,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -64,7 +64,37 @@
       "receipt_parse_error": "",
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
-      "note": "pilot entry with reviewed, eligible, narrow packet may pass the gate"
+      "note": "pilot entry (PORT_CONNECTION) with reviewed, eligible, narrow packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_port_enable",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_port_enable_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "Phase 8H: PORT_ENABLE with reviewed, eligible, narrow packet may pass the gate"
+    },
+    {
+      "name": "invalid_verified_nonpilot",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"
+      ],
+      "actual_error_codes": [
+        "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_nonpilot_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE: verified_entry[0] wHubStatus.bit0.HUB_LOCAL_POWER: only allowed pilot entries ['wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8H\n\nEntry verification gate validation FAIL\n",
+      "stderr": "",
+      "note": "entry not in allowed pilot set (HUB_LOCAL_POWER) must be rejected"
     }
   ]
 }

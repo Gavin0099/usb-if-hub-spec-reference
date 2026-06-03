@@ -36,8 +36,8 @@ review_checklist:
   - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port status fields.
   - Confirm the packet stays limited to `PORT_ENABLE` bit name and bit position.
   - Confirm no state machine, SetPortFeature, or ClearPortFeature semantics are claimed.
-  - Confirm that `eligible_for_verified: false` is the correct Phase 8G verdict.
-  - Confirm the table entry for `wPortStatus.bit1.PORT_ENABLE` remains `claim_level: inferred`.
+  - Confirm that `eligible_for_verified: true` is authorized by Phase 8H gate expansion.
+  - Confirm the verified scope remains bit_name_and_position_only.
 
 verification_scope:
   claim: bit_name_and_position_only
@@ -50,18 +50,16 @@ verification_scope:
     - full USB compliance
 
 result:
-  eligible_for_verified: false
+  eligible_for_verified: true
   evidence_status: reviewed
   promotion_note: >
-    Non-promoting by Phase 8G design. The review was completed and confirms the
-    narrow bit-name-and-position surface for `wPortStatus.bit1.PORT_ENABLE`. However,
-    the Phase 8 pilot promotion boundary is currently limited to the single reviewed
-    pilot entry (wPortStatus.bit0.PORT_CONNECTION). A future phase must explicitly
-    extend the pilot boundary and update the gate before any verified promotion of
-    PORT_ENABLE may occur.
+    Authorized for Phase 8H entry-level verified promotion. The gate was expanded
+    in Phase 8H to include `wPortStatus.bit1.PORT_ENABLE` in the allowed pilot set.
+    Verified scope remains limited to bit name and bit position only.
+    No behavioral, state-machine, SetPortFeature, or host-stack semantics are claimed.
 
 non_claims:
   - This packet does not verify downstream port behavior.
   - This packet does not verify host-stack interpretation.
   - This packet does not establish page-level or table-level verification.
-  - This packet does not authorize verified promotion of wPortStatus.bit1.PORT_ENABLE.
+  - This packet does not claim SetPortFeature, ClearPortFeature, or error recovery behavior.

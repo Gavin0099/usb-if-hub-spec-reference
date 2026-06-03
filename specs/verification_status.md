@@ -2,7 +2,7 @@
 title: 驗證狀態
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-02"
+last_reviewed: "2026-06-03"
 semantic_verification_claimed: false
 ---
 
@@ -18,9 +18,9 @@ semantic_verification_claimed: false
 |---|---|---|---|---|---|
 | Hub 類別請求 | `tables/class_request_matrix.yaml` | 12 | 0 | 0 | 12 |
 | 功能選擇器 | `tables/feature_selector_matrix.yaml` | 25 | 0 | 0 | 25 |
-| 連接埠狀態位元 | `tables/port_status_bit_matrix.yaml` | 10 | 1 | 1 | 8 |
-| Evidence packets | `evidence/entry_verification_packets/` | 2 | 1（已 promote） | 1（non-promoting） | — |
-| **合計** | | **47** | **1** | **1** | **45** |
+| 連接埠狀態位元 | `tables/port_status_bit_matrix.yaml` | 10 | 2 | 0 | 8 |
+| Evidence packets | `evidence/entry_verification_packets/` | 2 | 2（已 promote） | 0 | — |
+| **合計** | | **47** | **2** | **0** | **45** |
 
 數字含義：
 
@@ -30,35 +30,28 @@ semantic_verification_claimed: false
 
 ## 已 Verified 的 Entry
 
-目前只有一筆 entry 完成 verified promotion：
+目前有兩筆 entry 完成 verified promotion（Phase 8E、Phase 8H）：
 
 | Entry | 欄位 | 位元 | Verified Scope |
 |---|---|---|---|
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
+| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 
 Verified scope 明確限定為：**bit 名稱與 bit 位置**。
 
-以下項目在此 verified scope 之外，不適用：
+以下項目在所有 verified entries 的 scope 之外，不適用：
 
 - 任何 timing 行為
 - 任何 state transition 行為
+- `SetPortFeature` 行為
 - `ClearPortFeature` 行為
+- error recovery 條件
 - host-stack 解讀
 - 完整 USB 2.0 compliance
 
 ## Reviewed but Not Promoted
 
-以下 entry 的 evidence packet 已完成 review，但刻意不進入 verified promotion：
-
-| Entry | 欄位 | 位元 | Review 狀態 | 原因 |
-|---|---|---|---|---|
-| PORT_ENABLE | `wPortStatus` | bit 1 | reviewed | Pilot 推廣邊界目前限定在 `PORT_CONNECTION`；擴展需要獨立 gate 更新 |
-
-**`reviewed` 不等於 `verified`。**
-
-Reviewed 代表 evidence packet 已被建立並 review 完成，但沒有觸發 promotion。
-
-Verified 代表 entry 已通過 Phase 8C promotion gate，`claim_level` 升為 `verified`。
+目前沒有 reviewed non-promoting entries。所有 reviewed packets 均已完成 Phase 8H promotion。
 
 ## 本頁不宣告的事項
 
@@ -66,7 +59,7 @@ Verified 代表 entry 已通過 Phase 8C promotion gate，`claim_level` 升為 `
 
 - USB 2.0 Hub 行為已全面驗證。
 - 任何 page-level 或 table-level 驗證已完成。
-- `PORT_ENABLE` 已 verified。
+- PORT_ENABLE 的 state machine、SetPortFeature 或 error recovery 行為已 verified。
 - Inferred entries 可作為實作真值使用。
 - 本參考資料可覆蓋 consuming repo 的確認 project facts。
 - 靜態數字會自動隨 YAML 表格同步。

@@ -41,22 +41,23 @@ semantic_verification_claimed: false
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | Records whether enable status has changed since the last clear |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit field |
 
-## Phase 8E Live Verified Pilot
+## Live Verified Entries (Phase 8E, Phase 8H)
 
-There is now exactly one live governed entry promoted to `verified`:
+Two live governed entries are promoted to `verified`:
 
-- `wPortStatus.bit0.PORT_CONNECTION` in `tables/port_status_bit_matrix.yaml`
+| Entry | Field | Bit | Verified Scope |
+|---|---|---|---|
+| PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
+| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 
-That verified scope is intentionally narrow. It covers only:
-
-- the bit name `PORT_CONNECTION`
-- the bit position `bit 0` within `wPortStatus`
+That verified scope is intentionally narrow. It covers only **bit name and bit position**.
 
 It does **not** mean that this repo has verified:
 
-- debounce, timing, reset, or state-transition behavior for `PORT_CONNECTION`
-- host-side `GET_STATUS` / `CLEAR_FEATURE` semantics
-- the full page or the full `port_status_bit_matrix` table
+- Timing, debounce, reset, or state-transition behavior for either entry
+- `SetPortFeature` or `ClearPortFeature` host-side semantics
+- PORT_ENABLE enable/disable state machine or error recovery conditions
+- The full page or the full `port_status_bit_matrix` table
 
 So this page frontmatter still remains:
 
@@ -96,15 +97,15 @@ So wording like “`PORT_LOW_SPEED = 0` means full-speed” is incomplete by its
 This repo now carries two different evidence-related signals:
 
 - `section_refs` as evidence attachment metadata
-- one live `verified` promotion for a single entry
+- two live `verified` promotions for `PORT_CONNECTION` (Phase 8E) and `PORT_ENABLE` (Phase 8H)
 
 They should not be conflated.
 
 Current state:
 
 - selected pilot entries carry `section_refs`
-- only `wPortStatus.bit0.PORT_CONNECTION` is live `verified`
-- that verified scope still remains `bit_name_and_position_only`
+- `wPortStatus.bit0.PORT_CONNECTION` and `wPortStatus.bit1.PORT_ENABLE` are live `verified`
+- all verified scopes remain `bit_name_and_position_only`
 - this still does not mean USB 2.0 PDF semantic verification is complete
 
 If a future wiki claim block needs `section_refs`, it should use the Phase 7A structure, for example:

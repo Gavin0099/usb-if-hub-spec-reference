@@ -1,0 +1,10 @@
+matrix_id: usb20_hub_port_status_bit_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - field: wHubStatus
+    bit: 0
+    name: HUB_LOCAL_POWER
+    status: defined
+    claim_level: verified
+    evidence_status: review_required

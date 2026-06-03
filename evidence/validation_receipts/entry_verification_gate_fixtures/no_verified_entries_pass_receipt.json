@@ -5,5 +5,8 @@
   "result": "PASS",
   "authority_ceiling": "entry_level_verified_gate_only",
   "errors": [],
-  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+  "allowed_pilot_entries": [
+    "wPortStatus.bit0.PORT_CONNECTION",
+    "wPortStatus.bit1.PORT_ENABLE"
+  ]
 }

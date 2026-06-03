@@ -10,5 +10,8 @@
       "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'"
     }
   ],
-  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+  "allowed_pilot_entries": [
+    "wPortStatus.bit0.PORT_CONNECTION",
+    "wPortStatus.bit1.PORT_ENABLE"
+  ]
 }

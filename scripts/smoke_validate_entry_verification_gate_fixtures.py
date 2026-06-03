@@ -37,7 +37,19 @@ CASES = [
         "name": "valid_verified_pilot",
         "expected_exit": 0,
         "expected_error_codes": [],
-        "note": "pilot entry with reviewed, eligible, narrow packet may pass the gate",
+        "note": "pilot entry (PORT_CONNECTION) with reviewed, eligible, narrow packet may pass the gate",
+    },
+    {
+        "name": "valid_verified_port_enable",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "Phase 8H: PORT_ENABLE with reviewed, eligible, narrow packet may pass the gate",
+    },
+    {
+        "name": "invalid_verified_nonpilot",
+        "expected_exit": 1,
+        "expected_error_codes": ["VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"],
+        "note": "entry not in allowed pilot set (HUB_LOCAL_POWER) must be rejected",
     },
 ]
 

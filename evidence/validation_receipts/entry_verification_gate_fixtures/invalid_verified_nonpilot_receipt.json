@@ -1,0 +1,17 @@
+{
+  "validator": "validate_entry_verification_gate",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_nonpilot\\matrix.yaml",
+  "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_nonpilot\\packets",
+  "result": "FAIL",
+  "authority_ceiling": "entry_level_verified_gate_only",
+  "errors": [
+    {
+      "code": "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE",
+      "message": "verified_entry[0] wHubStatus.bit0.HUB_LOCAL_POWER: only allowed pilot entries ['wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may be promoted in Phase 8H"
+    }
+  ],
+  "allowed_pilot_entries": [
+    "wPortStatus.bit0.PORT_CONNECTION",
+    "wPortStatus.bit1.PORT_ENABLE"
+  ]
+}

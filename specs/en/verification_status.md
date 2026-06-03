@@ -2,7 +2,7 @@
 title: Verification Status
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-02"
+last_reviewed: "2026-06-03"
 semantic_verification_claimed: false
 ---
 
@@ -18,9 +18,9 @@ semantic_verification_claimed: false
 |---|---|---|---|---|---|
 | Hub class requests | `tables/class_request_matrix.yaml` | 12 | 0 | 0 | 12 |
 | Feature selectors | `tables/feature_selector_matrix.yaml` | 25 | 0 | 0 | 25 |
-| Port status bits | `tables/port_status_bit_matrix.yaml` | 10 | 1 | 1 | 8 |
-| Evidence packets | `evidence/entry_verification_packets/` | 2 | 1 (promoted) | 1 (non-promoting) | — |
-| **Total** | | **47** | **1** | **1** | **45** |
+| Port status bits | `tables/port_status_bit_matrix.yaml` | 10 | 2 | 0 | 8 |
+| Evidence packets | `evidence/entry_verification_packets/` | 2 | 2 (promoted) | 0 | — |
+| **Total** | | **47** | **2** | **0** | **45** |
 
 Term definitions:
 
@@ -30,35 +30,28 @@ Term definitions:
 
 ## Verified Entries
 
-Only one entry has completed verified promotion:
+Two entries have completed verified promotion (Phase 8E and Phase 8H):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
+| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 
 The verified scope is explicitly limited to **bit name and bit position**.
 
-The following are outside this verified scope:
+The following are outside the verified scope for all entries:
 
 - Timing behavior
 - State transition behavior
+- `SetPortFeature` behavior
 - `ClearPortFeature` behavior
+- Error recovery conditions
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
 ## Reviewed but Not Promoted
 
-The following entry has a completed reviewed evidence packet but has not been promoted to verified:
-
-| Entry | Field | Bit | Review Status | Reason |
-|---|---|---|---|---|
-| PORT_ENABLE | `wPortStatus` | bit 1 | reviewed | Pilot promotion boundary is currently limited to `PORT_CONNECTION`; expansion requires a separate gate update |
-
-**`reviewed` is not the same as `verified`.**
-
-Reviewed means an evidence packet was created and reviewed, but no promotion was triggered.
-
-Verified means the entry passed the Phase 8C promotion gate and `claim_level` was upgraded to `verified`.
+No reviewed non-promoting entries currently exist. All reviewed packets have been promoted through Phase 8H.
 
 ## What This Page Does Not Claim
 
@@ -66,7 +59,7 @@ This page does not claim:
 
 - USB 2.0 hub behavior is fully verified.
 - Any page-level or table-level verification is complete.
-- `PORT_ENABLE` is verified.
+- PORT_ENABLE state machine, SetPortFeature, or error recovery behavior is verified.
 - Inferred entries are safe to use as implementation truth.
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.

@@ -10,5 +10,8 @@
       "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: verified promotion requires a matching evidence packet in E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets"
     }
   ],
-  "pilot_entry_id": "wPortStatus.bit0.PORT_CONNECTION"
+  "allowed_pilot_entries": [
+    "wPortStatus.bit0.PORT_CONNECTION",
+    "wPortStatus.bit1.PORT_ENABLE"
+  ]
 }

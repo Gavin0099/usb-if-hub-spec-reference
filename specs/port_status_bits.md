@@ -41,21 +41,22 @@ semantic_verification_claimed: false
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | 記錄 enable status 是否自上次清除以來發生變化 |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field boundary placeholder |
 
-## Phase 8E Live Verified Pilot
+## Live Verified Entries（Phase 8E、Phase 8H）
 
-目前只有一筆 live governed entry 已升級為 `verified`：
+目前有兩筆 live governed entry 已升級為 `verified`：
 
-- `tables/port_status_bit_matrix.yaml` 中的 `wPortStatus.bit0.PORT_CONNECTION`
+| Entry | 欄位 | 位元 | Verified Scope |
+|---|---|---|---|
+| PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
+| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 
-這筆 verified 的範圍非常窄，只包含：
+這兩筆 verified 的範圍非常窄，只包含 **bit 名稱與 bit 位置**。
 
-- bit 名稱：`PORT_CONNECTION`
-- bit 位置：`wPortStatus` 的 bit 0
+這些 verified **不代表**：
 
-這筆 verified **不代表**：
-
-- `PORT_CONNECTION` 的 debounce、timing、reset 或 state-transition 行為已驗證
-- `GET_STATUS` / `CLEAR_FEATURE` 的 host-side semantic behavior 已驗證
+- 任何 timing、state-transition、debounce 或 reset 行為已驗證
+- `SetPortFeature`、`ClearPortFeature` 的 host-side semantic behavior 已驗證
+- PORT_ENABLE 的 enable/disable 狀態機、error recovery 條件已驗證
 - 本頁或整張 `port_status_bit_matrix` 已升級為 page-level / table-level verified
 
 所以本頁 frontmatter 仍維持：
@@ -103,8 +104,8 @@ semantic_verification_claimed: false
 目前成立的是：
 
 - 部分 pilot entries 帶有 `section_refs`
-- 只有 `wPortStatus.bit0.PORT_CONNECTION` 被升為 live `verified`
-- 該 verified scope 仍限於 `bit_name_and_position_only`
+- `wPortStatus.bit0.PORT_CONNECTION`（Phase 8E）與 `wPortStatus.bit1.PORT_ENABLE`（Phase 8H）已升為 live `verified`
+- 所有 verified scope 仍限於 `bit_name_and_position_only`
 
 如果未來要在 wiki claim block 掛 `section_refs`，應採用 Phase 7A 定義的結構，例如：
 

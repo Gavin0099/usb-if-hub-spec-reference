@@ -111,6 +111,16 @@
 - Pilot promotion boundary remains limited to `wPortStatus.bit0.PORT_CONNECTION`
 - Gate and table unchanged; no claim_level upgrade
 
+[x] Phase 8H : Expand promotion gate to PORT_ENABLE
+- Gate refactored from `PILOT_ENTRY_ID` (single string) to `ALLOWED_PILOT_ENTRIES` (set)
+- `wPortStatus.bit1.PORT_ENABLE` added to allowed pilot set
+- 2 new smoke fixtures added: `valid_verified_port_enable`, `invalid_verified_nonpilot` (6/6 PASS)
+- PORT_ENABLE packet updated: `eligible_for_verified: true`; `promotion_note` updated
+- `tables/port_status_bit_matrix.yaml` PORT_ENABLE entry: `claim_level: verified`
+- `specs/verification_status.md` and en: 2 verified, 0 reviewed non-promoting, 45 inferred
+- `specs/port_status_bits.md` and en: updated verified pilot description
+- Claim ceiling: `entry_level_verified_gate_only`; verified scope remains `bit_name_and_position_only`
+
 [x] Phase 3 : Wire cross-repo reference
 - `USB-Hub-Firmware-Architecture-Contract TRACEABILITY_MATRIX.md` updated (`11ed715`)
 - Allowed usage defined: look up field/bit names, clarify semantics, support escalation, align terminology

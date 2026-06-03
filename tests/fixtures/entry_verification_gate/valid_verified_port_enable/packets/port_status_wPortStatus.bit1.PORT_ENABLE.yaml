@@ -1,0 +1,23 @@
+packet_version: 1
+status: reviewed
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortStatus.bit1.PORT_ENABLE
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  quoted_surface: reviewer_paraphrase_only
+  reviewer_note: >
+    Phase 8H fixture: reviewed for bit name and bit position only.
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - ClearPortFeature behavior
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: Fixture for Phase 8H gate test.
