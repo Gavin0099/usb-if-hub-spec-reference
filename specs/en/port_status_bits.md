@@ -2,7 +2,7 @@
 title: Port Status Bits
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-02"
+last_reviewed: "2026-06-03"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -13,13 +13,30 @@ semantic_verification_claimed: false
 # Port Status Bits
 
 > Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.  
-> This page remains a reference summary, not a full bit-by-bit verified reconstruction of the source spec.
+> This page is a reference summary, not a full bit-by-bit verified reconstruction of the source spec.
+
+## Page Purpose
+
+This page is meant to answer:
+
+- what hub-level and port-level fields `GET_STATUS` can return
+- how `Status` bits differ from `Change` bits
+- which core bits are currently exposed through the machine-readable layer
+- which two entries have live `verified` promotion, and how narrow that verified scope is
+
+This page is not meant to answer:
+
+- whether all port bits have completed PDF section-level verification
+- whether timing, debounce, reset, and error-recovery semantics have completed correctness verification
+- the full host behavior model for `SetPortFeature` / `ClearPortFeature`
 
 ## Status Field Model
 
-- `GET_STATUS` can return hub-level `wHubStatus` / `wHubChange` or port-level `wPortStatus` / `wPortChange`.
-- `Status` bits describe the current state; `Change` bits describe whether that state has changed since the last clear.
-- For change bits, `CLEAR_FEATURE` is best read as “acknowledge and clear this recorded change event.”
+- `GET_STATUS` can return hub-level `wHubStatus` / `wHubChange`
+- it can also return port-level `wPortStatus` / `wPortChange`
+- `Status` bits describe current state
+- `Change` bits describe whether that state has changed since the last clear
+- for change bits, `CLEAR_FEATURE(...)` is best read as "acknowledge and clear this recorded change event"
 
 ## Hub-Level Bits
 
@@ -39,25 +56,28 @@ semantic_verification_claimed: false
 | `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit field |
 | `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | Records whether connection status has changed since the last clear |
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | Records whether enable status has changed since the last clear |
-| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit field |
+| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
 
-## Live Verified Entries (Phase 8E, Phase 8H)
+## Live Verified Entries
 
-Two live governed entries are promoted to `verified`:
+Only two live governed entries are currently promoted to `verified`:
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
-| PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
-| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
+| `PORT_CONNECTION` | `wPortStatus` | bit 0 | bit name and bit position only |
+| `PORT_ENABLE` | `wPortStatus` | bit 1 | bit name and bit position only |
 
-That verified scope is intentionally narrow. It covers only **bit name and bit position**.
+That verified scope is intentionally narrow. It covers only:
+
+- bit name
+- bit position
 
 It does **not** mean that this repo has verified:
 
-- Timing, debounce, reset, or state-transition behavior for either entry
-- `SetPortFeature` or `ClearPortFeature` host-side semantics
-- PORT_ENABLE enable/disable state machine or error recovery conditions
-- The full page or the full `port_status_bit_matrix` table
+- timing, debounce, reset, or state-transition behavior
+- host-side `SetPortFeature` / `ClearPortFeature` semantics
+- the full `PORT_ENABLE` enable/disable state machine
+- the full page or the full `port_status_bit_matrix`
 
 So this page frontmatter still remains:
 
@@ -90,14 +110,15 @@ Example:
 | 0 | 1 | High-speed |
 | 1 | 1 | Reserved / unexpected combination |
 
-So wording like “`PORT_LOW_SPEED = 0` means full-speed” is incomplete by itself. It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
+So wording like "`PORT_LOW_SPEED = 0` means full-speed" is incomplete by itself.  
+It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
 
 ## Section Anchor and Verified-Scope Boundary
 
-This repo now carries two different evidence-related signals:
+This repo currently carries two different evidence-related signals:
 
 - `section_refs` as evidence attachment metadata
-- two live `verified` promotions for `PORT_CONNECTION` (Phase 8E) and `PORT_ENABLE` (Phase 8H)
+- live `verified` promotions, currently only for `PORT_CONNECTION` and `PORT_ENABLE`
 
 They should not be conflated.
 
@@ -108,7 +129,7 @@ Current state:
 - all verified scopes remain `bit_name_and_position_only`
 - this still does not mean USB 2.0 PDF semantic verification is complete
 
-If a future wiki claim block needs `section_refs`, it should use the Phase 7A structure, for example:
+If a future wiki claim block needs `section_refs`, it should keep the Phase 7A metadata structure, for example:
 
 ```yaml
 section_refs:
@@ -121,8 +142,16 @@ section_refs:
 
 That metadata block is evidence attachment only. It does not automatically promote the page or claim block to `verified`.
 
-## Usage Notes
+## Governed Linkage
 
-- This page is not a complete bit encyclopedia; it only summarizes the core surface currently exposed through the machine-readable layer.
-- Semantics for `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, speed-related bits, and adjacent details still need stronger PDF-level verification.
-- Reserved bits should not be silently repurposed by firmware; if they are, that is an escalation condition.
+- `tables/port_status_bit_matrix.yaml`: primary machine-readable source for hub/port status bit namespaces
+- `specs/hub_class_requests.md`: request-family summary for `GET_STATUS`, `SET_FEATURE`, and `CLEAR_FEATURE`
+- `specs/feature_selectors.md`: feature-selector boundary for `C_PORT_*` selectors
+- `specs/escalation_table.md`: escalation triggers such as E-02, E-03, and E-09
+
+## Non-claims
+
+- This page does not claim that all port status bits have completed PDF-level verification.
+- This page does not claim that speed bits, reset bits, power bits, or adjacent semantics are fully verified.
+- This page does not expand two verified entries into a claim that the whole page is verified.
+- This page does not elevate the status-bit summary into firmware implementation authority.
