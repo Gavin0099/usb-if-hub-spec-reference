@@ -69,9 +69,13 @@ semantic_verification_claimed: false
 - `C_PORT_SUSPEND` <-> 標準 suspend-change selector boundary
 - `C_PORT_OVER_CURRENT` <-> 標準 over-current-change selector boundary
 - `C_PORT_RESET` <-> 標準 reset-change selector boundary
+- `PORT_ENABLE` <-> 標準 port enable feature selector boundary
+- `PORT_SUSPEND` <-> 標準 port suspend feature selector boundary
+- `PORT_RESET` <-> 標準 port reset feature selector boundary
+- `PORT_POWER` <-> 標準 port power feature selector boundary
 
-這表示 selector-to-change-condition 的 reference boundary 已做 reviewed surface 收斂，
-不代表 host 端 clear sequencing 或更寬的 request behavior 已完成 verified。
+這表示 selector namespace 的 reference boundary 已做 reviewed surface 收斂，
+不代表 host 端 sequencing、selector side effects 或更寬的 request behavior 已完成 verified。
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -111,7 +115,7 @@ Representative selectors：
 - `SET_FEATURE` / `CLEAR_FEATURE` 的 `wValue` 應回連到 `tables/feature_selector_matrix.yaml`
 - `GET_STATUS` 並不是直接「設定 selector」，但有些 matrix entries 仍存在，目的是補齊 status / change-field comparison context
 - `C_PORT_*` selectors 應和 `specs/port_status_bits.md` 的 `change bits` 一起解讀
-- `C_HUB_*` 與 `C_PORT_*` 的 reviewed linkage 仍只代表 selector boundary，不代表 `CLEAR_FEATURE` 行為證明
+- reviewed `PORT_*`、`C_HUB_*` 與 `C_PORT_*` linkage 仍只代表 selector boundary，不代表 `SET_FEATURE` 或 `CLEAR_FEATURE` 行為證明
 
 ## Governed Linkage
 

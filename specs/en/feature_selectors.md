@@ -67,9 +67,13 @@ The current repo-local reviewed linkage surface includes:
 - `C_PORT_SUSPEND` <-> standard suspend-change selector boundary
 - `C_PORT_OVER_CURRENT` <-> standard over-current-change selector boundary
 - `C_PORT_RESET` <-> standard reset-change selector boundary
+- `PORT_ENABLE` <-> standard port enable feature selector boundary
+- `PORT_SUSPEND` <-> standard port suspend feature selector boundary
+- `PORT_RESET` <-> standard port reset feature selector boundary
+- `PORT_POWER` <-> standard port power feature selector boundary
 
-This means the selector-to-change-bit boundary has been reviewed as a reference surface.
-It does **not** mean host-side clear sequencing or broader request behavior is verified.
+This means the selector namespace boundary has been reviewed as a reference surface.
+It does **not** mean host-side sequencing, selector side effects, or broader request behavior is verified.
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -109,7 +113,7 @@ This repo currently treats selectors in three reading categories:
 - `SET_FEATURE` / `CLEAR_FEATURE` `wValue` should link back to `tables/feature_selector_matrix.yaml`.
 - `GET_STATUS` does not directly "set a selector", but some matrix entries still exist to explain the status / change-field comparison context.
 - `C_PORT_*` selectors should be read together with `change bits` on `specs/port_status_bits.md`.
-- `C_HUB_*` and `C_PORT_*` reviewed linkage should still be treated as selector boundary only, not as behavioral proof for `CLEAR_FEATURE`.
+- Reviewed `PORT_*`, `C_HUB_*`, and `C_PORT_*` linkage should still be treated as selector boundary only, not as behavioral proof for `SET_FEATURE` or `CLEAR_FEATURE`.
 
 ## Governed Linkage
 

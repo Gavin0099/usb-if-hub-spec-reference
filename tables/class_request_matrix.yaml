@@ -123,8 +123,10 @@ entries:
       bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
       Reviewed repo-local summary: wValue=feature_selector and must be resolved
       against the standard port selector namespace rather than the hub-recipient
-      selector set. wIndex=1-based port number. wLength=0. This repo still does
-      not claim selector side-effect or state-transition verification.
+      selector set. Reviewed SetFeature-side anchors currently include
+      `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, and `PORT_POWER`.
+      wIndex=1-based port number. wLength=0. This repo still does not claim
+      selector side-effect, timing, or state-transition verification.
 
   - request_id: usb20_clear_feature_hub
     request_family: CLEAR_FEATURE

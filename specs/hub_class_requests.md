@@ -167,6 +167,7 @@ semantic_verification_claimed: false
 - Hub 與 port selector namespaces 必須保持分離。
 - 某些 selectors 會影響 port power、reset、suspend behavior，但本頁仍只是 request summary。
 - 這裡目前的 reviewed request surface 只到 namespace 層級：hub-recipient selectors 不得和標準 port selector range 混在一起。
+- Port-recipient reviewed anchors 目前包含 `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`。
 
 **Reviewed surface**
 

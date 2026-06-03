@@ -167,6 +167,7 @@ This page does not answer:
 - Hub and port selector namespaces must remain distinct.
 - Some selectors affect port power, reset, or suspend behavior, but this page remains a request summary only.
 - The reviewed request surface here is namespace-level only: hub-recipient selectors must not be merged with the standard port selector range.
+- Port-recipient reviewed anchors currently include `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, and `PORT_POWER`.
 
 **Reviewed surface**
 

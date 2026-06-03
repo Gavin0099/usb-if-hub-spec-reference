@@ -73,7 +73,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not PORT_ENABLE state-machine verification."
 
   - selector_id: usb20_port_suspend
     selector_value: 2
@@ -88,7 +89,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not suspend/resume behavior verification."
 
   - selector_id: usb20_port_over_current
     selector_value: 3
@@ -115,7 +117,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient SetFeature selector within the standard port selector namespace. Selector boundary only; not reset timing or completion behavior verification."
 
   - selector_id: usb20_port_reserved_5
     selector_value: 5
@@ -169,7 +172,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not power-switch policy or timing verification."
 
   - selector_id: usb20_port_low_speed
     selector_value: 9

@@ -38,7 +38,7 @@ features:
     details: 列出 consuming firmware repo 何時應進入 Standard Escalation Mode。
     link: /escalation_table
   - title: Verification Status
-    details: 目前共有 47 筆 tracked entries，其中 8 筆 verified、17 筆 reviewed、22 筆 inferred，並附 non-claims 與 evidence packet 狀態。
+    details: 目前共有 47 筆 tracked entries，其中 8 筆 verified、21 筆 reviewed、18 筆 inferred，並附 non-claims 與 evidence packet 狀態。
     link: /verification_status
 ---
 

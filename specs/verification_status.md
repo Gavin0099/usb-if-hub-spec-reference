@@ -17,9 +17,9 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 10 | 2 | 0 |
-| Feature selectors | 25 | 0 | 7 | 18 | 0 |
+| Feature selectors | 25 | 0 | 11 | 14 | 0 |
 | Port status bits | 10 | 8 | 0 | 2 | 0 |
-| **Total** | **47** | **8** | **17** | **22** | **0** |
+| **Total** | **47** | **8** | **21** | **18** | **0** |
 
 ## Evidence Packet Summary
 
@@ -38,7 +38,7 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Class requests | reviewed-heavy | `SET_FEATURE` / `CLEAR_FEATURE`、TT request families、`GET_DESCRIPTOR` / `SET_DESCRIPTOR` 已有 reviewed surface，但尚未有 entry-level verified promotion |
-| Feature selectors | inferred-heavy with broader reviewed anchors | `C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 已有 reviewed linkage；其餘多數仍是 inferred namespace coverage |
+| Feature selectors | reviewed / inferred mixed | `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 已有 reviewed linkage；其餘 selector coverage 仍是 inferred |
 | Port status bits | verified-heavy | 8 筆核心 hub/port status-change bits 已完成 entry-level verified promotion；剩餘 2 筆 boundary placeholders 仍是 inferred |
 
 ## Reviewed Surface Inventory
@@ -62,6 +62,10 @@ Term definitions:
   - `C_PORT_SUSPEND`
   - `C_PORT_OVER_CURRENT`
   - `C_PORT_RESET`
+  - `PORT_ENABLE`
+  - `PORT_SUSPEND`
+  - `PORT_RESET`
+  - `PORT_POWER`
 
 這些 `reviewed` surfaces 代表 repo-local boundary 已比純 inferred surface 更明確，
 但不代表這些 surfaces 已完成 entry-level verified promotion。
