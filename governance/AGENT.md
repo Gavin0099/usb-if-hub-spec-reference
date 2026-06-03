@@ -309,6 +309,7 @@ Scope control rule:
 ## 13. Operational Semantics Binding Rule (Mandatory)
 
 When using `hooks_ready`, `repo_native_verified`, `clean_admissibility`,
-`expected_dirty_ttl`, or `self_hosting_gap_closed`, use the definitions in
-`governance/fleet/operational_semantics_v1.md`. Do not imply broader authority
-than the verifier can prove.
+`expected_dirty_ttl`, or `self_hosting_gap_closed`, do not treat them as
+repo-local verified claims unless this repository carries an explicit local
+definition and validator for the term. Do not imply broader authority than the
+verifier can prove.
