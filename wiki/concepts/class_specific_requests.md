@@ -5,25 +5,25 @@ usb_versions:
   - usb_2_0
   - usb_3_2
 authority_required: normative_official
-claim_level: draft
+claim_level: inferred
 source_refs:
   - usb20_spec
-status: draft
-last_reviewed: 2026-05-30
+status: review_required
+last_reviewed: 2026-06-03
 ---
 
 # Hub Class-specific Requests
 
-This page defines request-level understanding for hub operations.
+This legacy concept page is an orientation note only.
 
-## Baseline
+Use the canonical `specs/` surface for current repo-local request boundaries:
 
-Start from USB 2.0 request definitions for hub class behavior.
-
-## Structured Lookup
-
-Use `tables/class_request_matrix.yaml` for machine-readable request mapping.
+- `specs/hub_class_requests.md`
+- `specs/en/hub_class_requests.md`
+- `tables/class_request_matrix.yaml`
 
 ## Boundary
 
-Do not assume request semantics are identical across USB 2.0, USB 3.2, and USB4 without section-level proof.
+- Do not treat this page as an independent request truth table.
+- Do not assume request semantics are identical across USB 2.0, USB 3.2, and USB4 without section-level proof.
+- Do not use this legacy page to override governed YAML tables or consuming-repo project facts.

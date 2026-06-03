@@ -5,25 +5,27 @@ usb_versions:
   - usb_2_0
   - usb_2_1
 authority_required: normative_official
-claim_level: draft
+claim_level: inferred
 source_refs:
   - usb20_spec
-status: draft
-last_reviewed: 2026-05-30
+status: review_required
+last_reviewed: 2026-06-03
 ---
 
 # Transaction Translator
 
-This page captures TT behavior scope and boundaries for hub analysis.
+This legacy concept page is an orientation note only.
 
-## Baseline
+Use the canonical `specs/` surface for current repo-local TT boundaries:
 
-TT semantics are anchored in USB 2.0 high-speed hub behavior.
-
-## Delta Handling
-
-Any USB 2.1-related TT interpretation must be presented as ECN/addendum delta against USB 2.0 baseline.
+- `specs/transaction_translator.md`
+- `specs/en/transaction_translator.md`
+- `specs/hub_descriptor.md`
+- `specs/en/hub_descriptor.md`
 
 ## Boundary
 
-Do not infer TT-equivalent semantics in USB4 context without explicit normative evidence.
+- Do not treat this page as an independent TT behavior truth table.
+- TT semantics are anchored in USB 2.0 high-speed hub behavior.
+- Any USB 2.1-related TT interpretation must be presented as ECN/addendum delta against USB 2.0 baseline.
+- Do not infer TT-equivalent semantics in USB4 context without explicit normative evidence.
