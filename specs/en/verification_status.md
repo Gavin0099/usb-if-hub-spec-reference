@@ -8,19 +8,24 @@ semantic_verification_claimed: false
 
 # Verification Status
 
-> This page is a static visibility summary, not an automatically generated source of truth.
-> The governed YAML tables and evidence packets are the authoritative source materials.
+> This page is a static visibility summary, not an automatically generated source of truth.  
+> The governed YAML tables and evidence packets are the authoritative source materials.  
 > Numbers on this page must be updated manually whenever table entries or packet status changes.
 
 ## Current Verification Summary
 
-| Area | Table | Entries | Verified | Reviewed non-promoting | Inferred |
-|---|---|---|---|---|---|
-| Hub class requests | `tables/class_request_matrix.yaml` | 12 | 0 | 0 | 12 |
-| Feature selectors | `tables/feature_selector_matrix.yaml` | 25 | 0 | 0 | 25 |
-| Port status bits | `tables/port_status_bit_matrix.yaml` | 10 | 2 | 0 | 8 |
-| Evidence packets | `evidence/entry_verification_packets/` | 2 | 2 (promoted) | 0 | — |
-| **Total** | | **47** | **2** | **0** | **45** |
+| Area | Tracked entries | Verified | Reviewed / inferred | Missing |
+|---|---:|---:|---:|---:|
+| Class requests | 12 | 0 | 12 | 0 |
+| Feature selectors | 25 | 0 | 25 | 0 |
+| Port status bits | 10 | 2 | 8 | 0 |
+| **Total** | **47** | **2** | **45** | **0** |
+
+## Evidence Packet Summary
+
+| Artifact type | Count | Status |
+|---|---:|---|
+| Entry verification packets | 2 | Both correspond to promoted verified entries |
 
 Term definitions:
 
@@ -51,7 +56,7 @@ The following are outside the verified scope for all entries:
 
 ## Reviewed but Not Promoted
 
-No reviewed non-promoting entries currently exist. All reviewed packets have been promoted through Phase 8H.
+No reviewed non-promoting entries currently exist. All reviewed packets have already been promoted through Phase 8H.
 
 ## What This Page Does Not Claim
 
