@@ -87,12 +87,14 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
       bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
-      wValue=feature_selector (hub feature selectors deferred to feature_selector_matrix).
-      wIndex=0 (hub itself). wLength=0.
+      Reviewed repo-local summary: wValue=feature_selector, but hub-recipient
+      selector namespace must remain separate from port-recipient selectors.
+      wIndex=0 (hub itself). wLength=0. This repo still does not claim
+      selector side-effect or state-transition verification.
 
   - request_id: usb20_set_feature_port
     request_family: SET_FEATURE
@@ -115,12 +117,14 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
       bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      wValue=feature_selector (port feature selectors deferred to feature_selector_matrix).
-      wIndex=1-based port number. wLength=0.
+      Reviewed repo-local summary: wValue=feature_selector and must be resolved
+      against the standard port selector namespace rather than the hub-recipient
+      selector set. wIndex=1-based port number. wLength=0. This repo still does
+      not claim selector side-effect or state-transition verification.
 
   - request_id: usb20_clear_feature_hub
     request_family: CLEAR_FEATURE
@@ -143,12 +147,14 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
       bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
-      wValue=feature_selector (hub feature selectors deferred to feature_selector_matrix).
-      wIndex=0. wLength=0.
+      Reviewed repo-local summary: wValue=feature_selector and links to the
+      hub-recipient change-selector boundary (`C_HUB_LOCAL_POWER`,
+      `C_HUB_OVER_CURRENT`). wIndex=0. wLength=0. This remains selector linkage
+      review only, not host-side clear sequencing or behavioral verification.
 
   - request_id: usb20_clear_feature_port
     request_family: CLEAR_FEATURE
@@ -171,12 +177,15 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
       bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      wValue=feature_selector (port feature selectors deferred to feature_selector_matrix).
-      wIndex=1-based port number. wLength=0.
+      Reviewed repo-local summary: wValue=feature_selector and links to the
+      port-recipient change-selector boundary (`C_PORT_CONNECTION`,
+      `C_PORT_ENABLE`) within the standard port selector namespace.
+      wIndex=1-based port number. wLength=0. This remains selector linkage
+      review only, not host-side clear sequencing or behavioral verification.
 
   - request_id: usb20_clear_tt_buffer
     request_family: CLEAR_TT_BUFFER

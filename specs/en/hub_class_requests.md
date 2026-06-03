@@ -117,7 +117,14 @@ This page does not answer:
 **Governed linkage**
 
 - Hub and port selector spaces must be interpreted separately.
+- Hub-recipient reviewed linkage currently includes `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0` and `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`.
+- Port-recipient reviewed linkage currently includes `C_PORT_CONNECTION` <-> `wPortChange bit 0` and `C_PORT_ENABLE` <-> `wPortChange bit 1`.
 - Common change-bit semantics should be read together with `GET_STATUS`.
+
+**Reviewed surface**
+
+- This repo now narrows `CLEAR_FEATURE` to a selector-linkage surface for the reviewed `C_HUB_*` and `C_PORT_*` change selectors.
+- This still does not claim host-side event-acknowledgement sequencing, full change-bit lifecycle correctness, or a complete `CLEAR_FEATURE` behavior model.
 
 **Related tables**
 
@@ -159,6 +166,12 @@ This page does not answer:
 
 - Hub and port selector namespaces must remain distinct.
 - Some selectors affect port power, reset, or suspend behavior, but this page remains a request summary only.
+- The reviewed request surface here is namespace-level only: hub-recipient selectors must not be merged with the standard port selector range.
+
+**Reviewed surface**
+
+- This repo now narrows `SET_FEATURE` to a reviewed selector-namespace boundary: hub-recipient and port-recipient selector spaces are intentionally distinct.
+- This still does not claim selector side-effect verification for power, reset, suspend, or other port-feature behaviors.
 
 **Related tables**
 
