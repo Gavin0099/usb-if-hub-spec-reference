@@ -2,7 +2,7 @@
 title: Hub Class Requests
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-02"
+last_reviewed: "2026-06-03"
 usb_versions:
   - usb_2_0
 source_refs:
