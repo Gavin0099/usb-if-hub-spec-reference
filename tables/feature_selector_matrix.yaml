@@ -25,8 +25,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Hub change bit: local power change condition. ClearFeature target on hub recipient."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: hub-recipient ClearFeature selector corresponding to wHubChange bit 0 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_hub_c_hub_over_current
     selector_value: 1
@@ -39,8 +39,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Hub change bit: over-current change condition. ClearFeature target on hub recipient."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: hub-recipient ClearFeature selector corresponding to wHubChange bit 1 change condition. Selector boundary only; not behavioral verification."
 
   # ── Port feature selectors (standard range 0-22) ───────────────────────────
   # Used in SetFeature/ClearFeature/GetStatus with recipient=other (port class requests).
@@ -275,8 +275,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Change bit selector: connection change. ClearFeature clears the change condition."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to wPortChange bit 0 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_enable
     selector_value: 17
@@ -289,8 +289,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Change bit selector: enable change."
+    evidence_status: reviewed
+    notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to wPortChange bit 1 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_suspend
     selector_value: 18

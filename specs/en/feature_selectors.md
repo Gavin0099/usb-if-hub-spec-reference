@@ -58,6 +58,16 @@ These selectors:
 - primarily belong to the `CLEAR_FEATURE` family
 - must not be merged into the port selector namespace
 
+The current repo-local reviewed linkage surface includes:
+
+- `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
+- `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
+- `C_PORT_CONNECTION` <-> `wPortChange bit 0`
+- `C_PORT_ENABLE` <-> `wPortChange bit 1`
+
+This means the selector-to-change-bit boundary has been reviewed as a reference surface.
+It does **not** mean host-side clear sequencing or broader request behavior is verified.
+
 ## Port Standard Selector Boundary (`0-22`)
 
 `tables/feature_selector_matrix.yaml` currently captures the standard port selector boundary `0-22`.  
@@ -96,6 +106,7 @@ This repo currently treats selectors in three reading categories:
 - `SET_FEATURE` / `CLEAR_FEATURE` `wValue` should link back to `tables/feature_selector_matrix.yaml`.
 - `GET_STATUS` does not directly "set a selector", but some matrix entries still exist to explain the status / change-field comparison context.
 - `C_PORT_*` selectors should be read together with `change bits` on `specs/port_status_bits.md`.
+- `C_HUB_*` and `C_PORT_*` reviewed linkage should still be treated as selector boundary only, not as behavioral proof for `CLEAR_FEATURE`.
 
 ## Governed Linkage
 
