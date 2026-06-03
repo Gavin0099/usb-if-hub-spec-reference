@@ -64,6 +64,7 @@ The current repo-local reviewed linkage surface includes:
 - `PORT_OVER_CURRENT` <-> `wPortStatus bit 3` as `GET_STATUS` context only
 - `PORT_LOW_SPEED` <-> speed indication in `wPortStatus` as `GET_STATUS` context only
 - `PORT_HIGH_SPEED` <-> speed indication in `wPortStatus` as `GET_STATUS` context only
+- reserved port selector slots `5-7` and `11-15` as reserved-boundary surface only
 - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
@@ -79,6 +80,7 @@ The current repo-local reviewed linkage surface includes:
 This means the selector namespace boundary has been reviewed as a reference surface.
 It does **not** mean host-side sequencing, selector side effects, or broader request behavior is verified.
 For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` rows, the reviewed surface is context-only `GET_STATUS` linkage; it does not make them direct `SET_FEATURE` / `CLEAR_FEATURE` targets.
+For the reserved rows, the reviewed surface only means those numeric slots remain inside the standard port selector boundary; it does not make them usable selectors or vendor-extension slots.
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -94,9 +96,11 @@ Representative selectors:
 | `2` | `PORT_SUSPEND` | `SET_FEATURE` / `CLEAR_FEATURE` / `GET_STATUS` |
 | `3` | `PORT_OVER_CURRENT` | `GET_STATUS` context |
 | `4` | `PORT_RESET` | `SET_FEATURE` |
+| `5-7` | reserved | reserved standard-range slots |
 | `8` | `PORT_POWER` | `SET_FEATURE` / `CLEAR_FEATURE` / `GET_STATUS` |
 | `9` | `PORT_LOW_SPEED` | `GET_STATUS` context |
 | `10` | `PORT_HIGH_SPEED` | `GET_STATUS` context |
+| `11-15` | reserved | reserved standard-range slots |
 | `16` | `C_PORT_CONNECTION` | `CLEAR_FEATURE` change selector |
 | `17` | `C_PORT_ENABLE` | `CLEAR_FEATURE` change selector |
 | `18` | `C_PORT_SUSPEND` | `CLEAR_FEATURE` change selector |

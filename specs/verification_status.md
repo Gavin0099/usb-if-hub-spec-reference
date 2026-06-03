@@ -17,9 +17,9 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 | 0 |
-| Feature selectors | 25 | 0 | 15 | 10 | 0 |
+| Feature selectors | 25 | 0 | 23 | 2 | 0 |
 | Port status bits | 10 | 8 | 0 | 2 | 0 |
-| **Total** | **47** | **8** | **27** | **12** | **0** |
+| **Total** | **47** | **8** | **35** | **4** | **0** |
 
 ## Evidence Packet Summary
 
@@ -38,7 +38,7 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Class requests | reviewed | 12 筆 tracked class requests 全部已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
-| Feature selectors | reviewed / inferred mixed | `PORT_CONNECTION`、`PORT_ENABLE`、`PORT_SUSPEND`、`PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 已有 reviewed linkage；其餘 selector coverage 仍是 inferred |
+| Feature selectors | reviewed-heavy | `PORT_CONNECTION`、`PORT_ENABLE`、`PORT_SUSPEND`、`PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`、reserved selector slots `5-7` / `11-15`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 已有 reviewed linkage；`PORT_TEST` 與 `PORT_INDICATOR` 仍是 inferred |
 | Port status bits | verified-heavy | 8 筆核心 hub/port status-change bits 已完成 entry-level verified promotion；剩餘 2 筆 boundary placeholders 仍是 inferred |
 
 ## Reviewed Surface Inventory
@@ -60,6 +60,8 @@ Term definitions:
   - `PORT_OVER_CURRENT`
   - `PORT_LOW_SPEED`
   - `PORT_HIGH_SPEED`
+  - reserved selector slots `5-7`
+  - reserved selector slots `11-15`
   - `C_HUB_LOCAL_POWER`
   - `C_HUB_OVER_CURRENT`
   - `C_PORT_CONNECTION`

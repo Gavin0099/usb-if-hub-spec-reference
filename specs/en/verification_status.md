@@ -17,9 +17,9 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 | 0 |
-| Feature selectors | 25 | 0 | 15 | 10 | 0 |
+| Feature selectors | 25 | 0 | 23 | 2 | 0 |
 | Port status bits | 10 | 8 | 0 | 2 | 0 |
-| **Total** | **47** | **8** | **27** | **12** | **0** |
+| **Total** | **47** | **8** | **35** | **4** | **0** |
 
 ## Evidence Packet Summary
 
@@ -38,7 +38,7 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
-| Feature selectors | reviewed / inferred mixed | `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`, `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` have reviewed linkage; remaining selector coverage is still inferred |
+| Feature selectors | reviewed-heavy | `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`, reserved selector slots `5-7` / `11-15`, `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` have reviewed linkage; `PORT_TEST` and `PORT_INDICATOR` remain inferred |
 | Port status bits | verified-heavy | 8 core hub/port status-change bits have completed entry-level verified promotion; the remaining 2 boundary placeholders are still inferred |
 
 ## Reviewed Surface Inventory
@@ -60,6 +60,8 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_OVER_CURRENT`
   - `PORT_LOW_SPEED`
   - `PORT_HIGH_SPEED`
+  - reserved selector slots `5-7`
+  - reserved selector slots `11-15`
   - `C_HUB_LOCAL_POWER`
   - `C_HUB_OVER_CURRENT`
   - `C_PORT_CONNECTION`

@@ -131,7 +131,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 5 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_6
     selector_value: 6
@@ -144,7 +145,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 6 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_7
     selector_value: 7
@@ -157,7 +159,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 7 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_power
     selector_value: 8
@@ -214,7 +217,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 11 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_12
     selector_value: 12
@@ -227,7 +231,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 12 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_13
     selector_value: 13
@@ -240,7 +245,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 13 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_14
     selector_value: 14
@@ -253,7 +259,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 14 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_15
     selector_value: 15
@@ -266,7 +273,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed reserved-boundary surface: selector value 15 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_c_port_connection
     selector_value: 16
