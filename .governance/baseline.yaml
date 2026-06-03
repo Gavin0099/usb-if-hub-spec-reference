@@ -1,6 +1,7 @@
 # .governance/baseline.yaml
 # Written by governance_tools/adopt_governance.py — do not edit manually.
-# Verified by: python governance_tools/governance_drift_checker.py --repo .
+# Verified by external ai-governance-framework drift checker during import.
+# This repo does not currently carry a repo-local governance_drift_checker.py path.
 #
 # Semantic layers in this file:
 #   PROVENANCE  — who generated this baseline and from which commit
@@ -11,18 +12,18 @@
 # ── PROVENANCE ────────────────────────────────────────────────────────────────
 schema_version: "1"
 baseline_version: 1.0.0
-source_commit: a17e28c1ca6f918f3cde1dfcfc940ba3c2864cc7
-framework_root: D:\usb-if-hub-spec-reference
-initialized_at: 2026-05-29T17:59:06Z
+source_commit: 70a54b3056c7662d0a2a6ed6fd69a7bf5d37abfd
+framework_root: https://github.com/Gavin0099/ai-governance-framework.git
+initialized_at: 2026-06-03T02:41:16Z
 initialized_by: governance_tools/adopt_governance.py
 
 # ── INTEGRITY ─────────────────────────────────────────────────────────────────
 # sha256.<file>: hash recorded at init/refresh time; "protected" files are hash-verified
 # overridable.<file>: protected = must not change | overridable = repo may extend freely
 sha256.AGENTS.base.md: f3daf5037a36606d546dc8d621dbb32963c6e3067f419187e4afd6f2d6dc14a7
-sha256.PLAN.md: e9ef9f156426f33048f183cf89a0169a0b6dd45656f3136c6e5dd9d9b1bd23d3
-sha256.contract.yaml: 734f4dd9d832061a6ee5bbbd631831c55e1499483a782bf0f2e6b75035d4968d
-sha256.AGENTS.md: 2f0fadeb4e0f601fdaacfacdf9ee4007d1d129a8bc0416300dabe1165ef442ea
+sha256.PLAN.md: ac5d947328c6f937f72585e5653c4d82c79a58c31298acba3ac751974014e237
+sha256.contract.yaml: 57359cbd6ed0774aae6909877d981c61bfd134b08c9058f7ae59882f466b51ba
+sha256.AGENTS.md: 7502b27279f910398897674ff5eda476e4dfef32dfa99c6e8fb1d71627153925
 overridable.AGENTS.base.md: protected
 overridable.PLAN.md: overridable
 overridable.contract.yaml: overridable
