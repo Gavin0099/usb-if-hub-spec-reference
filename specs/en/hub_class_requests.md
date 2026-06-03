@@ -187,13 +187,18 @@ This page does not answer:
 **Setup-field summary**
 
 - `bRequest`: `GET_DESCRIPTOR`
-- `wValue`: encodes descriptor type and descriptor index; still `spec_defined` in this repo
+- `wValue`: encodes hub descriptor type `0x29` together with the descriptor index
 - `wIndex`: `0x0000`
-- `wLength`: depends on descriptor size; still `spec_defined`
+- `wLength`: depends on hub descriptor length; this repo does not hardcode it to a single fixed constant
 
 **Governed linkage**
 
 - This is the request family that exposes the fields summarized in `specs/hub_descriptor.md`.
+
+**Reviewed surface**
+
+- This repo has now narrowed the class-specific `GET_DESCRIPTOR` descriptor type surface to `0x29`
+- This still does not claim that every host request-length strategy has completed correctness verification
 
 **Related tables**
 
@@ -222,13 +227,18 @@ This page does not answer:
 **Setup-field summary**
 
 - `bRequest`: `SET_DESCRIPTOR`
-- `wValue`: encodes descriptor type and descriptor index; still `spec_defined`
+- `wValue`: encodes hub descriptor type `0x29` together with the descriptor index
 - `wIndex`: `0x0000`
-- `wLength`: depends on payload size; still `spec_defined`
+- `wLength`: depends on descriptor payload size
 
 **Governed linkage**
 
 - Belongs to the same descriptor family as `GET_DESCRIPTOR`, but support should not be assumed.
+
+**Reviewed surface**
+
+- This repo has now narrowed the class-specific `SET_DESCRIPTOR` descriptor type surface to `0x29`
+- This does not mean all hubs implement `SET_DESCRIPTOR`
 
 **Related tables**
 

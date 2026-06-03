@@ -32,6 +32,7 @@ semantic_verification_claimed: false
 ## Main Descriptor Fields
 
 Hub descriptor 由 class-specific `GET_DESCRIPTOR` request 回傳，descriptor type 為 `0x29`。
+在本 repo 目前的 reviewed request surface 中，`GET_DESCRIPTOR` / `SET_DESCRIPTOR` 都已明確連回這個 descriptor type 邊界，但仍未升級成 page-level verified claim。
 
 | Offset | Field | Size | Role Summary |
 |---|---|---|---|

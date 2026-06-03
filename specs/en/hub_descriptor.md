@@ -32,6 +32,7 @@ This page does not answer:
 ## Main Descriptor Fields
 
 The hub descriptor is returned by the class-specific `GET_DESCRIPTOR` request, with descriptor type `0x29`.
+In this repo's current reviewed request surface, both `GET_DESCRIPTOR` and `SET_DESCRIPTOR` are now explicitly linked back to that descriptor-type boundary, but this still does not upgrade the page into a page-level verified claim.
 
 | Offset | Field | Size | Role Summary |
 |---|---|---|---|

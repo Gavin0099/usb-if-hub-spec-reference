@@ -187,13 +187,18 @@ semantic_verification_claimed: false
 **Setup-field summary**
 
 - `bRequest`: `GET_DESCRIPTOR`
-- `wValue`: 編碼 descriptor type 與 descriptor index；在本 repo 仍為 `spec_defined`
+- `wValue`: 編碼 hub descriptor type `0x29` 與 descriptor index
 - `wIndex`: `0x0000`
-- `wLength`: 依 descriptor size 而定；仍為 `spec_defined`
+- `wLength`: 依 hub descriptor length 而定；本 repo 不把它硬寫成單一固定常數
 
 **Governed linkage**
 
 - 這個 request family 會暴露 `specs/hub_descriptor.md` 摘要的那些欄位
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：hub class-specific `GET_DESCRIPTOR` 的 descriptor type 是 `0x29`
+- 仍未在本 repo 內宣告每一種 host request length 策略都已完成 correctness verification
 
 **Related tables**
 
@@ -222,13 +227,18 @@ semantic_verification_claimed: false
 **Setup-field summary**
 
 - `bRequest`: `SET_DESCRIPTOR`
-- `wValue`: 編碼 descriptor type 與 descriptor index；仍為 `spec_defined`
+- `wValue`: 編碼 hub descriptor type `0x29` 與 descriptor index
 - `wIndex`: `0x0000`
-- `wLength`: 依 payload size 而定；仍為 `spec_defined`
+- `wLength`: 依 descriptor payload size 而定
 
 **Governed linkage**
 
 - 與 `GET_DESCRIPTOR` 同屬 descriptor family，但不能預設一定支援
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：若討論 hub class-specific `SET_DESCRIPTOR`，descriptor type surface 仍是 `0x29`
+- 這不等於宣告所有 hubs 都支援 `SET_DESCRIPTOR`
 
 **Related tables**
 
