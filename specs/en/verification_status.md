@@ -14,12 +14,12 @@ semantic_verification_claimed: false
 
 ## Current Verification Summary
 
-| Area | Tracked entries | Verified | Reviewed / inferred | Missing |
-|---|---:|---:|---:|---:|
-| Class requests | 12 | 0 | 12 | 0 |
-| Feature selectors | 25 | 0 | 25 | 0 |
-| Port status bits | 10 | 8 | 2 | 0 |
-| **Total** | **47** | **8** | **39** | **0** |
+| Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
+|---|---:|---:|---:|---:|---:|
+| Class requests | 12 | 0 | 10 | 2 | 0 |
+| Feature selectors | 25 | 0 | 4 | 21 | 0 |
+| Port status bits | 10 | 8 | 0 | 2 | 0 |
+| **Total** | **47** | **8** | **14** | **25** | **0** |
 
 ## Evidence Packet Summary
 
@@ -30,7 +30,7 @@ semantic_verification_claimed: false
 Term definitions:
 
 - **Verified**: Passed the entry-level promotion gate; `claim_level: verified`; scope is explicitly bounded.
-- **Reviewed non-promoting**: Review complete; evidence packet exists; `eligible_for_verified: false`; promotion is deliberately withheld.
+- **Reviewed**: Repo-local review is complete and the surface has been narrowed to a clearer field role, selector boundary, or request linkage, but it has not been promoted to entry-level verified.
 - **Inferred**: Organized but not yet reviewed or verified; `claim_level: inferred`.
 
 ## Verified Entries
@@ -60,9 +60,15 @@ The following are outside the verified scope for all entries:
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
-## Reviewed but Not Promoted
+## Reviewed Surface Notes
 
-No reviewed non-promoting entries currently exist. All reviewed packets have already been promoted through Phase 8H.
+The current `reviewed` surface is concentrated in two areas:
+
+- class requests: `SET_FEATURE` / `CLEAR_FEATURE`, TT request families, and `GET_DESCRIPTOR` / `SET_DESCRIPTOR`
+- feature selectors: `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, and `C_PORT_ENABLE`
+
+These `reviewed` surfaces mean the repo-local boundary is clearer than a purely inferred surface.
+They do **not** mean those surfaces have completed entry-level verified promotion.
 
 ## What This Page Does Not Claim
 
@@ -71,7 +77,7 @@ This page does not claim:
 - USB 2.0 hub behavior is fully verified.
 - Any page-level or table-level verification is complete.
 - PORT_ENABLE state machine, SetPortFeature, or error recovery behavior is verified.
-- Inferred entries are safe to use as implementation truth.
+- Reviewed or inferred entries are safe to use as implementation truth.
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.
 
@@ -79,8 +85,8 @@ This page does not claim:
 
 When verification maturity or tracked entry counts change, the following visible surfaces must be checked together:
 
-- `specs/index.md`: tracked / verified summary on the zh-TW homepage
-- `specs/en/index.md`: tracked / verified summary on the English homepage
+- `specs/index.md`: tracked / maturity summary on the zh-TW homepage
+- `specs/en/index.md`: tracked / maturity summary on the English homepage
 - `specs/verification_status.md`: zh-TW verification summary, verified entries, and non-claims
 - `specs/en/verification_status.md`: English verification summary, verified entries, and non-claims
 - Core spec pages: `Non-claims` and `Governed Linkage` sections for the affected entry family
@@ -89,6 +95,7 @@ Maintenance rules:
 
 - Wording-only updates must not change YAML source-of-truth semantics.
 - New or promoted verified entries must update the verification status pages and homepage summaries together.
+- When a surface moves from inferred to reviewed, the maturity breakdown on this page must also be updated.
 - Evidence packet count changes must update the evidence packet summary.
 - Adding `section_refs` metadata must not automatically claim that a page or entry is verified.
 
@@ -99,7 +106,7 @@ The entry counts and packet statuses on this page are a manually maintained stat
 This page must be updated manually when any of the following change:
 
 - `claim_level` on any entry in `tables/port_status_bit_matrix.yaml`
-- Entries added or updated in `tables/class_request_matrix.yaml` or `tables/feature_selector_matrix.yaml`
+- `evidence_status` / `claim_level` on entries in `tables/class_request_matrix.yaml` or `tables/feature_selector_matrix.yaml`
 - Packets added or modified in `evidence/entry_verification_packets/`
 
 The governed YAML tables are the source of truth; this page is a visibility summary only.

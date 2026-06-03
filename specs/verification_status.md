@@ -14,12 +14,12 @@ semantic_verification_claimed: false
 
 ## Current Verification Summary
 
-| Area | Tracked entries | Verified | Reviewed / inferred | Missing |
-|---|---:|---:|---:|---:|
-| Class requests | 12 | 0 | 12 | 0 |
-| Feature selectors | 25 | 0 | 25 | 0 |
-| Port status bits | 10 | 8 | 2 | 0 |
-| **Total** | **47** | **8** | **39** | **0** |
+| Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
+|---|---:|---:|---:|---:|---:|
+| Class requests | 12 | 0 | 10 | 2 | 0 |
+| Feature selectors | 25 | 0 | 4 | 21 | 0 |
+| Port status bits | 10 | 8 | 0 | 2 | 0 |
+| **Total** | **47** | **8** | **14** | **25** | **0** |
 
 ## Evidence Packet Summary
 
@@ -30,7 +30,7 @@ semantic_verification_claimed: false
 Term definitions:
 
 - **Verified**: 已通過 entry-level promotion gate；`claim_level: verified`；scope 仍受明確邊界限制。
-- **Reviewed non-promoting**: review 已完成，evidence packet 已存在，但 `eligible_for_verified: false`，因此刻意不升級 promotion。
+- **Reviewed**: repo-local review 已完成，對應 surface 已收斂到較明確的欄位角色、selector boundary 或 request linkage，但尚未升成 entry-level verified。
 - **Inferred**: 已整理但尚未 reviewed / verified；`claim_level: inferred`。
 
 ## Verified Entries
@@ -60,9 +60,15 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
-## Reviewed but Not Promoted
+## Reviewed Surface Notes
 
-目前沒有 reviewed non-promoting entries。現有 reviewed packets 都已完成 promotion。
+目前 `reviewed` surface 主要集中在兩類：
+
+- class requests：`SET_FEATURE` / `CLEAR_FEATURE`、TT request families、`GET_DESCRIPTOR` / `SET_DESCRIPTOR`
+- feature selectors：`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`
+
+這些 `reviewed` surfaces 代表 repo-local boundary 已被收斂得更清楚，
+但不代表這些 surfaces 已完成 entry-level verified promotion。
 
 ## What This Page Does Not Claim
 
@@ -70,8 +76,8 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 
 - USB 2.0 hub behavior 已整體 verified
 - 任何 page-level 或 table-level verification 已完成
-- `PORT_ENABLE` state machine、`SetPortFeature`、error recovery behavior 已 verified
-- inferred entries 可以直接當作 implementation truth
+- `PORT_ENABLE` state machine、`SetPortFeature`、`ClearPortFeature`、error recovery behavior 已 verified
+- reviewed 或 inferred entries 可以直接當作 implementation truth
 - 這個 reference 可以覆蓋 consuming repos 的 confirmed project facts
 - 靜態數字會自動和 YAML tables 同步
 
@@ -79,8 +85,8 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 
 當 verification maturity 或 tracked entry count 改變時，下列 visible surfaces 必須一起檢查：
 
-- `specs/index.md`: zh-TW 首頁的 tracked / verified 摘要
-- `specs/en/index.md`: English 首頁的 tracked / verified 摘要
+- `specs/index.md`: zh-TW 首頁的 tracked / maturity 摘要
+- `specs/en/index.md`: English 首頁的 tracked / maturity 摘要
 - `specs/verification_status.md`: zh-TW verification summary、verified entries、non-claims
 - `specs/en/verification_status.md`: English verification summary、verified entries、non-claims
 - 核心 spec pages：受影響 entry family 的 `Non-claims` 與 `Governed Linkage`
@@ -89,6 +95,7 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 
 - 只改 visible wording，不得改變 YAML source-of-truth semantics。
 - 新增或升級 verified entry 時，首頁摘要與 verification status 必須一起更新。
+- surface 從 inferred 升到 reviewed 時，verification summary 的 maturity breakdown 也要同步更新。
 - evidence packet count 改變時，evidence packet summary 也要同步更新。
 - 新增 `section_refs` metadata，不得自動宣告 page 或 entry 已 verified。
 
@@ -99,7 +106,7 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 下列任一來源有變時，本頁都必須手動更新：
 
 - `tables/port_status_bit_matrix.yaml` 內任一 entry 的 `claim_level`
-- `tables/class_request_matrix.yaml` 與 `tables/feature_selector_matrix.yaml` 的 entries
+- `tables/class_request_matrix.yaml` 與 `tables/feature_selector_matrix.yaml` 的 `evidence_status` / `claim_level`
 - `evidence/entry_verification_packets/` 新增或修改 packet
 
 governed YAML tables 才是 source of truth；本頁只是 visibility summary。
