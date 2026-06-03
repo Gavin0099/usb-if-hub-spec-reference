@@ -111,7 +111,10 @@
 - Pilot promotion boundary remains limited to `wPortStatus.bit0.PORT_CONNECTION`
 - Gate and table unchanged; no claim_level upgrade
 
-[ ] Phase 3 (deferred) : Wire cross-repo reference
-- Register as referenced spec source in `USB-Hub-Firmware-Architecture-Contract`
-- Define allowed usage boundary: clarify semantics only, never override confirmed project facts
-- Depends on traceability surface expectations in consuming repos
+[x] Phase 3 : Wire cross-repo reference
+- `USB-Hub-Firmware-Architecture-Contract TRACEABILITY_MATRIX.md` updated (`11ed715`)
+- Allowed usage defined: look up field/bit names, clarify semantics, support escalation, align terminology
+- Prohibited usage defined: must not override project facts, must not treat inferred as implementation truth
+- Entry-level verification status documented: 1/10 port status bits verified at bit_name_and_position_only scope
+- `specs/verification_status.md` linked from consuming repo
+- Claim ceiling: `cross_repo_reference_registered_only`
