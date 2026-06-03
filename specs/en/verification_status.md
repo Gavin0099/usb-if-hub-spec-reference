@@ -16,10 +16,10 @@ semantic_verification_claimed: false
 
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
-| Class requests | 12 | 0 | 10 | 2 | 0 |
-| Feature selectors | 25 | 0 | 11 | 14 | 0 |
+| Class requests | 12 | 0 | 12 | 0 | 0 |
+| Feature selectors | 25 | 0 | 15 | 10 | 0 |
 | Port status bits | 10 | 8 | 0 | 2 | 0 |
-| **Total** | **47** | **8** | **21** | **18** | **0** |
+| **Total** | **47** | **8** | **27** | **12** | **0** |
 
 ## Evidence Packet Summary
 
@@ -37,8 +37,8 @@ Term definitions:
 
 | Area | Current maturity center | Notes |
 |---|---|---|
-| Class requests | reviewed-heavy | `SET_FEATURE` / `CLEAR_FEATURE`, TT request families, and `GET_DESCRIPTOR` / `SET_DESCRIPTOR` have reviewed surfaces, but no entry-level verified promotions yet |
-| Feature selectors | mixed reviewed / inferred | `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, `PORT_POWER`, `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` have reviewed linkage; remaining selector coverage is still inferred |
+| Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
+| Feature selectors | reviewed / inferred mixed | `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`, `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` have reviewed linkage; remaining selector coverage is still inferred |
 | Port status bits | verified-heavy | 8 core hub/port status-change bits have completed entry-level verified promotion; the remaining 2 boundary placeholders are still inferred |
 
 ## Reviewed Surface Inventory
@@ -46,6 +46,7 @@ Term definitions:
 The current `reviewed` surface is concentrated in these items:
 
 - class requests
+  - `GET_STATUS` hub / port
   - `SET_FEATURE` hub / port
   - `CLEAR_FEATURE` hub / port
   - `CLEAR_TT_BUFFER`
@@ -55,6 +56,10 @@ The current `reviewed` surface is concentrated in these items:
   - `GET_DESCRIPTOR`
   - `SET_DESCRIPTOR`
 - feature selectors
+  - `PORT_CONNECTION`
+  - `PORT_OVER_CURRENT`
+  - `PORT_LOW_SPEED`
+  - `PORT_HIGH_SPEED`
   - `C_HUB_LOCAL_POWER`
   - `C_HUB_OVER_CURRENT`
   - `C_PORT_CONNECTION`

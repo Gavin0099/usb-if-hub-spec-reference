@@ -60,6 +60,10 @@ These selectors:
 
 The current repo-local reviewed linkage surface includes:
 
+- `PORT_CONNECTION` <-> `wPortStatus bit 0` as `GET_STATUS` context only
+- `PORT_OVER_CURRENT` <-> `wPortStatus bit 3` as `GET_STATUS` context only
+- `PORT_LOW_SPEED` <-> speed indication in `wPortStatus` as `GET_STATUS` context only
+- `PORT_HIGH_SPEED` <-> speed indication in `wPortStatus` as `GET_STATUS` context only
 - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
@@ -74,6 +78,7 @@ The current repo-local reviewed linkage surface includes:
 
 This means the selector namespace boundary has been reviewed as a reference surface.
 It does **not** mean host-side sequencing, selector side effects, or broader request behavior is verified.
+For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` rows, the reviewed surface is context-only `GET_STATUS` linkage; it does not make them direct `SET_FEATURE` / `CLEAR_FEATURE` targets.
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -111,7 +116,7 @@ This repo currently treats selectors in three reading categories:
 ## Relationship to Request Families
 
 - `SET_FEATURE` / `CLEAR_FEATURE` `wValue` should link back to `tables/feature_selector_matrix.yaml`.
-- `GET_STATUS` does not directly "set a selector", but some matrix entries still exist to explain the status / change-field comparison context.
+- `GET_STATUS` does not directly "set a selector", but `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` now have reviewed context-only linkage to the status-field comparison surface.
 - `C_PORT_*` selectors should be read together with `change bits` on `specs/port_status_bits.md`.
 - Reviewed `PORT_*`, `C_HUB_*`, and `C_PORT_*` linkage should still be treated as selector boundary only, not as behavioral proof for `SET_FEATURE` or `CLEAR_FEATURE`.
 

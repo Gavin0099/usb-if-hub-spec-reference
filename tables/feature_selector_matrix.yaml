@@ -7,7 +7,7 @@ status: draft
 # Phase 3G: Feature selector minimum boundary for E-05
 # Standard port selector range 0-22 defines the boundary that vendor selectors must not overlap.
 # Hub selectors share numerical values with port selectors but target a different recipient.
-# All entries: claim_level=inferred, evidence_status=review_required
+# Entries remain claim_level=inferred; evidence_status is mixed reviewed / review_required.
 entries:
 
   # ── Hub feature selectors ──────────────────────────────────────────────────
@@ -57,8 +57,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Read-only in wPortStatus bit 0. Not a direct SetFeature/ClearFeature target. Listed to complete namespace."
+    evidence_status: reviewed
+    notes: "Reviewed GET_STATUS context-only linkage: read-only in wPortStatus bit 0. Not a direct SetFeature/ClearFeature target. Selector/status-field linkage only; not connection behavior verification."
 
   - selector_id: usb20_port_enable
     selector_value: 1
@@ -103,8 +103,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Read-only in wPortStatus bit 3. Not a direct SetFeature/ClearFeature target."
+    evidence_status: reviewed
+    notes: "Reviewed GET_STATUS context-only linkage: read-only in wPortStatus bit 3. Not a direct SetFeature/ClearFeature target. Selector/status-field linkage only; not over-current behavior verification."
 
   - selector_id: usb20_port_reset
     selector_value: 4
@@ -186,8 +186,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Speed indication in wPortStatus. Not directly settable via SetFeature."
+    evidence_status: reviewed
+    notes: "Reviewed GET_STATUS context-only linkage: speed indication in wPortStatus. Not directly settable via SetFeature. Selector/status-field linkage only; not combined speed decoding verification."
 
   - selector_id: usb20_port_high_speed
     selector_value: 10
@@ -200,8 +200,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
-    notes: "Speed indication in wPortStatus. Not directly settable via SetFeature."
+    evidence_status: reviewed
+    notes: "Reviewed GET_STATUS context-only linkage: speed indication in wPortStatus. Not directly settable via SetFeature. Selector/status-field linkage only; not combined speed decoding verification."
 
   - selector_id: usb20_port_reserved_11
     selector_value: 11

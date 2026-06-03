@@ -30,12 +30,14 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
-      Returns wHubStatus (2 bytes) + wHubChange (2 bytes). Total wLength=4.
-      bmRequestType=0xA0 (D7=1 D2H, D6:5=01 class, D4:0=00000 device).
-      wIndex=0 (hub itself). Hub status bits defined separately in hub_status_matrix.
+      Reviewed linkage surface: returns wHubStatus (2 bytes) + wHubChange
+      (2 bytes), total wLength=4. bmRequestType=0xA0 (D7=1 D2H,
+      D6:5=01 class, D4:0=00000 device). wIndex=0 (hub itself).
+      Hub status/change bits are defined separately in port_status_bit_matrix.
+      Request linkage only; not hub status behavior verification.
 
   - request_id: usb20_get_status_port
     request_family: GET_STATUS
@@ -58,13 +60,14 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
     drift_status: clean
     notes: >
-      Returns wPortStatus (2 bytes) + wPortChange (2 bytes). Total wLength=4.
-      bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other).
-      wIndex=1-based port number. Port status/change bits defined separately
-      in port_status_matrix (Phase 4A).
+      Reviewed linkage surface: returns wPortStatus (2 bytes) + wPortChange
+      (2 bytes), total wLength=4. bmRequestType=0xA3 (D7=1 D2H,
+      D6:5=01 class, D4:0=00011 other). wIndex=1-based port number.
+      Port status/change bits are defined separately in port_status_bit_matrix.
+      Request linkage only; not host polling, debounce, or port behavior verification.
 
   - request_id: usb20_set_feature_hub
     request_family: SET_FEATURE

@@ -77,6 +77,13 @@ This page does not answer:
 
 - Hub request maps to `wHubStatus` + `wHubChange`.
 - Port request maps to `wPortStatus` + `wPortChange`.
+- The current reviewed request surface covers this request-to-status-field linkage only.
+- The related context-only selector surface includes `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` as `GET_STATUS` comparison anchors.
+
+**Reviewed surface**
+
+- This repo now narrows `GET_STATUS` to the hub/port status-field linkage surface.
+- This still does not claim returned-bit behavior, host polling strategy, debounce behavior, or combined speed decoding correctness.
 
 **Related tables**
 
