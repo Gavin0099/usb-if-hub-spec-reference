@@ -46,7 +46,7 @@ semantic_verification_claimed: false
 ## Boundary Conditions for Reading This Page
 
 - `bmRequestType` 在本頁只摘要到 direction / type / recipient 層級
-- 若 `wValue`、`wIndex`、`wLength` 仍標記為 `spec_defined`，表示本 repo 尚未完成這些欄位的 section-level verification
+- 若 `wValue`、`wIndex`、`wLength` 仍標成抽象欄位名稱，而不是固定常數，表示本 repo 已收斂欄位角色，但尚未把完整 encoding 升級成 verified truth
 - port-recipient、hub-recipient 與 TT requests 不能混讀；TT requests 只適用於內嵌 TT 的 HS hubs
 
 ## `GET_STATUS`
@@ -267,13 +267,18 @@ semantic_verification_claimed: false
 **Setup-field summary**
 
 - `bRequest`: `CLEAR_TT_BUFFER`
-- `wValue`: 帶有 TT-related encoded fields；仍為 `spec_defined`
-- `wIndex`: 帶有 TT port / context；仍為 `spec_defined`
+- `wValue`: 帶有 TT buffer selector fields
+- `wIndex`: 帶有 TT port 或相關 context
 - `wLength`: `0`
 
 **Governed linkage**
 
 - 屬於 TT request family，只對 TT-capable hubs 有意義
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：`wValue` 不是任意值，而是 TT buffer selector fields
+- `wIndex` 用於指定 TT port 或相關 TT context
 
 **Related tables**
 
@@ -303,12 +308,17 @@ semantic_verification_claimed: false
 
 - `bRequest`: `RESET_TT`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context；仍為 `spec_defined`
+- `wIndex`: TT port number
 - `wLength`: `0`
 
 **Governed linkage**
 
 - 屬於 TT request family，並與 TT recovery / restart concerns 有關
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：`RESET_TT` 的 `wValue` 為 `0x0000`
+- `wIndex` 用於指定要 reset 的 TT port / TT target instance
 
 **Related tables**
 
@@ -338,12 +348,18 @@ semantic_verification_claimed: false
 
 - `bRequest`: `GET_TT_STATE`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context；仍為 `spec_defined`
-- `wLength`: TT state data length；仍為 `spec_defined`
+- `wIndex`: TT port 或相關 diagnostic context
+- `wLength`: TT state data length
 
 **Governed linkage**
 
 - 回傳內容屬於 TT diagnostic surface，不應與一般 port status semantics 混讀
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：`wValue` 為 `0x0000`
+- `wIndex` 指向 TT port / diagnostic context
+- `wLength` 代表 TT state data length，但本 repo 不把它硬寫成固定常數
 
 **Related tables**
 
@@ -373,12 +389,17 @@ semantic_verification_claimed: false
 
 - `bRequest`: `STOP_TT`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context；仍為 `spec_defined`
+- `wIndex`: TT port number
 - `wLength`: `0`
 
 **Governed linkage**
 
 - 屬於 TT request family，通常和 TT diagnostics 或 recovery scenarios 相關
+
+**Reviewed surface**
+
+- 本 repo 已收斂到：`STOP_TT` 的 `wValue` 為 `0x0000`
+- `wIndex` 用於指定停止 split-transaction processing 的 TT port / TT target instance
 
 **Related tables**
 

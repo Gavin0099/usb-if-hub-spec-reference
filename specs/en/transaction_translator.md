@@ -2,7 +2,7 @@
 title: Transaction Translator
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-01"
+last_reviewed: "2026-06-03"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -41,7 +41,16 @@ A Transaction Translator (TT) exists inside a high-speed hub to bridge host-issu
 - `GET_TT_STATE`
 - `STOP_TT`
 
-These requests apply only to HS hubs with embedded TT, and some fields remain `spec_defined` pending section-level verification.
+These requests apply only to HS hubs with embedded TT.
+
+The current reviewed request surface in this repo is:
+
+- `CLEAR_TT_BUFFER`: `wValue` carries TT buffer selector fields; `wIndex` selects the TT port / context
+- `RESET_TT`: `wValue = 0x0000`; `wIndex` selects the TT port number
+- `GET_TT_STATE`: `wValue = 0x0000`; `wIndex` selects the TT port / diagnostic context; `wLength` is the TT state data length
+- `STOP_TT`: `wValue = 0x0000`; `wIndex` selects the TT port number
+
+That still does not amount to full field-level verified encoding, and it does not claim TT behavior has completed semantic verification.
 
 ## Split Transaction Flow
 

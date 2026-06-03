@@ -46,7 +46,7 @@ This page does not answer:
 ## Boundary Conditions for Reading This Page
 
 - `bmRequestType` is summarized here only at the direction / type / recipient level.
-- If `wValue`, `wIndex`, or `wLength` are still marked `spec_defined`, this repo has not completed section-level field verification for them.
+- If `wValue`, `wIndex`, or `wLength` still appear as abstract field-role names rather than fixed constants, this repo has narrowed the field role but has not upgraded the full encoding into verified truth.
 - Port-recipient and hub-recipient requests must not be merged, and TT requests apply only to HS hubs with embedded TT.
 
 ## `GET_STATUS`
@@ -267,13 +267,18 @@ This page does not answer:
 **Setup-field summary**
 
 - `bRequest`: `CLEAR_TT_BUFFER`
-- `wValue`: carries TT-related encoded fields; still `spec_defined`
-- `wIndex`: carries TT port / context; still `spec_defined`
+- `wValue`: carries TT buffer selector fields
+- `wIndex`: carries TT port or related context
 - `wLength`: `0`
 
 **Governed linkage**
 
 - Belongs to the TT request family and is meaningful only on TT-capable hubs.
+
+**Reviewed surface**
+
+- This repo now narrows `wValue` to TT buffer selector fields rather than an arbitrary opaque value
+- `wIndex` is used to select the TT port or related TT context
 
 **Related tables**
 
@@ -303,12 +308,17 @@ This page does not answer:
 
 - `bRequest`: `RESET_TT`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context; still `spec_defined`
+- `wIndex`: TT port number
 - `wLength`: `0`
 
 **Governed linkage**
 
 - Belongs to the TT request family and relates to TT recovery / restart concerns.
+
+**Reviewed surface**
+
+- This repo now narrows `RESET_TT` to `wValue = 0x0000`
+- `wIndex` selects the TT port or TT target instance to reset
 
 **Related tables**
 
@@ -338,12 +348,18 @@ This page does not answer:
 
 - `bRequest`: `GET_TT_STATE`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context; still `spec_defined`
-- `wLength`: TT state data length; still `spec_defined`
+- `wIndex`: TT port or related diagnostic context
+- `wLength`: TT state data length
 
 **Governed linkage**
 
 - The returned content belongs to the TT diagnostic surface and should not be merged with general port status semantics.
+
+**Reviewed surface**
+
+- This repo now narrows `wValue` to `0x0000`
+- `wIndex` points to the TT port / diagnostic context
+- `wLength` names the TT state data length, but this repo still does not hardcode it to a single constant
 
 **Related tables**
 
@@ -373,12 +389,17 @@ This page does not answer:
 
 - `bRequest`: `STOP_TT`
 - `wValue`: `0x0000`
-- `wIndex`: TT port / context; still `spec_defined`
+- `wIndex`: TT port number
 - `wLength`: `0`
 
 **Governed linkage**
 
 - Belongs to the TT request family and is typically relevant to TT diagnostics or recovery scenarios.
+
+**Reviewed surface**
+
+- This repo now narrows `STOP_TT` to `wValue = 0x0000`
+- `wIndex` selects the TT port or TT target instance whose split-transaction processing is being stopped
 
 **Related tables**
 
