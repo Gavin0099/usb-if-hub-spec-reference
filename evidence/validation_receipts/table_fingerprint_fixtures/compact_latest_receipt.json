@@ -1,0 +1,16 @@
+{
+  "probe": "probe_table_fingerprint.py",
+  "authority_ceiling": "table_content_fingerprint_drift_only",
+  "mode": "compact",
+  "result": "PASS",
+  "compacted_at": "2026-06-03T09:52:55.438818+00:00",
+  "baseline_in": "C:\\Users\\reiko\\AppData\\Local\\Temp\\tmpvlwbi0nx\\baseline.jsonl",
+  "baseline_out": "C:\\Users\\reiko\\AppData\\Local\\Temp\\tmpvlwbi0nx\\baseline_compacted.jsonl",
+  "input_entries": 2,
+  "entries_retained": 1,
+  "entries_removed": 1,
+  "errors": [],
+  "time_bound": true,
+  "observation_only": true,
+  "does_not_change_claim_level": true
+}

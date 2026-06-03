@@ -2,7 +2,7 @@
   "probe": "probe_table_fingerprint.py",
   "smoke_runner": "smoke_probe_table_fingerprint_fixtures.py",
   "authority_ceiling": "table_content_fingerprint_drift_only",
-  "total_cases": 3,
+  "total_cases": 4,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -15,7 +15,7 @@
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\no_drift_receipt.json",
       "stderr": "",
-      "note": "same content as baseline \u2192 no drift"
+      "note": "same content as baseline, no drift"
     },
     {
       "name": "hash_changed",
@@ -26,7 +26,7 @@
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\hash_changed_receipt.json",
       "stderr": "",
-      "note": "table modified since baseline was recorded \u2192 drift detected"
+      "note": "table modified since baseline was recorded, drift detected"
     },
     {
       "name": "baseline_fresh",
@@ -37,7 +37,18 @@
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\baseline_fresh_receipt.json",
       "stderr": "",
-      "note": "fresh baseline mode \u2192 1 table fingerprinted"
+      "note": "fresh baseline mode, 1 table fingerprinted"
+    },
+    {
+      "name": "compact_latest",
+      "mode": "compact",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "metric_detail": "compact_entries: input expected=2 actual=2; retained expected=1 actual=1; removed expected=1 actual=1",
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\compact_latest_receipt.json",
+      "stderr": "",
+      "note": "duplicate baseline entries compacted to latest table_id entry"
     }
   ]
 }

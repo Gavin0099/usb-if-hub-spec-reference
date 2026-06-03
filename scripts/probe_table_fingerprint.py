@@ -3,11 +3,12 @@
 
 Authority ceiling: table_content_fingerprint_drift_only
 
-Two modes:
+Modes:
   --mode baseline  Compute content hashes for all governed tables and append
                    each entry to --baseline-out (JSONL). Emits a receipt.
   --mode check     Re-hash governed tables, compare to stored baseline entries,
                    and emit a drift receipt. Exit 1 if any table has drifted.
+  --mode compact   Rewrite a baseline JSONL to the latest entry per table_id.
 
 Non-goals:
   - Does not validate table semantics.
@@ -69,10 +70,38 @@ def _load_baseline(path: Path) -> dict[str, dict]:
     return latest
 
 
+def _load_baseline_entries(path: Path) -> tuple[list[dict], list[dict]]:
+    if not path.exists():
+        return [], [{"error": "BASELINE_NOT_FOUND", "path": str(path)}]
+
+    entries: list[dict] = []
+    errors: list[dict] = []
+    for line_no, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw.strip()
+        if not line:
+            continue
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError as exc:
+            errors.append({"line": line_no, "error": "INVALID_JSON", "detail": str(exc)})
+            continue
+        if not entry.get("table_id"):
+            errors.append({"line": line_no, "error": "MISSING_TABLE_ID"})
+            continue
+        entries.append(entry)
+    return entries, errors
+
+
 def _append_jsonl(path: Path, obj: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as f:
         f.write(json.dumps(obj, ensure_ascii=True) + "\n")
+
+
+def _write_jsonl(path: Path, entries: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = "".join(json.dumps(e, ensure_ascii=True) + "\n" for e in entries)
+    path.write_text(text, encoding="utf-8")
 
 
 def _resolve_table_path(table_entry: dict, manifest_path: Path) -> Path:
@@ -223,13 +252,64 @@ def run_check(args: argparse.Namespace) -> int:
     return 0 if passed else 1
 
 
+def run_compact(args: argparse.Namespace) -> int:
+    baseline_in = Path(args.baseline_in)
+    baseline_out = Path(args.baseline_out)
+    receipt_path = Path(args.receipt_out) if args.receipt_out else None
+    compacted_at = _utc_now_iso()
+
+    entries, errors = _load_baseline_entries(baseline_in)
+    latest: dict[str, dict] = {}
+    for entry in entries:
+        latest[entry["table_id"]] = entry
+
+    compacted_entries = [latest[tid] for tid in sorted(latest)]
+    if not errors:
+        _write_jsonl(baseline_out, compacted_entries)
+
+    removed_count = len(entries) - len(compacted_entries)
+    result = "PASS" if not errors else "ERROR"
+    receipt = {
+        "probe": "probe_table_fingerprint.py",
+        "authority_ceiling": "table_content_fingerprint_drift_only",
+        "mode": "compact",
+        "result": result,
+        "compacted_at": compacted_at,
+        "baseline_in": str(baseline_in),
+        "baseline_out": str(baseline_out),
+        "input_entries": len(entries),
+        "entries_retained": len(compacted_entries),
+        "entries_removed": removed_count,
+        "errors": errors,
+        **GOVERNANCE_METADATA,
+    }
+
+    if receipt_path:
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        receipt_path.write_text(
+            json.dumps(receipt, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
+        )
+
+    if errors:
+        print(f"Table fingerprint compact ERROR: {len(errors)} error(s)")
+        for e in errors:
+            print(f"  [error] line {e.get('line', '-')}: {e['error']}")
+        return 1
+
+    print(
+        "Table fingerprint compact PASSED: "
+        f"{len(entries)} input, {len(compacted_entries)} retained, {removed_count} removed"
+    )
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Fingerprint governed tables for drift detection."
     )
     parser.add_argument(
-        "--mode", choices=["baseline", "check"], required=True,
-        help="baseline: record hashes; check: compare to stored baseline",
+        "--mode", choices=["baseline", "check", "compact"], required=True,
+        help="baseline: record hashes; check: compare to stored baseline; compact: keep latest entry per table_id",
     )
     parser.add_argument("--manifest", default=str(DEFAULT_MANIFEST),
                         help="governed_tables manifest YAML")
@@ -243,6 +323,8 @@ def main() -> int:
 
     if args.mode == "baseline":
         return run_baseline(args)
+    if args.mode == "compact":
+        return run_compact(args)
     return run_check(args)
 
 
