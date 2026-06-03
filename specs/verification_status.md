@@ -116,7 +116,7 @@ Verified scope 明確限制在 **bit name and bit position**。
 - USB 2.0 hub behavior 已完整 verified。
 - 任何 page-level 或 table-level verification 已完成。
 - `PORT_ENABLE` state machine、`SetPortFeature`、`ClearPortFeature` 或 error recovery behavior 已 verified。
-- Reviewed 或 inferred entries 可直接當作 implementation truth。
+- Reviewed entries 可直接當作 implementation truth。
 - Reviewed coverage 等同 verified coverage。
 - 本 reference 可覆蓋 consuming repositories 中已確認的 project facts。
 - Static counts 是與 YAML tables 自動同步的 source of truth。

@@ -7,7 +7,7 @@ status: draft
 # Phase 3G: Feature selector minimum boundary for E-05
 # Standard port selector range 0-22 defines the boundary that vendor selectors must not overlap.
 # Hub selectors share numerical values with port selectors but target a different recipient.
-# Entries remain claim_level=inferred; evidence_status is mixed reviewed / review_required.
+# Entries remain claim_level=inferred; all tracked selector boundaries are reviewed.
 entries:
 
   # ── Hub feature selectors ──────────────────────────────────────────────────

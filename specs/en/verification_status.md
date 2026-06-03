@@ -116,7 +116,7 @@ This page does not claim:
 - USB 2.0 hub behavior is fully verified.
 - Any page-level or table-level verification is complete.
 - `PORT_ENABLE` state machine, `SetPortFeature`, `ClearPortFeature`, or error recovery behavior is verified.
-- Reviewed or inferred entries are safe to use as implementation truth.
+- Reviewed entries are safe to use as implementation truth.
 - Reviewed coverage is the same as verified coverage.
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.
