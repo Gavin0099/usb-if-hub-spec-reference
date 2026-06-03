@@ -6,6 +6,8 @@
   "authority_ceiling": "entry_level_verified_gate_only",
   "errors": [],
   "allowed_pilot_entries": [
+    "wHubStatus.bit0.HUB_LOCAL_POWER",
+    "wHubStatus.bit1.HUB_OVER_CURRENT",
     "wPortChange.bit0.C_PORT_CONNECTION",
     "wPortChange.bit1.C_PORT_ENABLE",
     "wPortStatus.bit0.PORT_CONNECTION",

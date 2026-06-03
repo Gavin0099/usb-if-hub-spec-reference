@@ -2,13 +2,13 @@ matrix_id: test_invalid_verified_nonpilot
 claim_level: inferred
 evidence_status: review_required
 entries:
-  - field: wHubStatus
+  - field: wHubChange
     bit: 0
-    name: HUB_LOCAL_POWER
+    name: C_HUB_LOCAL_POWER
     status: defined
-    description: Hub local power status
+    description: Hub local power status change
     claim_level: verified
     evidence_status: reviewed
     evidence:
-      source: USB 2.0 hub class request status field
+      source: USB 2.0 hub class request change field
       review_required: false

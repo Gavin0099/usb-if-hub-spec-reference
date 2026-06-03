@@ -7,10 +7,11 @@ This validator does not verify USB semantics. It only enforces that any
 entry-level `claim_level: verified` promotion is backed by a narrow, explicit,
 reviewable evidence packet.
 
-Current Phase 8I scope:
+Current Phase 8J scope:
   - only `tables/port_status_bit_matrix.yaml`
   - allowed entries: `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`,
-    `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`
+    `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`,
+    `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`
   - only `bit_name_and_position_only` verification scope
 """
 
@@ -34,6 +35,8 @@ ALLOWED_PILOT_ENTRIES = {
     "wPortStatus.bit1.PORT_ENABLE",
     "wPortChange.bit0.C_PORT_CONNECTION",
     "wPortChange.bit1.C_PORT_ENABLE",
+    "wHubStatus.bit0.HUB_LOCAL_POWER",
+    "wHubStatus.bit1.HUB_OVER_CURRENT",
 }
 REQUIRED_SCOPE = "bit_name_and_position_only"
 REQUIRED_EXCLUDES = {
@@ -91,7 +94,7 @@ def validate(matrix_path: Path, packet_dir: Path) -> tuple[str, list[dict[str, s
         if entry_id not in ALLOWED_PILOT_ENTRIES:
             fail(
                 "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE",
-                f"{loc}: only allowed pilot entries {sorted(ALLOWED_PILOT_ENTRIES)} may be promoted in Phase 8I",
+                f"{loc}: only allowed pilot entries {sorted(ALLOWED_PILOT_ENTRIES)} may be promoted in Phase 8J",
             )
             continue
 

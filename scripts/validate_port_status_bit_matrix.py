@@ -9,7 +9,7 @@ Structural checks only:
   R3 field must be one of wHubStatus, wHubChange, wPortStatus, wPortChange
   R4 status must be one of defined, reserved, vendor_or_spec_dependent
   R5 claim/evidence must exist at matrix level or entry level
-  R6 claim_level=verified is only allowed for the gated Phase 8I pilot set
+  R6 claim_level=verified is only allowed for the gated Phase 8J pilot set
 """
 
 from __future__ import annotations
@@ -35,6 +35,8 @@ ALLOWED_VERIFIED_ENTRY_IDS = {
     "wPortStatus.bit1.PORT_ENABLE",
     "wPortChange.bit0.C_PORT_CONNECTION",
     "wPortChange.bit1.C_PORT_ENABLE",
+    "wHubStatus.bit0.HUB_LOCAL_POWER",
+    "wHubStatus.bit1.HUB_OVER_CURRENT",
 }
 
 

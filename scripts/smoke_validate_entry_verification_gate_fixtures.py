@@ -49,7 +49,7 @@ CASES = [
         "name": "invalid_verified_nonpilot",
         "expected_exit": 1,
         "expected_error_codes": ["VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"],
-        "note": "entry not in allowed pilot set (HUB_LOCAL_POWER) must be rejected",
+        "note": "entry not in the allowed Phase 8J pilot set (C_HUB_LOCAL_POWER) must be rejected",
     },
 ]
 

@@ -38,7 +38,7 @@ features:
     details: Lists when a consuming firmware repository should enter Standard Escalation Mode.
     link: /en/escalation_table
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 4 verified out of 47 tracked entries.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 6 verified out of 47 tracked entries.
     link: /en/verification_status
 ---
 

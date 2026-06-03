@@ -18,14 +18,14 @@ semantic_verification_claimed: false
 |---|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 |
-| Port status bits | 10 | 4 | 6 | 0 |
-| **Total** | **47** | **4** | **43** | **0** |
+| Port status bits | 10 | 6 | 4 | 0 |
+| **Total** | **47** | **6** | **41** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 4 | All correspond to promoted verified entries |
+| Entry verification packets | 6 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -35,7 +35,7 @@ Term definitions:
 
 ## Verified Entries
 
-Four entries have completed verified promotion (Phase 8E, Phase 8H, and Phase 8I):
+Six entries have completed verified promotion (Phase 8E, Phase 8H, Phase 8I, and Phase 8J):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -43,6 +43,8 @@ Four entries have completed verified promotion (Phase 8E, Phase 8H, and Phase 8I
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
 | C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
+| HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |
+| HUB_OVER_CURRENT | `wHubStatus` | bit 1 | bit name and bit position only |
 
 The verified scope is explicitly limited to **bit name and bit position**.
 
