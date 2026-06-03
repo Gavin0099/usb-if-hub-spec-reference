@@ -1,16 +1,16 @@
 ---
-title: 驗證狀態
+title: Verification Status
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-03"
 semantic_verification_claimed: false
 ---
 
-# 驗證狀態
+# Verification Status
 
-> 本頁是靜態可見性摘要，不是自動生成的 source of truth。  
-> governed YAML tables 與 evidence packets 才是權威來源。  
-> 只要 table entry 或 packet 狀態有變動，本頁數字就必須手動更新。
+> 本頁是靜態可見性摘要，不是自動產生的 source of truth。  
+> governed YAML tables 與 evidence packets 才是 authoritative source materials。  
+> 只要 table entries 或 packet 狀態改變，本頁數字都必須手動更新。
 
 ## Current Verification Summary
 
@@ -29,22 +29,22 @@ semantic_verification_claimed: false
 
 Term definitions:
 
-- **Verified**: 已通過 entry-level promotion gate，`claim_level: verified`，scope 有明確上限。
-- **Reviewed non-promoting**: review 已完成，evidence packet 存在，但 `eligible_for_verified: false`，promotion 刻意保留。
-- **Inferred**: 已整理，但尚未進入 reviewed 或 verified 狀態，`claim_level: inferred`。
+- **Verified**: 已通過 entry-level promotion gate；`claim_level: verified`；scope 有明確邊界。
+- **Reviewed non-promoting**: review 已完成；evidence packet 存在；`eligible_for_verified: false`；刻意不做 promotion。
+- **Inferred**: 已整理但尚未進入 reviewed / verified；`claim_level: inferred`。
 
 ## Verified Entries
 
-目前有兩筆 entry 完成 verified promotion（Phase 8E、Phase 8H）：
+目前有 2 個 entries 已完成 verified promotion（Phase 8E 與 Phase 8H）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 
-Verified scope 明確限定為：**bit 名稱與 bit 位置**。
+verified scope 明確限制在 **bit name** 與 **bit position**。
 
-以下都不在 verified scope 內：
+以下內容都不在 verified scope 內：
 
 - Timing behavior
 - State transition behavior
@@ -56,7 +56,7 @@ Verified scope 明確限定為：**bit 名稱與 bit 位置**。
 
 ## Reviewed but Not Promoted
 
-目前沒有 reviewed non-promoting entries。所有 reviewed packets 都已在 Phase 8H 前後完成 promotion。
+目前沒有 reviewed non-promoting entries。現有 reviewed packets 都已在 Phase 8H 前後完成 promotion。
 
 ## What This Page Does Not Claim
 
@@ -64,19 +64,19 @@ Verified scope 明確限定為：**bit 名稱與 bit 位置**。
 
 - USB 2.0 hub behavior 已完整 verified
 - 任何 page-level 或 table-level verification 已完成
-- PORT_ENABLE 的 state machine、SetPortFeature 或 error recovery behavior 已 verified
-- inferred entries 可以直接當成 implementation truth
-- 本 reference 可以覆蓋 consuming repo 裡已確認的 project facts
-- 這些靜態數字是與 YAML tables 自動同步的
+- PORT_ENABLE state machine、SetPortFeature、error recovery behavior 已 verified
+- inferred entries 可直接當 implementation truth 使用
+- 這份 reference 可覆蓋 consuming repos 的 confirmed project facts
+- 靜態數字已和 YAML tables 自動同步
 
 ## Static Numbers Note
 
-本頁的 entry 數量與 packet 狀態是人工維護的靜態摘要。
+本頁的 entry counts 與 packet statuses 都是人工維護的靜態摘要。
 
-只要以下任何一項變動，本頁就必須手動更新：
+只要以下任一項改變，本頁都必須手動更新：
 
-- `tables/port_status_bit_matrix.yaml` 中任何 entry 的 `claim_level`
-- `tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 的 entry 數量或狀態
-- `evidence/entry_verification_packets/` 中 packet 的新增、刪除或狀態變更
+- `tables/port_status_bit_matrix.yaml` 中任一 entry 的 `claim_level`
+- `tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 的 entries 數量或狀態
+- `evidence/entry_verification_packets/` 中新增或修改 packet
 
-governed YAML tables 是 source of truth；本頁只是 visibility summary。
+governed YAML tables 才是 source of truth；本頁只是 visibility summary。
