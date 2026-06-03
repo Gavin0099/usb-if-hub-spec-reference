@@ -30,8 +30,38 @@ semantic_verification_claimed: false
 Term definitions:
 
 - **Verified**: 已通過 entry-level promotion gate；`claim_level: verified`；scope 仍受明確邊界限制。
-- **Reviewed**: repo-local review 已完成，對應 surface 已收斂到較明確的欄位角色、selector boundary 或 request linkage，但尚未升成 entry-level verified。
+- **Reviewed**: repo-local review 已完成，對應 surface 已收斂到較清楚的欄位角色、selector boundary 或 request linkage，但尚未升成 entry-level verified。
 - **Inferred**: 已整理但尚未 reviewed / verified；`claim_level: inferred`。
+
+## Coverage Map
+
+| Area | Current maturity center | Notes |
+|---|---|---|
+| Class requests | reviewed-heavy | `SET_FEATURE` / `CLEAR_FEATURE`、TT request families、`GET_DESCRIPTOR` / `SET_DESCRIPTOR` 已有 reviewed surface，但尚未有 entry-level verified promotion |
+| Feature selectors | inferred-heavy with reviewed anchors | `C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE` 已做 reviewed linkage；其餘多數仍是 inferred namespace coverage |
+| Port status bits | verified-heavy | 8 筆核心 hub/port status-change bits 已完成 entry-level verified promotion；剩餘 2 筆 boundary placeholders 仍是 inferred |
+
+## Reviewed Surface Inventory
+
+目前 `reviewed` surface 主要集中在這些項目：
+
+- class requests
+  - `SET_FEATURE` hub / port
+  - `CLEAR_FEATURE` hub / port
+  - `CLEAR_TT_BUFFER`
+  - `RESET_TT`
+  - `GET_TT_STATE`
+  - `STOP_TT`
+  - `GET_DESCRIPTOR`
+  - `SET_DESCRIPTOR`
+- feature selectors
+  - `C_HUB_LOCAL_POWER`
+  - `C_HUB_OVER_CURRENT`
+  - `C_PORT_CONNECTION`
+  - `C_PORT_ENABLE`
+
+這些 `reviewed` surfaces 代表 repo-local boundary 已比純 inferred surface 更明確，
+但不代表這些 surfaces 已完成 entry-level verified promotion。
 
 ## Verified Entries
 
@@ -60,16 +90,6 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
-## Reviewed Surface Notes
-
-目前 `reviewed` surface 主要集中在兩類：
-
-- class requests：`SET_FEATURE` / `CLEAR_FEATURE`、TT request families、`GET_DESCRIPTOR` / `SET_DESCRIPTOR`
-- feature selectors：`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`
-
-這些 `reviewed` surfaces 代表 repo-local boundary 已被收斂得更清楚，
-但不代表這些 surfaces 已完成 entry-level verified promotion。
-
 ## What This Page Does Not Claim
 
 本頁不宣告：
@@ -87,15 +107,15 @@ verified scope 目前仍明確限制在 **bit name** 與 **bit position**。
 
 - `specs/index.md`: zh-TW 首頁的 tracked / maturity 摘要
 - `specs/en/index.md`: English 首頁的 tracked / maturity 摘要
-- `specs/verification_status.md`: zh-TW verification summary、verified entries、non-claims
-- `specs/en/verification_status.md`: English verification summary、verified entries、non-claims
+- `specs/verification_status.md`: zh-TW verification summary、coverage map、verified entries、non-claims
+- `specs/en/verification_status.md`: English verification summary、coverage map、verified entries、non-claims
 - 核心 spec pages：受影響 entry family 的 `Non-claims` 與 `Governed Linkage`
 
 維護規則：
 
 - 只改 visible wording，不得改變 YAML source-of-truth semantics。
 - 新增或升級 verified entry 時，首頁摘要與 verification status 必須一起更新。
-- surface 從 inferred 升到 reviewed 時，verification summary 的 maturity breakdown 也要同步更新。
+- surface 從 inferred 升到 reviewed 時，verification summary 與 coverage map 的 maturity breakdown 也要同步更新。
 - evidence packet count 改變時，evidence packet summary 也要同步更新。
 - 新增 `section_refs` metadata，不得自動宣告 page 或 entry 已 verified。
 
