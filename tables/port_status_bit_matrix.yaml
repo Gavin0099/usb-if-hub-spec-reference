@@ -130,9 +130,19 @@ entries:
     name: PORT_STATUS_HIGH_BIT_BOUNDARY
     status: reserved
     description: Boundary placeholder for 16-bit status field
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus high-bit boundary placeholder"
+        note: "Reviewed boundary surface only; not a defined status-bit semantic verification."
     evidence:
       source: USB 2.0 hub class request status field
-      review_required: true
+      review_required: false
+      reviewed_scope: high_bit_boundary_placeholder_only
 
   - field: wPortChange
     bit: 0
@@ -179,6 +189,16 @@ entries:
     name: PORT_CHANGE_HIGH_BIT_BOUNDARY
     status: reserved
     description: Boundary placeholder for 16-bit change field
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortChange high-bit boundary placeholder"
+        note: "Reviewed boundary surface only; not a defined change-bit semantic verification."
     evidence:
       source: USB 2.0 hub class request change field
-      review_required: true
+      review_required: false
+      reviewed_scope: high_bit_boundary_placeholder_only

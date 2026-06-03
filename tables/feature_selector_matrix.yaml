@@ -357,7 +357,8 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed SetFeature selector-boundary surface: PORT_TEST is selector value 21 in the standard port selector range 0-22. Selector boundary only; not test-mode behavior, electrical signaling, or compliance verification."
 
   - selector_id: usb20_port_indicator
     selector_value: 22
@@ -370,4 +371,5 @@ entries:
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
     claim_level: inferred
-    evidence_status: review_required
+    evidence_status: reviewed
+    notes: "Reviewed SetFeature selector-boundary surface: PORT_INDICATOR is selector value 22 in the standard port selector range 0-22. Selector boundary only; not indicator behavior, policy, or hardware support verification."

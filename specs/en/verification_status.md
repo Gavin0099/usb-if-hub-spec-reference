@@ -17,9 +17,9 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Class requests | 12 | 0 | 12 | 0 | 0 |
-| Feature selectors | 25 | 0 | 23 | 2 | 0 |
-| Port status bits | 10 | 8 | 0 | 2 | 0 |
-| **Total** | **47** | **8** | **35** | **4** | **0** |
+| Feature selectors | 25 | 0 | 25 | 0 | 0 |
+| Port status bits | 10 | 8 | 2 | 0 | 0 |
+| **Total** | **47** | **8** | **39** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -38,8 +38,8 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
-| Feature selectors | reviewed-heavy | `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`, reserved selector slots `5-7` / `11-15`, `C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` have reviewed linkage; `PORT_TEST` and `PORT_INDICATOR` remain inferred |
-| Port status bits | verified-heavy | 8 core hub/port status-change bits have completed entry-level verified promotion; the remaining 2 boundary placeholders are still inferred |
+| Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
+| Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 2 high-bit boundary placeholders are reviewed boundary markers only |
 
 ## Reviewed Surface Inventory
 
@@ -73,6 +73,11 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_SUSPEND`
   - `PORT_RESET`
   - `PORT_POWER`
+  - `PORT_TEST`
+  - `PORT_INDICATOR`
+- port status bit boundary placeholders
+  - `PORT_STATUS_HIGH_BIT_BOUNDARY`
+  - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 
 These `reviewed` surfaces mean the repo-local boundary is clearer than a purely inferred surface.
 They do **not** mean those surfaces have completed entry-level verified promotion.
@@ -112,6 +117,7 @@ This page does not claim:
 - Any page-level or table-level verification is complete.
 - `PORT_ENABLE` state machine, `SetPortFeature`, `ClearPortFeature`, or error recovery behavior is verified.
 - Reviewed or inferred entries are safe to use as implementation truth.
+- Reviewed coverage is the same as verified coverage.
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.
 

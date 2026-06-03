@@ -91,6 +91,18 @@ So this page frontmatter still remains:
 - `status: review_required`
 - `semantic_verification_claimed: false`
 
+## Reviewed Boundary Placeholders
+
+Two high-bit placeholders are now reviewed as boundary markers only:
+
+| Entry | Field | Bit | Reviewed Scope |
+|---|---|---|---|
+| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status-field high boundary only |
+| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change-field high boundary only |
+
+These reviewed placeholders do not define additional status semantics.
+They only keep the machine-readable layer explicit that the status and change fields are 16-bit fields with a high-boundary marker.
+
 ## Change Bits and `CLEAR_FEATURE`
 
 You can think of `wPortChange` / `wHubChange` as latched change-event flags:
@@ -160,4 +172,5 @@ That metadata block is evidence attachment only. It does not automatically promo
 - This page does not claim that all port status bits have completed PDF-level verification.
 - This page does not claim that speed bits, reset bits, power bits, or adjacent semantics are fully verified.
 - This page does not expand two verified entries into a claim that the whole page is verified.
+- This page does not treat high-bit boundary placeholders as defined status or change semantics.
 - This page does not elevate the status-bit summary into firmware implementation authority.

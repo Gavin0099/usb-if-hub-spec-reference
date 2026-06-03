@@ -76,11 +76,14 @@ The current repo-local reviewed linkage surface includes:
 - `PORT_SUSPEND` <-> standard port suspend feature selector boundary
 - `PORT_RESET` <-> standard port reset feature selector boundary
 - `PORT_POWER` <-> standard port power feature selector boundary
+- `PORT_TEST` <-> standard port test feature selector boundary
+- `PORT_INDICATOR` <-> standard port indicator feature selector boundary
 
 This means the selector namespace boundary has been reviewed as a reference surface.
 It does **not** mean host-side sequencing, selector side effects, or broader request behavior is verified.
 For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` rows, the reviewed surface is context-only `GET_STATUS` linkage; it does not make them direct `SET_FEATURE` / `CLEAR_FEATURE` targets.
 For the reserved rows, the reviewed surface only means those numeric slots remain inside the standard port selector boundary; it does not make them usable selectors or vendor-extension slots.
+For `PORT_TEST` and `PORT_INDICATOR`, the reviewed surface is selector-boundary only; it does not verify test-mode behavior, indicator policy, or hardware support.
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -123,6 +126,7 @@ This repo currently treats selectors in three reading categories:
 - `GET_STATUS` does not directly "set a selector", but `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` now have reviewed context-only linkage to the status-field comparison surface.
 - `C_PORT_*` selectors should be read together with `change bits` on `specs/port_status_bits.md`.
 - Reviewed `PORT_*`, `C_HUB_*`, and `C_PORT_*` linkage should still be treated as selector boundary only, not as behavioral proof for `SET_FEATURE` or `CLEAR_FEATURE`.
+- `PORT_TEST` and `PORT_INDICATOR` remain outside behavior verification even though their selector slots are now reviewed.
 
 ## Governed Linkage
 

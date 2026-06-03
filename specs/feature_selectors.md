@@ -77,11 +77,14 @@ semantic_verification_claimed: false
 - `PORT_SUSPEND` <-> standard port suspend feature selector boundary
 - `PORT_RESET` <-> standard port reset feature selector boundary
 - `PORT_POWER` <-> standard port power feature selector boundary
+- `PORT_TEST` <-> standard port test feature selector boundary
+- `PORT_INDICATOR` <-> standard port indicator feature selector boundary
 
 這表示 selector namespace boundary 已作為 reference surface 完成 reviewed 收斂。
 這不代表 host-side sequencing、selector side effects 或更廣泛 request behavior 已 verified。
 對 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 來說，reviewed surface 只限 context-only `GET_STATUS` linkage；它們不是直接的 `SET_FEATURE` / `CLEAR_FEATURE` target。
 對 reserved rows 來說，reviewed surface 只代表那些數值仍位於 standard port selector boundary 內；它們不是可用 selector，也不是 vendor-extension slots。
+對 `PORT_TEST` 與 `PORT_INDICATOR` 來說，reviewed surface 只限 selector-boundary；它不驗證 test-mode behavior、indicator policy 或 hardware support。
 
 ## Port Standard Selector Boundary (`0-22`)
 
@@ -125,6 +128,7 @@ Representative selectors：
 - Reserved selector rows 只支援 standard boundary 判斷，不支援 behavior claim 或 implementation guidance。
 - `C_PORT_*` selectors 應與 `specs/port_status_bits.md` 的 `change bits` 一起閱讀。
 - Reviewed `PORT_*`、`C_HUB_*`、reserved 與 `C_PORT_*` linkage 仍只代表 selector boundary，不代表 `SET_FEATURE` 或 `CLEAR_FEATURE` 行為證明。
+- `PORT_TEST` 與 `PORT_INDICATOR` 的 selector slot 已 reviewed，但 behavior verification 仍不在本頁宣告範圍內。
 
 ## Governed Linkage
 
