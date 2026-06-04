@@ -175,16 +175,16 @@ Example:
 
 這兩者不應混淆。
 
-Current state:
+目前狀態：
 
-- selected pilot entries carry `section_refs`
+- 有選定的 pilot entries 會保留 `section_refs`
 - `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 是 live `verified`
 - 所有 verified scopes 仍限制為 `bit_name_and_position_only`
 - 其餘 defined port status/change entries 只是 reviewed namespace entries
 - high-bit boundary placeholders 是 reviewed boundary markers，不是 verified bit semantics
 - 這仍不代表 USB 2.0 PDF semantic verification 已完成
 
-如果 future wiki claim block 需要 `section_refs`，應保留 Phase 7A metadata structure，例如：
+若未來 wiki claim block 需要 `section_refs`，應保留 Phase 7A metadata 結構，例如：
 
 ```yaml
 section_refs:
