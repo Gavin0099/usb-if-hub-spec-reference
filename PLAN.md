@@ -1,130 +1,179 @@
-> **Last Updated**: 2026-06-02
+> **Last Updated**: 2026-06-04
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
 # PLAN
 
-[x] Phase 1 : Initialize governance baseline
-- Adopt `ai-governance-framework` v1.2.0
-- Create `contract.yaml`, `AGENTS.md`, `AGENTS.base.md`
-- Install git hooks
+This repository is a read-only USB hub specification reference layer. It
+clarifies USB hub standard semantics for consuming firmware repositories, but it
+does not govern firmware behavior and does not override confirmed project facts.
 
-[x] Phase 2 (partial) : Populate USB-IF spec reference tables
-- [x] Hub class request matrix (`tables/class_request_matrix.yaml`) — 12 entries, 9/9 families, coverage complete
-- [x] Feature selector matrix (`tables/feature_selector_matrix.yaml`) — 25 entries, port namespace `0–22` complete
-- [x] Port status bit matrix (`tables/port_status_bit_matrix.yaml`) — scaffold established, `wHub*` / `wPort*` entry surface active
-- [x] Hub descriptor field definitions page drafted and deepened
-- [x] Transaction Translator rules summary page drafted
-- [x] Standard Escalation trigger table (`specs/escalation_table.md`) drafted and localized
-- [x] Core spec pages remain `inferred` / `review_required` until PDF-backed verification exists
-- Claim ceiling: `inferred` / `review_required`. No PDF section-level verification performed.
+## Current State
 
-[x] Phase 2A : Specs wiki frontmatter bootstrap
-- Added YAML frontmatter to all spec pages
-- Fields include `title`, `claim_level: inferred`, `status: review_required`, `semantic_verification_claimed: false`
-- Wiki frontmatter validation established
-- Claim ceiling: `wiki_frontmatter_structural_consistency_only`
+- USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
+- Governed tracked entries: 47.
+- Entry-level verified entries: 8.
+- Reviewed entries: 39.
+- Inferred tracked entries: 0.
+- Verification scope remains narrow: verified entries are verified only for bit
+  name and bit position.
+- No page-level, table-level, firmware-behavior, or full USB compliance
+  verification is claimed.
 
-[x] Phase 2B : Wiki consistency probe (observation-only)
-- `probe_wiki_consistency.py`: regex token-search, governed table names vs specs page content
-- Fixture smoke gate established
-- Real-table advisory coverage has since been improved to practical 100% on current core pages after deepening work
-- Claim ceiling: `wiki_table_token_consistency_observation_only`
-- Capability: wiki/table lexical consistency is observable; semantic correctness is not yet proven
+## Completed Phases
 
-[x] Phase 4 : Machine-readable consumer access contract
-- Export manifest (`exports/usb20_hub_class_request_manifest.yaml`) listing governed tables
-- Validators: `validate_class_request_matrix`, `validate_feature_selector_matrix`, `validate_port_status_bit_matrix`, `validate_usb20_hub_class_request_manifest`
-- All validators remain structural only
-- Claim: `consumer_discovered_governed_table_access_gaps_closed`
-- Claim ceiling: `machine_readable_namespace_and_access_contract_only`
+### Phase 1 - Governance Baseline
 
-[x] Phase 5B : Table fingerprint baseline and drift observability
-- `probe_table_fingerprint.py`: `--mode baseline` / `--mode check`
-- `evidence/table_fingerprint_baseline.jsonl` recorded for 3 governed tables
-- Drift receipt recorded with PASS / no drift at baseline checkpoint
-- Smoke tests established
-- Claim ceiling: `table_content_fingerprint_drift_only`
+- Adopted `ai-governance-framework` baseline.
+- Created `contract.yaml`, `AGENTS.md`, and `AGENTS.base.md`.
+- Installed repo governance hooks.
 
-[x] Phase 5C : Traceability surface sync
-- Update consuming repo `TRACEABILITY_MATRIX` with manifest path + receipt links
-- Explicit non-claims section in traceability entry
-- Consuming repo commit: `USB-Hub-Firmware-Architecture-Contract 0e08179`
+Claim ceiling: governance baseline only.
 
-[x] Phase 6 : USB 2.0 Core Reference Deepening
-- [x] Phase 6A — `specs/port_status_bits.md` deepened into LLM-readable reference summary
-- [x] Phase 6B — `specs/hub_descriptor.md` and `specs/en/hub_descriptor.md` deepened (`d189cda`)
-- [x] Phase 6C — `specs/hub_class_requests.md` and `specs/en/hub_class_requests.md` setup-field detail pass completed (`0907113`)
-- [x] Minimal bilingual glossary added and linked (`292928c`)
-- Core outcome: existing USB 2.0 hub pages are now reviewable, consumer-usable, and bounded by explicit non-claims
-- Claim ceiling remains `inferred` / `review_required`
+### Phase 2 - USB-IF Spec Reference Tables
 
-[x] Phase 7A : Section Anchor Schema
-- Add `contract/section_anchor_schema.yaml`
-- Add `governance/SECTION_ANCHOR_SCHEMA.md`
-- `section_refs` established as evidence metadata only
-- `section_refs` does not upgrade `claim_level`
-- Legacy scalar `section_anchor` remains compatible
+- `tables/class_request_matrix.yaml`: 12 entries, 9/9 USB 2.0 hub class request
+  families covered.
+- `tables/feature_selector_matrix.yaml`: 25 entries, standard port selector
+  namespace 0-22 covered, including reserved-boundary slots.
+- `tables/port_status_bit_matrix.yaml`: 10 tracked hub/port status and change
+  entries, including 8 verified entries and 2 reviewed high-bit boundary
+  placeholders.
+- Core bilingual spec pages are present under `specs/` and `specs/en/`.
 
-[x] Phase 7B : Port Status Section Anchor Pilot
-- Attach `section_refs` to selected `tables/port_status_bit_matrix.yaml` entries (`72269bf`)
-- Pilot entries: `PORT_CONNECTION`, `PORT_ENABLE`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`
-- Result: entry-level anchors can be attached without promoting `claim_level` or `evidence_status`
+Claim ceiling: structured spec-reference entries only; no firmware behavior.
 
-[x] Phase 7C : Wiki Section-Ref Usage Note
-- Add wiki-side `section_refs` usage note to `specs/port_status_bits.md` and `specs/en/port_status_bits.md` (`7dd0588`)
-- Clarify that wiki claim-block anchor metadata is allowed without verified promotion
+### Phase 2A - Wiki Frontmatter Bootstrap
 
-[x] Phase 8A : Entry verification evidence packet format
-- `contract/entry_verification_packet_schema.yaml` added
-- `governance/ENTRY_LEVEL_VERIFICATION.md` added
-- Packet existence is explicit evidence metadata, not verified promotion
+- Added required frontmatter to canonical spec pages.
+- Established `scripts/validate_wiki_frontmatter.py`.
 
-[x] Phase 8B : First evidence packet, no promotion
-- Pilot packet added for `wPortStatus.bit0.PORT_CONNECTION`
-- Target remains `claim_level: inferred`
-- Packet remains reviewable and non-promoting
+Claim ceiling: wiki frontmatter structural consistency only.
 
-[x] Phase 8C : Entry-level verified promotion gate
-- `validate_entry_verification_gate.py` added
-- Gate only permits future verified promotion for the pilot entry when a reviewed, eligible, narrow-scope packet exists
-- Page-level and table-level verified promotion remain disallowed
+### Phase 2B - Wiki/Table Consistency Probe
 
-[x] Phase 8D : Human-reviewable PDF evidence packet pilot
-- Pilot packet for `wPortStatus.bit0.PORT_CONNECTION` upgraded to human-reviewable form (`3bc241c`)
-- Packet remains narrow and preserves non-claims beyond bit name and bit position
+- Added observation-only wiki consistency probe and fixture smoke coverage.
+- Real table/page token coverage has been improved through later page deepening.
 
-[x] Phase 8E : First entry-level verified promotion
-- `tables/port_status_bit_matrix.yaml` now promotes only `wPortStatus.bit0.PORT_CONNECTION`
-- Verified scope remains `bit_name_and_position_only`
-- Page-level and table-level verified promotion remain disallowed
+Claim ceiling: lexical consistency observation only; no semantic proof.
 
-[x] Phase 8F : Wiki verified-scope propagation
-- `specs/port_status_bits.md` and `specs/en/port_status_bits.md` now explicitly describe the single live verified pilot entry
-- Wiki pages remain `claim_level: inferred` and do not inherit table-level promotion
-- Chinese port-status page encoding repaired while preserving the verification boundary
+### Phase 3 - Cross-Repo Reference Registration
 
-[x] Phase 8G : Non-promoting reviewed packet for PORT_ENABLE
-- Evidence packet added for `wPortStatus.bit1.PORT_ENABLE` (same section as pilot)
-- `eligible_for_verified: false` — promotion is deliberately withheld
-- `evidence_status: reviewed` — review completed; non-claims explicit
-- Pilot promotion boundary remains limited to `wPortStatus.bit0.PORT_CONNECTION`
-- Gate and table unchanged; no claim_level upgrade
+- Registered this repo as standard-side reference input in the consuming
+  firmware contract repo traceability surface.
+- Allowed usage: lookup, semantics clarification, escalation support,
+  terminology alignment.
+- Prohibited usage: overriding project facts, treating inferred/reviewed entries
+  as implementation truth.
 
-[x] Phase 8H : Expand promotion gate to PORT_ENABLE
-- Gate refactored from `PILOT_ENTRY_ID` (single string) to `ALLOWED_PILOT_ENTRIES` (set)
-- `wPortStatus.bit1.PORT_ENABLE` added to allowed pilot set
-- 2 new smoke fixtures added: `valid_verified_port_enable`, `invalid_verified_nonpilot` (6/6 PASS)
-- PORT_ENABLE packet updated: `eligible_for_verified: true`; `promotion_note` updated
-- `tables/port_status_bit_matrix.yaml` PORT_ENABLE entry: `claim_level: verified`
-- `specs/verification_status.md` and en: 2 verified, 0 reviewed non-promoting, 45 inferred
-- `specs/port_status_bits.md` and en: updated verified pilot description
-- Claim ceiling: `entry_level_verified_gate_only`; verified scope remains `bit_name_and_position_only`
+Claim ceiling: cross-repo reference registered only.
 
-[x] Phase 3 : Wire cross-repo reference
-- `USB-Hub-Firmware-Architecture-Contract TRACEABILITY_MATRIX.md` updated (`11ed715`)
-- Allowed usage defined: look up field/bit names, clarify semantics, support escalation, align terminology
-- Prohibited usage defined: must not override project facts, must not treat inferred as implementation truth
-- Entry-level verification status documented: 1/10 port status bits verified at bit_name_and_position_only scope
-- `specs/verification_status.md` linked from consuming repo
-- Claim ceiling: `cross_repo_reference_registered_only`
+### Phase 4 - Machine-Readable Consumer Access Contract
+
+- Added `exports/usb20_hub_class_request_manifest.yaml`.
+- Validators cover class request, feature selector, port status bit, and manifest
+  structure.
+
+Claim ceiling: machine-readable namespace and access contract only.
+
+### Phase 5B - Table Fingerprint Drift Observability
+
+- Added `scripts/probe_table_fingerprint.py`.
+- Supports `baseline`, `check`, and `compact` modes.
+- Current table fingerprint baseline is synchronized: 3 governed tables, 0 drift.
+
+Claim ceiling: table content fingerprint drift only.
+
+### Phase 6 - USB 2.0 Core Reference Deepening
+
+- Deepened core zh-TW and English pages for:
+  - hub descriptor
+  - hub class requests
+  - feature selectors
+  - port status bits
+  - transaction translator
+  - escalation table
+  - glossary
+- Current core pages are readable reference summaries with explicit non-claims.
+
+Claim ceiling: readable reference surface only; not semantic verification.
+
+### Phase 7 - Section Anchor Metadata
+
+- Added section anchor schema and governance documentation.
+- Attached section references to selected pilot entries.
+- Clarified that section references are evidence metadata and do not upgrade
+  claim level by themselves.
+
+Claim ceiling: section-ref metadata only.
+
+### Phase 8 - Entry-Level Verification Pilot
+
+- Added entry verification packet schema and governance guidance.
+- Added promotion gate for a bounded pilot set.
+- Current verified entries:
+  - `wPortStatus.bit0.PORT_CONNECTION`
+  - `wPortStatus.bit1.PORT_ENABLE`
+  - `wPortChange.bit0.C_PORT_CONNECTION`
+  - `wPortChange.bit1.C_PORT_ENABLE`
+  - `wHubStatus.bit0.HUB_LOCAL_POWER`
+  - `wHubStatus.bit1.HUB_OVER_CURRENT`
+  - `wHubChange.bit0.C_HUB_LOCAL_POWER`
+  - `wHubChange.bit1.C_HUB_OVER_CURRENT`
+- Verified scope for all 8 entries: bit name and bit position only.
+
+Claim ceiling: entry-level verified gate only.
+
+### Phase 9 - LLM Wiki Reference Surface Completion
+
+- Canonical visible wiki surface is under `specs/` and `specs/en/`.
+- Legacy `wiki/` pages have been demoted to orientation notes.
+- Homepage and verification status surfaces align to 47 tracked entries, 8
+  verified entries, 39 reviewed entries, and 0 inferred tracked entries.
+
+Claim ceiling: LLM reference readability and boundary clarity only.
+
+### Phase 10 - ai-governance Repo-Local Import
+
+- Pulled latest `ai-governance-framework` state at
+  `a0d42d15a43cf98be33dc8618deae8153d69ff62`.
+- Imported only repo-local reporting and reviewer-facing surfaces:
+  - `governance/RESPONSE_ENVELOPE_CONTRACT.md`
+  - `governance/TRUST_BOUNDARY_TAXONOMY.md`
+- Registered retained files in `governance/AUTHORITY.md`, `contract.yaml`, and
+  `governance/framework.lock.json`.
+- Excluded framework memory, artifacts, runtime profile validator, fleet
+  governance, and new CI workflow surfaces.
+
+Claim ceiling: reporting/reference governance surface only.
+
+## Active Validators
+
+- `python scripts\validate_wiki_frontmatter.py`
+- `python scripts\validate_wiki_source_coverage.py`
+- `python scripts\validate_feature_selector_matrix.py`
+- `python scripts\validate_port_status_bit_matrix.py`
+- `python scripts\validate_class_request_matrix.py`
+- `python scripts\validate_class_request_coverage.py --matrix tables\class_request_matrix.yaml`
+- `python scripts\probe_table_fingerprint.py --mode check --manifest exports\usb20_hub_class_request_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
+- `npm.cmd run build`
+
+## Open Work
+
+1. Audit visible README/governance copy for stale or mojibake reference wording.
+2. Decide whether to add a generated statistics validator for verification
+   counts; do not add it until the verified promotion workflow is stable enough
+   to define a durable contract.
+3. Continue entry-level verification only when narrow evidence packets and gate
+   scope are explicit.
+4. Keep consuming-repo integration as reference-only; any firmware behavior
+   change still belongs in the consuming repo's Standard Escalation Mode.
+
+## Cannot Claim
+
+- USB 2.0 hub behavior is fully verified.
+- All entries are PDF-semantically verified.
+- Reviewed coverage is the same as verified coverage.
+- This repo can override consuming firmware project facts.
+- Fleet governance is enabled.
+- Runtime profile validation or response envelope enforcement is active.
