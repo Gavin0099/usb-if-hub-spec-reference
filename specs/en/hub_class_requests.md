@@ -13,7 +13,7 @@ semantic_verification_claimed: false
 # Hub Class Requests
 
 > Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.
-> This page is a request-family reference summary, not a complete SETUP packet truth table and not a section-level PDF verification record.
+> This page is a request-family reference summary, not a complete setup-packet truth table and not a section-level PDF verification record.
 
 ## Page Purpose
 
