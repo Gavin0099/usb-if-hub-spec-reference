@@ -94,6 +94,13 @@ def _visible_expected_patterns(stats: dict[str, Any]) -> list[tuple[str, str]]:
     return patterns
 
 
+def _is_redirect_page(path: Path, text: str) -> bool:
+    rel = path.relative_to(ROOT)
+    if rel != Path("specs/index.md"):
+        return False
+    return "window.location.replace" in text and "./en/" in text
+
+
 def validate(stats: dict[str, Any], visible_files: list[Path]) -> tuple[str, list[dict[str, str]]]:
     errors: list[dict[str, str]] = []
     total = stats["total"]
@@ -118,6 +125,8 @@ def validate(stats: dict[str, Any], visible_files: list[Path]) -> tuple[str, lis
             errors.append({"code": "VISIBLE_FILE_MISSING", "message": str(path)})
             continue
         text = path.read_text(encoding="utf-8")
+        if _is_redirect_page(path, text):
+            continue
         for label, pattern in _visible_expected_patterns(stats):
             if not re.search(pattern, text):
                 rel = path.relative_to(ROOT)
