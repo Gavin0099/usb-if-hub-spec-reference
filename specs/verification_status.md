@@ -21,14 +21,14 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 21 | 11 | 10 | 0 | 0 |
-| **Total** | **86** | **31** | **55** | **0** | **0** |
+| Port status bits | 21 | 12 | 9 | 0 | 0 |
+| **Total** | **86** | **32** | **54** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 31 | 全部對應到已 promoted 的 verified entries |
+| Entry verification packets | 32 | 全部對應到已 promoted 的 verified entries |
 
 名詞定義：
 
@@ -116,6 +116,7 @@ semantic_verification_claimed: false
 | PORT_SUSPEND | `wPortStatus` | bit 2 | bit name and bit position only |
 | PORT_OVER_CURRENT | `wPortStatus` | bit 3 | bit name and bit position only |
 | PORT_RESET | `wPortStatus` | bit 4 | bit name and bit position only |
+| PORT_POWER | `wPortStatus` | bit 8 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
 | C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
 | HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |

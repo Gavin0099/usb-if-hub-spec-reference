@@ -43,6 +43,7 @@ TABLE_RULES = {
             "wPortStatus.bit2.PORT_SUSPEND",
             "wPortStatus.bit3.PORT_OVER_CURRENT",
             "wPortStatus.bit4.PORT_RESET",
+            "wPortStatus.bit8.PORT_POWER",
             "wPortChange.bit0.C_PORT_CONNECTION",
             "wPortChange.bit1.C_PORT_ENABLE",
             "wHubStatus.bit0.HUB_LOCAL_POWER",
