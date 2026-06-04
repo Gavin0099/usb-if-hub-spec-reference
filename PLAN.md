@@ -12,8 +12,8 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - Governed tracked entries: 86.
-- Entry-level verified entries: 34.
-- Reviewed entries: 52.
+- Entry-level verified entries: 36.
+- Reviewed entries: 50.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are verified only for
   descriptor field identity or bit name and bit position.
@@ -43,7 +43,7 @@ Claim ceiling: governance baseline only.
 - `tables/feature_selector_matrix.yaml`: 25 entries, standard port selector
   namespace 0-22 covered, including reserved-boundary slots.
 - `tables/port_status_bit_matrix.yaml`: 21 tracked hub/port status and change
-  entries, including 14 verified entries, 5 reviewed defined port
+  entries, including 16 verified entries, 3 reviewed defined port
   status/change namespace entries, and 2 reviewed high-bit boundary
   placeholders.
 - Core bilingual spec pages are present under `specs/` and `specs/en/`.
@@ -135,6 +135,8 @@ Claim ceiling: section-ref metadata only.
   - `wPortStatus.bit8.PORT_POWER`
   - `wPortStatus.bit9.PORT_LOW_SPEED`
   - `wPortStatus.bit10.PORT_HIGH_SPEED`
+  - `wPortStatus.bit11.PORT_TEST`
+  - `wPortStatus.bit12.PORT_INDICATOR`
   - `wPortChange.bit0.C_PORT_CONNECTION`
   - `wPortChange.bit1.C_PORT_ENABLE`
   - `wHubStatus.bit0.HUB_LOCAL_POWER`
@@ -155,7 +157,7 @@ Claim ceiling: section-ref metadata only.
   - `usb20_set_descriptor_hub`
 - Verified scope for the 8 hub descriptor entries: descriptor field identity
   only.
-- Verified scope for the 14 port/hub status-change entries: bit name and bit
+- Verified scope for the 16 port/hub status-change entries: bit name and bit
   position only.
 
 Claim ceiling: entry-level verified gate only.
@@ -164,8 +166,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 86 tracked entries, 34
-  verified entries, 52 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 86 tracked entries, 36
+  verified entries, 50 reviewed entries, and 0 inferred tracked entries.
 - Added `scripts/validate_reference_surface_statistics.py` to check that visible
   statistics remain aligned with governed tables and evidence packets.
 

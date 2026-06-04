@@ -70,11 +70,11 @@ semantic_verification_claimed: false
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field 的 high-boundary placeholder |
 
 新追蹤的 status/change entries 並不都代表 verified。  
-目前只有下面列出的 14 個 live verified entries 完成 entry-level promotion。
+目前只有下面列出的 16 個 live verified entries 完成 entry-level promotion。
 
 ## Live Verified Entries
 
-目前有 14 個 live governed entries 已提升為 `verified`：
+目前有 16 個 live governed entries 已提升為 `verified`：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -86,6 +86,8 @@ semantic_verification_claimed: false
 | `PORT_POWER` | `wPortStatus` | bit 8 | bit name and bit position only |
 | `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
 | `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
+| `PORT_TEST` | `wPortStatus` | bit 11 | bit name and bit position only |
+| `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
@@ -117,8 +119,6 @@ semantic_verification_claimed: false
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_TEST` | `wPortStatus` | bit 11 | bit name and bit position only |
-| `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
 | `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
 | `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
@@ -206,6 +206,6 @@ section_refs:
 
 - 本頁不宣告所有 port status bits 都已完成 PDF-level verification。
 - 本頁不宣告 speed bits、reset bits、power bits 或相鄰 semantics 已全面 verified。
-- 本頁不把 14 個 verified entries 擴張成整頁 verified。
+- 本頁不把 16 個 verified entries 擴張成整頁 verified。
 - 本頁不把 high-bit boundary placeholders 視為已定義的 status 或 change semantics。
 - 本頁不把 status-bit summary 提升成 firmware implementation authority。

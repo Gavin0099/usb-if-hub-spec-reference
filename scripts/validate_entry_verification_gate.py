@@ -46,6 +46,8 @@ TABLE_RULES = {
             "wPortStatus.bit8.PORT_POWER",
             "wPortStatus.bit9.PORT_LOW_SPEED",
             "wPortStatus.bit10.PORT_HIGH_SPEED",
+            "wPortStatus.bit11.PORT_TEST",
+            "wPortStatus.bit12.PORT_INDICATOR",
             "wPortChange.bit0.C_PORT_CONNECTION",
             "wPortChange.bit1.C_PORT_ENABLE",
             "wHubStatus.bit0.HUB_LOCAL_POWER",
