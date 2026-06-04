@@ -19,16 +19,16 @@ semantic_verification_claimed: false
 | Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
-| Class requests | 12 | 0 | 12 | 0 | 0 |
+| Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **86** | **16** | **70** | **0** | **0** |
+| **Total** | **86** | **28** | **58** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 16 | All correspond to promoted verified entries |
+| Entry verification packets | 28 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -43,7 +43,7 @@ Term definitions:
 | Hub descriptor fields | verified | All 8 tracked hub descriptor fields have descriptor field identity verified; this does not verify descriptor dumps or device behavior |
 | Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
 | Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
-| Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
+| Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
 | Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 11 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
 
@@ -60,16 +60,6 @@ The current `reviewed` surface is concentrated in these items:
   - `STOP_TT`
 - escalation triggers
   - `E-01` through `E-10`
-- class requests
-  - `GET_STATUS` hub / port
-  - `SET_FEATURE` hub / port
-  - `CLEAR_FEATURE` hub / port
-  - `CLEAR_TT_BUFFER`
-  - `RESET_TT`
-  - `GET_TT_STATE`
-  - `STOP_TT`
-  - `GET_DESCRIPTOR`
-  - `SET_DESCRIPTOR`
 - feature selectors
   - `PORT_CONNECTION`
   - `PORT_OVER_CURRENT`

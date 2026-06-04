@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-04
+
+target:
+  surface: governed_table_entry
+  table: class_request_matrix
+  entry_id: usb20_get_status_port
+
+evidence:
+  spec: usb20
+  section: "11.24.2"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    GET_STATUS with port recipient setup fields (bmRequestType 0xA3,
+    bRequest GET_STATUS, wIndex=port number, wLength=4) are documented at
+    the class request linkage layer.
+  reviewer_note: >
+    Reviewed for request linkage only. No state transition, timing, or host-side
+    behavior is claimed.
+
+review_checklist:
+  - Confirm section linkage and setup fields for usb20_get_status_port in section 11.24.2.
+  - Confirm scope is limited to request-linkage identity.
+  - Confirm no firmware or host-stack behavior is claimed.
+  - Confirm no full USB compliance interpretation is attached.
+
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single entry-level verified promotion for `usb20_get_status_port`.
+    This remains request linkage only.
+
+non_claims:
+  - This packet does not claim full port status-change behavior.
+  - This packet does not claim project-specific port polling behavior.

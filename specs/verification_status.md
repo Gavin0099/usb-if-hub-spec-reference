@@ -19,16 +19,16 @@ semantic_verification_claimed: false
 | Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
-| Class requests | 12 | 0 | 12 | 0 | 0 |
+| Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **86** | **16** | **70** | **0** | **0** |
+| **Total** | **86** | **28** | **58** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 16 | All correspond to promoted verified entries |
+| Entry verification packets | 28 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -43,7 +43,7 @@ Term definitions:
 | Hub descriptor fields | verified | 全部 8 個 tracked hub descriptor fields 已完成 descriptor field identity verified；不驗證 descriptor dumps 或 device behavior |
 | Transaction Translator entries | reviewed | 全部 10 個 tracked TT type、think-time 與 request-linkage entries 已有 reviewed reference-boundary surfaces，但未宣告 split-transaction behavior verification |
 | Escalation triggers | reviewed | 全部 10 個 E-01 到 E-10 trigger boundaries 已有 reviewed reference surfaces，但 escalation execution 仍由 consuming repos 負責 |
-| Class requests | reviewed | 全部 12 個 tracked class requests 已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
+| Class requests | verified | 全部 12 個 tracked class requests 已完成 request-linkage-only verified promotions |
 | Feature selectors | reviewed | 全部 25 個 tracked feature selectors 已有 reviewed selector-boundary 或 reserved-boundary surfaces |
 | Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；另外 11 個 defined port status/change bits 與 2 個 high-bit boundary placeholders 只是 reviewed namespace/boundary entries |
 
@@ -60,16 +60,6 @@ Term definitions:
   - `STOP_TT`
 - escalation triggers
   - `E-01` through `E-10`
-- class requests
-  - `GET_STATUS` hub / port
-  - `SET_FEATURE` hub / port
-  - `CLEAR_FEATURE` hub / port
-  - `CLEAR_TT_BUFFER`
-  - `RESET_TT`
-  - `GET_TT_STATE`
-  - `STOP_TT`
-  - `GET_DESCRIPTOR`
-  - `SET_DESCRIPTOR`
 - feature selectors
   - `PORT_CONNECTION`
   - `PORT_OVER_CURRENT`
@@ -110,20 +100,32 @@ Term definitions:
 
 ## Verified Entries
 
-目前共有 8 個 entries 已完成 verified promotion（Phase 8E、Phase 8H、Phase 8I、Phase 8J、Phase 8K）：
+目前共有 20 個 entries 已完成 verified promotion：
 
-| Entry | Field | Bit | Verified Scope |
-|---|---|---|---|
-| PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
-| PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
-| C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
-| C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
-| HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |
-| HUB_OVER_CURRENT | `wHubStatus` | bit 1 | bit name and bit position only |
-| C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |
-| C_HUB_OVER_CURRENT | `wHubChange` | bit 1 | bit name and bit position only |
+| Entry | Field / Request | Scope |
+|---|---|---|
+| PORT_CONNECTION | `wPortStatus.bit0` | bit name and bit position only |
+| PORT_ENABLE | `wPortStatus.bit1` | bit name and bit position only |
+| C_PORT_CONNECTION | `wPortChange.bit0` | bit name and bit position only |
+| C_PORT_ENABLE | `wPortChange.bit1` | bit name and bit position only |
+| HUB_LOCAL_POWER | `wHubStatus.bit0` | bit name and bit position only |
+| HUB_OVER_CURRENT | `wHubStatus.bit1` | bit name and bit position only |
+| C_HUB_LOCAL_POWER | `wHubChange.bit0` | bit name and bit position only |
+| C_HUB_OVER_CURRENT | `wHubChange.bit1` | bit name and bit position only |
+| usb20_get_status_hub | GET_STATUS hub request | request linkage only |
+| usb20_get_status_port | GET_STATUS port request | request linkage only |
+| usb20_set_feature_hub | SET_FEATURE hub request | request linkage only |
+| usb20_set_feature_port | SET_FEATURE port request | request linkage only |
+| usb20_clear_feature_hub | CLEAR_FEATURE hub request | request linkage only |
+| usb20_clear_feature_port | CLEAR_FEATURE port request | request linkage only |
+| usb20_clear_tt_buffer | CLEAR_TT_BUFFER request | request linkage only |
+| usb20_reset_tt | RESET_TT request | request linkage only |
+| usb20_get_tt_state | GET_TT_STATE request | request linkage only |
+| usb20_stop_tt | STOP_TT request | request linkage only |
+| usb20_get_descriptor_hub | GET_DESCRIPTOR request | request linkage only |
+| usb20_set_descriptor_hub | SET_DESCRIPTOR request | request linkage only |
 
-Verified scope 明確只限於 **bit name and bit position**。
+Verified scope 明確只限於 **bit name and bit position** 或 **request linkage**。
 
 以下項目全部不在 verified scope 內：
 

@@ -29,7 +29,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -59,7 +59,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -89,7 +89,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -119,7 +119,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -151,7 +151,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -181,7 +181,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -213,7 +213,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -244,7 +244,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -274,7 +274,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -304,7 +304,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -314,7 +314,7 @@ entries:
       Stops processing split transactions on the TT.
       Only valid on HS hubs with an embedded Transaction Translator.
 
-  # Phase 3F: GET_DESCRIPTOR / SET_DESCRIPTOR — E-04 gap
+  # Phase 3F: GET_DESCRIPTOR / SET_DESCRIPTOR E-04 gap
   - request_id: usb20_get_descriptor_hub
     request_family: GET_DESCRIPTOR
     request_name: GET_DESCRIPTOR
@@ -336,7 +336,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -368,7 +368,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: >
@@ -379,3 +379,4 @@ entries:
       the descriptor index. wIndex=0. wLength depends on descriptor payload size.
       This entry remains a descriptor-surface reference only, not an implementation
       claim that all hubs support SET_DESCRIPTOR.
+

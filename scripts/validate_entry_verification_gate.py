@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MATRICES = [
     ROOT / "tables" / "port_status_bit_matrix.yaml",
     ROOT / "tables" / "hub_descriptor_matrix.yaml",
+    ROOT / "tables" / "class_request_matrix.yaml",
 ]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 
@@ -73,6 +74,30 @@ TABLE_RULES = {
             "full USB compliance",
         },
     },
+    "class_request_matrix": {
+        "allowed_entries": {
+            "usb20_get_status_hub",
+            "usb20_get_status_port",
+            "usb20_set_feature_hub",
+            "usb20_set_feature_port",
+            "usb20_clear_feature_hub",
+            "usb20_clear_feature_port",
+            "usb20_clear_tt_buffer",
+            "usb20_reset_tt",
+            "usb20_get_tt_state",
+            "usb20_stop_tt",
+            "usb20_get_descriptor_hub",
+            "usb20_set_descriptor_hub",
+        },
+        "required_scope": "request_linkage_only",
+        "required_excludes": {
+            "timing behavior",
+            "state transition behavior",
+            "firmware behavior",
+            "host-stack interpretation",
+            "full USB compliance",
+        },
+    },
 }
 
 
@@ -82,6 +107,8 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 
 def _entry_id(entry: dict[str, Any]) -> str:
+    if "request_id" in entry:
+        return str(entry.get("request_id"))
     if "field_id" in entry:
         return str(entry.get("field_id"))
     return f"{entry.get('field')}.bit{entry.get('bit')}.{entry.get('name')}"

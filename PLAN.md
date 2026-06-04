@@ -12,8 +12,8 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - Governed tracked entries: 86.
-- Entry-level verified entries: 16.
-- Reviewed entries: 70.
+- Entry-level verified entries: 28.
+- Reviewed entries: 58.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are verified only for
   descriptor field identity or bit name and bit position.
@@ -135,6 +135,18 @@ Claim ceiling: section-ref metadata only.
   - `wHubStatus.bit1.HUB_OVER_CURRENT`
   - `wHubChange.bit0.C_HUB_LOCAL_POWER`
   - `wHubChange.bit1.C_HUB_OVER_CURRENT`
+  - `usb20_get_status_hub`
+  - `usb20_get_status_port`
+  - `usb20_set_feature_hub`
+  - `usb20_set_feature_port`
+  - `usb20_clear_feature_hub`
+  - `usb20_clear_feature_port`
+  - `usb20_clear_tt_buffer`
+  - `usb20_reset_tt`
+  - `usb20_get_tt_state`
+  - `usb20_stop_tt`
+  - `usb20_get_descriptor_hub`
+  - `usb20_set_descriptor_hub`
 - Verified scope for the 8 hub descriptor entries: descriptor field identity
   only.
 - Verified scope for the 8 port/hub status-change entries: bit name and bit
@@ -146,8 +158,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 86 tracked entries, 16
-  verified entries, 70 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 86 tracked entries, 28
+  verified entries, 58 reviewed entries, and 0 inferred tracked entries.
 - Added `scripts/validate_reference_surface_statistics.py` to check that visible
   statistics remain aligned with governed tables and evidence packets.
 
