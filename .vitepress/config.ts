@@ -8,15 +8,15 @@ const SPECS_DIR = join(ROOT, "specs");
 type Labels = Record<string, string>;
 
 const ZH_LABELS: Labels = {
-  escalation_table: "升級觸發表",
+  escalation_table: "Escalation Table",
   feature_selectors: "Feature Selectors",
   glossary: "Glossary",
-  hub_class_requests: "Hub 類別請求",
+  hub_class_requests: "Hub Class Requests",
   hub_descriptor: "Hub Descriptor",
   port_status_bits: "Port Status Bits",
   transaction_translator: "Transaction Translator",
-  verification_status: "驗證狀態",
-  version_source_map: "版本來源對應",
+  verification_status: "Verification Status",
+  version_source_map: "Version Source Map",
 };
 
 const EN_LABELS: Labels = {
@@ -56,7 +56,7 @@ function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, 
 }
 
 const zhReferenceItems = [
-  { text: "Hub 類別請求", link: "/hub_class_requests" },
+  { text: "Hub Class Requests", link: "/hub_class_requests" },
   { text: "Feature Selectors", link: "/feature_selectors" },
   { text: "Port Status Bits", link: "/port_status_bits" },
   { text: "Hub Descriptor", link: "/hub_descriptor" },
@@ -104,8 +104,12 @@ export default defineConfig({
               button: { buttonText: "搜尋", buttonAriaLabel: "搜尋文件" },
               modal: {
                 noResultsText: "找不到結果",
-                resetButtonTitle: "清除搜尋",
-                footer: { selectText: "選擇", navigateText: "切換", closeText: "關閉" },
+                resetButtonTitle: "清除查詢條件",
+                footer: {
+                  selectText: "選取",
+                  navigateText: "切換",
+                  closeText: "關閉",
+                },
               },
             },
           },
