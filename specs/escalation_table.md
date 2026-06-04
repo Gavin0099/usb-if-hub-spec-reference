@@ -1,5 +1,5 @@
 ---
-title: 標準升級觸發表
+title: Standard Escalation Trigger Table
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-01"
@@ -10,58 +10,58 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# 標準升級觸發表
+# Standard Escalation Trigger Table
 
-> **用途：** 本表供 consuming firmware repo 使用。
-> 當任何觸發條件成立時，必須啟動 consuming repo 的 `AGENTS.md` Section 10 所定義的 Standard Escalation Mode。
+> **Usage:** This table is for consuming firmware repositories.
+> When any trigger condition is met, Standard Escalation Mode defined by the consuming repo must be activated.
 
 ## 觸發條件
 
-| # | 條件 | 規格參考 | 需升級 |
-|---|------|---------|-------|
-| E-01 | 韌體 `bNbrPorts` 與 hub descriptor 欄位值不一致 | 11.23.2.1 offset 2 | 是 |
-| E-02 | Port status bit 3 用於非 OC 目的 | 11.24.2.7.1 bit 3 | 是 |
-| E-03 | Reserved port status bits (7:5, 15:13) 被韌體使用 | 11.24.2.7.1 | 是 |
-| E-04 | Hub descriptor `GET_DESCRIPTOR` 未實作 | 11.24.2 | 是 |
-| E-05 | Vendor command selector 與標準 selector (0-22) 重疊 | 11.24.2 table | 是 |
-| E-06 | Full-speed-only hub 出現 TT 行為 | 11.17-11.18 | 是 |
-| E-07 | Descriptor 中 TT Think Time 與硬體實際時序不一致 | 11.23.2.1 `wHubCharacteristics[6:5]` | 是 |
-| E-08 | Descriptor 中 Power switching mode 與已確認的專案事實不一致 | 11.23.2.1 `wHubCharacteristics[1:0]` | 是 |
-| E-09 | 在 Full-speed-only hub 中測試 `PORT_HIGH_SPEED` bit | 11.24.2.7.1 bit 10 | 是 |
-| E-10 | 具 TT 的 hub 需要 `CLEAR_TT_BUFFER` / `RESET_TT` 但未實作 | 11.24.2 | 是 |
+| # | 條件 | 規格參考 | 必須升級 |
+|---|---|---|---|
+| E-01 | firmware 的 `bNbrPorts` 不符合 hub descriptor 欄位值 | 11.23.2.1 offset 2 | Yes |
+| E-02 | Port status bit 3 被 firmware 用於非過流用途 | 11.24.2.7.1 bit 3 | Yes |
+| E-03 | reserved port status bits `(7:5, 15:13)` 被 firmware 使用 | 11.24.2.7.1 | Yes |
+| E-04 | 沒有實作 hub descriptor `GET_DESCRIPTOR` | 11.24.2 | Yes |
+| E-05 | vendor command selector 與 standard selector range `(0-22)` 重疊 | 11.24.2 table | Yes |
+| E-06 | 在 full-speed-only hub 上出現 TT 行為 | 11.17-11.18 | Yes |
+| E-07 | descriptor TT Think Time 與硬體時序不一致 | 11.23.2.1 `wHubCharacteristics[6:5]` | Yes |
+| E-08 | descriptor power switching mode 與已確認專案事實不一致 | 11.23.2.1 `wHubCharacteristics[1:0]` | Yes |
+| E-09 | 在 full-speed-only hub 上測試 `PORT_HIGH_SPEED` | 11.24.2.7.1 bit 10 | Yes |
+| E-10 | TT-capable hub 需要 `CLEAR_TT_BUFFER` / `RESET_TT` 但未實作 | 11.24.2 | Yes |
 
-## 不需升級的情況
+## 不屬於 escalation 的使用
 
-以下標準參考用途不需要啟動升級模式：
+以下僅是標準參考用途，單獨不構成 escalation 需求：
 
-- 使用 `specs/port_status_bits.md` 的 port status bit 定義澄清語意
-- 使用 `specs/hub_class_requests.md` 的 hub 類別請求表作為欄位編碼參考
-- 使用 `specs/hub_descriptor.md` 確認 `GET_DESCRIPTOR` 回應格式
+- 使用 `specs/port_status_bits.md` 釐清 port status bit 語意
+- 使用 `specs/hub_class_requests.md` 做 field encoding 參考
+- 使用 `specs/hub_descriptor.md` 確認 `GET_DESCRIPTOR` 回傳格式
 
 ## Governed Linkage
 
-- `tables/escalation_trigger_matrix.yaml`: 管理 E-01 到 E-10 的 trigger-boundary surface
-- `tables/hub_descriptor_matrix.yaml`: E-01、E-07、E-08 涉及的 descriptor fields
-- `tables/port_status_bit_matrix.yaml`: E-02、E-03、E-09 涉及的 port status bits
-- `tables/feature_selector_matrix.yaml`: E-05 涉及的 selector namespace
-- `tables/transaction_translator_matrix.yaml`: E-06、E-07、E-10 涉及的 TT applicability 與 request surfaces
+- `tables/escalation_trigger_matrix.yaml`: E-01 到 E-10 的 trigger-boundary surface。
+- `tables/hub_descriptor_matrix.yaml`: 涉及 E-01、E-07、E-08 的 descriptor 欄位。
+- `tables/port_status_bit_matrix.yaml`: 涉及 E-02、E-03、E-09 的 port status bits。
+- `tables/feature_selector_matrix.yaml`: 涉及 E-05 的 selector namespace。
+- `tables/transaction_translator_matrix.yaml`: 涉及 E-06、E-07、E-10 的 TT 應用與 request surface。
 
-Governed trigger table 只代表 standard-side reference boundary。它不執行 escalation、不解決 consuming-repo project facts，也不授權 firmware behavior changes。
+此標準觸發表僅作為 standard-side reference boundary。它不會直接執行 escalation，不會取代 consuming repo 的 project facts，也不授權 firmware 行為變更。
 
-## 升級輸出格式
+## Escalation 輸出格式
 
-觸發升級時，在 consuming repo 的 `memory/03_decisions.md` 中記錄：
+當觸發 escalation 時，請於 consuming repo 紀錄：
 
 ```text
 [Standard Conflict Detected]
 
-Trigger: <本表的 E-NN>
+Trigger: <E-NN from this table>
 
-Standard says: <來自本 repo 的 standard-based interpretation>
+Standard says: <standard-based interpretation from this repo>
 
-Project fact says: <已確認的 project-specific behavior>
+Project fact says: <confirmed project-specific behavior>
 
 Classification: Project Implementation Constraint | Standards Compliance Risk | Documentation Error
 
-Resolution: <選擇的處理路徑>
+Resolution: <chosen path>
 ```
