@@ -28,7 +28,7 @@ This page is not meant to answer:
 
 - whether all port bits have completed PDF section-level verification
 - whether timing, debounce, reset, and error-recovery semantics have completed correctness verification
-- the full host behavior model for `SetPortFeature` / `ClearPortFeature`
+- the full host behavior model for `SET_FEATURE` / `CLEAR_FEATURE`
 
 ## Status Field Model
 
@@ -95,7 +95,7 @@ That verified scope is intentionally narrow. It covers only:
 It does **not** mean that this repo has verified:
 
 - timing, debounce, reset, or state-transition behavior
-- host-side `SetPortFeature` / `ClearPortFeature` semantics
+- host-side `SET_FEATURE` / `CLEAR_FEATURE` semantics
 - the full `PORT_ENABLE` enable/disable state machine
 - the full page or the full `port_status_bit_matrix`
 
