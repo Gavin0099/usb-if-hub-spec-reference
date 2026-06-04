@@ -13,21 +13,21 @@ semantic_verification_claimed: false
 # Hub Class Requests
 
 > Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.  
-> 本頁是 request-family reference summary，不是完整 SETUP packet truth table，也不是 section-level PDF verification record。
+> 本頁是 request-family reference summary，不是完整 SETUP packet truth table，也不是 section-level 的 PDF verification record。
 
 ## Page Purpose
 
 本頁回答：
 
-- USB 2.0 hub class request families 有哪些。
-- 每個 family 的高層 direction、recipient、target 與 setup-field meaning。
-- 哪些欄位應連回 `class_request_matrix`、`feature_selector_matrix` 與 `port_status_bit_matrix`。
+- USB 2.0 hub class 的 request family 有哪些。
+- 每個 family 的 direction、recipient、target 與 setup field 代表什麼。
+- 哪些欄位應回指 `class_request_matrix`、`feature_selector_matrix`、`port_status_bit_matrix`。
 
 本頁不回答：
 
-- 每個 request 的每個欄位是否都已完成 PDF section-level verification。
-- TT request field encodings 是否已完成 correctness verification。
-- `SET_FEATURE` / `CLEAR_FEATURE` 是否已在本 repo 建立完整 state-transition model。
+- 每一個請求欄位是否都已完成 PDF section-level verification。
+- TT request 的欄位編碼是否已完整 correctness-verified。
+- `SET_FEATURE` / `CLEAR_FEATURE` 是否已有完整 state-transition model。
 
 ## Request Family Overview
 
@@ -45,9 +45,9 @@ semantic_verification_claimed: false
 
 ## Boundary Conditions for Reading This Page
 
-- `bmRequestType` 在本頁只整理到 direction / type / recipient 層級。
-- 如果 `wValue`、`wIndex` 或 `wLength` 仍以 abstract field-role name 呈現，代表本 repo 只收斂欄位角色，尚未把完整 encoding 升級成 verified truth。
-- Port-recipient 與 hub-recipient requests 不得合併解讀；TT requests 只適用於具 embedded TT 的 HS hubs。
+- `bmRequestType` 在本頁僅整理到 direction / type / recipient 層級。
+- 如果 `wValue`、`wIndex` 或 `wLength` 仍用抽象 field-role 名稱表示，代表本 repo 只完成欄位角色收斂，尚未將完整 encoding 升級為 verified truth。
+- Port-recipient 與 hub-recipient requests 不可混合；TT requests 僅適用於具備 embedded TT 的 HS hubs。
 
 ## `GET_STATUS`
 
@@ -75,15 +75,15 @@ semantic_verification_claimed: false
 
 **Governed linkage**
 
-- Hub request maps to `wHubStatus` + `wHubChange`。
-- Port request maps to `wPortStatus` + `wPortChange`。
-- 目前 reviewed request surface 只涵蓋這個 request-to-status-field linkage。
-- 相關 context-only selector surface 包含 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`，作為 `GET_STATUS` comparison anchors。
+- Hub request 對應 `wHubStatus` + `wHubChange`。
+- Port request 對應 `wPortStatus` + `wPortChange`。
+- 目前 reviewed request surface 只聚焦 request-to-status-field linkage。
+- context-only selector surface 僅涵蓋 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 作為 `GET_STATUS` 比較錨點。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `GET_STATUS` 收斂到 hub/port status-field linkage surface。
-- 這仍不宣告 returned-bit behavior、host polling strategy、debounce behavior 或 combined speed decoding correctness。
+- 本 repo 已把 `GET_STATUS` 收斂到 hub / port status-field linkage。
+- 仍不宣告 returned bits behavior、host polling strategy、debounce 或 speed decode correctness。
 
 **Related tables**
 
@@ -100,8 +100,8 @@ semantic_verification_claimed: false
 
 **Purpose**
 
-- Clears a hub or port feature。
-- 對 change bits 來說，這代表 host 已觀察並 acknowledge 該 event，接著清除 event record。
+- Clears a hub or port feature.
+- 對 change bit 而言，代表 host 已觀察並 acknowledge 該 event，接著清除 event record。
 
 **Direction / recipient**
 
@@ -124,14 +124,14 @@ semantic_verification_claimed: false
 **Governed linkage**
 
 - Hub 與 port selector spaces 必須分開解讀。
-- Hub-recipient reviewed linkage 目前包含 `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0` 與 `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`。
-- Port-recipient reviewed linkage 目前包含 `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 這組 standard port change-selector boundary。
-- Common change-bit semantics 應與 `GET_STATUS` 一起閱讀。
+- Hub-recipient reviewed linkage 目前包括 `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`、`C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`。
+- Port-recipient reviewed linkage 目前納入 `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET`（皆屬標準 port change-selector boundary）。
+- 共同的 change-bit 解讀需與 `GET_STATUS` 一併參照。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `CLEAR_FEATURE` 收斂到已 reviewed 的 `C_HUB_*` / `C_PORT_*` selector-linkage surface。
-- 這仍不宣告 host-side event-acknowledgement sequencing、完整 change-bit lifecycle correctness 或完整 `CLEAR_FEATURE` behavior model。
+- 本 repo 將 `CLEAR_FEATURE` 收斂為 reviewed selector-linkage surface，涵蓋 `C_HUB_*`、`C_PORT_*` change selectors。
+- 仍不宣告 host-side event acknowledgement sequencing、完整 change-bit lifecycle correctness、或完整 `CLEAR_FEATURE` 行為模型。
 
 **Related tables**
 
@@ -143,13 +143,13 @@ semantic_verification_claimed: false
 **Non-claims**
 
 - 本頁不建立完整 `CLEAR_FEATURE` state-transition model。
-- 本頁不宣告所有 selectors 都已有 section-level packet verification。
+- 本頁不宣告所有 selectors 已完成 section-level packet verification。
 
 ## `SET_FEATURE`
 
 **Purpose**
 
-- Sets a hub or port feature。
+- Sets a hub or port feature.
 
 **Direction / recipient**
 
@@ -171,15 +171,15 @@ semantic_verification_claimed: false
 
 **Governed linkage**
 
-- Hub 與 port selector namespaces 必須保持分離。
-- 有些 selectors 影響 port power、reset 或 suspend behavior，但本頁仍只是 request summary。
-- 這裡目前的 reviewed request surface 只到 namespace 層級：hub-recipient selectors 不得與 standard port selector range 混在一起。
-- Port-recipient reviewed anchors 目前包含 `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`。
+- Hub 與 port selector namespaces 保持獨立，不可混淆。
+- 部分 selector 會影響 port power/reset/suspend 行為，但本頁只作 request summary。
+- reviewed surface 仍為 namespace boundary：hub-recipient 與 port-recipient selector spaces 嚴格分離。
+- Port-recipient reviewed anchors 目前包括 `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `SET_FEATURE` 收斂到 reviewed selector-namespace boundary：hub-recipient 與 port-recipient selector spaces 是刻意分開的。
-- 這仍不宣告 power、reset、suspend 或其他 port-feature behaviors 的 selector side-effect verification。
+- 本 repo 將 `SET_FEATURE` 收斂為 reviewed selector namespace boundary。
+- 仍不宣告 power、reset、suspend 等 selector side-effect 的 correctness 驗證。
 
 **Related tables**
 
@@ -188,14 +188,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不宣告 `SET_FEATURE` side effects 已完成 correctness verification。
-- 本頁不把 selector summaries 轉成 firmware control truth table。
+- 本頁不宣告 `SET_FEATURE` side effects 已完成 correctness 驗證。
+- 本頁不將 selector summaries 當作 firmware control truth table。
 
 ## `GET_DESCRIPTOR`
 
 **Purpose**
 
-- Reads the hub class-specific descriptor。
+- Reads the hub class-specific descriptor.
 
 **Direction / recipient**
 
@@ -203,23 +203,23 @@ semantic_verification_claimed: false
 
 **Target**
 
-- Hub 本身。
+- Hub 本體。
 
 **Setup-field summary**
 
 - `bRequest`: `GET_DESCRIPTOR`
-- `wValue`: encodes hub descriptor type `0x29` together with the descriptor index
+- `wValue`: combines hub descriptor type `0x29` with descriptor index
 - `wIndex`: `0x0000`
-- `wLength`: depends on hub descriptor length；本 repo 不把它硬編成單一固定常數
+- `wLength`: depends on hub descriptor length; 本 repo 不以單一固定常數硬編碼
 
 **Governed linkage**
 
-- 這是 exposes `specs/hub_descriptor.md` 所整理 descriptor fields 的 request family。
+- 對應到 `specs/hub_descriptor.md` 的字段族群摘要。
 
 **Reviewed surface**
 
-- 本 repo 已將 class-specific `GET_DESCRIPTOR` descriptor type surface 收斂到 `0x29`。
-- 這仍不宣告所有 host request-length strategy 已完成 correctness verification。
+- 本 repo 已將 class-specific `GET_DESCRIPTOR` 的 descriptor type surface 收斂為 `0x29`。
+- 仍不宣告 host request-length strategy 的 correctness 已完成驗證。
 
 **Related tables**
 
@@ -228,14 +228,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不把 `wValue` / `wLength` encoding details 升級成 section-level verified truth。
-- 本頁不宣告所有 hubs 都必須支援某種 consumer-side descriptor workflow。
+- 本頁不將 `wValue` / `wLength` 編碼細節升級為 section-level verified truth。
+- 本頁不宣告所有 hub 都支援某種 consumer-side descriptor 流程。
 
 ## `SET_DESCRIPTOR`
 
 **Purpose**
 
-- Writes the hub class-specific descriptor。
+- Writes the hub class-specific descriptor.
 
 **Direction / recipient**
 
@@ -243,23 +243,23 @@ semantic_verification_claimed: false
 
 **Target**
 
-- Hub 本身。
+- Hub 本體。
 
 **Setup-field summary**
 
 - `bRequest`: `SET_DESCRIPTOR`
-- `wValue`: encodes hub descriptor type `0x29` together with the descriptor index
+- `wValue`: combines hub descriptor type `0x29` with descriptor index
 - `wIndex`: `0x0000`
 - `wLength`: depends on descriptor payload size
 
 **Governed linkage**
 
-- 與 `GET_DESCRIPTOR` 屬於同一個 descriptor family，但不應假設所有實作都支援。
+- 與 `GET_DESCRIPTOR` 屬於同一 descriptor family，但不應假設一定支援。
 
 **Reviewed surface**
 
-- 本 repo 已將 class-specific `SET_DESCRIPTOR` descriptor type surface 收斂到 `0x29`。
-- 這不代表所有 hubs 都 implement `SET_DESCRIPTOR`。
+- 本 repo 已將 class-specific `SET_DESCRIPTOR` descriptor type surface 收斂為 `0x29`。
+- 這不代表所有 hub 都實作 `SET_DESCRIPTOR`。
 
 **Related tables**
 
@@ -268,14 +268,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不宣告所有 hubs 都 implement `SET_DESCRIPTOR`。
-- 本頁不把 descriptor-write support 升級成 normative compatibility claim。
+- 本頁不宣告所有 hub 實作 `SET_DESCRIPTOR`。
+- 本頁不把 descriptor write support 提升為 normative compatibility claim。
 
 ## `CLEAR_TT_BUFFER`
 
 **Purpose**
 
-- Clears TT buffer-related state。
+- Clears TT buffer-related state.
 
 **Direction / recipient**
 
@@ -283,23 +283,23 @@ semantic_verification_claimed: false
 
 **Target**
 
-- 具 embedded TT 的 HS hub。
+- 具備 embedded TT 的 HS hub。
 
 **Setup-field summary**
 
 - `bRequest`: `CLEAR_TT_BUFFER`
 - `wValue`: carries TT buffer selector fields
-- `wIndex`: carries TT port or related context
+- `wIndex`: carries TT port or related TT context
 - `wLength`: `0`
 
 **Governed linkage**
 
-- 屬於 TT request family，且只有在 TT-capable hubs 上才有意義。
+- 屬於 TT request family，僅在 TT-capable hubs 有意義。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `wValue` 收斂到 TT buffer selector fields，而不是 arbitrary opaque value。
-- `wIndex` 用來選擇 TT port 或相關 TT context。
+- 本 repo 已將 `wValue` 收斂為 TT buffer selector fields，而非任意 opaque value。
+- `wIndex` 用於選取 TT port 或 TT context。
 
 **Related tables**
 
@@ -308,14 +308,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不驗證 TT buffer field encoding correctness。
+- 本頁不驗證 TT buffer 欄位編碼 correctness。
 - 本頁不建立 TT state machine。
 
 ## `RESET_TT`
 
 **Purpose**
 
-- Resets the Transaction Translator。
+- Resets the Transaction Translator.
 
 **Direction / recipient**
 
@@ -323,7 +323,7 @@ semantic_verification_claimed: false
 
 **Target**
 
-- 具 embedded TT 的 HS hub。
+- 具備 embedded TT 的 HS hub。
 
 **Setup-field summary**
 
@@ -334,12 +334,12 @@ semantic_verification_claimed: false
 
 **Governed linkage**
 
-- 屬於 TT request family，並與 TT recovery / restart concerns 相關。
+- 屬於 TT request family，關聯 TT recovery / restart 需求。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `RESET_TT` 收斂到 `wValue = 0x0000`。
-- `wIndex` selects the TT port or TT target instance to reset。
+- 本 repo 已將 `RESET_TT` 收斂為 `wValue = 0x0000`。
+- `wIndex` 選擇 TT port 或 TT 目標實例以 reset。
 
 **Related tables**
 
@@ -348,14 +348,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不宣告 reset 前後的 TT behavior 已驗證。
-- 本頁不建立 split-transaction completion rules 的 correctness claims。
+- 本頁不宣告 reset 前後 TT 行為已驗證。
+- 本頁不建立 split-transaction completion rules 的 correctness claim。
 
 ## `GET_TT_STATE`
 
 **Purpose**
 
-- Reads TT diagnostic state data。
+- Reads TT diagnostic state data.
 
 **Direction / recipient**
 
@@ -363,24 +363,24 @@ semantic_verification_claimed: false
 
 **Target**
 
-- 具 embedded TT 的 HS hub。
+- 具備 embedded TT 的 HS hub。
 
 **Setup-field summary**
 
 - `bRequest`: `GET_TT_STATE`
 - `wValue`: `0x0000`
-- `wIndex`: TT port or related diagnostic context
+- `wIndex`: TT port 或相關 diagnostic context
 - `wLength`: TT state data length
 
 **Governed linkage**
 
-- Returned content 屬於 TT diagnostic surface，不應與 general port status semantics 合併。
+- 回傳內容屬於 TT diagnostic surface，不應與一般 port status semantics 混用。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `wValue` 收斂到 `0x0000`。
-- `wIndex` points to the TT port / diagnostic context。
-- `wLength` 命名 TT state data length，但本 repo 仍不把它硬編成單一常數。
+- 本 repo 已將 `wValue` 收斂為 `0x0000`。
+- `wIndex` 指向 TT port / diagnostic context。
+- `wLength` 為 TT state data 長度，本 repo 仍不以單一常數替代。
 
 **Related tables**
 
@@ -389,14 +389,14 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不宣告 TT state payload bit meanings 已完成 section-level verification。
-- 本頁不規定 host stack 應如何 consume TT state data。
+- 本頁不宣告 TT state payload bit 意義已完成 section-level 驗證。
+- 本頁不規範 host stack 如何 consume TT state data。
 
 ## `STOP_TT`
 
 **Purpose**
 
-- Stops TT split-transaction processing。
+- Stops TT split-transaction processing.
 
 **Direction / recipient**
 
@@ -404,7 +404,7 @@ semantic_verification_claimed: false
 
 **Target**
 
-- 具 embedded TT 的 HS hub。
+- 具備 embedded TT 的 HS hub。
 
 **Setup-field summary**
 
@@ -415,12 +415,12 @@ semantic_verification_claimed: false
 
 **Governed linkage**
 
-- 屬於 TT request family，通常與 TT diagnostics 或 recovery scenarios 有關。
+- 屬於 TT request family，通常與 TT diagnosis / recovery 場景相關。
 
 **Reviewed surface**
 
-- 本 repo 現在把 `STOP_TT` 收斂到 `wValue = 0x0000`。
-- `wIndex` selects the TT port or TT target instance whose split-transaction processing is being stopped。
+- 本 repo 已將 `STOP_TT` 收斂為 `wValue = 0x0000`。
+- `wIndex` 指定欲停止 split-transaction processing 的 TT port 或對象。
 
 **Related tables**
 
@@ -429,20 +429,20 @@ semantic_verification_claimed: false
 
 **Non-claims**
 
-- 本頁不宣告 TT stop 之後的 downstream timing behavior。
-- 本頁不建立 TT traffic control 的 correctness model。
+- 本頁不宣告 TT stop 後下游 timing behavior。
+- 本頁不建立 TT traffic-control 的 correctness model。
 
 ## Governed Table Linkage Summary
 
-- `tables/class_request_matrix.yaml`: 9 個 hub class request families 的 primary structural source。
-- `tables/feature_selector_matrix.yaml`: `SET_FEATURE` / `CLEAR_FEATURE` 的 selector boundary reference。
-- `tables/port_status_bit_matrix.yaml`: `GET_STATUS` 與 change-bit interpretation 的 comparison source。
-- `specs/hub_descriptor.md`: `GET_DESCRIPTOR` / `SET_DESCRIPTOR` 的 descriptor-side reference page。
-- `specs/transaction_translator.md`: TT request family 的 high-level semantic summary。
+- `tables/class_request_matrix.yaml`: primary structural source for hub class request families。
+- `tables/feature_selector_matrix.yaml`: selector boundary reference for `SET_FEATURE` / `CLEAR_FEATURE`。
+- `tables/port_status_bit_matrix.yaml`: comparison source for `GET_STATUS` and change-bit interpretation。
+- `specs/hub_descriptor.md`: descriptor-side reference page for `GET_DESCRIPTOR` / `SET_DESCRIPTOR`。
+- `specs/transaction_translator.md`: high-level semantic summary for TT request family。
 
 ## Non-claims
 
 - 本頁不是完整 setup-packet truth table。
-- 本頁不是 per-request section-level USB 2.0 PDF verification record。
+- 本頁不是逐一 request 的 section-level USB 2.0 PDF verification record。
 - 本頁不宣告 TT request field encodings 已完成 correctness verification。
-- 本頁不覆蓋 consuming repos 中已確認的 project facts。
+- 本頁不覆蓋 consuming repos 的已確認 project facts。
