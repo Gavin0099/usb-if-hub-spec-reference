@@ -8,9 +8,9 @@ semantic_verification_claimed: false
 
 # Verification Status
 
-> 本頁是靜態 visibility summary，不是自動產生的 source of truth。
-> Governed YAML tables 與 evidence packets 才是 authoritative source materials。
-> 當 table entries 或 packet status 改變時，本頁數字必須手動更新。
+> 本頁是靜態可見性摘要，不是自動產生的 source of truth。
+> 受治理的 YAML tables 與 evidence packets 才是權威來源材料。
+> 當 table entries 或 packet status 變更時，本頁數字必須手動同步更新。
 
 ## Current Verification Summary
 
@@ -29,21 +29,21 @@ semantic_verification_claimed: false
 
 Term definitions:
 
-- **Verified**: 已通過 entry-level promotion gate；`claim_level: verified`；scope 已明確限制。
-- **Reviewed**: Repo-local review 已完成，surface 已收斂到較清楚的 field role、selector boundary 或 request linkage，但尚未 promoted to entry-level verified。
-- **Inferred**: 已整理但尚未 reviewed / verified；`claim_level: inferred`。
+- **Verified**: 已通過 entry-level promotion gate；`claim_level: verified`；scope 明確受限。
+- **Reviewed**: Repo-local review 已完成，surface 已收斂成較清楚的 field role、selector boundary 或 request linkage，但尚未提升為 entry-level verified。
+- **Inferred**: 已整理但尚未 reviewed 或 verified；`claim_level: inferred`。
 
 ## Coverage Map
 
 | Area | Current maturity center | Notes |
 |---|---|---|
-| Class requests | reviewed | 12 筆 tracked class requests 全部已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
-| Feature selectors | reviewed | 25 筆 tracked feature selectors 全部已有 reviewed selector-boundary 或 reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 8 筆核心 hub/port status-change bits 已完成 entry-level verified promotion；2 筆 high-bit boundary placeholders 只是 reviewed boundary markers |
+| Class requests | reviewed | 全部 12 個 tracked class requests 已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
+| Feature selectors | reviewed | 全部 25 個 tracked feature selectors 已有 reviewed selector-boundary 或 reserved-boundary surfaces |
+| Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；2 個 high-bit boundary placeholders 只代表 reviewed boundary markers |
 
 ## Reviewed Surface Inventory
 
-目前 `reviewed` surface 主要集中在這些項目：
+目前 `reviewed` surface 集中在以下項目：
 
 - class requests
   - `GET_STATUS` hub / port
@@ -80,11 +80,11 @@ Term definitions:
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 
 這些 `reviewed` surfaces 代表 repo-local boundary 比純 inferred surface 更清楚。
-它們不代表已完成 entry-level verified promotion。
+它們不代表這些 surfaces 已完成 entry-level verified promotion。
 
 ## Verified Entries
 
-目前有 8 筆 entries 已完成 verified promotion（Phase 8E、Phase 8H、Phase 8I、Phase 8J、Phase 8K）：
+目前共有 8 個 entries 已完成 verified promotion（Phase 8E、Phase 8H、Phase 8I、Phase 8J、Phase 8K）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -97,7 +97,7 @@ Term definitions:
 | C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |
 | C_HUB_OVER_CURRENT | `wHubChange` | bit 1 | bit name and bit position only |
 
-Verified scope 明確限制在 **bit name and bit position**。
+Verified scope 明確只限於 **bit name and bit position**。
 
 以下項目全部不在 verified scope 內：
 
@@ -116,14 +116,14 @@ Verified scope 明確限制在 **bit name and bit position**。
 - USB 2.0 hub behavior 已完整 verified。
 - 任何 page-level 或 table-level verification 已完成。
 - `PORT_ENABLE` state machine、`SetPortFeature`、`ClearPortFeature` 或 error recovery behavior 已 verified。
-- Reviewed entries 可直接當作 implementation truth。
-- Reviewed coverage 等同 verified coverage。
+- Reviewed entries 可以作為 implementation truth。
+- Reviewed coverage 等同於 verified coverage。
 - 本 reference 可覆蓋 consuming repositories 中已確認的 project facts。
-- Static counts 是與 YAML tables 自動同步的 source of truth。
+- 靜態數字是與 YAML tables 自動同步的 source of truth。
 
 ## Reference Surface Maintenance Rule
 
-當 verification maturity 或 tracked entry counts 改變時，以下 visible surfaces 必須一起檢查：
+當 verification maturity 或 tracked entry counts 變更時，以下可見 surfaces 必須一起檢查：
 
 - `specs/index.md`: zh-TW homepage 的 tracked / maturity summary
 - `specs/en/index.md`: English homepage 的 tracked / maturity summary
@@ -134,19 +134,19 @@ Verified scope 明確限制在 **bit name and bit position**。
 Maintenance rules:
 
 - Wording-only updates 不得改變 YAML source-of-truth semantics。
-- 新增或 promoted verified entries 時，verification status pages 與 homepage summaries 必須同步更新。
-- Surface 從 inferred 升到 reviewed 時，本頁 verification summary 與 coverage map 的 maturity breakdown 也要同步更新。
-- Evidence packet count 改變時，evidence packet summary 必須同步更新。
-- 新增 `section_refs` metadata 不會自動宣告 page 或 entry 已 verified。
+- 新增或 promoted verified entries 時，verification status pages 與 homepage summaries 必須一起更新。
+- 當 surface 從 inferred 移到 reviewed，本頁 maturity breakdown 與 coverage map 也必須同步更新。
+- Evidence packet count 變更時，必須更新 evidence packet summary。
+- 新增 `section_refs` metadata 不會自動代表 page 或 entry 已 verified。
 
 ## Static Numbers Note
 
-本頁的 entry counts 與 packet statuses 是手動維護的 static summary。
+本頁 entry counts 與 packet statuses 是手動維護的靜態摘要。
 
-以下項目改變時，本頁必須手動更新：
+當以下內容變更時，本頁必須手動更新：
 
-- `tables/port_status_bit_matrix.yaml` 中任何 entry 的 `claim_level`
-- `tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 中的 `evidence_status` / `claim_level`
-- `evidence/entry_verification_packets/` 中新增或修改 packets
+- `tables/port_status_bit_matrix.yaml` 任一 entry 的 `claim_level`
+- `tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 任一 entry 的 `evidence_status` / `claim_level`
+- `evidence/entry_verification_packets/` 新增或修改 packets
 
-Governed YAML tables 是 source of truth；本頁只是 visibility summary。
+受治理的 YAML tables 是 source of truth；本頁只是 visibility summary。
