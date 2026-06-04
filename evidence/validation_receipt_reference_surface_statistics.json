@@ -9,8 +9,8 @@
     "areas": {
       "hub_descriptor": {
         "tracked": 8,
-        "verified": 0,
-        "reviewed": 8,
+        "verified": 8,
+        "reviewed": 0,
         "inferred": 0,
         "missing": 0
       },
@@ -52,12 +52,12 @@
     },
     "total": {
       "tracked": 86,
-      "verified": 8,
-      "reviewed": 78,
+      "verified": 16,
+      "reviewed": 70,
       "inferred": 0,
       "missing": 0
     },
-    "evidence_packets": 8
+    "evidence_packets": 16
   },
   "visible_files": [
     "README.md",

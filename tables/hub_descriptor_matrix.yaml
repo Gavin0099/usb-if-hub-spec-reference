@@ -5,7 +5,7 @@ scope:
   topic: hub_descriptor_field
 status: draft
 # USB 2.0 hub descriptor field reference surface.
-# Reviewed field-role entries only; not field-by-field PDF verification.
+# Entry-level verified field identity entries only; not descriptor dump or behavior verification.
 
 entries:
   - field_id: usb20_hub_desc_bDescLength
@@ -17,10 +17,10 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed field-role surface only; not a device descriptor value verification."
+    notes: "Verified descriptor field identity only: field name, offset, and size. Not a device descriptor value verification."
 
   - field_id: usb20_hub_desc_bDescriptorType
     offset: 1
@@ -32,10 +32,10 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed descriptor-type boundary only; not a descriptor dump verification."
+    notes: "Verified descriptor field identity only: field name, offset, size, and descriptor type value boundary. Not a descriptor dump verification."
 
   - field_id: usb20_hub_desc_bNbrPorts
     offset: 2
@@ -46,12 +46,12 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
       - E-01
-    notes: "Reviewed field-role surface; conflicts with confirmed project topology facts remain escalation-sensitive."
+    notes: "Verified descriptor field identity only: field name, offset, size, and role. Conflicts with confirmed project topology facts remain escalation-sensitive."
 
   - field_id: usb20_hub_desc_wHubCharacteristics
     offset: 3
@@ -75,13 +75,13 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
       - E-07
       - E-08
-    notes: "Reviewed field-role and bit-group boundary only; not a complete semantic truth table for all bit patterns."
+    notes: "Verified descriptor field identity only: field name, offset, size, role, and bit-group boundaries. Not a complete semantic truth table for all bit patterns."
 
   - field_id: usb20_hub_desc_bPwrOn2PwrGood
     offset: 5
@@ -92,10 +92,10 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed field-role surface only; not a board-level timing guarantee."
+    notes: "Verified descriptor field identity only: field name, offset, size, and unit role. Not a board-level timing guarantee."
 
   - field_id: usb20_hub_desc_bHubContrCurrent
     offset: 6
@@ -106,10 +106,10 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed field-role surface only; not a board-level current validation claim."
+    notes: "Verified descriptor field identity only: field name, offset, size, and role. Not a board-level current validation claim."
 
   - field_id: usb20_hub_desc_DeviceRemovable
     offset: 7
@@ -120,10 +120,10 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed bitmap-role surface only; not a verification of every possible removable bitmap pattern."
+    notes: "Verified descriptor field identity only: field name, offset, size, and bitmap role. Not a verification of every possible removable bitmap pattern."
 
   - field_id: usb20_hub_desc_PortPwrCtrlMask
     offset: variable_after_DeviceRemovable
@@ -134,7 +134,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
-    notes: "Reviewed field-role surface only; common descriptor patterns are not elevated to verified universal truth."
+    notes: "Verified descriptor field identity only: field name, relative offset, size, and role. Common descriptor patterns are not elevated to verified universal truth."

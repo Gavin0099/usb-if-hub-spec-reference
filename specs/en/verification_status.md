@@ -16,19 +16,19 @@ semantic_verification_claimed: false
 
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
-| Hub descriptor fields | 8 | 0 | 8 | 0 | 0 |
+| Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **86** | **8** | **78** | **0** | **0** |
+| **Total** | **86** | **16** | **70** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 8 | All correspond to promoted verified entries |
+| Entry verification packets | 16 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -40,7 +40,7 @@ Term definitions:
 
 | Area | Current maturity center | Notes |
 |---|---|---|
-| Hub descriptor fields | reviewed | All 8 tracked hub descriptor fields have reviewed field-role surfaces, but no field-by-field verified promotions yet |
+| Hub descriptor fields | verified | All 8 tracked hub descriptor fields have descriptor field identity verified; this does not verify descriptor dumps or device behavior |
 | Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
 | Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
@@ -51,15 +51,6 @@ Term definitions:
 
 The current `reviewed` surface is concentrated in these items:
 
-- hub descriptor fields
-  - `bDescLength`
-  - `bDescriptorType`
-  - `bNbrPorts`
-  - `wHubCharacteristics`
-  - `bPwrOn2PwrGood`
-  - `bHubContrCurrent`
-  - `DeviceRemovable`
-  - `PortPwrCtrlMask`
 - transaction translator entries
   - Single TT / Multiple TT
   - TT think-time values `00`, `01`, `10`, `11`

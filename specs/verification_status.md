@@ -16,19 +16,19 @@ semantic_verification_claimed: false
 
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
-| Hub descriptor fields | 8 | 0 | 8 | 0 | 0 |
+| Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **86** | **8** | **78** | **0** | **0** |
+| **Total** | **86** | **16** | **70** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 8 | All correspond to promoted verified entries |
+| Entry verification packets | 16 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -40,7 +40,7 @@ Term definitions:
 
 | Area | Current maturity center | Notes |
 |---|---|---|
-| Hub descriptor fields | reviewed | 全部 8 個 tracked hub descriptor fields 已有 reviewed field-role surfaces，但尚未有 field-by-field verified promotions |
+| Hub descriptor fields | verified | 全部 8 個 tracked hub descriptor fields 已完成 descriptor field identity verified；不驗證 descriptor dumps 或 device behavior |
 | Transaction Translator entries | reviewed | 全部 10 個 tracked TT type、think-time 與 request-linkage entries 已有 reviewed reference-boundary surfaces，但未宣告 split-transaction behavior verification |
 | Escalation triggers | reviewed | 全部 10 個 E-01 到 E-10 trigger boundaries 已有 reviewed reference surfaces，但 escalation execution 仍由 consuming repos 負責 |
 | Class requests | reviewed | 全部 12 個 tracked class requests 已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
@@ -51,15 +51,6 @@ Term definitions:
 
 目前 `reviewed` surface 集中在以下項目：
 
-- hub descriptor fields
-  - `bDescLength`
-  - `bDescriptorType`
-  - `bNbrPorts`
-  - `wHubCharacteristics`
-  - `bPwrOn2PwrGood`
-  - `bHubContrCurrent`
-  - `DeviceRemovable`
-  - `PortPwrCtrlMask`
 - transaction translator entries
   - Single TT / Multiple TT
   - TT think-time values `00`, `01`, `10`, `11`

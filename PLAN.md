@@ -12,11 +12,11 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - Governed tracked entries: 86.
-- Entry-level verified entries: 8.
-- Reviewed entries: 78.
+- Entry-level verified entries: 16.
+- Reviewed entries: 70.
 - Inferred tracked entries: 0.
-- Verification scope remains narrow: verified entries are verified only for bit
-  name and bit position.
+- Verification scope remains narrow: verified entries are verified only for
+  descriptor field identity or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
   verification is claimed.
 
@@ -34,8 +34,8 @@ Claim ceiling: governance baseline only.
 
 - `tables/escalation_trigger_matrix.yaml`: 10 reviewed USB 2.0 standard-side
   escalation trigger-boundary entries.
-- `tables/hub_descriptor_matrix.yaml`: 8 reviewed USB 2.0 hub descriptor
-  field-role entries.
+- `tables/hub_descriptor_matrix.yaml`: 8 verified USB 2.0 hub descriptor field
+  identity entries.
 - `tables/transaction_translator_matrix.yaml`: 10 reviewed USB 2.0 TT type,
   think-time, and TT request-linkage entries.
 - `tables/class_request_matrix.yaml`: 12 entries, 9/9 USB 2.0 hub class request
@@ -119,6 +119,14 @@ Claim ceiling: section-ref metadata only.
 - Added entry verification packet schema and governance guidance.
 - Added promotion gate for a bounded pilot set.
 - Current verified entries:
+  - `usb20_hub_desc_bDescLength`
+  - `usb20_hub_desc_bDescriptorType`
+  - `usb20_hub_desc_bNbrPorts`
+  - `usb20_hub_desc_wHubCharacteristics`
+  - `usb20_hub_desc_bPwrOn2PwrGood`
+  - `usb20_hub_desc_bHubContrCurrent`
+  - `usb20_hub_desc_DeviceRemovable`
+  - `usb20_hub_desc_PortPwrCtrlMask`
   - `wPortStatus.bit0.PORT_CONNECTION`
   - `wPortStatus.bit1.PORT_ENABLE`
   - `wPortChange.bit0.C_PORT_CONNECTION`
@@ -127,7 +135,10 @@ Claim ceiling: section-ref metadata only.
   - `wHubStatus.bit1.HUB_OVER_CURRENT`
   - `wHubChange.bit0.C_HUB_LOCAL_POWER`
   - `wHubChange.bit1.C_HUB_OVER_CURRENT`
-- Verified scope for all 8 entries: bit name and bit position only.
+- Verified scope for the 8 hub descriptor entries: descriptor field identity
+  only.
+- Verified scope for the 8 port/hub status-change entries: bit name and bit
+  position only.
 
 Claim ceiling: entry-level verified gate only.
 
@@ -135,8 +146,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 86 tracked entries, 8
-  verified entries, 78 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 86 tracked entries, 16
+  verified entries, 70 reviewed entries, and 0 inferred tracked entries.
 - Added `scripts/validate_reference_surface_statistics.py` to check that visible
   statistics remain aligned with governed tables and evidence packets.
 

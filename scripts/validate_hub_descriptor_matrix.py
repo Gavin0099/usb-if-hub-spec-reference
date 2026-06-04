@@ -8,7 +8,7 @@ Structural checks only:
   R2 field_name must be one of the tracked USB 2.0 hub descriptor fields
   R3 offset must match the tracked field-role surface
   R4 source_refs must exist in source_registry
-  R5 claim_level=verified/normative is not allowed by this validator
+  R5 claim_level=normative is not allowed by this validator
   R6 wHubCharacteristics must include the reviewed bit-group boundaries
 
 Non-goals:
@@ -16,7 +16,7 @@ Non-goals:
   - Does not parse PDF contents.
   - Does not validate descriptor dump values.
   - Does not verify wHubCharacteristics bit-pattern semantics.
-  - Does not upgrade claim_level.
+  - Does not validate evidence packets for verified promotion.
 """
 
 from __future__ import annotations
@@ -45,7 +45,7 @@ EXPECTED_FIELDS: dict[str, int | str] = {
     "PortPwrCtrlMask": "variable_after_DeviceRemovable",
 }
 EXPECTED_BIT_GROUPS = {"1:0", "2", "4:3", "6:5", "7", "15:8"}
-VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "rejected"}
+VALID_CLAIM_LEVELS = {"verified", "inferred", "provisional", "draft", "rejected"}
 VALID_EVIDENCE_STATUS = {"reviewed", "review_required", "unverified"}
 
 

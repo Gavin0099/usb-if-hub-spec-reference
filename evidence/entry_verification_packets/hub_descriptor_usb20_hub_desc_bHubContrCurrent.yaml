@@ -1,0 +1,52 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-04
+
+target:
+  surface: governed_table_entry
+  table: hub_descriptor_matrix
+  entry_id: usb20_hub_desc_bHubContrCurrent
+
+evidence:
+  spec: usb20
+  section: "11.23.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.23.2.1 is the hub descriptor field surface used for this
+    packet. The narrow claim is only that `bHubContrCurrent` is tracked as the
+    descriptor field at offset 6 with size 1 byte and the role of hub controller
+    current requirement.
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset, size, and
+    role. This does not verify board-level current consumption.
+
+review_checklist:
+  - Confirm Section 11.23.2.1 is the correct USB 2.0 hub descriptor field surface.
+  - Confirm `bHubContrCurrent` remains limited to field name, offset, size, and role.
+  - Confirm no board-level current guarantee is claimed.
+  - Confirm promotion remains limited to this governed table entry only.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - descriptor dump validation
+    - device behavior
+    - board-level timing or current guarantee
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for a single-entry descriptor field identity promotion only. No
+    page-level or table-level verified promotion is authorized by this packet.
+
+non_claims:
+  - This packet does not verify a live hub descriptor dump.
+  - This packet does not verify board-level current consumption.
+  - This packet does not establish page-level or table-level verification.
