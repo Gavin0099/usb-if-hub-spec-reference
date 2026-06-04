@@ -7,136 +7,150 @@ default_load: never
 ---
 
 # REVIEW_CRITERIA.md
-**Code Review 與 Audit Protocol - v1.2**
 
-> **Version**: 1.2 | **Priority**: 3（稽核協定）
->
-> 定義如何 audit、批判、驗證 code change。
-> 當 `SCOPE = review` 時載入。
+**Code Review / Audit Protocol - v1.2**
 
----
+> **Version**: 1.2 | **Priority**: 3
+
+This document defines how review or audit work must be performed in this repo.
+It is reviewer-facing guidance. It does not override canonical runtime
+governance or the repo root `AGENTS.md`.
 
 ## 0. Activation
 
-當 `SCOPE = review` 時，這份文件生效。
+This protocol applies whenever the user asks for `review`, `audit`, pull request
+review, governance review, or equivalent change assessment.
 
-啟用後：
-- agent 應保持 governance-first
-- 行為模式應轉成 skeptical verifier，而不是 implementer
-- findings 必須綁定 evidence，而不是靠直覺
+When active, the agent must:
 
----
+- Switch to a skeptical verifier posture rather than an implementer posture.
+- Read this file before producing review output.
+- Focus on bugs, regressions, governance boundary violations, missing evidence,
+  and missing tests.
+- Put findings before summaries.
+- Include a `Review Inputs Checked` block in the final review output.
 
 ## 1. Review Philosophy
 
-review 的目標是：
-- 驗證變更是否可預期
-- 驗證變更是否安全
-- 驗證變更是否能在 governance 下被 review
+Review work must answer these questions:
 
-不要因為變更很小，就假設它沒問題。
-也不要在沒有指明 evidence 的情況下給 approval。
+- Does the change preserve this repo's read-only spec-reference boundary?
+- Does the change create claim inflation or authority drift?
+- Does the change risk misleading consuming firmware repositories?
+- Does the validation evidence match the risk of the change?
+- Are unrelated dirty worktree changes being mixed into the review scope?
 
----
+Do not approve a change only because it builds. Build success is evidence, not
+correctness.
 
 ## 2. Verdict Model
 
-| Verdict | 意義 | 使用時機 |
+| Verdict | Meaning | Use When |
 |---|---|---|
-| `APPROVED` | 足夠安全，可接受 | 不再有 blocking governance 或 correctness 問題 |
-| `CHANGES_REQUESTED` | 必須修正 | 存在明確 blocking issue |
-| `ESCALATED` | 需要人類決策 | review 後仍有重大 risk / trade-off ambiguity |
+| `APPROVED` | No blocking governance, correctness, or validation issue found | Remaining risk is acceptable and disclosed |
+| `CHANGES_REQUESTED` | At least one blocking issue must be fixed | The change would merge with unacceptable risk |
+| `ESCALATED` | Risk or ownership is ambiguous enough to need higher-level decision | The reviewer cannot safely decide from current evidence |
 
 ### 2.1 Finding Levels
 
-| Level | 意義 |
+| Level | Meaning |
 |---|---|
-| `BLOCKING` | 必須修掉的 governance / correctness / safety 問題 |
-| `WARNING` | 必須顯性指出的風險、技術債、或弱 evidence |
-| `SUGGESTION` | 不阻擋的改善建議 |
+| `BLOCKING` | Must be fixed before approval; correctness, safety, or governance boundary issue |
+| `WARNING` | Important risk or missing evidence; may be acceptable only if explicitly accepted |
+| `SUGGESTION` | Non-blocking improvement or cleanup |
 
-不要把 `ESCALATED` 和 `BLOCKING` 混為一談。  
-Escalation 是給仍未解決的重大歧義，不只是 defect。
-
----
+Do not use `ESCALATED` as a substitute for a concrete `BLOCKING` finding. Use it
+when the issue is a decision/ownership ambiguity rather than a directly fixable
+defect.
 
 ## 3. Mandatory Audit Checklist
 
 ### 3.1 Boundary and Architecture
 
-檢查：
-- domain code 是否碰到 forbidden I/O、UI、OS、或 native concern
-- external / native model 介入時，ACL 使用是否合理
-- 變更是否與 ADR 或 boundary rule 衝突
+Check whether the change:
+
+- Treats this repo as firmware truth instead of standard-side reference input.
+- Adds project-specific implementation guidance that belongs in a consuming repo.
+- Adds fleet governance, runtime enforcement, or CI authority outside this repo's
+  spec-reference role.
+- Changes authority hierarchy, load mode, or memory promotion policy.
+- Introduces a new interpretation affecting port status bits or Transaction
+  Translator behavior without adequate source tracing.
 
 ### 3.2 Physical and Native Safety
 
-若涉及 native interop，檢查：
-- memory ownership 是否明確
-- 需要時 ABI layout 是否明確
-- panic / fail-fast 與 recoverable error handling 是否一致
+For native interop, C/C++, firmware, ABI, memory ownership, or hardware-facing
+changes, check:
 
-若不涉及 native interop，標記 `N/A`。
+- Ownership and lifetime rules.
+- ABI layout and packing assumptions.
+- Panic/fail-fast versus recoverable error handling.
+- Whether the change belongs in this reference repo at all.
+
+If not applicable, mark `N/A`.
 
 ### 3.3 Quality and Verification
 
-檢查：
-- evidence 是否符合 task risk
-- failure path 在適用時是否有被考慮
-- verification 是否鎖定 behavior，而不是 implementation trivia
-- legacy refactor 是否真的先確認 baseline buildability
+Check whether:
+
+- Validation commands match the risk of the change.
+- Failure paths are tested or explicitly out of scope.
+- Evidence supports behavior rather than implementation trivia.
+- Documentation-only changes avoid semantic or claim-level drift.
+- Generated receipts or baselines are intentional and scoped.
 
 ### 3.4 Thread Safety and Async Safety
 
-若碰到 UI 或 async path，檢查：
-- 影響 UI 的更新是否留在正確 thread
-- async failure path 是否有處理
+For UI, async, scheduled, or delegated execution paths, check:
 
-若無關，標記 `N/A`。
+- Thread or task ownership.
+- Failure and cancellation paths.
+- Whether the change introduces side effects through automation or agents.
+
+If not applicable, mark `N/A`.
 
 ### 3.5 Dirty Worktree and Scope Hygiene
 
-若 implementation 或 review 當時 worktree 是 dirty，檢查：
-- unrelated dirty file 是否沒有被靜默混進 scope
-- touched-file overlap 是否已處理或明確 escalate
-- commit / review boundary 是否仍然可理解
+Check whether:
 
----
+- Unrelated dirty files are mixed into the review.
+- The reviewed diff overlaps with uncommitted user changes.
+- The commit boundary is coherent and small enough to review.
+- Memory writes follow the canonical closeout rule.
 
 ## 4. Knowledge Base Cross-Check
 
-在給 verdict 前，檢查 `memory/03_knowledge_base.md`：
-1. 有沒有 anti-pattern match
-2. 有沒有已記錄過的 regression pattern
+If a relevant knowledge base or prior review log is available, check for:
 
-若已知 anti-pattern 再次出現，要明確點出來。
+- Known anti-patterns.
+- Regression notes.
+- Prior unresolved findings.
 
----
+If no applicable knowledge base exists or it is not readable, state that in the
+review output instead of silently skipping it.
 
 ## 5. Legacy Refactor Review Addendum
 
-對 legacy repo、refactor、rollback、或 baseline reset，review 還必須檢查：
-- 所宣稱的 baseline 是否真的用 authoritative build path 驗過
-- canonical toolchain 是否已辨識
-- 這次變更是否在 baseline 不穩定時，仍被包裝成安全 refactor
+For refactor, rollback, or baseline reset work, additionally check:
 
-若 baseline 未驗證：
-- 不要把結果描述成 clean refactor
-- 至少出一個 `WARNING`
-- 若結論依賴 baseline 穩定，則應 escalate
-
----
+- The authoritative baseline remains buildable or is explicitly marked
+  unverified.
+- The canonical toolchain is still clear.
+- The change does not label a reset as a clean refactor when baseline evidence is
+  missing.
+- Any baseline instability is reported as at least a `WARNING`; escalate if the
+  correct baseline cannot be determined.
 
 ## 6. Review Output Format
 
-每次 review 回應都應包含：
+Use this structure for review output:
 
 ```markdown
 ### Review Inputs Checked
 - governance/REVIEW_CRITERIA.md
-- <list any additional documents read per REVIEW_CRITERIA.md conditions>
+- <additional documents or commands checked>
 
-### [Decision Summary]
+### Decision Summary
 **Verdict**: APPROVED | CHANGES_REQUESTED | ESCALATED
 **Risk Level**: Low | Medium | High
 
@@ -157,42 +171,40 @@ Escalation 是給仍未解決的重大歧義，不只是 defect。
 ### Knowledge Base Alignment
 - Anti-patterns checked: N
 - Regression notes checked: N
-- Result: Pass | Conflict Found
+- Result: Pass | Conflict Found | Not Available
 ```
 
-每個 non-trivial finding 都必須指明：
-- location
-- evidence
-- rule reference
+Every non-trivial finding must include:
 
----
+- Location.
+- Evidence.
+- Rule reference.
+- Required fix or reviewer reasoning.
 
 ## 7. Post-Review Memory Actions
 
-發出 verdict 後：
+Memory writes are not automatic during review.
 
-1. 將完整 review record append 到 `memory/04_review_log.md`
-2. 在 `memory/01_active_task.md` 加一行摘要
-3. 若發現新的 anti-pattern，記到 `memory/03_knowledge_base.md`
+Only canonical closeout may write under `memory/`. If a review result needs a
+memory record, it must be written as part of the canonical closeout flow and
+must preserve the repo's memory authority rules.
 
-`memory/01_active_task.md` 應保持精簡，不要把完整 findings 全倒進去。
-
----
+Do not write `memory/04_review_log.md` or any other memory file as an incidental
+side effect of a non-closeout review.
 
 ## 8. C++ Build Boundary Addendum
 
-當 review 碰到 C++ project file、header layout、或 build configuration 時，套用這段補充。
+When review touches C++ project files, header layout, or build configuration:
 
-硬檢查：
-- `AdditionalIncludeDirectories` 或同類設定，不得指向 peer-project 的 private tree
-- cross-project private header 不得因為 build pass 就被合理化
-- 若 header 是 shared，應放在有明確 ownership 的 shared boundary layer
+- Check that include directories do not depend on private peer-project trees.
+- Check that cross-project private headers are not used to force a build pass.
+- If a header must be shared, check ownership and shared boundary rules.
 
-這是 boundary issue，不是 style issue。
-
----
+Treat this as a boundary issue, not a style issue.
 
 ## 9. Final Principle
 
-> **沒有指名 evidence 的 review，不是有效 review。**
-> **結論若依賴歧義，用 escalation；違規若已具體成立，用 blocking finding。**
+No evidence means no review approval.
+
+Ambiguous ownership or authority should be escalated. A directly evidenced bug,
+regression, or governance violation should be reported as a finding.
