@@ -1,0 +1,191 @@
+matrix_id: usb20_transaction_translator_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: transaction_translator
+status: draft
+# USB 2.0 Transaction Translator reference surface.
+# Reviewed TT boundary entries only; not split-transaction semantic verification.
+
+entries:
+  - tt_id: usb20_tt_type_single
+    category: tt_type
+    name: Single TT
+    related_field: wHubCharacteristics
+    value: single_tt
+    role: One Transaction Translator is shared across downstream ports.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.17-11.18"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-06
+      - E-07
+    notes: "Reviewed TT type boundary only; not a project-fact claim about a specific hub implementation."
+
+  - tt_id: usb20_tt_type_multiple
+    category: tt_type
+    name: Multiple TT
+    related_field: wHubCharacteristics
+    value: multiple_tt
+    role: Independent Transaction Translator instances exist per port or per port group.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.17-11.18"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-06
+      - E-07
+    notes: "Reviewed TT type boundary only; not a project-fact claim about a specific hub implementation."
+
+  - tt_id: usb20_tt_think_time_00
+    category: tt_think_time
+    name: TT Think Time 00
+    related_field: "wHubCharacteristics[6:5]"
+    value: "00"
+    role: 8 FS bit times.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-07
+    notes: "Reviewed descriptor linkage only; not a hardware timing verification."
+
+  - tt_id: usb20_tt_think_time_01
+    category: tt_think_time
+    name: TT Think Time 01
+    related_field: "wHubCharacteristics[6:5]"
+    value: "01"
+    role: 16 FS bit times.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-07
+    notes: "Reviewed descriptor linkage only; not a hardware timing verification."
+
+  - tt_id: usb20_tt_think_time_10
+    category: tt_think_time
+    name: TT Think Time 10
+    related_field: "wHubCharacteristics[6:5]"
+    value: "10"
+    role: 24 FS bit times.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-07
+    notes: "Reviewed descriptor linkage only; not a hardware timing verification."
+
+  - tt_id: usb20_tt_think_time_11
+    category: tt_think_time
+    name: TT Think Time 11
+    related_field: "wHubCharacteristics[6:5]"
+    value: "11"
+    role: 32 FS bit times.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-07
+    notes: "Reviewed descriptor linkage only; not a hardware timing verification."
+
+  - tt_id: usb20_tt_request_clear_tt_buffer
+    category: tt_request
+    name: CLEAR_TT_BUFFER
+    related_field: hub_class_request
+    value: CLEAR_TT_BUFFER
+    role: Clears TT buffer-related state.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    request_ref: usb20_clear_tt_buffer
+    escalation_refs:
+      - E-10
+    notes: "Reviewed request linkage only; not full TT buffer selector field-level verification."
+
+  - tt_id: usb20_tt_request_reset_tt
+    category: tt_request
+    name: RESET_TT
+    related_field: hub_class_request
+    value: RESET_TT
+    role: Resets the Transaction Translator.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    request_ref: usb20_reset_tt
+    escalation_refs:
+      - E-10
+    notes: "Reviewed request linkage only; not TT reset behavior or timing verification."
+
+  - tt_id: usb20_tt_request_get_tt_state
+    category: tt_request
+    name: GET_TT_STATE
+    related_field: hub_class_request
+    value: GET_TT_STATE
+    role: Reads TT diagnostic state.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    request_ref: usb20_get_tt_state
+    notes: "Reviewed request linkage only; not TT diagnostic payload semantic verification."
+
+  - tt_id: usb20_tt_request_stop_tt
+    category: tt_request
+    name: STOP_TT
+    related_field: hub_class_request
+    value: STOP_TT
+    role: Stops TT split-transaction processing.
+    applies_to: high_speed_hub_with_embedded_tt
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    request_ref: usb20_stop_tt
+    notes: "Reviewed request linkage only; not split-transaction behavior verification."

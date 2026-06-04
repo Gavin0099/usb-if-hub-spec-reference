@@ -52,6 +52,15 @@ The current reviewed request surface in this repo is:
 
 That still does not amount to full field-level verified encoding, and it does not claim TT behavior has completed semantic verification.
 
+## Governed Linkage
+
+- `tables/transaction_translator_matrix.yaml`: governed TT type, think-time, and TT request-linkage surface.
+- `tables/hub_descriptor_matrix.yaml`: links TT think-time to `wHubCharacteristics[6:5]`.
+- `tables/class_request_matrix.yaml`: links TT request names to class request setup surfaces.
+- `specs/escalation_table.md`: `E-06`, `E-07`, and `E-10` describe TT-related escalation triggers.
+
+The TT table is a reviewed reference boundary only. It does not verify split-transaction timing, TT buffer selector encoding, diagnostic payload semantics, or firmware support.
+
 ## Split Transaction Flow
 
 1. The host sends a Start Split to the HS hub.

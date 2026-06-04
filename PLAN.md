@@ -11,9 +11,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 ## Current State
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
-- Governed tracked entries: 55.
+- Governed tracked entries: 65.
 - Entry-level verified entries: 8.
-- Reviewed entries: 47.
+- Reviewed entries: 57.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are verified only for bit
   name and bit position.
@@ -34,6 +34,8 @@ Claim ceiling: governance baseline only.
 
 - `tables/hub_descriptor_matrix.yaml`: 8 reviewed USB 2.0 hub descriptor
   field-role entries.
+- `tables/transaction_translator_matrix.yaml`: 10 reviewed USB 2.0 TT type,
+  think-time, and TT request-linkage entries.
 - `tables/class_request_matrix.yaml`: 12 entries, 9/9 USB 2.0 hub class request
   families covered.
 - `tables/feature_selector_matrix.yaml`: 25 entries, standard port selector
@@ -82,7 +84,7 @@ Claim ceiling: machine-readable namespace and access contract only.
 
 - Added `scripts/probe_table_fingerprint.py`.
 - Supports `baseline`, `check`, and `compact` modes.
-- Current table fingerprint baseline is synchronized: 4 governed tables, 0 drift.
+- Current table fingerprint baseline is synchronized: 5 governed tables, 0 drift.
 
 Claim ceiling: table content fingerprint drift only.
 
@@ -130,8 +132,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 55 tracked entries, 8
-  verified entries, 47 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 65 tracked entries, 8
+  verified entries, 57 reviewed entries, and 0 inferred tracked entries.
 
 Claim ceiling: LLM reference readability and boundary clarity only.
 
@@ -154,6 +156,7 @@ Claim ceiling: reporting/reference governance surface only.
 - `python scripts\validate_wiki_frontmatter.py`
 - `python scripts\validate_wiki_source_coverage.py`
 - `python scripts\validate_hub_descriptor_matrix.py`
+- `python scripts\validate_transaction_translator_matrix.py`
 - `python scripts\validate_feature_selector_matrix.py`
 - `python scripts\validate_port_status_bit_matrix.py`
 - `python scripts\validate_class_request_matrix.py`

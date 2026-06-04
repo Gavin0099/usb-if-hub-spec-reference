@@ -1,0 +1,18 @@
+{
+  "validator": "validate_transaction_translator_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\transaction_translator_matrix.yaml",
+  "result": "PASS",
+  "authority_ceiling": "transaction_translator_reference_boundary_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_validate_usb_semantics": true,
+  "errors": [],
+  "coverage": {
+    "tt_type_count": 2,
+    "tt_think_time_count": 4,
+    "tt_request_count": 4,
+    "expected_tt_type_count": 2,
+    "expected_tt_think_time_count": 4,
+    "expected_tt_request_count": 4
+  }
+}

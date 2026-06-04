@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB 2.0 Transaction Translator Matrix",
+  "description": "Governed reference table for USB 2.0 Transaction Translator type, think-time, and TT request linkage. Structural validation only.",
+  "type": "object",
+  "required": ["matrix_id", "scope", "status", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "matrix_id": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["usb_versions", "topic"],
+      "additionalProperties": false,
+      "properties": {
+        "usb_versions": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "topic": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "review_required", "complete", "deprecated"] },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "tt_id",
+          "category",
+          "name",
+          "related_field",
+          "value",
+          "role",
+          "applies_to",
+          "source_refs",
+          "section_anchor",
+          "authority_level",
+          "claim_level",
+          "evidence_status",
+          "drift_status",
+          "notes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "tt_id": { "type": "string", "minLength": 1 },
+          "category": {
+            "type": "string",
+            "enum": ["tt_type", "tt_think_time", "tt_request", "split_transaction_boundary"]
+          },
+          "name": { "type": "string", "minLength": 1 },
+          "related_field": { "type": "string", "minLength": 1 },
+          "value": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "applies_to": {
+            "type": "string",
+            "enum": ["high_speed_hub_with_embedded_tt", "full_speed_only_hub", "all_hubs", "unknown"]
+          },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "section_anchor": { "type": "string", "minLength": 1 },
+          "authority_level": { "type": "string" },
+          "claim_level": {
+            "type": "string",
+            "enum": ["normative", "verified", "inferred", "provisional", "draft", "rejected"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["complete", "reviewed", "review_required", "unverified"]
+          },
+          "drift_status": {
+            "type": "string",
+            "enum": ["clean", "changed", "unresolved", "not_monitored"]
+          },
+          "request_ref": { "type": "string" },
+          "escalation_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

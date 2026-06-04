@@ -17,10 +17,11 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Hub descriptor fields | 8 | 0 | 8 | 0 | 0 |
+| Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 10 | 8 | 2 | 0 | 0 |
-| **Total** | **55** | **8** | **47** | **0** | **0** |
+| **Total** | **65** | **8** | **57** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -39,6 +40,7 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Hub descriptor fields | reviewed | All 8 tracked hub descriptor fields have reviewed field-role surfaces, but no field-by-field verified promotions yet |
+| Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
 | Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 2 high-bit boundary placeholders are reviewed boundary markers only |
@@ -56,6 +58,13 @@ The current `reviewed` surface is concentrated in these items:
   - `bHubContrCurrent`
   - `DeviceRemovable`
   - `PortPwrCtrlMask`
+- transaction translator entries
+  - Single TT / Multiple TT
+  - TT think-time values `00`, `01`, `10`, `11`
+  - `CLEAR_TT_BUFFER`
+  - `RESET_TT`
+  - `GET_TT_STATE`
+  - `STOP_TT`
 - class requests
   - `GET_STATUS` hub / port
   - `SET_FEATURE` hub / port
@@ -157,7 +166,7 @@ The entry counts and packet statuses on this page are a manually maintained stat
 This page must be updated manually when any of the following change:
 
 - `claim_level` on any entry in `tables/port_status_bit_matrix.yaml`
-- `evidence_status` / `claim_level` on entries in `tables/hub_descriptor_matrix.yaml`, `tables/class_request_matrix.yaml`, or `tables/feature_selector_matrix.yaml`
+- `evidence_status` / `claim_level` on entries in `tables/hub_descriptor_matrix.yaml`, `tables/transaction_translator_matrix.yaml`, `tables/class_request_matrix.yaml`, or `tables/feature_selector_matrix.yaml`
 - Packets added or modified in `evidence/entry_verification_packets/`
 
 The governed YAML tables are the source of truth; this page is a visibility summary only.

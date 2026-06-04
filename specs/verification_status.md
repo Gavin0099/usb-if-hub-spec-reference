@@ -17,10 +17,11 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Hub descriptor fields | 8 | 0 | 8 | 0 | 0 |
+| Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 10 | 8 | 2 | 0 | 0 |
-| **Total** | **55** | **8** | **47** | **0** | **0** |
+| **Total** | **65** | **8** | **57** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -39,6 +40,7 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Hub descriptor fields | reviewed | 全部 8 個 tracked hub descriptor fields 已有 reviewed field-role surfaces，但尚未有 field-by-field verified promotions |
+| Transaction Translator entries | reviewed | 全部 10 個 tracked TT type、think-time 與 request-linkage entries 已有 reviewed reference-boundary surfaces，但未宣告 split-transaction behavior verification |
 | Class requests | reviewed | 全部 12 個 tracked class requests 已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
 | Feature selectors | reviewed | 全部 25 個 tracked feature selectors 已有 reviewed selector-boundary 或 reserved-boundary surfaces |
 | Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；2 個 high-bit boundary placeholders 只代表 reviewed boundary markers |
@@ -56,6 +58,13 @@ Term definitions:
   - `bHubContrCurrent`
   - `DeviceRemovable`
   - `PortPwrCtrlMask`
+- transaction translator entries
+  - Single TT / Multiple TT
+  - TT think-time values `00`, `01`, `10`, `11`
+  - `CLEAR_TT_BUFFER`
+  - `RESET_TT`
+  - `GET_TT_STATE`
+  - `STOP_TT`
 - class requests
   - `GET_STATUS` hub / port
   - `SET_FEATURE` hub / port
@@ -157,7 +166,7 @@ Maintenance rules:
 當以下內容變更時，本頁必須手動更新：
 
 - `tables/port_status_bit_matrix.yaml` 任一 entry 的 `claim_level`
-- `tables/hub_descriptor_matrix.yaml`、`tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 任一 entry 的 `evidence_status` / `claim_level`
+- `tables/hub_descriptor_matrix.yaml`、`tables/transaction_translator_matrix.yaml`、`tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 任一 entry 的 `evidence_status` / `claim_level`
 - `evidence/entry_verification_packets/` 新增或修改 packets
 
 受治理的 YAML tables 是 source of truth；本頁只是 visibility summary。
