@@ -1,5 +1,5 @@
 name: usb-if-hub-spec-reference-contract
-plugin_version: "1.0.0"
+plugin_version: "1.1.0"
 framework_interface_version: "1"
 framework_compatible: ">=1.0.0,<2.0.0"
 domain: usb-if-spec

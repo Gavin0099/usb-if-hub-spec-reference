@@ -1,8 +1,8 @@
 # Governance Authority Table
 
 > machine-readable: true
-> version: 1.0.0
-> updated: 2026-03-23
+> version: 1.1.0
+> updated: 2026-06-04
 
 ## Authority Levels
 
