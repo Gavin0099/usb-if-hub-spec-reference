@@ -12,64 +12,64 @@ semantic_verification_claimed: false
 
 # Transaction Translator
 
-> 來源範圍：USB 2.0 Specification Rev 2.0，第 11.17-11.18 節。
-> 本頁為 TT 行為摘要，不代表已完成所有 split transaction 細節的逐段驗證。
+> Source scope: USB 2.0 Specification Rev 2.0, Sections 11.17-11.18.  
+> This page is a TT behavior summary and does not claim full split-transaction verification.
 
 ## 核心概念
 
-Transaction Translator（TT）存在於 high-speed hub 中，用來橋接 host 發出的 high-speed split transaction，與 full-speed / low-speed downstream 裝置之間的實際傳輸。
+Transaction Translator（TT）存在於 high-speed hub，用來橋接主機端高速 split transaction 與實際流向 full-speed / low-speed downstream 的實際傳輸。
 
-- 沒有 TT 的 hub，不應宣稱支援 TT 專屬請求。
-- Full-speed-only hub 不應出現 TT 行為；若出現，屬於 escalation trigger。
-- TT 行為與 `wHubCharacteristics` 中的 TT 類型與 think time 設定密切相關。
+- 不具 TT 的 hub 不該宣告 TT 專用請求支援。
+- Full-speed-only hub 不該宣告 TT 行為。
+- TT 行為綁定 descriptor 宣告的 TT 類型與 TT think time 設定。
 
-## TT 類型與 think time
+## TT 類型與 Think Time
 
-| 項目 | 對應欄位 | 摘要 |
+| 項目 | 相關欄位 | 說明 |
 |---|---|---|
-| Single TT | `wHubCharacteristics` TT type | 所有 downstream port 共用同一個 TT |
-| Multiple TT | `wHubCharacteristics` TT type | 每個 port 或 port 群組具獨立 TT |
+| Single TT | `wHubCharacteristics` TT type | 一個 TT 服務整個 downstream ports |
+| Multiple TT | `wHubCharacteristics` TT type | 每個 port（或 port 群）可有獨立 TT 實例 |
 | TT Think Time = `00` | `wHubCharacteristics[6:5]` | 8 FS bit times |
 | TT Think Time = `01` | `wHubCharacteristics[6:5]` | 16 FS bit times |
 | TT Think Time = `10` | `wHubCharacteristics[6:5]` | 24 FS bit times |
 | TT Think Time = `11` | `wHubCharacteristics[6:5]` | 32 FS bit times |
 
-## TT 相關請求
+## TT Requests
 
-- `CLEAR_TT_BUFFER`：清除 TT 緩衝狀態
-- `RESET_TT`：重設 TT
-- `GET_TT_STATE`：讀取 TT 診斷狀態
-- `STOP_TT`：停止 TT split transaction 處理
+- `CLEAR_TT_BUFFER`
+- `RESET_TT`
+- `GET_TT_STATE`
+- `STOP_TT`
 
-這些請求只適用於具內建 TT 的 HS hub。
+這些 request 僅適用於具有 embedded TT 的 HS hub。
 
-本 repo 目前已收斂的 reviewed request surface 是：
+本 repo 的 reviewed request surface 目前是：
 
-- `CLEAR_TT_BUFFER`: `wValue` 是 TT buffer selector fields；`wIndex` 是 TT port / context
-- `RESET_TT`: `wValue = 0x0000`；`wIndex` 是 TT port number
-- `GET_TT_STATE`: `wValue = 0x0000`；`wIndex` 是 TT port / diagnostic context；`wLength` 是 TT state data length
-- `STOP_TT`: `wValue = 0x0000`；`wIndex` 是 TT port number
+- `CLEAR_TT_BUFFER`：`wValue` 帶 TT buffer selector fields；`wIndex` 選擇 TT port / context
+- `RESET_TT`：`wValue = 0x0000`；`wIndex` 選擇 TT port number
+- `GET_TT_STATE`：`wValue = 0x0000`；`wIndex` 選擇 TT port / diagnostic context；`wLength` 是 TT state data length
+- `STOP_TT`：`wValue = 0x0000`；`wIndex` 選擇 TT port number
 
-這不等於完整 field-level verified encoding，也不等於 TT behavior 已完成 semantic verification。
+這還不足以構成 field-level 的完整 verifier 或 TT 行為語意驗證完成。
 
 ## Governed Linkage
 
-- `tables/transaction_translator_matrix.yaml`: 管理 TT type、think-time 與 TT request-linkage surface
-- `tables/hub_descriptor_matrix.yaml`: 將 TT think-time 連到 `wHubCharacteristics[6:5]`
-- `tables/class_request_matrix.yaml`: 將 TT request names 連到 class request setup surfaces
-- `specs/escalation_table.md`: `E-06`、`E-07`、`E-10` 描述 TT 相關 escalation triggers
+- `tables/transaction_translator_matrix.yaml`: TT 類型、think-time、TT request-linkage 的主要治理來源。
+- `tables/hub_descriptor_matrix.yaml`: 將 TT think-time 對應到 `wHubCharacteristics[6:5]`。
+- `tables/class_request_matrix.yaml`: 將 TT request 名稱映射到 class request setup surface。
+- `specs/escalation_table.md`: `E-06`、`E-07`、`E-10` 提供 TT 相關 escalation triggers。
 
-TT table 只代表 reviewed reference boundary。它不驗證 split-transaction timing、TT buffer selector encoding、diagnostic payload semantics 或 firmware support。
+此 TT 表格只是一個 reviewed reference boundary，未驗證 split-transaction timing、TT buffer selector encoding、診斷 payload semantics，或 firmware 支援語意。
 
-## Split transaction 摘要
+## Split Transaction 流程
 
-1. Host 對 HS hub 發出 Start Split。
-2. Hub 內的 TT 轉換為對 FS/LS 裝置可用的交易。
-3. Host 之後再以 Complete Split 取回結果或完成階段。
-4. Hub / TT 彙整結果並回傳 upstream。
+1. Host 發送 Start Split 給 HS hub。
+2. Hub TT 將 request 轉譯給下游 FS/LS 裝置。
+3. Host 後續發送 Complete Split。
+4. Hub / TT 匯總結果並向上游回報。
 
 ## 使用注意
 
-- 如果專案已確認使用 Single TT 或 Multiple TT，不能僅憑本 repo 的一般標準摘要覆蓋它。
-- TT Think Time 若與 descriptor 宣告不一致，屬於 escalation trigger。
-- consuming repo 若要依本頁內容調整 TT 行為，應先經過標準衝突檢查與 architecture review。
+- 本頁不得覆蓋消費 repo 已確認的 Single TT / Multiple TT 架構決策。
+- TT think time 與 descriptor 宣告設定不一致是 escalation trigger。
+- 若此頁面內容會直接改變 firmware 行為，應先走 architecture review。
