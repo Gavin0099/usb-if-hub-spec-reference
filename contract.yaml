@@ -1,5 +1,5 @@
 name: usb-if-hub-spec-reference-contract
-plugin_version: "1.1.0"
+plugin_version: "1.2.0"
 framework_interface_version: "1"
 framework_compatible: ">=1.0.0,<2.0.0"
 domain: usb-if-spec
@@ -8,6 +8,8 @@ documents:
   - PLAN.md
   - governance/TESTING.md
   - governance/ARCHITECTURE.md
+  - governance/RESPONSE_ENVELOPE_CONTRACT.md
+  - governance/TRUST_BOUNDARY_TAXONOMY.md
   - specs/hub_descriptor.md
   - specs/port_status_bits.md
   - specs/hub_class_requests.md
