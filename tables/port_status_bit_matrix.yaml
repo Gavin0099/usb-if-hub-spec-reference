@@ -150,38 +150,40 @@ entries:
     name: PORT_OVER_CURRENT
     status: defined
     description: Port over-current status
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortStatus bit 3 reviewed name and position"
-        note: "Reviewed namespace surface only; not over-current behavior verification."
+        applies_to: "wPortStatus bit 3 name and position"
+        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit3.PORT_OVER_CURRENT.yaml
 
   - field: wPortStatus
     bit: 4
     name: PORT_RESET
     status: defined
     description: Port reset status
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortStatus bit 4 reviewed name and position"
-        note: "Reviewed namespace surface only; not reset timing or completion behavior verification."
+        applies_to: "wPortStatus bit 4 name and position"
+        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit4.PORT_RESET.yaml
 
   - field: wPortStatus
     bit: 8

@@ -41,6 +41,8 @@ TABLE_RULES = {
             "wPortStatus.bit0.PORT_CONNECTION",
             "wPortStatus.bit1.PORT_ENABLE",
             "wPortStatus.bit2.PORT_SUSPEND",
+            "wPortStatus.bit3.PORT_OVER_CURRENT",
+            "wPortStatus.bit4.PORT_RESET",
             "wPortChange.bit0.C_PORT_CONNECTION",
             "wPortChange.bit1.C_PORT_ENABLE",
             "wHubStatus.bit0.HUB_LOCAL_POWER",
