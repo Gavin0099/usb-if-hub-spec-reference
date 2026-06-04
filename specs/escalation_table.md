@@ -30,6 +30,13 @@ semantic_verification_claimed: false
 | E-09 | 在 full-speed-only hub 上測試 `PORT_HIGH_SPEED` | 11.24.2.7.1 bit 10 | Yes |
 | E-10 | TT-capable hub 需要 `CLEAR_TT_BUFFER` / `RESET_TT` 但未實作 | 11.24.2 | Yes |
 
+## 觸發範圍界線
+
+本表列出的是「最小必要」的標準層 escalation boundary。  
+即使這些條件未直接命中，消費者專案仍可基於 project facts、架構決策或安全治理要求新增額外 trigger。
+
+本頁的目標是幫助區分：哪些情況應進入 consuming repo 的 escalation 流程，哪些情況僅是參考用途。
+
 ## 不屬於 escalation 的使用
 
 以下僅是標準參考用途，單獨不構成 escalation 需求：

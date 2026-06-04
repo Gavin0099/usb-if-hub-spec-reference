@@ -30,6 +30,13 @@ semantic_verification_claimed: false
 | E-09 | `PORT_HIGH_SPEED` is tested in a full-speed-only hub | 11.24.2.7.1 bit 10 | Yes |
 | E-10 | A TT-capable hub requires `CLEAR_TT_BUFFER` / `RESET_TT` but does not implement them | 11.24.2 | Yes |
 
+## Escalation Scope Boundary
+
+This table defines a minimum standard-side escalation boundary.  
+Even when these conditions are not met, consuming projects may still introduce additional triggers based on confirmed project facts, architecture decisions, or safety governance requirements.
+
+The purpose of this page is to separate what should enter the consuming repo's escalation flow from what should remain documentation-only usage.
+
 ## Non-Escalation Cases
 
 The following reference usage does not by itself require escalation:

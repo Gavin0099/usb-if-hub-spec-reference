@@ -100,10 +100,18 @@ Term definitions:
 
 ## Verified Entries
 
-目前共有 20 個 entries 已完成 verified promotion：
+目前共有 28 個 entries 已完成 verified promotion（依 `claim_level: verified`）：
 
 | Entry | Field / Request | Scope |
 |---|---|---|
+| bDescLength | `wHubDescriptor.bDescLength` | descriptor field identity only |
+| bDescriptorType | `wHubDescriptor.bDescriptorType` | descriptor field identity only |
+| bNbrPorts | `wHubDescriptor.bNbrPorts` | descriptor field identity only |
+| wHubCharacteristics | `wHubDescriptor.wHubCharacteristics` | descriptor field identity only |
+| bPwrOn2PwrGood | `wHubDescriptor.bPwrOn2PwrGood` | descriptor field identity only |
+| bHubContrCurrent | `wHubDescriptor.bHubContrCurrent` | descriptor field identity only |
+| DeviceRemovable | `wHubDescriptor.DeviceRemovable` | descriptor field identity only |
+| PortPwrCtrlMask | `wHubDescriptor.PortPwrCtrlMask` | descriptor field identity only |
 | PORT_CONNECTION | `wPortStatus.bit0` | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus.bit1` | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange.bit0` | bit name and bit position only |

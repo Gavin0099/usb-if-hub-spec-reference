@@ -100,10 +100,18 @@ They do **not** mean those surfaces have completed entry-level verified promotio
 
 ## Verified Entries
 
-Eight entries have completed verified promotion (Phase 8E, Phase 8H, Phase 8I, Phase 8J, and Phase 8K):
+Twenty-eight entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
+| bDescLength | `wHubDescriptor.bDescLength` | - | descriptor field identity only |
+| bDescriptorType | `wHubDescriptor.bDescriptorType` | - | descriptor field identity only |
+| bNbrPorts | `wHubDescriptor.bNbrPorts` | - | descriptor field identity only |
+| wHubCharacteristics | `wHubDescriptor.wHubCharacteristics` | - | descriptor field identity only |
+| bPwrOn2PwrGood | `wHubDescriptor.bPwrOn2PwrGood` | - | descriptor field identity only |
+| bHubContrCurrent | `wHubDescriptor.bHubContrCurrent` | - | descriptor field identity only |
+| DeviceRemovable | `wHubDescriptor.DeviceRemovable` | - | descriptor field identity only |
+| PortPwrCtrlMask | `wHubDescriptor.PortPwrCtrlMask` | - | descriptor field identity only |
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
