@@ -38,6 +38,8 @@ evidence_state:
   semantic_pdf_verification: false
 
 governed_tables:
+  - id: usb20_escalation_trigger_matrix
+    path: tables/escalation_trigger_matrix.yaml
   - id: usb20_hub_descriptor_field_matrix
     path: tables/hub_descriptor_matrix.yaml
   - id: usb20_transaction_translator_matrix

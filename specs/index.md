@@ -41,7 +41,7 @@ features:
     details: 對照 hub 相關的 USB 2.0、2.1、3.2 與 USB4 sources 和 authority boundaries。
     link: /version_source_map
   - title: Verification Status
-    details: 目前共有 76 筆 tracked entries，其中 8 筆 verified、68 筆 reviewed、0 筆 inferred，並附 non-claims 與 evidence packet 狀態。
+    details: 目前共有 86 筆 tracked entries，其中 8 筆 verified、78 筆 reviewed、0 筆 inferred，並附 non-claims 與 evidence packet 狀態。
     link: /verification_status
   - title: Glossary
     details: 固定本 repo 的中英文術語寫法，降低文件與 LLM 回答漂移。

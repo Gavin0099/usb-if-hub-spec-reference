@@ -1,0 +1,139 @@
+matrix_id: usb20_escalation_trigger_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: standard_escalation_trigger
+status: draft
+# USB 2.0 standard-side escalation trigger reference surface.
+# Reviewed trigger-boundary entries only; consuming repos own escalation execution.
+
+entries:
+  - trigger_id: E-01
+    condition: Firmware bNbrPorts does not match the hub descriptor field value.
+    spec_reference: "11.23.2.1 offset 2"
+    escalation_required: true
+    related_surface: hub_descriptor
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed trigger boundary only; this repo supplies standard-side input and does not resolve project facts."
+
+  - trigger_id: E-02
+    condition: Port status bit 3 is used for a non-over-current purpose.
+    spec_reference: "11.24.2.7.1 bit 3"
+    escalation_required: true
+    related_surface: port_status_bits
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed trigger boundary only; port status bit behavior is not firmware truth in this repo."
+
+  - trigger_id: E-03
+    condition: Reserved port status bits 7:5 or 15:13 are used by firmware.
+    spec_reference: "11.24.2.7.1"
+    escalation_required: true
+    related_surface: port_status_bits
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed reserved-boundary trigger only; not a permission model for vendor-specific firmware behavior."
+
+  - trigger_id: E-04
+    condition: Hub descriptor GET_DESCRIPTOR is not implemented.
+    spec_reference: "11.24.2"
+    escalation_required: true
+    related_surface: hub_class_requests
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed request-support trigger only; this repo does not assert a specific firmware implementation state."
+
+  - trigger_id: E-05
+    condition: A vendor command selector overlaps with the standard selector range 0-22.
+    spec_reference: "11.24.2 table"
+    escalation_required: true
+    related_surface: feature_selectors
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed selector-boundary trigger only; consuming repos must resolve vendor command conflicts."
+
+  - trigger_id: E-06
+    condition: TT behavior appears in a full-speed-only hub.
+    spec_reference: "11.17-11.18"
+    escalation_required: true
+    related_surface: transaction_translator
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed TT applicability trigger only; no TT firmware behavior is verified here."
+
+  - trigger_id: E-07
+    condition: Descriptor TT Think Time does not match hardware timing.
+    spec_reference: "11.23.2.1 wHubCharacteristics[6:5]"
+    escalation_required: true
+    related_surface: transaction_translator
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed descriptor/TT timing conflict trigger only; not a hardware timing validation."
+
+  - trigger_id: E-08
+    condition: Descriptor power switching mode does not match a confirmed project fact.
+    spec_reference: "11.23.2.1 wHubCharacteristics[1:0]"
+    escalation_required: true
+    related_surface: hub_descriptor
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed descriptor/project-fact conflict trigger only; consuming repos own project-fact resolution."
+
+  - trigger_id: E-09
+    condition: PORT_HIGH_SPEED is tested in a full-speed-only hub.
+    spec_reference: "11.24.2.7.1 bit 10"
+    escalation_required: true
+    related_surface: port_status_bits
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed speed-bit applicability trigger only; not combined speed decoding verification."
+
+  - trigger_id: E-10
+    condition: A TT-capable hub requires CLEAR_TT_BUFFER or RESET_TT but does not implement them.
+    spec_reference: "11.24.2"
+    escalation_required: true
+    related_surface: transaction_translator
+    source_refs:
+      - usb20_spec
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed TT request-support trigger only; consuming repos own implementation decisions."

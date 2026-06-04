@@ -38,6 +38,16 @@ The following reference usage does not by itself require escalation:
 - Using `specs/hub_class_requests.md` as a field-encoding reference
 - Using `specs/hub_descriptor.md` to confirm the `GET_DESCRIPTOR` response format
 
+## Governed Linkage
+
+- `tables/escalation_trigger_matrix.yaml`: governed trigger-boundary surface for E-01 through E-10.
+- `tables/hub_descriptor_matrix.yaml`: descriptor fields involved in E-01, E-07, and E-08.
+- `tables/port_status_bit_matrix.yaml`: port status bits involved in E-02, E-03, and E-09.
+- `tables/feature_selector_matrix.yaml`: selector namespace involved in E-05.
+- `tables/transaction_translator_matrix.yaml`: TT applicability and request surfaces involved in E-06, E-07, and E-10.
+
+The governed trigger table is a standard-side reference boundary only. It does not execute escalation, resolve consuming-repo project facts, or authorize firmware behavior changes.
+
 ## Escalation Output Format
 
 When escalation is triggered, record the issue in the consuming repo:

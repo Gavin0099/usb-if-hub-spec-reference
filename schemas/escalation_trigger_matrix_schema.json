@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB 2.0 Escalation Trigger Matrix",
+  "description": "Governed reference table for USB 2.0 standard-side escalation triggers. Structural validation only; consuming repos own escalation execution.",
+  "type": "object",
+  "required": ["matrix_id", "scope", "status", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "matrix_id": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["usb_versions", "topic"],
+      "additionalProperties": false,
+      "properties": {
+        "usb_versions": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "topic": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "review_required", "complete", "deprecated"] },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "trigger_id",
+          "condition",
+          "spec_reference",
+          "escalation_required",
+          "related_surface",
+          "source_refs",
+          "authority_level",
+          "claim_level",
+          "evidence_status",
+          "drift_status",
+          "notes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "trigger_id": { "type": "string", "pattern": "^E-[0-9]{2}$" },
+          "condition": { "type": "string", "minLength": 1 },
+          "spec_reference": { "type": "string", "minLength": 1 },
+          "escalation_required": { "type": "boolean" },
+          "related_surface": {
+            "type": "string",
+            "enum": [
+              "hub_descriptor",
+              "hub_class_requests",
+              "feature_selectors",
+              "port_status_bits",
+              "transaction_translator"
+            ]
+          },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "authority_level": { "type": "string" },
+          "claim_level": {
+            "type": "string",
+            "enum": ["normative", "verified", "inferred", "provisional", "draft", "rejected"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["complete", "reviewed", "review_required", "unverified"]
+          },
+          "drift_status": {
+            "type": "string",
+            "enum": ["clean", "changed", "unresolved", "not_monitored"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

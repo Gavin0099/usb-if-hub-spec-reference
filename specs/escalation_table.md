@@ -38,6 +38,16 @@ semantic_verification_claimed: false
 - 使用 `specs/hub_class_requests.md` 的 hub 類別請求表作為欄位編碼參考
 - 使用 `specs/hub_descriptor.md` 確認 `GET_DESCRIPTOR` 回應格式
 
+## Governed Linkage
+
+- `tables/escalation_trigger_matrix.yaml`: 管理 E-01 到 E-10 的 trigger-boundary surface
+- `tables/hub_descriptor_matrix.yaml`: E-01、E-07、E-08 涉及的 descriptor fields
+- `tables/port_status_bit_matrix.yaml`: E-02、E-03、E-09 涉及的 port status bits
+- `tables/feature_selector_matrix.yaml`: E-05 涉及的 selector namespace
+- `tables/transaction_translator_matrix.yaml`: E-06、E-07、E-10 涉及的 TT applicability 與 request surfaces
+
+Governed trigger table 只代表 standard-side reference boundary。它不執行 escalation、不解決 consuming-repo project facts，也不授權 firmware behavior changes。
+
 ## 升級輸出格式
 
 觸發升級時，在 consuming repo 的 `memory/03_decisions.md` 中記錄：

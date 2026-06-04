@@ -1,0 +1,17 @@
+{
+  "validator": "validate_escalation_trigger_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\escalation_trigger_matrix.yaml",
+  "result": "PASS",
+  "authority_ceiling": "escalation_trigger_reference_boundary_only",
+  "does_not_execute_consuming_repo_escalation": true,
+  "does_not_resolve_project_facts": true,
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_validate_usb_semantics": true,
+  "errors": [],
+  "coverage": {
+    "trigger_count": 10,
+    "expected_trigger_count": 10,
+    "coverage_status": "complete"
+  }
+}

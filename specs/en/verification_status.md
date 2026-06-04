@@ -18,10 +18,11 @@ semantic_verification_claimed: false
 |---|---:|---:|---:|---:|---:|
 | Hub descriptor fields | 8 | 0 | 8 | 0 | 0 |
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
+| Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
 | Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **76** | **8** | **68** | **0** | **0** |
+| **Total** | **86** | **8** | **78** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -41,6 +42,7 @@ Term definitions:
 |---|---|---|
 | Hub descriptor fields | reviewed | All 8 tracked hub descriptor fields have reviewed field-role surfaces, but no field-by-field verified promotions yet |
 | Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
+| Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
 | Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 11 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
@@ -65,6 +67,8 @@ The current `reviewed` surface is concentrated in these items:
   - `RESET_TT`
   - `GET_TT_STATE`
   - `STOP_TT`
+- escalation triggers
+  - `E-01` through `E-10`
 - class requests
   - `GET_STATUS` hub / port
   - `SET_FEATURE` hub / port
@@ -177,7 +181,7 @@ The entry counts and packet statuses on this page are a manually maintained stat
 This page must be updated manually when any of the following change:
 
 - `claim_level` on any entry in `tables/port_status_bit_matrix.yaml`
-- `evidence_status` / `claim_level` on entries in `tables/hub_descriptor_matrix.yaml`, `tables/transaction_translator_matrix.yaml`, `tables/class_request_matrix.yaml`, or `tables/feature_selector_matrix.yaml`
+- `evidence_status` / `claim_level` on entries in `tables/escalation_trigger_matrix.yaml`, `tables/hub_descriptor_matrix.yaml`, `tables/transaction_translator_matrix.yaml`, `tables/class_request_matrix.yaml`, or `tables/feature_selector_matrix.yaml`
 - Packets added or modified in `evidence/entry_verification_packets/`
 
 The governed YAML tables are the source of truth; this page is a visibility summary only.
