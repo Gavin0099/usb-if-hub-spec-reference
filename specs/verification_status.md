@@ -8,9 +8,9 @@ semantic_verification_claimed: false
 
 # Verification Status
 
-> This page is a static visibility summary, not an automatically generated source of truth.  
-> The governed YAML tables and evidence packets are the authoritative source materials.  
-> Numbers on this page must be updated manually whenever table entries or packet status changes.
+> 本頁是靜態可見性摘要，不是自動產生的 source of truth。  
+> Governed YAML tables 與 evidence packets 才是權威來源。  
+> 只要 table entries 或 packet status 有變動，本頁數字就必須手動更新。
 
 ## Current Verification Summary
 
@@ -28,28 +28,28 @@ semantic_verification_claimed: false
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 28 | All correspond to promoted verified entries |
+| Entry verification packets | 28 | 全部對應到已 promoted 的 verified entries |
 
-Term definitions:
+術語定義：
 
-- **Verified**: Passed the entry-level promotion gate; `claim_level: verified`; scope is explicitly bounded.
-- **Reviewed**: Repo-local review is complete and the surface has been narrowed to a clearer field role, selector boundary, or request linkage, but it has not been promoted to entry-level verified.
-- **Inferred**: Organized but not yet reviewed or verified; `claim_level: inferred`.
+- **Verified**：已通過 entry-level promotion gate；`claim_level: verified`；scope 有明確邊界。
+- **Reviewed**：repo-local review 已完成，surface 已被收斂成較清楚的 field role、selector boundary 或 request linkage，但尚未升級為 entry-level verified。
+- **Inferred**：已整理，但尚未 review 或 verified；`claim_level: inferred`。
 
 ## Coverage Map
 
 | Area | Current maturity center | Notes |
 |---|---|---|
-| Hub descriptor fields | verified | All 8 tracked hub descriptor fields have descriptor field identity verified; this does not verify descriptor dumps or device behavior |
-| Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
-| Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
-| Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
-| Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 11 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
+| Hub descriptor fields | verified | 8 個 tracked hub descriptor fields 都已完成 descriptor field identity verified；但這不驗證 descriptor dumps 或 device behavior |
+| Transaction Translator entries | reviewed | 10 個 tracked TT type、think-time 與 request-linkage entries 都已有 reviewed reference-boundary surfaces，但不驗證 split-transaction behavior |
+| Escalation triggers | reviewed | 10 個 tracked E-01 到 E-10 trigger boundaries 都已有 reviewed reference surfaces，但 escalation execution 仍由 consuming repos 負責 |
+| Class requests | verified | 12 個 tracked class requests 都已完成 request-linkage-only verified promotion |
+| Feature selectors | reviewed | 25 個 tracked feature selectors 都已有 reviewed selector-boundary 或 reserved-boundary surfaces |
+| Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；另有 11 個 defined port status/change bits 與 2 個 high-bit boundary placeholders 仍是 reviewed namespace/boundary entries |
 
 ## Reviewed Surface Inventory
 
-The current `reviewed` surface is concentrated in these items:
+目前 `reviewed` surface 主要集中在下列項目：
 
 - transaction translator entries
   - Single TT / Multiple TT
@@ -95,12 +95,12 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 
-These `reviewed` surfaces mean the repo-local boundary is clearer than a purely inferred surface.
-They do **not** mean those surfaces have completed entry-level verified promotion.
+這些 `reviewed` surfaces 代表 repo-local boundary 已比純 `inferred` surface 更清楚。  
+它們**不代表**這些 surfaces 已完成 entry-level verified promotion。
 
 ## Verified Entries
 
-Twenty-eight entries have completed verified promotion (`claim_level: verified`):
+目前共有 28 個 entries 已完成 verified promotion（`claim_level: verified`）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -121,9 +121,9 @@ Twenty-eight entries have completed verified promotion (`claim_level: verified`)
 | C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |
 | C_HUB_OVER_CURRENT | `wHubChange` | bit 1 | bit name and bit position only |
 
-The verified scope is explicitly limited to **bit name and bit position**.
+Verified scope 明確限制為 **bit name and bit position**。
 
-The following are outside the verified scope for all entries:
+對所有 entries 而言，下列內容都仍在 verified scope 之外：
 
 - Timing behavior
 - State transition behavior
@@ -135,42 +135,42 @@ The following are outside the verified scope for all entries:
 
 ## What This Page Does Not Claim
 
-This page does not claim:
+本頁不宣告：
 
-- USB 2.0 hub behavior is fully verified.
-- Any page-level or table-level verification is complete.
-- `PORT_ENABLE` state machine, `SET_FEATURE`, `CLEAR_FEATURE`, or error recovery behavior is verified.
-- Reviewed entries are safe to use as implementation truth.
-- Reviewed coverage is the same as verified coverage.
-- This reference overrides confirmed project facts in consuming repositories.
-- Static counts are an automated source of truth synchronized with the YAML tables.
+- USB 2.0 hub behavior 已完整 verified
+- 任何 page-level 或 table-level verification 已完成
+- `PORT_ENABLE` state machine、`SET_FEATURE`、`CLEAR_FEATURE` 或 error recovery behavior 已驗證
+- Reviewed entries 可安全直接當作 implementation truth
+- Reviewed coverage 等同於 verified coverage
+- 這份 reference 可覆蓋 consuming repositories 中已確認的 project facts
+- 靜態統計數字是與 YAML tables 自動同步的 source of truth
 
 ## Reference Surface Maintenance Rule
 
-When verification maturity or tracked entry counts change, the following visible surfaces must be checked together:
+當 verification maturity 或 tracked entry counts 變動時，下列 visible surfaces 必須一起檢查：
 
-- `specs/index.md`: tracked / maturity summary on the zh-TW homepage
-- `specs/en/index.md`: tracked / maturity summary on the English homepage
-- `specs/verification_status.md`: zh-TW verification summary, coverage map, verified entries, and non-claims
-- `specs/en/verification_status.md`: English verification summary, coverage map, verified entries, and non-claims
-- Core spec pages: `Non-claims` and `Governed Linkage` sections for the affected entry family
+- `specs/index.md`：zh-TW homepage 上的 tracked / maturity summary
+- `specs/en/index.md`：English homepage 上的 tracked / maturity summary
+- `specs/verification_status.md`：zh-TW verification summary、coverage map、verified entries 與 non-claims
+- `specs/en/verification_status.md`：English verification summary、coverage map、verified entries 與 non-claims
+- Core spec pages：受影響 entry family 的 `Non-claims` 與 `Governed Linkage` sections
 
-Maintenance rules:
+維護規則：
 
-- Wording-only updates must not change YAML source-of-truth semantics.
-- New or promoted verified entries must update the verification status pages and homepage summaries together.
-- When a surface moves from inferred to reviewed, the maturity breakdown on this page and its coverage map must also be updated.
-- Evidence packet count changes must update the evidence packet summary.
-- Adding `section_refs` metadata must not automatically claim that a page or entry is verified.
+- 純 wording update 不得改變 YAML source-of-truth semantics。
+- 新增或提升 verified entries 時，必須同步更新 verification status pages 與 homepage summaries。
+- 當 surface 從 inferred 變為 reviewed 時，本頁的 maturity breakdown 與 coverage map 也必須同步更新。
+- Evidence packet count 變動時，必須同步更新 evidence packet summary。
+- 新增 `section_refs` metadata 不得自動宣稱某個 page 或 entry 已 verified。
 
 ## Static Numbers Note
 
-The entry counts and packet statuses on this page are a manually maintained static summary.
+本頁的 entry counts 與 packet statuses 是人工維護的靜態摘要。
 
-This page must be updated manually when any of the following change:
+只要下列任一項變動，本頁就必須手動更新：
 
-- `claim_level` on any entry in `tables/port_status_bit_matrix.yaml`
-- `evidence_status` / `claim_level` on entries in `tables/escalation_trigger_matrix.yaml`, `tables/hub_descriptor_matrix.yaml`, `tables/transaction_translator_matrix.yaml`, `tables/class_request_matrix.yaml`, or `tables/feature_selector_matrix.yaml`
-- Packets added or modified in `evidence/entry_verification_packets/`
+- `tables/port_status_bit_matrix.yaml` 中任一 entry 的 `claim_level`
+- `tables/escalation_trigger_matrix.yaml`、`tables/hub_descriptor_matrix.yaml`、`tables/transaction_translator_matrix.yaml`、`tables/class_request_matrix.yaml` 或 `tables/feature_selector_matrix.yaml` 中 entries 的 `evidence_status` / `claim_level`
+- `evidence/entry_verification_packets/` 中新增或修改 packets
 
-The governed YAML tables are the source of truth; this page is a visibility summary only.
+Governed YAML tables 才是 source of truth；本頁只是 visibility summary。
