@@ -1,5 +1,5 @@
 ---
-title: 詞彙表
+title: Glossary
 claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-03"
@@ -10,65 +10,66 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# 詞彙表
+# Glossary
 
-> 本頁用來標準化本 repo 術語，降低文件與 LLM 的 drift。它不新增 USB 2.0 的段落級驗證。
+> 本頁用來統一本 repo 的術語使用方式，以降低文件與 LLM 回答的 drift。  
+> 它不會新增 USB 2.0 的 section-level verification。
 
-## 使用規則
+## Usage Rules
 
-- 請保留規格欄位名、請求名與位元名稱原文，例如 `GET_STATUS`、`CLEAR_FEATURE`、`wHubCharacteristics`、`PORT_CONNECTION`。
-- 首次提及可使用中英對照，之後請固定使用同一術語。
-- 若翻譯會降低技術精確度，保留原始英文字面表達。
+- 規格中的 field names、request names 與 bit names 盡量保留原始形式，例如 `GET_STATUS`、`CLEAR_FEATURE`、`wHubCharacteristics`、`PORT_CONNECTION`。
+- 第一次出現時可同時給中英文說明；之後應固定使用同一個術語。
+- 如果翻譯會降低技術精準度，就保留原始英文術語。
 
-## 核心術語
+## Core Terms
 
-| 首選術語 | 備註 |
+| Preferred Term | Notes |
 |---|---|
-| Hub Class Requests | 對應 `specs/hub_class_requests.md` 的請求族頁面。 |
-| Hub Descriptor | 對應 class-specific hub descriptor。 |
-| Port Status Bits | 對應 `wPortStatus` / `wPortChange` 的摘要頁。 |
-| Escalation Table | 對應 consuming repo 的 Standard Escalation Mode 觸發彙整。 |
-| Glossary | 對應本 repo 的術語標準化頁。 |
+| Hub Class Requests | 用於 `specs/hub_class_requests.md` 這類 request-family 頁面。 |
+| Hub Descriptor | 用於 class-specific hub descriptor。 |
+| Port Status Bits | 用於 `wPortStatus` / `wPortChange` 的摘要頁。 |
+| Escalation Table | 用於 Standard Escalation Mode 的 trigger summaries。 |
+| Glossary | 用於 repo-level 術語正規化。 |
 
-## 建議保留英文的術語
+## Terms Kept in English
 
-| 首選術語 | 原因 |
+| Preferred Term | Reason |
 |---|---|
-| Transaction Translator (TT) | 這是穩定的 USB Hub 術語，翻譯常降低可識別性。 |
-| TT Think Time | 作為欄位/群組名稱時建議保留英文。 |
-| Port Indicator | 欄位名稱以英文為準，正文可補充中文解釋。 |
+| Transaction Translator (TT) | 這是穩定的 USB hub 術語；直接翻譯通常會降低辨識度。 |
+| TT Think Time | 這已被視為固定的 field/group 名稱。 |
+| Port Indicator | 保留英文欄位名通常更清楚；必要時可在正文補本地說明。 |
 
-## 請求與欄位術語
+## Request and Field Terms
 
-| 首選術語 | 說明 |
+| Preferred Term | Notes |
 |---|---|
-| Feature Selector | 說明文可本地化，但欄位名稱與識別子仍保留 `feature_selector`。 |
-| Descriptor Type | 作為請求欄位用語可本地化，request 名稱與字面值保留原文。 |
-| Change Bit | 指 `wPortChange` / `wHubChange` 中的 latch event bits。 |
-| Reserved Bit | 指規格保留位元，不能任意當作一般可用位元。 |
-| Device-to-Host | 可用於 `bmRequestType` 方向摘要。 |
-| Host-to-Device | 可用於 `bmRequestType` 方向摘要。 |
+| Feature Selector | 正文可視情況翻成「功能選擇值」，但 field identifier 仍維持 `feature_selector`。 |
+| Descriptor Type | 可作為一般敘述用語；request 名稱與 literal values 保持不變。 |
+| Change Bit | 指 `wPortChange` / `wHubChange` 中 latched event bits。 |
+| Reserved Bit | 指規格保留、不可隨意重用的位元。 |
+| Device-to-Host | 可安全用於 `bmRequestType` direction summaries。 |
+| Host-to-Device | 可安全用於 `bmRequestType` direction summaries。 |
 
-## 速度術語
+## Speed Terms
 
-| 首選術語 | 說明 |
+| Preferred Term | Notes |
 |---|---|
 | Low-speed | 可直接使用。 |
 | Full-speed | 可直接使用。 |
 | High-speed | 可直接使用。 |
-| Combined speed decoding | 指 `PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 的組合解讀。 |
+| Combined speed decoding | 用於描述 `PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 的聯合解讀方式。 |
 
-## 描述符術語
+## Descriptor Terms
 
-| 首選術語 | 說明 |
+| Preferred Term | Notes |
 |---|---|
 | downstream port count | 用於描述 `bNbrPorts`。 |
-| removable bitmap | `DeviceRemovable` 的高階描述。 |
-| Power Switching Mode | descriptor 正文中的穩定用語。 |
-| Over-current Protection Mode | descriptor 正文中的穩定用語。 |
+| removable bitmap | `DeviceRemovable` 的高層摘要說法。 |
+| Power Switching Mode | 可安全用於 descriptor prose。 |
+| Over-current Protection Mode | 可安全用於 descriptor prose。 |
 
-## 邊界提醒
+## Boundary Reminder
 
-- 本頁只做術語標準化，不建立新的規格真值權威。
-- 本頁不把術語選擇升級為 verified 或欄位驗證。
-- 若 consuming repo 發現與 project fact 衝突，本頁內容不應覆蓋已確認事實，仍走 Standard Escalation Mode。
+- 本頁只統一用語，不建立新的 spec truth。
+- 本頁不會把術語選擇升級成 verified authority。
+- 若 consuming repo 發現 project facts 與本 repo 的 terminology summary 衝突，仍應套用 Standard Escalation Mode。
