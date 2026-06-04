@@ -19,8 +19,8 @@ semantic_verification_claimed: false
 
 This page answers:
 
-- Which hub and port feature selectors exist in the USB 2.0 hub request space.
-- Which selectors belong to hub recipient vs. port recipient.
+- Which USB 2.0 feature selectors exist in the hub request space.
+- Which selectors belong to the hub recipient vs. the port recipient.
 - Why `0-22` is the E-05 standard port selector boundary.
 - Which selectors mainly appear in `SET_FEATURE`, `CLEAR_FEATURE`, or `GET_STATUS` interpretation contexts.
 
@@ -124,7 +124,7 @@ This repo currently treats selectors in three reading categories:
 
 - `SET_FEATURE` / `CLEAR_FEATURE` `wValue` should link back to `tables/feature_selector_matrix.yaml`.
 - `GET_STATUS` does not directly "set a selector", but `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` now have reviewed context-only linkage to the status-field comparison surface.
-- `C_PORT_*` selectors should be read together with `change bits` on `specs/port_status_bits.md`.
+- `C_PORT_*` selectors should be read together with `change bits` in `specs/port_status_bits.md`.
 - Reviewed `PORT_*`, `C_HUB_*`, and `C_PORT_*` linkage should still be treated as selector boundary only, not as behavioral proof for `SET_FEATURE` or `CLEAR_FEATURE`.
 - `PORT_TEST` and `PORT_INDICATOR` remain outside behavior verification even though their selector slots are now reviewed.
 
