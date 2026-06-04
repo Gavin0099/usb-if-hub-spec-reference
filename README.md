@@ -51,6 +51,9 @@ English pages are available under [specs/en/](specs/en/).
   promoted verified entries.
 - `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for
   governed table drift observation.
+- `scripts/validate_reference_surface_statistics.py`: consistency check for
+  manually maintained visible counts across README, PLAN, homepages, and
+  verification status pages.
 
 ## Governance Layers
 

@@ -1,0 +1,71 @@
+{
+  "validator": "validate_reference_surface_statistics",
+  "result": "PASS",
+  "authority_ceiling": "visible_statistics_consistency_only",
+  "does_not_generate_statistics": true,
+  "does_not_change_claim_level": true,
+  "does_not_validate_usb_semantics": true,
+  "statistics": {
+    "areas": {
+      "hub_descriptor": {
+        "tracked": 8,
+        "verified": 0,
+        "reviewed": 8,
+        "inferred": 0,
+        "missing": 0
+      },
+      "transaction_translator": {
+        "tracked": 10,
+        "verified": 0,
+        "reviewed": 10,
+        "inferred": 0,
+        "missing": 0
+      },
+      "escalation_triggers": {
+        "tracked": 10,
+        "verified": 0,
+        "reviewed": 10,
+        "inferred": 0,
+        "missing": 0
+      },
+      "class_requests": {
+        "tracked": 12,
+        "verified": 0,
+        "reviewed": 12,
+        "inferred": 0,
+        "missing": 0
+      },
+      "feature_selectors": {
+        "tracked": 25,
+        "verified": 0,
+        "reviewed": 25,
+        "inferred": 0,
+        "missing": 0
+      },
+      "port_status_bits": {
+        "tracked": 21,
+        "verified": 8,
+        "reviewed": 13,
+        "inferred": 0,
+        "missing": 0
+      }
+    },
+    "total": {
+      "tracked": 86,
+      "verified": 8,
+      "reviewed": 78,
+      "inferred": 0,
+      "missing": 0
+    },
+    "evidence_packets": 8
+  },
+  "visible_files": [
+    "README.md",
+    "PLAN.md",
+    "specs\\index.md",
+    "specs\\en\\index.md",
+    "specs\\verification_status.md",
+    "specs\\en\\verification_status.md"
+  ],
+  "errors": []
+}

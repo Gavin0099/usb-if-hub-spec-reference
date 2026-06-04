@@ -137,6 +137,8 @@ Claim ceiling: entry-level verified gate only.
 - Legacy `wiki/` pages have been demoted to orientation notes.
 - Homepage and verification status surfaces align to 86 tracked entries, 8
   verified entries, 78 reviewed entries, and 0 inferred tracked entries.
+- Added `scripts/validate_reference_surface_statistics.py` to check that visible
+  statistics remain aligned with governed tables and evidence packets.
 
 Claim ceiling: LLM reference readability and boundary clarity only.
 
@@ -158,6 +160,7 @@ Claim ceiling: reporting/reference governance surface only.
 
 - `python scripts\validate_wiki_frontmatter.py`
 - `python scripts\validate_wiki_source_coverage.py`
+- `python scripts\validate_reference_surface_statistics.py`
 - `python scripts\validate_escalation_trigger_matrix.py`
 - `python scripts\validate_hub_descriptor_matrix.py`
 - `python scripts\validate_transaction_translator_matrix.py`
@@ -171,12 +174,9 @@ Claim ceiling: reporting/reference governance surface only.
 ## Open Work
 
 1. Audit visible README/governance copy for stale or mojibake reference wording.
-2. Decide whether to add a generated statistics validator for verification
-   counts; do not add it until the verified promotion workflow is stable enough
-   to define a durable contract.
-3. Continue entry-level verification only when narrow evidence packets and gate
+2. Continue entry-level verification only when narrow evidence packets and gate
    scope are explicit.
-4. Keep consuming-repo integration as reference-only; any firmware behavior
+3. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
 
 ## Cannot Claim
