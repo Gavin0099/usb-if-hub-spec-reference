@@ -12,32 +12,31 @@ semantic_verification_claimed: false
 
 # Port Status Bits
 
-> Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.
-> 本頁是 hub / port status 與 change fields 的 reference summary，不是完整 bit-by-bit verified reconstruction。
+> Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2.7.  
+> This page is a reference summary, not a full bit-by-bit verified reconstruction of the source spec.
 
-## Page Purpose
+## 頁面目的
 
 本頁回答：
 
-- `GET_STATUS` 可能回傳哪些 hub-level 與 port-level fields。
-- `Status` bits 與 `Change` bits 的差異。
-- 目前 machine-readable layer 暴露哪些 hub/port status 與 change bits。
-- 哪些 entries 目前已有 live `verified` promotion，以及 verified scope 有多窄。
-- 哪些 high-bit placeholders 只是 16-bit field boundary markers。
+- `GET_STATUS` 可以回報的 hub-level 與 port-level 欄位
+- `Status` 與 `Change` bits 的差異
+- 目前 machine-readable layer 已涵蓋的 hub/port status 與 change entries
+- 目前有哪些 entry 已 live `verified`、且可驗證範圍有多窄
 
 本頁不回答：
 
-- 所有 port bits 是否已完成 PDF section-level verification。
-- Timing、debounce、reset、error-recovery semantics 是否已完成 correctness verification。
-- `SetPortFeature` / `ClearPortFeature` 的完整 host behavior model。
+- 所有 port bits 是否都已完成 PDF section-level 驗證
+- timing、debounce、reset、error-recovery 的正確性驗證是否完成
+- `SetPortFeature` / `ClearPortFeature` 的完整 host 行為模型
 
 ## Status Field Model
 
-- `GET_STATUS` 可回傳 hub-level `wHubStatus` / `wHubChange`。
-- 也可回傳 port-level `wPortStatus` / `wPortChange`。
-- `Status` bits 描述目前狀態。
-- `Change` bits 描述該狀態自上次 clear 之後是否改變過。
-- 對 change bits 來說，`CLEAR_FEATURE(...)` 最好讀成「acknowledge and clear this recorded change event」。
+- `GET_STATUS` 可以回報 hub-level 的 `wHubStatus` / `wHubChange`
+- 也可以回報 port-level 的 `wPortStatus` / `wPortChange`
+- `Status` bits 描述目前狀態
+- `Change` bits 描述該狀態自上次清除後是否曾改變
+- 對於 change bits，`CLEAR_FEATURE(...)` 應以「確認事件、並清除此已記錄變更」來解讀
 
 ## Hub-Level Bits
 
@@ -70,12 +69,12 @@ semantic_verification_claimed: false
 | `wPortChange` | 4 | `C_PORT_RESET` | defined | Records whether reset status has changed since the last clear |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
 
-新增追蹤的 status/change entries 只是 reviewed namespace entries。
-它們不會把 verified scope 擴張到下方 8 筆 live verified entries 之外。
+本頁新增追蹤的 status/change entries 目前僅為 reviewed namespace entries。  
+它們不會擴大以下已在 live verified 的八筆：
 
 ## Live Verified Entries
 
-目前有 8 筆 live governed entries promoted to `verified`：
+目前已提升為 `verified` 的條目為 8 筆：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -88,19 +87,19 @@ semantic_verification_claimed: false
 | `C_HUB_LOCAL_POWER` | `wHubChange` | bit 0 | bit name and bit position only |
 | `C_HUB_OVER_CURRENT` | `wHubChange` | bit 1 | bit name and bit position only |
 
-Verified scope 刻意很窄，只涵蓋：
+可驗證範圍目前刻意縮窄，只涵蓋：
 
-- bit name
-- bit position
+- bit 名稱
+- bit 位置
 
-它不代表本 repo 已 verified：
+並不代表本頁已完成以下驗證：
 
-- timing、debounce、reset 或 state-transition behavior
+- timing、debounce、reset、state-transition 行為
 - host-side `SetPortFeature` / `ClearPortFeature` semantics
-- 完整 `PORT_ENABLE` enable/disable state machine
-- 整頁或完整 `port_status_bit_matrix`
+- `PORT_ENABLE` 完整 enable/disable 狀態機
+- `port_status_bit_matrix` 全頁
 
-所以本頁 frontmatter 仍維持：
+因此 frontmatter 仍保持：
 
 - `claim_level: inferred`
 - `status: review_required`
@@ -108,7 +107,7 @@ Verified scope 刻意很窄，只涵蓋：
 
 ## Reviewed Entries Outside Verified Scope
 
-以下 port status/change entries 目前是 `reviewed`，不是 `verified`：
+以下 port status/change entries 目前為 `reviewed`，不是 `verified`：
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
@@ -124,37 +123,37 @@ Verified scope 刻意很窄，只涵蓋：
 | `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
 | `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
 
-這些 entries 改善 namespace coverage，但不驗證 timing、state machines、clear sequencing、error recovery、speed decoding、test-mode behavior、power-switch policy 或 indicator behavior。
+這些條目提升了 namespace coverage，但未驗證 timing、state machine、clear sequencing、error recovery、speed 解碼、test-mode、power-switch policy、indicator 行為。
 
 ## Reviewed Boundary Placeholders
 
-兩個 high-bit placeholders 現在只作為 boundary markers reviewed：
+兩個高位 placeholder 仍僅作為 boundary markers reviewed：
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status-field high boundary only |
 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change-field high boundary only |
 
-這些 reviewed placeholders 不定義額外 status semantics。
-它們只讓 machine-readable layer 明確保留 status 與 change fields 的 16-bit high-boundary marker。
+這些 reviewed placeholders 並未新增 status semantics。  
+它們只保留 machine-readable layer 的範圍資訊，指出 status / change field 都是 16-bit，含高位邊界標記。
 
 ## Change Bits and `CLEAR_FEATURE`
 
-可以把 `wPortChange` / `wHubChange` 理解為 latched change-event flags：
+可以把 `wPortChange` / `wHubChange` 視為「已鎖存的 change event flag」：
 
-- bit = `1`：對應狀態自上次 clear 之後至少改變過一次。
-- bit = `0`：自上次 clear 之後沒有記錄到該 change event。
-- `CLEAR_FEATURE(...)`：host acknowledge 該 event，並清除 recorded change bit。
+- bit = `1`：代表該狀態自上次 clear 後至少變更過一次
+- bit = `0`：代表上次 clear 後未記錄到此變更
+- `CLEAR_FEATURE(...)`：host acknowledge event 並清除此已記錄變更位元
 
-Example:
+範例：
 
-- `C_PORT_CONNECTION = 1` 代表 connection state 自上次 clear 後發生過變化。
-- Host 讀完 `GET_STATUS` 後，可以送 `CLEAR_FEATURE(C_PORT_CONNECTION)` 清除該 event record。
-- 如果之後 connection 又改變，該 bit 可再次被 set。
+- `C_PORT_CONNECTION = 1` 代表連線狀態自上次 clear 後曾變更
+- 取得 `GET_STATUS` 後，host 可發送 `CLEAR_FEATURE(C_PORT_CONNECTION)` 清除此 event record
+- 如果之後連線再次改變，這個 bit 可以再次被設為 `1`
 
 ## Speed Bits Must Be Decoded Together
 
-`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 不應獨立解讀。它們形成 combined speed encoding：
+`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED` 不應獨立解釋。它們是一組組合編碼：
 
 | `PORT_LOW_SPEED` | `PORT_HIGH_SPEED` | Interpretation |
 |---|---|---|
@@ -163,28 +162,27 @@ Example:
 | 0 | 1 | High-speed |
 | 1 | 1 | Reserved / unexpected combination |
 
-所以「`PORT_LOW_SPEED = 0` means full-speed」這種說法本身不完整。
-只有在 `PORT_HIGH_SPEED` 同時也是 `0` 時，才能判成 full-speed。
+因此 `PORT_LOW_SPEED = 0` 單獨無法單獨代表 full-speed。  
+只有當 `PORT_HIGH_SPEED = 0` 時，才能表示 full-speed。
 
 ## Section Anchor and Verified-Scope Boundary
 
-本 repo 目前有兩種 evidence-related signals：
+本頁目前會有兩種證據訊號：
 
-- `section_refs` 作為 evidence attachment metadata。
-- live `verified` promotions，目前是 `PORT_CONNECTION`、`PORT_ENABLE`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`。
+- `section_refs` 作為 evidence attachment metadata
+- live `verified` promotions，當前為 `PORT_CONNECTION`、`PORT_ENABLE`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`
 
-這兩者不應混淆。
+兩者不能混為一談。
 
 目前狀態：
 
-- 有選定的 pilot entries 會保留 `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 是 live `verified`
-- 所有 verified scopes 仍限制為 `bit_name_and_position_only`
-- 其餘 defined port status/change entries 只是 reviewed namespace entries
-- high-bit boundary placeholders 是 reviewed boundary markers，不是 verified bit semantics
-- 這仍不代表 USB 2.0 PDF semantic verification 已完成
+- 有些 pilot entries 帶有 `section_refs`
+- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 目前為 live `verified`
+- 所有 verified scopes 皆為 `bit_name_and_position_only`
+- 其餘已定義的 port status/change entries 僅為 reviewed namespace entries
+- 這仍不代表 USB 2.0 PDF semantic verification 完整完成
 
-若未來 wiki claim block 需要 `section_refs`，應保留 Phase 7A metadata 結構，例如：
+若未來 wiki claim block 需要 `section_refs`，應維持 Phase 7A 的 metadata 結構，例如：
 
 ```yaml
 section_refs:
@@ -195,19 +193,19 @@ section_refs:
     applies_to: "PORT_CONNECTION summary block"
 ```
 
-這個 metadata block 只是 evidence attachment，不會自動把 page 或 claim block promote to `verified`。
+該 metadata 僅為 evidence attachment，不代表頁面或 claim block 自動提升為 `verified`。
 
 ## Governed Linkage
 
-- `tables/port_status_bit_matrix.yaml`: hub / port status bit namespace 的 primary machine-readable source。
-- `specs/hub_class_requests.md`: `GET_STATUS`、`SET_FEATURE`、`CLEAR_FEATURE` 的 request-family summary。
-- `specs/feature_selectors.md`: `C_PORT_*` selectors 的 feature-selector boundary。
-- `specs/escalation_table.md`: E-02、E-03、E-09 escalation triggers。
+- `tables/port_status_bit_matrix.yaml`: hub / port status bit namespace 的 primary machine-readable source
+- `specs/hub_class_requests.md`: `GET_STATUS`、`SET_FEATURE`、`CLEAR_FEATURE` 的 request-family summary
+- `specs/feature_selectors.md`: `C_PORT_*` 的 selector boundary
+- `specs/escalation_table.md`: escalation triggers（例如 E-02、E-03、E-09）
 
 ## Non-claims
 
-- 本頁不宣告所有 port status bits 已完成 PDF-level verification。
-- 本頁不宣告 speed bits、reset bits、power bits 或 adjacent semantics 已 fully verified。
-- 本頁不把 8 筆 verified entries 擴張成整頁 verified claim。
-- 本頁不把 high-bit boundary placeholders 視為已定義的 status 或 change semantics。
-- 本頁不把 status-bit summary 升級成 firmware implementation authority。
+- 本頁不宣告所有 port status bits 已完成 PDF-level 驗證。
+- 本頁不宣告 speed bits、reset bits、power bits 及相鄰語意全部完成驗證。
+- 本頁不把 8 筆 verified entries 扩展為「全頁 verified」。
+- 本頁不把 boundary placeholders 解讀為定義式 status / change semantics。
+- 本頁不將 status-bit summary 升為 firmware implementation authority。
