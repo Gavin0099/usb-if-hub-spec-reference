@@ -43,6 +43,17 @@ A Transaction Translator (TT) exists inside a high-speed hub to bridge host-issu
 
 These requests apply only to HS hubs with embedded TT.
 
+## TT Request Opcode Map
+
+| Request | bRequest | Summary |
+|---|---:|---|
+| `CLEAR_TT_BUFFER` | `0x08` | Clears TT buffer state (TT-capable HS hub only). |
+| `RESET_TT` | `0x09` | Resets the TT (TT-capable HS hub only). |
+| `GET_TT_STATE` | `0x0A` | Reads TT diagnostic state (TT-capable HS hub only). |
+| `STOP_TT` | `0x0B` | Stops TT split-transaction processing (TT-capable HS hub only). |
+
+The mapping above is request-level orientation only; behavioral limits for `wValue`, `wIndex`, and `wLength` remain defined in the matrix and related pages.
+
 The current reviewed request surface in this repo is:
 
 - `CLEAR_TT_BUFFER`: `wValue` carries TT buffer selector fields; `wIndex` selects the TT port / context
