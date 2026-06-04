@@ -130,19 +130,20 @@ entries:
     name: PORT_SUSPEND
     status: defined
     description: Port suspend status
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortStatus bit 2 reviewed name and position"
-        note: "Reviewed namespace surface only; not suspend/resume behavior verification."
+        applies_to: "wPortStatus bit 2 name and position"
+        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit2.PORT_SUSPEND.yaml
 
   - field: wPortStatus
     bit: 3

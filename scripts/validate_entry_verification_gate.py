@@ -40,6 +40,7 @@ TABLE_RULES = {
         "allowed_entries": {
             "wPortStatus.bit0.PORT_CONNECTION",
             "wPortStatus.bit1.PORT_ENABLE",
+            "wPortStatus.bit2.PORT_SUSPEND",
             "wPortChange.bit0.C_PORT_CONNECTION",
             "wPortChange.bit1.C_PORT_ENABLE",
             "wHubStatus.bit0.HUB_LOCAL_POWER",

@@ -34,6 +34,7 @@ VALID_EVIDENCE_STATUS = {"review_required", "reviewed", "unreviewed", "unknown"}
 ALLOWED_VERIFIED_ENTRY_IDS = {
     "wPortStatus.bit0.PORT_CONNECTION",
     "wPortStatus.bit1.PORT_ENABLE",
+    "wPortStatus.bit2.PORT_SUSPEND",
     "wPortChange.bit0.C_PORT_CONNECTION",
     "wPortChange.bit1.C_PORT_ENABLE",
     "wHubStatus.bit0.HUB_LOCAL_POWER",

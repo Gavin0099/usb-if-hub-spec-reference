@@ -21,14 +21,14 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 21 | 8 | 13 | 0 | 0 |
-| **Total** | **86** | **28** | **58** | **0** | **0** |
+| Port status bits | 21 | 9 | 12 | 0 | 0 |
+| **Total** | **86** | **29** | **57** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 28 | All correspond to promoted verified entries |
+| Entry verification packets | 29 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -45,7 +45,7 @@ Term definitions:
 | Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
 | Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 11 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
+| Port status bits | verified / reviewed | 9 core hub/port status-change bits have completed entry-level verified promotion; 10 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
 
 ## Reviewed Surface Inventory
 
@@ -81,7 +81,6 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_TEST`
   - `PORT_INDICATOR`
 - port status bit boundary placeholders
-  - `PORT_SUSPEND`
   - `PORT_OVER_CURRENT`
   - `PORT_RESET`
   - `PORT_POWER`
@@ -100,7 +99,7 @@ They do **not** mean those surfaces have completed entry-level verified promotio
 
 ## Verified Entries
 
-Twenty-eight entries have completed verified promotion (`claim_level: verified`):
+Twenty-nine entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -114,12 +113,25 @@ Twenty-eight entries have completed verified promotion (`claim_level: verified`)
 | PortPwrCtrlMask | `wHubDescriptor.PortPwrCtrlMask` | - | descriptor field identity only |
 | PORT_CONNECTION | `wPortStatus` | bit 0 | bit name and bit position only |
 | PORT_ENABLE | `wPortStatus` | bit 1 | bit name and bit position only |
+| PORT_SUSPEND | `wPortStatus` | bit 2 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
 | C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
 | HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |
 | HUB_OVER_CURRENT | `wHubStatus` | bit 1 | bit name and bit position only |
 | C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |
 | C_HUB_OVER_CURRENT | `wHubChange` | bit 1 | bit name and bit position only |
+| usb20_get_status_hub | `GET_STATUS` hub recipient | - | request linkage only |
+| usb20_get_status_port | `GET_STATUS` port recipient | - | request linkage only |
+| usb20_set_feature_hub | `SET_FEATURE` hub recipient | - | request linkage only |
+| usb20_set_feature_port | `SET_FEATURE` port recipient | - | request linkage only |
+| usb20_clear_feature_hub | `CLEAR_FEATURE` hub recipient | - | request linkage only |
+| usb20_clear_feature_port | `CLEAR_FEATURE` port recipient | - | request linkage only |
+| usb20_clear_tt_buffer | `CLEAR_TT_BUFFER` TT-capable hub recipient | - | request linkage only |
+| usb20_reset_tt | `RESET_TT` TT-capable hub recipient | - | request linkage only |
+| usb20_get_tt_state | `GET_TT_STATE` TT-capable hub recipient | - | request linkage only |
+| usb20_stop_tt | `STOP_TT` TT-capable hub recipient | - | request linkage only |
+| usb20_get_descriptor_hub | `GET_DESCRIPTOR` hub recipient | - | request linkage only |
+| usb20_set_descriptor_hub | `SET_DESCRIPTOR` hub recipient | - | request linkage only |
 
 The verified scope is explicitly limited to **bit name and bit position**.
 
