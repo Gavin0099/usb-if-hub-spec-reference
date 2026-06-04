@@ -38,6 +38,8 @@ ALLOWED_VERIFIED_ENTRY_IDS = {
     "wPortStatus.bit3.PORT_OVER_CURRENT",
     "wPortStatus.bit4.PORT_RESET",
     "wPortStatus.bit8.PORT_POWER",
+    "wPortStatus.bit9.PORT_LOW_SPEED",
+    "wPortStatus.bit10.PORT_HIGH_SPEED",
     "wPortChange.bit0.C_PORT_CONNECTION",
     "wPortChange.bit1.C_PORT_ENABLE",
     "wHubStatus.bit0.HUB_LOCAL_POWER",

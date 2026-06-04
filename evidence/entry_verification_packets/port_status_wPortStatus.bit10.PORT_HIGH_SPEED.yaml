@@ -1,0 +1,64 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-04
+
+target:
+  surface: governed_table_entry
+  table: port_status_bit_matrix
+  entry_id: wPortStatus.bit10.PORT_HIGH_SPEED
+
+evidence:
+  spec: usb20
+  section: "11.24.2.7.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.24.2.7.1 is the port-status field surface used for this
+    packet. For this promotion, the narrow observation is only that
+    `wPortStatus.bit10.PORT_HIGH_SPEED` names the high-speed indication bit at
+    bit position 10. This packet does not claim complete combined speed-decoding
+    semantics, SetPortFeature behavior, ClearPortFeature behavior, or host-side
+    interpretation semantics.
+  reviewer_note: >
+    Reviewed against the cited USB 2.0 section for the narrow observation that
+    `wPortStatus.bit10.PORT_HIGH_SPEED` names the high-speed indication bit at
+    bit position 10. This review does not extend to combined speed-decoding
+    correctness with `PORT_LOW_SPEED`, timing behavior, selector side effects,
+    or host-side interpretation.
+
+review_checklist:
+  - Confirm Section 11.24.2.7.1 is the correct USB 2.0 surface for port status fields.
+  - Confirm the packet stays limited to `PORT_HIGH_SPEED` bit name and bit position.
+  - Confirm no combined speed-decoding correctness, SetPortFeature, or ClearPortFeature semantics are claimed.
+  - Confirm that `eligible_for_verified: true` is authorized by the Phase 8L gate expansion.
+  - Confirm the verified scope remains bit_name_and_position_only.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - SetPortFeature behavior
+    - ClearPortFeature behavior
+    - error recovery conditions
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for Phase 8L entry-level verified promotion. The gate was
+    expanded in Phase 8L to include `wPortStatus.bit10.PORT_HIGH_SPEED` in the
+    allowed pilot set. Verified scope remains limited to bit name and bit
+    position only. No combined speed-decoding correctness, timing behavior,
+    SetPortFeature, ClearPortFeature, or host-stack semantics are claimed.
+
+non_claims:
+  - This packet does not verify complete combined speed decoding.
+  - This packet does not verify host-stack interpretation.
+  - This packet does not establish page-level or table-level verification.
+  - This packet does not claim SetPortFeature, ClearPortFeature, or timing behavior.

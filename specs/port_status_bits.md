@@ -70,11 +70,11 @@ semantic_verification_claimed: false
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field 的 high-boundary placeholder |
 
 新追蹤的 status/change entries 並不都代表 verified。  
-目前只有下面列出的 12 個 live verified entries 完成 entry-level promotion。
+目前只有下面列出的 14 個 live verified entries 完成 entry-level promotion。
 
 ## Live Verified Entries
 
-目前有 12 個 live governed entries 已提升為 `verified`：
+目前有 14 個 live governed entries 已提升為 `verified`：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -84,6 +84,8 @@ semantic_verification_claimed: false
 | `PORT_OVER_CURRENT` | `wPortStatus` | bit 3 | bit name and bit position only |
 | `PORT_RESET` | `wPortStatus` | bit 4 | bit name and bit position only |
 | `PORT_POWER` | `wPortStatus` | bit 8 | bit name and bit position only |
+| `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
+| `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
 | `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
@@ -115,8 +117,6 @@ semantic_verification_claimed: false
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
-| `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
 | `PORT_TEST` | `wPortStatus` | bit 11 | bit name and bit position only |
 | `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
@@ -170,14 +170,14 @@ semantic_verification_claimed: false
 這個 repo 目前同時存在兩種 evidence-related signals：
 
 - `section_refs`：evidence attachment metadata
-- live `verified` promotions：目前包含 `PORT_CONNECTION`、`PORT_ENABLE`、`PORT_SUSPEND`、`PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`
+- live `verified` promotions：目前包含 `PORT_CONNECTION`、`PORT_ENABLE`、`PORT_SUSPEND`、`PORT_OVER_CURRENT`、`PORT_RESET`、`PORT_POWER`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`、`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`HUB_LOCAL_POWER`、`HUB_OVER_CURRENT`、`C_HUB_LOCAL_POWER`、`C_HUB_OVER_CURRENT`
 
 這兩者不能混為一談。
 
 目前狀態：
 
 - 部分 pilot entries 帶有 `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortStatus.bit2.PORT_SUSPEND`、`wPortStatus.bit3.PORT_OVER_CURRENT`、`wPortStatus.bit4.PORT_RESET`、`wPortStatus.bit8.PORT_POWER`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 已是 live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`、`wPortStatus.bit1.PORT_ENABLE`、`wPortStatus.bit2.PORT_SUSPEND`、`wPortStatus.bit3.PORT_OVER_CURRENT`、`wPortStatus.bit4.PORT_RESET`、`wPortStatus.bit8.PORT_POWER`、`wPortStatus.bit9.PORT_LOW_SPEED`、`wPortStatus.bit10.PORT_HIGH_SPEED`、`wPortChange.bit0.C_PORT_CONNECTION`、`wPortChange.bit1.C_PORT_ENABLE`、`wHubStatus.bit0.HUB_LOCAL_POWER`、`wHubStatus.bit1.HUB_OVER_CURRENT`、`wHubChange.bit0.C_HUB_LOCAL_POWER`、`wHubChange.bit1.C_HUB_OVER_CURRENT` 已是 live `verified`
 - 所有 verified scope 仍然都是 `bit_name_and_position_only`
 - 其餘已定義的 port status/change entries 仍然只是 reviewed namespace entries
 - 這仍然不代表 USB 2.0 PDF semantic verification 已完成
@@ -206,6 +206,6 @@ section_refs:
 
 - 本頁不宣告所有 port status bits 都已完成 PDF-level verification。
 - 本頁不宣告 speed bits、reset bits、power bits 或相鄰 semantics 已全面 verified。
-- 本頁不把 12 個 verified entries 擴張成整頁 verified。
+- 本頁不把 14 個 verified entries 擴張成整頁 verified。
 - 本頁不把 high-bit boundary placeholders 視為已定義的 status 或 change semantics。
 - 本頁不把 status-bit summary 提升成 firmware implementation authority。

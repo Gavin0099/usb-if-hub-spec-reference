@@ -210,38 +210,40 @@ entries:
     name: PORT_LOW_SPEED
     status: defined
     description: Port low-speed status indicator
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortStatus bit 9 reviewed name and position"
-        note: "Reviewed namespace surface only; speed decoding must be interpreted with PORT_HIGH_SPEED."
+        applies_to: "wPortStatus bit 9 name and position"
+        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit9.PORT_LOW_SPEED.yaml
 
   - field: wPortStatus
     bit: 10
     name: PORT_HIGH_SPEED
     status: defined
     description: Port high-speed status indicator
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortStatus bit 10 reviewed name and position"
-        note: "Reviewed namespace surface only; speed decoding must be interpreted with PORT_LOW_SPEED."
+        applies_to: "wPortStatus bit 10 name and position"
+        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request status field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit10.PORT_HIGH_SPEED.yaml
 
   - field: wPortStatus
     bit: 11

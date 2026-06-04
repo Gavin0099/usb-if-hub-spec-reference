@@ -70,11 +70,11 @@ This page is not meant to answer:
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
 
 The newly tracked status/change entries are not all verified.
-Only the 12 live verified entries listed below have completed entry-level promotion.
+Only the 14 live verified entries listed below have completed entry-level promotion.
 
 ## Live Verified Entries
 
-Twelve live governed entries are currently promoted to `verified`:
+Fourteen live governed entries are currently promoted to `verified`:
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -84,6 +84,8 @@ Twelve live governed entries are currently promoted to `verified`:
 | `PORT_OVER_CURRENT` | `wPortStatus` | bit 3 | bit name and bit position only |
 | `PORT_RESET` | `wPortStatus` | bit 4 | bit name and bit position only |
 | `PORT_POWER` | `wPortStatus` | bit 8 | bit name and bit position only |
+| `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
+| `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
 | `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
@@ -115,8 +117,6 @@ The following port status/change entries are currently `reviewed`, not `verified
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
-| `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
 | `PORT_TEST` | `wPortStatus` | bit 11 | bit name and bit position only |
 | `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
@@ -170,14 +170,14 @@ It is only full-speed when `PORT_HIGH_SPEED` is also `0`.
 This repo currently carries two different evidence-related signals:
 
 - `section_refs` as evidence attachment metadata
-- live `verified` promotions, currently for `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `HUB_LOCAL_POWER`, `HUB_OVER_CURRENT`, `C_HUB_LOCAL_POWER`, and `C_HUB_OVER_CURRENT`
+- live `verified` promotions, currently for `PORT_CONNECTION`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_OVER_CURRENT`, `PORT_RESET`, `PORT_POWER`, `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`, `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `HUB_LOCAL_POWER`, `HUB_OVER_CURRENT`, `C_HUB_LOCAL_POWER`, and `C_HUB_OVER_CURRENT`
 
 They should not be conflated.
 
 Current state:
 
 - selected pilot entries carry `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortStatus.bit2.PORT_SUSPEND`, `wPortStatus.bit3.PORT_OVER_CURRENT`, `wPortStatus.bit4.PORT_RESET`, `wPortStatus.bit8.PORT_POWER`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortStatus.bit2.PORT_SUSPEND`, `wPortStatus.bit3.PORT_OVER_CURRENT`, `wPortStatus.bit4.PORT_RESET`, `wPortStatus.bit8.PORT_POWER`, `wPortStatus.bit9.PORT_LOW_SPEED`, `wPortStatus.bit10.PORT_HIGH_SPEED`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
 - all verified scopes remain `bit_name_and_position_only`
 - the remaining defined port status/change entries are reviewed namespace entries only
 - this still does not mean USB 2.0 PDF semantic verification is complete
@@ -206,6 +206,6 @@ That metadata block is evidence attachment only. It does not automatically promo
 
 - This page does not claim that all port status bits have completed PDF-level verification.
 - This page does not claim that speed bits, reset bits, power bits, or adjacent semantics are fully verified.
-- This page does not expand 12 verified entries into a claim that the whole page is verified.
+- This page does not expand 14 verified entries into a claim that the whole page is verified.
 - This page does not treat high-bit boundary placeholders as defined status or change semantics.
 - This page does not elevate the status-bit summary into firmware implementation authority.
