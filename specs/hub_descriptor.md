@@ -118,11 +118,12 @@ Hub descriptor 由 class-specific `GET_DESCRIPTOR` request 回傳，descriptor t
 
 ## Governed Linkage
 
+- `tables/hub_descriptor_matrix.yaml`: 管理 8 個 tracked USB 2.0 hub descriptor fields 的 field-role surface
 - `tables/class_request_matrix.yaml`: `GET_DESCRIPTOR` family 提供 hub descriptor access 的 request-level linkage
 - `specs/escalation_table.md`: `E-01`、`E-07`、`E-08` 直接涉及 `bNbrPorts`、`wHubCharacteristics[6:5]`、`wHubCharacteristics[1:0]`
 - `specs/transaction_translator.md`: 提供較高層的 TT type 與 TT think-time summary
 
-目前沒有專屬的 governed hub-descriptor table，因此本頁是透過 request-family coverage、escalation rules 與相鄰 summary pages 建立 linkage。
+Hub descriptor table 只代表 field-role surface。它不會把本頁升級為 field-by-field verification，也不會建立 descriptor dump correctness。
 
 ## What This Page Can and Cannot Answer
 

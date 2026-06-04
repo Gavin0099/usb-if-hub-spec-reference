@@ -13,9 +13,9 @@ It must not override confirmed project facts in consuming firmware repositories.
 ## Current USB 2.0 Status
 
 - Canonical visible reference surface: `specs/` and `specs/en/`.
-- Governed tracked entries: 47.
+- Governed tracked entries: 55.
 - Entry-level verified entries: 8.
-- Reviewed entries: 39.
+- Reviewed entries: 47.
 - Inferred tracked entries: 0.
 - Verified scope is limited to bit name and bit position for the 8 promoted
   port/hub status-change entries.
@@ -42,8 +42,8 @@ English pages are available under [specs/en/](specs/en/).
 
 ## Machine-Readable Surfaces
 
-- `tables/`: governed structured matrices for class requests, feature selectors,
-  and port status bits.
+- `tables/`: governed structured matrices for hub descriptor fields, class
+  requests, feature selectors, and port status bits.
 - `exports/usb20_hub_class_request_manifest.yaml`: consumer-facing access
   manifest for governed tables.
 - `evidence/entry_verification_packets/`: entry-level verification packets for

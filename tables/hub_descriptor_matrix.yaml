@@ -1,0 +1,140 @@
+matrix_id: usb20_hub_descriptor_field_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: hub_descriptor_field
+status: draft
+# USB 2.0 hub descriptor field reference surface.
+# Reviewed field-role entries only; not field-by-field PDF verification.
+
+entries:
+  - field_id: usb20_hub_desc_bDescLength
+    offset: 0
+    field_name: bDescLength
+    size: 1 byte
+    role: Total hub descriptor length.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed field-role surface only; not a device descriptor value verification."
+
+  - field_id: usb20_hub_desc_bDescriptorType
+    offset: 1
+    field_name: bDescriptorType
+    size: 1 byte
+    role: Class-specific hub descriptor type.
+    expected_value: "0x29"
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed descriptor-type boundary only; not a descriptor dump verification."
+
+  - field_id: usb20_hub_desc_bNbrPorts
+    offset: 2
+    field_name: bNbrPorts
+    size: 1 byte
+    role: Number of downstream ports reported by the hub.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-01
+    notes: "Reviewed field-role surface; conflicts with confirmed project topology facts remain escalation-sensitive."
+
+  - field_id: usb20_hub_desc_wHubCharacteristics
+    offset: 3
+    field_name: wHubCharacteristics
+    size: 2 bytes
+    role: Bitfield covering power switching, compound device, over-current mode, TT think time, and port indicators.
+    bit_groups:
+      - bits: "1:0"
+        group: Logical Power Switching Mode
+      - bits: "2"
+        group: Compound Device
+      - bits: "4:3"
+        group: Over-current Protection Mode
+      - bits: "6:5"
+        group: TT Think Time
+      - bits: "7"
+        group: Port Indicators Supported
+      - bits: "15:8"
+        group: Reserved
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    escalation_refs:
+      - E-07
+      - E-08
+    notes: "Reviewed field-role and bit-group boundary only; not a complete semantic truth table for all bit patterns."
+
+  - field_id: usb20_hub_desc_bPwrOn2PwrGood
+    offset: 5
+    field_name: bPwrOn2PwrGood
+    size: 1 byte
+    role: Delay from power-on to power-good, represented in 2 ms units.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed field-role surface only; not a board-level timing guarantee."
+
+  - field_id: usb20_hub_desc_bHubContrCurrent
+    offset: 6
+    field_name: bHubContrCurrent
+    size: 1 byte
+    role: Hub controller current requirement.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed field-role surface only; not a board-level current validation claim."
+
+  - field_id: usb20_hub_desc_DeviceRemovable
+    offset: 7
+    field_name: DeviceRemovable
+    size: variable
+    role: Bitmap describing whether downstream ports are removable.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed bitmap-role surface only; not a verification of every possible removable bitmap pattern."
+
+  - field_id: usb20_hub_desc_PortPwrCtrlMask
+    offset: variable_after_DeviceRemovable
+    field_name: PortPwrCtrlMask
+    size: variable
+    role: Reserved or mask field associated with per-port power-control representation.
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
+    authority_level: normative_official
+    claim_level: inferred
+    evidence_status: reviewed
+    drift_status: clean
+    notes: "Reviewed field-role surface only; common descriptor patterns are not elevated to verified universal truth."

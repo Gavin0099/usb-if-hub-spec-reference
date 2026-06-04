@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB 2.0 Hub Descriptor Field Matrix",
+  "description": "Governed field-role extraction table for the USB 2.0 hub descriptor. This schema validates structure only and does not verify USB semantic correctness.",
+  "type": "object",
+  "required": ["matrix_id", "scope", "status", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "matrix_id": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["usb_versions", "topic"],
+      "additionalProperties": false,
+      "properties": {
+        "usb_versions": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["usb20", "usb21", "usb32", "usb4"] },
+          "minItems": 1
+        },
+        "topic": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["draft", "review_required", "complete", "deprecated"] },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "offset",
+          "field_name",
+          "size",
+          "role",
+          "source_refs",
+          "section_anchor",
+          "authority_level",
+          "claim_level",
+          "evidence_status",
+          "drift_status",
+          "notes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "field_id": { "type": "string", "minLength": 1 },
+          "offset": { "type": ["integer", "string"] },
+          "field_name": { "type": "string", "minLength": 1 },
+          "size": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "expected_value": { "type": "string" },
+          "bit_groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["bits", "group"],
+              "additionalProperties": false,
+              "properties": {
+                "bits": { "type": "string", "minLength": 1 },
+                "group": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "section_anchor": { "type": "string", "minLength": 1 },
+          "authority_level": { "type": "string" },
+          "claim_level": {
+            "type": "string",
+            "enum": ["normative", "verified", "inferred", "provisional", "draft", "rejected"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["complete", "reviewed", "review_required", "unverified"]
+          },
+          "drift_status": {
+            "type": "string",
+            "enum": ["clean", "changed", "unresolved", "not_monitored"]
+          },
+          "escalation_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

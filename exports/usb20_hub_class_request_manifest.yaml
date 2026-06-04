@@ -38,6 +38,8 @@ evidence_state:
   semantic_pdf_verification: false
 
 governed_tables:
+  - id: usb20_hub_descriptor_field_matrix
+    path: tables/hub_descriptor_matrix.yaml
   - id: usb_hub_class_request_matrix
     path: tables/class_request_matrix.yaml
   - id: usb_hub_feature_selector_matrix

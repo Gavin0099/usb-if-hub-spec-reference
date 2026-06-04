@@ -118,11 +118,12 @@ In this repo's current reviewed request surface, both `GET_DESCRIPTOR` and `SET_
 
 ## Governed Linkage
 
+- `tables/hub_descriptor_matrix.yaml`: governed field-role surface for the 8 tracked USB 2.0 hub descriptor fields.
 - `tables/class_request_matrix.yaml`: the `GET_DESCRIPTOR` family provides request-level linkage for hub descriptor access.
 - `specs/escalation_table.md`: `E-01`, `E-07`, and `E-08` directly involve `bNbrPorts`, `wHubCharacteristics[6:5]`, and `wHubCharacteristics[1:0]`.
 - `specs/transaction_translator.md`: provides the higher-level TT type and TT think-time summary.
 
-There is currently no dedicated governed hub-descriptor table, so this page links through request-family coverage, escalation rules, and adjacent summary pages.
+The hub descriptor table is a field-role surface only. It does not upgrade the page to field-by-field verification and does not establish descriptor dump correctness.
 
 ## What This Page Can and Cannot Answer
 

@@ -1,0 +1,15 @@
+{
+  "validator": "validate_hub_descriptor_matrix",
+  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\hub_descriptor_matrix.yaml",
+  "result": "PASS",
+  "authority_ceiling": "hub_descriptor_field_role_only",
+  "does_not_fetch_network": true,
+  "does_not_parse_pdf": true,
+  "does_not_validate_usb_semantics": true,
+  "errors": [],
+  "coverage": {
+    "tracked_field_count": 8,
+    "expected_field_count": 8,
+    "missing_fields": []
+  }
+}
