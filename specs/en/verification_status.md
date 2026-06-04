@@ -20,8 +20,8 @@ semantic_verification_claimed: false
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 10 | 8 | 2 | 0 | 0 |
-| **Total** | **65** | **8** | **57** | **0** | **0** |
+| Port status bits | 21 | 8 | 13 | 0 | 0 |
+| **Total** | **76** | **8** | **68** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -43,7 +43,7 @@ Term definitions:
 | Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
 | Class requests | reviewed | All 12 tracked class requests have reviewed request-linkage surfaces, but no entry-level verified promotions yet |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 2 high-bit boundary placeholders are reviewed boundary markers only |
+| Port status bits | verified / reviewed | 8 core hub/port status-change bits have completed entry-level verified promotion; 11 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
 
 ## Reviewed Surface Inventory
 
@@ -96,6 +96,17 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_TEST`
   - `PORT_INDICATOR`
 - port status bit boundary placeholders
+  - `PORT_SUSPEND`
+  - `PORT_OVER_CURRENT`
+  - `PORT_RESET`
+  - `PORT_POWER`
+  - `PORT_LOW_SPEED`
+  - `PORT_HIGH_SPEED`
+  - `PORT_TEST`
+  - `PORT_INDICATOR`
+  - `C_PORT_SUSPEND`
+  - `C_PORT_OVER_CURRENT`
+  - `C_PORT_RESET`
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 

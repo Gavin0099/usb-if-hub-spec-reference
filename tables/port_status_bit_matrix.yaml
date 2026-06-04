@@ -126,6 +126,158 @@ entries:
       verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit1.PORT_ENABLE.yaml
 
   - field: wPortStatus
+    bit: 2
+    name: PORT_SUSPEND
+    status: defined
+    description: Port suspend status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 2 reviewed name and position"
+        note: "Reviewed namespace surface only; not suspend/resume behavior verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 3
+    name: PORT_OVER_CURRENT
+    status: defined
+    description: Port over-current status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 3 reviewed name and position"
+        note: "Reviewed namespace surface only; not over-current behavior verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 4
+    name: PORT_RESET
+    status: defined
+    description: Port reset status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 4 reviewed name and position"
+        note: "Reviewed namespace surface only; not reset timing or completion behavior verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 8
+    name: PORT_POWER
+    status: defined
+    description: Port power status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 8 reviewed name and position"
+        note: "Reviewed namespace surface only; not power-switch policy or timing verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 9
+    name: PORT_LOW_SPEED
+    status: defined
+    description: Port low-speed status indicator
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 9 reviewed name and position"
+        note: "Reviewed namespace surface only; speed decoding must be interpreted with PORT_HIGH_SPEED."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 10
+    name: PORT_HIGH_SPEED
+    status: defined
+    description: Port high-speed status indicator
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 10 reviewed name and position"
+        note: "Reviewed namespace surface only; speed decoding must be interpreted with PORT_LOW_SPEED."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 11
+    name: PORT_TEST
+    status: defined
+    description: Port test-mode status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 11 reviewed name and position"
+        note: "Reviewed namespace surface only; not test-mode behavior or electrical signaling verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
+    bit: 12
+    name: PORT_INDICATOR
+    status: defined
+    description: Port indicator status
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortStatus bit 12 reviewed name and position"
+        note: "Reviewed namespace surface only; not indicator behavior, policy, or hardware support verification."
+    evidence:
+      source: USB 2.0 hub class request status field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortStatus
     bit: 15
     name: PORT_STATUS_HIGH_BIT_BOUNDARY
     status: reserved
@@ -183,6 +335,63 @@ entries:
       review_required: false
       verified_scope: bit_name_and_position_only
       verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit1.C_PORT_ENABLE.yaml
+
+  - field: wPortChange
+    bit: 2
+    name: C_PORT_SUSPEND
+    status: defined
+    description: Port suspend status change
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortChange bit 2 reviewed name and position"
+        note: "Reviewed namespace surface only; not suspend/resume change behavior verification."
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortChange
+    bit: 3
+    name: C_PORT_OVER_CURRENT
+    status: defined
+    description: Port over-current status change
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortChange bit 3 reviewed name and position"
+        note: "Reviewed namespace surface only; not over-current change behavior verification."
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
+
+  - field: wPortChange
+    bit: 4
+    name: C_PORT_RESET
+    status: defined
+    description: Port reset status change
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.7.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wPortChange bit 4 reviewed name and position"
+        note: "Reviewed namespace surface only; not reset completion or change behavior verification."
+    evidence:
+      source: USB 2.0 hub class request change field
+      review_required: false
+      reviewed_scope: bit_name_and_position_only
 
   - field: wPortChange
     bit: 15

@@ -20,8 +20,8 @@ semantic_verification_claimed: false
 | Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 0 | 12 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 10 | 8 | 2 | 0 | 0 |
-| **Total** | **65** | **8** | **57** | **0** | **0** |
+| Port status bits | 21 | 8 | 13 | 0 | 0 |
+| **Total** | **76** | **8** | **68** | **0** | **0** |
 
 ## Evidence Packet Summary
 
@@ -43,7 +43,7 @@ Term definitions:
 | Transaction Translator entries | reviewed | 全部 10 個 tracked TT type、think-time 與 request-linkage entries 已有 reviewed reference-boundary surfaces，但未宣告 split-transaction behavior verification |
 | Class requests | reviewed | 全部 12 個 tracked class requests 已有 reviewed request-linkage surfaces，但尚未有 entry-level verified promotions |
 | Feature selectors | reviewed | 全部 25 個 tracked feature selectors 已有 reviewed selector-boundary 或 reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；2 個 high-bit boundary placeholders 只代表 reviewed boundary markers |
+| Port status bits | verified / reviewed | 8 個核心 hub/port status-change bits 已完成 entry-level verified promotion；另外 11 個 defined port status/change bits 與 2 個 high-bit boundary placeholders 只是 reviewed namespace/boundary entries |
 
 ## Reviewed Surface Inventory
 
@@ -96,6 +96,17 @@ Term definitions:
   - `PORT_TEST`
   - `PORT_INDICATOR`
 - port status bit boundary placeholders
+  - `PORT_SUSPEND`
+  - `PORT_OVER_CURRENT`
+  - `PORT_RESET`
+  - `PORT_POWER`
+  - `PORT_LOW_SPEED`
+  - `PORT_HIGH_SPEED`
+  - `PORT_TEST`
+  - `PORT_INDICATOR`
+  - `C_PORT_SUSPEND`
+  - `C_PORT_OVER_CURRENT`
+  - `C_PORT_RESET`
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 

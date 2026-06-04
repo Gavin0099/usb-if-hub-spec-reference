@@ -10,6 +10,7 @@ Structural checks only:
   R4 status must be one of defined, reserved, vendor_or_spec_dependent
   R5 claim/evidence must exist at matrix level or entry level
   R6 claim_level=verified is only allowed for the gated Phase 8K pilot set
+  R7 expected USB 2.0 hub/port status and change bit names must be present
 """
 
 from __future__ import annotations
@@ -39,6 +40,27 @@ ALLOWED_VERIFIED_ENTRY_IDS = {
     "wHubStatus.bit1.HUB_OVER_CURRENT",
     "wHubChange.bit0.C_HUB_LOCAL_POWER",
     "wHubChange.bit1.C_HUB_OVER_CURRENT",
+}
+EXPECTED_DEFINED_BITS = {
+    ("wHubStatus", 0, "HUB_LOCAL_POWER"),
+    ("wHubStatus", 1, "HUB_OVER_CURRENT"),
+    ("wHubChange", 0, "C_HUB_LOCAL_POWER"),
+    ("wHubChange", 1, "C_HUB_OVER_CURRENT"),
+    ("wPortStatus", 0, "PORT_CONNECTION"),
+    ("wPortStatus", 1, "PORT_ENABLE"),
+    ("wPortStatus", 2, "PORT_SUSPEND"),
+    ("wPortStatus", 3, "PORT_OVER_CURRENT"),
+    ("wPortStatus", 4, "PORT_RESET"),
+    ("wPortStatus", 8, "PORT_POWER"),
+    ("wPortStatus", 9, "PORT_LOW_SPEED"),
+    ("wPortStatus", 10, "PORT_HIGH_SPEED"),
+    ("wPortStatus", 11, "PORT_TEST"),
+    ("wPortStatus", 12, "PORT_INDICATOR"),
+    ("wPortChange", 0, "C_PORT_CONNECTION"),
+    ("wPortChange", 1, "C_PORT_ENABLE"),
+    ("wPortChange", 2, "C_PORT_SUSPEND"),
+    ("wPortChange", 3, "C_PORT_OVER_CURRENT"),
+    ("wPortChange", 4, "C_PORT_RESET"),
 }
 
 
@@ -75,6 +97,7 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
         )
 
     seen_field_bit: set[tuple[str, int]] = set()
+    seen_defined_bits: set[tuple[str, int, str]] = set()
     for i, entry in enumerate(entries):
         if not isinstance(entry, dict):
             fail("INVALID_ENTRY_TYPE", f"entry[{i}] must be a mapping")
@@ -100,6 +123,8 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
                 fail("DUPLICATE_FIELD_BIT", f"{loc}: duplicate field+bit pair ({field}, {bit})")
             else:
                 seen_field_bit.add(key)
+            if status == "defined":
+                seen_defined_bits.add((field, bit, entry.get("name", "")))
 
         # R4
         if status not in VALID_STATUS:
@@ -132,6 +157,14 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
                         f"{loc}: claim_level=verified requires evidence_status='reviewed'",
                     )
 
+    missing_defined_bits = sorted(EXPECTED_DEFINED_BITS - seen_defined_bits)
+    if missing_defined_bits:
+        fail(
+            "MISSING_EXPECTED_DEFINED_BITS",
+            "missing expected defined bit entries: "
+            + ", ".join(f"{field}.bit{bit}.{name}" for field, bit, name in missing_defined_bits),
+        )
+
     return ("FAIL" if errors else "PASS"), errors
 
 
@@ -146,6 +179,8 @@ def main() -> None:
     for e in errors:
         print(f"[FAIL] {e['code']}: {e['message']}")
     print(f"\nPort status bit matrix validation {result}")
+    if result == "PASS":
+        print(f"- defined bit coverage: {len(EXPECTED_DEFINED_BITS)}/{len(EXPECTED_DEFINED_BITS)}")
 
     if args.receipt_out:
         args.receipt_out.parent.mkdir(parents=True, exist_ok=True)
@@ -154,6 +189,11 @@ def main() -> None:
             "matrix": str(args.matrix),
             "result": result,
             "authority_ceiling": "status_bit_namespace_only",
+            "coverage": {
+                "defined_bits_covered": len(EXPECTED_DEFINED_BITS) if result == "PASS" else None,
+                "expected_defined_bits": len(EXPECTED_DEFINED_BITS),
+                "coverage_status": "complete" if result == "PASS" else "review_required",
+            },
             "errors": errors,
         }
         args.receipt_out.write_text(json.dumps(receipt, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")

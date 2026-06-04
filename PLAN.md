@@ -11,9 +11,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 ## Current State
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
-- Governed tracked entries: 65.
+- Governed tracked entries: 76.
 - Entry-level verified entries: 8.
-- Reviewed entries: 57.
+- Reviewed entries: 68.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are verified only for bit
   name and bit position.
@@ -40,8 +40,9 @@ Claim ceiling: governance baseline only.
   families covered.
 - `tables/feature_selector_matrix.yaml`: 25 entries, standard port selector
   namespace 0-22 covered, including reserved-boundary slots.
-- `tables/port_status_bit_matrix.yaml`: 10 tracked hub/port status and change
-  entries, including 8 verified entries and 2 reviewed high-bit boundary
+- `tables/port_status_bit_matrix.yaml`: 21 tracked hub/port status and change
+  entries, including 8 verified entries, 11 reviewed defined port
+  status/change namespace entries, and 2 reviewed high-bit boundary
   placeholders.
 - Core bilingual spec pages are present under `specs/` and `specs/en/`.
 
@@ -132,8 +133,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 65 tracked entries, 8
-  verified entries, 57 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 76 tracked entries, 8
+  verified entries, 68 reviewed entries, and 0 inferred tracked entries.
 
 Claim ceiling: LLM reference readability and boundary clarity only.
 

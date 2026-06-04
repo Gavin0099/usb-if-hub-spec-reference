@@ -21,7 +21,7 @@ This page is meant to answer:
 
 - what hub-level and port-level fields `GET_STATUS` can return
 - how `Status` bits differ from `Change` bits
-- which core bits are currently exposed through the machine-readable layer
+- which hub/port status and change bits are currently exposed through the machine-readable layer
 - which entries currently have live `verified` promotion, and how narrow that verified scope is
 
 This page is not meant to answer:
@@ -47,16 +47,30 @@ This page is not meant to answer:
 | `wHubChange` | 0 | `C_HUB_LOCAL_POWER` | Records whether local power status has changed since the last clear |
 | `wHubChange` | 1 | `C_HUB_OVER_CURRENT` | Records whether over-current status has changed since the last clear |
 
-## Minimum Port-Level Boundary
+## Port-Level Bits
 
 | Field | Bit | Name | State | Meaning |
 |---|---|---|---|---|
 | `wPortStatus` | 0 | `PORT_CONNECTION` | defined | Port connection status |
 | `wPortStatus` | 1 | `PORT_ENABLE` | defined | Port enabled status |
+| `wPortStatus` | 2 | `PORT_SUSPEND` | defined | Port suspend status |
+| `wPortStatus` | 3 | `PORT_OVER_CURRENT` | defined | Port over-current status |
+| `wPortStatus` | 4 | `PORT_RESET` | defined | Port reset status |
+| `wPortStatus` | 8 | `PORT_POWER` | defined | Port power status |
+| `wPortStatus` | 9 | `PORT_LOW_SPEED` | defined | Port low-speed status indicator |
+| `wPortStatus` | 10 | `PORT_HIGH_SPEED` | defined | Port high-speed status indicator |
+| `wPortStatus` | 11 | `PORT_TEST` | defined | Port test-mode status |
+| `wPortStatus` | 12 | `PORT_INDICATOR` | defined | Port indicator status |
 | `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit field |
 | `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | Records whether connection status has changed since the last clear |
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | Records whether enable status has changed since the last clear |
+| `wPortChange` | 2 | `C_PORT_SUSPEND` | defined | Records whether suspend status has changed since the last clear |
+| `wPortChange` | 3 | `C_PORT_OVER_CURRENT` | defined | Records whether over-current status has changed since the last clear |
+| `wPortChange` | 4 | `C_PORT_RESET` | defined | Records whether reset status has changed since the last clear |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
+
+The newly tracked status/change entries are reviewed namespace entries only.
+They do not expand the verified scope beyond the eight live verified entries listed below.
 
 ## Live Verified Entries
 
@@ -90,6 +104,26 @@ So this page frontmatter still remains:
 - `claim_level: inferred`
 - `status: review_required`
 - `semantic_verification_claimed: false`
+
+## Reviewed Entries Outside Verified Scope
+
+The following port status/change entries are currently `reviewed`, not `verified`:
+
+| Entry | Field | Bit | Reviewed Scope |
+|---|---|---|---|
+| `PORT_SUSPEND` | `wPortStatus` | bit 2 | bit name and bit position only |
+| `PORT_OVER_CURRENT` | `wPortStatus` | bit 3 | bit name and bit position only |
+| `PORT_RESET` | `wPortStatus` | bit 4 | bit name and bit position only |
+| `PORT_POWER` | `wPortStatus` | bit 8 | bit name and bit position only |
+| `PORT_LOW_SPEED` | `wPortStatus` | bit 9 | bit name and bit position only |
+| `PORT_HIGH_SPEED` | `wPortStatus` | bit 10 | bit name and bit position only |
+| `PORT_TEST` | `wPortStatus` | bit 11 | bit name and bit position only |
+| `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
+| `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
+| `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
+| `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
+
+These entries improve namespace coverage, but they do not verify timing, state machines, clear sequencing, error recovery, speed decoding, test-mode behavior, power-switch policy, or indicator behavior.
 
 ## Reviewed Boundary Placeholders
 
@@ -145,6 +179,7 @@ Current state:
 - selected pilot entries carry `section_refs`
 - `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
 - all verified scopes remain `bit_name_and_position_only`
+- the remaining defined port status/change entries are reviewed namespace entries only
 - this still does not mean USB 2.0 PDF semantic verification is complete
 
 If a future wiki claim block needs `section_refs`, it should keep the Phase 7A metadata structure, for example:
@@ -171,6 +206,6 @@ That metadata block is evidence attachment only. It does not automatically promo
 
 - This page does not claim that all port status bits have completed PDF-level verification.
 - This page does not claim that speed bits, reset bits, power bits, or adjacent semantics are fully verified.
-- This page does not expand two verified entries into a claim that the whole page is verified.
+- This page does not expand eight verified entries into a claim that the whole page is verified.
 - This page does not treat high-bit boundary placeholders as defined status or change semantics.
 - This page does not elevate the status-bit summary into firmware implementation authority.
