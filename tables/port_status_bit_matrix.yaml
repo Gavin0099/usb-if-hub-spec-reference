@@ -349,57 +349,60 @@ entries:
     name: C_PORT_SUSPEND
     status: defined
     description: Port suspend status change
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortChange bit 2 reviewed name and position"
-        note: "Reviewed namespace surface only; not suspend/resume change behavior verification."
+        applies_to: "wPortChange bit 2 name and position"
+        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit2.C_PORT_SUSPEND.yaml
 
   - field: wPortChange
     bit: 3
     name: C_PORT_OVER_CURRENT
     status: defined
     description: Port over-current status change
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortChange bit 3 reviewed name and position"
-        note: "Reviewed namespace surface only; not over-current change behavior verification."
+        applies_to: "wPortChange bit 3 name and position"
+        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit3.C_PORT_OVER_CURRENT.yaml
 
   - field: wPortChange
     bit: 4
     name: C_PORT_RESET
     status: defined
     description: Port reset status change
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     section_refs:
       - spec: usb20
         section: "11.24.2.7.1"
         anchor_type: section
         evidence_status: reviewed
-        applies_to: "wPortChange bit 4 reviewed name and position"
-        note: "Reviewed namespace surface only; not reset completion or change behavior verification."
+        applies_to: "wPortChange bit 4 name and position"
+        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
     evidence:
       source: USB 2.0 hub class request change field
       review_required: false
-      reviewed_scope: bit_name_and_position_only
+      verified_scope: bit_name_and_position_only
+      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit4.C_PORT_RESET.yaml
 
   - field: wPortChange
     bit: 15

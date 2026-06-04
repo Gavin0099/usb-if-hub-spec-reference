@@ -21,14 +21,14 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 21 | 16 | 5 | 0 | 0 |
-| **Total** | **86** | **36** | **50** | **0** | **0** |
+| Port status bits | 21 | 19 | 2 | 0 | 0 |
+| **Total** | **86** | **39** | **47** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 36 | All correspond to promoted verified entries |
+| Entry verification packets | 39 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -45,7 +45,7 @@ Term definitions:
 | Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
 | Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
 | Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 16 core hub/port status-change bits have completed entry-level verified promotion; 3 additional defined port status/change bits and 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
+| Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; only 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
 
 ## Reviewed Surface Inventory
 
@@ -68,16 +68,10 @@ The current `reviewed` surface is concentrated in these items:
   - `C_HUB_OVER_CURRENT`
   - `C_PORT_CONNECTION`
   - `C_PORT_ENABLE`
-  - `C_PORT_SUSPEND`
-  - `C_PORT_OVER_CURRENT`
-  - `C_PORT_RESET`
   - `PORT_ENABLE`
   - `PORT_SUSPEND`
   - `PORT_POWER`
 - port status bit boundary placeholders
-  - `C_PORT_SUSPEND`
-  - `C_PORT_OVER_CURRENT`
-  - `C_PORT_RESET`
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 
@@ -86,7 +80,7 @@ They do **not** mean those surfaces have completed entry-level verified promotio
 
 ## Verified Entries
 
-Thirty-six entries have completed verified promotion (`claim_level: verified`):
+Thirty-nine entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -110,6 +104,9 @@ Thirty-six entries have completed verified promotion (`claim_level: verified`):
 | PORT_INDICATOR | `wPortStatus` | bit 12 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
 | C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
+| C_PORT_SUSPEND | `wPortChange` | bit 2 | bit name and bit position only |
+| C_PORT_OVER_CURRENT | `wPortChange` | bit 3 | bit name and bit position only |
+| C_PORT_RESET | `wPortChange` | bit 4 | bit name and bit position only |
 | HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |
 | HUB_OVER_CURRENT | `wHubStatus` | bit 1 | bit name and bit position only |
 | C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |

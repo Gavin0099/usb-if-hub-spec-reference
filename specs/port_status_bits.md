@@ -70,11 +70,11 @@ semantic_verification_claimed: false
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change field 的 high-boundary placeholder |
 
 新追蹤的 status/change entries 並不都代表 verified。  
-目前只有下面列出的 16 個 live verified entries 完成 entry-level promotion。
+目前只有下面列出的 19 個 live verified entries 完成 entry-level promotion。
 
 ## Live Verified Entries
 
-目前有 16 個 live governed entries 已提升為 `verified`：
+目前有 19 個 live governed entries 已提升為 `verified`：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -90,6 +90,9 @@ semantic_verification_claimed: false
 | `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
+| `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
+| `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
+| `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
 | `HUB_OVER_CURRENT` | `wHubStatus` | bit 1 | bit name and bit position only |
 | `C_HUB_LOCAL_POWER` | `wHubChange` | bit 0 | bit name and bit position only |
@@ -115,13 +118,9 @@ semantic_verification_claimed: false
 
 ## Reviewed Entries Outside Verified Scope
 
-下列 port status/change entries 目前仍是 `reviewed`，不是 `verified`：
+下列 port status/change entries 目前僅有 boundary placeholders，已無 defined 變更位元維持 `reviewed` 但未 verified：
 
-| Entry | Field | Bit | Reviewed Scope |
-|---|---|---|---|
-| `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
-| `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
-| `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
+目前沒有其他 `reviewed` 定義位元，只有 high-bit boundary placeholders 保留在 reviewed 範圍內。
 
 這些 entries 提升了 namespace coverage，但不表示 timing、state machine、clear sequencing、error recovery、speed decoding、test mode、power-switch policy 或 indicator behavior 已被驗證。
 

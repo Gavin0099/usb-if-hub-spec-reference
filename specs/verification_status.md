@@ -21,14 +21,14 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 0 | 10 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 0 | 25 | 0 | 0 |
-| Port status bits | 21 | 16 | 5 | 0 | 0 |
-| **Total** | **86** | **36** | **50** | **0** | **0** |
+| Port status bits | 21 | 19 | 2 | 0 | 0 |
+| **Total** | **86** | **39** | **47** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 36 | 全部對應到已 promoted 的 verified entries |
+| Entry verification packets | 39 | 全部對應到已 promoted 的 verified entries |
 
 名詞定義：
 
@@ -45,7 +45,7 @@ semantic_verification_claimed: false
 | Escalation triggers | reviewed | 全部 10 個 tracked E-01 到 E-10 trigger boundaries 都已達到 reviewed reference surface，但 escalation execution 仍由 consuming repos 負責 |
 | Class requests | verified | 全部 12 個 tracked class requests 都已完成 request-linkage-only verified promotion |
 | Feature selectors | reviewed | 全部 25 個 tracked feature selectors 都已具備 reviewed selector-boundary 或 reserved-boundary surfaces |
-| Port status bits | verified / reviewed | 9 個核心 hub/port status-change bits 已完成 entry-level verified promotion；另有 10 個已定義的 port status/change bits 與 2 個 high-bit boundary placeholders 仍屬 reviewed namespace/boundary entries |
+| Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；僅有 2 個 high-bit boundary placeholders 仍屬 reviewed namespace/boundary entries |
 
 ## Reviewed Surface Inventory
 
@@ -71,9 +71,6 @@ semantic_verification_claimed: false
   - `C_HUB_OVER_CURRENT`
   - `C_PORT_CONNECTION`
   - `C_PORT_ENABLE`
-  - `C_PORT_SUSPEND`
-  - `C_PORT_OVER_CURRENT`
-  - `C_PORT_RESET`
   - `PORT_ENABLE`
   - `PORT_SUSPEND`
   - `PORT_RESET`
@@ -88,9 +85,6 @@ semantic_verification_claimed: false
   - `PORT_HIGH_SPEED`
   - `PORT_TEST`
   - `PORT_INDICATOR`
-  - `C_PORT_SUSPEND`
-  - `C_PORT_OVER_CURRENT`
-  - `C_PORT_RESET`
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
 
@@ -99,7 +93,7 @@ semantic_verification_claimed: false
 
 ## Verified Entries
 
-目前共有 29 個 entries 已完成 verified promotion（`claim_level: verified`）：
+目前共有 39 個 entries 已完成 verified promotion（`claim_level: verified`）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -123,6 +117,9 @@ semantic_verification_claimed: false
 | PORT_INDICATOR | `wPortStatus` | bit 12 | bit name and bit position only |
 | C_PORT_CONNECTION | `wPortChange` | bit 0 | bit name and bit position only |
 | C_PORT_ENABLE | `wPortChange` | bit 1 | bit name and bit position only |
+| C_PORT_SUSPEND | `wPortChange` | bit 2 | bit name and bit position only |
+| C_PORT_OVER_CURRENT | `wPortChange` | bit 3 | bit name and bit position only |
+| C_PORT_RESET | `wPortChange` | bit 4 | bit name and bit position only |
 | HUB_LOCAL_POWER | `wHubStatus` | bit 0 | bit name and bit position only |
 | HUB_OVER_CURRENT | `wHubStatus` | bit 1 | bit name and bit position only |
 | C_HUB_LOCAL_POWER | `wHubChange` | bit 0 | bit name and bit position only |

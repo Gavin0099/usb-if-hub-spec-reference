@@ -74,7 +74,7 @@ Only the 14 live verified entries listed below have completed entry-level promot
 
 ## Live Verified Entries
 
-Sixteen live governed entries are currently promoted to `verified`:
+Nineteen live governed entries are currently promoted to `verified`:
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -90,6 +90,9 @@ Sixteen live governed entries are currently promoted to `verified`:
 | `PORT_INDICATOR` | `wPortStatus` | bit 12 | bit name and bit position only |
 | `C_PORT_CONNECTION` | `wPortChange` | bit 0 | bit name and bit position only |
 | `C_PORT_ENABLE` | `wPortChange` | bit 1 | bit name and bit position only |
+| `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
+| `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
+| `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
 | `HUB_LOCAL_POWER` | `wHubStatus` | bit 0 | bit name and bit position only |
 | `HUB_OVER_CURRENT` | `wHubStatus` | bit 1 | bit name and bit position only |
 | `C_HUB_LOCAL_POWER` | `wHubChange` | bit 0 | bit name and bit position only |
@@ -115,13 +118,7 @@ So this page frontmatter still remains:
 
 ## Reviewed Entries Outside Verified Scope
 
-The following port status/change entries are currently `reviewed`, not `verified`:
-
-| Entry | Field | Bit | Reviewed Scope |
-|---|---|---|---|
-| `C_PORT_SUSPEND` | `wPortChange` | bit 2 | bit name and bit position only |
-| `C_PORT_OVER_CURRENT` | `wPortChange` | bit 3 | bit name and bit position only |
-| `C_PORT_RESET` | `wPortChange` | bit 4 | bit name and bit position only |
+No port status/change defined entries are currently `reviewed` but not `verified`.
 
 These entries improve namespace coverage, but they do not verify timing, state machines, clear sequencing, error recovery, speed decoding, test-mode behavior, power-switch policy, or indicator behavior.
 
@@ -177,9 +174,9 @@ They should not be conflated.
 Current state:
 
 - selected pilot entries carry `section_refs`
-- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortStatus.bit2.PORT_SUSPEND`, `wPortStatus.bit3.PORT_OVER_CURRENT`, `wPortStatus.bit4.PORT_RESET`, `wPortStatus.bit8.PORT_POWER`, `wPortStatus.bit9.PORT_LOW_SPEED`, `wPortStatus.bit10.PORT_HIGH_SPEED`, `wPortStatus.bit11.PORT_TEST`, `wPortStatus.bit12.PORT_INDICATOR`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
+- `wPortStatus.bit0.PORT_CONNECTION`, `wPortStatus.bit1.PORT_ENABLE`, `wPortStatus.bit2.PORT_SUSPEND`, `wPortStatus.bit3.PORT_OVER_CURRENT`, `wPortStatus.bit4.PORT_RESET`, `wPortStatus.bit8.PORT_POWER`, `wPortStatus.bit9.PORT_LOW_SPEED`, `wPortStatus.bit10.PORT_HIGH_SPEED`, `wPortStatus.bit11.PORT_TEST`, `wPortStatus.bit12.PORT_INDICATOR`, `wPortChange.bit0.C_PORT_CONNECTION`, `wPortChange.bit1.C_PORT_ENABLE`, `wPortChange.bit2.C_PORT_SUSPEND`, `wPortChange.bit3.C_PORT_OVER_CURRENT`, `wPortChange.bit4.C_PORT_RESET`, `wHubStatus.bit0.HUB_LOCAL_POWER`, `wHubStatus.bit1.HUB_OVER_CURRENT`, `wHubChange.bit0.C_HUB_LOCAL_POWER`, and `wHubChange.bit1.C_HUB_OVER_CURRENT` are live `verified`
 - all verified scopes remain `bit_name_and_position_only`
-- the remaining defined port status/change entries are reviewed namespace entries only
+- the remaining defined port status/change entries are reviewed namespace entries only (currently none)
 - this still does not mean USB 2.0 PDF semantic verification is complete
 
 If a future wiki claim block needs `section_refs`, it should keep the Phase 7A metadata structure, for example:
@@ -206,6 +203,6 @@ That metadata block is evidence attachment only. It does not automatically promo
 
 - This page does not claim that all port status bits have completed PDF-level verification.
 - This page does not claim that speed bits, reset bits, power bits, or adjacent semantics are fully verified.
-- This page does not expand 16 verified entries into a claim that the whole page is verified.
+- This page does not expand 19 verified entries into a claim that the whole page is verified.
 - This page does not treat high-bit boundary placeholders as defined status or change semantics.
 - This page does not elevate the status-bit summary into firmware implementation authority.
