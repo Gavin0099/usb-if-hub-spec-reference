@@ -46,3 +46,9 @@ semantic_verification_claimed: false
 2. Go to the corresponding USB-IF specification or official index source.
 3. Treat community or archive sources as supporting context only.
 4. If the version mapping would affect consuming firmware behavior, enter Standard Escalation Mode first.
+
+## Notes
+
+- This page does not assert that USB 2.0, 2.1, 3.2, and USB4 hub semantics are directly interchangeable.
+- If a new version document enters the source registry, this repo should sync checks for `contract/*.yaml` and `evidence/source_registry.yaml`.
+- Any high-confidence claim based on this page still requires returning to the corresponding normative official source for the target version.
