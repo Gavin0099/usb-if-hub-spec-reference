@@ -79,7 +79,7 @@ semantic_verification_claimed: false
 - `PORT_TEST` <-> 標準 port test selector 邊界
 - `PORT_INDICATOR` <-> 標準 port indicator selector 邊界
 
-這表示 selector 命名空間邊界本頁已完成 reference surface reviewed，  
+本頁的 selector 命名空間邊界已完成 reviewed，可視為 reference surface，  
 但不代表主機端 sequencing、selector side effect 或更廣泛 request 行為已驗證。  
 對 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`，目前只屬於 `GET_STATUS` 的 context-only linkage，不是直接宣告可供 `SET_FEATURE` / `CLEAR_FEATURE` 使用。  
 對 reserved rows，reviewed 僅表示這些數值屬於標準 port selector 邊界，並不代表可當作可用 selector。  
@@ -119,7 +119,7 @@ semantic_verification_claimed: false
 - `PORT_CONNECTION`
   - selector 值對應 port 連線語義，但本頁不將其提升為 host-side 連線/斷線流程真值。
 - `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`
-  - 這些 selector 在 header 上可見於標準命名空間，但對應 `SET_FEATURE` / `CLEAR_FEATURE` 的完整啟停副作用未在本 repo 完成驗證。
+  - 這些 selector 在標準 selector 命名空間中出現，但對應 `SET_FEATURE` / `CLEAR_FEATURE` 的完整啟停副作用未在本 repo 完成驗證。
 - `PORT_OVER_CURRENT`
   - `C_PORT_OVER_CURRENT` 屬於 change selector 族群；本頁保留 `change` 識別語義，不直接定義 recovery policy。
 - `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET`
