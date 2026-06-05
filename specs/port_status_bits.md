@@ -61,13 +61,13 @@ semantic_verification_claimed: false
 | `wPortStatus` | 10 | `PORT_HIGH_SPEED` | defined | Port 高速端口指示 |
 | `wPortStatus` | 11 | `PORT_TEST` | defined | Port 測試模式狀態 |
 | `wPortStatus` | 12 | `PORT_INDICATOR` | defined | Port 指示燈狀態 |
-| `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | 16-bit status 欄位的高位界限占位 |
+| `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | 16-bit status 欄位的邊界位 |
 | `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | 紀錄自上次 clear 後 connection 狀態是否有變更 |
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | 紀錄自上次 clear 後 enable 狀態是否有變更 |
 | `wPortChange` | 2 | `C_PORT_SUSPEND` | defined | 紀錄自上次 clear 後 suspend 狀態是否有變更 |
 | `wPortChange` | 3 | `C_PORT_OVER_CURRENT` | defined | 紀錄自上次 clear 後 over-current 狀態是否有變更 |
 | `wPortChange` | 4 | `C_PORT_RESET` | defined | 紀錄自上次 clear 後 reset 狀態是否有變更 |
-| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change 欄位的高位界限占位 |
+| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change 欄位的邊界位 |
 
 ## 已完成 `verified` 的 tracked entries
 
@@ -115,20 +115,20 @@ semantic_verification_claimed: false
 
 ## reviewed 邊界項（非 verified）
 
-目前沒有其他 defined 的 status/change entry 是「reviewed 但未 verified」。
+目前沒有其他 defined 的 status/change entry 是「已 reviewed 但未 verified」。
 
 這些 reviewed 項目只提供 namespace 邊界，不延伸 timing、state machine、清除序列、錯誤復原、速度解碼、test-mode、power/power-indicator 行為的驗證。
 
 ## Reviewed Boundary Markers
 
-高位界限項目僅作為 reviewed boundary marker：
+高位界限項目僅作為 reviewed 邊界標記：
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 高位界限 |
-| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 高位界限 |
+| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 邊界位 |
+| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 邊界位 |
 
-這兩個 boundary marker 不代表額外的 status/change 行為定義，只保留 16-bit 欄位結構邊界。
+這兩個 boundary marker 不代表額外的 status/change 行為定義，只保留 16-bit 欄位結構邊界語意。
 
 ## Change bit 與 `CLEAR_FEATURE`
 

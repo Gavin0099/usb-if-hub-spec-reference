@@ -69,8 +69,8 @@ This page is not meant to answer:
 | `wPortChange` | 4 | `C_PORT_RESET` | defined | Records whether reset status has changed since the last clear |
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
 
-The newly tracked status/change entries are not all verified.
-Only the 19 live verified entries listed below have completed entry-level promotion.
+Not all tracked status/change entries are verified.
+Only the 19 live entries listed below have completed entry-level promotion.
 
 ## Live Verified Entries
 
@@ -124,7 +124,7 @@ These entries improve namespace coverage, but they do not verify timing, state m
 
 ## Reviewed Boundary Placeholders
 
-Two high-bit placeholders are now reviewed as boundary markers only:
+Two high-bit placeholders remain reviewed as boundary markers only:
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
@@ -132,7 +132,7 @@ Two high-bit placeholders are now reviewed as boundary markers only:
 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change-field high boundary only |
 
 These reviewed placeholders do not define additional status semantics.
-They only keep the machine-readable layer explicit that the status and change fields are 16-bit fields with a high-boundary marker.
+They keep the machine-readable layer explicit that the status and change fields are 16-bit fields with boundary markers.
 
 ## Change Bits and `CLEAR_FEATURE`
 
