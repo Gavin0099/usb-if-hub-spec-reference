@@ -128,7 +128,8 @@ semantic_verification_claimed: false
 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 邊界位 |
 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 邊界位 |
 
-這兩個 boundary marker 不代表額外的 status/change 行為定義，只保留 16-bit 欄位結構邊界語意。
+這兩個 boundary marker 不代表額外的 status/change 行為定義，只保留 16-bit 欄位結構邊界語意。  
+這是 reviewed surface；不會改變 live verified 的邊界或語意宣告數量。
 
 ## Change bit 與 `CLEAR_FEATURE`
 
