@@ -67,11 +67,11 @@ The current repo-local reviewed linkage surface includes:
 - reserved port selector slots `5-7` and `11-15` as reserved-boundary surface only
 - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
-- `C_PORT_CONNECTION` <-> `wPortChange bit 0`
-- `C_PORT_ENABLE` <-> `wPortChange bit 1`
-- `C_PORT_SUSPEND` <-> standard suspend-change selector boundary
-- `C_PORT_OVER_CURRENT` <-> standard over-current-change selector boundary
-- `C_PORT_RESET` <-> standard reset-change selector boundary
+- `C_PORT_CONNECTION` <-> `wPortChange` change selector (event-record bit 0)
+- `C_PORT_ENABLE` <-> `wPortChange` change selector (event-record bit 1)
+- `C_PORT_SUSPEND` <-> `wPortChange` change selector (event-record bit 2)
+- `C_PORT_OVER_CURRENT` <-> `wPortChange` change selector (event-record bit 3)
+- `C_PORT_RESET` <-> `wPortChange` change selector (event-record bit 4)
 - `PORT_ENABLE` <-> standard port enable feature selector boundary
 - `PORT_SUSPEND` <-> standard port suspend feature selector boundary
 - `PORT_RESET` <-> standard port reset feature selector boundary
@@ -85,16 +85,17 @@ For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH
 For the reserved rows, the reviewed surface only means those numeric slots remain inside the standard port selector boundary; it does not make them usable selectors or vendor-extension slots.
 For `PORT_TEST` and `PORT_INDICATOR`, the reviewed surface is selector-boundary only; it does not verify test-mode behavior, indicator policy, or hardware support.
 
-## PORT_* / C_PORT_* behavior boundary (selector layer)
+## `PORT_*` / `C_PORT_*` behavior boundary (selector layer)
 
 - `PORT_CONNECTION`
-  - The selector value maps to the port connection concept, but this page does not claim the full host connect/disconnect behavior.
+  - The selector value maps to the port connection concept only; full host connect/disconnect transition semantics are not claimed.
 - `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, `PORT_POWER`
   - These selectors are in the standard namespace; the complete `SET_FEATURE` / `CLEAR_FEATURE` transition effects are not fully verified here.
 - `PORT_OVER_CURRENT`
   - `PORT_OVER_CURRENT` is reported in status context; `C_PORT_OVER_CURRENT` is the associated change-selector event-acknowledge path, and this page does not extend to recovery policy or timing truth.
 - `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, `C_PORT_RESET`
-  - These are treated as change selectors: the page records the change-acknowledgment role instead of timing or control-state machine truth.
+  - These are treated as change selectors over `wPortChange`.
+  - The page records the event-record / clear-acknowledgment role instead of timing or control-state-machine truth.
 - `PORT_TEST`, `PORT_INDICATOR`
   - This slice only keeps selector boundary currently; it does not advance to test-mode or indicator behavior verification.
 
@@ -157,5 +158,6 @@ This repo currently treats selectors in three reading categories:
 
 - This page does not claim value-by-value PDF section-level verification for selector `0-22`.
 - This page does not claim correctness verification for all selector side effects.
+- This page does not claim request success/failure, timing, or recovery semantics for `SET_FEATURE` / `CLEAR_FEATURE`.
 - This page does not upgrade selector summaries into firmware implementation authority.
 - This page does not override confirmed project facts in consuming repos.
