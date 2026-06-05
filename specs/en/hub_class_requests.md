@@ -77,7 +77,7 @@ This page does not answer:
 
 - Hub request maps to `wHubStatus` + `wHubChange`.
 - Port request maps to `wPortStatus` + `wPortChange`.
-- The current reviewed request surface covers this request-to-status-field linkage only.
+- The current reviewed scope covers only this request-to-status-field linkage.
 - The related context-only selector surface includes `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` as `GET_STATUS` comparison anchors.
 
 **Reviewed surface**

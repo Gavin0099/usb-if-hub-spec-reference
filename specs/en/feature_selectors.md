@@ -79,7 +79,7 @@ The current repo-local reviewed linkage surface includes:
 - `PORT_TEST` <-> standard port test feature selector boundary
 - `PORT_INDICATOR` <-> standard port indicator feature selector boundary
 
-This means the selector namespace boundary has been reviewed as a reference surface.
+This means the selector namespace boundary has been reviewed as a boundary-only reference surface.
 It does **not** mean host-side sequencing, selector side effects, or broader request behavior is verified.
 For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` rows, the reviewed surface is context-only `GET_STATUS` linkage; it does not make them direct `SET_FEATURE` / `CLEAR_FEATURE` targets.
 For the reserved rows, the reviewed surface only means those numeric slots remain inside the standard port selector boundary; it does not make them usable selectors or vendor-extension slots.

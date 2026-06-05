@@ -77,8 +77,8 @@ semantic_verification_claimed: false
 
 - Hub request 對應 `wHubStatus` + `wHubChange`。
 - Port request 對應 `wPortStatus` + `wPortChange`。
-- 本 repo 當前 reviewed 邊界面僅涵蓋 request-to-status-field 的對應關係。
-- `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 僅作為 `GET_STATUS` 比對 anchor 的 context-only surface。
+- 本 repo 當前 reviewed 範圍僅涵蓋 request-to-status-field 的對應關係。
+- `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 僅作為 `GET_STATUS` 比對 anchor 的 context-only 邊界面。
 
 **Review 範圍**
 

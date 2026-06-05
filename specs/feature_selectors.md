@@ -79,7 +79,7 @@ semantic_verification_claimed: false
 - `PORT_TEST` <-> 標準 port test selector 邊界
 - `PORT_INDICATOR` <-> 標準 port indicator selector 邊界
 
-本頁的 selector 命名空間邊界已完成 reviewed，可視為 reference surface，  
+本頁的 selector 命名空間邊界已完成 reviewed，作為 reference surface，  
 但不代表主機端 sequencing、selector side effect 或更廣泛 request 行為已驗證。  
 對 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`，目前只屬於 `GET_STATUS` 的 context-only linkage，不是直接宣告可供 `SET_FEATURE` / `CLEAR_FEATURE` 使用。  
 對 reserved rows，reviewed 僅表示這些數值屬於標準 port selector 邊界，並不代表可當作可用 selector。  
