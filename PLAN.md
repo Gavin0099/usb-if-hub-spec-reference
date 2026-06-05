@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-05
+> **Last Updated**: 2026-06-06
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -189,6 +189,19 @@ Claim ceiling: LLM reference readability and boundary clarity only.
 
 Claim ceiling: reporting/reference governance surface only.
 
+### Phase 11 - VitePress Static Site and GitHub Pages Deployment
+
+- Added `.vitepress/config.ts` with zh-TW / English bilingual navigation and
+  local search.
+- Added `.vitepress/theme/components/AskAI.vue` — browser-side AI Q&A widget
+  using `claude-haiku-4-5-20251001`; API key stored in localStorage only.
+- Added `.github/workflows/deploy-pages.yml` — auto-deploys to GitHub Pages on
+  push to `main` when `specs/` or `.vitepress/` changes.
+- `npm run build` passes against the current `specs/` surface.
+
+Claim ceiling: static reference site deployment only; no semantic verification
+upgrade and no governance behavior change.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -206,7 +219,8 @@ Claim ceiling: reporting/reference governance surface only.
 
 ## Open Work
 
-1. Audit visible README/governance copy for stale or mojibake reference wording.
+1. Confirm GitHub Pages is enabled on the repository so `deploy-pages.yml` can
+   deploy the VitePress site.
 2. Continue entry-level verification only when narrow evidence packets and gate
    scope are explicit.
 3. Keep consuming-repo integration as reference-only; any firmware behavior
