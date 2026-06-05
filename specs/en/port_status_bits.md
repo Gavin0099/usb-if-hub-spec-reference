@@ -118,7 +118,7 @@ So this page frontmatter still remains:
 
 ## Reviewed Entries Outside Verified Scope
 
-No port status/change defined entries are currently `reviewed` but not `verified`.
+No live port status/change entries are currently `reviewed` but not `verified`.
 
 These entries improve namespace coverage, but they do not verify timing, state machines, clear sequencing, error recovery, speed decoding, test-mode behavior, power-switch policy, or indicator behavior.
 
