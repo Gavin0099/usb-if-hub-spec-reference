@@ -1,8 +1,13 @@
 {
   "validator": "validate_port_status_bit_matrix",
-  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_duplicate_field_bit\\matrix.yaml",
+  "matrix": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_duplicate_field_bit\\matrix.yaml",
   "result": "FAIL",
   "authority_ceiling": "status_bit_namespace_only",
+  "coverage": {
+    "defined_bits_covered": null,
+    "expected_defined_bits": 19,
+    "coverage_status": "review_required"
+  },
   "errors": [
     {
       "code": "DUPLICATE_FIELD_BIT",

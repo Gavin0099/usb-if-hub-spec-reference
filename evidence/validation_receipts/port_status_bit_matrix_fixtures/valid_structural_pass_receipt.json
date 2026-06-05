@@ -1,7 +1,12 @@
 {
   "validator": "validate_port_status_bit_matrix",
-  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\valid_structural_pass\\matrix.yaml",
+  "matrix": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\valid_structural_pass\\matrix.yaml",
   "result": "PASS",
   "authority_ceiling": "status_bit_namespace_only",
+  "coverage": {
+    "defined_bits_covered": 19,
+    "expected_defined_bits": 19,
+    "coverage_status": "complete"
+  },
   "errors": []
 }

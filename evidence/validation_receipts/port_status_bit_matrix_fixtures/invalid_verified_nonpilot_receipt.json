@@ -1,12 +1,17 @@
 {
   "validator": "validate_port_status_bit_matrix",
-  "matrix": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_verified_nonpilot\\matrix.yaml",
+  "matrix": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\port_status_bit_matrix\\invalid_verified_nonpilot\\matrix.yaml",
   "result": "FAIL",
   "authority_ceiling": "status_bit_namespace_only",
+  "coverage": {
+    "defined_bits_covered": null,
+    "expected_defined_bits": 19,
+    "coverage_status": "review_required"
+  },
   "errors": [
     {
       "code": "VERIFIED_NOT_ALLOWED",
-      "message": "entry[0]: only pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may use claim_level=verified"
+      "message": "entry[0]: only pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortChange.bit2.C_PORT_SUSPEND', 'wPortChange.bit3.C_PORT_OVER_CURRENT', 'wPortChange.bit4.C_PORT_RESET', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE', 'wPortStatus.bit10.PORT_HIGH_SPEED', 'wPortStatus.bit11.PORT_TEST', 'wPortStatus.bit12.PORT_INDICATOR', 'wPortStatus.bit2.PORT_SUSPEND', 'wPortStatus.bit3.PORT_OVER_CURRENT', 'wPortStatus.bit4.PORT_RESET', 'wPortStatus.bit8.PORT_POWER', 'wPortStatus.bit9.PORT_LOW_SPEED'] may use claim_level=verified"
     }
   ]
 }

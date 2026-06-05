@@ -15,7 +15,7 @@
       "expected_advisory_count": 0,
       "actual_advisory_count": 0,
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\consistent_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\consistent_receipt.json",
       "stderr": "",
       "note": "all table names present in page \u2192 no advisories"
     },
@@ -28,7 +28,7 @@
       "expected_advisory_count": 1,
       "actual_advisory_count": 1,
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\partial_coverage_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\partial_coverage_receipt.json",
       "stderr": "",
       "note": "one name absent from page \u2192 1 advisory, still exit 0"
     },
@@ -41,7 +41,7 @@
       "expected_advisory_count": 0,
       "actual_advisory_count": 0,
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\empty_table_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\wiki_consistency_fixtures\\empty_table_receipt.json",
       "stderr": "",
       "note": "empty table \u2192 100% coverage trivially, 0 advisories"
     }

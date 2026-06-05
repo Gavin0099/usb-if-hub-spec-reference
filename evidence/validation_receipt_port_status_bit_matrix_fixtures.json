@@ -13,9 +13,9 @@
       "expected_error_codes": [],
       "actual_error_codes": [],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_structural_pass_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_structural_pass_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "\nPort status bit matrix validation PASS\n",
+      "stdout": "\nPort status bit matrix validation PASS\n- defined bit coverage: 19/19\n",
       "stderr": "",
       "note": "valid scaffold entries with allowed fields and bit range"
     },
@@ -26,9 +26,9 @@
       "expected_error_codes": [],
       "actual_error_codes": [],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_verified_pilot_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\valid_verified_pilot_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "\nPort status bit matrix validation PASS\n",
+      "stdout": "\nPort status bit matrix validation PASS\n- defined bit coverage: 19/19\n",
       "stderr": "",
       "note": "single reviewed pilot verified entry is structurally allowed"
     },
@@ -43,7 +43,7 @@
         "DUPLICATE_FIELD_BIT"
       ],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_duplicate_field_bit_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_duplicate_field_bit_receipt.json",
       "receipt_parse_error": "",
       "stdout": "[FAIL] DUPLICATE_FIELD_BIT: entry[1]: duplicate field+bit pair (wPortStatus, 1)\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
@@ -60,7 +60,7 @@
         "INVALID_FIELD"
       ],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_field_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_field_receipt.json",
       "receipt_parse_error": "",
       "stdout": "[FAIL] INVALID_FIELD: entry[0]: field 'wPortFeature' is not in ['wHubChange', 'wHubStatus', 'wPortChange', 'wPortStatus']\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
@@ -77,7 +77,7 @@
         "BIT_OUT_OF_RANGE"
       ],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_bit_range_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_bit_range_receipt.json",
       "receipt_parse_error": "",
       "stdout": "[FAIL] BIT_OUT_OF_RANGE: entry[0]: bit '16' is not in 0-15\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
@@ -94,9 +94,9 @@
         "VERIFIED_NOT_ALLOWED"
       ],
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_verified_nonpilot_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\port_status_bit_matrix_fixtures\\invalid_verified_nonpilot_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "[FAIL] VERIFIED_NOT_ALLOWED: entry[0]: only pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE'] may use claim_level=verified\n\nPort status bit matrix validation FAIL\n",
+      "stdout": "[FAIL] VERIFIED_NOT_ALLOWED: entry[0]: only pilot entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortChange.bit2.C_PORT_SUSPEND', 'wPortChange.bit3.C_PORT_OVER_CURRENT', 'wPortChange.bit4.C_PORT_RESET', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE', 'wPortStatus.bit10.PORT_HIGH_SPEED', 'wPortStatus.bit11.PORT_TEST', 'wPortStatus.bit12.PORT_INDICATOR', 'wPortStatus.bit2.PORT_SUSPEND', 'wPortStatus.bit3.PORT_OVER_CURRENT', 'wPortStatus.bit4.PORT_RESET', 'wPortStatus.bit8.PORT_POWER', 'wPortStatus.bit9.PORT_LOW_SPEED'] may use claim_level=verified\n\nPort status bit matrix validation FAIL\n",
       "stderr": "",
       "note": "entry outside the Phase 8K pilot set must still fail"
     }

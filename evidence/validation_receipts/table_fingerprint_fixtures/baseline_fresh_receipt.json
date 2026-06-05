@@ -3,14 +3,14 @@
   "authority_ceiling": "table_content_fingerprint_drift_only",
   "mode": "baseline",
   "result": "PASS",
-  "recorded_at": "2026-06-03T09:52:54.999925+00:00",
+  "recorded_at": "2026-06-05T16:15:14.192324+00:00",
   "tables_fingerprinted": 1,
   "entries": [
     {
       "table_id": "fixture_table_c",
       "path": "tests\\fixtures\\table_fingerprint\\baseline_fresh\\tables\\test_table_c.yaml",
-      "content_hash": "sha256:4293f373c1ed6c115c54627b90be189e22c6e509a9e914411da4e49c0a6521ec",
-      "recorded_at": "2026-06-03T09:52:54.999925+00:00",
+      "content_hash": "sha256:dd84c285f12c82bc545e9818e307e012ae6b29dcca3237fcbf08ae9a8b1faf3d",
+      "recorded_at": "2026-06-05T16:15:14.192324+00:00",
       "time_bound": true,
       "observation_only": true,
       "does_not_change_claim_level": true

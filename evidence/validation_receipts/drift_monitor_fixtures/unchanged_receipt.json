@@ -2,7 +2,7 @@
   "monitor": "usbif_source_monitor.py",
   "authority_ceiling": "drift_observation_only",
   "note": "Drift events record observation only. does_not_change_claim_level=true. Manual review required on drift.",
-  "checked_at": "2026-05-30T07:54:46.256531+00:00",
+  "checked_at": "2026-06-05T16:15:15.361358+00:00",
   "skip_network": true,
   "sources_checked": 1,
   "new_snapshots": 1,

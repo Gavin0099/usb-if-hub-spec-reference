@@ -1,6 +1,6 @@
 {
   "validator": "validate_usb20_hub_class_request_manifest",
-  "manifest": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\missing_table_path\\manifest.yaml",
+  "manifest": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\manifest_access_contract\\missing_table_path\\manifest.yaml",
   "result": "FAIL",
   "errors": [
     {

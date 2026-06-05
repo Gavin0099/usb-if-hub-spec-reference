@@ -13,7 +13,7 @@
       "actual_exit": 0,
       "metric_detail": "drift_count: expected=0 actual=0",
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\no_drift_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\no_drift_receipt.json",
       "stderr": "",
       "note": "same content as baseline, no drift"
     },
@@ -24,7 +24,7 @@
       "actual_exit": 1,
       "metric_detail": "drift_count: expected=1 actual=1",
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\hash_changed_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\hash_changed_receipt.json",
       "stderr": "",
       "note": "table modified since baseline was recorded, drift detected"
     },
@@ -35,7 +35,7 @@
       "actual_exit": 0,
       "metric_detail": "tables_fingerprinted: expected=1 actual=1",
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\baseline_fresh_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\baseline_fresh_receipt.json",
       "stderr": "",
       "note": "fresh baseline mode, 1 table fingerprinted"
     },
@@ -46,7 +46,7 @@
       "actual_exit": 0,
       "metric_detail": "compact_entries: input expected=2 actual=2; retained expected=1 actual=1; removed expected=1 actual=1",
       "result": "PASS",
-      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\compact_latest_receipt.json",
+      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\table_fingerprint_fixtures\\compact_latest_receipt.json",
       "stderr": "",
       "note": "duplicate baseline entries compacted to latest table_id entry"
     }
