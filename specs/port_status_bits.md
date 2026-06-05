@@ -113,20 +113,20 @@ semantic_verification_claimed: false
 - `status: review_required`
 - `semantic_verification_claimed: false`
 
-## reviewed 邊界項（非 verified）
+## reviewed 邊界項目（非 verified）
 
-目前沒有其他 defined 的 status/change entry 是「已 reviewed 但未 verified」。
+目前沒有其他 status/change entry 是「已 reviewed 但未 verified」。
 
 這些 reviewed 項目只提供 namespace 邊界，不延伸 timing、state machine、清除序列、錯誤復原、速度解碼、test-mode、power/power-indicator 行為的驗證。
 
 ## Reviewed Boundary Markers
 
-高位界限項目僅作為 reviewed 邊界標記：
+高位 boundary 標記項目僅作為 reviewed 邊界標記：
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 欄位邊界 marker |
-| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 欄位邊界 marker |
+| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 欄位邊界標記 |
+| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 欄位邊界標記 |
 
 這兩個 boundary marker 僅作為 16-bit 欄位邊界標示，不代表額外 status/change 行為定義。  
 這是 reviewed surface；不會改變 live verified 的邊界或語意宣告數量。
