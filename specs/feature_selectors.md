@@ -114,20 +114,20 @@ semantic_verification_claimed: false
 
 ## `PORT_*` / `C_PORT_*` 行為邊界（selector 層）
 
-以下是 selector page 的行為邊界提醒，不等於 full state-machine verified：
+以下是 selector page 的行為邊界提醒，不代表該 family 的 host-side state-machine 已完整驗證：
 
 - `PORT_CONNECTION`
-  - selector 值對應 port 連線語義，但本頁不將其提升為 host-side 連線/斷線流程真值。
+  - Selector 值對應 port 連線語義，但本頁不將其提升為 host-side 連線/斷線流程真值。
 - `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`
-  - 這些 selector 在標準 selector 命名空間中出現，但對應 `SET_FEATURE` / `CLEAR_FEATURE` 的完整啟停副作用未在本 repo 完成驗證。
+- 這些 selector 在標準 selector 命名空間中存在，但 `SET_FEATURE` / `CLEAR_FEATURE` 的完整啟停副作用不在本 repo 宣告為已驗證。
 - `PORT_OVER_CURRENT`
-  - `C_PORT_OVER_CURRENT` 屬於 change selector 族群；本頁保留 `change` 識別語義，不直接定義 recovery policy。
+  - `C_PORT_OVER_CURRENT` 屬於 change selector 族群；本頁保留 `change` 類型語義，不直接定義 recovery policy。
 - `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET`
-  - 一般作為 change selector，表示「事件可被清除/追蹤」的 `CHANGE` 類型語義，而不是直接的電氣時序定義。
+  - 一般作為 change selector，表示「事件可被清除/追蹤」的 `CHANGE` 行為語意；不直接定義電氣時序真值。
 - `PORT_TEST`、`PORT_INDICATOR`
-  - 本頁目前僅保留 selector boundary；不推進至 test-mode、indicator mode 之 correctness 結論。
+  - 本頁目前僅保留 selector boundary；不做 test-mode、indicator mode 的 correctness 結論。
 
-實務上，這裡的 `PORT_*` / `C_PORT_*` 與 `specs/port_status_bits.md` 的 status / change bit 分別對齊：
+實務上，這裡的 `PORT_*` / `C_PORT_*` 與 `specs/port_status_bits.md` 的 `status` / `change` bit 分別對齊：
 
 - `PORT_*`：對應 `wPortStatus` 狀態欄位的名義識別
 - `C_PORT_*`：對應 `wPortChange` 變更位元的事件識別
