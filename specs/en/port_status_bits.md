@@ -128,12 +128,12 @@ Two high-bit placeholders remain reviewed as boundary markers only:
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status-field high boundary only |
-| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change-field high boundary only |
+| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status-field width marker only |
+| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change-field width marker only |
 
 These reviewed placeholders do not define additional status semantics.
 They are intentionally boundary-only review markers and do not alter any verified scope or count.
-They keep the machine-readable layer explicit that the status and change fields are 16-bit fields with boundary markers.
+They keep the layer explicit that these are 16-bit width markers, not defined status/change behavior.
 
 ## Change Bits and `CLEAR_FEATURE`
 

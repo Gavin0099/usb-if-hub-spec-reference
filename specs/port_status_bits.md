@@ -61,13 +61,13 @@ semantic_verification_claimed: false
 | `wPortStatus` | 10 | `PORT_HIGH_SPEED` | defined | Port 高速端口指示 |
 | `wPortStatus` | 11 | `PORT_TEST` | defined | Port 測試模式狀態 |
 | `wPortStatus` | 12 | `PORT_INDICATOR` | defined | Port 指示燈狀態 |
-| `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | 16-bit status 欄位的邊界位 |
+| `wPortStatus` | 15 | `PORT_STATUS_HIGH_BIT_BOUNDARY` | reserved | 16-bit status 欄位邊界 marker |
 | `wPortChange` | 0 | `C_PORT_CONNECTION` | defined | 紀錄自上次 clear 後 connection 狀態是否有變更 |
 | `wPortChange` | 1 | `C_PORT_ENABLE` | defined | 紀錄自上次 clear 後 enable 狀態是否有變更 |
 | `wPortChange` | 2 | `C_PORT_SUSPEND` | defined | 紀錄自上次 clear 後 suspend 狀態是否有變更 |
 | `wPortChange` | 3 | `C_PORT_OVER_CURRENT` | defined | 紀錄自上次 clear 後 over-current 狀態是否有變更 |
 | `wPortChange` | 4 | `C_PORT_RESET` | defined | 紀錄自上次 clear 後 reset 狀態是否有變更 |
-| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change 欄位的邊界位 |
+| `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | 16-bit change 欄位邊界 marker |
 
 ## 已完成 `verified` 的 tracked entries
 
@@ -125,10 +125,10 @@ semantic_verification_claimed: false
 
 | Entry | Field | Bit | Reviewed Scope |
 |---|---|---|---|
-| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 邊界位 |
-| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 邊界位 |
+| `PORT_STATUS_HIGH_BIT_BOUNDARY` | `wPortStatus` | bit 15 | 16-bit status 欄位邊界 marker |
+| `PORT_CHANGE_HIGH_BIT_BOUNDARY` | `wPortChange` | bit 15 | 16-bit change 欄位邊界 marker |
 
-這兩個 boundary marker 不代表額外的 status/change 行為定義，只保留 16-bit 欄位結構邊界語意。  
+這兩個 boundary marker 僅作為 16-bit 欄位邊界標示，不代表額外 status/change 行為定義。  
 這是 reviewed surface；不會改變 live verified 的邊界或語意宣告數量。
 
 ## Change bit 與 `CLEAR_FEATURE`
