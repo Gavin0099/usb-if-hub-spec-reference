@@ -88,6 +88,26 @@ Chinese format (when session language is Chinese):
 
 Do NOT omit `Cannot claim` / `本次無法宣告`. It is required in every completion report.
 
+### Rule 5: Canonical Memory Writer Only
+
+All new session-derived memory entries under `memory/` MUST be written through
+the framework canonical writer:
+
+```powershell
+python E:/BackUp/Git_EE/ai-governance-framework/governance_tools/memory_record.py `
+  --what-changed "..." `
+  --commit <git-sha> `
+  --test-evidence "..." `
+  --next-step "..." `
+  --project-root .
+```
+
+Direct markdown append using `- what changed:` or `- what_changed:` is
+PROHIBITED for new entries because it triggers `non_canonical_writer`.
+
+Do not write memory until commit/push state and validation evidence are known.
+Do not repair historical memory entries unless explicitly scoped.
+
 **Examples:**
 
 Schema-only change (markdown, no runtime):
