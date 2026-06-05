@@ -111,6 +111,10 @@ TABLE_RULES = {
     },
 }
 
+MATRIX_ID_SUFFIX_ALIASES = {
+    "hub_descriptor_field_matrix": "hub_descriptor_matrix",
+}
+
 
 def _load_yaml(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as f:
@@ -138,8 +142,30 @@ def _load_packets(packet_dir: Path) -> dict[str, dict[str, Any]]:
     return packets
 
 
-def _matrix_table_key(matrix_path: Path) -> str:
-    return matrix_path.stem
+def _matrix_table_key(matrix_path: Path, matrix: dict[str, Any] | None = None) -> str:
+    stem = matrix_path.stem
+    if stem in TABLE_RULES:
+        return stem
+
+    if matrix is None:
+        matrix = _load_yaml(matrix_path)
+
+    matrix_id = str(matrix.get("matrix_id", "")).strip().lower()
+    if matrix_id:
+        for key in TABLE_RULES:
+            suffix = f"_{key}"
+            if matrix_id.endswith(suffix):
+                return key
+            if matrix_id == f"usb20_hub_{key}" or matrix_id == f"usb_hub_{key}":
+                return key
+            if matrix_id == f"usb20_hub_{suffix}" or matrix_id == f"usb_hub_{suffix}":
+                return key
+
+        for alias_suffix, key in MATRIX_ID_SUFFIX_ALIASES.items():
+            if matrix_id.endswith(f"_{alias_suffix}") or matrix_id == alias_suffix:
+                return key
+
+    return stem
 
 
 def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
@@ -148,13 +174,12 @@ def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dic
     def fail(code: str, message: str) -> None:
         errors.append({"code": code, "message": message})
 
-    table_key = _matrix_table_key(matrix_path)
+    matrix = _load_yaml(matrix_path)
+    table_key = _matrix_table_key(matrix_path, matrix)
     rule = TABLE_RULES.get(table_key)
     if rule is None:
         fail("MATRIX_NOT_GATED", f"{matrix_path}: no entry verification gate rule is registered")
         return errors
-
-    matrix = _load_yaml(matrix_path)
 
     if matrix.get("claim_level") == "verified":
         fail(
