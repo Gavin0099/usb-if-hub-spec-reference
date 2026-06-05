@@ -11,6 +11,7 @@ does not govern firmware behavior and does not override confirmed project facts.
 ## Current State
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
+- VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
 - Governed tracked entries: 86.
 - Entry-level verified entries: 84.
 - Reviewed entries: 2.
@@ -219,11 +220,9 @@ upgrade and no governance behavior change.
 
 ## Open Work
 
-1. Confirm GitHub Pages is enabled on the repository so `deploy-pages.yml` can
-   deploy the VitePress site.
-2. Continue entry-level verification only when narrow evidence packets and gate
+1. Continue entry-level verification only when narrow evidence packets and gate
    scope are explicit.
-3. Keep consuming-repo integration as reference-only; any firmware behavior
+2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
 
 ## Cannot Claim
