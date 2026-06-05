@@ -13,7 +13,7 @@ semantic_verification_claimed: false
 # Standard Escalation Trigger Table
 
 > **用途：**本頁為 consuming firmware repo 的參考邊界。  
-> 任一條件符合時，需依 consuming repo 的 Standard Escalation Mode 流程進行判定與處理。
+> 任一條件符合時，需依 consuming repo 的 Standard Escalation Mode 流程判定是否升階。
 
 ## 觸發條件
 
@@ -33,7 +33,7 @@ semantic_verification_claimed: false
 ## Escalation 邊界
 
 本表只列出標準側最小化升階邊界。  
-即使上述條件不成立，consuming project 仍可依確認專案事實、架構決策或安全治理需求，新增其他 escalation 條件。
+即使上述條件不成立，consuming repo 仍可依確認專案事實、架構決策或安全治理需求，新增其他 escalation 條件。
 
 目標是讓 consuming repo 區分「應進入 escalation 流程」與「可留在文件參考」的界線。
 
@@ -53,7 +53,7 @@ semantic_verification_claimed: false
 - `tables/feature_selector_matrix.yaml`：E-05 涉及 selector 命名空間
 - `tables/transaction_translator_matrix.yaml`：E-06、E-07、E-10 涉及 TT 適用性與請求面
 
-本表是標準-side 的 reference boundary，**不**執行 escalation、**不**取代 project fact，也**不**授權直接改 firmware 行為。
+本表是標準-side 參考邊界，**不**執行 escalation、**不**取代 project fact，也**不**授權直接改 firmware 行為。
 
 ## Escalation 輸出格式（範本）
 
@@ -72,4 +72,3 @@ Classification: Project Implementation Constraint | Standards Compliance Risk | 
 
 Resolution: <採用的處理路徑>
 ```
-
