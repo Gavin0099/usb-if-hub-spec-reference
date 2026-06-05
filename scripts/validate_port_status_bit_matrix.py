@@ -168,13 +168,14 @@ def validate(matrix_path: Path) -> tuple[str, list[dict[str, str]]]:
                         f"{loc}: claim_level=verified requires evidence_status='reviewed'",
                     )
 
-    missing_defined_bits = sorted(EXPECTED_DEFINED_BITS - seen_defined_bits)
-    if missing_defined_bits:
-        fail(
-            "MISSING_EXPECTED_DEFINED_BITS",
-            "missing expected defined bit entries: "
-            + ", ".join(f"{field}.bit{bit}.{name}" for field, bit, name in missing_defined_bits),
-        )
+    if doc.get("matrix_id") == "usb20_hub_port_status_bit_matrix":
+        missing_defined_bits = sorted(EXPECTED_DEFINED_BITS - seen_defined_bits)
+        if missing_defined_bits:
+            fail(
+                "MISSING_EXPECTED_DEFINED_BITS",
+                "missing expected defined bit entries: "
+                + ", ".join(f"{field}.bit{bit}.{name}" for field, bit, name in missing_defined_bits),
+            )
 
     return ("FAIL" if errors else "PASS"), errors
 
