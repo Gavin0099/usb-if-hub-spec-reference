@@ -2,7 +2,7 @@
 title: Port Status Bits
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -70,7 +70,7 @@ This page is not meant to answer:
 | `wPortChange` | 15 | `PORT_CHANGE_HIGH_BIT_BOUNDARY` | reserved | Boundary placeholder for the 16-bit change field |
 
 The newly tracked status/change entries are not all verified.
-Only the 14 live verified entries listed below have completed entry-level promotion.
+Only the 19 live verified entries listed below have completed entry-level promotion.
 
 ## Live Verified Entries
 
@@ -147,6 +147,54 @@ Example:
 - `C_PORT_CONNECTION = 1` means the connection state changed since the last clear
 - after reading `GET_STATUS`, the host may issue `CLEAR_FEATURE(C_PORT_CONNECTION)` to clear that event record
 - if the connection changes again later, the bit can be set again
+
+## PORT_* and C_PORT_* behavior notes
+
+These notes keep behavior boundaries intentionally narrow and do not extend to full timing or state-machine proof.
+
+### `PORT_*` (status bits)
+
+- `PORT_CONNECTION`
+  - `1` generally indicates the port currently has a live logical connection; `0` indicates no active connection.
+  - It is useful as a current-state visibility bit; "just connected" transitions are typically inferred with `C_PORT_CONNECTION`.
+- `PORT_ENABLE`
+  - Indicates the port is logically enabled from the controller perspective.
+  - This page only tracks the meaning of the bit; the enabling/disabling state machine is not claimed complete.
+- `PORT_SUSPEND`
+  - `1` generally means suspend-like port behavior is active (power-management pause path) and `0` means not suspended.
+  - Complete suspend/resume semantics and transitions are intentionally outside this page.
+- `PORT_OVER_CURRENT`
+  - `1` indicates the port reports an over-current condition in status context.
+  - Over-current recovery thresholds and retry timing remain in firmware/project scope.
+- `PORT_RESET`
+  - Exposes whether reset state for the port is active in the returned status.
+- `PORT_POWER`
+  - Indicates whether the port power supply is currently enabled.
+  - In practice there can be transient enable timing; implementations should align with firmware telemetry where needed.
+- `PORT_LOW_SPEED`, `PORT_HIGH_SPEED`
+  - Speed bits are a pair and must be interpreted together; see next section.
+- `PORT_TEST`
+  - Indicates test-mode related status, but does not by itself prove test progression success.
+- `PORT_INDICATOR`
+  - Indicates the port indicator state; this page stores a role-level summary only.
+
+### `C_PORT_*` (change bits)
+
+- `C_PORT_CONNECTION`
+  - `1` indicates a connection-status change event has occurred since the last clear.
+- `C_PORT_ENABLE`
+  - `1` indicates enable-related change was observed since the last clear.
+- `C_PORT_SUSPEND`
+  - `1` indicates suspend-related status changed since the last clear (enter/exit suspend).
+- `C_PORT_OVER_CURRENT`
+  - `1` indicates over-current-related state changed since the last clear.
+- `C_PORT_RESET`
+  - `1` indicates a reset-related change event was observed since the last clear.
+
+General note:
+
+- `C_PORT_*` values represent "an event was recorded", not the full current state by themselves.
+- In normal interpretation, pair `GET_STATUS` with the status bits and then clear recorded events with `CLEAR_FEATURE`.
 
 ## Speed Bits Must Be Decoded Together
 

@@ -2,7 +2,7 @@
 title: Feature Selectors
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -12,100 +12,98 @@ semantic_verification_claimed: false
 
 # Feature Selectors
 
-> Source scope: USB 2.0 Specification Rev 2.0, Section 11.24.2。  
-> 本頁是 `SET_FEATURE` / `CLEAR_FEATURE` selector namespace 的參考摘要，不是完整 control truth table，也不是 section-level PDF verification record。
+> 來源範圍：USB 2.0 規範 Rev 2.0，11.24.2 章節。  
+> 本頁為 `SET_FEATURE` / `CLEAR_FEATURE` selector 命名空間的參考摘要，不是完整控制真值表，也不是 section-level PDF 驗證記錄。
 
-## Page Purpose
+## 頁面目的
 
-本頁主要回答：
+本頁回答：
 
-- USB 2.0 hub request space 中有哪些 feature selectors。
-- 哪些 selectors 屬於 hub recipient，哪些屬於 port recipient。
+- USB 2.0 hub request 空間中有哪些 feature selector。
+- 哪些 selector 屬於 hub recipient，哪些屬於 port recipient。
 - 為什麼 `0-22` 是 E-05 的標準 port selector 邊界。
-- 哪些 selectors 主要出現在 `SET_FEATURE`、`CLEAR_FEATURE` 或 `GET_STATUS` 解讀情境中。
+- 哪些 selector 主要出現在 `SET_FEATURE`、`CLEAR_FEATURE` 或 `GET_STATUS` 的上下文解讀中。
 
 本頁不回答：
 
-- 是否每個 selector 都已完成 PDF section-level verification。
-- 是否每個 selector side effect 都已完成 correctness verification。
-- `SET_FEATURE` / `CLEAR_FEATURE` 的完整 state-transition model。
+- 每個 selector 是否都已完成 PDF 章節級驗證。
+- 每個 selector 的 side effect 是否都完成 correctness 驗證。
+- `SET_FEATURE` / `CLEAR_FEATURE` 的完整 state-transition 模型。
 
-## Boundary Before Reading
+## 先決邊界
 
-- Hub selectors 與 port selectors 可能共用數值，但 recipient 不同，不能合併解讀。
-- E-05 專門處理 **vendor command selectors 不得與標準 port selector 範圍 `0-22` 重疊**。
-- 某些 matrix entries 是作為 `GET_STATUS` context 出現，不應被解讀成可直接 settable 的 feature targets。
+- Hub selector 與 port selector 可能有相同數值，但 recipient 不同，不能混用。
+- E-05 僅規範**廠商命令 selector 不得落在標準 port selector 範圍 `0-22`**。
+- 有些 matrix entry 僅作為 `GET_STATUS` context，不能直接解讀為可設定（set）目標。
 
-## Namespace Summary
+## 命名空間摘要
 
-| Namespace | Range | Recipient | Meaning |
+| Namespace | Range | Recipient | 意義 |
 |---|---:|---|---|
-| Hub change selectors | `0-1` | hub recipient | 用於 hub-recipient `CLEAR_FEATURE` |
-| Port standard selectors | `0-22` | port recipient | E-05 標準邊界；vendor selectors 不得重疊 |
+| Hub change selectors | `0-1` | device | 供 `CLEAR_FEATURE` 的 hub-recipient 請求使用 |
+| Port standard selectors | `0-22` | other | E-05 標準範圍；廠商 selector 不可與此重疊 |
 
 ## Hub Selectors
 
-目前 matrix 收錄的 hub selectors 如下：
+目前 matrix 包含下列 hub selector：
 
-| Value | Name | Main Use |
+| Value | Name | 主要用途 |
 |---:|---|---|
 | `0` | `C_HUB_LOCAL_POWER` | 清除 hub local power change condition |
-| `1` | `C_HUB_OVER_CURRENT` | 清除 hub over-current change condition |
+| `1` | `C_HUB_OVER_CURRENT` | 清除 hub 過電流 change condition |
 
-這些 selectors：
+這些 selector 的使用原則：
 
-- 只應搭配 hub recipient 解讀
-- 主要屬於 `CLEAR_FEATURE` family
-- 不可與 port selector namespace 合併
+- 僅能以 hub recipient 解讀。
+- 主要屬於 `CLEAR_FEATURE` 家族。
+- 不可與 port selector 命名空間合併。
 
-目前 repo-local reviewed linkage surface 包含：
+本 repo 的 reviewed linkage 目前覆蓋：
 
-- `PORT_CONNECTION` <-> `wPortStatus bit 0`，僅作為 `GET_STATUS` context
-- `PORT_OVER_CURRENT` <-> `wPortStatus bit 3`，僅作為 `GET_STATUS` context
-- `PORT_LOW_SPEED` <-> `wPortStatus` 中的 speed indication，僅作為 `GET_STATUS` context
-- `PORT_HIGH_SPEED` <-> `wPortStatus` 中的 speed indication，僅作為 `GET_STATUS` context
-- reserved port selector slots `5-7`，僅作為 reserved-boundary surface
-- reserved port selector slots `11-15`，僅作為 reserved-boundary surface
+- `PORT_CONNECTION` <-> `wPortStatus bit 0`（僅作 `GET_STATUS` context）
+- `PORT_OVER_CURRENT` <-> `wPortStatus bit 3`（僅作 `GET_STATUS` context）
+- `PORT_LOW_SPEED` <-> `wPortStatus` 的速度指示（`GET_STATUS` context）
+- `PORT_HIGH_SPEED` <-> `wPortStatus` 的速度指示（`GET_STATUS` context）
+- reserved slot `5-7`、`11-15` 作為 reserved-boundary surface
 - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
 - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
 - `C_PORT_ENABLE` <-> `wPortChange bit 1`
-- `C_PORT_SUSPEND` <-> standard suspend-change selector boundary
-- `C_PORT_OVER_CURRENT` <-> standard over-current-change selector boundary
-- `C_PORT_RESET` <-> standard reset-change selector boundary
-- `PORT_ENABLE` <-> standard port enable feature selector boundary
-- `PORT_SUSPEND` <-> standard port suspend feature selector boundary
-- `PORT_RESET` <-> standard port reset feature selector boundary
-- `PORT_POWER` <-> standard port power feature selector boundary
-- `PORT_TEST` <-> standard port test feature selector boundary
-- `PORT_INDICATOR` <-> standard port indicator feature selector boundary
+- `C_PORT_SUSPEND` <-> 標準 suspend-change selector 邊界
+- `C_PORT_OVER_CURRENT` <-> 標準 over-current-change selector 邊界
+- `C_PORT_RESET` <-> 標準 reset-change selector 邊界
+- `PORT_ENABLE` <-> 標準 port enable selector 邊界
+- `PORT_SUSPEND` <-> 標準 port suspend selector 邊界
+- `PORT_RESET` <-> 標準 port reset selector 邊界
+- `PORT_POWER` <-> 標準 port power selector 邊界
+- `PORT_TEST` <-> 標準 port test selector 邊界
+- `PORT_INDICATOR` <-> 標準 port indicator selector 邊界
 
-這代表 selector namespace boundary 已被整理成較清楚的 reference surface。  
-這不代表 host-side sequencing、selector side effects 或更廣泛的 request behavior 已完成 verified。
+這表示 selector 命名空間邊界本頁已完成 reference surface reviewed，  
+但不代表主機端 sequencing、selector side effect 或更廣泛 request 行為已驗證。  
+對 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED`，目前只屬於 `GET_STATUS` 的 context-only linkage，不是直接宣告可供 `SET_FEATURE` / `CLEAR_FEATURE` 使用。  
+對 reserved rows，reviewed 僅表示這些數值屬於標準 port selector 邊界，並不代表可當作可用 selector。  
+`PORT_TEST` / `PORT_INDICATOR` 目前也僅有 selector-boundary reviewed，未驗證 test mode 或 indicator 行為。
 
-對於 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED` 與 `PORT_HIGH_SPEED`，目前的 reviewed surface 只是 context-only `GET_STATUS` linkage，不表示它們是直接的 `SET_FEATURE` / `CLEAR_FEATURE` targets。  
-對於 reserved rows，reviewed surface 只表示這些數值仍位於標準 port selector boundary 內，不表示它們是可用 selectors 或 vendor-extension slots。  
-對於 `PORT_TEST` 與 `PORT_INDICATOR`，目前 reviewed surface 只到 selector boundary，不驗證 test-mode behavior、indicator policy 或 hardware support。
+## Port Standard Selector Boundary（`0-22`）
 
-## Port Standard Selector Boundary (`0-22`)
+`tables/feature_selector_matrix.yaml` 目前記錄標準 port selector 範圍 `0-22`。  
+這就是 E-05 的核心邊界：**vendor-defined selector 不可重疊到此範圍**。
 
-`tables/feature_selector_matrix.yaml` 目前明確收錄了標準 port selector boundary `0-22`。  
-這是 E-05 的核心邊界：**vendor-defined selectors 不得與此範圍重疊**。
+主要 selector 列如下：
 
-代表性 selectors：
-
-| Value | Name | Common Context |
+| Value | Name | 常見 context |
 |---:|---|---|
-| `0` | `PORT_CONNECTION` | `GET_STATUS` context |
+| `0` | `PORT_CONNECTION` | `GET_STATUS` |
 | `1` | `PORT_ENABLE` | `SET_FEATURE` / `CLEAR_FEATURE` / `GET_STATUS` |
 | `2` | `PORT_SUSPEND` | `SET_FEATURE` / `CLEAR_FEATURE` / `GET_STATUS` |
-| `3` | `PORT_OVER_CURRENT` | `GET_STATUS` context |
+| `3` | `PORT_OVER_CURRENT` | `GET_STATUS` |
 | `4` | `PORT_RESET` | `SET_FEATURE` |
-| `5-7` | reserved | reserved standard-range slots |
+| `5-7` | reserved | reserved 標準槽位 |
 | `8` | `PORT_POWER` | `SET_FEATURE` / `CLEAR_FEATURE` / `GET_STATUS` |
-| `9` | `PORT_LOW_SPEED` | `GET_STATUS` context |
-| `10` | `PORT_HIGH_SPEED` | `GET_STATUS` context |
-| `11-15` | reserved | reserved standard-range slots |
+| `9` | `PORT_LOW_SPEED` | `GET_STATUS` |
+| `10` | `PORT_HIGH_SPEED` | `GET_STATUS` |
+| `11-15` | reserved | reserved 標準槽位 |
 | `16` | `C_PORT_CONNECTION` | `CLEAR_FEATURE` change selector |
 | `17` | `C_PORT_ENABLE` | `CLEAR_FEATURE` change selector |
 | `18` | `C_PORT_SUSPEND` | `CLEAR_FEATURE` change selector |
@@ -114,32 +112,52 @@ semantic_verification_claimed: false
 | `21` | `PORT_TEST` | `SET_FEATURE` |
 | `22` | `PORT_INDICATOR` | `SET_FEATURE` |
 
-## Defined / Reserved / Context-Only
+## `PORT_*` / `C_PORT_*` 行為邊界（selector 層）
 
-本 repo 目前將 selectors 分成三種讀法：
+以下是 selector page 的行為邊界提醒，不等於 full state-machine verified：
 
-- **defined selector**：matrix 中明確列出名稱與角色
-- **reserved selector**：仍在標準範圍內，但不應被重用為標準 selector
-- **context-only selector**：為了補齊 namespace 或 `GET_STATUS` 比對 surface 而納入，不代表它一定是直接 feature target
+- `PORT_CONNECTION`
+  - selector 值對應 port 連線語義，但本頁不將其提升為 host-side 連線/斷線流程真值。
+- `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`
+  - 這些 selector 在 header 上可見於標準命名空間，但對應 `SET_FEATURE` / `CLEAR_FEATURE` 的完整啟停副作用未在本 repo 完成驗證。
+- `PORT_OVER_CURRENT`
+  - `C_PORT_OVER_CURRENT` 屬於 change selector 族群；本頁保留 `change` 識別語義，不直接定義 recovery policy。
+- `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET`
+  - 一般作為 change selector，表示「事件可被清除/追蹤」的 `CHANGE` 類型語義，而不是直接的電氣時序定義。
+- `PORT_TEST`、`PORT_INDICATOR`
+  - 本頁目前僅保留 selector boundary；不推進至 test-mode、indicator mode 之 correctness 結論。
 
-## Relationship to Request Families
+實務上，這裡的 `PORT_*` / `C_PORT_*` 與 `specs/port_status_bits.md` 的 status / change bit 分別對齊：
 
-- `SET_FEATURE` / `CLEAR_FEATURE` 的 `wValue` 應回連到 `tables/feature_selector_matrix.yaml`
-- `GET_STATUS` 不會直接「設定 selector」，但 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 目前都有 reviewed 的 context-only linkage，可作為 status-field 對照 surface
-- `C_PORT_*` selectors 應與 `specs/port_status_bits.md` 中的 change bits 一起閱讀
-- 目前 reviewed 的 `PORT_*`、`C_HUB_*`、`C_PORT_*` linkage 仍應視為 selector boundary，不是 `SET_FEATURE` / `CLEAR_FEATURE` behavior proof
-- `PORT_TEST` 與 `PORT_INDICATOR` 雖然 selector slots 已 reviewed，但仍未進入 behavior verification
+- `PORT_*`：對應 `wPortStatus` 狀態欄位的名義識別
+- `C_PORT_*`：對應 `wPortChange` 變更位元的事件識別
+
+## Defined / Reserved / Context-only
+
+本 repo 目前用三種閱讀分類：
+
+- **defined selector**：matrix 上明確列出名稱與作用
+- **reserved selector**：屬於標準範圍內的保留值，不可被當作標準 selector 重用
+- **context-only selector**：為 namespace 或 `GET_STATUS` 對照 completeness 而列入，不代表直接可當做實作 target
+
+## 與請求族群的關係
+
+- `SET_FEATURE` / `CLEAR_FEATURE` 的 `wValue` 應對應 `tables/feature_selector_matrix.yaml`。
+- `GET_STATUS` 本身不直接設定 selector，但 `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 已有 context-only 的狀態欄位比對 linkage。
+- `C_PORT_*` selector 請與 `specs/port_status_bits.md` 的 `change bits` 一併閱讀。
+- 已 review 的 `PORT_*`、`C_HUB_*`、`C_PORT_*` linkage 仍只可視為 selector boundary，不能推到 `SET_FEATURE` 或 `CLEAR_FEATURE` 的行為驗證結論。
+- `PORT_TEST` 與 `PORT_INDICATOR` 僅保持 selector-slot reviewed，未宣告 test-mode 或指示燈行為驗證。
 
 ## Governed Linkage
 
-- `tables/feature_selector_matrix.yaml`：selector namespace 的主要 machine-readable source
-- `specs/hub_class_requests.md`：`SET_FEATURE` / `CLEAR_FEATURE` 的 request-family 摘要
+- `tables/feature_selector_matrix.yaml`：selector 命名空間主要 machine-readable source
+- `specs/hub_class_requests.md`：`SET_FEATURE` / `CLEAR_FEATURE` 請求族群摘要
 - `specs/port_status_bits.md`：`GET_STATUS`、change bits 與 `CLEAR_FEATURE` 的關聯
-- `specs/escalation_table.md`：E-05 escalation trigger
+- `specs/escalation_table.md`：E-05 escalation trigger context
 
 ## Non-claims
 
-- 本頁不宣告 selector `0-22` 已完成逐值 PDF section-level verification
-- 本頁不宣告所有 selector side effects 都已完成 correctness verification
-- 本頁不把 selector summaries 升級為 firmware implementation authority
-- 本頁不覆蓋 consuming repos 中已確認的 project facts
+- 本頁不宣告 `0-22` selector 全部完成 PDF section-level 驗證。
+- 本頁不宣告所有 selector side effect 均有 correctness 驗證。
+- 本頁不將 selector 清單直接提升為 firmware 實作真值。
+- 本頁不覆蓋 consuming repo 已確認的實作事實。

@@ -2,7 +2,7 @@
 title: Feature Selectors
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -84,6 +84,24 @@ It does **not** mean host-side sequencing, selector side effects, or broader req
 For the `PORT_CONNECTION`, `PORT_OVER_CURRENT`, `PORT_LOW_SPEED`, and `PORT_HIGH_SPEED` rows, the reviewed surface is context-only `GET_STATUS` linkage; it does not make them direct `SET_FEATURE` / `CLEAR_FEATURE` targets.
 For the reserved rows, the reviewed surface only means those numeric slots remain inside the standard port selector boundary; it does not make them usable selectors or vendor-extension slots.
 For `PORT_TEST` and `PORT_INDICATOR`, the reviewed surface is selector-boundary only; it does not verify test-mode behavior, indicator policy, or hardware support.
+
+## PORT_* / C_PORT_* behavior boundary (selector layer)
+
+- `PORT_CONNECTION`
+  - The selector value maps to the port connection concept, but this page does not claim the full host connect/disconnect behavior.
+- `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, `PORT_POWER`
+  - These selectors are in the standard namespace; the complete `SET_FEATURE` / `CLEAR_FEATURE` transition effects are not fully verified here.
+- `PORT_OVER_CURRENT`
+  - `C_PORT_OVER_CURRENT` belongs to the change-selector family; this page retains the `CHANGE`-style semantics and does not define recovery policies.
+- `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, `C_PORT_RESET`
+  - These are treated as change selectors: the page records the change-acknowledgment role instead of timing or control-state machine truth.
+- `PORT_TEST`, `PORT_INDICATOR`
+  - This slice only keeps selector boundary currently; it does not advance to test-mode or indicator behavior verification.
+
+In practice, `PORT_*` / `C_PORT_*` here aligns with status/change classification in `specs/port_status_bits.md`:
+
+- `PORT_*`: role mapping to `wPortStatus` state fields
+- `C_PORT_*`: role mapping to `wPortChange` change/event fields
 
 ## Port Standard Selector Boundary (`0-22`)
 
