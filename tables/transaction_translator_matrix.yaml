@@ -19,7 +19,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.17-11.18"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -38,7 +38,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.17-11.18"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -57,7 +57,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -75,7 +75,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -93,7 +93,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -111,7 +111,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     escalation_refs:
@@ -129,7 +129,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     request_ref: usb20_clear_tt_buffer
@@ -148,7 +148,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     request_ref: usb20_reset_tt
@@ -167,7 +167,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     request_ref: usb20_get_tt_state
@@ -184,7 +184,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     request_ref: usb20_stop_tt

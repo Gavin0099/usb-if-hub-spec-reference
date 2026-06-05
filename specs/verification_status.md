@@ -2,7 +2,7 @@
 title: Verification Status
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 semantic_verification_claimed: false
 ---
 
@@ -17,18 +17,18 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
-| Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
-| Escalation triggers | 10 | 0 | 10 | 0 | 0 |
+| Transaction Translator entries | 10 | 10 | 0 | 0 | 0 |
+| Escalation triggers | 10 | 10 | 0 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
-| Feature selectors | 25 | 0 | 25 | 0 | 0 |
+| Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 21 | 19 | 2 | 0 | 0 |
-| **Total** | **86** | **39** | **47** | **0** | **0** |
+| **Total** | **86** | **84** | **2** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 39 | 全部對應到已 promoted 的 verified entries |
+| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries |
 
 名詞定義：
 
@@ -41,42 +41,16 @@ semantic_verification_claimed: false
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Hub descriptor fields | verified | 全部 8 個 tracked hub descriptor fields 都已完成 descriptor field identity verified；這不代表 descriptor dumps 或 device behavior 已驗證 |
-| Transaction Translator entries | reviewed | 全部 10 個 tracked TT type、think-time、request-linkage entries 都已達到 reviewed reference-boundary surface，但未驗證 split-transaction behavior |
-| Escalation triggers | reviewed | 全部 10 個 tracked E-01 到 E-10 trigger boundaries 都已達到 reviewed reference surface，但 escalation execution 仍由 consuming repos 負責 |
+| Transaction Translator entries | verified | 全部 10 個 tracked TT type、think-time、request-linkage entries 已完成 entry-level verified |
+| Escalation triggers | verified | 全部 10 個 tracked E-01 到 E-10 trigger boundaries 已完成 entry-level verified |
 | Class requests | verified | 全部 12 個 tracked class requests 都已完成 request-linkage-only verified promotion |
-| Feature selectors | reviewed | 全部 25 個 tracked feature selectors 都已具備 reviewed selector-boundary 或 reserved-boundary surfaces |
+| Feature selectors | verified | 全部 25 個 tracked feature selectors 已完成 selector-name/value scope 的 entry-level verified promotion |
 | Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；僅有 2 個 high-bit boundary placeholders 仍屬 reviewed namespace/boundary entries |
 
 ## Reviewed Surface Inventory
 
 目前 `reviewed` surface 主要集中在這些項目：
 
-- transaction translator entries
-  - Single TT / Multiple TT
-  - TT think-time values `00`, `01`, `10`, `11`
-  - `CLEAR_TT_BUFFER`
-  - `RESET_TT`
-  - `GET_TT_STATE`
-  - `STOP_TT`
-- escalation triggers
-  - `E-01` through `E-10`
-- feature selectors
-  - `PORT_CONNECTION`
-  - `PORT_OVER_CURRENT`
-  - `PORT_LOW_SPEED`
-  - `PORT_HIGH_SPEED`
-  - reserved selector slots `5-7`
-  - reserved selector slots `11-15`
-  - `C_HUB_LOCAL_POWER`
-  - `C_HUB_OVER_CURRENT`
-  - `C_PORT_CONNECTION`
-  - `C_PORT_ENABLE`
-  - `PORT_ENABLE`
-  - `PORT_SUSPEND`
-  - `PORT_RESET`
-  - `PORT_POWER`
-  - `PORT_TEST`
-  - `PORT_INDICATOR`
 - port status bit boundary placeholders
   - `PORT_OVER_CURRENT`
   - `PORT_RESET`
@@ -93,7 +67,7 @@ semantic_verification_claimed: false
 
 ## Verified Entries
 
-目前共有 39 個 entries 已完成 verified promotion（`claim_level: verified`）：
+目前共有 84 個 entries 已完成 verified promotion（`claim_level: verified`）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -136,8 +110,54 @@ semantic_verification_claimed: false
 | usb20_stop_tt | `STOP_TT` TT-capable hub recipient | - | request linkage only |
 | usb20_get_descriptor_hub | `GET_DESCRIPTOR` hub recipient | - | request linkage only |
 | usb20_set_descriptor_hub | `SET_DESCRIPTOR` hub recipient | - | request linkage only |
+| usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
+| usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
+| usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |
+| usb20_tt_think_time_01 | `wHubCharacteristics` | 01 | TT think-time boundary only |
+| usb20_tt_think_time_10 | `wHubCharacteristics` | 10 | TT think-time boundary only |
+| usb20_tt_think_time_11 | `wHubCharacteristics` | 11 | TT think-time boundary only |
+| usb20_tt_request_clear_tt_buffer | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_reset_tt | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_get_tt_state | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_stop_tt | `hub_class_request` | - | TT request-linkage boundary only |
+| E-01 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-02 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-03 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-04 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-05 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-06 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-07 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-08 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-09 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-10 | `Escalation trigger` | - | escalation trigger boundary only |
 
-所有 verified entries 的 verified scope 都明確限制在 **bit name and bit position**。
+| C_HUB_LOCAL_POWER | `feature_selector_matrix` | 0 | selector name and value only |
+| C_HUB_OVER_CURRENT | `feature_selector_matrix` | 1 | selector name and value only |
+| PORT_CONNECTION | `feature_selector_matrix` | 0 | selector name and value only |
+| PORT_ENABLE | `feature_selector_matrix` | 1 | selector name and value only |
+| PORT_SUSPEND | `feature_selector_matrix` | 2 | selector name and value only |
+| PORT_OVER_CURRENT | `feature_selector_matrix` | 3 | selector name and value only |
+| PORT_RESET | `feature_selector_matrix` | 4 | selector name and value only |
+| reserved | `feature_selector_matrix` | 5 | selector name and value only |
+| reserved | `feature_selector_matrix` | 6 | selector name and value only |
+| reserved | `feature_selector_matrix` | 7 | selector name and value only |
+| PORT_POWER | `feature_selector_matrix` | 8 | selector name and value only |
+| PORT_LOW_SPEED | `feature_selector_matrix` | 9 | selector name and value only |
+| PORT_HIGH_SPEED | `feature_selector_matrix` | 10 | selector name and value only |
+| reserved | `feature_selector_matrix` | 11 | selector name and value only |
+| reserved | `feature_selector_matrix` | 12 | selector name and value only |
+| reserved | `feature_selector_matrix` | 13 | selector name and value only |
+| reserved | `feature_selector_matrix` | 14 | selector name and value only |
+| reserved | `feature_selector_matrix` | 15 | selector name and value only |
+| C_PORT_CONNECTION | `feature_selector_matrix` | 16 | selector name and value only |
+| C_PORT_ENABLE | `feature_selector_matrix` | 17 | selector name and value only |
+| C_PORT_SUSPEND | `feature_selector_matrix` | 18 | selector name and value only |
+| C_PORT_OVER_CURRENT | `feature_selector_matrix` | 19 | selector name and value only |
+| C_PORT_RESET | `feature_selector_matrix` | 20 | selector name and value only |
+| PORT_TEST | `feature_selector_matrix` | 21 | selector name and value only |
+| PORT_INDICATOR | `feature_selector_matrix` | 22 | selector name and value only |
+
+所有 verified entries 的 verified scope 都明確限制在各表列欄位中指定的範圍（selector name/value、bit name 和 bit position）。
 
 以下內容對所有 entries 都仍然在 verified scope 之外：
 

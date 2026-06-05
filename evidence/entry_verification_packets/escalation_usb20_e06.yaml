@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-05
+
+target:
+  surface: governed_table_entry
+  table: escalation_trigger_matrix
+  entry_id: E-06
+
+evidence:
+  spec: usb20
+  section: 11.17-11.18
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 sections 11.17-11.18 define TT behavior scope.
+    This packet confirms only escalation trigger boundary for TT in full-speed-only contexts.
+  reviewer_note: >
+    Reviewed for TT applicability boundary escalation trigger only.
+    Does not claim TT behavior by speed.
+
+review_checklist:
+  - Confirm sections 11.17-11.18 are the correct source for TT applicability.
+  - Confirm packet scope is limited to escalation trigger boundary.
+  - Confirm no runtime TT behavior is claimed.
+  - Confirm packet remains entry-level governance scope.
+
+verification_scope:
+  claim: escalation_trigger_boundary_only
+  excludes:
+    - tt_runtime_behavior
+    - firmware behavior
+    - timing behavior
+    - state transition behavior
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for entry-level verified promotion for `E-06`.
+    Verified scope is limited to escalation-trigger boundary only.
+
+non_claims:
+  - This packet does not claim TT runtime behavior.
+  - This packet does not claim timing behavior.
+  - This packet does not claim implementation truth.

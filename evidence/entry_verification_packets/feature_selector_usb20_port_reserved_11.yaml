@@ -1,0 +1,54 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-04
+
+target:
+  surface: governed_table_entry
+  table: feature_selector_matrix
+  entry_id: usb20_port_reserved_11
+
+evidence:
+  spec: usb20
+  section: 11.24.2
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 Section 11.24.2 is the standard selector surface for this feature selector.
+    For this entry (`reserved` / value 11), this packet only confirms selector
+    name and value in recipient scope `reserved`.
+  reviewer_note: >
+    Reviewed against the cited section for selector namespace boundary only.
+    This packet does not claim selector side effects, request ordering, timing,
+    or firmware behavior.
+
+review_checklist:
+  - Confirm Section 11.24.2 is the correct USB 2.0 surface for this selector namespace entry.
+  - Confirm the packet stays limited to selector name and numeric value only.
+  - Confirm no selector side effects are claimed.
+  - Confirm any promotion remains limited to this governed table entry only.
+
+verification_scope:
+  claim: selector_name_and_value_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - selector side effects
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for entry-level verified promotion for `usb20_port_reserved_11`.
+    Verified scope remains limited to selector name and value.
+
+non_claims:
+  - This packet does not claim selector side effects.
+  - This packet does not claim host-stack interpretation.
+  - This packet does not establish page-level or table-level behavior verification.
+  - This packet does not claim timing or state-transition behavior.

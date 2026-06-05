@@ -2,7 +2,7 @@
 title: Verification Status
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 semantic_verification_claimed: false
 ---
 
@@ -17,18 +17,18 @@ semantic_verification_claimed: false
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | Hub descriptor fields | 8 | 8 | 0 | 0 | 0 |
-| Transaction Translator entries | 10 | 0 | 10 | 0 | 0 |
-| Escalation triggers | 10 | 0 | 10 | 0 | 0 |
+| Transaction Translator entries | 10 | 10 | 0 | 0 | 0 |
+| Escalation triggers | 10 | 10 | 0 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
-| Feature selectors | 25 | 0 | 25 | 0 | 0 |
+| Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 21 | 19 | 2 | 0 | 0 |
-| **Total** | **86** | **39** | **47** | **0** | **0** |
+| **Total** | **86** | **84** | **2** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 39 | All correspond to promoted verified entries |
+| Entry verification packets | 84 | All correspond to promoted verified entries |
 
 Term definitions:
 
@@ -41,36 +41,16 @@ Term definitions:
 | Area | Current maturity center | Notes |
 |---|---|---|
 | Hub descriptor fields | verified | All 8 tracked hub descriptor fields have descriptor field identity verified; this does not verify descriptor dumps or device behavior |
-| Transaction Translator entries | reviewed | All 10 tracked TT type, think-time, and request-linkage entries have reviewed reference-boundary surfaces, but no split-transaction behavior verification |
-| Escalation triggers | reviewed | All 10 tracked E-01 through E-10 trigger boundaries have reviewed reference surfaces, but escalation execution remains owned by consuming repos |
+| Transaction Translator entries | verified | All 10 tracked TT type, think-time, and request-linkage entries have promoted entry-level verified scope |
+| Escalation triggers | verified | All 10 tracked E-01 through E-10 trigger boundaries have promoted entry-level verified scope |
 | Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
-| Feature selectors | reviewed | All 25 tracked feature selectors now have reviewed selector-boundary or reserved-boundary surfaces |
+| Feature selectors | verified | All 25 tracked feature selectors are now verified at selector-name-and-value scope |
 | Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; only 2 high-bit boundary placeholders are reviewed namespace/boundary entries only |
 
 ## Reviewed Surface Inventory
 
 The current `reviewed` surface is concentrated in these items:
 
-- transaction translator entries
-  - Single TT / Multiple TT
-  - TT think-time values `00`, `01`, `10`, `11`
-  - `CLEAR_TT_BUFFER`
-  - `RESET_TT`
-  - `GET_TT_STATE`
-  - `STOP_TT`
-- escalation triggers
-  - `E-01` through `E-10`
-- feature selectors
-  - `PORT_CONNECTION`
-  - reserved selector slots `5-7`
-  - reserved selector slots `11-15`
-  - `C_HUB_LOCAL_POWER`
-  - `C_HUB_OVER_CURRENT`
-  - `C_PORT_CONNECTION`
-  - `C_PORT_ENABLE`
-  - `PORT_ENABLE`
-  - `PORT_SUSPEND`
-  - `PORT_POWER`
 - port status bit boundary placeholders
   - `PORT_STATUS_HIGH_BIT_BOUNDARY`
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
@@ -80,7 +60,7 @@ They do **not** mean those surfaces have completed entry-level verified promotio
 
 ## Verified Entries
 
-Thirty-nine entries have completed verified promotion (`claim_level: verified`):
+Eighty-four entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -123,8 +103,54 @@ Thirty-nine entries have completed verified promotion (`claim_level: verified`):
 | usb20_stop_tt | `STOP_TT` TT-capable hub recipient | - | request linkage only |
 | usb20_get_descriptor_hub | `GET_DESCRIPTOR` hub recipient | - | request linkage only |
 | usb20_set_descriptor_hub | `SET_DESCRIPTOR` hub recipient | - | request linkage only |
+| usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
+| usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
+| usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |
+| usb20_tt_think_time_01 | `wHubCharacteristics` | 01 | TT think-time boundary only |
+| usb20_tt_think_time_10 | `wHubCharacteristics` | 10 | TT think-time boundary only |
+| usb20_tt_think_time_11 | `wHubCharacteristics` | 11 | TT think-time boundary only |
+| usb20_tt_request_clear_tt_buffer | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_reset_tt | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_get_tt_state | `hub_class_request` | - | TT request-linkage boundary only |
+| usb20_tt_request_stop_tt | `hub_class_request` | - | TT request-linkage boundary only |
+| E-01 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-02 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-03 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-04 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-05 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-06 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-07 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-08 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-09 | `Escalation trigger` | - | escalation trigger boundary only |
+| E-10 | `Escalation trigger` | - | escalation trigger boundary only |
 
-The verified scope is explicitly limited to **bit name and bit position**.
+| C_HUB_LOCAL_POWER | `feature_selector_matrix` | 0 | selector name and value only |
+| C_HUB_OVER_CURRENT | `feature_selector_matrix` | 1 | selector name and value only |
+| PORT_CONNECTION | `feature_selector_matrix` | 0 | selector name and value only |
+| PORT_ENABLE | `feature_selector_matrix` | 1 | selector name and value only |
+| PORT_SUSPEND | `feature_selector_matrix` | 2 | selector name and value only |
+| PORT_OVER_CURRENT | `feature_selector_matrix` | 3 | selector name and value only |
+| PORT_RESET | `feature_selector_matrix` | 4 | selector name and value only |
+| reserved | `feature_selector_matrix` | 5 | selector name and value only |
+| reserved | `feature_selector_matrix` | 6 | selector name and value only |
+| reserved | `feature_selector_matrix` | 7 | selector name and value only |
+| PORT_POWER | `feature_selector_matrix` | 8 | selector name and value only |
+| PORT_LOW_SPEED | `feature_selector_matrix` | 9 | selector name and value only |
+| PORT_HIGH_SPEED | `feature_selector_matrix` | 10 | selector name and value only |
+| reserved | `feature_selector_matrix` | 11 | selector name and value only |
+| reserved | `feature_selector_matrix` | 12 | selector name and value only |
+| reserved | `feature_selector_matrix` | 13 | selector name and value only |
+| reserved | `feature_selector_matrix` | 14 | selector name and value only |
+| reserved | `feature_selector_matrix` | 15 | selector name and value only |
+| C_PORT_CONNECTION | `feature_selector_matrix` | 16 | selector name and value only |
+| C_PORT_ENABLE | `feature_selector_matrix` | 17 | selector name and value only |
+| C_PORT_SUSPEND | `feature_selector_matrix` | 18 | selector name and value only |
+| C_PORT_OVER_CURRENT | `feature_selector_matrix` | 19 | selector name and value only |
+| C_PORT_RESET | `feature_selector_matrix` | 20 | selector name and value only |
+| PORT_TEST | `feature_selector_matrix` | 21 | selector name and value only |
+| PORT_INDICATOR | `feature_selector_matrix` | 22 | selector name and value only |
+
+The verified scope is explicitly limited to each entry's stated scope in the table below.
 
 The following are outside the verified scope for all entries:
 

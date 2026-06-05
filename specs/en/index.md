@@ -41,7 +41,7 @@ features:
     details: Maps hub-related USB 2.0, 2.1, 3.2, and USB4 sources and authority boundaries.
     link: /en/version_source_map
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 86 tracked entries, including 39 verified, 47 reviewed, and 0 inferred.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 86 tracked entries, including 84 verified, 2 reviewed, and 0 inferred.
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.

@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-04
+> **Last Updated**: 2026-06-05
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -12,11 +12,11 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - Governed tracked entries: 86.
-- Entry-level verified entries: 39.
-- Reviewed entries: 47.
+- Entry-level verified entries: 84.
+- Reviewed entries: 2.
 - Inferred tracked entries: 0.
-- Verification scope remains narrow: verified entries are verified only for
-  descriptor field identity or bit name and bit position.
+- Verification scope remains narrow: verified entries are limited to descriptor field
+  identity, selector-name/value, or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
   verification is claimed.
 
@@ -40,8 +40,8 @@ Claim ceiling: governance baseline only.
   think-time, and TT request-linkage entries.
 - `tables/class_request_matrix.yaml`: 12 entries, 9/9 USB 2.0 hub class request
   families covered.
-- `tables/feature_selector_matrix.yaml`: 25 entries, standard port selector
-  namespace 0-22 covered, including reserved-boundary slots.
+- `tables/feature_selector_matrix.yaml`: 25 entries, all selector entries are now
+  promoted to selector-name/value verified scope.
 - `tables/port_status_bit_matrix.yaml`: 21 tracked hub/port status and change
   entries, including 19 verified entries, 0 reviewed defined port
   status/change namespace entries, and 2 reviewed high-bit boundary
@@ -155,10 +155,12 @@ Claim ceiling: section-ref metadata only.
   - `usb20_stop_tt`
   - `usb20_get_descriptor_hub`
   - `usb20_set_descriptor_hub`
+  - Additional 25 verified entries were added from
+    `tables/feature_selector_matrix.yaml` at selector-name/value scope.
 - Verified scope for the 8 hub descriptor entries: descriptor field identity
   only.
-- Verified scope for the 19 port/hub status-change entries: bit name and bit
-  position only.
+- Verified scope for selector and status-change entries: selector-name/value or
+  bit name and bit position only.
 
 Claim ceiling: entry-level verified gate only.
 
@@ -166,8 +168,8 @@ Claim ceiling: entry-level verified gate only.
 
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
-- Homepage and verification status surfaces align to 86 tracked entries, 39
-  verified entries, 47 reviewed entries, and 0 inferred tracked entries.
+- Homepage and verification status surfaces align to 86 tracked entries, 84 verified
+  entries, 2 reviewed entries, and 0 inferred tracked entries.
 - Added `scripts/validate_reference_surface_statistics.py` to check that visible
   statistics remain aligned with governed tables and evidence packets.
 

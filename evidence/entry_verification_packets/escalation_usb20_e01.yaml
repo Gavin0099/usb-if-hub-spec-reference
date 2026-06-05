@@ -1,0 +1,52 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-05
+
+target:
+  surface: governed_table_entry
+  table: escalation_trigger_matrix
+  entry_id: E-01
+
+evidence:
+  spec: usb20
+  section: 11.23.2.1
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 section 11.23.2.1 section offset-2 defines hub descriptor field context
+    for `bNbrPorts` alignment checks.
+    This packet confirms only the trigger boundary statement.
+  reviewer_note: >
+    Reviewed for escalation trigger boundary wording only.
+    This packet does not claim project-policy execution or project-fact behavior.
+
+review_checklist:
+  - Confirm section 11.23.2.1 is the correct source for `bNbrPorts` boundary.
+  - Confirm packet scope is limited to escalation trigger boundary.
+  - Confirm no escalation action semantics are claimed.
+  - Confirm `claim_level` remains entry-level.
+
+verification_scope:
+  claim: escalation_trigger_boundary_only
+  excludes:
+    - escalation action policy
+    - project-fact enforcement
+    - firmware behavior
+    - full USB compliance
+    - state transition behavior
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for entry-level verified promotion for `E-01`.
+    Verified scope is limited to escalation-trigger boundary only.
+
+non_claims:
+  - This packet does not claim escalation execution policy.
+  - This packet does not claim implementation requirements.
+  - This packet does not claim firmware behavior.

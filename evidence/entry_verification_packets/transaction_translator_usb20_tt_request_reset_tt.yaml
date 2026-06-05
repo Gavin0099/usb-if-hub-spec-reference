@@ -1,0 +1,52 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-05
+
+target:
+  surface: governed_table_entry
+  table: transaction_translator_matrix
+  entry_id: usb20_tt_request_reset_tt
+
+evidence:
+  spec: usb20
+  section: 11.24.2
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 section 11.24.2 includes `RESET_TT` request linkage.
+    For this entry, the packet confirms only class-request boundary association.
+  reviewer_note: >
+    Reviewed for request linkage boundary only.
+    This packet does not claim reset semantics beyond boundary linkage.
+
+review_checklist:
+  - Confirm section 11.24.2 is the correct source for RESET_TT linkage.
+  - Confirm the packet is limited to request-linkage boundary.
+  - Confirm no reset timing or firmware behavior is claimed.
+  - Confirm no split-transaction state transition behavior is claimed.
+
+verification_scope:
+  claim: request_linkage_boundary_only
+  excludes:
+    - reset behavior semantics
+    - state transition behavior
+    - split-transaction behavior
+    - firmware behavior
+    - full USB compliance
+    - host-stack interpretation
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for entry-level verified promotion for `usb20_tt_request_reset_tt`.
+    Verified scope is limited to request linkage boundary only.
+
+non_claims:
+  - This packet does not claim request payload semantics.
+  - This packet does not claim timing or TT internal behavior.
+  - This packet does not claim implementation truth.

@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed
+created_at: 2026-06-05
+
+target:
+  surface: governed_table_entry
+  table: escalation_trigger_matrix
+  entry_id: E-08
+
+evidence:
+  spec: usb20
+  section: 11.23.2.1
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 2.0 section 11.23.2.1 includes power switching mode bits.
+    This packet confirms only escalation trigger boundary for project-fact mismatch.
+  reviewer_note: >
+    Reviewed for project-fact mismatch escalation boundary only.
+    Does not claim any power-switching runtime behavior.
+
+review_checklist:
+  - Confirm section 11.23.2.1 is the correct source for power-switching boundary.
+  - Confirm packet scope is limited to escalation trigger boundary.
+  - Confirm no power-management behavior is claimed.
+  - Confirm packet remains entry-level governance scope.
+
+verification_scope:
+  claim: escalation_trigger_boundary_only
+  excludes:
+    - power-management behavior
+    - firmware behavior
+    - project-fact enforcement
+    - full USB compliance
+    - state transition behavior
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Authorized for entry-level verified promotion for `E-08`.
+    Verified scope is limited to escalation-trigger boundary only.
+
+non_claims:
+  - This packet does not claim power-management runtime behavior.
+  - This packet does not claim project-fact enforcement.
+  - This packet does not claim implementation truth.

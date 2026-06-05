@@ -7,7 +7,9 @@ status: draft
 # Phase 3G: Feature selector minimum boundary for E-05
 # Standard port selector range 0-22 defines the boundary that vendor selectors must not overlap.
 # Hub selectors share numerical values with port selectors but target a different recipient.
-# Entries remain claim_level=inferred; all tracked selector boundaries are reviewed.
+# Entry-level verified promotion is applied to all 25 selector entries for
+# selector-name/value-only scope. Reserved and standard entries remain boundary-only
+# semantics as defined in the table notes.
 entries:
 
   # ── Hub feature selectors ──────────────────────────────────────────────────
@@ -24,8 +26,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_hub_c_hub_local_power.yaml
     notes: "Reviewed linkage surface: hub-recipient ClearFeature selector corresponding to wHubChange bit 0 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_hub_c_hub_over_current
@@ -38,8 +41,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_hub_c_hub_over_current.yaml
     notes: "Reviewed linkage surface: hub-recipient ClearFeature selector corresponding to wHubChange bit 1 change condition. Selector boundary only; not behavioral verification."
 
   # ── Port feature selectors (standard range 0-22) ───────────────────────────
@@ -56,8 +60,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_connection.yaml
     notes: "Reviewed GET_STATUS context-only linkage: read-only in wPortStatus bit 0. Not a direct SetFeature/ClearFeature target. Selector/status-field linkage only; not connection behavior verification."
 
   - selector_id: usb20_port_enable
@@ -72,8 +77,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_enable.yaml
     notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not PORT_ENABLE state-machine verification."
 
   - selector_id: usb20_port_suspend
@@ -88,8 +94,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_suspend.yaml
     notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not suspend/resume behavior verification."
 
   - selector_id: usb20_port_over_current
@@ -102,8 +109,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_over_current.yaml
     notes: "Reviewed GET_STATUS context-only linkage: read-only in wPortStatus bit 3. Not a direct SetFeature/ClearFeature target. Selector/status-field linkage only; not over-current behavior verification."
 
   - selector_id: usb20_port_reset
@@ -116,8 +124,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reset.yaml
     notes: "Reviewed linkage surface: port-recipient SetFeature selector within the standard port selector namespace. Selector boundary only; not reset timing or completion behavior verification."
 
   - selector_id: usb20_port_reserved_5
@@ -130,8 +139,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_5.yaml
     notes: "Reviewed reserved-boundary surface: selector value 5 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_6
@@ -144,8 +154,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_6.yaml
     notes: "Reviewed reserved-boundary surface: selector value 6 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_7
@@ -158,8 +169,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_7.yaml
     notes: "Reviewed reserved-boundary surface: selector value 7 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_power
@@ -174,8 +186,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_power.yaml
     notes: "Reviewed linkage surface: port-recipient SetFeature/ClearFeature selector within the standard port selector namespace. Selector boundary only; not power-switch policy or timing verification."
 
   - selector_id: usb20_port_low_speed
@@ -188,8 +201,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_low_speed.yaml
     notes: "Reviewed GET_STATUS context-only linkage: speed indication in wPortStatus. Not directly settable via SetFeature. Selector/status-field linkage only; not combined speed decoding verification."
 
   - selector_id: usb20_port_high_speed
@@ -202,8 +216,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_high_speed.yaml
     notes: "Reviewed GET_STATUS context-only linkage: speed indication in wPortStatus. Not directly settable via SetFeature. Selector/status-field linkage only; not combined speed decoding verification."
 
   - selector_id: usb20_port_reserved_11
@@ -216,8 +231,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_11.yaml
     notes: "Reviewed reserved-boundary surface: selector value 11 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_12
@@ -230,8 +246,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_12.yaml
     notes: "Reviewed reserved-boundary surface: selector value 12 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_13
@@ -244,8 +261,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_13.yaml
     notes: "Reviewed reserved-boundary surface: selector value 13 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_14
@@ -258,8 +276,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_14.yaml
     notes: "Reviewed reserved-boundary surface: selector value 14 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_port_reserved_15
@@ -272,8 +291,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_reserved_15.yaml
     notes: "Reviewed reserved-boundary surface: selector value 15 is reserved within the standard port selector range 0-22. Boundary only; not a usable feature selector and not vendor-extension authorization."
 
   - selector_id: usb20_c_port_connection
@@ -286,8 +306,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_c_port_connection.yaml
     notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to wPortChange bit 0 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_enable
@@ -300,8 +321,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_c_port_enable.yaml
     notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to wPortChange bit 1 change condition. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_suspend
@@ -314,8 +336,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_c_port_suspend.yaml
     notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the suspend-change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_over_current
@@ -328,8 +351,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_c_port_over_current.yaml
     notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the over-current change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_c_port_reset
@@ -342,8 +366,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_c_port_reset.yaml
     notes: "Reviewed linkage surface: port-recipient ClearFeature selector corresponding to the reset-change condition in the standard port change-selector namespace. Selector boundary only; not behavioral verification."
 
   - selector_id: usb20_port_test
@@ -356,8 +381,9 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_test.yaml
     notes: "Reviewed SetFeature selector-boundary surface: PORT_TEST is selector value 21 in the standard port selector range 0-22. Selector boundary only; not test-mode behavior, electrical signaling, or compliance verification."
 
   - selector_id: usb20_port_indicator
@@ -370,6 +396,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
+    verification_packet: evidence/entry_verification_packets/feature_selector_usb20_port_indicator.yaml
     notes: "Reviewed SetFeature selector-boundary surface: PORT_INDICATOR is selector value 22 in the standard port selector range 0-22. Selector boundary only; not indicator behavior, policy, or hardware support verification."

@@ -23,7 +23,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed trigger boundary only; this repo supplies standard-side input and does not resolve project facts."
@@ -43,7 +43,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed trigger boundary only; port status bit behavior is not firmware truth in this repo."
@@ -63,7 +63,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed reserved-boundary trigger only; not a permission model for vendor-specific firmware behavior."
@@ -83,7 +83,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed request-support trigger only; this repo does not assert a specific firmware implementation state."
@@ -103,7 +103,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed selector-boundary trigger only; consuming repos must resolve vendor command conflicts."
@@ -123,7 +123,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed TT applicability trigger only; no TT firmware behavior is verified here."
@@ -143,7 +143,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed descriptor/TT timing conflict trigger only; not a hardware timing validation."
@@ -163,7 +163,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed descriptor/project-fact conflict trigger only; consuming repos own project-fact resolution."
@@ -183,7 +183,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed speed-bit applicability trigger only; not combined speed decoding verification."
@@ -203,7 +203,7 @@ entries:
     source_refs:
       - usb20_spec
     authority_level: normative_official
-    claim_level: inferred
+    claim_level: verified
     evidence_status: reviewed
     drift_status: clean
     notes: "Reviewed TT request-support trigger only; consuming repos own implementation decisions."

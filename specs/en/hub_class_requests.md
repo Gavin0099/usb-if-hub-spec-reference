@@ -2,7 +2,7 @@
 title: Hub Class Requests
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-05"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -128,6 +128,10 @@ This page does not answer:
 - Port-recipient reviewed linkage currently includes `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` within the standard port change-selector boundary.
 - Common change-bit semantics should be read together with `GET_STATUS`.
 
+- Reviewed change selectors are boundary-level evidence only:
+  - `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, and `C_PORT_RESET` are treated as event-record selectors for the host to acknowledge and clear.
+  - This does not assert full control-state transitions, timing, or error-recovery behavior.
+
 **Reviewed surface**
 
 - This repo now narrows `CLEAR_FEATURE` to a selector-linkage surface for the reviewed `C_HUB_*` and `C_PORT_*` change selectors.
@@ -175,6 +179,9 @@ This page does not answer:
 - Some selectors affect port power, reset, or suspend behavior, but this page remains a request summary only.
 - The reviewed request surface here is namespace-level only: hub-recipient selectors must not be merged with the standard port selector range.
 - Port-recipient reviewed anchors currently include `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, and `PORT_POWER`.
+
+- `PORT_TEST` and `PORT_INDICATOR` are currently on-namespace-only for selector coverage.
+  - This repo does not claim full test-mode or indicator control semantics from these request entries yet.
 
 **Reviewed surface**
 

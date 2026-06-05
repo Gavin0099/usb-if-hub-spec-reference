@@ -14,11 +14,12 @@ It must not override confirmed project facts in consuming firmware repositories.
 
 - Canonical visible reference surface: `specs/` and `specs/en/`.
 - Governed tracked entries: 86.
-- Entry-level verified entries: 39.
-- Reviewed entries: 47.
+- Entry-level verified entries: 84.
+- Reviewed entries: 2.
 - Inferred tracked entries: 0.
-- Verified scope is limited to descriptor field identity for 8 hub descriptor
-  entries and bit name/position for 19 promoted port/hub status-change entries.
+- Verified scope is limited to selector-name/value for selector tables, descriptor field
+  identity for hub descriptor fields, and bit name/position for promoted port/hub
+  status-change entries.
 - No page-level, table-level, firmware-behavior, or full USB compliance
   verification is claimed.
 
