@@ -13,7 +13,7 @@ semantic_verification_claimed: false
 # Hub Class Requests
 
 > 來源範圍：USB 2.0 規範 Rev 2.0，Section 11.24.2。  
-> 本頁是 request family 的參考摘要，不是完整 setup-packet 真值表，也不是 section-level PDF 驗證記錄。
+> 本頁為 hub class request 請求族群參考摘要，不是完整 setup packet 真值表，也不是 section-level PDF 驗證記錄。
 
 ## 頁面目的
 
@@ -77,7 +77,7 @@ semantic_verification_claimed: false
 
 - Hub request 對應 `wHubStatus` + `wHubChange`。
 - Port request 對應 `wPortStatus` + `wPortChange`。
-- 本 repo 當前 review surface 僅涵蓋 request-to-status-field 的對應關係。
+- 本 repo 當前 reviewed 邊界面僅涵蓋 request-to-status-field 的對應關係。
 - `PORT_CONNECTION`、`PORT_OVER_CURRENT`、`PORT_LOW_SPEED`、`PORT_HIGH_SPEED` 僅作為 `GET_STATUS` 比對 anchor 的 context-only surface。
 
 **Review 範圍**
@@ -124,8 +124,8 @@ semantic_verification_claimed: false
 **Governed linkage**
 
 - Hub 與 port selector namespace 必須分開解讀。
-- Hub-recipient 已 review 的 linkage：`C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`，`C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`。
-- Port-recipient 已 review 的 linkage：`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 皆在標準 port change-selector 邊界內。
+- Hub-recipient 已 reviewed 的 linkage：`C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`，`C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`。
+- Port-recipient 已 reviewed 的 linkage：`C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 皆在標準 port change-selector 邊界內。
 - change-bit 的一般語意需與 `GET_STATUS` 一起閱讀。
 - 已 review 的 change selectors 僅是邊界證據，**不是**完整行為模型：
   - `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET` 只表達「主機可 ack/清除的事件紀錄 selector」。
@@ -176,7 +176,7 @@ semantic_verification_claimed: false
 
 - Hub 與 port selector namespace 必須保持 distinct。
 - 部分 selector 會影響 port power / reset / suspend，但本頁仍只提供 request summary。
-- 本 repo 的 review surface 僅為 namespace-level：hub-recipient selector 不可與標準 port selector range 合併。
+- 本 repo 的 reviewed 邊界面僅為 namespace-level：hub-recipient selector 不可與標準 port selector range 合併。
 - Port-recipient reviewed anchors 目前包含 `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`。
 - `PORT_TEST` 與 `PORT_INDICATOR` 目前只保留 selector coverage 層級；本 repo 尚不主張這兩個 request entry 有完整 test-mode 或 indicator 行為語意驗證。
 
