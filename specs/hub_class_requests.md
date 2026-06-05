@@ -128,11 +128,11 @@ semantic_verification_claimed: false
   - `C_HUB_LOCAL_POWER` <-> `wHubChange bit 0`
   - `C_HUB_OVER_CURRENT` <-> `wHubChange bit 1`
 - Port-recipient reviewed linkage 目前包含：
-  - `C_PORT_CONNECTION`
-  - `C_PORT_ENABLE`
-  - `C_PORT_SUSPEND`
-  - `C_PORT_OVER_CURRENT`
-  - `C_PORT_RESET`
+  - `C_PORT_CONNECTION` <-> `wPortChange bit 0`
+  - `C_PORT_ENABLE` <-> `wPortChange bit 1`
+  - `C_PORT_SUSPEND` <-> `wPortChange bit 2`
+  - `C_PORT_OVER_CURRENT` <-> `wPortChange bit 3`
+  - `C_PORT_RESET` <-> `wPortChange bit 4`
 - change-bit 行為需與 `GET_STATUS` 一起判讀。
 
 **Reviewed surface**
@@ -453,4 +453,6 @@ semantic_verification_claimed: false
 - 本頁不是完整 setup-packet 真值表。
 - 本頁不是每個 request 的 section-level USB 2.0 PDF 驗證紀錄。
 - 本頁不聲明 TT request 欄位編碼已完成 correctness 驗證。
+- 本頁不將 request 摘要提升為韌體控制真值。
 - 本頁不會覆蓋 consuming repo 已確認 project fact。
+
