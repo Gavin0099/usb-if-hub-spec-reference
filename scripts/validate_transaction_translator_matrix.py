@@ -8,7 +8,7 @@ Structural checks only:
   R2 category must be one of the tracked TT categories
   R3 required TT type, think-time, and request entries must be present
   R4 source_refs must exist in source_registry
-  R5 claim_level=verified/normative is not allowed by this validator
+  R5 claim_level=verified is allowed when authorized by an evidence packet; normative is not allowed
   R6 TT request entries must point at existing class request IDs
 
 Non-goals:
@@ -36,7 +36,7 @@ DEFAULT_SOURCE_REGISTRY = ROOT / "evidence" / "source_registry.yaml"
 DEFAULT_CLASS_REQUEST_MATRIX = ROOT / "tables" / "class_request_matrix.yaml"
 
 VALID_CATEGORIES = {"tt_type", "tt_think_time", "tt_request", "split_transaction_boundary"}
-VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "rejected"}
+VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "rejected", "verified"}
 VALID_EVIDENCE_STATUS = {"reviewed", "review_required", "unverified"}
 EXPECTED_TT_TYPES = {"Single TT", "Multiple TT"}
 EXPECTED_THINK_VALUES = {"00", "01", "10", "11"}

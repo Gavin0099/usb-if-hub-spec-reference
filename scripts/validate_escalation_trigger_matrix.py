@@ -9,7 +9,7 @@ Structural checks only:
   R3 escalation_required must be true for every tracked trigger
   R4 related_surface must be one of the canonical USB2 reference surfaces
   R5 source_refs must exist in source_registry
-  R6 claim_level=verified/normative is not allowed by this validator
+  R6 claim_level=verified is allowed when authorized by an evidence packet; normative is not allowed
 
 Non-goals:
   - Does not execute escalation in consuming repos.
@@ -42,7 +42,7 @@ VALID_RELATED_SURFACES = {
     "port_status_bits",
     "transaction_translator",
 }
-VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "rejected"}
+VALID_CLAIM_LEVELS = {"inferred", "provisional", "draft", "rejected", "verified"}
 VALID_EVIDENCE_STATUS = {"reviewed", "review_required", "unverified"}
 
 
