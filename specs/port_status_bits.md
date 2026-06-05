@@ -152,27 +152,29 @@ semantic_verification_claimed: false
 ### `PORT_*`（status bits）
 
 - `PORT_CONNECTION`
-  - `0`：預期表示未接上設備或尚未可供通信；`1`：表示當前連線建立完成。
-  - 常見用途是做接続變化的基礎可見性；是否可視為「剛剛連上」需結合 `C_PORT_CONNECTION`。
+  - `1` 代表該埠目前有連線；`0` 代表目前無連線。
+  - 主要是當前狀態可見性；是否表示「剛剛連上」仍需搭配 `C_PORT_CONNECTION`。
 - `PORT_ENABLE`
-  - 表示 port 的邏輯啟用結果；對應主機對資源使能的可見狀態。
-  - 狀態本身可受 host 配置、錯誤恢復和中斷事件影響，但本頁不保證完整 state-machine。
+  - `1` 代表該埠由主機邏輯視角為啟用；`0` 代表未啟用。
+  - 本頁不延伸為完整 `PORT_ENABLE`/`PORT_DISABLE` 的 state-machine 驗證。
 - `PORT_SUSPEND`
-  - `1` 時表示 port 處於 suspend 狀態（已暫停流量/節電或功率管理路徑）; `0` 表示未暫停。
-  - 不以本頁宣告完整 suspend/resume 邊界與時序。
+  - `1` 代表 suspend 相關行為處於作用中；`0` 代表非 suspend。
+  - 本頁不宣稱完整 suspend/resume 的時序與轉移。
 - `PORT_OVER_CURRENT`
-  - `1` 表示該 port 的過流條件被偵測到。
-  - 常見與 hub 過流保護策略有關，但實際閾值、恢復條件須以 firmware 實作與硬體資料校驗。
+  - `1` 代表該埠報告過流事件；`0` 代表未報告。
+  - 過流恢復條件與重試時機仍需以消費端實作為主。
 - `PORT_RESET`
-  - 表示 reset 已被主機請求並反映端口重置狀態。
+  - `1` 代表該埠為 reset 狀態；`0` 代表未 reset。  
+  - 成功與失敗時序仍不在此頁可驗證範圍內。
 - `PORT_POWER`
-  - 表示 port 目標電源供應啟用。實作上常有「啟用中」狀態延遲，建議搭配 `wPortChange`/firmware telemetry 判斷過渡。
+  - `1` 代表 port 電源目前供應；`0` 代表未供應。
+  - 電源轉換的過渡時間與策略需由實作確認。
 - `PORT_LOW_SPEED`、`PORT_HIGH_SPEED`
-  - 速度位元需聯合解讀，請見下一節「Speed bits 需共同解讀」。
+  - 速度位元需聯合解讀，請見下方「Speed bits 需共同解讀」。
 - `PORT_TEST`
-  - 指出 port 測試模式狀態，不足以直接映射到 host 測試流程成功與否。
+  - `1` 代表測試模式狀態標誌；不保證測試模式完整流程已成功。
 - `PORT_INDICATOR`
-  - 指示燈（LED）相關狀態；本頁只保留欄位角色，不做面板映射規格。
+  - 指示該埠指示燈狀態角色；本頁僅保留欄位語意，不主張完整 LED 顯示映射。
 
 ### `C_PORT_*`（change bits）
 
@@ -183,9 +185,9 @@ semantic_verification_claimed: false
 - `C_PORT_SUSPEND`
   - 代表自上次清除後，port suspend 狀態曾改變（進入或離開 suspend）。
 - `C_PORT_OVER_CURRENT`
-  - 代表自上次清除後，過流事件曾發生與/或狀態變更過。
+  - `1` 代表過流事件在上次清除後曾發生或變更。
 - `C_PORT_RESET`
-  - 代表自上次清除後，port reset 相關事件曾發生；host 可視為 reset 邊界確認信號。
+  - `1` 代表 reset 相關變更事件曾發生；可作為 reset 邊界提示。
 
 通用補充：
 
