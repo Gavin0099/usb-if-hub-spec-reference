@@ -91,7 +91,7 @@ semantic_verification_claimed: false
 - `PORT_ENABLE`、`PORT_SUSPEND`、`PORT_RESET`、`PORT_POWER`
   - 這些 selector 在標準命名空間中；`SET_FEATURE` / `CLEAR_FEATURE` 的完整 transition 影響不在本頁完成驗證。
 - `PORT_OVER_CURRENT`
-  - `C_PORT_OVER_CURRENT` 歸入 change-selector family；本頁保留 `CHANGE` 語意，未定義 recovery policy。
+  - `PORT_OVER_CURRENT` 在 status context 報告過電流狀態；`C_PORT_OVER_CURRENT` 則是對應的 change-selector 事件與 ack/clear 流程，皆不延伸到 recovery policy 或時序真假值。
 - `C_PORT_CONNECTION`、`C_PORT_ENABLE`、`C_PORT_SUSPEND`、`C_PORT_OVER_CURRENT`、`C_PORT_RESET`
   - 這些是 change selector：本頁只記錄事件 ack/clear 的 selector 角色，不以 timing 或 control-state machine 當真值。
 - `PORT_TEST`、`PORT_INDICATOR`

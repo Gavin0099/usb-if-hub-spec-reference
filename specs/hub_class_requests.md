@@ -27,7 +27,7 @@ semantic_verification_claimed: false
 
 - 每一個欄位都已在 PDF section-level 完成驗證。
 - TT request 的欄位編碼已完成 correctness-verified。
-- 本 repo 已有 `SET_FEATURE` / `CLEAR_FEATURE` 的完整 state-transition 模型。
+- 本 repo 還沒有 `SET_FEATURE` / `CLEAR_FEATURE` 的完整 state-transition 模型。
 
 ## Request Family Overview
 

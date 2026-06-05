@@ -92,7 +92,7 @@ For `PORT_TEST` and `PORT_INDICATOR`, the reviewed surface is selector-boundary 
 - `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, `PORT_POWER`
   - These selectors are in the standard namespace; the complete `SET_FEATURE` / `CLEAR_FEATURE` transition effects are not fully verified here.
 - `PORT_OVER_CURRENT`
-  - `C_PORT_OVER_CURRENT` belongs to the change-selector family; this page retains the `CHANGE`-style semantics and does not define recovery policies.
+  - `PORT_OVER_CURRENT` is reported in status context; `C_PORT_OVER_CURRENT` is the associated change-selector event-acknowledge path, and this page does not extend to recovery policy or timing truth.
 - `C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`, `C_PORT_RESET`
   - These are treated as change selectors: the page records the change-acknowledgment role instead of timing or control-state machine truth.
 - `PORT_TEST`, `PORT_INDICATOR`
