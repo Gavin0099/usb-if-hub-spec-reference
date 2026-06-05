@@ -130,9 +130,26 @@ When using the Rule 4 structured completion format for this repo:
 
 ## Canonical Memory Writer Rule
 
-Only canonical session closeout is allowed to write under `memory/`.
+Only canonical memory writer output is allowed to create new session-derived
+entries under `memory/`.
 
-- Non-closeout phases must not write memory records.
-- If closeout evidence is missing, memory write claims are non-admissible.
-- Any attempt to bypass canonical closeout memory write flow is a governance
+- All new session-derived memory entries MUST be written through the framework
+  canonical writer:
+
+  ```powershell
+  python E:/BackUp/Git_EE/ai-governance-framework/governance_tools/memory_record.py `
+    --what-changed "..." `
+    --commit <git-sha> `
+    --test-evidence "..." `
+    --next-step "..." `
+    --project-root .
+  ```
+
+- Direct markdown append using `- what changed:` or `- what_changed:` is
+  PROHIBITED for new entries because it triggers `non_canonical_writer`.
+- Non-closeout phases must not write memory records unless explicitly producing
+  a canonical session-derived entry after commit/push state is known.
+- If closeout or commit evidence is missing, memory write claims are
+  non-admissible.
+- Any attempt to bypass the canonical memory writer flow is a governance
   violation.
