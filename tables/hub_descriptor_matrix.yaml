@@ -61,16 +61,56 @@ entries:
     bit_groups:
       - bits: "1:0"
         group: Logical Power Switching Mode
+        encodings:
+          - value: "0b00"
+            meaning: Ganged power switching (all ports switched together)
+          - value: "0b01"
+            meaning: Individual (per-port) power switching
+          - value: "0b10"
+            meaning: Reserved
+          - value: "0b11"
+            meaning: Reserved
       - bits: "2"
         group: Compound Device
+        encodings:
+          - value: "0"
+            meaning: Hub is NOT a compound device
+          - value: "1"
+            meaning: Hub IS a compound device
       - bits: "4:3"
         group: Over-current Protection Mode
+        encodings:
+          - value: "0b00"
+            meaning: Global over-current protection (entire hub)
+          - value: "0b01"
+            meaning: Individual port over-current protection
+          - value: "0b10"
+            meaning: No over-current protection reporting
+          - value: "0b11"
+            meaning: Reserved
       - bits: "6:5"
         group: TT Think Time
+        encodings:
+          - value: "0b00"
+            meaning: At most 8 FS bit times of inter-transaction gap
+          - value: "0b01"
+            meaning: At most 16 FS bit times
+          - value: "0b10"
+            meaning: At most 24 FS bit times
+          - value: "0b11"
+            meaning: At most 32 FS bit times
       - bits: "7"
         group: Port Indicators Supported
+        encodings:
+          - value: "0"
+            meaning: Port indicators not supported
+          - value: "1"
+            meaning: Port indicators supported; SET_FEATURE(PORT_INDICATOR) applicable
       - bits: "15:8"
         group: Reserved
+        encodings:
+          - value: "0x00"
+            meaning: Must be zero; reserved by USB 2.0 spec
     source_refs:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1"

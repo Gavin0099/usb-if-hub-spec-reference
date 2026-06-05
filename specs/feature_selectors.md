@@ -141,6 +141,39 @@ semantic_verification_claimed: false
 - `PORT_*`、`C_HUB_*`、`C_PORT_*` 的 reviewed linkage 僅為 boundary，不構成 `SET_FEATURE` 或 `CLEAR_FEATURE` 行為證據
 - `PORT_TEST` 與 `PORT_INDICATOR` 雖有 selector slot reviewed，但仍不作為 test-mode / indicator 行為驗證
 
+## `PORT_TEST` 測試模式編碼（`wIndex` 高位元組）
+
+> 來源：§11.24.2.13 / Table 11-20。Reviewed boundary only；非測試模式電氣或合規驗證。
+
+發送 `SET_FEATURE(PORT_TEST)` 時，測試模式由 `wIndex[15:8]` 指定：
+
+| `wIndex[15:8]` | 名稱 | 說明 |
+|---:|---|---|
+| `0x00` | Reserved | |
+| `0x01` | Test_J | J-state 靜態測試 |
+| `0x02` | Test_K | K-state 靜態測試 |
+| `0x03` | Test_SE0_NAK | SE0 NAK 測試 |
+| `0x04` | Test_Packet | 測試封包傳送 |
+| `0x05` | Test_Force_Enable | 強制 port enable |
+| `0x06–0xFF` | Reserved | |
+
+本表僅記錄 selector 編碼 identity，不驗證測試模式電氣行為、合規測試程序或設備回應。
+
+## `PORT_INDICATOR` 指示燈顏色編碼（`wIndex` 高位元組）
+
+> 來源：§11.24.2.7.1.1 / Table 11-20。Reviewed boundary only；非指示燈硬體或政策驗證。
+
+發送 `SET_FEATURE(PORT_INDICATOR)` 時，指示燈顏色由 `wIndex[15:8]` 指定：
+
+| `wIndex[15:8]` | 顏色 | 說明 |
+|---:|---|---|
+| `0x00` | Off | 指示燈關閉 |
+| `0x01` | Amber | 琥珀色 |
+| `0x02` | Green | 綠色 |
+| `0x03` | Undefined | 軟體自定義；USB 2.0 spec 未定義含義 |
+
+本表僅記錄編碼 identity，不驗證指示燈硬體支援、政策或 hub 是否實際實作指示燈控制。
+
 ## Governed Linkage
 
 - `tables/feature_selector_matrix.yaml`：selector namespace 的主要 machine-readable source

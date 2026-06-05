@@ -110,6 +110,55 @@ In this repo's current reviewed request surface, both `GET_DESCRIPTOR` and `SET_
 | `7` | Port Indicators Supported | Describes whether port indicators are supported. |
 | `15:8` | Reserved | Reserved bits; this page does not claim firmware may repurpose them. |
 
+### Bit-Field Encoding Reference
+
+> Source: §11.23.2.1 Table 11-13. Reviewed boundary only; not semantic behavior verification.
+
+**bits\[1:0\] — Logical Power Switching Mode**
+
+| Value | Meaning |
+|---|---|
+| `0b00` | Ganged power switching (all ports switched together) |
+| `0b01` | Individual (per-port) power switching |
+| `0b10` | Reserved |
+| `0b11` | Reserved |
+
+**bit\[2\] — Compound Device**
+
+| Value | Meaning |
+|---|---|
+| `0` | Hub is NOT a compound device |
+| `1` | Hub IS a compound device |
+
+**bits\[4:3\] — Over-current Protection Mode**
+
+| Value | Meaning |
+|---|---|
+| `0b00` | Global over-current protection (entire hub) |
+| `0b01` | Individual port over-current protection |
+| `0b10` | No over-current protection reporting |
+| `0b11` | Reserved |
+
+**bits\[6:5\] — TT Think Time**
+
+| Value | Meaning |
+|---|---|
+| `0b00` | At most 8 FS bit times of inter-transaction gap |
+| `0b01` | At most 16 FS bit times |
+| `0b10` | At most 24 FS bit times |
+| `0b11` | At most 32 FS bit times |
+
+**bit\[7\] — Port Indicators Supported**
+
+| Value | Meaning |
+|---|---|
+| `0` | Port indicators not supported |
+| `1` | Port indicators supported; `SET_FEATURE(PORT_INDICATOR)` applicable |
+
+**bits\[15:8\] — Reserved**
+
+Must be zero. USB 2.0 spec does not assign meaning to these bits.
+
 ### Safe Interpretation Boundary for `wHubCharacteristics`
 
 - `1:0` and `6:5` often directly affect power switching and TT behavior, so they are easy for consuming repos to over-apply.

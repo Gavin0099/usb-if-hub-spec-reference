@@ -147,6 +147,39 @@ This repo currently treats selectors in three reading categories:
 - Reviewed `PORT_*`, `C_HUB_*`, and `C_PORT_*` linkage should still be treated as selector boundary only, not as behavioral proof for `SET_FEATURE` or `CLEAR_FEATURE`.
 - `PORT_TEST` and `PORT_INDICATOR` remain outside behavior verification even though their selector slots are now reviewed.
 
+## `PORT_TEST` Test Mode Selector Encoding (`wIndex` high byte)
+
+> Source: §11.24.2.13 / Table 11-20. Reviewed boundary only; not test-mode electrical or compliance verification.
+
+When `SET_FEATURE(PORT_TEST)` is issued, the test mode is specified in `wIndex[15:8]`:
+
+| `wIndex[15:8]` | Name | Notes |
+|---:|---|---|
+| `0x00` | Reserved | |
+| `0x01` | Test_J | J-state static test |
+| `0x02` | Test_K | K-state static test |
+| `0x03` | Test_SE0_NAK | SE0 NAK test |
+| `0x04` | Test_Packet | Test packet transmission |
+| `0x05` | Test_Force_Enable | Force port enable |
+| `0x06–0xFF` | Reserved | |
+
+This table records selector-encoding identity only. It does not verify test-mode electrical behavior, compliance test procedures, or device response.
+
+## `PORT_INDICATOR` Indicator Color Encoding (`wIndex` high byte)
+
+> Source: §11.24.2.7.1.1 / Table 11-20. Reviewed boundary only; not indicator hardware or policy verification.
+
+When `SET_FEATURE(PORT_INDICATOR)` is issued, the indicator color is specified in `wIndex[15:8]`:
+
+| `wIndex[15:8]` | Color | Notes |
+|---:|---|---|
+| `0x00` | Off | Indicator off |
+| `0x01` | Amber | Amber indicator |
+| `0x02` | Green | Green indicator |
+| `0x03` | Undefined | Software-controlled; meaning not defined by USB 2.0 standard |
+
+This table records encoding identity only. It does not verify indicator hardware support, policy, or whether the hub actually implements indicator control.
+
 ## Governed Linkage
 
 - `tables/feature_selector_matrix.yaml`: primary machine-readable source for selector namespaces.
