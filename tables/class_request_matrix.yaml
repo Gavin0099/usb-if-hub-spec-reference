@@ -1,382 +1,363 @@
 matrix_id: usb_hub_class_request_matrix
 scope:
   usb_versions:
-    - usb20
+  - usb20
   topic: class_specific_request
 status: draft
-# Phase 3B: GET_STATUS hub/port entries added.
-# Phase 3C: SET_FEATURE / CLEAR_FEATURE hub/port entries added.
-# Phase 3D: TT request family added. applies_to field introduced.
 entries:
+- request_id: usb20_get_status_hub
+  request_family: GET_STATUS
+  request_name: GET_STATUS
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: all_hubs
+  setup:
+    direction: device_to_host
+    type: class
+    recipient: device
+    bRequest: GET_STATUS
+    wValue: '0x0000'
+    wIndex: '0x0000'
+    wLength: 4
+    bmRequestType: '0xA0'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'Reviewed linkage surface: returns wHubStatus (2 bytes) + wHubChange (2 bytes), total wLength=4. bmRequestType=0xA0
+    (D7=1 D2H, D6:5=01 class, D4:0=00000 device). wIndex=0 (hub itself). Hub status/change bits are defined separately in
+    port_status_bit_matrix. Request linkage only; not hub status behavior verification.
 
-  - request_id: usb20_get_status_hub
-    request_family: GET_STATUS
-    request_name: GET_STATUS
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: all_hubs
-    setup:
-      direction: device_to_host
-      type: class
-      recipient: device
-      bRequest: GET_STATUS
-      wValue: "0x0000"
-      wIndex: "0x0000"
-      wLength: 4
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      Reviewed linkage surface: returns wHubStatus (2 bytes) + wHubChange
-      (2 bytes), total wLength=4. bmRequestType=0xA0 (D7=1 D2H,
-      D6:5=01 class, D4:0=00000 device). wIndex=0 (hub itself).
-      Hub status/change bits are defined separately in port_status_bit_matrix.
-      Request linkage only; not hub status behavior verification.
+    '
+- request_id: usb20_get_status_port
+  request_family: GET_STATUS
+  request_name: GET_STATUS
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: port
+  applies_to: all_hubs
+  setup:
+    direction: device_to_host
+    type: class
+    recipient: other
+    bRequest: GET_STATUS
+    wValue: '0x0000'
+    wIndex: port_number
+    wLength: 4
+    bmRequestType: '0xA3'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'Reviewed linkage surface: returns wPortStatus (2 bytes) + wPortChange (2 bytes), total wLength=4. bmRequestType=0xA3
+    (D7=1 D2H, D6:5=01 class, D4:0=00011 other). wIndex=1-based port number. Port status/change bits are defined separately
+    in port_status_bit_matrix. Request linkage only; not host polling, debounce, or port behavior verification.
 
-  - request_id: usb20_get_status_port
-    request_family: GET_STATUS
-    request_name: GET_STATUS
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: port
-    applies_to: all_hubs
-    setup:
-      direction: device_to_host
-      type: class
-      recipient: other
-      bRequest: GET_STATUS
-      wValue: "0x0000"
-      wIndex: port_number
-      wLength: 4
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      Reviewed linkage surface: returns wPortStatus (2 bytes) + wPortChange
-      (2 bytes), total wLength=4. bmRequestType=0xA3 (D7=1 D2H,
-      D6:5=01 class, D4:0=00011 other). wIndex=1-based port number.
-      Port status/change bits are defined separately in port_status_bit_matrix.
-      Request linkage only; not host polling, debounce, or port behavior verification.
+    '
+- request_id: usb20_set_feature_hub
+  request_family: SET_FEATURE
+  request_name: SET_FEATURE
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: all_hubs
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: device
+    bRequest: SET_FEATURE
+    wValue: feature_selector
+    wIndex: '0x0000'
+    wLength: 0
+    bmRequestType: '0x20'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device). Reviewed repo-local summary: wValue=feature_selector,
+    but hub-recipient selector namespace must remain separate from port-recipient selectors. wIndex=0 (hub itself). wLength=0.
+    This repo still does not claim selector side-effect or state-transition verification.
 
-  - request_id: usb20_set_feature_hub
-    request_family: SET_FEATURE
-    request_name: SET_FEATURE
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: all_hubs
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: device
-      bRequest: SET_FEATURE
-      wValue: feature_selector
-      wIndex: "0x0000"
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
-      Reviewed repo-local summary: wValue=feature_selector, but hub-recipient
-      selector namespace must remain separate from port-recipient selectors.
-      wIndex=0 (hub itself). wLength=0. This repo still does not claim
-      selector side-effect or state-transition verification.
+    '
+- request_id: usb20_set_feature_port
+  request_family: SET_FEATURE
+  request_name: SET_FEATURE
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: port
+  applies_to: all_hubs
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: other
+    bRequest: SET_FEATURE
+    wValue: feature_selector
+    wIndex: port_number
+    wLength: 0
+    bmRequestType: '0x23'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue=feature_selector
+    and must be resolved against the standard port selector namespace rather than the hub-recipient selector set. Reviewed
+    SetFeature-side anchors currently include `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, and `PORT_POWER`. wIndex=1-based
+    port number. wLength=0. This repo still does not claim selector side-effect, timing, or state-transition verification.
 
-  - request_id: usb20_set_feature_port
-    request_family: SET_FEATURE
-    request_name: SET_FEATURE
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: port
-    applies_to: all_hubs
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: other
-      bRequest: SET_FEATURE
-      wValue: feature_selector
-      wIndex: port_number
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue=feature_selector and must be resolved
-      against the standard port selector namespace rather than the hub-recipient
-      selector set. Reviewed SetFeature-side anchors currently include
-      `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_RESET`, and `PORT_POWER`.
-      wIndex=1-based port number. wLength=0. This repo still does not claim
-      selector side-effect, timing, or state-transition verification.
+    '
+- request_id: usb20_clear_feature_hub
+  request_family: CLEAR_FEATURE
+  request_name: CLEAR_FEATURE
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: all_hubs
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: device
+    bRequest: CLEAR_FEATURE
+    wValue: feature_selector
+    wIndex: '0x0000'
+    wLength: 0
+    bmRequestType: '0x20'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device). Reviewed repo-local summary: wValue=feature_selector
+    and links to the hub-recipient change-selector boundary (`C_HUB_LOCAL_POWER`, `C_HUB_OVER_CURRENT`). wIndex=0. wLength=0.
+    This remains selector linkage review only, not host-side clear sequencing or behavioral verification.
 
-  - request_id: usb20_clear_feature_hub
-    request_family: CLEAR_FEATURE
-    request_name: CLEAR_FEATURE
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: all_hubs
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: device
-      bRequest: CLEAR_FEATURE
-      wValue: feature_selector
-      wIndex: "0x0000"
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x20 (D7=0 H2D, D6:5=01 class, D4:0=00000 device).
-      Reviewed repo-local summary: wValue=feature_selector and links to the
-      hub-recipient change-selector boundary (`C_HUB_LOCAL_POWER`,
-      `C_HUB_OVER_CURRENT`). wIndex=0. wLength=0. This remains selector linkage
-      review only, not host-side clear sequencing or behavioral verification.
+    '
+- request_id: usb20_clear_feature_port
+  request_family: CLEAR_FEATURE
+  request_name: CLEAR_FEATURE
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: port
+  applies_to: all_hubs
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: other
+    bRequest: CLEAR_FEATURE
+    wValue: feature_selector
+    wIndex: port_number
+    wLength: 0
+    bmRequestType: '0x23'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue=feature_selector
+    and links to the port-recipient change-selector boundary (`C_PORT_CONNECTION`, `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`,
+    `C_PORT_RESET`) within the standard port selector namespace. wIndex=1-based port number. wLength=0. This remains selector
+    linkage review only, not host-side clear sequencing or behavioral verification.
 
-  - request_id: usb20_clear_feature_port
-    request_family: CLEAR_FEATURE
-    request_name: CLEAR_FEATURE
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: port
-    applies_to: all_hubs
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: other
-      bRequest: CLEAR_FEATURE
-      wValue: feature_selector
-      wIndex: port_number
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue=feature_selector and links to the
-      port-recipient change-selector boundary (`C_PORT_CONNECTION`,
-      `C_PORT_ENABLE`, `C_PORT_SUSPEND`, `C_PORT_OVER_CURRENT`,
-      `C_PORT_RESET`) within the standard port selector namespace.
-      wIndex=1-based port number. wLength=0. This remains selector linkage
-      review only, not host-side clear sequencing or behavioral verification.
+    '
+- request_id: usb20_clear_tt_buffer
+  request_family: CLEAR_TT_BUFFER
+  request_name: CLEAR_TT_BUFFER
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: hub_with_tt_only
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: other
+    bRequest: CLEAR_TT_BUFFER
+    wValue: tt_buffer_selector_fields
+    wIndex: tt_port_or_context
+    wLength: 0
+    bmRequestType: '0x23'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue carries TT buffer
+    selector fields (including endpoint/device/type context), while wIndex selects the TT port or related TT context. This
+    repo still does not claim a fully verified field-level encoding map. Only valid on HS hubs with an embedded Transaction
+    Translator.
 
-  - request_id: usb20_clear_tt_buffer
-    request_family: CLEAR_TT_BUFFER
-    request_name: CLEAR_TT_BUFFER
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: hub_with_tt_only
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: other
-      bRequest: CLEAR_TT_BUFFER
-      wValue: tt_buffer_selector_fields
-      wIndex: tt_port_or_context
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue carries TT buffer selector fields
-      (including endpoint/device/type context), while wIndex selects the TT port
-      or related TT context. This repo still does not claim a fully verified
-      field-level encoding map.
-      Only valid on HS hubs with an embedded Transaction Translator.
+    '
+- request_id: usb20_reset_tt
+  request_family: RESET_TT
+  request_name: RESET_TT
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: hub_with_tt_only
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: other
+    bRequest: RESET_TT
+    wValue: '0x0000'
+    wIndex: tt_port_number
+    wLength: 0
+    bmRequestType: '0x23'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue=0 and wIndex
+    selects the TT port number or TT target instance for reset. Hub must complete ongoing split transactions before resetting.
+    Only valid on HS hubs with an embedded Transaction Translator.
 
-  - request_id: usb20_reset_tt
-    request_family: RESET_TT
-    request_name: RESET_TT
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: hub_with_tt_only
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: other
-      bRequest: RESET_TT
-      wValue: "0x0000"
-      wIndex: tt_port_number
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue=0 and wIndex selects the TT port number
-      or TT target instance for reset.
-      Hub must complete ongoing split transactions before resetting.
-      Only valid on HS hubs with an embedded Transaction Translator.
+    '
+- request_id: usb20_get_tt_state
+  request_family: GET_TT_STATE
+  request_name: GET_TT_STATE
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: hub_with_tt_only
+  setup:
+    direction: device_to_host
+    type: class
+    recipient: other
+    bRequest: GET_TT_STATE
+    wValue: '0x0000'
+    wIndex: tt_port_or_context
+    wLength: tt_state_data_length
+    bmRequestType: '0xA3'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue=0. wIndex selects
+    the TT port or relevant TT diagnostic context. wLength is the TT state data length and must not be hardcoded here as a
+    single universal constant. Returns TT diagnostic state data. Only valid on HS hubs with embedded TT.
 
-  - request_id: usb20_get_tt_state
-    request_family: GET_TT_STATE
-    request_name: GET_TT_STATE
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: hub_with_tt_only
-    setup:
-      direction: device_to_host
-      type: class
-      recipient: other
-      bRequest: GET_TT_STATE
-      wValue: "0x0000"
-      wIndex: tt_port_or_context
-      wLength: tt_state_data_length
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0xA3 (D7=1 D2H, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue=0. wIndex selects the TT port or
-      relevant TT diagnostic context. wLength is the TT state data length and
-      must not be hardcoded here as a single universal constant.
-      Returns TT diagnostic state data. Only valid on HS hubs with embedded TT.
+    '
+- request_id: usb20_stop_tt
+  request_family: STOP_TT
+  request_name: STOP_TT
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: hub_with_tt_only
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: other
+    bRequest: STOP_TT
+    wValue: '0x0000'
+    wIndex: tt_port_number
+    wLength: 0
+    bmRequestType: '0x23'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other). Reviewed repo-local summary: wValue=0 and wIndex
+    selects the TT port number or TT target instance whose split-transaction processing is being stopped. Stops processing
+    split transactions on the TT. Only valid on HS hubs with an embedded Transaction Translator.
 
-  - request_id: usb20_stop_tt
-    request_family: STOP_TT
-    request_name: STOP_TT
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: hub_with_tt_only
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: other
-      bRequest: STOP_TT
-      wValue: "0x0000"
-      wIndex: tt_port_number
-      wLength: 0
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      bmRequestType=0x23 (D7=0 H2D, D6:5=01 class, D4:0=00011 other).
-      Reviewed repo-local summary: wValue=0 and wIndex selects the TT port number
-      or TT target instance whose split-transaction processing is being stopped.
-      Stops processing split transactions on the TT.
-      Only valid on HS hubs with an embedded Transaction Translator.
+    '
+- request_id: usb20_get_descriptor_hub
+  request_family: GET_DESCRIPTOR
+  request_name: GET_DESCRIPTOR
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: all_hubs
+  request_context: hub_class_specific
+  setup:
+    direction: device_to_host
+    type: class
+    recipient: device
+    bRequest: GET_DESCRIPTOR
+    wValue: descriptor_type_0x29_and_index
+    wIndex: '0x0000'
+    wLength: descriptor_length
+    bmRequestType: '0xA0'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'Hub class-specific context. Not to be confused with standard USB GET_DESCRIPTOR (bmRequestType type=standard). request_context=hub_class_specific
+    marks this distinction. Reviewed repo-local summary: bmRequestType=0xA0 (D7=1 D2H, D6:5=01 class, D4:0=00000 device).
+    wValue encodes hub descriptor type 0x29 together with the descriptor index. wIndex=0. wLength is descriptor-length dependent
+    and remains a request-size field, not a fixed constant in this repo.
 
-  # Phase 3F: GET_DESCRIPTOR / SET_DESCRIPTOR E-04 gap
-  - request_id: usb20_get_descriptor_hub
-    request_family: GET_DESCRIPTOR
-    request_name: GET_DESCRIPTOR
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: all_hubs
-    request_context: hub_class_specific
-    setup:
-      direction: device_to_host
-      type: class
-      recipient: device
-      bRequest: GET_DESCRIPTOR
-      wValue: descriptor_type_0x29_and_index
-      wIndex: "0x0000"
-      wLength: descriptor_length
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      Hub class-specific context. Not to be confused with standard USB GET_DESCRIPTOR
-      (bmRequestType type=standard). request_context=hub_class_specific marks this distinction.
-      Reviewed repo-local summary: bmRequestType=0xA0 (D7=1 D2H, D6:5=01 class,
-      D4:0=00000 device). wValue encodes hub descriptor type 0x29 together with
-      the descriptor index. wIndex=0. wLength is descriptor-length dependent and
-      remains a request-size field, not a fixed constant in this repo.
+    '
+- request_id: usb20_set_descriptor_hub
+  request_family: SET_DESCRIPTOR
+  request_name: SET_DESCRIPTOR
+  usb_version_scope:
+  - usb20
+  topic: class_specific_request
+  recipient: hub
+  applies_to: all_hubs
+  request_context: hub_class_specific
+  setup:
+    direction: host_to_device
+    type: class
+    recipient: device
+    bRequest: SET_DESCRIPTOR
+    wValue: descriptor_type_0x29_and_index
+    wIndex: '0x0000'
+    wLength: descriptor_payload_length
+    bmRequestType: '0x20'
+  source_refs:
+  - usb20_spec
+  section_anchor: USB 2.0 Specification Rev 2.0 §11.24.2
+  authority_level: normative_official
+  claim_level: verified
+  evidence_status: reviewed
+  drift_status: clean
+  notes: 'Hub class-specific context. Optional request; implementation support is not mandatory. request_context=hub_class_specific
+    distinguishes from generic standard SET_DESCRIPTOR. Reviewed repo-local summary: bmRequestType=0x20 (D7=0 H2D, D6:5=01
+    class, D4:0=00000 device). wValue encodes hub descriptor type 0x29 together with the descriptor index. wIndex=0. wLength
+    depends on descriptor payload size. This entry remains a descriptor-surface reference only, not an implementation claim
+    that all hubs support SET_DESCRIPTOR.
 
-  - request_id: usb20_set_descriptor_hub
-    request_family: SET_DESCRIPTOR
-    request_name: SET_DESCRIPTOR
-    usb_version_scope:
-      - usb20
-    topic: class_specific_request
-    recipient: hub
-    applies_to: all_hubs
-    request_context: hub_class_specific
-    setup:
-      direction: host_to_device
-      type: class
-      recipient: device
-      bRequest: SET_DESCRIPTOR
-      wValue: descriptor_type_0x29_and_index
-      wIndex: "0x0000"
-      wLength: descriptor_payload_length
-    source_refs:
-      - usb20_spec
-    section_anchor: "USB 2.0 Specification Rev 2.0 §11.24.2"
-    authority_level: normative_official
-    claim_level: verified
-    evidence_status: reviewed
-    drift_status: clean
-    notes: >
-      Hub class-specific context. Optional request; implementation support is not mandatory.
-      request_context=hub_class_specific distinguishes from generic standard SET_DESCRIPTOR.
-      Reviewed repo-local summary: bmRequestType=0x20 (D7=0 H2D, D6:5=01 class,
-      D4:0=00000 device). wValue encodes hub descriptor type 0x29 together with
-      the descriptor index. wIndex=0. wLength depends on descriptor payload size.
-      This entry remains a descriptor-surface reference only, not an implementation
-      claim that all hubs support SET_DESCRIPTOR.
-
+    '

@@ -21,15 +21,15 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 10 | 0 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
-| Port status bits | 23 | 19 | 4 | 0 | 0 |
+| Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| **Total** | **92** | **84** | **8** | **0** | **0** |
+| **Total** | **133** | **84** | **49** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | All correspond to promoted verified entries; 8 reviewed entries have no evidence packet |
+| Entry verification packets | 84 | All correspond to promoted verified entries; 49 reviewed entries have no evidence packet |
 
 Term definitions:
 
@@ -46,7 +46,7 @@ Term definitions:
 | Escalation triggers | verified | All 10 tracked E-01 through E-10 trigger boundaries have promoted entry-level verified scope |
 | Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
 | Feature selectors | verified | All 25 tracked feature selectors are now verified at selector-name-and-value scope |
-| Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; 4 high-bit boundary placeholders (wPortStatus, wPortChange, wHubStatus, wHubChange) are reviewed namespace/boundary entries only |
+| Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; 4 high-bit boundary placeholders are reviewed; 41 reserved bit entries (wPortStatus, wPortChange, wHubStatus, wHubChange reserved bits) have reviewed namespace boundary |
 | Hub interrupt endpoint | reviewed | 4 status change endpoint descriptor fields (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval) have reviewed field identity; no verified promotion |
 
 ## Reviewed Surface Inventory

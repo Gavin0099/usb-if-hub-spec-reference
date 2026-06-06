@@ -49,8 +49,14 @@ features:
   - title: Hub Interrupt Endpoint
     details: Describes the status change endpoint descriptor fields, wMaxPacketSize calculation, and bInterval encoding for FS and HS hubs.
     link: /en/hub_interrupt_endpoint
+  - title: Hub Power Management
+    details: Power switching modes (ganged vs. per-port), bPwrOn2PwrGood timing, over-current protection, and suspend/resume semantics.
+    link: /en/hub_power_management
+  - title: Hub Configuration Descriptors
+    details: Configuration and interface descriptor fields for hub class, including bInterfaceClass=0x09, bNumEndpoints, and alternate settings for multi-TT hubs.
+    link: /en/hub_configuration
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 92 tracked entries, including 84 verified, 8 reviewed, and 0 inferred.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 133 tracked entries, including 84 verified, 49 reviewed, and 0 inferred.
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.

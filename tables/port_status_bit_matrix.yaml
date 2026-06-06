@@ -1,462 +1,1177 @@
 matrix_id: usb20_hub_port_status_bit_matrix
 source_spec:
   spec: USB 2.0
-  section: "11.24.2.7 / hub and port status change fields"
+  section: 11.24.2.7 / hub and port status change fields
 claim_level: inferred
 evidence_status: review_required
 status: draft
-
 entries:
-  - field: wHubStatus
-    bit: 0
-    name: HUB_LOCAL_POWER
-    status: defined
-    description: Hub local power status
-    claim_level: verified
+- field: wHubStatus
+  bit: 0
+  name: HUB_LOCAL_POWER
+  status: defined
+  description: Hub local power status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubStatus bit 0 name and position"
-        note: "Phase 8J verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wHubStatus.bit0.HUB_LOCAL_POWER.yaml
-
-  - field: wHubStatus
-    bit: 1
-    name: HUB_OVER_CURRENT
-    status: defined
-    description: Hub over-current status
-    claim_level: verified
+    applies_to: wHubStatus bit 0 name and position
+    note: 'Phase 8J verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wHubStatus.bit0.HUB_LOCAL_POWER.yaml
+- field: wHubStatus
+  bit: 1
+  name: HUB_OVER_CURRENT
+  status: defined
+  description: Hub over-current status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubStatus bit 1 name and position"
-        note: "Phase 8J verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wHubStatus.bit1.HUB_OVER_CURRENT.yaml
-
-  - field: wHubChange
-    bit: 0
-    name: C_HUB_LOCAL_POWER
-    status: defined
-    description: Hub local power status change
-    claim_level: verified
+    applies_to: wHubStatus bit 1 name and position
+    note: 'Phase 8J verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wHubStatus.bit1.HUB_OVER_CURRENT.yaml
+- field: wHubChange
+  bit: 0
+  name: C_HUB_LOCAL_POWER
+  status: defined
+  description: Hub local power status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubChange bit 0 name and position"
-        note: "Phase 8K verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit0.C_HUB_LOCAL_POWER.yaml
-
-  - field: wHubChange
-    bit: 1
-    name: C_HUB_OVER_CURRENT
-    status: defined
-    description: Hub over-current status change
-    claim_level: verified
+    applies_to: wHubChange bit 0 name and position
+    note: 'Phase 8K verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit0.C_HUB_LOCAL_POWER.yaml
+- field: wHubChange
+  bit: 1
+  name: C_HUB_OVER_CURRENT
+  status: defined
+  description: Hub over-current status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubChange bit 1 name and position"
-        note: "Phase 8K verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit1.C_HUB_OVER_CURRENT.yaml
-
-  - field: wPortStatus
-    bit: 0
-    name: PORT_CONNECTION
-    status: defined
-    description: Port connection status
-    claim_level: verified
+    applies_to: wHubChange bit 1 name and position
+    note: 'Phase 8K verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wHubChange.bit1.C_HUB_OVER_CURRENT.yaml
+- field: wPortStatus
+  bit: 0
+  name: PORT_CONNECTION
+  status: defined
+  description: Port connection status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 0 name and position"
-        note: "Phase 8E pilot verified promotion is limited to bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-
-  - field: wPortStatus
-    bit: 1
-    name: PORT_ENABLE
-    status: defined
-    claim_level: verified
-    description: Port enabled status
+    applies_to: wPortStatus bit 0 name and position
+    note: Phase 8E pilot verified promotion is limited to bit name and bit position only.
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+- field: wPortStatus
+  bit: 1
+  name: PORT_ENABLE
+  status: defined
+  claim_level: verified
+  description: Port enabled status
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 1 name and position"
-        note: "Phase 8H verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit1.PORT_ENABLE.yaml
-
-  - field: wPortStatus
-    bit: 2
-    name: PORT_SUSPEND
-    status: defined
-    description: Port suspend status
-    claim_level: verified
+    applies_to: wPortStatus bit 1 name and position
+    note: 'Phase 8H verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit1.PORT_ENABLE.yaml
+- field: wPortStatus
+  bit: 2
+  name: PORT_SUSPEND
+  status: defined
+  description: Port suspend status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 2 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit2.PORT_SUSPEND.yaml
-
-  - field: wPortStatus
-    bit: 3
-    name: PORT_OVER_CURRENT
-    status: defined
-    description: Port over-current status
-    claim_level: verified
+    applies_to: wPortStatus bit 2 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit2.PORT_SUSPEND.yaml
+- field: wPortStatus
+  bit: 3
+  name: PORT_OVER_CURRENT
+  status: defined
+  description: Port over-current status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 3 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit3.PORT_OVER_CURRENT.yaml
-
-  - field: wPortStatus
-    bit: 4
-    name: PORT_RESET
-    status: defined
-    description: Port reset status
-    claim_level: verified
+    applies_to: wPortStatus bit 3 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit3.PORT_OVER_CURRENT.yaml
+- field: wPortStatus
+  bit: 4
+  name: PORT_RESET
+  status: defined
+  description: Port reset status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 4 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit4.PORT_RESET.yaml
-
-  - field: wPortStatus
-    bit: 8
-    name: PORT_POWER
-    status: defined
-    description: Port power status
-    claim_level: verified
+    applies_to: wPortStatus bit 4 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit4.PORT_RESET.yaml
+- field: wPortStatus
+  bit: 8
+  name: PORT_POWER
+  status: defined
+  description: Port power status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 8 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit8.PORT_POWER.yaml
-
-  - field: wPortStatus
-    bit: 9
-    name: PORT_LOW_SPEED
-    status: defined
-    description: Port low-speed status indicator
-    claim_level: verified
+    applies_to: wPortStatus bit 8 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit8.PORT_POWER.yaml
+- field: wPortStatus
+  bit: 9
+  name: PORT_LOW_SPEED
+  status: defined
+  description: Port low-speed status indicator
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 9 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit9.PORT_LOW_SPEED.yaml
-
-  - field: wPortStatus
-    bit: 10
-    name: PORT_HIGH_SPEED
-    status: defined
-    description: Port high-speed status indicator
-    claim_level: verified
+    applies_to: wPortStatus bit 9 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit9.PORT_LOW_SPEED.yaml
+- field: wPortStatus
+  bit: 10
+  name: PORT_HIGH_SPEED
+  status: defined
+  description: Port high-speed status indicator
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 10 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit10.PORT_HIGH_SPEED.yaml
-
-  - field: wPortStatus
-    bit: 11
-    name: PORT_TEST
-    status: defined
-    description: Port test-mode status
-    claim_level: verified
+    applies_to: wPortStatus bit 10 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit10.PORT_HIGH_SPEED.yaml
+- field: wPortStatus
+  bit: 11
+  name: PORT_TEST
+  status: defined
+  description: Port test-mode status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 11 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit11.PORT_TEST.yaml
-
-  - field: wPortStatus
-    bit: 12
-    name: PORT_INDICATOR
-    status: defined
-    description: Port indicator status
-    claim_level: verified
+    applies_to: wPortStatus bit 11 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit11.PORT_TEST.yaml
+- field: wPortStatus
+  bit: 12
+  name: PORT_INDICATOR
+  status: defined
+  description: Port indicator status
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus bit 12 name and position"
-        note: "Phase 8L verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit12.PORT_INDICATOR.yaml
-
-  - field: wPortStatus
-    bit: 15
-    name: PORT_STATUS_HIGH_BIT_BOUNDARY
-    status: reserved
-    description: Boundary placeholder for 16-bit status field
-    claim_level: inferred
+    applies_to: wPortStatus bit 12 name and position
+    note: 'Phase 8L verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortStatus.bit12.PORT_INDICATOR.yaml
+- field: wPortStatus
+  bit: 15
+  name: PORT_STATUS_HIGH_BIT_BOUNDARY
+  status: reserved
+  description: Boundary placeholder for 16-bit status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortStatus high-bit boundary placeholder"
-        note: "Reviewed boundary surface only; not a defined status-bit semantic verification."
-    evidence:
-      source: USB 2.0 hub class request status field
-      review_required: false
-      reviewed_scope: high_bit_boundary_placeholder_only
-
-  - field: wPortChange
-    bit: 0
-    name: C_PORT_CONNECTION
-    status: defined
-    description: Port connection status change
-    claim_level: verified
+    applies_to: wPortStatus high-bit boundary placeholder
+    note: Reviewed boundary surface only; not a defined status-bit semantic verification.
+  evidence:
+    source: USB 2.0 hub class request status field
+    review_required: false
+    reviewed_scope: high_bit_boundary_placeholder_only
+- field: wPortChange
+  bit: 0
+  name: C_PORT_CONNECTION
+  status: defined
+  description: Port connection status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange bit 0 name and position"
-        note: "Phase 8I verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit0.C_PORT_CONNECTION.yaml
-
-  - field: wPortChange
-    bit: 1
-    name: C_PORT_ENABLE
-    status: defined
-    description: Port enable status change
-    claim_level: verified
+    applies_to: wPortChange bit 0 name and position
+    note: 'Phase 8I verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit0.C_PORT_CONNECTION.yaml
+- field: wPortChange
+  bit: 1
+  name: C_PORT_ENABLE
+  status: defined
+  description: Port enable status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange bit 1 name and position"
-        note: "Phase 8I verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit1.C_PORT_ENABLE.yaml
-
-  - field: wPortChange
-    bit: 2
-    name: C_PORT_SUSPEND
-    status: defined
-    description: Port suspend status change
-    claim_level: verified
+    applies_to: wPortChange bit 1 name and position
+    note: 'Phase 8I verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit1.C_PORT_ENABLE.yaml
+- field: wPortChange
+  bit: 2
+  name: C_PORT_SUSPEND
+  status: defined
+  description: Port suspend status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange bit 2 name and position"
-        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit2.C_PORT_SUSPEND.yaml
-
-  - field: wPortChange
-    bit: 3
-    name: C_PORT_OVER_CURRENT
-    status: defined
-    description: Port over-current status change
-    claim_level: verified
+    applies_to: wPortChange bit 2 name and position
+    note: 'Phase 8M verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit2.C_PORT_SUSPEND.yaml
+- field: wPortChange
+  bit: 3
+  name: C_PORT_OVER_CURRENT
+  status: defined
+  description: Port over-current status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange bit 3 name and position"
-        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit3.C_PORT_OVER_CURRENT.yaml
-
-  - field: wPortChange
-    bit: 4
-    name: C_PORT_RESET
-    status: defined
-    description: Port reset status change
-    claim_level: verified
+    applies_to: wPortChange bit 3 name and position
+    note: 'Phase 8M verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit3.C_PORT_OVER_CURRENT.yaml
+- field: wPortChange
+  bit: 4
+  name: C_PORT_RESET
+  status: defined
+  description: Port reset status change
+  claim_level: verified
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange bit 4 name and position"
-        note: "Phase 8M verified promotion. Verified scope: bit name and bit position only."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      verified_scope: bit_name_and_position_only
-      verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit4.C_PORT_RESET.yaml
-
-  - field: wPortChange
-    bit: 15
-    name: PORT_CHANGE_HIGH_BIT_BOUNDARY
-    status: reserved
-    description: Boundary placeholder for 16-bit change field
-    claim_level: inferred
+    applies_to: wPortChange bit 4 name and position
+    note: 'Phase 8M verified promotion. Verified scope: bit name and bit position only.'
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    verified_scope: bit_name_and_position_only
+    verification_packet: evidence/entry_verification_packets/port_status_wPortChange.bit4.C_PORT_RESET.yaml
+- field: wPortChange
+  bit: 15
+  name: PORT_CHANGE_HIGH_BIT_BOUNDARY
+  status: reserved
+  description: Boundary placeholder for 16-bit change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.7.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wPortChange high-bit boundary placeholder"
-        note: "Reviewed boundary surface only; not a defined change-bit semantic verification."
-    evidence:
-      source: USB 2.0 hub class request change field
-      review_required: false
-      reviewed_scope: high_bit_boundary_placeholder_only
-
-  - field: wHubStatus
-    bit: 15
-    name: HUB_STATUS_HIGH_BIT_BOUNDARY
-    status: reserved
-    description: Boundary placeholder for 16-bit hub status field; bits 2-15 are reserved by USB 2.0 spec
-    claim_level: inferred
+    applies_to: wPortChange high-bit boundary placeholder
+    note: Reviewed boundary surface only; not a defined change-bit semantic verification.
+  evidence:
+    source: USB 2.0 hub class request change field
+    review_required: false
+    reviewed_scope: high_bit_boundary_placeholder_only
+- field: wHubStatus
+  bit: 15
+  name: HUB_STATUS_HIGH_BIT_BOUNDARY
+  status: reserved
+  description: Boundary placeholder for 16-bit hub status field; bits 2-15 are reserved by USB 2.0 spec
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.6.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubStatus high-bit boundary placeholder"
-        note: "Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-status-bit semantic verification."
-    evidence:
-      source: USB 2.0 hub class request hub status field
-      review_required: false
-      reviewed_scope: high_bit_boundary_placeholder_only
-
-  - field: wHubChange
-    bit: 15
-    name: HUB_CHANGE_HIGH_BIT_BOUNDARY
-    status: reserved
-    description: Boundary placeholder for 16-bit hub change field; bits 2-15 are reserved by USB 2.0 spec
-    claim_level: inferred
+    applies_to: wHubStatus high-bit boundary placeholder
+    note: Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-status-bit semantic verification.
+  evidence:
+    source: USB 2.0 hub class request hub status field
+    review_required: false
+    reviewed_scope: high_bit_boundary_placeholder_only
+- field: wHubChange
+  bit: 15
+  name: HUB_CHANGE_HIGH_BIT_BOUNDARY
+  status: reserved
+  description: Boundary placeholder for 16-bit hub change field; bits 2-15 are reserved by USB 2.0 spec
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
     evidence_status: reviewed
-    section_refs:
-      - spec: usb20
-        section: "11.24.2.6.1"
-        anchor_type: section
-        evidence_status: reviewed
-        applies_to: "wHubChange high-bit boundary placeholder"
-        note: "Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-change-bit semantic verification."
-    evidence:
-      source: USB 2.0 hub class request hub change field
-      review_required: false
-      reviewed_scope: high_bit_boundary_placeholder_only
+    applies_to: wHubChange high-bit boundary placeholder
+    note: Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-change-bit semantic verification.
+  evidence:
+    source: USB 2.0 hub class request hub change field
+    review_required: false
+    reviewed_scope: high_bit_boundary_placeholder_only
+- field: wPortStatus
+  bit: 5
+  name: PORT_STATUS_RESERVED_BIT5
+  status: reserved
+  description: Reserved by USB 2.0 spec; host and hub must treat as zero
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortStatus reserved bit 5
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortStatus
+  bit: 6
+  name: PORT_STATUS_RESERVED_BIT6
+  status: reserved
+  description: Reserved by USB 2.0 spec; host and hub must treat as zero
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortStatus reserved bit 6
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortStatus
+  bit: 7
+  name: PORT_STATUS_RESERVED_BIT7
+  status: reserved
+  description: Reserved by USB 2.0 spec; host and hub must treat as zero
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortStatus reserved bit 7
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortStatus
+  bit: 13
+  name: PORT_STATUS_RESERVED_BIT13
+  status: reserved
+  description: Reserved by USB 2.0 spec; host and hub must treat as zero
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortStatus reserved bit 13
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortStatus
+  bit: 14
+  name: PORT_STATUS_RESERVED_BIT14
+  status: reserved
+  description: Reserved by USB 2.0 spec; host and hub must treat as zero
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortStatus reserved bit 14
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 5
+  name: PORT_CHANGE_RESERVED_BIT5
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 5
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 6
+  name: PORT_CHANGE_RESERVED_BIT6
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 6
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 7
+  name: PORT_CHANGE_RESERVED_BIT7
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 7
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 8
+  name: PORT_CHANGE_RESERVED_BIT8
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 8
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 9
+  name: PORT_CHANGE_RESERVED_BIT9
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 9
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 10
+  name: PORT_CHANGE_RESERVED_BIT10
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 10
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 11
+  name: PORT_CHANGE_RESERVED_BIT11
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 11
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 12
+  name: PORT_CHANGE_RESERVED_BIT12
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 12
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 13
+  name: PORT_CHANGE_RESERVED_BIT13
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 13
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wPortChange
+  bit: 14
+  name: PORT_CHANGE_RESERVED_BIT14
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.7.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wPortChange reserved bit 14
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class port change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 2
+  name: HUB_STATUS_RESERVED_BIT2
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 2
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 3
+  name: HUB_STATUS_RESERVED_BIT3
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 3
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 4
+  name: HUB_STATUS_RESERVED_BIT4
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 4
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 5
+  name: HUB_STATUS_RESERVED_BIT5
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 5
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 6
+  name: HUB_STATUS_RESERVED_BIT6
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 6
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 7
+  name: HUB_STATUS_RESERVED_BIT7
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 7
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 8
+  name: HUB_STATUS_RESERVED_BIT8
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 8
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 9
+  name: HUB_STATUS_RESERVED_BIT9
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 9
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 10
+  name: HUB_STATUS_RESERVED_BIT10
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 10
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 11
+  name: HUB_STATUS_RESERVED_BIT11
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 11
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 12
+  name: HUB_STATUS_RESERVED_BIT12
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 12
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 13
+  name: HUB_STATUS_RESERVED_BIT13
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 13
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubStatus
+  bit: 14
+  name: HUB_STATUS_RESERVED_BIT14
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub status field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubStatus reserved bit 14
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub status field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 2
+  name: HUB_CHANGE_RESERVED_BIT2
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 2
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 3
+  name: HUB_CHANGE_RESERVED_BIT3
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 3
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 4
+  name: HUB_CHANGE_RESERVED_BIT4
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 4
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 5
+  name: HUB_CHANGE_RESERVED_BIT5
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 5
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 6
+  name: HUB_CHANGE_RESERVED_BIT6
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 6
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 7
+  name: HUB_CHANGE_RESERVED_BIT7
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 7
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 8
+  name: HUB_CHANGE_RESERVED_BIT8
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 8
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 9
+  name: HUB_CHANGE_RESERVED_BIT9
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 9
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 10
+  name: HUB_CHANGE_RESERVED_BIT10
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 10
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 11
+  name: HUB_CHANGE_RESERVED_BIT11
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 11
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 12
+  name: HUB_CHANGE_RESERVED_BIT12
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 12
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 13
+  name: HUB_CHANGE_RESERVED_BIT13
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 13
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only
+- field: wHubChange
+  bit: 14
+  name: HUB_CHANGE_RESERVED_BIT14
+  status: reserved
+  description: Reserved by USB 2.0 spec; must be zero in hub change field
+  claim_level: inferred
+  evidence_status: reviewed
+  section_refs:
+  - spec: usb20
+    section: 11.24.2.6.1
+    anchor_type: section
+    evidence_status: reviewed
+    applies_to: wHubChange reserved bit 14
+    note: Reserved bit boundary only; USB 2.0 spec does not define semantics for this bit.
+  evidence:
+    source: USB 2.0 hub class hub change field
+    review_required: false
+    reviewed_scope: reserved_bit_namespace_only

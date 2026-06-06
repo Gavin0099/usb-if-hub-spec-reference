@@ -12,9 +12,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
-- Governed tracked entries: 92.
+- Governed tracked entries: 133.
 - Entry-level verified entries: 84.
-- Reviewed entries: 8.
+- Reviewed entries: 49.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are limited to descriptor field
   identity, selector-name/value, or bit name and bit position.

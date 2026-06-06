@@ -21,15 +21,15 @@ semantic_verification_claimed: false
 | Escalation triggers | 10 | 10 | 0 | 0 | 0 |
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
-| Port status bits | 23 | 19 | 4 | 0 | 0 |
+| Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| **Total** | **92** | **84** | **8** | **0** | **0** |
+| **Total** | **133** | **84** | **49** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries；8 個 reviewed entries 無 evidence packet |
+| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries；49 個 reviewed entries 無 evidence packet |
 
 名詞定義：
 
@@ -46,7 +46,7 @@ semantic_verification_claimed: false
 | Escalation triggers | verified | 全部 10 個 tracked E-01 到 E-10 trigger boundaries 已完成 entry-level verified |
 | Class requests | verified | 全部 12 個 tracked class requests 都已完成 request-linkage-only verified promotion |
 | Feature selectors | verified | 全部 25 個 tracked feature selectors 已完成 selector-name/value scope 的 entry-level verified promotion |
-| Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；4 個 high-bit boundary placeholders（wPortStatus, wPortChange, wHubStatus, wHubChange）仍屬 reviewed namespace/boundary entries |
+| Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；4 個 high-bit boundary placeholders 為 reviewed；41 個 reserved bit entries 已完成 reviewed namespace boundary |
 | Hub interrupt endpoint | reviewed | 4 個 status change endpoint descriptor 欄位（bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval）已完成 reviewed field identity；無 verified promotion |
 
 ## Reviewed Surface Inventory
