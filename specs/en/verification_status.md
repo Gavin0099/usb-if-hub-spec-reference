@@ -23,13 +23,14 @@ semantic_verification_claimed: false
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| **Total** | **133** | **84** | **49** | **0** | **0** |
+| Standard device requests | 12 | 0 | 12 | 0 | 0 |
+| **Total** | **145** | **84** | **61** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | All correspond to promoted verified entries; 49 reviewed entries have no evidence packet |
+| Entry verification packets | 84 | All correspond to promoted verified entries; 61 reviewed entries have no evidence packet |
 
 Term definitions:
 
@@ -48,6 +49,7 @@ Term definitions:
 | Feature selectors | verified | All 25 tracked feature selectors are now verified at selector-name-and-value scope |
 | Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; 4 high-bit boundary placeholders are reviewed; 41 reserved bit entries (wPortStatus, wPortChange, wHubStatus, wHubChange reserved bits) have reviewed namespace boundary |
 | Hub interrupt endpoint | reviewed | 4 status change endpoint descriptor fields (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval) have reviewed field identity; no verified promotion |
+| Standard device requests | reviewed | 12 standard USB device requests applicable to hubs have reviewed request-linkage scope; no verified promotion |
 
 ## Reviewed Surface Inventory
 

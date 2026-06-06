@@ -1,0 +1,187 @@
+matrix_id: usb20_standard_device_request_matrix
+version: "0.1"
+description: >
+  Standard USB 2.0 device requests (Chapter 9 §9.4) applicable to USB hubs.
+  All entries are at reviewed scope only; no entry-level verified promotion.
+  These are distinct from hub class requests (class_request_matrix.yaml).
+
+entries:
+  - request_id: usb20_std_get_status_device
+    request_name: GET_STATUS
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_5
+    setup:
+      bmRequestType: "0x80"
+      bRequest: "0x00"
+      wValue: "0x0000"
+      wIndex: "0x0000"
+      wLength: 2
+    notes: "Returns 2 bytes: bit0=Self-Powered, bit1=Remote-Wakeup-Enabled"
+
+  - request_id: usb20_std_get_status_interface
+    request_name: GET_STATUS
+    recipient: interface
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_5
+    setup:
+      bmRequestType: "0x81"
+      bRequest: "0x00"
+      wValue: "0x0000"
+      wIndex: interface_number
+      wLength: 2
+    notes: "Returns 0x0000 (reserved)"
+
+  - request_id: usb20_std_get_status_endpoint
+    request_name: GET_STATUS
+    recipient: endpoint
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_5
+    setup:
+      bmRequestType: "0x82"
+      bRequest: "0x00"
+      wValue: "0x0000"
+      wIndex: endpoint_address
+      wLength: 2
+    notes: "Returns 2 bytes: bit0=Halt (endpoint stall status)"
+
+  - request_id: usb20_std_clear_feature_device
+    request_name: CLEAR_FEATURE
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_1
+    setup:
+      bmRequestType: "0x00"
+      bRequest: "0x01"
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    notes: "Standard feature selectors: DEVICE_REMOTE_WAKEUP=0x01, TEST_MODE=0x02"
+
+  - request_id: usb20_std_clear_feature_endpoint
+    request_name: CLEAR_FEATURE
+    recipient: endpoint
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_1
+    setup:
+      bmRequestType: "0x02"
+      bRequest: "0x01"
+      wValue: "0x0000"
+      wIndex: endpoint_address
+      wLength: 0
+    notes: "Clears ENDPOINT_HALT (stall); wValue=0x0000 (ENDPOINT_HALT selector)"
+
+  - request_id: usb20_std_set_feature_device
+    request_name: SET_FEATURE
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_9
+    setup:
+      bmRequestType: "0x00"
+      bRequest: "0x03"
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    notes: "Standard feature selectors: DEVICE_REMOTE_WAKEUP=0x01, TEST_MODE=0x02"
+
+  - request_id: usb20_std_set_address
+    request_name: SET_ADDRESS
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_6
+    setup:
+      bmRequestType: "0x00"
+      bRequest: "0x05"
+      wValue: device_address
+      wIndex: "0x0000"
+      wLength: 0
+    notes: "wValue=new bus address (1-127); device responds at new address from next transaction"
+
+  - request_id: usb20_std_get_descriptor
+    request_name: GET_DESCRIPTOR
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_3
+    setup:
+      bmRequestType: "0x80"
+      bRequest: "0x06"
+      wValue: descriptor_type_and_index
+      wIndex: language_id_or_zero
+      wLength: descriptor_length
+    notes: "wValue high byte=descriptor type (0x01=Device, 0x02=Config, 0x03=String); low byte=index"
+
+  - request_id: usb20_std_get_configuration
+    request_name: GET_CONFIGURATION
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_2
+    setup:
+      bmRequestType: "0x80"
+      bRequest: "0x08"
+      wValue: "0x0000"
+      wIndex: "0x0000"
+      wLength: 1
+    notes: "Returns 1 byte: current bConfigurationValue (0=not configured)"
+
+  - request_id: usb20_std_set_configuration
+    request_name: SET_CONFIGURATION
+    recipient: device
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_7
+    setup:
+      bmRequestType: "0x00"
+      bRequest: "0x09"
+      wValue: configuration_value
+      wIndex: "0x0000"
+      wLength: 0
+    notes: "wValue=bConfigurationValue to activate (1 for hubs); 0 returns to Address state"
+
+  - request_id: usb20_std_get_interface
+    request_name: GET_INTERFACE
+    recipient: interface
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_4
+    setup:
+      bmRequestType: "0x81"
+      bRequest: "0x0A"
+      wValue: "0x0000"
+      wIndex: interface_number
+      wLength: 1
+    notes: "Returns 1 byte: current bAlternateSetting (0=single-TT, 1=multi-TT for HS hubs)"
+
+  - request_id: usb20_std_set_interface
+    request_name: SET_INTERFACE
+    recipient: interface
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec_9_4_10
+    setup:
+      bmRequestType: "0x01"
+      bRequest: "0x0B"
+      wValue: alternate_setting
+      wIndex: interface_number
+      wLength: 0
+    notes: "wValue=bAlternateSetting (0=single-TT, 1=multi-TT); used by multi-TT HS hubs"

@@ -61,8 +61,26 @@ features:
   - title: Hub Compound Device
     details: Compound device identification via wHubCharacteristics bit 2, DeviceRemovable bitmap semantics, and PortPwrCtrlMask interpretation in USB 2.0.
     link: /en/hub_compound_device
+  - title: Standard Device Requests
+    details: All standard USB 2.0 device requests (Chapter 9 §9.4) applicable to hubs — setup packet format, bmRequestType breakdown, GET_DESCRIPTOR, SET_ADDRESS, SET_CONFIGURATION, and standard feature selectors.
+    link: /en/standard_device_requests
+  - title: Standard USB Descriptors
+    details: Standard USB 2.0 descriptor field tables — device, Device_Qualifier, configuration, interface, endpoint, and string descriptors with hub-specific values.
+    link: /en/standard_descriptors
+  - title: USB Device States
+    details: USB device-level states (Chapter 9 §9.1) — Attached, Powered, Default, Address, Configured, Suspended — and how they differ from hub port states.
+    link: /en/usb_device_states
+  - title: USB Transfer Types
+    details: The four USB 2.0 transfer types (Control, Interrupt, Bulk, Isochronous) and which ones a hub uses — endpoint 0 for Control, interrupt IN for status change.
+    link: /en/usb_transfer_types
+  - title: USB Signaling
+    details: USB bus signal states (J, K, SE0), NRZI encoding, bit stuffing, reset/suspend/resume signaling events, and FS vs. HS bus differences.
+    link: /en/usb_signaling
+  - title: High-Speed Detection
+    details: HS chirp handshake sequence during port reset — device Chirp K, hub KJ response pattern, outcome matrix, and timing reference for HS speed negotiation.
+    link: /en/hs_detection
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 133 tracked entries, including 84 verified, 49 reviewed, and 0 inferred.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 145 tracked entries, including 84 verified, 61 reviewed, and 0 inferred.
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.

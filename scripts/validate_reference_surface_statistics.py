@@ -29,6 +29,7 @@ TABLES = {
     "feature_selectors": ROOT / "tables" / "feature_selector_matrix.yaml",
     "port_status_bits": ROOT / "tables" / "port_status_bit_matrix.yaml",
     "hub_interrupt_endpoint": ROOT / "tables" / "hub_interrupt_endpoint_matrix.yaml",
+    "standard_device_requests": ROOT / "tables" / "standard_device_request_matrix.yaml",
 }
 VISIBLE_FILES = [
     ROOT / "README.md",

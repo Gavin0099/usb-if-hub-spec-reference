@@ -12,12 +12,12 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
-- Governed tracked entries: 133.
+- Governed tracked entries: 145.
 - Entry-level verified entries: 84.
-- Reviewed entries: 49.
+- Reviewed entries: 61.
 - Inferred tracked entries: 0.
-- Wiki pages (bilingual zh-TW + English): 16 topic pairs covering the complete
-  USB 2.0 hub specification surface area.
+- Wiki pages (bilingual zh-TW + English): 22 topic pairs covering the full USB 2.0
+  specification surface area (Chapter 5, 7, 9, 11).
 - Verification scope remains narrow: verified entries are limited to descriptor field
   identity, selector-name/value, or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
@@ -207,6 +207,31 @@ Claim ceiling: reporting/reference governance surface only.
 
 Claim ceiling: static reference site deployment only; no semantic verification
 upgrade and no governance behavior change.
+
+### Phase 14 - Full USB 2.0 Spec Coverage (Chapters 5, 7, 9)
+
+- NEW `tables/standard_device_request_matrix.yaml`: 12 reviewed entries for standard USB 2.0
+  device requests applicable to hubs (GET_STATUS device/interface/endpoint, CLEAR_FEATURE,
+  SET_FEATURE, SET_ADDRESS, GET_DESCRIPTOR, GET_CONFIGURATION, SET_CONFIGURATION,
+  GET_INTERFACE, SET_INTERFACE).
+- NEW `scripts/validate_standard_device_request_matrix.py`: structural validator (R1–R9).
+- NEW `specs/standard_device_requests.md` + EN: setup packet format, bmRequestType breakdown,
+  all 11 hub-relevant standard requests, standard feature selectors.
+- NEW `specs/standard_descriptors.md` + EN: device descriptor (18B), Device_Qualifier,
+  configuration descriptor (9B), interface descriptor (9B), endpoint descriptor (7B),
+  string descriptor — all with hub-specific values.
+- NEW `specs/usb_device_states.md` + EN: Chapter 9 §9.1 device states (Attached → Powered →
+  Default → Address → Configured → Suspended); comparison table vs. hub port states.
+- NEW `specs/usb_transfer_types.md` + EN: Chapter 5 four transfer types; hub uses Control
+  (EP0) and Interrupt (status change EP); Bulk and Isochronous not used.
+- NEW `specs/usb_signaling.md` + EN: Chapter 7 §7.1 bus states (J/K/SE0/SE1), NRZI encoding,
+  bit stuffing, reset/suspend/resume/SOF signaling.
+- NEW `specs/hs_detection.md` + EN: Chapter 7 §7.1.7.1 HS chirp handshake sequence, outcome
+  matrix, timing reference.
+- Updated statistics: tracked=145, verified=84, reviewed=61.
+- Updated `.vitepress/config.ts`, `specs/en/index.md`, both verification_status pages.
+
+Claim ceiling: reviewed reference surface only; not semantic verification.
 
 ### Phase 13 - USB 2.0 Complete Coverage Expansion
 

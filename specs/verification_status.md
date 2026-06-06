@@ -23,13 +23,14 @@ semantic_verification_claimed: false
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| **Total** | **133** | **84** | **49** | **0** | **0** |
+| Standard device requests | 12 | 0 | 12 | 0 | 0 |
+| **Total** | **145** | **84** | **61** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries；49 個 reviewed entries 無 evidence packet |
+| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries；61 個 reviewed entries 無 evidence packet |
 
 名詞定義：
 
@@ -48,6 +49,7 @@ semantic_verification_claimed: false
 | Feature selectors | verified | 全部 25 個 tracked feature selectors 已完成 selector-name/value scope 的 entry-level verified promotion |
 | Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；4 個 high-bit boundary placeholders 為 reviewed；41 個 reserved bit entries 已完成 reviewed namespace boundary |
 | Hub interrupt endpoint | reviewed | 4 個 status change endpoint descriptor 欄位（bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval）已完成 reviewed field identity；無 verified promotion |
+| Standard device requests | reviewed | 12 個適用於 hub 的標準 USB 設備請求已完成 reviewed request-linkage scope；無 verified promotion |
 
 ## Reviewed Surface Inventory
 
