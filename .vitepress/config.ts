@@ -30,6 +30,12 @@ const ZH_LABELS: Labels = {
   usb_transfer_types: "USB Transfer Types",
   verification_status: "Verification Status",
   version_source_map: "Version Source Map",
+  usb_packet_types: "USB Packet Types",
+  usb_transactions: "USB Transactions",
+  split_transaction_packets: "Split Transaction Packets",
+  usb_test_modes: "USB Test Modes",
+  port_indicators: "Port Indicators",
+  hub_power_budget: "Hub Power Budget",
 };
 
 const EN_LABELS: Labels = {
@@ -55,6 +61,12 @@ const EN_LABELS: Labels = {
   usb_transfer_types: "USB Transfer Types",
   verification_status: "Verification Status",
   version_source_map: "Version Source Map",
+  usb_packet_types: "USB Packet Types",
+  usb_transactions: "USB Transactions",
+  split_transaction_packets: "Split Transaction Packets",
+  usb_test_modes: "USB Test Modes",
+  port_indicators: "Port Indicators",
+  hub_power_budget: "Hub Power Budget",
 };
 
 function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, prefix = "") {
@@ -100,6 +112,12 @@ const zhReferenceItems = [
   { text: "USB Signaling", link: "/usb_signaling" },
   { text: "HS Detection", link: "/hs_detection" },
   { text: "Transaction Translator", link: "/transaction_translator" },
+  { text: "USB Packet Types", link: "/usb_packet_types" },
+  { text: "USB Transactions", link: "/usb_transactions" },
+  { text: "Split Transaction Packets", link: "/split_transaction_packets" },
+  { text: "USB Test Modes", link: "/usb_test_modes" },
+  { text: "Port Indicators", link: "/port_indicators" },
+  { text: "Hub Power Budget", link: "/hub_power_budget" },
   { text: "Escalation Table", link: "/escalation_table" },
   { text: "Version Source Map", link: "/version_source_map" },
   { text: "Verification Status", link: "/verification_status" },
@@ -125,6 +143,12 @@ const enReferenceItems = [
   { text: "USB Signaling", link: "/en/usb_signaling" },
   { text: "HS Detection", link: "/en/hs_detection" },
   { text: "Transaction Translator", link: "/en/transaction_translator" },
+  { text: "USB Packet Types", link: "/en/usb_packet_types" },
+  { text: "USB Transactions", link: "/en/usb_transactions" },
+  { text: "Split Transaction Packets", link: "/en/split_transaction_packets" },
+  { text: "USB Test Modes", link: "/en/usb_test_modes" },
+  { text: "Port Indicators", link: "/en/port_indicators" },
+  { text: "Hub Power Budget", link: "/en/hub_power_budget" },
   { text: "Escalation Table", link: "/en/escalation_table" },
   { text: "Version Source Map", link: "/en/version_source_map" },
   { text: "Verification Status", link: "/en/verification_status" },

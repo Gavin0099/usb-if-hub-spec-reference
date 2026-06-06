@@ -16,8 +16,8 @@ does not govern firmware behavior and does not override confirmed project facts.
 - Entry-level verified entries: 84.
 - Reviewed entries: 61.
 - Inferred tracked entries: 0.
-- Wiki pages (bilingual zh-TW + English): 22 topic pairs covering the full USB 2.0
-  specification surface area (Chapter 5, 7, 9, 11).
+- Wiki pages (bilingual zh-TW + English): 28 topic pairs covering the full USB 2.0
+  specification surface area (Chapters 5, 7, 8, 9, 11).
 - Verification scope remains narrow: verified entries are limited to descriptor field
   identity, selector-name/value, or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
@@ -230,6 +230,32 @@ upgrade and no governance behavior change.
   matrix, timing reference.
 - Updated statistics: tracked=145, verified=84, reviewed=61.
 - Updated `.vitepress/config.ts`, `specs/en/index.md`, both verification_status pages.
+
+Claim ceiling: reviewed reference surface only; not semantic verification.
+
+### Phase 15 - USB 2.0 Chapter 8 Coverage + HS Compliance Topics
+
+- NEW `specs/usb_packet_types.md` + EN: PID encoding (4-bit type + 4-bit one's complement),
+  all token packets (OUT=0xE1, IN=0x69, SOF=0xA5, SETUP=0x2D), data packets (DATA0/1/2/MDATA),
+  handshake (ACK/NAK/STALL/NYET/ERR), special (SPLIT=0x78), hub operation packet table.
+- NEW `specs/usb_transactions.md` + EN: SETUP/IN/OUT transaction structure, control transfer
+  3-phase (SETUP+DATA+STATUS), interrupt polling, data toggle mechanism, error response table.
+- NEW `specs/split_transaction_packets.md` + EN: SPLIT PID=0x78, 4-byte structure with bit
+  layout (Hub Addr[6:0]+SC[7]+Port[14:8]+S[15]+E/U[16]+ET[18:17]+CRC5[23:19]), SSPLIT/CSPLIT
+  flows with NYET handling, control transfer micro-frame example, endpoint type behavior table.
+- NEW `specs/usb_test_modes.md` + EN: TEST_J/K/SE0_NAK/PACKET/FORCE_ENABLE selectors,
+  SET_FEATURE(TEST_MODE) encoding (bmRequestType=0x00, wValue=0x0002, wIndex=[mode<<8]),
+  power-cycle-only exit rule, hub port test mode wIndex encoding.
+- NEW `specs/port_indicators.md` + EN: wHubCharacteristics bit 7 indicator support,
+  SET_FEATURE(PORT_INDICATOR) with selector values 0=Auto/1=Amber/2=Green/3=Off,
+  PORT_TEST feature selector (value=21/0x15), both use bmRequestType=0x23.
+- NEW `specs/hub_power_budget.md` + EN: self-powered vs. bus-powered rules (bmAttributes bit 6),
+  per-port limits (500 mA vs. 100 mA), bHubContrCurrent (direct mA) vs. bMaxPower (×2),
+  power budget example, overcurrent interaction.
+- Updated `.vitepress/config.ts`: 6 new labels in ZH_LABELS/EN_LABELS, 6 new nav items
+  in zhReferenceItems and enReferenceItems.
+- Updated `specs/en/index.md`: 6 new feature cards.
+- Statistics unchanged (all new pages are wiki only, no new matrix entries).
 
 Claim ceiling: reviewed reference surface only; not semantic verification.
 

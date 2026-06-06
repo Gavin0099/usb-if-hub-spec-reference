@@ -79,6 +79,24 @@ features:
   - title: High-Speed Detection
     details: HS chirp handshake sequence during port reset — device Chirp K, hub KJ response pattern, outcome matrix, and timing reference for HS speed negotiation.
     link: /en/hs_detection
+  - title: USB Packet Types
+    details: PID encoding (4-bit type + 4-bit complement), all token/data/handshake/special packet types, PID values, and hub operation packet table (Chapter 8).
+    link: /en/usb_packet_types
+  - title: USB Transactions
+    details: Transaction structure (token + data + handshake), SETUP/IN/OUT flows, control transfer 3-phase sequence, data toggle, and error response table.
+    link: /en/usb_transactions
+  - title: Split Transaction Packets
+    details: SPLIT PID structure (4-byte SSPLIT/CSPLIT), SSPLIT/CSPLIT transaction flows, NYET retry behavior, and endpoint type split semantics for TT hubs.
+    link: /en/split_transaction_packets
+  - title: USB Test Modes
+    details: HS electrical compliance test modes (TEST_J/K/SE0_NAK/PACKET/FORCE_ENABLE), SET_FEATURE(TEST_MODE) encoding, entry rules, and power-cycle-only exit.
+    link: /en/usb_test_modes
+  - title: Port Indicators
+    details: PORT_INDICATOR LED control (Auto/Amber/Green/Off), wHubCharacteristics bit 7 indicator support flag, and PORT_TEST feature selector encoding.
+    link: /en/port_indicators
+  - title: Hub Power Budget
+    details: Self-powered vs. bus-powered hub power rules, per-port current limits (500 mA vs. 100 mA), bHubContrCurrent (mA direct) vs. bMaxPower (×2) units.
+    link: /en/hub_power_budget
   - title: Verification Status
     details: Current entry-level verification maturity, reviewed packet status, and non-claims. 145 tracked entries, including 84 verified, 61 reviewed, and 0 inferred.
     link: /en/verification_status
