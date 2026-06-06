@@ -73,6 +73,17 @@ semantic_verification_claimed: false
   - Port request: `port_number`
 - `wLength`: `4`
 
+**Response format**
+
+`GET_STATUS` 一律回傳 4 個 bytes（`wLength=4`）：
+
+| Bytes | 欄位 | Hub recipient | Port recipient |
+|---|---|---|---|
+| `[1:0]` | `wStatus` | `wHubStatus` | `wPortStatus` |
+| `[3:2]` | `wChange` | `wHubChange` | `wPortChange` |
+
+`wChange` bits 會持續累積直到 host 對各 bit 發出 `CLEAR_FEATURE`。Bit 定義請見 `specs/port_status_bits.md`。
+
 **Governed linkage**
 
 - Hub request 對應 `wHubStatus` + `wHubChange`。

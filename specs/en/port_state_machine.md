@@ -91,12 +91,42 @@ Any powered state ──overcurrent or hardware error──> Disabled / Port Err
 - State transitions may be affected by hub implementation details (for example, the Resetting → Enabled timing).
 - The path from `PORT_RESET` completion to Enabled depends on whether the device responds correctly to reset; if the device does not respond, the port should remain Disabled.
 
+## Port Reset Timing
+
+When the host issues `SET_FEATURE(PORT_RESET)`, the hub asserts USB reset on the port. Minimum timing constraints from §11.5.1.5:
+
+| Phase | Duration | Notes |
+|---|---|---|
+| Reset assertion minimum | 10 ms | Hub must hold reset for at least this long |
+| Port reset recovery (debounce) | 10 ms | Host waits before issuing the next request |
+| Total minimum reset cycle | ~20 ms | Assertion + recovery |
+
+- The hub (not the host) controls the reset assertion duration and sets `C_PORT_RESET=1` when complete.
+- After `C_PORT_RESET=1`, the host reads `GET_STATUS(port)`, clears the bit with `CLEAR_FEATURE(C_PORT_RESET)`, then checks speed bits.
+- If the attached device fails to respond during reset, the port remains in the Disabled state.
+
+## Speed Detection After Port Reset
+
+After port reset completes and `C_PORT_RESET` is cleared, the host reads `wPortStatus` to determine device speed:
+
+| `PORT_LOW_SPEED` (bit 9) | `PORT_HIGH_SPEED` (bit 10) | Attached device speed |
+|---|---|---|
+| `0` | `0` | Full-speed (FS) |
+| `1` | `0` | Low-speed (LS) |
+| `0` | `1` | High-speed (HS) — only HS-capable hubs |
+| `1` | `1` | Not a valid combination |
+
+- Speed bits are set by the hub based on the chirp/handshake result during reset.
+- An FS hub (`bDeviceProtocol=0x00`) will never set `PORT_HIGH_SPEED`.
+- Speed detection is read-only from `GET_STATUS`; there is no command to select device speed.
+
 ## Governed Linkage
 
 - `specs/en/port_status_bits.md`: detailed definitions of wPortStatus / wPortChange bits
 - `specs/en/feature_selectors.md`: selector values for `PORT_RESET`, `PORT_ENABLE`, `PORT_SUSPEND`, `PORT_POWER`
 - `specs/en/hub_class_requests.md`: `SET_FEATURE` and `CLEAR_FEATURE` request families
 - `specs/en/escalation_table.md`: port state-related escalation triggers
+- `specs/en/hub_enumeration.md`: full hub enumeration sequence including reset timing
 
 ## Non-claims
 

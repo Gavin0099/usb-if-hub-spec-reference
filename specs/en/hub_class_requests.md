@@ -73,6 +73,17 @@ This page does not answer:
   - Port request: `port_number`
 - `wLength`: `4`
 
+**Response format**
+
+`GET_STATUS` always returns exactly 4 bytes (`wLength=4`):
+
+| Bytes | Field | Hub recipient | Port recipient |
+|---|---|---|---|
+| `[1:0]` | `wStatus` | `wHubStatus` | `wPortStatus` |
+| `[3:2]` | `wChange` | `wHubChange` | `wPortChange` |
+
+`wChange` bits accumulate until the host issues `CLEAR_FEATURE` for each bit. See `specs/en/port_status_bits.md` for bit definitions.
+
 **Governed linkage**
 
 - Hub request maps to `wHubStatus` + `wHubChange`.

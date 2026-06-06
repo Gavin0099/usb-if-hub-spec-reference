@@ -91,12 +91,42 @@ Disconnected ──CLEAR_FEATURE(PORT_POWER)──> Powered-off
 - State transition 可能受 hub 實作細節影響（例如：Resetting → Enabled 的時序）。
 - `PORT_RESET` 完成到 `Enabled` 的路徑取決於設備是否正確回應 reset；設備不回應時 port 應維持在 Disabled。
 
+## Port Reset 時序
+
+Host 發出 `SET_FEATURE(PORT_RESET)` 後，hub 在 port 上維持 USB reset 信號。§11.5.1.5 的最短時序要求：
+
+| 階段 | 時間 | 說明 |
+|---|---|---|
+| Reset 持續最短時間 | 10 ms | Hub 必須維持 reset 至少這麼長 |
+| Port reset 恢復時間（debounce）| 10 ms | Host 在下一個請求前等待 |
+| Reset 週期最短總時間 | 約 20 ms | 持續 + 恢復 |
+
+- Reset 持續時間由 hub（而非 host）控制；hub 完成後設 `C_PORT_RESET=1`。
+- `C_PORT_RESET=1` 後，host 讀取 `GET_STATUS(port)`，以 `CLEAR_FEATURE(C_PORT_RESET)` 清除，再確認速度 bits。
+- 若連接設備在 reset 過程中未回應，port 維持在 Disabled 狀態。
+
+## Port Reset 後的速度判斷
+
+Port reset 完成並清除 `C_PORT_RESET` 後，host 讀取 `wPortStatus` 以判斷設備速度：
+
+| `PORT_LOW_SPEED`（bit 9）| `PORT_HIGH_SPEED`（bit 10）| 連接設備速度 |
+|---|---|---|
+| `0` | `0` | Full-speed (FS) |
+| `1` | `0` | Low-speed (LS) |
+| `0` | `1` | High-speed (HS) — 僅限 HS-capable hub |
+| `1` | `1` | 無效組合 |
+
+- 速度 bits 由 hub 根據 reset 過程中的 chirp/handshake 結果設置。
+- FS hub（`bDeviceProtocol=0x00`）永遠不會設 `PORT_HIGH_SPEED`。
+- 速度判斷是透過 `GET_STATUS` 讀取；沒有指令可選擇設備速度。
+
 ## Governed Linkage
 
 - `specs/port_status_bits.md`：wPortStatus / wPortChange bits 的詳細定義
 - `specs/feature_selectors.md`：`PORT_RESET`、`PORT_ENABLE`、`PORT_SUSPEND`、`PORT_POWER` 等 selector 值
 - `specs/hub_class_requests.md`：`SET_FEATURE` 與 `CLEAR_FEATURE` request family
 - `specs/escalation_table.md`：port state 相關的 escalation triggers
+- `specs/hub_enumeration.md`：完整 hub 枚舉 sequence，包含 reset 時序
 
 ## Non-claims
 

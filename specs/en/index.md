@@ -55,6 +55,12 @@ features:
   - title: Hub Configuration Descriptors
     details: Configuration and interface descriptor fields for hub class, including bInterfaceClass=0x09, bNumEndpoints, and alternate settings for multi-TT hubs.
     link: /en/hub_configuration
+  - title: Hub Enumeration Sequence
+    details: The USB 2.0 hub enumeration request sequence, GET_STATUS 4-byte response format, speed detection after port reset, and port power-on timing constraints.
+    link: /en/hub_enumeration
+  - title: Hub Compound Device
+    details: Compound device identification via wHubCharacteristics bit 2, DeviceRemovable bitmap semantics, and PortPwrCtrlMask interpretation in USB 2.0.
+    link: /en/hub_compound_device
   - title: Verification Status
     details: Current entry-level verification maturity, reviewed packet status, and non-claims. 133 tracked entries, including 84 verified, 49 reviewed, and 0 inferred.
     link: /en/verification_status

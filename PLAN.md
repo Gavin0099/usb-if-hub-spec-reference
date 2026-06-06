@@ -16,6 +16,8 @@ does not govern firmware behavior and does not override confirmed project facts.
 - Entry-level verified entries: 84.
 - Reviewed entries: 49.
 - Inferred tracked entries: 0.
+- Wiki pages (bilingual zh-TW + English): 16 topic pairs covering the complete
+  USB 2.0 hub specification surface area.
 - Verification scope remains narrow: verified entries are limited to descriptor field
   identity, selector-name/value, or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
@@ -205,6 +207,28 @@ Claim ceiling: reporting/reference governance surface only.
 
 Claim ceiling: static reference site deployment only; no semantic verification
 upgrade and no governance behavior change.
+
+### Phase 13 - USB 2.0 Complete Coverage Expansion
+
+- NEW `specs/hub_enumeration.md` + `specs/en/hub_enumeration.md`:
+  - Hub enumeration 3-phase sequence (standard device enum → hub init → port monitoring).
+  - `GET_STATUS` 4-byte response format (wStatus[1:0] + wChange[3:2]).
+  - Speed detection table (PORT_LOW_SPEED / PORT_HIGH_SPEED after port reset).
+  - Port timing reference (10ms minimum reset, bPwrOn2PwrGood × 2ms).
+- NEW `specs/hub_compound_device.md` + `specs/en/hub_compound_device.md`:
+  - `wHubCharacteristics bit 2` compound device indicator.
+  - `DeviceRemovable` bitmap layout and non-removable port interpretation.
+  - `PortPwrCtrlMask` USB 2.0 semantics (all bits = 0xFF, no actionable meaning).
+  - `wHubCharacteristics` bit layout cross-reference table.
+- ENHANCED `specs/port_state_machine.md` + EN:
+  - Added Port Reset Timing section (10ms minimum, 20ms cycle).
+  - Added Speed Detection After Reset section.
+- ENHANCED `specs/hub_class_requests.md` + EN:
+  - Added `GET_STATUS` response format table (4-byte layout).
+- `.vitepress/config.ts`: registered hub_enumeration and hub_compound_device.
+- `specs/en/index.md`: added feature cards for new pages.
+
+Claim ceiling: reviewed reference surface only; not semantic verification.
 
 ## Active Validators
 
