@@ -12,9 +12,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
-- Governed tracked entries: 145.
-- Entry-level verified entries: 100.
-- Reviewed entries: 45.
+- Governed tracked entries: 151.
+- Entry-level verified entries: 105.
+- Reviewed entries: 46.
 - Inferred tracked entries: 0.
 - Wiki pages (bilingual zh-TW + English): 28 topic pairs covering the full USB 2.0
   specification surface area (Chapters 5, 7, 8, 9, 11).
@@ -232,6 +232,25 @@ upgrade and no governance behavior change.
 - Updated `.vitepress/config.ts`, `specs/en/index.md`, both verification_status pages.
 
 Claim ceiling: reviewed reference surface only; not semantic verification.
+
+### Phase WHC-1 - wHubCharacteristics Bit-Group Governed Matrix
+
+- NEW `tables/wHubCharacteristics_bit_matrix.yaml`: 6 entries covering wHubCharacteristics
+  bit groups with value_encoding:
+  - `usb20_whc_power_switching` (bits[1:0]): Logical Power Switching Mode — verified
+  - `usb20_whc_compound_device` (bit[2]): Compound Device flag — verified
+  - `usb20_whc_over_current_mode` (bits[4:3]): Over-Current Protection Mode — verified
+  - `usb20_whc_tt_think_time` (bits[6:5]): TT Think Time (cross-link to TT matrix) — verified
+  - `usb20_whc_port_indicators` (bit[7]): Port Indicators Supported — verified
+  - `usb20_whc_reserved_high` (bits[15:8]): Reserved boundary — permanent reviewed
+- NEW `scripts/validate_wHubCharacteristics_bit_matrix.py`: structural validator (R1–R10).
+- 5 evidence packets written (one per verified entry).
+- `scripts/validate_reference_surface_statistics.py`: registered hub_characteristics_bits.
+- Updated `specs/hub_descriptor.md` + EN: Governed Linkage → wHubCharacteristics bit matrix.
+- Statistics: tracked=151, verified=105, reviewed=46.
+
+Claim ceiling: bit-group name and value-encoding identity only; not descriptor dump
+verification, firmware behavior, electrical/power behavior, or hub compliance.
 
 ### Phase 15 - USB 2.0 Chapter 8 Coverage + HS Compliance Topics
 

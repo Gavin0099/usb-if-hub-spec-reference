@@ -98,7 +98,7 @@ features:
     details: Self-powered vs. bus-powered hub power rules, per-port current limits (500 mA vs. 100 mA), bHubContrCurrent (mA direct) vs. bMaxPower (×2) units.
     link: /en/hub_power_budget
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 145 tracked entries, including 100 verified, 45 reviewed, and 0 inferred.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 151 tracked entries, including 105 verified, 46 reviewed, and 0 inferred.
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.

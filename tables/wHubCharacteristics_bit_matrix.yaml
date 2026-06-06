@@ -1,0 +1,129 @@
+matrix_id: usb20_hub_characteristics_bit_matrix
+version: "0.1"
+description: >
+  wHubCharacteristics bit-group semantic governance for USB 2.0 hub descriptor.
+  Covers the 5 defined bit groups and the reserved high-bit boundary.
+  Scope: bit group name, bit range, and value encoding identity only.
+  Does not claim descriptor dump correctness, firmware behavior verification,
+  or electrical/power behavior.
+
+entries:
+  - id: usb20_whc_power_switching
+    field: wHubCharacteristics
+    bit_range: "1:0"
+    namespace: hub_descriptor_characteristics
+    semantic_group: power_switching
+    claim_level: verified
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding:
+      "00": ganged_power_switching
+      "01": individual_port_power_switching
+      "10": no_power_switching
+      "11": no_power_switching
+    notes: >
+      Defines whether all hub ports are powered together (ganged) or independently
+      (per-port), or if no power switching is provided. Affects SET_FEATURE(PORT_POWER)
+      behavior. Verified at bit-group name and value-encoding identity only.
+
+  - id: usb20_whc_compound_device
+    field: wHubCharacteristics
+    bit_range: "2"
+    namespace: hub_descriptor_characteristics
+    semantic_group: compound_device
+    claim_level: verified
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding:
+      "0": not_compound_device
+      "1": compound_device
+    notes: >
+      Identifies whether the hub is part of a compound device. Firmware uses this
+      to interpret the DeviceRemovable bitmap semantics. Verified at bit name and
+      value-encoding identity only.
+
+  - id: usb20_whc_over_current_mode
+    field: wHubCharacteristics
+    bit_range: "4:3"
+    namespace: hub_descriptor_characteristics
+    semantic_group: over_current_protection
+    claim_level: verified
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding:
+      "00": global_over_current_protection
+      "01": individual_port_over_current_protection
+      "10": no_over_current_protection
+      "11": no_over_current_protection
+    notes: >
+      Defines over-current protection reporting granularity. 00=hub-level OC events;
+      01=per-port OC events; 1x=no OC reporting. Verified at bit-group name and
+      value-encoding identity only.
+
+  - id: usb20_whc_tt_think_time
+    field: wHubCharacteristics
+    bit_range: "6:5"
+    namespace: hub_descriptor_characteristics
+    semantic_group: tt_think_time
+    claim_level: verified
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding:
+      "00": tt_8_fs_bit_times
+      "01": tt_16_fs_bit_times
+      "10": tt_24_fs_bit_times
+      "11": tt_32_fs_bit_times
+    cross_link:
+      matrix: transaction_translator_matrix
+      entries:
+        - usb20_tt_think_time_00
+        - usb20_tt_think_time_01
+        - usb20_tt_think_time_10
+        - usb20_tt_think_time_11
+    notes: >
+      TT Think Time in FS bit times. Determines maximum number of FS bit times the
+      Transaction Translator needs per transaction. Already tracked in
+      transaction_translator_matrix; this entry adds the wHubCharacteristics
+      bit-range linkage. Verified at bit-group name and value-encoding identity only.
+
+  - id: usb20_whc_port_indicators
+    field: wHubCharacteristics
+    bit_range: "7"
+    namespace: hub_descriptor_characteristics
+    semantic_group: port_indicators
+    claim_level: verified
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding:
+      "0": port_indicators_not_supported
+      "1": port_indicators_supported
+    notes: >
+      Indicates whether hub hardware supports LED port indicators controllable via
+      SET_FEATURE(PORT_INDICATOR). If 0, PORT_INDICATOR requests are invalid.
+      Verified at bit name and value-encoding identity only.
+
+  - id: usb20_whc_reserved_high
+    field: wHubCharacteristics
+    bit_range: "15:8"
+    namespace: hub_descriptor_characteristics
+    semantic_group: reserved_boundary
+    claim_level: inferred
+    evidence_status: reviewed
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.23.2.1 Table 11-13"
+    value_encoding: {}
+    notes: >
+      Reserved bits; shall be zero per USB 2.0 specification. This entry closes
+      the wHubCharacteristics high-byte namespace boundary. Permanent reviewed
+      boundary — no behavioral semantic to verify.

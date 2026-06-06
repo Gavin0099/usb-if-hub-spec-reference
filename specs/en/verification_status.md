@@ -24,13 +24,14 @@ semantic_verification_claimed: false
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 4 | 0 | 0 | 0 |
 | Standard device requests | 12 | 12 | 0 | 0 | 0 |
-| **Total** | **145** | **100** | **45** | **0** | **0** |
+| wHubCharacteristics bit groups | 6 | 5 | 1 | 0 | 0 |
+| **Total** | **151** | **105** | **46** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 100 | All correspond to promoted verified entries; 45 reviewed entries have no evidence packet |
+| Entry verification packets | 105 | All correspond to promoted verified entries; 46 reviewed entries have no evidence packet |
 
 Term definitions:
 
@@ -50,12 +51,17 @@ Term definitions:
 | Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; 4 high-bit boundary placeholders are reviewed; 41 reserved bit entries (wPortStatus, wPortChange, wHubStatus, wHubChange reserved bits) have reviewed namespace boundary |
 | Hub interrupt endpoint | verified | 4 status change endpoint descriptor fields (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval) have completed entry-level verified promotion (descriptor field identity scope) |
 | Standard device requests | verified | 12 standard USB device requests applicable to hubs have completed entry-level verified promotion (request-linkage identity scope) |
+| wHubCharacteristics bit groups | verified / reviewed | 5 wHubCharacteristics bit groups (power switching, compound device, OC mode, TT think time, port indicators) have completed entry-level verified promotion (bit-group name and value-encoding identity scope); 1 reserved high-byte boundary entry is permanent reviewed |
 
 ## Reviewed Surface Inventory
 
 The remaining 45 `reviewed` entries represent **permanent boundaries**, not unfinished upgrade work.
 
-### 4 High-bit boundary placeholders (no semantic to verify; not upgradeable)
+### 1 wHubCharacteristics reserved high-byte boundary (no semantic to verify; not upgradeable)
+
+- `usb20_whc_reserved_high` (wHubCharacteristics bits[15:8], spec-defined reserved, shall be zero)
+
+### 4 Port/Hub status-change high-bit boundary placeholders (no semantic to verify; not upgradeable)
 
 These four entries are intentional namespace-closing entries that bound each status word's upper bit range. They do not represent real USB 2.0 bit definitions:
 
@@ -136,6 +142,11 @@ One hundred entries have completed verified promotion (`claim_level: verified`):
 | usb20_hub_ep_bmAttributes | `bmAttributes` hub status-change EP | - | descriptor field identity only |
 | usb20_hub_ep_wMaxPacketSize | `wMaxPacketSize` hub status-change EP | - | descriptor field identity only |
 | usb20_hub_ep_bInterval | `bInterval` hub status-change EP | - | descriptor field identity only |
+| usb20_whc_power_switching | `wHubCharacteristics` | bits[1:0] | bit-group name and value-encoding identity only |
+| usb20_whc_compound_device | `wHubCharacteristics` | bit[2] | bit-group name and value-encoding identity only |
+| usb20_whc_over_current_mode | `wHubCharacteristics` | bits[4:3] | bit-group name and value-encoding identity only |
+| usb20_whc_tt_think_time | `wHubCharacteristics` | bits[6:5] | bit-group name and value-encoding identity only |
+| usb20_whc_port_indicators | `wHubCharacteristics` | bit[7] | bit-group name and value-encoding identity only |
 | usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |

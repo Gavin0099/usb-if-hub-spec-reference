@@ -24,13 +24,14 @@ semantic_verification_claimed: false
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
 | Hub interrupt endpoint | 4 | 4 | 0 | 0 | 0 |
 | Standard device requests | 12 | 12 | 0 | 0 | 0 |
-| **Total** | **145** | **100** | **45** | **0** | **0** |
+| wHubCharacteristics bit groups | 6 | 5 | 1 | 0 | 0 |
+| **Total** | **151** | **105** | **46** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 100 | 全部對應到已 promoted 的 verified entries；45 個 reviewed entries 無 evidence packet |
+| Entry verification packets | 105 | 全部對應到已 promoted 的 verified entries；46 個 reviewed entries 無 evidence packet |
 
 名詞定義：
 
@@ -50,12 +51,17 @@ semantic_verification_claimed: false
 | Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；4 個 high-bit boundary placeholders 為 reviewed；41 個 reserved bit entries 已完成 reviewed namespace boundary |
 | Hub interrupt endpoint | verified | 4 個 status change endpoint descriptor 欄位（bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval）已完成 entry-level verified promotion（descriptor field identity scope）|
 | Standard device requests | verified | 12 個適用於 hub 的標準 USB 設備請求已完成 entry-level verified promotion（request-linkage identity scope）|
+| wHubCharacteristics bit groups | verified / reviewed | 5 個 wHubCharacteristics bit groups（power switching、compound device、OC mode、TT think time、port indicators）已完成 entry-level verified promotion（bit-group name and value-encoding identity scope）；1 個 reserved high-bit boundary 為永久 reviewed |
 
 ## Reviewed Surface Inventory
 
 剩餘的 45 個 `reviewed` entries 屬於**永久邊界**，不是未完成的升級缺口。
 
-### 4 筆 High-bit boundary placeholders（無語意可驗證，不可升級）
+### 1 筆 wHubCharacteristics reserved high-byte boundary（無語意可驗證，不可升級）
+
+- `usb20_whc_reserved_high`（wHubCharacteristics bits[15:8]，規格定義 reserved，shall be zero）
+
+### 4 筆 Port/Hub status-change high-bit boundary placeholders（無語意可驗證，不可升級）
 
 這四筆是刻意設計的命名空間封閉 entries，用於封閉各 status word 的高位元邊界，不代表真實的 USB 2.0 bit 定義：
 
@@ -136,6 +142,11 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 | usb20_hub_ep_bmAttributes | `bmAttributes` hub status-change EP | - | descriptor field identity only |
 | usb20_hub_ep_wMaxPacketSize | `wMaxPacketSize` hub status-change EP | - | descriptor field identity only |
 | usb20_hub_ep_bInterval | `bInterval` hub status-change EP | - | descriptor field identity only |
+| usb20_whc_power_switching | `wHubCharacteristics` | bits[1:0] | bit-group name and value-encoding identity only |
+| usb20_whc_compound_device | `wHubCharacteristics` | bit[2] | bit-group name and value-encoding identity only |
+| usb20_whc_over_current_mode | `wHubCharacteristics` | bits[4:3] | bit-group name and value-encoding identity only |
+| usb20_whc_tt_think_time | `wHubCharacteristics` | bits[6:5] | bit-group name and value-encoding identity only |
+| usb20_whc_port_indicators | `wHubCharacteristics` | bit[7] | bit-group name and value-encoding identity only |
 | usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |

@@ -13,13 +13,14 @@ It must not override confirmed project facts in consuming firmware repositories.
 ## Current USB 2.0 Status
 
 - Canonical visible reference surface: `specs/` and `specs/en/`.
-- Governed tracked entries: 145.
-- Entry-level verified entries: 100.
-- Reviewed entries: 45.
+- Governed tracked entries: 151.
+- Entry-level verified entries: 105.
+- Reviewed entries: 46.
 - Inferred tracked entries: 0.
 - Verified scope is limited to selector-name/value for selector tables, descriptor field
-  identity for hub descriptor fields, bit name/position for promoted port/hub
-  status-change entries, and request-linkage identity for standard and class requests.
+  identity for hub descriptor fields, bit name/position for port/hub status-change entries,
+  request-linkage identity for standard and class requests, and bit-group name and
+  value-encoding identity for wHubCharacteristics characteristic bit groups.
 - No page-level, table-level, firmware-behavior, or full USB compliance
   verification is claimed.
 

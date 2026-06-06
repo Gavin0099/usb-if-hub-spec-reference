@@ -168,6 +168,7 @@ Must be zero. USB 2.0 spec does not assign meaning to these bits.
 ## Governed Linkage
 
 - `tables/hub_descriptor_matrix.yaml`: governed field-role surface for the 8 tracked USB 2.0 hub descriptor fields.
+- `tables/wHubCharacteristics_bit_matrix.yaml`: governed bit-group semantic surface for wHubCharacteristics — power switching [1:0], compound device [2], OC mode [4:3], TT think time [6:5], port indicators [7], reserved high byte [15:8].
 - `tables/class_request_matrix.yaml`: the `GET_DESCRIPTOR` family provides request-level linkage for hub descriptor access.
 - `specs/escalation_table.md`: `E-01`, `E-07`, and `E-08` directly involve `bNbrPorts`, `wHubCharacteristics[6:5]`, and `wHubCharacteristics[1:0]`.
 - `specs/transaction_translator.md`: provides the higher-level TT type and TT think-time summary.

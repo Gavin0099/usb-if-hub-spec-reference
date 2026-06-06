@@ -1,0 +1,52 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: wHubCharacteristics_bit_matrix
+  entry_id: usb20_whc_port_indicators
+
+evidence:
+  spec: usb20
+  section: "11.23.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    wHubCharacteristics bit[7] indicates whether the hub hardware supports
+    LED port indicators controllable via SET_FEATURE(PORT_INDICATOR).
+    0=Port indicators not supported;
+    1=Port indicators supported; SET_FEATURE(PORT_INDICATOR) is applicable.
+    Documented at USB 2.0 §11.23.2.1 Table 11-13.
+  reviewer_note: >
+    Reviewed for bit name, bit position [7], and value-encoding identity only.
+    Does not claim LED hardware behavior, color accuracy, or indicator control verification.
+
+review_checklist:
+  - Confirm bit position [7] and value encoding for usb20_whc_port_indicators in §11.23.2.1.
+  - Confirm packet scope is limited to bit name and value-encoding identity.
+  - Confirm no LED hardware behavior or indicator control correctness is claimed.
+  - Confirm no descriptor dump correctness is claimed.
+
+verification_scope:
+  claim: bit_group_name_and_value_encoding_identity_only
+  excludes:
+    - LED hardware behavior or color accuracy
+    - PORT_INDICATOR request behavioral correctness
+    - firmware descriptor dump correctness
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_whc_port_indicators`.
+    Promotion limited to bit name and value-encoding identity only.
+
+non_claims:
+  - This packet does not claim LED hardware behavior or color accuracy for any hub.
+  - This packet does not claim PORT_INDICATOR request behavioral correctness.
