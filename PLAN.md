@@ -13,8 +13,8 @@ does not govern firmware behavior and does not override confirmed project facts.
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
 - Governed tracked entries: 145.
-- Entry-level verified entries: 84.
-- Reviewed entries: 61.
+- Entry-level verified entries: 100.
+- Reviewed entries: 45.
 - Inferred tracked entries: 0.
 - Wiki pages (bilingual zh-TW + English): 28 topic pairs covering the full USB 2.0
   specification surface area (Chapters 5, 7, 8, 9, 11).

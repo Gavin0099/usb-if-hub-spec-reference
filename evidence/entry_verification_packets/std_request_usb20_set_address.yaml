@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: standard_device_request_matrix
+  entry_id: usb20_std_set_address
+
+evidence:
+  spec: usb20
+  section: "9.4.6"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    SET_ADDRESS: bmRequestType=0x00, bRequest=0x05, wValue=device_address (1-127),
+    wIndex=0x0000, wLength=0. Device begins responding at new address from the
+    next transaction after status stage. Documented at USB 2.0 §9.4.6.
+  reviewer_note: >
+    Reviewed for setup field identity and address-range linkage only.
+    Does not claim address-assignment timing or Default-to-Address state transition.
+
+review_checklist:
+  - Confirm section linkage and setup fields for usb20_std_set_address in §9.4.6.
+  - Confirm packet scope is limited to request-linkage identity.
+  - Confirm no firmware behavior or host-stack interpretation is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_std_set_address`.
+    Promotion limited to request setup field linkage only.
+
+non_claims:
+  - This packet does not claim address-assignment timing or Default→Address state transition.
+  - This packet does not claim project-specific address assignment behavior.

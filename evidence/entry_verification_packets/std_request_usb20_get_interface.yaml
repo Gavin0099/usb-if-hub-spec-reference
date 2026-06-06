@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: standard_device_request_matrix
+  entry_id: usb20_std_get_interface
+
+evidence:
+  spec: usb20
+  section: "9.4.4"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    GET_INTERFACE: bmRequestType=0x81, bRequest=0x0A, wValue=0x0000,
+    wIndex=interface_number, wLength=1. Returns 1 byte: current bAlternateSetting
+    (0=single-TT, 1=multi-TT for HS hubs). Documented at USB 2.0 §9.4.4.
+  reviewer_note: >
+    Reviewed for setup field identity and alternate-setting linkage only.
+    Does not claim multi-TT switching behavior or alternate-setting semantics.
+
+review_checklist:
+  - Confirm section linkage and setup fields for usb20_std_get_interface in §9.4.4.
+  - Confirm packet scope is limited to request-linkage identity.
+  - Confirm no firmware behavior or host-stack interpretation is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_std_get_interface`.
+    Promotion limited to request setup field linkage only.
+
+non_claims:
+  - This packet does not claim multi-TT switching or alternate-setting semantics.
+  - This packet does not claim project-specific GET_INTERFACE response behavior.

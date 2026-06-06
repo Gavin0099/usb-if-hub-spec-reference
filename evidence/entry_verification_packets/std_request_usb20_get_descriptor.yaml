@@ -1,0 +1,52 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: standard_device_request_matrix
+  entry_id: usb20_std_get_descriptor
+
+evidence:
+  spec: usb20
+  section: "9.4.3"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    GET_DESCRIPTOR: bmRequestType=0x80, bRequest=0x06,
+    wValue high byte=descriptor type (0x01=Device, 0x02=Config, 0x03=String),
+    wValue low byte=descriptor index, wIndex=language_id_or_zero,
+    wLength=descriptor_length. Documented at USB 2.0 §9.4.3.
+  reviewer_note: >
+    Reviewed for setup field identity and descriptor type encoding only.
+    Does not claim descriptor content correctness or full descriptor response behavior.
+
+review_checklist:
+  - Confirm section linkage and setup fields for usb20_std_get_descriptor in §9.4.3.
+  - Confirm packet scope is limited to request-linkage identity.
+  - Confirm no firmware behavior or host-stack interpretation is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_std_get_descriptor`.
+    Promotion limited to request setup field linkage only.
+
+non_claims:
+  - This packet does not claim descriptor content correctness.
+  - This packet does not claim project-specific descriptor response behavior.

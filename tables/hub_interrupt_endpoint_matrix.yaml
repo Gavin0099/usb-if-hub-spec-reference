@@ -3,7 +3,7 @@ scope:
   usb_versions:
     - usb20
   topic: hub_interrupt_endpoint_descriptor
-status: draft
+status: reviewed
 # USB 2.0 hub status-change (interrupt) endpoint descriptor field reference.
 # Reviewed field identity and constraint surface only; not firmware behavior verification.
 
@@ -18,7 +18,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
     authority_level: normative_official
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     notes: "Reviewed field identity only: direction constraint and endpoint number role. Not a firmware address assignment constraint."
 
@@ -32,7 +32,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
     authority_level: normative_official
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     notes: "Reviewed field identity only: interrupt transfer-type constraint. Not a firmware behavior verification."
 
@@ -48,7 +48,7 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
     authority_level: normative_official
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     notes: "Reviewed field identity only: minimum size calculation and port-count linkage. Not a firmware packet-size correctness verification."
 
@@ -62,6 +62,6 @@ entries:
       - usb20_spec
     section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
     authority_level: normative_official
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     notes: "Reviewed field identity only: interval unit and speed-dependent encoding. Not a polling-behavior or latency guarantee."

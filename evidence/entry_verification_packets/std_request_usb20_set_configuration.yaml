@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: standard_device_request_matrix
+  entry_id: usb20_std_set_configuration
+
+evidence:
+  spec: usb20
+  section: "9.4.7"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    SET_CONFIGURATION: bmRequestType=0x00, bRequest=0x09,
+    wValue=configuration_value (1 for hubs), wIndex=0x0000, wLength=0.
+    wValue=0 returns device to Address state. Documented at USB 2.0 §9.4.7.
+  reviewer_note: >
+    Reviewed for setup field identity and configuration-value linkage only.
+    Does not claim Address→Configured state transition timing or endpoint activation.
+
+review_checklist:
+  - Confirm section linkage and setup fields for usb20_std_set_configuration in §9.4.7.
+  - Confirm packet scope is limited to request-linkage identity.
+  - Confirm no firmware behavior or host-stack interpretation is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_std_set_configuration`.
+    Promotion limited to request setup field linkage only.
+
+non_claims:
+  - This packet does not claim Address→Configured state transition semantics.
+  - This packet does not claim project-specific SET_CONFIGURATION handling behavior.

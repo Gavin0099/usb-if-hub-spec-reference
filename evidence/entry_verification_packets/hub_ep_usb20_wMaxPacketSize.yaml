@@ -1,0 +1,49 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: hub_interrupt_endpoint_matrix
+  entry_id: usb20_hub_ep_wMaxPacketSize
+
+evidence:
+  spec: usb20
+  section: "11.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    wMaxPacketSize for hub status-change endpoint: minimum size = ceil((bNbrPorts+1)/8)
+    bytes. For 1-7 ports: 1 byte; for 8-15 ports: 2 bytes. Must accommodate
+    1 status bit per downstream port plus 1 hub-level bit. Documented at USB 2.0 §11.15.1.
+  reviewer_note: >
+    Reviewed for field identity and minimum-size calculation linkage only.
+    Does not claim specific firmware packet-size correctness or maximum packet behavior.
+
+review_checklist:
+  - Confirm section linkage and field encoding for usb20_hub_ep_wMaxPacketSize in §11.15.1.
+  - Confirm packet scope is limited to field-identity.
+  - Confirm no firmware behavior or implementation correctness is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - specific firmware packet-size correctness
+    - maximum packet size behavior
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_hub_ep_wMaxPacketSize`.
+    Promotion limited to field identity: minimum-size calculation ceil((bNbrPorts+1)/8).
+
+non_claims:
+  - This packet does not claim firmware wMaxPacketSize value correctness for any hub.
+  - This packet does not claim maximum packet size behavior under HS operation.

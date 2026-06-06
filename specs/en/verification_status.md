@@ -22,15 +22,15 @@ semantic_verification_claimed: false
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
-| Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| Standard device requests | 12 | 0 | 12 | 0 | 0 |
-| **Total** | **145** | **84** | **61** | **0** | **0** |
+| Hub interrupt endpoint | 4 | 4 | 0 | 0 | 0 |
+| Standard device requests | 12 | 12 | 0 | 0 | 0 |
+| **Total** | **145** | **100** | **45** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | All correspond to promoted verified entries; 61 reviewed entries have no evidence packet |
+| Entry verification packets | 100 | All correspond to promoted verified entries; 45 reviewed entries have no evidence packet |
 
 Term definitions:
 
@@ -48,8 +48,8 @@ Term definitions:
 | Class requests | verified | All 12 tracked class requests have request-linkage-only verified promotions |
 | Feature selectors | verified | All 25 tracked feature selectors are now verified at selector-name-and-value scope |
 | Port status bits | verified / reviewed | 19 core hub/port status-change bits have completed entry-level verified promotion; 4 high-bit boundary placeholders are reviewed; 41 reserved bit entries (wPortStatus, wPortChange, wHubStatus, wHubChange reserved bits) have reviewed namespace boundary |
-| Hub interrupt endpoint | reviewed | 4 status change endpoint descriptor fields (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval) have reviewed field identity; no verified promotion |
-| Standard device requests | reviewed | 12 standard USB device requests applicable to hubs have reviewed request-linkage scope; no verified promotion |
+| Hub interrupt endpoint | verified | 4 status change endpoint descriptor fields (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval) have completed entry-level verified promotion (descriptor field identity scope) |
+| Standard device requests | verified | 12 standard USB device requests applicable to hubs have completed entry-level verified promotion (request-linkage identity scope) |
 
 ## Reviewed Surface Inventory
 
@@ -60,15 +60,12 @@ The current `reviewed` surface is concentrated in these items:
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
   - `HUB_STATUS_HIGH_BIT_BOUNDARY` (new)
   - `HUB_CHANGE_HIGH_BIT_BOUNDARY` (new)
-- hub interrupt endpoint descriptor fields
-  - `bEndpointAddress`, `bmAttributes`, `wMaxPacketSize`, `bInterval`
-
 These `reviewed` surfaces mean the repo-local boundary is clearer than a purely inferred surface.
 They do **not** mean those surfaces have completed entry-level verified promotion.
 
 ## Verified Entries
 
-Eighty-four entries have completed verified promotion (`claim_level: verified`); 8 entries have reviewed scope only:
+One hundred entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -111,6 +108,22 @@ Eighty-four entries have completed verified promotion (`claim_level: verified`);
 | usb20_stop_tt | `STOP_TT` TT-capable hub recipient | - | request linkage only |
 | usb20_get_descriptor_hub | `GET_DESCRIPTOR` hub recipient | - | request linkage only |
 | usb20_set_descriptor_hub | `SET_DESCRIPTOR` hub recipient | - | request linkage only |
+| usb20_std_get_status_device | `GET_STATUS` device recipient | - | request linkage only |
+| usb20_std_get_status_interface | `GET_STATUS` interface recipient | - | request linkage only |
+| usb20_std_get_status_endpoint | `GET_STATUS` endpoint recipient | - | request linkage only |
+| usb20_std_clear_feature_device | `CLEAR_FEATURE` device recipient | - | request linkage only |
+| usb20_std_clear_feature_endpoint | `CLEAR_FEATURE` endpoint recipient | - | request linkage only |
+| usb20_std_set_feature_device | `SET_FEATURE` device recipient | - | request linkage only |
+| usb20_std_set_address | `SET_ADDRESS` device recipient | - | request linkage only |
+| usb20_std_get_descriptor | `GET_DESCRIPTOR` device recipient | - | request linkage only |
+| usb20_std_get_configuration | `GET_CONFIGURATION` device recipient | - | request linkage only |
+| usb20_std_set_configuration | `SET_CONFIGURATION` device recipient | - | request linkage only |
+| usb20_std_get_interface | `GET_INTERFACE` interface recipient | - | request linkage only |
+| usb20_std_set_interface | `SET_INTERFACE` interface recipient | - | request linkage only |
+| usb20_hub_ep_bEndpointAddress | `bEndpointAddress` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_bmAttributes | `bmAttributes` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_wMaxPacketSize | `wMaxPacketSize` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_bInterval | `bInterval` hub status-change EP | - | descriptor field identity only |
 | usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |

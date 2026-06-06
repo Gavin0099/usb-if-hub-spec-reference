@@ -22,15 +22,15 @@ semantic_verification_claimed: false
 | Class requests | 12 | 12 | 0 | 0 | 0 |
 | Feature selectors | 25 | 25 | 0 | 0 | 0 |
 | Port status bits | 64 | 19 | 45 | 0 | 0 |
-| Hub interrupt endpoint | 4 | 0 | 4 | 0 | 0 |
-| Standard device requests | 12 | 0 | 12 | 0 | 0 |
-| **Total** | **145** | **84** | **61** | **0** | **0** |
+| Hub interrupt endpoint | 4 | 4 | 0 | 0 | 0 |
+| Standard device requests | 12 | 12 | 0 | 0 | 0 |
+| **Total** | **145** | **100** | **45** | **0** | **0** |
 
 ## Evidence Packet Summary
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| Entry verification packets | 84 | 全部對應到已 promoted 的 verified entries；61 個 reviewed entries 無 evidence packet |
+| Entry verification packets | 100 | 全部對應到已 promoted 的 verified entries；45 個 reviewed entries 無 evidence packet |
 
 名詞定義：
 
@@ -48,8 +48,8 @@ semantic_verification_claimed: false
 | Class requests | verified | 全部 12 個 tracked class requests 都已完成 request-linkage-only verified promotion |
 | Feature selectors | verified | 全部 25 個 tracked feature selectors 已完成 selector-name/value scope 的 entry-level verified promotion |
 | Port status bits | verified / reviewed | 19 個核心 hub/port status-change bits 已完成 entry-level verified promotion；4 個 high-bit boundary placeholders 為 reviewed；41 個 reserved bit entries 已完成 reviewed namespace boundary |
-| Hub interrupt endpoint | reviewed | 4 個 status change endpoint descriptor 欄位（bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval）已完成 reviewed field identity；無 verified promotion |
-| Standard device requests | reviewed | 12 個適用於 hub 的標準 USB 設備請求已完成 reviewed request-linkage scope；無 verified promotion |
+| Hub interrupt endpoint | verified | 4 個 status change endpoint descriptor 欄位（bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval）已完成 entry-level verified promotion（descriptor field identity scope）|
+| Standard device requests | verified | 12 個適用於 hub 的標準 USB 設備請求已完成 entry-level verified promotion（request-linkage identity scope）|
 
 ## Reviewed Surface Inventory
 
@@ -67,15 +67,12 @@ semantic_verification_claimed: false
   - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
   - `HUB_STATUS_HIGH_BIT_BOUNDARY`（新增）
   - `HUB_CHANGE_HIGH_BIT_BOUNDARY`（新增）
-- hub interrupt endpoint descriptor fields
-  - `bEndpointAddress`、`bmAttributes`、`wMaxPacketSize`、`bInterval`
-
 這些 `reviewed` surfaces 代表 repo-local boundary 已經比單純 inferred 更清楚。  
 它們**不代表**已完成 entry-level verified promotion。
 
 ## Verified Entries
 
-目前共有 84 個 entries 已完成 verified promotion（`claim_level: verified`），8 個 entries 為 reviewed scope：
+目前共有 100 個 entries 已完成 verified promotion（`claim_level: verified`）：
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -118,6 +115,22 @@ semantic_verification_claimed: false
 | usb20_stop_tt | `STOP_TT` TT-capable hub recipient | - | request linkage only |
 | usb20_get_descriptor_hub | `GET_DESCRIPTOR` hub recipient | - | request linkage only |
 | usb20_set_descriptor_hub | `SET_DESCRIPTOR` hub recipient | - | request linkage only |
+| usb20_std_get_status_device | `GET_STATUS` device recipient | - | request linkage only |
+| usb20_std_get_status_interface | `GET_STATUS` interface recipient | - | request linkage only |
+| usb20_std_get_status_endpoint | `GET_STATUS` endpoint recipient | - | request linkage only |
+| usb20_std_clear_feature_device | `CLEAR_FEATURE` device recipient | - | request linkage only |
+| usb20_std_clear_feature_endpoint | `CLEAR_FEATURE` endpoint recipient | - | request linkage only |
+| usb20_std_set_feature_device | `SET_FEATURE` device recipient | - | request linkage only |
+| usb20_std_set_address | `SET_ADDRESS` device recipient | - | request linkage only |
+| usb20_std_get_descriptor | `GET_DESCRIPTOR` device recipient | - | request linkage only |
+| usb20_std_get_configuration | `GET_CONFIGURATION` device recipient | - | request linkage only |
+| usb20_std_set_configuration | `SET_CONFIGURATION` device recipient | - | request linkage only |
+| usb20_std_get_interface | `GET_INTERFACE` interface recipient | - | request linkage only |
+| usb20_std_set_interface | `SET_INTERFACE` interface recipient | - | request linkage only |
+| usb20_hub_ep_bEndpointAddress | `bEndpointAddress` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_bmAttributes | `bmAttributes` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_wMaxPacketSize | `wMaxPacketSize` hub status-change EP | - | descriptor field identity only |
+| usb20_hub_ep_bInterval | `bInterval` hub status-change EP | - | descriptor field identity only |
 | usb20_tt_type_single | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_type_multiple | `wHubCharacteristics` | - | TT type boundary only |
 | usb20_tt_think_time_00 | `wHubCharacteristics` | 00 | TT think-time boundary only |

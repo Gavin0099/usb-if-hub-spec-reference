@@ -1,0 +1,49 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: hub_interrupt_endpoint_matrix
+  entry_id: usb20_hub_ep_bInterval
+
+evidence:
+  spec: usb20
+  section: "11.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    bInterval for hub status-change endpoint: FS/LS hubs use direct ms value (1-255 ms).
+    HS hubs use 2^(bInterval-1) × 125 µs; bInterval must be 1 to 16.
+    Speed-dependent encoding documented at USB 2.0 §11.15.1.
+  reviewer_note: >
+    Reviewed for field identity and speed-dependent encoding linkage only.
+    Does not claim actual polling latency or host scheduling behavior.
+
+review_checklist:
+  - Confirm section linkage and field encoding for usb20_hub_ep_bInterval in §11.15.1.
+  - Confirm packet scope is limited to field-identity.
+  - Confirm no firmware behavior or implementation correctness is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - actual polling latency guarantees
+    - host scheduling behavior
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_hub_ep_bInterval`.
+    Promotion limited to field identity: FS/LS direct-ms vs. HS 2^(n-1)×125µs encoding.
+
+non_claims:
+  - This packet does not claim actual interrupt polling latency for any hub.
+  - This packet does not claim firmware bInterval value correctness for any hub.

@@ -1,0 +1,49 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-06
+
+target:
+  surface: governed_table_entry
+  table: hub_interrupt_endpoint_matrix
+  entry_id: usb20_hub_ep_bEndpointAddress
+
+evidence:
+  spec: usb20
+  section: "11.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb20_spec
+    fallback_source_id: archive_usb20_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    bEndpointAddress for hub status-change endpoint: bit 7 = 1 (IN direction
+    required); bits 3:0 = endpoint number (implementation-defined, commonly 1).
+    Documented at USB 2.0 §11.15.1.
+  reviewer_note: >
+    Reviewed for field identity, direction constraint, and endpoint number role only.
+    Does not claim firmware address assignment or descriptor dump correctness.
+
+review_checklist:
+  - Confirm section linkage and field encoding for usb20_hub_ep_bEndpointAddress in §11.15.1.
+  - Confirm packet scope is limited to field-identity.
+  - Confirm no firmware behavior or implementation correctness is claimed.
+  - Confirm no full compliance interpretation is attached to this packet.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - firmware address assignment
+    - implementation-specific endpoint number correctness
+    - full USB compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb20_hub_ep_bEndpointAddress`.
+    Promotion limited to field identity: direction constraint (IN) and endpoint number role.
+
+non_claims:
+  - This packet does not claim any specific firmware endpoint number is correct.
+  - This packet does not claim descriptor dump correctness for any hub implementation.
