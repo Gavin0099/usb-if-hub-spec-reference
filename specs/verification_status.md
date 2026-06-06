@@ -2,7 +2,7 @@
 title: Verification Status
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-05"
+last_reviewed: "2026-06-06"
 semantic_verification_claimed: false
 ---
 
@@ -53,22 +53,27 @@ semantic_verification_claimed: false
 
 ## Reviewed Surface Inventory
 
-目前 `reviewed` surface 主要集中在這些項目：
+剩餘的 45 個 `reviewed` entries 屬於**永久邊界**，不是未完成的升級缺口。
 
-- port status bit boundary placeholders
-  - `PORT_OVER_CURRENT`
-  - `PORT_RESET`
-  - `PORT_POWER`
-  - `PORT_LOW_SPEED`
-  - `PORT_HIGH_SPEED`
-  - `PORT_TEST`
-  - `PORT_INDICATOR`
-  - `PORT_STATUS_HIGH_BIT_BOUNDARY`
-  - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
-  - `HUB_STATUS_HIGH_BIT_BOUNDARY`（新增）
-  - `HUB_CHANGE_HIGH_BIT_BOUNDARY`（新增）
-這些 `reviewed` surfaces 代表 repo-local boundary 已經比單純 inferred 更清楚。  
-它們**不代表**已完成 entry-level verified promotion。
+### 4 筆 High-bit boundary placeholders（無語意可驗證，不可升級）
+
+這四筆是刻意設計的命名空間封閉 entries，用於封閉各 status word 的高位元邊界，不代表真實的 USB 2.0 bit 定義：
+
+- `PORT_STATUS_HIGH_BIT_BOUNDARY`（wPortStatus bit 15 命名空間封閉）
+- `PORT_CHANGE_HIGH_BIT_BOUNDARY`（wPortChange bit 15 命名空間封閉）
+- `HUB_STATUS_HIGH_BIT_BOUNDARY`（wHubStatus bit 15 命名空間封閉）
+- `HUB_CHANGE_HIGH_BIT_BOUNDARY`（wHubChange bit 15 命名空間封閉）
+
+### 41 筆 Reserved bit namespace boundaries（語意已封板，不應升 verified）
+
+USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（shall be zero）。這些 entries 的 `reviewed` 狀態代表「規格位置已明確，無行為語意可進一步驗證」，不代表驗證缺口：
+
+- wPortStatus reserved：BIT5, BIT6, BIT7, BIT13, BIT14（5 筆）
+- wPortChange reserved：BIT5–BIT14（10 筆）
+- wHubStatus reserved：BIT2–BIT14（13 筆）
+- wHubChange reserved：BIT2–BIT14（13 筆）
+
+**這 45 筆 reviewed entries 是正確的終態。** 將它們升為 verified 不會增加語意覆蓋，因為 reserved bits 沒有行為語意可驗證，boundary placeholder entries 也不是真實 bit 定義。
 
 ## Verified Entries
 

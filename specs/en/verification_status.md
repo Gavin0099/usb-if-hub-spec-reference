@@ -2,7 +2,7 @@
 title: Verification Status
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-05"
+last_reviewed: "2026-06-06"
 semantic_verification_claimed: false
 ---
 
@@ -53,15 +53,27 @@ Term definitions:
 
 ## Reviewed Surface Inventory
 
-The current `reviewed` surface is concentrated in these items:
+The remaining 45 `reviewed` entries represent **permanent boundaries**, not unfinished upgrade work.
 
-- port status bit boundary placeholders
-  - `PORT_STATUS_HIGH_BIT_BOUNDARY`
-  - `PORT_CHANGE_HIGH_BIT_BOUNDARY`
-  - `HUB_STATUS_HIGH_BIT_BOUNDARY` (new)
-  - `HUB_CHANGE_HIGH_BIT_BOUNDARY` (new)
-These `reviewed` surfaces mean the repo-local boundary is clearer than a purely inferred surface.
-They do **not** mean those surfaces have completed entry-level verified promotion.
+### 4 High-bit boundary placeholders (no semantic to verify; not upgradeable)
+
+These four entries are intentional namespace-closing entries that bound each status word's upper bit range. They do not represent real USB 2.0 bit definitions:
+
+- `PORT_STATUS_HIGH_BIT_BOUNDARY` (wPortStatus bit 15 namespace boundary)
+- `PORT_CHANGE_HIGH_BIT_BOUNDARY` (wPortChange bit 15 namespace boundary)
+- `HUB_STATUS_HIGH_BIT_BOUNDARY` (wHubStatus bit 15 namespace boundary)
+- `HUB_CHANGE_HIGH_BIT_BOUNDARY` (wHubChange bit 15 namespace boundary)
+
+### 41 Reserved bit namespace boundaries (semantically final; should not be upgraded)
+
+USB 2.0 §11.24 / Table 11-19 explicitly defines the following bit positions as reserved (shall be zero). The `reviewed` status for these entries means "the spec position is clear; there is no behavioral semantic left to verify" — not a verification gap:
+
+- wPortStatus reserved: BIT5, BIT6, BIT7, BIT13, BIT14 (5 entries)
+- wPortChange reserved: BIT5–BIT14 (10 entries)
+- wHubStatus reserved: BIT2–BIT14 (13 entries)
+- wHubChange reserved: BIT2–BIT14 (13 entries)
+
+**These 45 reviewed entries are the correct final state.** Promoting them to verified would add no semantic coverage, because reserved bits have no behavioral semantic to verify and boundary placeholder entries are not real bit definitions.
 
 ## Verified Entries
 
