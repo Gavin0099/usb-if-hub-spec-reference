@@ -40,8 +40,17 @@ features:
   - title: Version Source Map
     details: Maps hub-related USB 2.0, 2.1, 3.2, and USB4 sources and authority boundaries.
     link: /en/version_source_map
+  - title: Port State Machine
+    details: Describes the 7 standard USB 2.0 hub port states and state transition triggers. Reviewed boundary only.
+    link: /en/port_state_machine
+  - title: Hub Device Class Codes
+    details: Documents bDeviceClass, bDeviceSubClass, and bDeviceProtocol values for hub class identification and TT type advertising.
+    link: /en/hub_device_class
+  - title: Hub Interrupt Endpoint
+    details: Describes the status change endpoint descriptor fields, wMaxPacketSize calculation, and bInterval encoding for FS and HS hubs.
+    link: /en/hub_interrupt_endpoint
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 86 tracked entries, including 84 verified, 2 reviewed, and 0 inferred.
+    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 92 tracked entries, including 84 verified, 8 reviewed, and 0 inferred.
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.

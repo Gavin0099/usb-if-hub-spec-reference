@@ -12,9 +12,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 
 - USB 2.0 LLM wiki/reference surface is complete at reviewed-reference depth.
 - VitePress static site deployed to GitHub Pages; bilingual zh-TW/English.
-- Governed tracked entries: 86.
+- Governed tracked entries: 92.
 - Entry-level verified entries: 84.
-- Reviewed entries: 2.
+- Reviewed entries: 8.
 - Inferred tracked entries: 0.
 - Verification scope remains narrow: verified entries are limited to descriptor field
   identity, selector-name/value, or bit name and bit position.
@@ -43,10 +43,13 @@ Claim ceiling: governance baseline only.
   families covered.
 - `tables/feature_selector_matrix.yaml`: 25 entries, all selector entries are now
   promoted to selector-name/value verified scope.
-- `tables/port_status_bit_matrix.yaml`: 21 tracked hub/port status and change
+- `tables/port_status_bit_matrix.yaml`: 23 tracked hub/port status and change
   entries, including 19 verified entries, 0 reviewed defined port
-  status/change namespace entries, and 2 reviewed high-bit boundary
-  placeholders.
+  status/change namespace entries, and 4 reviewed high-bit boundary
+  placeholders (wPortStatus, wPortChange, wHubStatus, wHubChange).
+- `tables/hub_interrupt_endpoint_matrix.yaml`: 4 reviewed entries for the hub
+  status change endpoint descriptor fields (bEndpointAddress, bmAttributes,
+  wMaxPacketSize, bInterval).
 - Core bilingual spec pages are present under `specs/` and `specs/en/`.
 
 Claim ceiling: structured spec-reference entries only; no firmware behavior.
@@ -170,7 +173,7 @@ Claim ceiling: entry-level verified gate only.
 - Canonical visible wiki surface is under `specs/` and `specs/en/`.
 - Legacy `wiki/` pages have been demoted to orientation notes.
 - Homepage and verification status surfaces align to 86 tracked entries, 84 verified
-  entries, 2 reviewed entries, and 0 inferred tracked entries.
+  entries, 2 reviewed entries, and 0 inferred tracked entries at Phase 9 completion.
 - Added `scripts/validate_reference_surface_statistics.py` to check that visible
   statistics remain aligned with governed tables and evidence packets.
 

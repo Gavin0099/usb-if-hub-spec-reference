@@ -422,3 +422,41 @@ entries:
       source: USB 2.0 hub class request change field
       review_required: false
       reviewed_scope: high_bit_boundary_placeholder_only
+
+  - field: wHubStatus
+    bit: 15
+    name: HUB_STATUS_HIGH_BIT_BOUNDARY
+    status: reserved
+    description: Boundary placeholder for 16-bit hub status field; bits 2-15 are reserved by USB 2.0 spec
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.6.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wHubStatus high-bit boundary placeholder"
+        note: "Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-status-bit semantic verification."
+    evidence:
+      source: USB 2.0 hub class request hub status field
+      review_required: false
+      reviewed_scope: high_bit_boundary_placeholder_only
+
+  - field: wHubChange
+    bit: 15
+    name: HUB_CHANGE_HIGH_BIT_BOUNDARY
+    status: reserved
+    description: Boundary placeholder for 16-bit hub change field; bits 2-15 are reserved by USB 2.0 spec
+    claim_level: inferred
+    evidence_status: reviewed
+    section_refs:
+      - spec: usb20
+        section: "11.24.2.6.1"
+        anchor_type: section
+        evidence_status: reviewed
+        applies_to: "wHubChange high-bit boundary placeholder"
+        note: "Reviewed boundary surface only; bits 2-15 are reserved. Not a defined hub-change-bit semantic verification."
+    evidence:
+      source: USB 2.0 hub class request hub change field
+      review_required: false
+      reviewed_scope: high_bit_boundary_placeholder_only

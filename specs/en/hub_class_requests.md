@@ -303,10 +303,25 @@ This page does not answer:
 
 - Belongs to the TT request family and is meaningful only on TT-capable hubs.
 
+**`wValue` sub-field encoding (§11.24.2.3 Table 11-17)**
+
+`wValue` carries the endpoint information identifying the TT buffer to clear:
+
+| bits | Field | Description |
+|---|---|---|
+| `[3:0]` | Endpoint number | Endpoint number of the buffer to clear (4 bits) |
+| `[10:4]` | Device address | USB address of the target device (7 bits) |
+| `[12:11]` | Endpoint type | `00`=Control, `01`=Isochronous, `10`=Bulk, `11`=Interrupt |
+| `[14:13]` | Reserved | Reserved, must be 0 |
+| `[15]` | Direction | `0`=OUT, `1`=IN |
+
+`wIndex`: TT port number (1-based; the port number associated with the target TT).
+
 **Reviewed surface**
 
 - This repo now narrows `wValue` to TT buffer selector fields rather than an arbitrary opaque value
 - `wIndex` is used to select the TT port or related TT context
+- The `wValue` sub-field encoding is a reviewed boundary; it is not a TT buffer clearing behavior verification.
 
 **Related tables**
 

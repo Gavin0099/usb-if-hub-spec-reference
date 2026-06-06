@@ -1,0 +1,67 @@
+matrix_id: usb20_hub_interrupt_endpoint_matrix
+scope:
+  usb_versions:
+    - usb20
+  topic: hub_interrupt_endpoint_descriptor
+status: draft
+# USB 2.0 hub status-change (interrupt) endpoint descriptor field reference.
+# Reviewed field identity and constraint surface only; not firmware behavior verification.
+
+entries:
+  - field_id: usb20_hub_ep_bEndpointAddress
+    field_name: bEndpointAddress
+    role: Status change endpoint address. Direction must be IN (bit 7=1); endpoint number is implementation-defined, commonly 1.
+    encoding:
+      direction_bit: "bit 7 = 1 (IN direction)"
+      endpoint_number: "bits 3:0, implementation-defined by hub firmware"
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
+    authority_level: normative_official
+    claim_level: reviewed
+    evidence_status: reviewed
+    notes: "Reviewed field identity only: direction constraint and endpoint number role. Not a firmware address assignment constraint."
+
+  - field_id: usb20_hub_ep_bmAttributes
+    field_name: bmAttributes
+    role: Transfer type for status change endpoint. Must be Interrupt transfer (bits[1:0] = 0b11).
+    encoding:
+      transfer_type_bits: "bits[1:0] = 0b11 (Interrupt)"
+      reserved_bits: "bits[7:2] = 0 for FS/LS hubs; HS hubs use additional synchronization bits"
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
+    authority_level: normative_official
+    claim_level: reviewed
+    evidence_status: reviewed
+    notes: "Reviewed field identity only: interrupt transfer-type constraint. Not a firmware behavior verification."
+
+  - field_id: usb20_hub_ep_wMaxPacketSize
+    field_name: wMaxPacketSize
+    role: Maximum packet size. Must be large enough to report status change bits for hub and all downstream ports.
+    encoding:
+      calculation: "ceil((bNbrPorts + 1) / 8) bytes minimum"
+      examples:
+        - "1 to 7 downstream ports: 1 byte"
+        - "8 to 15 downstream ports: 2 bytes"
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
+    authority_level: normative_official
+    claim_level: reviewed
+    evidence_status: reviewed
+    notes: "Reviewed field identity only: minimum size calculation and port-count linkage. Not a firmware packet-size correctness verification."
+
+  - field_id: usb20_hub_ep_bInterval
+    field_name: bInterval
+    role: Polling interval for the status change endpoint. Encoding differs by hub speed.
+    encoding:
+      full_speed_low_speed: "1 to 255 ms (direct ms value)"
+      high_speed: "2^(bInterval-1) x 125 microseconds; bInterval must be 1 to 16"
+    source_refs:
+      - usb20_spec
+    section_anchor: "USB 2.0 Specification Rev 2.0 §11.15.1"
+    authority_level: normative_official
+    claim_level: reviewed
+    evidence_status: reviewed
+    notes: "Reviewed field identity only: interval unit and speed-dependent encoding. Not a polling-behavior or latency guarantee."

@@ -304,10 +304,25 @@ semantic_verification_claimed: false
 
 - 屬於 TT request family，僅對 TT-capable hub 有意義。
 
+**`wValue` sub-field encoding（§11.24.2.3 Table 11-17）**
+
+`wValue` 攜帶待清除的 TT buffer 對應 endpoint 資訊：
+
+| bits | 欄位 | 說明 |
+|---|---|---|
+| `[3:0]` | Endpoint number | 待清除的 endpoint number（4 bits） |
+| `[10:4]` | Device address | 目標設備的 USB address（7 bits） |
+| `[12:11]` | Endpoint type | `00`=Control, `01`=Isochronous, `10`=Bulk, `11`=Interrupt |
+| `[14:13]` | Reserved | 保留，應為 0 |
+| `[15]` | Direction | `0`=OUT, `1`=IN |
+
+`wIndex`：TT port 號碼（1-based；對應具體 TT 的 port number）。
+
 **Reviewed surface**
 
 - 已將 `wValue` 收斂為 TT buffer selector 欄位，不視為任意 opaque。
 - `wIndex` 用於選擇 TT port 或 TT context。
+- `wValue` sub-field encoding 為 reviewed boundary；不是 TT buffer 清除行為驗證。
 
 **Related tables**
 
