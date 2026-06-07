@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_DeviceRemovable
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines DeviceRemovable at offset 10, variable
+    size. Bit N=1 means port N+1 is non-removable. Same semantics as USB 2.0.
+    Note: USB 3.x hub descriptor does not include a PortPwrCtrlMask field
+    (present in USB 2.0 descriptor).
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=10,
+    variable size, bit-per-port semantics boundary. Notes absence of
+    PortPwrCtrlMask vs USB 2.0. Does not verify port removability for
+    any specific hub.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm DeviceRemovable at offset 10, variable size, bit-per-port layout.
+  - Confirm PortPwrCtrlMask is absent from USB 3.x descriptor.
+  - Confirm no specific hub port removability is claimed.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - specific port removability values for any hub
+    - firmware DeviceRemovable bitmap correctness
+    - device behavior related to non-removable ports
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_DeviceRemovable`. Promotion limited to field name,
+    offset, and bit-per-port layout identity only.
+
+non_claims:
+  - This packet does not verify port removability for any specific hub.
+  - This packet does not claim firmware DeviceRemovable encoding correctness.
+  - This packet does not establish table-level verification.

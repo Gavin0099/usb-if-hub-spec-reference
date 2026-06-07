@@ -1,0 +1,51 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_bHubContrCurrent
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines bHubContrCurrent at offset 6, size 1 byte.
+    Represents the maximum current consumed by the hub controller in mA.
+    Same semantics as USB 2.0 hub descriptor bHubContrCurrent.
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=6, size=1B.
+    Units are direct mA (not multiplied). Does not claim specific current values
+    or hub power delivery behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm bHubContrCurrent at offset 6, size 1B, units=mA direct.
+  - Confirm no current value or power delivery behavior is claimed.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - specific current values for any hub
+    - firmware power delivery correctness
+    - electrical power compliance
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_bHubContrCurrent`. Promotion limited to field name,
+    offset, and size identity only.
+
+non_claims:
+  - This packet does not verify hub controller current consumption for any device.
+  - This packet does not claim firmware bHubContrCurrent encoding correctness.

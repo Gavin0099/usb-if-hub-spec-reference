@@ -206,6 +206,23 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
+## USB 3.x Scaffold Surface
+
+> USB 3.x entries 與 evidence packets 獨立追蹤，**不計入** USB 2.0 151/105/46 freeze 統計。
+
+| Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
+|---|---:|---:|---:|---:|---:|
+| SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
+| SS port status bits | 19 | 0 | 19 | 0 | 0 |
+| SS hub class requests | 10 | 0 | 10 | 0 | 0 |
+| **USB 3.x Total** | **38** | **9** | **29** | **0** | **0** |
+
+| Artifact type | Count | Status |
+|---|---:|---|
+| USB 3.x evidence packets | 9 | `evidence/entry_verification_packets/usb3/`；對應 SS hub descriptor field identity verified pilot (USB3-3A) |
+
+SS port status bit matrix 與 SS hub class request matrix 的 verified gate 維持 CLOSED，等待後續 USB3-3B/USB3-3C pilot。
+
 ## What This Page Does Not Claim
 
 本頁不宣告：

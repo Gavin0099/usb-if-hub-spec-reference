@@ -1,0 +1,53 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_wHubCharacteristics
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines wHubCharacteristics at offset 3, size 2 bytes.
+    Key USB 3.x differences from USB 2.0: Port Indicators bit at bit[5] (not bit[7]);
+    no TT Think Time field (bits[9:8] absent); bits[15:6] reserved.
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=3, size=2B.
+    The narrow claim notes the bit[5] Port Indicators position and absence of TT
+    Think Time bits. Does not verify wHubCharacteristics values in any firmware.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm wHubCharacteristics is at offset 3, size 2 bytes.
+  - Confirm Port Indicators is at bit[5] in USB 3.x (vs bit[7] in USB 2.0).
+  - Confirm no TT Think Time field exists in USB 3.x wHubCharacteristics.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - power switching behavior verification
+    - over-current protection behavior
+    - firmware wHubCharacteristics value correctness
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_wHubCharacteristics`. Promotion limited to field name,
+    offset, and size identity only. Bit-group details are scaffold_reviewed;
+    separate bit-group evidence packets would be required for bit-group verified.
+
+non_claims:
+  - This packet does not verify power switching or OC protection behavior.
+  - This packet does not claim firmware wHubCharacteristics encoding correctness.

@@ -1,10 +1,9 @@
 matrix_id: usb3_ss_hub_descriptor_field_matrix
-version: "0.1"
+version: "0.2"
 description: >
-  USB 3.x SuperSpeed hub descriptor field governance scaffold.
+  USB 3.x SuperSpeed hub descriptor field governance.
   USB 3.2 Specification Rev 1.0, Section 10.14.2.1.
-  Scaffold scope: descriptor field identity only (reviewed).
-  No entry-level verified promotion in this scaffold phase.
+  Verified scope: descriptor field identity only (field name, offset, size).
   Does not claim descriptor dump correctness, firmware behavior, or
   electrical compliance.
 spec_family: usb3
@@ -22,9 +21,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "Scaffold: field name, offset, and size identity only."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bLength.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, and size identity only."
 
   - field_id: usb3_hub_desc_bDescriptorType
     offset: 1
@@ -35,9 +37,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "0x2A distinguishes SS hub descriptor from USB 2.0 hub descriptor (0x29)."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bDescriptorType.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: 0x2A value boundary identity only. Distinguishes SS from USB 2.0 (0x29)."
 
   - field_id: usb3_hub_desc_bNbrPorts
     offset: 2
@@ -47,9 +52,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "Scaffold: field name, offset, and size identity only."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bNbrPorts.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, and size identity only."
 
   - field_id: usb3_hub_desc_wHubCharacteristics
     offset: 3
@@ -62,9 +70,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "Port indicators at bit[5] (USB 2.0 had it at bit[7])."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_wHubCharacteristics.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, and size identity only. Bit-group details remain scaffold_reviewed."
 
   - field_id: usb3_hub_desc_bPwrOn2PwrGood
     offset: 5
@@ -74,9 +85,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "Same semantics as USB 2.0 hub descriptor bPwrOn2PwrGood."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bPwrOn2PwrGood.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, size, and unit boundary (2ms) identity only."
 
   - field_id: usb3_hub_desc_bHubContrCurrent
     offset: 6
@@ -86,9 +100,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "Same semantics as USB 2.0 hub descriptor bHubContrCurrent."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bHubContrCurrent.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, and size identity only."
 
   - field_id: usb3_hub_desc_bHubDecLat
     offset: 7
@@ -101,9 +118,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "New field in USB 3.x; not present in USB 2.0 hub descriptor."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bHubDecLat.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, size, and unit (0.1μs) identity only. USB 3.x-only field."
 
   - field_id: usb3_hub_desc_wHubDelay
     offset: 8
@@ -116,9 +136,12 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "New field in USB 3.x; not present in USB 2.0 hub descriptor."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_wHubDelay.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, size, and unit (ns) identity only. USB 3.x-only field."
 
   - field_id: usb3_hub_desc_DeviceRemovable
     offset: 10
@@ -131,6 +154,9 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    notes: "USB 3.x hub descriptor omits PortPwrCtrlMask (present in USB 2.0)."
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_DeviceRemovable.yaml
+      verified_scope: descriptor_field_identity_only
+    notes: "Verified: field name, offset, and bit-per-port layout identity only. PortPwrCtrlMask absent noted."

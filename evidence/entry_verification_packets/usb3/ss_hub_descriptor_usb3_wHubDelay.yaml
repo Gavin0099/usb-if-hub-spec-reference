@@ -1,0 +1,56 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_wHubDelay
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines wHubDelay at offset 8, size 2 bytes.
+    Represents the average delay added by the hub in nanoseconds. Used by
+    xHCI to calculate U1/U2 entry latency budget. This field is new in USB 3.x
+    and not present in the USB 2.0 hub descriptor.
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=8, size=2B,
+    unit boundary (ns). The narrow claim is that wHubDelay exists at this
+    position with this unit. Does not claim U1/U2 latency budget correctness
+    or xHCI behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm wHubDelay at offset 8, size 2B, unit ns.
+  - Confirm this field is absent from USB 2.0 hub descriptor.
+  - Confirm no U1/U2 latency budget behavior or xHCI behavior is claimed.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - U1/U2 entry latency budget calculation
+    - xHCI handling of wHubDelay
+    - specific wHubDelay values for any hub
+    - firmware correctness
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_wHubDelay`. Promotion limited to field name, offset,
+    size, and unit (ns) identity only.
+
+non_claims:
+  - This packet does not claim that U1/U2 latency budget is correctly handled
+    by any host controller or hub firmware.
+  - This packet does not claim USB 3.x compliance for any hub.

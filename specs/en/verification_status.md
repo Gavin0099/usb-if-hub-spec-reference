@@ -206,6 +206,23 @@ The following are outside the verified scope for all entries:
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
+## USB 3.x Scaffold Surface
+
+> USB 3.x entries and evidence packets are tracked independently and are **not included** in the USB 2.0 151/105/46 freeze statistics.
+
+| Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
+|---|---:|---:|---:|---:|---:|
+| SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
+| SS port status bits | 19 | 0 | 19 | 0 | 0 |
+| SS hub class requests | 10 | 0 | 10 | 0 | 0 |
+| **USB 3.x Total** | **38** | **9** | **29** | **0** | **0** |
+
+| Artifact type | Count | Status |
+|---|---:|---|
+| USB 3.x evidence packets | 9 | `evidence/entry_verification_packets/usb3/`; correspond to SS hub descriptor field identity verified pilot (USB3-3A) |
+
+The SS port status bit matrix and SS hub class request matrix keep their verified gate CLOSED, pending future USB3-3B/USB3-3C pilots.
+
 ## What This Page Does Not Claim
 
 This page does not claim:

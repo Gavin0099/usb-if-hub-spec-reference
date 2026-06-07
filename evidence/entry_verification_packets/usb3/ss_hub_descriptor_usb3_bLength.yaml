@@ -1,0 +1,53 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_bLength
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines the SuperSpeed Hub Descriptor.
+    bLength is the descriptor length field at offset 0, size 1 byte.
+    Minimum value is 12 bytes (excluding the DeviceRemovable bitmap).
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=0, size=1B.
+    Does not claim specific bLength values for any hub, firmware implementation,
+    or descriptor dump correctness.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm bLength is at offset 0, size 1 byte.
+  - Confirm no descriptor dump or device behavior is claimed.
+  - Confirm spec_family=usb3 is consistent.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - descriptor dump validation
+    - specific bLength value for any hub
+    - device behavior or firmware correctness
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_bLength`. Promotion limited to field name, offset,
+    and size identity only.
+
+non_claims:
+  - This packet does not verify a live SS hub descriptor dump.
+  - This packet does not claim USB 3.x electrical or signal compliance.
+  - This packet does not establish table-level verification.

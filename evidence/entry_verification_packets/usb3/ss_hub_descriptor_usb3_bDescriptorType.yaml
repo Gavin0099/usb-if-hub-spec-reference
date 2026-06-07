@@ -1,0 +1,53 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_descriptor_matrix
+  entry_id: usb3_hub_desc_bDescriptorType
+
+evidence:
+  spec: usb32
+  section: "10.14.2.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.1 defines bDescriptorType for the SuperSpeed Hub
+    Descriptor as 0x2A. This distinguishes it from the USB 2.0 Hub Descriptor
+    type (0x29). The field is at offset 1, size 1 byte.
+  reviewer_note: >
+    Reviewed for descriptor field identity only: field name, offset=1, size=1B,
+    expected value boundary 0x2A. The value boundary 0x2A is the narrow claim.
+    Does not claim descriptor dump correctness or firmware behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm bDescriptorType=0x2A for SuperSpeed Hub Descriptor (not 0x29).
+  - Confirm offset=1, size=1B.
+  - Confirm no descriptor dump or device behavior is claimed.
+
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - descriptor dump validation
+    - device behavior
+    - firmware descriptor generation correctness
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry descriptor field identity promotion for
+    `usb3_hub_desc_bDescriptorType`. Promotion limited to field name,
+    offset, size, and value boundary (0x2A) identity only.
+
+non_claims:
+  - This packet does not verify that any hub firmware correctly reports bDescriptorType=0x2A.
+  - This packet does not claim USB 3.x compliance for any device.
+  - This packet does not establish table-level or page-level verification.

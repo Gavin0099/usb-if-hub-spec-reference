@@ -399,6 +399,32 @@ electrical compliance claimed.
 Claim ceiling: scaffold_reviewed — bit/field/request name and position identity
 only. Verified gate closed. No LTSSM, xHCI, or electrical compliance claimed.
 
+### Phase USB3-3A - SS Hub Descriptor Field Identity Verified Pilot
+
+- `tables/ss_hub_descriptor_matrix.yaml` promoted to version "0.2": all 9
+  SS hub descriptor entries promoted from `reviewed` to `verified`.
+  Verified scope: descriptor field identity only (field name, offset, size).
+- NEW `evidence/entry_verification_packets/usb3/` subdirectory created to
+  isolate USB 3.x evidence packets from USB 2.0 surface statistics.
+- 9 USB 3.x evidence packets created (one per descriptor field):
+  `ss_hub_descriptor_usb3_bLength.yaml`, `ss_hub_descriptor_usb3_bDescriptorType.yaml`,
+  `ss_hub_descriptor_usb3_bNbrPorts.yaml`, `ss_hub_descriptor_usb3_wHubCharacteristics.yaml`,
+  `ss_hub_descriptor_usb3_bPwrOn2PwrGood.yaml`, `ss_hub_descriptor_usb3_bHubContrCurrent.yaml`,
+  `ss_hub_descriptor_usb3_bHubDecLat.yaml`, `ss_hub_descriptor_usb3_wHubDelay.yaml`,
+  `ss_hub_descriptor_usb3_DeviceRemovable.yaml`.
+- `scripts/validate_ss_hub_descriptor_matrix.py` rewritten from CLOSED gate
+  to PARTIAL/allowlist gate (ALLOWLIST_VERIFIED_IDS = 9 field IDs).
+- `specs/verification_status.md` + EN: added USB 3.x Scaffold Surface section
+  showing independent stats: 38 tracked, 9 verified (SS hub descriptor), 29 reviewed.
+  USB 3.x evidence packets tracked at 9, stored in `usb3/` subdirectory,
+  not counted in USB 2.0 statistics (105 remains).
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46, evidence_packets=105.
+
+Claim ceiling: descriptor_field_identity_only — field name, offset, and size
+boundary only. Does not claim descriptor dump correctness, firmware behavior, or
+electrical compliance. SS port status and SS hub class request matrices remain
+with verified gate CLOSED; no USB3-3B/USB3-3C pilot yet started.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
