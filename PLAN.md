@@ -499,6 +499,35 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase EXPORT-2 - Consumer Integration Contract
+
+- NEW `docs/CONSUMER_INTEGRATION_CONTRACT.md`: formal consumer-facing contract
+  for the governed surface export. Defines:
+  - **Entry point**: `exports/hub_governed_surface_manifest.yaml` as the
+    canonical governed truth index; consuming repos must not read individual
+    YAML tables directly as primary source of truth.
+  - **Two-step integration check**: Step 1 = manifest structural integrity
+    (`validate_hub_governed_surface_manifest.py`); Step 2 = table content
+    drift detection (`probe_table_fingerprint.py --mode check`).
+  - **Allowed usage** (6 categories): table drift detection, selector/request/
+    bit identity reference, reserved boundary guard, USB 2.0/USB 3.x family
+    separation, verified scope lookup, reviewed meaning lookup.
+  - **Forbidden usage** (7 categories): firmware compliance truth,
+    LTSSM runtime behavior, xHCI port state management, electrical/timing
+    compliance, USB-IF certification, treating reviewed entries as
+    implementation truth, overriding consuming repo project facts.
+  - **Failure interpretation**: Manifest validator FAIL = export contract
+    broken (stop using governed surface); Fingerprint drift FAIL = governed
+    table changed (investigate then re-baseline if authorized).
+  - **Governance layer model**: L1–L3 confirmed; L4 (framework runtime) and
+    L5 (consumer enforcement) left to the consuming repo's decision.
+  - Explicit non-claims: PORT_LINK_STATE/LTSSM, xHCI behavior, USB-IF
+    certification, USB 3.x depth ≠ USB 2.0 depth.
+- Supersedes `docs/phase4_consumer_access_closeout.md` (partial Phase 4 contract).
+- No table changes. No statistic changes.
+
+Claim ceiling: governed_matrix_identity_and_boundary_reference_only.
+
 ### Phase EXPORT-1 - Unified Hub Governed Surface Manifest
 
 - NEW `exports/hub_governed_surface_manifest.yaml`: unified machine-readable
