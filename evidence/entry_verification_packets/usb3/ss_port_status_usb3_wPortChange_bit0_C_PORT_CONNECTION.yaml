@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortChange.bit0.C_PORT_CONNECTION
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 0 as
+    C_PORT_CONNECTION: set when the PORT_CONNECTION status bit has changed.
+    Cleared when the host acknowledges the change via CLEAR_FEATURE(C_PORT_CONNECTION).
+  reviewer_note: >
+    Reviewed for bit name and bit position identity only: bit name
+    C_PORT_CONNECTION, field wPortChange, bit position 0. Does not verify
+    change acknowledgement behavior, debounce, or LTSSM interaction.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm C_PORT_CONNECTION is at wPortChange bit 0.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no change acknowledgement or debounce behavior is claimed.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - change acknowledgement behavior
+    - debounce timing
+    - LTSSM interaction
+    - CLEAR_FEATURE response behavior
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name and position identity promotion for
+    `ss_wPortChange.bit0.C_PORT_CONNECTION`. Promotion limited to bit name
+    and bit position identity only.
+
+non_claims:
+  - This packet does not verify change acknowledgement or debounce behavior.
+  - This packet does not claim LTSSM or CLEAR_FEATURE response behavior.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.

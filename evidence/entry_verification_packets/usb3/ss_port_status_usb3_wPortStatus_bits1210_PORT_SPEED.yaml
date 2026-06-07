@@ -1,0 +1,59 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortStatus.bits1210.PORT_SPEED
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bits[12:10]
+    as PORT_SPEED: a 3-bit field encoding the current connection speed.
+    Values: 000=undefined, 001=Full_Speed (12 Mbps), 010=Low_Speed (1.5 Mbps),
+    011=High_Speed (480 Mbps), 100=SuperSpeed (5 Gbps),
+    101=SuperSpeedPlus (10 Gbps), 110–111=Reserved.
+  reviewer_note: >
+    Reviewed for bit name, bit range identity, and value encoding table
+    identity only: field name PORT_SPEED, field wPortStatus, bit range
+    [12:10], and 6 named speed encodings. Does not verify speed detection
+    hardware, LTSSM training outcome, or xHCI speed negotiation.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm PORT_SPEED occupies wPortStatus bits[12:10].
+  - Confirm the 6-value encoding table matches the specification.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no speed detection hardware or LTSSM training behavior is claimed.
+
+verification_scope:
+  claim: bit_name_range_and_encoding_identity_only
+  excludes:
+    - speed detection hardware behavior
+    - LTSSM training outcome
+    - xHCI speed negotiation behavior
+    - chirp/handshake sequence
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name, range, and encoding identity
+    promotion for `ss_wPortStatus.bits1210.PORT_SPEED`. Promotion limited
+    to field name, bit range [12:10], and 6-value encoding table identity only.
+
+non_claims:
+  - This packet does not verify speed detection hardware or LTSSM training.
+  - This packet does not claim xHCI speed negotiation behavior.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.

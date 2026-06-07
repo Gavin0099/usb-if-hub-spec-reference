@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-06
+> **Last Updated**: 2026-06-07
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -456,7 +456,48 @@ Non-claims (written into evidence packets):
 Claim ceiling: per-entry scoped — request_linkage_identity_only (shared),
 request_identity_requiredness_only (SET_HUB_DEPTH),
 request_identity_optionality_only (GET_PORT_ERR_COUNT).
-SS port status bit matrix verified gate remains CLOSED pending USB3-3C.
+SS port status bit matrix verified gate CLOSED → OPEN in USB3-3C.
+
+### Phase USB3-3C - SS Port Status Bit Matrix Verified Pilot
+
+- `tables/ss_port_status_bit_matrix.yaml` promoted to version "0.2": 15 defined
+  SS port status bit entries promoted from `reviewed` to `verified`.
+  Two distinct verified scopes applied:
+  - 13 single-bit defined entries: `bit_name_and_position_only`
+    (PORT_CONNECTION, PORT_ENABLE, PORT_OVER_CURRENT, PORT_RESET, PORT_POWER,
+    PORT_U1_ENABLE, PORT_U2_ENABLE in wPortStatus; C_PORT_CONNECTION,
+    C_PORT_OVER_CURRENT, C_PORT_RESET, C_BH_PORT_RESET, C_PORT_LINK_STATE,
+    C_PORT_CONFIG_ERROR in wPortChange)
+  - 2 multi-bit defined entries: `bit_name_range_and_encoding_identity_only`
+    (PORT_LINK_STATE bits[8:5] with 12-value encoding; PORT_SPEED bits[12:10]
+    with 6-value encoding)
+  - 4 reserved entries remain `reviewed` (permanent boundaries, not promotable):
+    wPortStatus bit4, bit15; wPortChange bit1, bits[15:7]
+- 15 USB 3.x evidence packets added to `evidence/entry_verification_packets/usb3/`:
+  one per SS port status bit defined entry.
+- `scripts/validate_ss_port_status_bit_matrix.py` rewritten from CLOSED gate to
+  PARTIAL/allowlist gate (ALLOWLIST_VERIFIED_IDS = 15 defined entry IDs).
+- `specs/verification_status.md` + EN: USB 3.x stats updated to
+  38 tracked / 34 verified / 4 reviewed, evidence_packets=34.
+  Second scaffold table updated to reflect all three gates OPEN.
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46,
+  evidence_packets=105.
+
+Non-claims (written into evidence packets):
+- PORT_LINK_STATE verified scope does not cover LTSSM state transitions,
+  U1/U2/U3 entry/exit timing, or xHCI link state management.
+- PORT_SPEED verified scope does not cover speed detection hardware or
+  LTSSM training outcome.
+- C_BH_PORT_RESET verified scope does not cover BH Reset timing or LFPS signaling.
+- C_PORT_LINK_STATE verified scope does not cover LTSSM transition conditions.
+- C_PORT_CONFIG_ERROR verified scope does not cover configuration failure
+  conditions or xHCI enumeration error handling.
+- No LTSSM, xHCI, LPM, or firmware compliance claimed.
+
+Claim ceiling: per-entry scoped — bit_name_and_position_only (single-bit),
+bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
+All three USB 3.x governed matrices are now at verified status for their
+defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
 ## Active Validators
 

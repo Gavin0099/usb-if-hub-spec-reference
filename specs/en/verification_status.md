@@ -214,14 +214,14 @@ The following are outside the verified scope for all entries:
 |---|---:|---:|---:|---:|---:|
 | SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
 | SS hub class requests | 10 | 10 | 0 | 0 | 0 |
-| SS port status bits | 19 | 0 | 19 | 0 | 0 |
-| **USB 3.x Total** | **38** | **19** | **19** | **0** | **0** |
+| SS port status bits | 19 | 15 | 4 | 0 | 0 |
+| **USB 3.x Total** | **38** | **34** | **4** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 19 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B) |
+| USB 3.x evidence packets | 34 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B), 15 for SS port status bits (USB3-3C) |
 
-The SS port status bit matrix keeps its verified gate CLOSED, pending future USB3-3C pilot.
+The SS port status bit matrix USB3-3C pilot is complete: 15 defined entries promoted to verified (bit name and position/range identity only); 4 reserved boundary entries remain reviewed (permanent boundaries).
 
 ## What This Page Does Not Claim
 
@@ -241,12 +241,12 @@ The USB 3.x governed matrix scaffold was established in Phase USB3-2. The follow
 
 | Table | Tracked | Verified | Reviewed | Verified gate |
 |---|---:|---:|---:|---|
-| SS port status bits | 19 | 0 | 19 | **CLOSED** (scaffold phase) |
-| SS hub class requests | 10 | 0 | 10 | **CLOSED** (scaffold phase) |
-| SS hub descriptor fields | 9 | 0 | 9 | **CLOSED** (scaffold phase) |
-| **USB 3.x scaffold total** | **38** | **0** | **38** | — |
+| SS port status bits | 19 | 15 | 4 | **OPEN** (USB3-3C pilot, 15/19 verified) |
+| SS hub class requests | 10 | 10 | 0 | **OPEN** (USB3-3B pilot, 10/10 verified) |
+| SS hub descriptor fields | 9 | 9 | 0 | **OPEN** (USB3-3A pilot, 9/9 verified) |
+| **USB 3.x total** | **38** | **34** | **4** | — |
 
-All USB 3.x scaffold entries have `claim_level: reviewed`. The verified gate is not yet open.
+All three USB 3.x matrices have open verified gates. 34 entries have completed entry-level verified promotion; 4 reserved boundary entries remain reviewed (permanent boundaries, no verifiable semantics).
 
 ### USB 3.x Scaffold Non-claims
 

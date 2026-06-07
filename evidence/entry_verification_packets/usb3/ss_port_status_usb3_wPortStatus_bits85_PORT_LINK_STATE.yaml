@@ -1,0 +1,61 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortStatus.bits85.PORT_LINK_STATE
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bits[8:5] as
+    PORT_LINK_STATE: a 4-bit field encoding the current SS link state.
+    Values: 0000=U0, 0001=U1, 0010=U2, 0011=U3, 0100=SS.Disabled,
+    0101=Rx.Detect, 0110=SS.Inactive, 0111=Polling, 1000=Recovery,
+    1001=Hot_Reset, 1010=Compliance_Mode, 1011=Loopback, 1100–1111=Reserved.
+  reviewer_note: >
+    Reviewed for bit name, bit range identity, and value encoding table
+    identity only: field name PORT_LINK_STATE, field wPortStatus, bit range
+    [8:5], and 12 named state encodings. Does not verify LTSSM state
+    transitions, U1/U2/U3 entry/exit timing, or link training behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm PORT_LINK_STATE occupies wPortStatus bits[8:5].
+  - Confirm the 12-value encoding table matches the specification.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no LTSSM transitions or link training behavior is claimed.
+
+verification_scope:
+  claim: bit_name_range_and_encoding_identity_only
+  excludes:
+    - LTSSM state transition behavior
+    - U1/U2/U3 entry/exit timing
+    - link training and recovery behavior
+    - xHCI link state management
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name, range, and encoding identity
+    promotion for `ss_wPortStatus.bits85.PORT_LINK_STATE`. Promotion
+    limited to field name, bit range [8:5], and 12-value encoding table
+    identity only.
+
+non_claims:
+  - This packet does not verify LTSSM state transition behavior.
+  - This packet does not claim U1/U2/U3 entry/exit timing or link training.
+  - This packet does not claim xHCI link state management behavior.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.

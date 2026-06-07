@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Validate USB 3.x SS hub port status bit matrix schema.
 
-Authority ceiling: scaffold_reviewed — bit name and bit position only.
-No verified promotion is open for this scaffold phase.
+Authority ceiling: bit_name_and_position_only for single-bit entries;
+bit_name_range_and_encoding_identity_only for multi-bit entries.
+No LTSSM behavior, xHCI interaction, or electrical compliance claimed.
 
 Checks:
   R1  matrix_id present
@@ -13,7 +14,8 @@ Checks:
   R5  field must be wPortStatus or wPortChange
   R6  bit in range 0–15 (single-bit entries)
   R7  bit_range format valid (N or N:M)
-  R8  claim_level must not be 'verified' (scaffold gate)
+  R8  claim_level=verified only for allowlisted defined entry ids; reserved
+      entries must remain reviewed
   R9  expected defined entry ids present
   R10 spec_family must be usb3
 """
@@ -30,11 +32,13 @@ MATRIX_PATH = ROOT / "tables" / "ss_port_status_bit_matrix.yaml"
 
 VALID_FIELDS = {"wPortStatus", "wPortChange"}
 VALID_STATUS = {"defined", "reserved", "vendor_or_spec_dependent"}
-VALID_CLAIM_LEVELS = {"reviewed", "inferred"}
+VALID_CLAIM_LEVELS = {"reviewed", "inferred", "verified"}
 VALID_EVIDENCE_STATUS = {"reviewed", "review_required", "inferred"}
 BIT_RANGE_RE = re.compile(r"^\d+(:\d+)?$")
 
-EXPECTED_DEFINED_IDS = {
+# Allowlist for verified promotion (USB3-3C pilot — 15 defined entries).
+# Reserved entries are permanently excluded from this allowlist.
+ALLOWLIST_VERIFIED_IDS = {
     "ss_wPortStatus.bit0.PORT_CONNECTION",
     "ss_wPortStatus.bit1.PORT_ENABLE",
     "ss_wPortStatus.bit2.PORT_OVER_CURRENT",
@@ -51,6 +55,8 @@ EXPECTED_DEFINED_IDS = {
     "ss_wPortChange.bit5.C_PORT_LINK_STATE",
     "ss_wPortChange.bit6.C_PORT_CONFIG_ERROR",
 }
+
+EXPECTED_DEFINED_IDS = ALLOWLIST_VERIFIED_IDS
 
 
 def main() -> int:
@@ -117,12 +123,16 @@ def main() -> int:
             if not BIT_RANGE_RE.match(br):
                 errors.append(f"R7: entry {eid!r} bit_range {br!r} invalid format")
 
-        # R8
+        # R8 — allowlist gate: verified only for explicitly promoted defined entries
         cl = entry.get("claim_level", "")
-        if cl == "verified":
-            errors.append(f"R8: entry {eid!r} has claim_level=verified; scaffold gate is closed")
-
         status = entry.get("status", "")
+        if cl == "verified":
+            if eid not in ALLOWLIST_VERIFIED_IDS:
+                errors.append(
+                    f"R8: entry {eid!r} has claim_level=verified but is not in "
+                    f"ALLOWLIST_VERIFIED_IDS (reserved entries must stay reviewed)"
+                )
+
         if status == "defined":
             seen_ids_defined.add(eid)
 
@@ -139,9 +149,12 @@ def main() -> int:
 
     defined = sum(1 for e in entries if e.get("status") == "defined")
     reserved = sum(1 for e in entries if e.get("status") == "reserved")
+    verified = sum(1 for e in entries if e.get("claim_level") == "verified")
+    reviewed = sum(1 for e in entries if e.get("claim_level") == "reviewed")
     print("PASS: SS port status bit matrix validation")
     print(f"  matrix_id: {doc.get('matrix_id')}")
     print(f"  entries: {len(entries)} (defined={defined}, reserved={reserved})")
+    print(f"  claim_level: verified={verified}, reviewed={reviewed}")
     return 0
 
 

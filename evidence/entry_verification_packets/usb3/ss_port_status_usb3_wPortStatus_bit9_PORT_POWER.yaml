@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortStatus.bit9.PORT_POWER
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bit 9 as
+    PORT_POWER: indicates the port power state. Value 0 = power off,
+    value 1 = power on.
+  reviewer_note: >
+    Reviewed for bit name and bit position identity only: bit name
+    PORT_POWER, field wPortStatus, bit position 9. Does not verify
+    power switching behavior, bPwrOn2PwrGood timing, or hub power
+    management runtime behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm PORT_POWER is at wPortStatus bit 9.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no power switching or timing behavior is claimed.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - power switching hardware behavior
+    - bPwrOn2PwrGood timing
+    - hub power management runtime behavior
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name and position identity promotion for
+    `ss_wPortStatus.bit9.PORT_POWER`. Promotion limited to bit name and
+    bit position identity only.
+
+non_claims:
+  - This packet does not verify power switching or bPwrOn2PwrGood timing.
+  - This packet does not claim hub power management behavior.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.

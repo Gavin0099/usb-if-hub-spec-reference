@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortChange.bit2.C_PORT_OVER_CURRENT
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 2 as
+    C_PORT_OVER_CURRENT: set when the PORT_OVER_CURRENT status bit has
+    changed. Indicates that an over-current condition has appeared or
+    been cleared.
+  reviewer_note: >
+    Reviewed for bit name and bit position identity only: bit name
+    C_PORT_OVER_CURRENT, field wPortChange, bit position 2. Does not verify
+    OC detection hardware response or power management behavior.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm C_PORT_OVER_CURRENT is at wPortChange bit 2.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no OC hardware response behavior is claimed.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - OC detection hardware response
+    - power management response to OC
+    - CLEAR_FEATURE response behavior
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name and position identity promotion for
+    `ss_wPortChange.bit2.C_PORT_OVER_CURRENT`. Promotion limited to bit
+    name and bit position identity only.
+
+non_claims:
+  - This packet does not verify OC detection hardware or power management response.
+  - This packet does not claim CLEAR_FEATURE response behavior.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.

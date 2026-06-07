@@ -214,14 +214,14 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 |---|---:|---:|---:|---:|---:|
 | SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
 | SS hub class requests | 10 | 10 | 0 | 0 | 0 |
-| SS port status bits | 19 | 0 | 19 | 0 | 0 |
-| **USB 3.x Total** | **38** | **19** | **19** | **0** | **0** |
+| SS port status bits | 19 | 15 | 4 | 0 | 0 |
+| **USB 3.x Total** | **38** | **34** | **4** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 19 | `evidence/entry_verification_packets/usb3/`；9 筆對應 SS hub descriptor (USB3-3A)，10 筆對應 SS hub class requests (USB3-3B) |
+| USB 3.x evidence packets | 34 | `evidence/entry_verification_packets/usb3/`；9 筆對應 SS hub descriptor (USB3-3A)，10 筆對應 SS hub class requests (USB3-3B)，15 筆對應 SS port status bits (USB3-3C) |
 
-SS port status bit matrix 的 verified gate 維持 CLOSED，等待後續 USB3-3C pilot。
+SS port status bit matrix 已完成 USB3-3C pilot：15 個 defined entries 升為 verified（bit name and position/range identity only）；4 個 reserved boundary entries 維持 reviewed（永久邊界）。
 
 ## What This Page Does Not Claim
 
@@ -241,12 +241,12 @@ USB 3.x governed matrix 已在 Phase USB3-2 建立 scaffold。以下統計**與 
 
 | Table | Tracked | Verified | Reviewed | Verified gate |
 |---|---:|---:|---:|---|
-| SS port status bits | 19 | 0 | 19 | **CLOSED** (scaffold phase) |
-| SS hub class requests | 10 | 0 | 10 | **CLOSED** (scaffold phase) |
-| SS hub descriptor fields | 9 | 0 | 9 | **CLOSED** (scaffold phase) |
-| **USB 3.x scaffold total** | **38** | **0** | **38** | — |
+| SS port status bits | 19 | 15 | 4 | **OPEN** (USB3-3C pilot, 15/19 verified) |
+| SS hub class requests | 10 | 10 | 0 | **OPEN** (USB3-3B pilot, 10/10 verified) |
+| SS hub descriptor fields | 9 | 9 | 0 | **OPEN** (USB3-3A pilot, 9/9 verified) |
+| **USB 3.x total** | **38** | **34** | **4** | — |
 
-所有 USB 3.x scaffold entries 的 `claim_level: reviewed`。Verified gate 尚未開放。
+USB 3.x 所有三個 matrices 的 verified gate 已開放。34 個 entries 已完成 entry-level verified promotion；4 個 reserved boundary entries 維持 reviewed（永久邊界，無語意可驗證）。
 
 ### USB 3.x Scaffold Non-claims
 

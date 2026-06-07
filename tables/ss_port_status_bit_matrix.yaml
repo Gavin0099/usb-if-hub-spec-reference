@@ -1,11 +1,12 @@
 matrix_id: usb3_ss_hub_port_status_bit_matrix
-version: "0.1"
+version: "0.2"
 description: >
-  SuperSpeed hub wPortStatus / wPortChange bit-field governance scaffold.
+  SuperSpeed hub wPortStatus / wPortChange bit-field governance.
   USB 3.2 Specification Rev 1.0, Section 10.14.2.6.
-  Scaffold scope: bit name and bit position only (reviewed).
-  No entry-level verified promotion in this scaffold phase.
-  Does not claim LTSSM behavior, xHCI interaction, or electrical compliance.
+  Version 0.2: 15 defined entries promoted to verified (bit name and bit
+  position/range identity only). 4 reserved entries remain reviewed.
+  Does not claim LTSSM behavior, xHCI interaction, U1/U2 power management
+  runtime behavior, or electrical compliance.
 spec_family: usb3
 source_spec:
   spec: USB 3.2
@@ -20,7 +21,7 @@ entries:
     name: PORT_CONNECTION
     status: defined
     description: Current connect status; 1 when device connected.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -32,7 +33,7 @@ entries:
     name: PORT_ENABLE
     status: defined
     description: Port enabled; always 1 when SS device is connected.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -44,7 +45,7 @@ entries:
     name: PORT_OVER_CURRENT
     status: defined
     description: Over-current condition active on this port.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -56,7 +57,7 @@ entries:
     name: PORT_RESET
     status: defined
     description: Reset signaling in progress on this port.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -99,7 +100,7 @@ entries:
       "1101": Reserved
       "1110": Reserved
       "1111": Reserved
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -111,7 +112,7 @@ entries:
     name: PORT_POWER
     status: defined
     description: Port power state; 0=off, 1=on.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -132,7 +133,7 @@ entries:
       "101": SuperSpeedPlus_10Gbps
       "110": Reserved
       "111": Reserved
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -144,7 +145,7 @@ entries:
     name: PORT_U1_ENABLE
     status: defined
     description: U1 entry enabled on this port (host-initiated).
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -156,7 +157,7 @@ entries:
     name: PORT_U2_ENABLE
     status: defined
     description: U2 entry enabled on this port (host or device-initiated).
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -182,7 +183,7 @@ entries:
     name: C_PORT_CONNECTION
     status: defined
     description: Connection status changed.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -206,7 +207,7 @@ entries:
     name: C_PORT_OVER_CURRENT
     status: defined
     description: Over-current condition changed.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -218,7 +219,7 @@ entries:
     name: C_PORT_RESET
     status: defined
     description: Standard port reset complete.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -230,7 +231,7 @@ entries:
     name: C_BH_PORT_RESET
     status: defined
     description: Warm Reset (BH Port Reset) complete.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -242,7 +243,7 @@ entries:
     name: C_PORT_LINK_STATE
     status: defined
     description: Link state changed.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec
@@ -254,7 +255,7 @@ entries:
     name: C_PORT_CONFIG_ERROR
     status: defined
     description: Port configuration error; SS device failed to configure.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
     source_refs:
       - usb32_spec

@@ -1,0 +1,54 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_port_status_bit_matrix
+  entry_id: ss_wPortStatus.bit3.PORT_RESET
+
+evidence:
+  spec: usb32
+  section: "10.14.2.6"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bit 3 as
+    PORT_RESET: indicates that reset signaling is currently in progress
+    on this port. Value 1 while reset is active.
+  reviewer_note: >
+    Reviewed for bit name and bit position identity only: bit name
+    PORT_RESET, field wPortStatus, bit position 3. Does not verify reset
+    timing, Warm Reset (BH Reset) behavior, or LTSSM reset state.
+
+review_checklist:
+  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm PORT_RESET is at wPortStatus bit 3.
+  - Confirm spec_family=usb3 is consistent.
+  - Confirm no reset timing or LTSSM reset behavior is claimed.
+
+verification_scope:
+  claim: bit_name_and_position_only
+  excludes:
+    - reset timing behavior
+    - Warm Reset (BH Reset) semantics
+    - LTSSM reset state transitions
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry bit name and position identity promotion for
+    `ss_wPortStatus.bit3.PORT_RESET`. Promotion limited to bit name and
+    bit position identity only.
+
+non_claims:
+  - This packet does not verify reset timing or BH Reset semantics.
+  - This packet does not claim LTSSM reset state transitions.
+  - This packet does not establish table-level verification.
+  - No USB 3.x electrical or signal compliance is claimed.
