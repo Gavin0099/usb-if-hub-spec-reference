@@ -1,0 +1,53 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_class_request_matrix
+  entry_id: usb3_get_status_hub
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 defines GET_STATUS (bRequest=0x00) addressed to
+    the hub recipient (bmRequestType=0xA0). Returns 4 bytes: wHubStatus (2B)
+    + wHubChange (2B). SS hub status bit layout differs from USB 2.0.
+  reviewer_note: >
+    Reviewed for request linkage identity only: request name GET_STATUS,
+    bRequest=0x00, hub recipient, bmRequestType=0xA0. Does not verify hub
+    status bit semantics, hub power state behavior, or any runtime response.
+
+review_checklist:
+  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm GET_STATUS is bRequest=0x00 for hub recipient.
+  - Confirm bmRequestType=0xA0 (device-to-host, class, device).
+  - Confirm no hub status bit behavior or runtime state is claimed.
+
+verification_scope:
+  claim: request_linkage_identity_only
+  excludes:
+    - hub status bit semantics (wHubStatus, wHubChange)
+    - hub power state behavior
+    - runtime response content
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry request linkage identity promotion for
+    `usb3_get_status_hub`. Promotion limited to request name, bRequest
+    value, recipient, and bmRequestType identity only.
+
+non_claims:
+  - This packet does not verify hub status bit semantics.
+  - This packet does not claim hub power state or runtime behavior.
+  - This packet does not establish table-level verification.

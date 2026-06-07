@@ -1,12 +1,13 @@
 matrix_id: usb3_ss_hub_class_request_matrix
-version: "0.1"
+version: "0.2"
 description: >
-  USB 3.x SuperSpeed hub class request governance scaffold.
+  USB 3.x SuperSpeed hub class request governance.
   USB 3.2 Specification Rev 1.0, Section 10.14.2.
-  Scaffold scope: request linkage identity only (reviewed).
-  No entry-level verified promotion in this scaffold phase.
+  Verified scope: request linkage identity only for shared requests;
+  request identity and requiredness/optionality for SS-only requests.
   TT-related requests (CLEAR_TT_BUFFER, RESET_TT, GET_TT_STATE, STOP_TT)
   are not included: SS hubs have no Transaction Translator.
+  Does not claim request behavior, xHCI topology, or firmware compliance.
 spec_family: usb3
 scope:
   usb_versions:
@@ -27,8 +28,11 @@ entries:
     notes: >
       Returns wHubStatus (2B) + wHubChange (2B). SS hub status bits differ from
       USB 2.0. Request linkage only; not hub status behavior verification.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_get_status_hub.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -47,8 +51,11 @@ entries:
       Returns wPortStatus (2B) + wPortChange (2B). SS port status layout
       is different from USB 2.0 (PORT_LINK_STATE, PORT_SPEED fields).
       Request linkage only; not port status behavior verification.
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_get_status_port.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -63,8 +70,11 @@ entries:
       wValue: feature_selector
       wIndex: "0x0000"
       wLength: 0
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_set_feature_hub.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -82,8 +92,11 @@ entries:
     notes: >
       SS-specific feature selectors include PORT_U1_TIMEOUT (0x23),
       PORT_U2_TIMEOUT (0x24), PORT_BH_PORT_RESET (0x1C).
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_set_feature_port.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -98,8 +111,11 @@ entries:
       wValue: feature_selector
       wIndex: "0x0000"
       wLength: 0
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_clear_feature_hub.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -117,8 +133,11 @@ entries:
     notes: >
       SS-specific clear selectors include C_PORT_LINK_STATE (0x19),
       C_PORT_CONFIG_ERROR (0x1E).
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_clear_feature_port.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -136,8 +155,11 @@ entries:
     notes: >
       wValue high byte = 0x2A (SuperSpeed Hub Descriptor type).
       Returns the SS hub descriptor; different from USB 2.0 (0x29).
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_get_descriptor_hub.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -152,8 +174,11 @@ entries:
       wValue: "0x2A00"
       wIndex: "0x0000"
       wLength: descriptor_length
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_set_descriptor_hub.yaml
+      verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -173,8 +198,13 @@ entries:
       SS-specific; mandatory for all SS hubs. Sets hub tier depth in bus topology
       (0 = root hub or hub directly attached to root hub; max 5).
       xHCI must issue this request before addressing downstream devices.
-    claim_level: reviewed
+      Verified: request identity and mandatory status only. Does not verify
+      xHCI topology runtime behavior or hub depth assignment algorithm.
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_set_hub_depth.yaml
+      verified_scope: request_identity_requiredness_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
@@ -193,8 +223,13 @@ entries:
     notes: >
       SS-specific; optional. Returns 16-bit link error count; counter resets to
       0 on read. Used for link quality diagnostics.
-    claim_level: reviewed
+      Verified: request identity and optional status only. Does not verify
+      error counter hardware behavior or link quality measurement accuracy.
+    claim_level: verified
     evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_class_request_usb3_get_port_err_count.yaml
+      verified_scope: request_identity_optionality_only
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"

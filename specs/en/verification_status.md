@@ -213,15 +213,15 @@ The following are outside the verified scope for all entries:
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
+| SS hub class requests | 10 | 10 | 0 | 0 | 0 |
 | SS port status bits | 19 | 0 | 19 | 0 | 0 |
-| SS hub class requests | 10 | 0 | 10 | 0 | 0 |
-| **USB 3.x Total** | **38** | **9** | **29** | **0** | **0** |
+| **USB 3.x Total** | **38** | **19** | **19** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 9 | `evidence/entry_verification_packets/usb3/`; correspond to SS hub descriptor field identity verified pilot (USB3-3A) |
+| USB 3.x evidence packets | 19 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B) |
 
-The SS port status bit matrix and SS hub class request matrix keep their verified gate CLOSED, pending future USB3-3B/USB3-3C pilots.
+The SS port status bit matrix keeps its verified gate CLOSED, pending future USB3-3C pilot.
 
 ## What This Page Does Not Claim
 

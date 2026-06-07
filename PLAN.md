@@ -425,6 +425,39 @@ boundary only. Does not claim descriptor dump correctness, firmware behavior, or
 electrical compliance. SS port status and SS hub class request matrices remain
 with verified gate CLOSED; no USB3-3B/USB3-3C pilot yet started.
 
+### Phase USB3-3B - SS Hub Class Request Evidence Pilot
+
+- `tables/ss_hub_class_request_matrix.yaml` promoted to version "0.2": all 10
+  SS hub class request entries promoted from `reviewed` to `verified`.
+  Three distinct verified scopes applied:
+  - 8 shared requests: `request_linkage_identity_only` (request name, bRequest,
+    recipient, bmRequestType identity only)
+  - `usb3_set_hub_depth`: `request_identity_requiredness_only` (request name,
+    bRequest=0x0C, SS-only mandatory status; not xHCI topology behavior)
+  - `usb3_get_port_err_count`: `request_identity_optionality_only` (request
+    name, bRequest=0x0D, SS-only optional status; not error counter hardware)
+- 10 USB 3.x evidence packets added to `evidence/entry_verification_packets/usb3/`:
+  one per SS hub class request entry.
+- `scripts/validate_ss_hub_class_request_matrix.py` rewritten from CLOSED gate
+  to PARTIAL/allowlist gate (ALLOWLIST_VERIFIED_IDS = 10 request IDs).
+- `specs/verification_status.md` + EN: USB 3.x scaffold stats updated to
+  38 tracked / 19 verified / 19 reviewed, evidence_packets=19 (usb3/).
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46,
+  evidence_packets=105.
+
+Non-claims (written into evidence packets):
+- SET_HUB_DEPTH verified scope does not cover xHCI topology runtime behavior
+  or hub depth assignment algorithm.
+- GET_PORT_ERR_COUNT verified scope does not cover error counter hardware
+  behavior or link quality measurement accuracy.
+- No TT request behavior claimed (TT requests absent from SS matrix by design).
+- No xHCI, LTSSM, or firmware compliance claimed.
+
+Claim ceiling: per-entry scoped — request_linkage_identity_only (shared),
+request_identity_requiredness_only (SET_HUB_DEPTH),
+request_identity_optionality_only (GET_PORT_ERR_COUNT).
+SS port status bit matrix verified gate remains CLOSED pending USB3-3C.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`

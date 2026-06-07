@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_class_request_matrix
+  entry_id: usb3_set_descriptor_hub
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 defines SET_DESCRIPTOR (bRequest=0x07) addressed
+    to the hub recipient (bmRequestType=0x20, wValue=0x2A00). The high byte
+    of wValue 0x2A is the SuperSpeed Hub Descriptor type. Used to write
+    the SS hub descriptor.
+  reviewer_note: >
+    Reviewed for request linkage identity only: request name SET_DESCRIPTOR,
+    bRequest=0x07, hub recipient, bmRequestType=0x20, descriptor type 0x2A.
+    Does not verify descriptor write behavior or hub configuration response.
+
+review_checklist:
+  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm SET_DESCRIPTOR is bRequest=0x07 for hub recipient.
+  - Confirm bmRequestType=0x20 (host-to-device, class, device).
+  - Confirm wValue high byte 0x2A is the SS hub descriptor type.
+  - Confirm no descriptor write behavior is claimed.
+
+verification_scope:
+  claim: request_linkage_identity_only
+  excludes:
+    - descriptor write behavior
+    - hub configuration response to SET_DESCRIPTOR
+    - descriptor field value semantics
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry request linkage identity promotion for
+    `usb3_set_descriptor_hub`. Promotion limited to request name, bRequest
+    value, recipient, bmRequestType, and descriptor type byte (0x2A) identity only.
+
+non_claims:
+  - This packet does not verify SET_DESCRIPTOR write behavior or hub response.
+  - This packet does not claim hub configuration correctness.
+  - This packet does not establish table-level verification.

@@ -1,0 +1,53 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-07
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_class_request_matrix
+  entry_id: usb3_set_feature_hub
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 defines SET_FEATURE (bRequest=0x03) addressed
+    to the hub recipient (bmRequestType=0x20, wValue=feature_selector,
+    wLength=0). Used to set hub-level features.
+  reviewer_note: >
+    Reviewed for request linkage identity only: request name SET_FEATURE,
+    bRequest=0x03, hub recipient, bmRequestType=0x20. Does not verify
+    feature selector semantics, feature behavior, or hub state changes.
+
+review_checklist:
+  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm SET_FEATURE is bRequest=0x03 for hub recipient.
+  - Confirm bmRequestType=0x20 (host-to-device, class, device).
+  - Confirm no feature selector semantics or hub behavior is claimed.
+
+verification_scope:
+  claim: request_linkage_identity_only
+  excludes:
+    - feature selector semantics
+    - hub state change behavior from SET_FEATURE
+    - runtime hub feature handling
+    - full USB 3.x compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for single-entry request linkage identity promotion for
+    `usb3_set_feature_hub`. Promotion limited to request name, bRequest
+    value, recipient, and bmRequestType identity only.
+
+non_claims:
+  - This packet does not verify feature selector semantics or hub state behavior.
+  - This packet does not claim SET_FEATURE runtime handling correctness.
+  - This packet does not establish table-level verification.
