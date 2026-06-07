@@ -320,6 +320,24 @@ Claim ceiling: reviewed reference surface only; not semantic verification.
 
 Claim ceiling: reviewed reference surface only; not semantic verification.
 
+### Phase USB3-0 - SuperSpeed Hub Scope Boundary
+
+- NEW `governance/USB3_SCOPE_BOUNDARY.md`: defines candidate scope, spec
+  authority, governance separation rules, schema compatibility note, UI namespace
+  plan (deferred), and permanent non-claims for USB 3.x governed surface.
+- Candidate governed surface identified: SS hub descriptor, SS port status bits,
+  SS feature selectors (PORT_U1_TIMEOUT, PORT_U2_TIMEOUT), SS hub class requests
+  (SET_HUB_DEPTH, GET_PORT_ERR_COUNT).
+- Governance separation: USB 3.x entries will be in separate tables; no
+  cross-table claim-level inheritance with USB 2.0; `specs/usb3/` namespace
+  reserved; `spec_family: usb3` frontmatter required.
+- No governed entries added. No wiki pages added. No UI changes.
+- USB 2.0 governed surface freeze is unaffected: tracked=151, verified=105,
+  reviewed=46.
+
+Claim ceiling: scope boundary documentation only. No USB 3.x reference surface
+is claimed to exist. No USB 3.x entries are tracked.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
