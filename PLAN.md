@@ -499,6 +499,19 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase RELEASE-1 - Hub Governed Surface Export Contract Release Note
+
+- NEW `docs/RELEASE_NOTES_EXPORT_CONTRACT.md`: stable checkpoint release note
+  covering the full export contract surface at EXPORT-CONTRACT-1.0.
+  Sections: governed surface state at release (USB 2.0 freeze + USB 3.x
+  matrix-level closeout with per-table breakdown), export contract components
+  (six components with paths and roles), consuming repo usage guide (entry
+  point, two-step CI gate, allowed usage, re-baseline procedure), non-claims
+  (fixed boundaries: LTSSM, xHCI, firmware compliance, electrical, USB-IF,
+  USB 3.x depth parity), public navigation chain, phases included in release.
+- PLAN.md: add RELEASE-1 phase entry.
+- No table changes. No statistic changes.
+
 ### Phase DOC-LINK-1 - Consumer Contract Visibility Sync
 
 - `README.md`: restructured "Current USB 2.0 Status" into "Governed Surface
