@@ -10,19 +10,25 @@ specifications for consumption by firmware governance contracts.
 It does **not** govern firmware behavior. It clarifies standard semantics only.
 It must not override confirmed project facts in consuming firmware repositories.
 
-## Current USB 2.0 Status
+## Governed Surface Status
+
+### USB 2.0 — Freeze
 
 - Canonical visible reference surface: `specs/` and `specs/en/`.
 - Governed tracked entries: 151.
 - Entry-level verified entries: 105.
-- Reviewed entries: 46.
-- Inferred tracked entries: 0.
-- Verified scope is limited to selector-name/value for selector tables, descriptor field
-  identity for hub descriptor fields, bit name/position for port/hub status-change entries,
-  request-linkage identity for standard and class requests, and bit-group name and
-  value-encoding identity for wHubCharacteristics characteristic bit groups.
-- No page-level, table-level, firmware-behavior, or full USB compliance
-  verification is claimed.
+- Reviewed entries: 46 (reserved bits and boundary-only placeholders; not pending promotion).
+- Verified scope: selector-name/value, descriptor field identity, bit name/position,
+  request-linkage identity, bit-group name and value-encoding identity.
+- No page-level, table-level, firmware-behavior, or full USB compliance verification is claimed.
+
+### USB 3.x / SuperSpeed Hub — Matrix-Level Closeout
+
+- Three governed matrices: SS hub descriptor (9 verified), SS hub class requests (10 verified),
+  SS port status/change bits (15 verified, 4 reviewed reserved boundary).
+- Governed tracked entries: 38. Entry-level verified: 34. Reviewed: 4.
+- Reference surface is matrix-defined only; not equivalent to full USB 3.x spec coverage.
+- No LTSSM, xHCI, electrical, or USB-IF certification claims.
 
 See:
 - [specs/verification_status.md](specs/verification_status.md)
@@ -44,18 +50,38 @@ English pages are available under [specs/en/](specs/en/).
 
 ## Machine-Readable Surfaces
 
-- `tables/`: governed structured matrices for escalation triggers, hub
-  descriptor fields, Transaction Translator entries, class requests, feature
-  selectors, and port status bits.
-- `exports/usb20_hub_class_request_manifest.yaml`: consumer-facing access
-  manifest for governed tables.
-- `evidence/entry_verification_packets/`: entry-level verification packets for
-  promoted verified entries.
-- `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for
-  governed table drift observation.
-- `scripts/validate_reference_surface_statistics.py`: consistency check for
-  manually maintained visible counts across README, PLAN, homepages, and
-  verification status pages.
+- `tables/`: governed structured matrices for USB 2.0 (9 tables) and USB 3.x (3 tables).
+- `exports/hub_governed_surface_manifest.yaml`: unified consumer-facing manifest
+  covering all 12 governed tables with per-family authority surface, claim ceiling,
+  and consumer usage contract. Supersedes `exports/usb20_hub_class_request_manifest.yaml`.
+- `evidence/entry_verification_packets/`: entry-level verification packets for promoted
+  verified entries (105 USB 2.0 + 34 USB 3.x packets).
+- `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for all 12 governed
+  table drift detection.
+- `scripts/validate_reference_surface_statistics.py`: consistency check for manually
+  maintained visible counts across README, PLAN, homepages, and verification status pages.
+
+## Consumer Integration
+
+Consuming repositories can integrate this governed surface through a two-step CI gate:
+
+```powershell
+# Step 1 — Manifest structural integrity
+python scripts\validate_hub_governed_surface_manifest.py
+
+# Step 2 — Table content drift detection
+python scripts\probe_table_fingerprint.py --mode check `
+  --manifest exports\hub_governed_surface_manifest.yaml `
+  --baseline-in evidence\table_fingerprint_baseline.jsonl
+```
+
+Both steps must PASS before treating the governed surface as stable. The contract
+documents allowed usage, forbidden usage, and failure interpretation:
+- [`docs/CONSUMER_INTEGRATION_CONTRACT.md`](docs/CONSUMER_INTEGRATION_CONTRACT.md)
+
+This contract is smoke-tested. The smoke fixture verifies manifest integrity, zero drift
+on 12 governed tables, and drift detection with table-level attribution when a hash is
+corrupted.
 
 ## Governance Layers
 
@@ -96,16 +122,30 @@ or response envelope enforcement.
 
 ## Validation
 
-Common repo-local checks:
+Core repo-local checks:
 
 ```powershell
-python scripts\validate_wiki_frontmatter.py
-python scripts\validate_wiki_source_coverage.py
+# USB 2.0 + USB 3.x matrix validators
+python scripts\validate_hub_descriptor_matrix.py
 python scripts\validate_feature_selector_matrix.py
 python scripts\validate_port_status_bit_matrix.py
 python scripts\validate_class_request_matrix.py
-python scripts\validate_class_request_coverage.py --matrix tables\class_request_matrix.yaml
-python scripts\probe_table_fingerprint.py --mode check --manifest exports\usb20_hub_class_request_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl
+python scripts\validate_standard_device_request_matrix.py
+python scripts\validate_wHubCharacteristics_bit_matrix.py
+python scripts\validate_ss_hub_descriptor_matrix.py
+python scripts\validate_ss_hub_class_request_matrix.py
+python scripts\validate_ss_port_status_bit_matrix.py
+
+# Export contract validators
+python scripts\validate_hub_governed_surface_manifest.py
+python scripts\probe_table_fingerprint.py --mode check `
+  --manifest exports\hub_governed_surface_manifest.yaml `
+  --baseline-in evidence\table_fingerprint_baseline.jsonl
+
+# Consumer integration smoke
+python scripts\smoke_consumer_integration_fixtures.py
+
+# Static site build
 npm.cmd run build
 ```
 
@@ -119,3 +159,7 @@ This repository does not claim:
 - Firmware implementation behavior is established here.
 - This repo can override consuming firmware project facts.
 - Fleet governance or runtime enforcement is active.
+- LTSSM runtime state transitions are verified.
+- xHCI port state management or xHCI enumeration behavior is verified.
+- USB 3.x governed matrix surface is equivalent to full USB 3.x spec coverage.
+- The export contract establishes firmware compliance truth or USB-IF certification.

@@ -499,6 +499,26 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase DOC-LINK-1 - Consumer Contract Visibility Sync
+
+- `README.md`: restructured "Current USB 2.0 Status" into "Governed Surface
+  Status" with separate USB 2.0 (Freeze) and USB 3.x (Matrix-Level Closeout)
+  subsections. Updated "Machine-Readable Surfaces" to reference the unified
+  manifest and all 34+105 evidence packets. Added "Consumer Integration"
+  section with two-step CI gate commands and link to contract doc. Updated
+  "Validation" commands to use new manifest + consumer smoke. Added USB3/export
+  non-claims to "Non-Claims" block.
+- `specs/verification_status.md` + EN: added "Export Contract Surface" section
+  listing the six export contract components (manifest, fingerprint baseline,
+  contract doc, manifest validator, fingerprint probe, consumer smoke) with
+  component roles, two-step CI gate commands, and export contract non-claims.
+- `specs/en/index.md`: added "Consumer Integration Contract" feature card
+  above Verification Status; updated Verification Status card details to show
+  both USB 2.0 and USB 3.x stats; updated footer boundary note to name
+  manifest and contract doc.
+- No table changes. No statistic changes.
+- All validators, consumer smoke, and build PASS.
+
 ### Phase CONSUMER-SMOKE-1 - Consumer Integration Contract Smoke Fixture
 
 - NEW `scripts/smoke_consumer_integration_fixtures.py`: smoke test covering

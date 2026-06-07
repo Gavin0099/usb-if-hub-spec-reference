@@ -97,13 +97,17 @@ features:
   - title: Hub Power Budget
     details: Self-powered vs. bus-powered hub power rules, per-port current limits (500 mA vs. 100 mA), bHubContrCurrent (mA direct) vs. bMaxPower (×2) units.
     link: /en/hub_power_budget
+  - title: Consumer Integration Contract
+    details: "Consuming repo CI contract: unified governed surface manifest (12 tables), fingerprint drift baseline, two-step CI gate, allowed/forbidden usage, and failure interpretation. Smoke-tested: manifest PASS, no-drift PASS, drift FAIL with table attribution."
+    link: /en/verification_status
   - title: Verification Status
-    details: Current entry-level verification maturity, reviewed packet status, and non-claims. 151 tracked entries, including 105 verified, 46 reviewed, and 0 inferred.
+    details: "Current entry-level verification maturity, reviewed packet status, and non-claims. USB 2.0: 151 tracked / 105 verified / 46 reviewed (freeze). USB 3.x: 38 tracked / 34 verified / 4 reviewed (matrix-level closeout)."
     link: /en/verification_status
   - title: Glossary
     details: Standardizes terminology for this repo to reduce document and LLM answer drift.
     link: /en/glossary
 ---
 
-> **Important boundary:** All content on this site currently remains `claim_level: inferred` and `semantic_verification_claimed: false`.
-> This repository is a standards clarification layer, not a project-fact authority for consuming firmware repositories.
+> **Important boundary:** This repository is a standards clarification layer, not a project-fact authority for consuming firmware repositories.
+> Governed surface export: `exports/hub_governed_surface_manifest.yaml` (12 tables, USB 2.0 freeze + USB 3.x matrix-level closeout).
+> Consumer integration contract: `docs/CONSUMER_INTEGRATION_CONTRACT.md`.

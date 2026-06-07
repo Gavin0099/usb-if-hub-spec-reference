@@ -270,6 +270,37 @@ The following are outside the verified scope for all USB 3.x entries, now and pe
 - USB 3.x reference surface covers the current three governed matrices only; **this is not complete USB 3.x spec coverage** and is not equivalent to the USB 2.0 28 topic-pair reference surface.
 - USB 3.x entries are not counted in the USB 2.0 evidence packet total (USB 2.0 remains at 105 packets).
 
+## Export Contract Surface
+
+The hub governed surface now has a complete machine-readable export contract for consuming repo CI use.
+
+| Component | Path | Role |
+|---|---|---|
+| Unified manifest | `exports/hub_governed_surface_manifest.yaml` | Governed truth index: authority surface, claim ceiling, and consumer usage contract for all 12 tables |
+| Fingerprint baseline | `evidence/table_fingerprint_baseline.jsonl` | Content-hash baseline for all 12 governed tables for CI drift detection |
+| Consumer contract | `docs/CONSUMER_INTEGRATION_CONTRACT.md` | Allowed / forbidden usage, failure interpretation, governance layer model |
+| Manifest validator | `scripts/validate_hub_governed_surface_manifest.py` | Consistency gate between manifest summary and actual table entries (R1–R8) |
+| Fingerprint probe | `scripts/probe_table_fingerprint.py --mode check` | Table content drift gate (exit 1 + names the drifted table) |
+| Consumer smoke | `scripts/smoke_consumer_integration_fixtures.py` | Smoke-tested: manifest PASS, no-drift PASS, drift FAIL with table attribution |
+
+**Consuming repo two-step CI gate:**
+
+```
+Step 1  python scripts/validate_hub_governed_surface_manifest.py
+        → PASS: 12 tables, usb20 freeze, usb3 matrix_level_closeout
+
+Step 2  python scripts/probe_table_fingerprint.py --mode check \
+          --manifest exports/hub_governed_surface_manifest.yaml \
+          --baseline-in evidence/table_fingerprint_baseline.jsonl
+        → PASS: 12 tables, 0 drift
+```
+
+**Export contract non-claims:**
+- Does not establish firmware compliance truth
+- Does not claim LTSSM / xHCI runtime behavior is verified
+- Does not claim USB-IF certification
+- Cannot override confirmed project facts in consuming repositories
+
 ## Reference Surface Maintenance Rule
 
 When verification maturity or tracked entry counts change, the following visible surfaces must be checked together:
