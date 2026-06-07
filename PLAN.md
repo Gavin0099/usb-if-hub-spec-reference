@@ -233,6 +233,26 @@ upgrade and no governance behavior change.
 
 Claim ceiling: reviewed reference surface only; not semantic verification.
 
+### Phase 16 - Bucket B Verified Promotion
+
+- Promoted 16 reviewed entries to verified across two tables:
+  - `tables/standard_device_request_matrix.yaml`: all 12 entries reviewed → verified
+    (GET_STATUS, CLEAR_FEATURE, SET_FEATURE, SET_ADDRESS, GET_DESCRIPTOR,
+    GET_CONFIGURATION, SET_CONFIGURATION, GET_INTERFACE, SET_INTERFACE — device,
+    interface, and endpoint variants)
+  - `tables/hub_interrupt_endpoint_matrix.yaml`: all 4 entries reviewed → verified
+    (bEndpointAddress, bmAttributes, wMaxPacketSize, bInterval)
+- 16 evidence packets written (one per promoted entry).
+- Statistics at completion: tracked=145, verified=100, reviewed=45, inferred=0,
+  evidence_packets=100.
+- Updated visible surfaces: README.md, PLAN.md, specs/en/index.md,
+  verification_status.md (ZH + EN); verified entries table +16 rows.
+- Reviewed surface post-promotion: 45 entries = 4 high-bit boundary-only +
+  41 reserved bits (permanent boundaries, no semantic promotion pending).
+
+Claim ceiling: entry-level verified gate only; selector-name/value or bit name
+and bit position identity scope only.
+
 ### Phase WHC-1 - wHubCharacteristics Bit-Group Governed Matrix
 
 - NEW `tables/wHubCharacteristics_bit_matrix.yaml`: 6 entries covering wHubCharacteristics
@@ -312,8 +332,25 @@ Claim ceiling: reviewed reference surface only; not semantic verification.
 - `python scripts\validate_port_status_bit_matrix.py`
 - `python scripts\validate_class_request_matrix.py`
 - `python scripts\validate_class_request_coverage.py --matrix tables\class_request_matrix.yaml`
+- `python scripts\validate_hub_interrupt_endpoint_matrix.py`
+- `python scripts\validate_standard_device_request_matrix.py`
+- `python scripts\validate_wHubCharacteristics_bit_matrix.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\usb20_hub_class_request_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `npm.cmd run build`
+
+## USB 2.0 Governed Surface Freeze
+
+USB 2.0 governed reference surface is closed.
+
+The governed matrix scope now tracks 151 entries:
+- 105 entry-level verified semantic entries
+- 46 reviewed permanent-boundary entries
+
+All remaining reviewed entries are reserved bits or boundary-only placeholders.
+No reviewed entry is pending semantic promotion.
+
+Active validators and completed phase history are aligned with the final USB 2.0
+governed surface.
 
 ## Open Work
 
