@@ -534,12 +534,39 @@ No reviewed entry is pending semantic promotion.
 Active validators and completed phase history are aligned with the final USB 2.0
 governed surface.
 
+## USB 3.x Governed Matrix State
+
+USB 3.x governed matrix surface has reached stable closeout state (Phase USB3-3C).
+
+The three USB 3.x governed matrices now track 38 entries:
+- 34 entry-level verified entries (all defined entries across all three matrices)
+- 4 reviewed permanent-boundary entries (reserved bits only, not pending promotion)
+
+All defined entries across the current three USB 3.x governed matrices have
+completed verified promotion:
+- SS hub descriptor fields: 9 / 9 verified
+- SS hub class requests: 10 / 10 verified
+- SS port status/change bits: 15 defined entries verified, 4 reserved boundary
+  entries reviewed
+
+No defined USB 3.x matrix entry is pending semantic promotion.
+The remaining 4 reviewed entries are reserved boundary entries only.
+
+USB 3.x reference surface is matrix-defined only — it covers these three
+governed matrices, not the full USB 3.x specification surface. It does not
+have the equivalent wiki/reference depth of USB 2.0 (28 topic pairs).
+
+USB 2.0 freeze remains unchanged at 151 / 105 / 46.
+
 ## Open Work
 
 1. Continue entry-level verification only when narrow evidence packets and gate
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
+3. USB 3.x wiki expansion and additional matrix scope are deferred; USB3-4
+   closeout hygiene is complete. Any expansion requires a new scope boundary
+   phase before adding entries.
 
 ## Cannot Claim
 
@@ -549,3 +576,10 @@ governed surface.
 - This repo can override consuming firmware project facts.
 - Fleet governance is enabled.
 - Runtime profile validation or response envelope enforcement is active.
+- USB 3.x governed matrix surface is equivalent to full USB 3.x spec coverage.
+- USB 3.x hub spec reference has converged to the same depth as USB 2.0.
+- LTSSM runtime state transitions are verified.
+- xHCI port state management or xHCI enumeration behavior is verified.
+- SuperSpeed hub firmware compliance truth is established.
+- PORT_LINK_STATE or PORT_SPEED verified scope covers any behavioral semantics
+  beyond bit range and encoding table identity.

@@ -248,13 +248,27 @@ The USB 3.x governed matrix scaffold was established in Phase USB3-2. The follow
 
 All three USB 3.x matrices have open verified gates. 34 entries have completed entry-level verified promotion; 4 reserved boundary entries remain reviewed (permanent boundaries, no verifiable semantics).
 
-### USB 3.x Scaffold Non-claims
+### USB 3.x Governed Matrix Closeout State
 
-- USB 2.0 governed surface statistics (151/105/46) are unaffected.
-- USB 3.x scaffold entries are not counted in the USB 2.0 evidence packet total.
-- Does not claim entry-level verified completion for any USB 3.x entry.
-- Does not claim LTSSM behavioral model, xHCI interaction semantics, or electrical compliance.
-- USB 3.x reviewed entries may be promoted to verified in a future phase, but will require independent evidence packets and a dedicated promotion gate.
+The USB 3.x governed matrix surface is now stable (as of Phase USB3-3C completion):
+
+- **All defined entries across the three matrices have completed entry-level verified promotion**: SS hub descriptor 9/9, SS hub class requests 10/10, SS port status/change bits 15/19.
+- **The remaining 4 reviewed entries are reserved boundaries only**, not pending-promotion gaps: wPortStatus bit4, bit15; wPortChange bit1, bits[15:7].
+- **No defined USB 3.x matrix entry is pending semantic promotion.**
+
+### USB 3.x Non-Claims (fixed boundaries)
+
+The following are outside the verified scope for all USB 3.x entries, now and permanently:
+
+- Does not claim LTSSM runtime state transition behavior is verified.
+- Does not claim xHCI port state management or xHCI enumeration behavior is verified.
+- Does not claim SuperSpeed hub firmware compliance truth.
+- Does not claim electrical, timing, or interoperability compliance.
+- Does not claim USB-IF certification completeness.
+- `PORT_LINK_STATE` verified scope is **limited to** bit range [8:5] and 12-value encoding table identity only; does not cover LTSSM transition behavior or U-state semantics.
+- `PORT_SPEED` verified scope is **limited to** bit range [12:10] and 6-value encoding table identity only; does not cover speed detection hardware or link training outcome.
+- USB 3.x reference surface covers the current three governed matrices only; **this is not complete USB 3.x spec coverage** and is not equivalent to the USB 2.0 28 topic-pair reference surface.
+- USB 3.x entries are not counted in the USB 2.0 evidence packet total (USB 2.0 remains at 105 packets).
 
 ## Reference Surface Maintenance Rule
 

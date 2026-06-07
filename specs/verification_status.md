@@ -248,13 +248,27 @@ USB 3.x governed matrix 已在 Phase USB3-2 建立 scaffold。以下統計**與 
 
 USB 3.x 所有三個 matrices 的 verified gate 已開放。34 個 entries 已完成 entry-level verified promotion；4 個 reserved boundary entries 維持 reviewed（永久邊界，無語意可驗證）。
 
-### USB 3.x Scaffold Non-claims
+### USB 3.x Governed Matrix Closeout State
 
-- USB 2.0 governed surface 統計（151/105/46）不受影響。
-- USB 3.x scaffold entries 不算入 USB 2.0 evidence packet count。
-- 不宣告 USB 3.x entries 的 entry-level verified 完成。
-- 不宣告 LTSSM 行為模型、xHCI 互動語意或電氣合規。
-- USB 3.x reviewed entries 未來可升 verified，但需要獨立 evidence packets 與 promotion gate。
+目前 USB 3.x governed matrix surface 已進入穩定狀態（Phase USB3-3C 完成後）：
+
+- **三張 matrix 的 defined entries 全部完成 entry-level verified promotion**：SS hub descriptor 9/9、SS hub class requests 10/10、SS port status/change bits 15/19。
+- **剩餘 4 個 reviewed entries 均為 reserved boundary**，不是未完成的升級缺口：wPortStatus bit4、bit15；wPortChange bit1、bits[15:7]。
+- **不存在任何 defined USB 3.x matrix entry 仍在 pending semantic promotion**。
+
+### USB 3.x Non-Claims（固定邊界）
+
+以下內容對所有 USB 3.x entries 均在 verified scope 之外，**無論現在或未來**：
+
+- 不宣告 LTSSM runtime state transition behavior 已驗證。
+- 不宣告 xHCI port state management 或 xHCI enumeration behavior 已驗證。
+- 不宣告 SuperSpeed hub firmware compliance truth。
+- 不宣告電氣、時序、或互操作性合規（electrical / timing / interoperability）。
+- 不宣告 USB-IF certification completeness。
+- `PORT_LINK_STATE` verified scope **僅限** bit range [8:5] 與 12-value encoding table identity；不涵蓋 LTSSM transition behavior 或 U-state 語意。
+- `PORT_SPEED` verified scope **僅限** bit range [12:10] 與 6-value encoding table identity；不涵蓋 speed detection hardware 或 link training outcome。
+- USB 3.x reference surface 僅涵蓋目前三張 governed matrix；**不是完整的 USB 3.x spec coverage**，也不等同於 USB 2.0 的 28 topic pairs reference surface。
+- USB 3.x entries 不算入 USB 2.0 evidence packet count（USB 2.0 維持 105 packets）。
 
 ## Reference Surface Maintenance Rule
 
