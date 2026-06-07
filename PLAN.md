@@ -499,6 +499,26 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase CONSUMER-SMOKE-1 - Consumer Integration Contract Smoke Fixture
+
+- NEW `scripts/smoke_consumer_integration_fixtures.py`: smoke test covering
+  three consumer integration contract cases using the real governed surface:
+  - `manifest_integrity_pass`: `validate_hub_governed_surface_manifest.py`
+    against the real manifest — expect exit 0, PASS in output.
+  - `fingerprint_no_drift`: `probe_table_fingerprint.py --mode check` against
+    the real manifest + real baseline — expect exit 0, 12 tables checked, 0 drift.
+  - `fingerprint_drift_detected`: programmatically corrupt the hash for
+    `usb20_hub_descriptor_field_matrix` in a temp baseline copy, run check —
+    expect exit 1, drift_count=1, table id named in stdout.
+- The drift case validates that the failure message specifically identifies the
+  drifted table — not just that the check failed.
+- All three cases PASS.
+- Active Validators updated to include `smoke_consumer_integration_fixtures.py`.
+- No table changes. No statistic changes.
+
+Authority ceiling: consumer_integration_contract_smoke_only.
+Claim ceiling: does not validate table semantics or promote claim levels.
+
 ### Phase EXPORT-2 - Consumer Integration Contract
 
 - NEW `docs/CONSUMER_INTEGRATION_CONTRACT.md`: formal consumer-facing contract
@@ -576,6 +596,7 @@ Claim ceiling: manifest_structural_integrity_only; does not re-verify table cont
 - `python scripts\validate_ss_hub_descriptor_matrix.py`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
+- `python scripts\smoke_consumer_integration_fixtures.py`
 - `npm.cmd run build`
 
 ## USB 2.0 Governed Surface Freeze

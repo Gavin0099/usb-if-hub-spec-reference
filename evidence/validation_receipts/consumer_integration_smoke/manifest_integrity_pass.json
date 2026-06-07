@@ -1,0 +1,9 @@
+{
+  "name": "manifest_integrity_pass",
+  "note": "validate_hub_governed_surface_manifest.py against real manifest",
+  "expected_exit": 0,
+  "actual_exit": 0,
+  "expected_stdout_contains": "PASS",
+  "stdout_contains_pass": true,
+  "result": "PASS"
+}

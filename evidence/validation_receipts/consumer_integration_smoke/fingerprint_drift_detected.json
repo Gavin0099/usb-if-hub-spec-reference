@@ -1,0 +1,12 @@
+{
+  "name": "fingerprint_drift_detected",
+  "note": "fingerprint check with corrupted hash for usb20_hub_descriptor_field_matrix; expect exit 1, drift_count=1, table id named in stdout",
+  "expected_exit": 1,
+  "actual_exit": 1,
+  "expected_drift_count": 1,
+  "actual_drift_count": 1,
+  "expected_drifted_table": "usb20_hub_descriptor_field_matrix",
+  "drifted_table_in_findings": true,
+  "drifted_table_in_stdout": true,
+  "result": "PASS"
+}

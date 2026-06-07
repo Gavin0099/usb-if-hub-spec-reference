@@ -1,0 +1,43 @@
+{
+  "smoke_runner": "smoke_consumer_integration_fixtures.py",
+  "authority_ceiling": "consumer_integration_contract_smoke_only",
+  "total_cases": 3,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "manifest_integrity_pass",
+      "note": "validate_hub_governed_surface_manifest.py against real manifest",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_stdout_contains": "PASS",
+      "stdout_contains_pass": true,
+      "result": "PASS"
+    },
+    {
+      "name": "fingerprint_no_drift",
+      "note": "fingerprint check on real manifest + real baseline; expect 12 tables, 0 drift",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_tables_checked": 12,
+      "actual_tables_checked": 12,
+      "expected_drift_count": 0,
+      "actual_drift_count": 0,
+      "expected_error_count": 0,
+      "actual_error_count": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "fingerprint_drift_detected",
+      "note": "fingerprint check with corrupted hash for usb20_hub_descriptor_field_matrix; expect exit 1, drift_count=1, table id named in stdout",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_drift_count": 1,
+      "actual_drift_count": 1,
+      "expected_drifted_table": "usb20_hub_descriptor_field_matrix",
+      "drifted_table_in_findings": true,
+      "drifted_table_in_stdout": true,
+      "result": "PASS"
+    }
+  ]
+}
