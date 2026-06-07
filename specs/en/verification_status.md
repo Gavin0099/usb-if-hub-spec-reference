@@ -83,7 +83,7 @@ USB 2.0 §11.24 / Table 11-19 explicitly defines the following bit positions as 
 
 ## Verified Entries
 
-One hundred entries have completed verified promotion (`claim_level: verified`):
+105 entries have completed verified promotion (`claim_level: verified`):
 
 | Entry | Field | Bit | Verified Scope |
 |---|---|---|---|
@@ -206,7 +206,7 @@ The following are outside the verified scope for all entries:
 - Host-stack interpretation
 - Full USB 2.0 compliance
 
-## USB 3.x Scaffold Surface
+## USB 3.x Governed Surface Statistics
 
 > USB 3.x entries and evidence packets are tracked independently and are **not included** in the USB 2.0 151/105/46 freeze statistics.
 
@@ -235,20 +235,20 @@ This page does not claim:
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.
 
-## USB 3.x Scaffold Surface (separate from USB 2.0 statistics)
+## USB 3.x Governed Matrix Closeout State (separate from USB 2.0 statistics)
 
-The USB 3.x governed matrix scaffold was established in Phase USB3-2. The following statistics are **fully independent of the USB 2.0 totals (151/105/46)** and are not added to the USB 2.0 counts.
+The following statistics are **fully independent of the USB 2.0 totals (151/105/46)** and are not added to the USB 2.0 counts.
 
-| Table | Tracked | Verified | Reviewed | Verified gate |
+| Table | Tracked | Verified | Reviewed | State |
 |---|---:|---:|---:|---|
-| SS port status bits | 19 | 15 | 4 | **OPEN** (USB3-3C pilot, 15/19 verified) |
-| SS hub class requests | 10 | 10 | 0 | **OPEN** (USB3-3B pilot, 10/10 verified) |
-| SS hub descriptor fields | 9 | 9 | 0 | **OPEN** (USB3-3A pilot, 9/9 verified) |
-| **USB 3.x total** | **38** | **34** | **4** | — |
+| SS port status bits | 19 | 15 | 4 | **CLOSED** (15/19 defined verified; 4 reserved boundary, permanent) |
+| SS hub class requests | 10 | 10 | 0 | **CLOSED** (10/10 verified) |
+| SS hub descriptor fields | 9 | 9 | 0 | **CLOSED** (9/9 verified) |
+| **USB 3.x total** | **38** | **34** | **4** | matrix-level closeout |
 
-All three USB 3.x matrices have open verified gates. 34 entries have completed entry-level verified promotion; 4 reserved boundary entries remain reviewed (permanent boundaries, no verifiable semantics).
+All three USB 3.x matrices are at matrix-level closeout. 34 entries have completed entry-level verified promotion; 4 reserved boundary entries remain reviewed (permanent boundaries, no verifiable semantics).
 
-### USB 3.x Governed Matrix Closeout State
+### USB 3.x Governed Matrix Closeout Details
 
 The USB 3.x governed matrix surface is now stable (as of Phase USB3-3C completion):
 
