@@ -218,6 +218,27 @@ This page does not claim:
 - This reference overrides confirmed project facts in consuming repositories.
 - Static counts are an automated source of truth synchronized with the YAML tables.
 
+## USB 3.x Scaffold Surface (separate from USB 2.0 statistics)
+
+The USB 3.x governed matrix scaffold was established in Phase USB3-2. The following statistics are **fully independent of the USB 2.0 totals (151/105/46)** and are not added to the USB 2.0 counts.
+
+| Table | Tracked | Verified | Reviewed | Verified gate |
+|---|---:|---:|---:|---|
+| SS port status bits | 19 | 0 | 19 | **CLOSED** (scaffold phase) |
+| SS hub class requests | 10 | 0 | 10 | **CLOSED** (scaffold phase) |
+| SS hub descriptor fields | 9 | 0 | 9 | **CLOSED** (scaffold phase) |
+| **USB 3.x scaffold total** | **38** | **0** | **38** | — |
+
+All USB 3.x scaffold entries have `claim_level: reviewed`. The verified gate is not yet open.
+
+### USB 3.x Scaffold Non-claims
+
+- USB 2.0 governed surface statistics (151/105/46) are unaffected.
+- USB 3.x scaffold entries are not counted in the USB 2.0 evidence packet total.
+- Does not claim entry-level verified completion for any USB 3.x entry.
+- Does not claim LTSSM behavioral model, xHCI interaction semantics, or electrical compliance.
+- USB 3.x reviewed entries may be promoted to verified in a future phase, but will require independent evidence packets and a dedicated promotion gate.
+
 ## Reference Surface Maintenance Rule
 
 When verification maturity or tracked entry counts change, the following visible surfaces must be checked together:

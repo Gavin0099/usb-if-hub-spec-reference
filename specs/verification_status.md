@@ -218,6 +218,27 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 - 本 reference 可以覆蓋 consuming repositories 中已確認的 project facts。
 - 這些靜態數字已與 YAML tables 自動同步，並可作為 source of truth。
 
+## USB 3.x Scaffold Surface（獨立於 USB 2.0 統計）
+
+USB 3.x governed matrix 已在 Phase USB3-2 建立 scaffold。以下統計**與 USB 2.0 的 151/105/46 完全獨立**，不加入 USB 2.0 總數。
+
+| Table | Tracked | Verified | Reviewed | Verified gate |
+|---|---:|---:|---:|---|
+| SS port status bits | 19 | 0 | 19 | **CLOSED** (scaffold phase) |
+| SS hub class requests | 10 | 0 | 10 | **CLOSED** (scaffold phase) |
+| SS hub descriptor fields | 9 | 0 | 9 | **CLOSED** (scaffold phase) |
+| **USB 3.x scaffold total** | **38** | **0** | **38** | — |
+
+所有 USB 3.x scaffold entries 的 `claim_level: reviewed`。Verified gate 尚未開放。
+
+### USB 3.x Scaffold Non-claims
+
+- USB 2.0 governed surface 統計（151/105/46）不受影響。
+- USB 3.x scaffold entries 不算入 USB 2.0 evidence packet count。
+- 不宣告 USB 3.x entries 的 entry-level verified 完成。
+- 不宣告 LTSSM 行為模型、xHCI 互動語意或電氣合規。
+- USB 3.x reviewed entries 未來可升 verified，但需要獨立 evidence packets 與 promotion gate。
+
 ## Reference Surface Maintenance Rule
 
 當 verification maturity 或 tracked entry counts 有變化時，以下 visible surfaces 必須一起檢查：

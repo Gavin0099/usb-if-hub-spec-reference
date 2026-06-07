@@ -1,0 +1,200 @@
+matrix_id: usb3_ss_hub_class_request_matrix
+version: "0.1"
+description: >
+  USB 3.x SuperSpeed hub class request governance scaffold.
+  USB 3.2 Specification Rev 1.0, Section 10.14.2.
+  Scaffold scope: request linkage identity only (reviewed).
+  No entry-level verified promotion in this scaffold phase.
+  TT-related requests (CLEAR_TT_BUFFER, RESET_TT, GET_TT_STATE, STOP_TT)
+  are not included: SS hubs have no Transaction Translator.
+spec_family: usb3
+scope:
+  usb_versions:
+    - usb_3_2
+  topic: ss_hub_class_request
+
+entries:
+  - request_id: usb3_get_status_hub
+    request_name: GET_STATUS
+    recipient: hub
+    bRequest_hex: "0x00"
+    setup:
+      bmRequestType: "0xA0"
+      bRequest: GET_STATUS
+      wValue: "0x0000"
+      wIndex: "0x0000"
+      wLength: 4
+    notes: >
+      Returns wHubStatus (2B) + wHubChange (2B). SS hub status bits differ from
+      USB 2.0. Request linkage only; not hub status behavior verification.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_get_status_port
+    request_name: GET_STATUS
+    recipient: port
+    bRequest_hex: "0x00"
+    setup:
+      bmRequestType: "0xA3"
+      bRequest: GET_STATUS
+      wValue: "0x0000"
+      wIndex: port_number
+      wLength: 4
+    notes: >
+      Returns wPortStatus (2B) + wPortChange (2B). SS port status layout
+      is different from USB 2.0 (PORT_LINK_STATE, PORT_SPEED fields).
+      Request linkage only; not port status behavior verification.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_set_feature_hub
+    request_name: SET_FEATURE
+    recipient: hub
+    bRequest_hex: "0x03"
+    setup:
+      bmRequestType: "0x20"
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_set_feature_port
+    request_name: SET_FEATURE
+    recipient: port
+    bRequest_hex: "0x03"
+    setup:
+      bmRequestType: "0x23"
+      bRequest: SET_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    notes: >
+      SS-specific feature selectors include PORT_U1_TIMEOUT (0x23),
+      PORT_U2_TIMEOUT (0x24), PORT_BH_PORT_RESET (0x1C).
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_clear_feature_hub
+    request_name: CLEAR_FEATURE
+    recipient: hub
+    bRequest_hex: "0x01"
+    setup:
+      bmRequestType: "0x20"
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: "0x0000"
+      wLength: 0
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_clear_feature_port
+    request_name: CLEAR_FEATURE
+    recipient: port
+    bRequest_hex: "0x01"
+    setup:
+      bmRequestType: "0x23"
+      bRequest: CLEAR_FEATURE
+      wValue: feature_selector
+      wIndex: port_number
+      wLength: 0
+    notes: >
+      SS-specific clear selectors include C_PORT_LINK_STATE (0x19),
+      C_PORT_CONFIG_ERROR (0x1E).
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_get_descriptor_hub
+    request_name: GET_DESCRIPTOR
+    recipient: hub
+    bRequest_hex: "0x06"
+    setup:
+      bmRequestType: "0xA0"
+      bRequest: GET_DESCRIPTOR
+      wValue: "0x2A00"
+      wIndex: "0x0000"
+      wLength: descriptor_length
+    notes: >
+      wValue high byte = 0x2A (SuperSpeed Hub Descriptor type).
+      Returns the SS hub descriptor; different from USB 2.0 (0x29).
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_set_descriptor_hub
+    request_name: SET_DESCRIPTOR
+    recipient: hub
+    bRequest_hex: "0x07"
+    setup:
+      bmRequestType: "0x20"
+      bRequest: SET_DESCRIPTOR
+      wValue: "0x2A00"
+      wIndex: "0x0000"
+      wLength: descriptor_length
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_set_hub_depth
+    request_name: SET_HUB_DEPTH
+    recipient: hub
+    bRequest_hex: "0x0C"
+    applicability: ss_only_mandatory
+    setup:
+      bmRequestType: "0x20"
+      bRequest: SET_HUB_DEPTH
+      wValue: hub_depth
+      wIndex: "0x0000"
+      wLength: 0
+    notes: >
+      SS-specific; mandatory for all SS hubs. Sets hub tier depth in bus topology
+      (0 = root hub or hub directly attached to root hub; max 5).
+      xHCI must issue this request before addressing downstream devices.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+
+  - request_id: usb3_get_port_err_count
+    request_name: GET_PORT_ERR_COUNT
+    recipient: port
+    bRequest_hex: "0x0D"
+    applicability: ss_only_optional
+    setup:
+      bmRequestType: "0xA0"
+      bRequest: GET_PORT_ERR_COUNT
+      wValue: "0x0000"
+      wIndex: port_number
+      wLength: 2
+    notes: >
+      SS-specific; optional. Returns 16-bit link error count; counter resets to
+      0 on read. Used for link quality diagnostics.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"

@@ -366,6 +366,39 @@ Claim ceiling: reference summary only; not semantic verification of USB 3.x
 entries. No USB 3.x governed matrix entries tracked. No LTSSM, xHCI, or
 electrical compliance claimed.
 
+### Phase USB3-2 - SuperSpeed Governed Matrix Scaffold
+
+- NEW `tables/ss_port_status_bit_matrix.yaml`: 19 entries (15 defined + 4 reserved).
+  wPortStatus: PORT_CONNECTION, PORT_ENABLE, PORT_OVER_CURRENT, PORT_RESET,
+  PORT_LINK_STATE (bits[8:5] with 12-value encoding), PORT_POWER,
+  PORT_SPEED (bits[12:10] with 6-value encoding), PORT_U1_ENABLE, PORT_U2_ENABLE,
+  plus reserved boundaries.
+  wPortChange: C_PORT_CONNECTION, C_PORT_OVER_CURRENT, C_PORT_RESET,
+  C_BH_PORT_RESET, C_PORT_LINK_STATE, C_PORT_CONFIG_ERROR, plus reserved boundaries.
+- NEW `tables/ss_hub_class_request_matrix.yaml`: 10 entries.
+  Shared with USB 2.0: GET_STATUS, SET_FEATURE, CLEAR_FEATURE, GET_DESCRIPTOR,
+  SET_DESCRIPTOR. SS-only mandatory: SET_HUB_DEPTH (0x0C).
+  SS-only optional: GET_PORT_ERR_COUNT (0x0D).
+  TT requests not included (SS hubs have no TT).
+- NEW `tables/ss_hub_descriptor_matrix.yaml`: 9 entries.
+  All USB 3.x SS hub descriptor fields including new USB 3.x-only fields:
+  bHubDecLat and wHubDelay.
+- NEW `scripts/validate_ss_port_status_bit_matrix.py`: R1–R10 structural
+  validator; verified gate CLOSED at scaffold.
+- NEW `scripts/validate_ss_hub_class_request_matrix.py`: R1–R7 structural
+  validator; verified gate CLOSED at scaffold.
+- NEW `scripts/validate_ss_hub_descriptor_matrix.py`: R1–R7 structural
+  validator; verified gate CLOSED at scaffold.
+- All USB 3.x scaffold entries: `claim_level: reviewed`, `evidence_status: reviewed`.
+- USB 3.x scaffold statistics (38 entries, 0 verified) are tracked SEPARATELY
+  from USB 2.0 surface; USB 2.0 freeze unaffected: tracked=151, verified=105,
+  reviewed=46.
+- `specs/verification_status.md` + EN: added USB 3.x scaffold surface section
+  with independent 38-entry table and explicit non-claims.
+
+Claim ceiling: scaffold_reviewed — bit/field/request name and position identity
+only. Verified gate closed. No LTSSM, xHCI, or electrical compliance claimed.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -381,6 +414,9 @@ electrical compliance claimed.
 - `python scripts\validate_hub_interrupt_endpoint_matrix.py`
 - `python scripts\validate_standard_device_request_matrix.py`
 - `python scripts\validate_wHubCharacteristics_bit_matrix.py`
+- `python scripts\validate_ss_port_status_bit_matrix.py`
+- `python scripts\validate_ss_hub_class_request_matrix.py`
+- `python scripts\validate_ss_hub_descriptor_matrix.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\usb20_hub_class_request_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `npm.cmd run build`
 

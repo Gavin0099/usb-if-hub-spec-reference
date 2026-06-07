@@ -1,0 +1,273 @@
+matrix_id: usb3_ss_hub_port_status_bit_matrix
+version: "0.1"
+description: >
+  SuperSpeed hub wPortStatus / wPortChange bit-field governance scaffold.
+  USB 3.2 Specification Rev 1.0, Section 10.14.2.6.
+  Scaffold scope: bit name and bit position only (reviewed).
+  No entry-level verified promotion in this scaffold phase.
+  Does not claim LTSSM behavior, xHCI interaction, or electrical compliance.
+spec_family: usb3
+source_spec:
+  spec: USB 3.2
+  section: 10.14.2.6 / Hub port status and change fields
+
+entries:
+  # ── wPortStatus bits ──────────────────────────────────────────────────────
+
+  - id: ss_wPortStatus.bit0.PORT_CONNECTION
+    field: wPortStatus
+    bit: 0
+    name: PORT_CONNECTION
+    status: defined
+    description: Current connect status; 1 when device connected.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit1.PORT_ENABLE
+    field: wPortStatus
+    bit: 1
+    name: PORT_ENABLE
+    status: defined
+    description: Port enabled; always 1 when SS device is connected.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit2.PORT_OVER_CURRENT
+    field: wPortStatus
+    bit: 2
+    name: PORT_OVER_CURRENT
+    status: defined
+    description: Over-current condition active on this port.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit3.PORT_RESET
+    field: wPortStatus
+    bit: 3
+    name: PORT_RESET
+    status: defined
+    description: Reset signaling in progress on this port.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit4.RESERVED
+    field: wPortStatus
+    bit: 4
+    name: RESERVED
+    status: reserved
+    description: Reserved bit between PORT_RESET and PORT_LINK_STATE; shall be zero.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bits85.PORT_LINK_STATE
+    field: wPortStatus
+    bit_range: "8:5"
+    name: PORT_LINK_STATE
+    status: defined
+    description: >
+      Current SS link state (4-bit field, bits[8:5]).
+      Firmware must not assume active (U0) if this field is non-zero.
+    value_encoding:
+      "0000": U0
+      "0001": U1
+      "0010": U2
+      "0011": U3
+      "0100": SS.Disabled
+      "0101": Rx.Detect
+      "0110": SS.Inactive
+      "0111": Polling
+      "1000": Recovery
+      "1001": Hot_Reset
+      "1010": Compliance_Mode
+      "1011": Loopback
+      "1100": Reserved
+      "1101": Reserved
+      "1110": Reserved
+      "1111": Reserved
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit9.PORT_POWER
+    field: wPortStatus
+    bit: 9
+    name: PORT_POWER
+    status: defined
+    description: Port power state; 0=off, 1=on.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bits1210.PORT_SPEED
+    field: wPortStatus
+    bit_range: "12:10"
+    name: PORT_SPEED
+    status: defined
+    description: Current connection speed (3-bit field, bits[12:10]).
+    value_encoding:
+      "000": undefined
+      "001": Full_Speed_12Mbps
+      "010": Low_Speed_1_5Mbps
+      "011": High_Speed_480Mbps
+      "100": SuperSpeed_5Gbps
+      "101": SuperSpeedPlus_10Gbps
+      "110": Reserved
+      "111": Reserved
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit13.PORT_U1_ENABLE
+    field: wPortStatus
+    bit: 13
+    name: PORT_U1_ENABLE
+    status: defined
+    description: U1 entry enabled on this port (host-initiated).
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit14.PORT_U2_ENABLE
+    field: wPortStatus
+    bit: 14
+    name: PORT_U2_ENABLE
+    status: defined
+    description: U2 entry enabled on this port (host or device-initiated).
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  - id: ss_wPortStatus.bit15.RESERVED
+    field: wPortStatus
+    bit: 15
+    name: RESERVED
+    status: reserved
+    description: High-bit boundary; shall be zero.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+
+  # ── wPortChange bits ──────────────────────────────────────────────────────
+
+  - id: ss_wPortChange.bit0.C_PORT_CONNECTION
+    field: wPortChange
+    bit: 0
+    name: C_PORT_CONNECTION
+    status: defined
+    description: Connection status changed.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit1.RESERVED
+    field: wPortChange
+    bit: 1
+    name: RESERVED
+    status: reserved
+    description: Always 0; PORT_ENABLE does not generate a change event in SS.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit2.C_PORT_OVER_CURRENT
+    field: wPortChange
+    bit: 2
+    name: C_PORT_OVER_CURRENT
+    status: defined
+    description: Over-current condition changed.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit3.C_PORT_RESET
+    field: wPortChange
+    bit: 3
+    name: C_PORT_RESET
+    status: defined
+    description: Standard port reset complete.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit4.C_BH_PORT_RESET
+    field: wPortChange
+    bit: 4
+    name: C_BH_PORT_RESET
+    status: defined
+    description: Warm Reset (BH Port Reset) complete.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit5.C_PORT_LINK_STATE
+    field: wPortChange
+    bit: 5
+    name: C_PORT_LINK_STATE
+    status: defined
+    description: Link state changed.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bit6.C_PORT_CONFIG_ERROR
+    field: wPortChange
+    bit: 6
+    name: C_PORT_CONFIG_ERROR
+    status: defined
+    description: Port configuration error; SS device failed to configure.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+
+  - id: ss_wPortChange.bits157.RESERVED
+    field: wPortChange
+    bit_range: "15:7"
+    name: RESERVED
+    status: reserved
+    description: High-byte boundary; shall be zero.
+    claim_level: reviewed
+    evidence_status: reviewed
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
