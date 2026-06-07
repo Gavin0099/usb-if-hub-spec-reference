@@ -499,6 +499,34 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase EXPORT-1 - Unified Hub Governed Surface Manifest
+
+- NEW `exports/hub_governed_surface_manifest.yaml`: unified machine-readable
+  manifest covering all 12 governed tables (9 USB 2.0 + 3 USB 3.x).
+  - `authority_surface` block declares per-family state, tracked/verified/reviewed
+    counts, reviewed_meaning, and pending_semantic_promotion.
+  - `claim_ceiling` block lists all cannot-establish domains (firmware behavior,
+    LTSSM, xHCI, electrical compliance, USB-IF certification).
+  - `consumer_usage` block specifies intended uses and must-not constraints.
+  - Each `governed_tables` entry carries: id, spec_family, path, validator,
+    state, verified, reviewed, verified_scope, reviewed_meaning (where applicable).
+- NEW `scripts/validate_hub_governed_surface_manifest.py`: structural validator
+  (R1–R8) checking manifest_id, entry completeness, path existence, spec_family
+  and state validity, id uniqueness, and per-family verified/reviewed sum
+  cross-check against authority_surface summary.
+- Updated `evidence/table_fingerprint_baseline.jsonl`: re-baselined with all
+  12 tables (was 6 USB 2.0 only); compact pass retained 12 latest entries.
+  Fingerprint check PASSES: 12 tables, 0 drift.
+- `exports/usb20_hub_class_request_manifest.yaml`: marked deprecated; retained
+  for backward compatibility; consumers directed to new manifest.
+- Active Validators updated: `validate_hub_governed_surface_manifest.py` added;
+  fingerprint probe updated to use `hub_governed_surface_manifest.yaml`.
+
+USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46.
+USB 3.x surface unaffected: tracked=38, verified=34, reviewed=4.
+
+Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -517,7 +545,8 @@ defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 - `python scripts\validate_ss_port_status_bit_matrix.py`
 - `python scripts\validate_ss_hub_class_request_matrix.py`
 - `python scripts\validate_ss_hub_descriptor_matrix.py`
-- `python scripts\probe_table_fingerprint.py --mode check --manifest exports\usb20_hub_class_request_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
+- `python scripts\validate_hub_governed_surface_manifest.py`
+- `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `npm.cmd run build`
 
 ## USB 2.0 Governed Surface Freeze

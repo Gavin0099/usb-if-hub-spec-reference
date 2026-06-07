@@ -2,8 +2,10 @@ manifest_id: usb20_hub_class_request_manifest
 manifest_version: "0.1"
 export_type: governed_table_reference
 
-# This manifest exposes the machine-readable access path for USB 2.0 Hub Class Request
-# setup entries. It does not enforce consumer-side behavior or establish firmware facts.
+# DEPRECATED: This manifest is superseded by exports/hub_governed_surface_manifest.yaml
+# which covers all USB 2.0 and USB 3.x governed matrices (12 tables total).
+# This file is retained for backward compatibility. New consumers should use
+# hub_governed_surface_manifest.yaml instead.
 #
 # Authority ceiling: spec_reference_only
 # See: docs/local_governance_freeze_point.md

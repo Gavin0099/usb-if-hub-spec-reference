@@ -1,0 +1,189 @@
+manifest_id: hub_governed_surface_manifest
+manifest_version: "0.1"
+export_type: governed_surface_reference
+generated_at: "2026-06-07"
+description: >
+  Unified machine-readable manifest for the USB hub governed reference surface.
+  Covers all USB 2.0 and USB 3.x / SuperSpeed governed matrices.
+  Authority ceiling: spec_reference_only for all surfaces.
+  Supersedes: exports/usb20_hub_class_request_manifest.yaml (USB 2.0 only).
+
+# ── Governed surface summary by spec family ────────────────────────────────
+
+authority_surface:
+  usb20:
+    state: freeze
+    summary: >
+      USB 2.0 Hub governed reference surface is closed. No entry is pending
+      semantic promotion. All remaining reviewed entries are reserved bits or
+      boundary-only placeholders.
+    tracked: 151
+    verified: 105
+    reviewed: 46
+    evidence_packets: 105
+    reviewed_meaning: reserved_bits_and_boundary_placeholders
+    pending_semantic_promotion: 0
+  usb3:
+    state: matrix_level_closeout
+    summary: >
+      USB 3.x governed matrix defined entries are all verified. Remaining
+      reviewed entries are reserved boundaries only. USB 3.x reference
+      surface is matrix-defined only; not equivalent to full USB 3.x spec
+      coverage.
+    tracked: 38
+    verified: 34
+    reviewed: 4
+    evidence_packets: 34
+    reviewed_meaning: reserved_boundary_only
+    pending_semantic_promotion: 0
+
+# ── Claim ceiling ──────────────────────────────────────────────────────────
+
+claim_ceiling:
+  default: spec_reference_only
+  cannot_establish:
+    - firmware_behavior
+    - project_specific_truth
+    - observed_device_behavior
+    - vendor_specific_behavior
+    - LTSSM_runtime_behavior
+    - xHCI_port_management
+    - electrical_or_timing_compliance
+    - USB_IF_certification_completeness
+
+# ── Consumer contract ──────────────────────────────────────────────────────
+
+consumer_usage:
+  intended_for:
+    - lookup_usb_hub_spec_reference
+    - drift_detection_in_CI
+    - consuming_repo_traceability
+  must_not:
+    - treat_spec_reference_as_project_fact
+    - override_project_evidence
+    - infer_firmware_support_from_spec_presence
+    - treat_PORT_LINK_STATE_or_PORT_SPEED_as_LTSSM_verified
+
+# ── Governed tables ────────────────────────────────────────────────────────
+# Each entry: id, spec_family, path, validator, state, verified, reviewed
+
+governed_tables:
+  # ── USB 2.0 tables (9 tables, state: freeze) ──────────────────────────
+
+  - id: usb20_hub_descriptor_field_matrix
+    spec_family: usb20
+    path: tables/hub_descriptor_matrix.yaml
+    validator: scripts/validate_hub_descriptor_matrix.py
+    state: freeze
+    verified: 8
+    reviewed: 0
+    verified_scope: descriptor_field_identity_only
+
+  - id: usb20_transaction_translator_matrix
+    spec_family: usb20
+    path: tables/transaction_translator_matrix.yaml
+    validator: scripts/validate_transaction_translator_matrix.py
+    state: freeze
+    verified: 10
+    reviewed: 0
+    verified_scope: tt_type_think_time_request_linkage_only
+
+  - id: usb20_escalation_trigger_matrix
+    spec_family: usb20
+    path: tables/escalation_trigger_matrix.yaml
+    validator: scripts/validate_escalation_trigger_matrix.py
+    state: freeze
+    verified: 10
+    reviewed: 0
+    verified_scope: escalation_trigger_boundary_only
+
+  - id: usb_hub_class_request_matrix
+    spec_family: usb20
+    path: tables/class_request_matrix.yaml
+    validator: scripts/validate_class_request_matrix.py
+    state: freeze
+    verified: 12
+    reviewed: 0
+    verified_scope: request_linkage_identity_only
+
+  - id: usb_hub_feature_selector_matrix
+    spec_family: usb20
+    path: tables/feature_selector_matrix.yaml
+    validator: scripts/validate_feature_selector_matrix.py
+    state: freeze
+    verified: 25
+    reviewed: 0
+    verified_scope: selector_name_and_value_only
+
+  - id: usb20_hub_port_status_bit_matrix
+    spec_family: usb20
+    path: tables/port_status_bit_matrix.yaml
+    validator: scripts/validate_port_status_bit_matrix.py
+    state: freeze
+    verified: 19
+    reviewed: 45
+    verified_scope: bit_name_and_position_only
+    reviewed_meaning: reserved_bits_and_high_bit_boundary_placeholders
+
+  - id: usb20_hub_interrupt_endpoint_matrix
+    spec_family: usb20
+    path: tables/hub_interrupt_endpoint_matrix.yaml
+    validator: scripts/validate_hub_interrupt_endpoint_matrix.py
+    state: freeze
+    verified: 4
+    reviewed: 0
+    verified_scope: descriptor_field_identity_only
+
+  - id: usb20_standard_device_request_matrix
+    spec_family: usb20
+    path: tables/standard_device_request_matrix.yaml
+    validator: scripts/validate_standard_device_request_matrix.py
+    state: freeze
+    verified: 12
+    reviewed: 0
+    verified_scope: request_linkage_identity_only
+
+  - id: usb20_hub_characteristics_bit_matrix
+    spec_family: usb20
+    path: tables/wHubCharacteristics_bit_matrix.yaml
+    validator: scripts/validate_wHubCharacteristics_bit_matrix.py
+    state: freeze
+    verified: 5
+    reviewed: 1
+    verified_scope: bit_group_name_and_value_encoding_identity_only
+    reviewed_meaning: reserved_high_byte_boundary_only
+
+  # ── USB 3.x tables (3 tables, state: matrix_level_closeout) ──────────
+
+  - id: usb3_ss_hub_descriptor_field_matrix
+    spec_family: usb3
+    path: tables/ss_hub_descriptor_matrix.yaml
+    validator: scripts/validate_ss_hub_descriptor_matrix.py
+    state: matrix_level_closeout
+    verified: 9
+    reviewed: 0
+    verified_scope: descriptor_field_identity_only
+
+  - id: usb3_ss_hub_class_request_matrix
+    spec_family: usb3
+    path: tables/ss_hub_class_request_matrix.yaml
+    validator: scripts/validate_ss_hub_class_request_matrix.py
+    state: matrix_level_closeout
+    verified: 10
+    reviewed: 0
+    verified_scope: >
+      request_linkage_identity_only (8 shared requests);
+      request_identity_requiredness_only (SET_HUB_DEPTH);
+      request_identity_optionality_only (GET_PORT_ERR_COUNT)
+
+  - id: usb3_ss_hub_port_status_bit_matrix
+    spec_family: usb3
+    path: tables/ss_port_status_bit_matrix.yaml
+    validator: scripts/validate_ss_port_status_bit_matrix.py
+    state: matrix_level_closeout
+    verified: 15
+    reviewed: 4
+    verified_scope: >
+      bit_name_and_position_only (13 single-bit entries);
+      bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED)
+    reviewed_meaning: reserved_boundary_only
