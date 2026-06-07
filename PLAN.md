@@ -338,6 +338,34 @@ Claim ceiling: reviewed reference surface only; not semantic verification.
 Claim ceiling: scope boundary documentation only. No USB 3.x reference surface
 is claimed to exist. No USB 3.x entries are tracked.
 
+### Phase USB3-1 - SuperSpeed Hub Wiki Scaffold + UI Namespace Split
+
+- NEW `specs/usb3/` and `specs/en/usb3/` namespace established.
+- NEW 3 bilingual wiki page pairs (ZH + EN):
+  - `ss_hub_descriptor`: bDescriptorType=0x2A, wHubCharacteristics (no TT Think Time),
+    bHubDecLat, wHubDelay; comparison table vs. USB 2.0 descriptor.
+  - `ss_port_status_bits`: wPortStatus / wPortChange full bit definitions,
+    PORT_LINK_STATE encoding table (U0–Loopback), PORT_SPEED encoding table
+    (FS/LS/HS/SS/SS+), wPortChange new bits (C_BH_PORT_RESET, C_PORT_LINK_STATE,
+    C_PORT_CONFIG_ERROR); comparison table vs. USB 2.0.
+  - `ss_hub_class_requests`: SET_HUB_DEPTH (mandatory), GET_PORT_ERR_COUNT
+    (optional), TT-related requests not applicable, SS feature selectors
+    (PORT_U1_TIMEOUT, PORT_U2_TIMEOUT, PORT_BH_PORT_RESET).
+- NEW `specs/usb3/index.md` and `specs/en/usb3/index.md`: USB 3.x section
+  landing pages with coverage table and key USB 2.0 vs USB 3.x differences.
+- All USB 3.x pages carry `spec_family: usb3` frontmatter.
+- UI namespace split in `.vitepress/config.ts`:
+  - Nav Reference dropdown grouped: USB 2.0 Hub / USB 3.x SuperSpeed Hub.
+  - Sidebar split into two sections: USB 2.0 Hub / USB 3.x SuperSpeed Hub.
+  - ZH and EN label dictionaries extended with USB 3.x keys.
+  - Footer updated to version-neutral non-claim (ZH + EN).
+- USB 2.0 page URLs, labels, and nav order unchanged.
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46.
+
+Claim ceiling: reference summary only; not semantic verification of USB 3.x
+entries. No USB 3.x governed matrix entries tracked. No LTSSM, xHCI, or
+electrical compliance claimed.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`

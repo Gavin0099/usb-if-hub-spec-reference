@@ -36,6 +36,10 @@ const ZH_LABELS: Labels = {
   usb_test_modes: "USB Test Modes",
   port_indicators: "Port Indicators",
   hub_power_budget: "Hub Power Budget",
+  // USB 3.x / SuperSpeed Hub
+  ss_hub_descriptor: "SuperSpeed Hub Descriptor",
+  ss_port_status_bits: "SS Port Status Bits",
+  ss_hub_class_requests: "SS Hub Class Requests",
 };
 
 const EN_LABELS: Labels = {
@@ -67,6 +71,10 @@ const EN_LABELS: Labels = {
   usb_test_modes: "USB Test Modes",
   port_indicators: "Port Indicators",
   hub_power_budget: "Hub Power Budget",
+  // USB 3.x / SuperSpeed Hub
+  ss_hub_descriptor: "SuperSpeed Hub Descriptor",
+  ss_port_status_bits: "SS Port Status Bits",
+  ss_hub_class_requests: "SS Hub Class Requests",
 };
 
 function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, prefix = "") {
@@ -93,7 +101,7 @@ function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, 
   ];
 }
 
-const zhReferenceItems = [
+const zhUsb2Items = [
   { text: "Hub Class Requests", link: "/hub_class_requests" },
   { text: "Feature Selectors", link: "/feature_selectors" },
   { text: "Port Status Bits", link: "/port_status_bits" },
@@ -124,7 +132,13 @@ const zhReferenceItems = [
   { text: "Glossary", link: "/glossary" },
 ];
 
-const enReferenceItems = [
+const zhUsb3Items = [
+  { text: "SuperSpeed Hub Descriptor", link: "/usb3/ss_hub_descriptor" },
+  { text: "SS Port Status Bits", link: "/usb3/ss_port_status_bits" },
+  { text: "SS Hub Class Requests", link: "/usb3/ss_hub_class_requests" },
+];
+
+const enUsb2Items = [
   { text: "Hub Class Requests", link: "/en/hub_class_requests" },
   { text: "Feature Selectors", link: "/en/feature_selectors" },
   { text: "Port Status Bits", link: "/en/port_status_bits" },
@@ -155,6 +169,22 @@ const enReferenceItems = [
   { text: "Glossary", link: "/en/glossary" },
 ];
 
+const enUsb3Items = [
+  { text: "SuperSpeed Hub Descriptor", link: "/en/usb3/ss_hub_descriptor" },
+  { text: "SS Port Status Bits", link: "/en/usb3/ss_port_status_bits" },
+  { text: "SS Hub Class Requests", link: "/en/usb3/ss_hub_class_requests" },
+];
+
+const zhReferenceItems = [
+  { text: "USB 2.0 Hub", items: zhUsb2Items },
+  { text: "USB 3.x / SuperSpeed Hub", items: zhUsb3Items },
+];
+
+const enReferenceItems = [
+  { text: "USB 2.0 Hub", items: enUsb2Items },
+  { text: "USB 3.x / SuperSpeed Hub", items: enUsb3Items },
+];
+
 export default defineConfig({
   title: "USB-IF Hub Spec Reference",
   description:
@@ -172,7 +202,10 @@ export default defineConfig({
           { text: "首頁", link: "/" },
           { text: "Reference", items: zhReferenceItems },
         ],
-        sidebar: buildSidebar(".", ZH_LABELS, "規格參考"),
+        sidebar: [
+          ...buildSidebar(".", ZH_LABELS, "USB 2.0 Hub"),
+          ...buildSidebar("usb3", ZH_LABELS, "USB 3.x / SuperSpeed Hub", "/usb3"),
+        ],
         search: {
           provider: "local",
           options: {
@@ -192,7 +225,7 @@ export default defineConfig({
         },
         footer: {
           message:
-            "claim_level: inferred, semantic_verification_claimed: false, content is not section-level verified against the USB 2.0 PDF",
+            "本參考站是受治理的規格澄清層；不宣告完整 PDF section-level verification、runtime behavior model、firmware compliance truth，亦不宣告 USB-IF certification completeness。",
         },
       },
     },
@@ -208,13 +241,16 @@ export default defineConfig({
           { text: "Home", link: "/en/" },
           { text: "Reference", items: enReferenceItems },
         ],
-        sidebar: buildSidebar("en", EN_LABELS, "Specification Reference", "/en"),
+        sidebar: [
+          ...buildSidebar("en", EN_LABELS, "USB 2.0 Hub", "/en"),
+          ...buildSidebar("en/usb3", EN_LABELS, "USB 3.x / SuperSpeed Hub", "/en/usb3"),
+        ],
         search: {
           provider: "local",
         },
         footer: {
           message:
-            "claim_level: inferred, semantic_verification_claimed: false, content is not section-level verified against the USB 2.0 PDF",
+            "This reference is a governed standards-clarification layer. It does not claim full PDF section-level verification, runtime behavior modeling, firmware compliance truth, or USB-IF certification completeness.",
         },
       },
     },
