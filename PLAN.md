@@ -499,6 +499,31 @@ bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED).
 All three USB 3.x governed matrices are now at verified status for their
 defined entries. USB 3.x surface: 38 tracked / 34 verified / 4 reviewed.
 
+### Phase USB3-FS-1 - SS Feature Selector Matrix Scaffold
+
+- NEW `tables/ss_feature_selector_matrix.yaml`: 6 SS-only port feature selector
+  entries (scaffold phase, verified gate CLOSED).
+  All entries: `claim_level: reviewed`, `evidence_status: reviewed`.
+  Entries: PORT_U1_ENABLE (17), PORT_U2_ENABLE (18), PORT_U1_TIMEOUT (23),
+  PORT_U2_TIMEOUT (24), PORT_REMOTE_WAKE_MASK (27), BH_PORT_RESET (28).
+  Each entry carries an explicit `non_claims` block covering U-state behavior,
+  LTSSM, xHCI policy, reset sequence, wake policy, and firmware compliance.
+- NEW `scripts/validate_ss_feature_selector_matrix.py`: CLOSED gate validator
+  (R1–R8); `claim_level: verified` is blocked until USB3-FS-2.
+- `specs/verification_status.md` + EN: added "USB 3.x Feature Selector
+  Expansion Scaffold" section with independent 6-entry table, gate CLOSED.
+  This section is explicitly separate from the 38/34/4 matrix-level closeout
+  baseline; USB 3.x closeout numbers unchanged.
+- PLAN.md: Active Validators updated; USB 3.x state section updated.
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46.
+- USB 3.x matrix-level closeout unaffected: tracked=38, verified=34, reviewed=4.
+- Expansion scaffold does not enter the unified manifest or fingerprint baseline
+  (those remain at EXPORT-CONTRACT-1.0 state).
+
+Claim ceiling: selector name/value/applicability/recipient identity only.
+Verified gate: CLOSED. U1/U2 behavior, LTSSM, xHCI, reset timing, and wake
+policy are outside scope permanently at this level.
+
 ### Phase RELEASE-1 - Hub Governed Surface Export Contract Release Note
 
 - NEW `docs/RELEASE_NOTES_EXPORT_CONTRACT.md`: stable checkpoint release note
@@ -627,6 +652,7 @@ Claim ceiling: manifest_structural_integrity_only; does not re-verify table cont
 - `python scripts\validate_ss_port_status_bit_matrix.py`
 - `python scripts\validate_ss_hub_class_request_matrix.py`
 - `python scripts\validate_ss_hub_descriptor_matrix.py`
+- `python scripts\validate_ss_feature_selector_matrix.py`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\smoke_consumer_integration_fixtures.py`
@@ -670,15 +696,27 @@ have the equivalent wiki/reference depth of USB 2.0 (28 topic pairs).
 
 USB 2.0 freeze remains unchanged at 151 / 105 / 46.
 
+## USB 3.x Feature Selector Expansion Scaffold
+
+Phase USB3-FS-1 adds a fourth governed matrix as an expansion scaffold:
+- `tables/ss_feature_selector_matrix.yaml`: 6 SS-only port feature selector
+  entries (PORT_U1_ENABLE, PORT_U2_ENABLE, PORT_U1_TIMEOUT, PORT_U2_TIMEOUT,
+  PORT_REMOTE_WAKE_MASK, BH_PORT_RESET).
+- All 6 entries: `claim_level: reviewed`, verified gate CLOSED.
+- Tracked separately from the 38/34/4 matrix-level closeout baseline.
+- Not yet included in the unified manifest or fingerprint baseline.
+- Verified promotion requires USB3-FS-2; manifest/baseline inclusion requires
+  a new EXPORT-CONTRACT-1.1 phase.
+
 ## Open Work
 
 1. Continue entry-level verification only when narrow evidence packets and gate
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
-3. USB 3.x wiki expansion and additional matrix scope are deferred; USB3-4
-   closeout hygiene is complete. Any expansion requires a new scope boundary
-   phase before adding entries.
+3. USB 3.x feature selector expansion scaffold (USB3-FS-1) is in place with 6
+   reviewed entries and verified gate CLOSED. Next step is USB3-FS-2 (verified
+   promotion) when ready; manifest/baseline inclusion deferred to EXPORT-1.1.
 
 ## Cannot Claim
 

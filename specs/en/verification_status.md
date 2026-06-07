@@ -270,6 +270,33 @@ The following are outside the verified scope for all USB 3.x entries, now and pe
 - USB 3.x reference surface covers the current three governed matrices only; **this is not complete USB 3.x spec coverage** and is not equivalent to the USB 2.0 28 topic-pair reference surface.
 - USB 3.x entries are not counted in the USB 2.0 evidence packet total (USB 2.0 remains at 105 packets).
 
+## USB 3.x Feature Selector Expansion Scaffold
+
+> This section is **independent of and separate from** the 38/34/4 matrix-level closeout baseline above.
+> It does not change USB 3.x closeout numbers. Verified gate is CLOSED.
+
+Phase USB3-FS-1 adds a fourth USB 3.x governed matrix as an expansion scaffold:
+six SS-only port feature selectors not present in the USB 2.0 feature selector namespace.
+
+| Selector | Value | Recipient | Claim level | Verified scope |
+|---|---|---|---|---|
+| PORT_U1_ENABLE | 17 (0x11) | port | reviewed | selector name/value/applicability identity only |
+| PORT_U2_ENABLE | 18 (0x12) | port | reviewed | selector name/value/applicability identity only |
+| PORT_U1_TIMEOUT | 23 (0x17) | port | reviewed | selector name/value/applicability identity only |
+| PORT_U2_TIMEOUT | 24 (0x18) | port | reviewed | selector name/value/applicability identity only |
+| PORT_REMOTE_WAKE_MASK | 27 (0x1B) | port | reviewed | selector name/value/applicability identity only |
+| BH_PORT_RESET | 28 (0x1C) | port | reviewed | selector name/value/applicability identity only |
+| **Total** | | | **0 verified / 6 reviewed** | gate: **CLOSED** |
+
+**Non-claims for all SS feature selector entries (fixed boundaries):**
+- Does not verify U1/U2 power state entry or exit behavior.
+- Does not verify LTSSM transition behavior triggered by U1/U2 enable or BH reset.
+- Does not verify xHCI port power policy or xHCI warm reset behavior.
+- Does not verify U1/U2 timeout encoding semantics or wValue field behavior.
+- Does not verify remote wake event routing, platform wake policy, or OS power management.
+- Does not verify BH/warm reset sequence timing, LFPS signaling, or link recovery outcome.
+- Verified promotion requires USB3-FS-2; manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
+
 ## Export Contract Surface
 
 The hub governed surface now has a complete machine-readable export contract for consuming repo CI use.
