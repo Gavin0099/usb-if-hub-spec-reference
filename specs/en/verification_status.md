@@ -270,23 +270,29 @@ The following are outside the verified scope for all USB 3.x entries, now and pe
 - USB 3.x reference surface covers the current three governed matrices only; **this is not complete USB 3.x spec coverage** and is not equivalent to the USB 2.0 28 topic-pair reference surface.
 - USB 3.x entries are not counted in the USB 2.0 evidence packet total (USB 2.0 remains at 105 packets).
 
-## USB 3.x Feature Selector Expansion Scaffold
+## USB 3.x Feature Selector Expansion (USB3-FS-2)
 
 > This section is **independent of and separate from** the 38/34/4 matrix-level closeout baseline above.
-> It does not change USB 3.x closeout numbers. Verified gate is CLOSED.
+> It does not change USB 3.x closeout numbers.
+> Verified gate: PARTIAL / allowlist-only (USB3-FS-2 pilot, all 6 entries promoted).
 
-Phase USB3-FS-1 adds a fourth USB 3.x governed matrix as an expansion scaffold:
-six SS-only port feature selectors not present in the USB 2.0 feature selector namespace.
+Phase USB3-FS-2 completes verified promotion for the fourth USB 3.x governed matrix:
+all six SS-only port feature selectors not present in the USB 2.0 feature selector namespace.
 
 | Selector | Value | Recipient | Claim level | Verified scope |
 |---|---|---|---|---|
-| PORT_U1_ENABLE | 17 (0x11) | port | reviewed | selector name/value/applicability identity only |
-| PORT_U2_ENABLE | 18 (0x12) | port | reviewed | selector name/value/applicability identity only |
-| PORT_U1_TIMEOUT | 23 (0x17) | port | reviewed | selector name/value/applicability identity only |
-| PORT_U2_TIMEOUT | 24 (0x18) | port | reviewed | selector name/value/applicability identity only |
-| PORT_REMOTE_WAKE_MASK | 27 (0x1B) | port | reviewed | selector name/value/applicability identity only |
-| BH_PORT_RESET | 28 (0x1C) | port | reviewed | selector name/value/applicability identity only |
-| **Total** | | | **0 verified / 6 reviewed** | gate: **CLOSED** |
+| PORT_U1_ENABLE | 17 (0x11) | port | **verified** | selector name/value/applicability/recipient identity only |
+| PORT_U2_ENABLE | 18 (0x12) | port | **verified** | selector name/value/applicability/recipient identity only |
+| PORT_U1_TIMEOUT | 23 (0x17) | port | **verified** | selector name/value/applicability/recipient identity only |
+| PORT_U2_TIMEOUT | 24 (0x18) | port | **verified** | selector name/value/applicability/recipient identity only |
+| PORT_REMOTE_WAKE_MASK | 27 (0x1B) | port | **verified** | selector name/value/applicability/recipient identity only |
+| BH_PORT_RESET | 28 (0x1C) | port | **verified** | selector name/value/applicability/recipient identity only |
+| **Total** | | | **6 verified / 0 reviewed** | gate: **PARTIAL (allowlist, all 6)** |
+
+Evidence packets (6 total, `evidence/entry_verification_packets/usb3/`):
+`ss_feature_selector_usb3_port_u1_enable.yaml`, `ss_feature_selector_usb3_port_u2_enable.yaml`,
+`ss_feature_selector_usb3_port_u1_timeout.yaml`, `ss_feature_selector_usb3_port_u2_timeout.yaml`,
+`ss_feature_selector_usb3_port_remote_wake_mask.yaml`, `ss_feature_selector_usb3_port_bh_port_reset.yaml`.
 
 **Non-claims for all SS feature selector entries (fixed boundaries):**
 - Does not verify U1/U2 power state entry or exit behavior.
@@ -295,7 +301,7 @@ six SS-only port feature selectors not present in the USB 2.0 feature selector n
 - Does not verify U1/U2 timeout encoding semantics or wValue field behavior.
 - Does not verify remote wake event routing, platform wake policy, or OS power management.
 - Does not verify BH/warm reset sequence timing, LFPS signaling, or link recovery outcome.
-- Verified promotion requires USB3-FS-2; manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
+- Manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
 
 ## Export Contract Surface
 

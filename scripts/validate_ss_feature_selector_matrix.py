@@ -3,8 +3,8 @@
 
 Authority ceiling: selector name/value/applicability/recipient identity only.
 
-Verified gate: CLOSED (USB3-FS-1 scaffold phase).
-No entry is eligible for verified promotion until USB3-FS-2.
+Verified gate: PARTIAL / allowlist-only (USB3-FS-2 pilot).
+All 6 SS-only port feature selector IDs are eligible for verified promotion.
 
 Checks:
   R1  matrix_id present
@@ -12,8 +12,8 @@ Checks:
   R3  selector_ids unique
   R4  required fields per entry (selector_id, selector_name, selector_value,
       recipient, claim_level, evidence_status, source_refs)
-  R5  claim_level=verified BLOCKED (verified gate is CLOSED)
-  R6  claim_level values in allowed set
+  R5  claim_level=verified only allowed for ALLOWLIST_VERIFIED_IDS
+  R6  verified entries must have evidence.verification_packet present
   R7  expected selector ids present
   R8  spec_family must be usb3
 """
@@ -27,9 +27,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 MATRIX_PATH = ROOT / "tables" / "ss_feature_selector_matrix.yaml"
 
-VALID_CLAIM_LEVELS = {"reviewed", "inferred"}
+VALID_CLAIM_LEVELS = {"verified", "reviewed", "inferred"}
 
-EXPECTED_SELECTOR_IDS = {
+ALLOWLIST_VERIFIED_IDS = {
     "usb3_port_u1_enable",
     "usb3_port_u2_enable",
     "usb3_port_u1_timeout",
@@ -37,6 +37,8 @@ EXPECTED_SELECTOR_IDS = {
     "usb3_port_remote_wake_mask",
     "usb3_port_bh_port_reset",
 }
+
+EXPECTED_SELECTOR_IDS = ALLOWLIST_VERIFIED_IDS
 
 
 def main() -> int:
@@ -85,15 +87,24 @@ def main() -> int:
 
         cl = entry.get("claim_level")
 
-        # R5 — verified gate is CLOSED; no verified entries permitted
-        if cl == "verified":
+        # R5 — verified only allowed for entries in the allowlist
+        if cl == "verified" and sid not in ALLOWLIST_VERIFIED_IDS:
             errors.append(
-                f"R5: entry {sid!r} has claim_level=verified but verified gate is "
-                f"CLOSED (USB3-FS-1 scaffold phase); verified promotion requires USB3-FS-2"
+                f"R5: entry {sid!r} has claim_level=verified but is not in the "
+                f"allowlist; USB3-FS-2 pilot covers SS feature selector entries only"
             )
 
-        # R6
-        if cl not in VALID_CLAIM_LEVELS and cl != "verified":
+        # R6 — verified entries must have evidence.verification_packet
+        if cl == "verified":
+            evidence = entry.get("evidence") or {}
+            if not evidence.get("verification_packet"):
+                errors.append(
+                    f"R6: entry {sid!r} is verified but missing "
+                    f"evidence.verification_packet"
+                )
+
+        # claim_level must be in valid set
+        if cl not in VALID_CLAIM_LEVELS:
             errors.append(
                 f"R6: entry {sid!r} has invalid claim_level {cl!r}; "
                 f"allowed: {sorted(VALID_CLAIM_LEVELS)}"
@@ -110,11 +121,12 @@ def main() -> int:
             print(f"  {e}")
         return 1
 
+    verified_count = sum(1 for e in entries if e.get("claim_level") == "verified")
     reviewed_count = sum(1 for e in entries if e.get("claim_level") == "reviewed")
     print("PASS: SS feature selector matrix validation")
     print(f"  matrix_id: {doc.get('matrix_id')}")
-    print(f"  entries: {len(entries)} (verified=0, reviewed={reviewed_count})")
-    print(f"  verified gate: CLOSED (scaffold phase USB3-FS-1)")
+    print(f"  entries: {len(entries)} (verified={verified_count}, reviewed={reviewed_count})")
+    print(f"  verified gate: PARTIAL / allowlist-only ({len(ALLOWLIST_VERIFIED_IDS)} eligible ids)")
     return 0
 
 

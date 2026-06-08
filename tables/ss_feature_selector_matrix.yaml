@@ -1,15 +1,14 @@
 matrix_id: usb3_ss_feature_selector_matrix
-version: "0.1"
+version: "0.2"
 description: >
   USB 3.x SuperSpeed hub feature selector governance.
   USB 3.2 Specification Rev 1.0, Section 10.14 / Table 10-8.
-  Scaffold phase: selector name / value / applicability / recipient identity only.
-  Verified gate CLOSED; no entry has completed verified promotion.
+  Verified scope: selector name / value / applicability / recipient identity only.
+  Verified gate: PARTIAL / allowlist-only (USB3-FS-2 pilot, 6 entries).
   Does not claim U-state transition behavior, LTSSM behavior, xHCI policy,
   reset sequence timing, wake policy, or firmware compliance.
 spec_family: usb3
-state: scaffold
-verified_gate: CLOSED
+verified_gate: PARTIAL
 scope:
   usb_versions:
     - usb_3_2
@@ -33,15 +32,17 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_u1_enable.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify U1 power state entry or exit behavior
       - does not verify LTSSM U1 transition behavior
       - does not verify xHCI port power policy
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (17/0x11), and port-recipient applicability identity only."
+    notes: "Verified: selector name, value (17/0x11), port-recipient applicability identity only."
 
   - selector_id: usb3_port_u2_enable
     selector_value: 18
@@ -54,15 +55,17 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_u2_enable.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify U2 power state entry or exit behavior
       - does not verify LTSSM U2 transition behavior
       - does not verify xHCI port power policy
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (18/0x12), and port-recipient applicability identity only."
+    notes: "Verified: selector name, value (18/0x12), port-recipient applicability identity only."
 
   - selector_id: usb3_port_u1_timeout
     selector_value: 23
@@ -74,15 +77,17 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_u1_timeout.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify U1 inactivity timeout encoding semantics
       - does not verify wValue timeout field encoding behavior
       - does not verify LTSSM transition timing
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (23/0x17), and port-recipient applicability identity only. wValue timeout encoding not verified."
+    notes: "Verified: selector name, value (23/0x17), port-recipient applicability identity only. wValue timeout encoding not verified."
 
   - selector_id: usb3_port_u2_timeout
     selector_value: 24
@@ -94,15 +99,17 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_u2_timeout.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify U2 inactivity timeout encoding semantics
       - does not verify wValue timeout field encoding behavior
       - does not verify LTSSM transition timing
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (24/0x18), and port-recipient applicability identity only. wValue timeout encoding not verified."
+    notes: "Verified: selector name, value (24/0x18), port-recipient applicability identity only. wValue timeout encoding not verified."
 
   - selector_id: usb3_port_remote_wake_mask
     selector_value: 27
@@ -114,15 +121,17 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_remote_wake_mask.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify remote wake event routing behavior
       - does not verify platform or OS wake policy
       - does not verify xHCI wake management behavior
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (27/0x1B), and port-recipient applicability identity only. Wake mask encoding and routing not verified."
+    notes: "Verified: selector name, value (27/0x1B), port-recipient applicability identity only. Wake mask encoding and routing not verified."
 
   - selector_id: usb3_port_bh_port_reset
     selector_value: 28
@@ -134,13 +143,15 @@ entries:
     source_refs:
       - usb32_spec
     section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: reviewed
-    verified_scope: selector name/value/applicability identity only
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_feature_selector_usb3_port_bh_port_reset.yaml
+      verified_scope: selector_name_value_applicability_recipient_identity_only
     non_claims:
       - does not verify BH/warm reset sequence timing or behavior
       - does not verify LTSSM reset or recovery behavior
       - does not verify xHCI warm reset behavior
       - does not verify link training outcome
       - does not verify firmware compliance
-    notes: "Scaffold: selector name, value (28/0x1C), and port-recipient applicability identity only. BH reset sequence and xHCI warm reset behavior not verified."
+    notes: "Verified: selector name, value (28/0x1C), port-recipient applicability identity only. BH reset sequence and xHCI warm reset behavior not verified."

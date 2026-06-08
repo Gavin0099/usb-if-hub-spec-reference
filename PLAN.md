@@ -524,6 +524,42 @@ Claim ceiling: selector name/value/applicability/recipient identity only.
 Verified gate: CLOSED. U1/U2 behavior, LTSSM, xHCI, reset timing, and wake
 policy are outside scope permanently at this level.
 
+### Phase USB3-FS-2 - SS Feature Selector Verified Promotion
+
+- `tables/ss_feature_selector_matrix.yaml` promoted to version "0.2": all 6
+  SS-only port feature selector entries promoted from `reviewed` to `verified`.
+  Verified scope: `selector_name_value_applicability_recipient_identity_only`.
+  All 6 entries carry an explicit `evidence.verification_packet` reference
+  and per-entry `non_claims` blocks.
+- 6 USB 3.x evidence packets created in `evidence/entry_verification_packets/usb3/`:
+  `ss_feature_selector_usb3_port_u1_enable.yaml`,
+  `ss_feature_selector_usb3_port_u2_enable.yaml`,
+  `ss_feature_selector_usb3_port_u1_timeout.yaml`,
+  `ss_feature_selector_usb3_port_u2_timeout.yaml`,
+  `ss_feature_selector_usb3_port_remote_wake_mask.yaml`,
+  `ss_feature_selector_usb3_port_bh_port_reset.yaml`.
+- `scripts/validate_ss_feature_selector_matrix.py` rewritten from CLOSED gate
+  to PARTIAL/allowlist gate (ALLOWLIST_VERIFIED_IDS = 6 selector IDs, R1–R8).
+- `specs/verification_status.md` + EN: "USB 3.x Feature Selector Expansion Scaffold"
+  section updated to "USB3-FS-2" with 6 verified entries table and evidence
+  packet listing. Gate updated from CLOSED to PARTIAL/allowlist.
+- USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46.
+- USB 3.x matrix-level closeout unaffected: tracked=38, verified=34, reviewed=4.
+- Feature selector expansion: tracked=6, verified=6, reviewed=0.
+- Feature selector evidence packets: 6 (separate from USB 3.x matrix 34-packet count).
+- Manifest/baseline inclusion deferred to EXPORT-CONTRACT-1.1.
+
+Non-claims:
+- U1/U2 power state entry or exit behavior not verified.
+- LTSSM transition behavior not verified.
+- xHCI port power policy or xHCI warm reset behavior not verified.
+- U1/U2 timeout encoding semantics or wValue field behavior not verified.
+- Remote wake event routing, platform wake policy, OS power management not verified.
+- BH/warm reset sequence timing, LFPS signaling, link recovery outcome not verified.
+
+Claim ceiling: selector_name_value_applicability_recipient_identity_only.
+Verified gate: PARTIAL / allowlist-only (6 entries, USB3-FS-2 pilot complete).
+
 ### Phase RELEASE-1 - Hub Governed Surface Export Contract Release Note
 
 - NEW `docs/RELEASE_NOTES_EXPORT_CONTRACT.md`: stable checkpoint release note
@@ -696,17 +732,17 @@ have the equivalent wiki/reference depth of USB 2.0 (28 topic pairs).
 
 USB 2.0 freeze remains unchanged at 151 / 105 / 46.
 
-## USB 3.x Feature Selector Expansion Scaffold
+## USB 3.x Feature Selector Expansion (USB3-FS-2 Complete)
 
-Phase USB3-FS-1 adds a fourth governed matrix as an expansion scaffold:
-- `tables/ss_feature_selector_matrix.yaml`: 6 SS-only port feature selector
+Phase USB3-FS-2 completes verified promotion for the fourth governed matrix:
+- `tables/ss_feature_selector_matrix.yaml` v0.2: 6 SS-only port feature selector
   entries (PORT_U1_ENABLE, PORT_U2_ENABLE, PORT_U1_TIMEOUT, PORT_U2_TIMEOUT,
   PORT_REMOTE_WAKE_MASK, BH_PORT_RESET).
-- All 6 entries: `claim_level: reviewed`, verified gate CLOSED.
+- All 6 entries: `claim_level: verified`, verified gate PARTIAL/allowlist.
+- 6 evidence packets in `evidence/entry_verification_packets/usb3/`.
 - Tracked separately from the 38/34/4 matrix-level closeout baseline.
 - Not yet included in the unified manifest or fingerprint baseline.
-- Verified promotion requires USB3-FS-2; manifest/baseline inclusion requires
-  a new EXPORT-CONTRACT-1.1 phase.
+- Manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
 
 ## Open Work
 
@@ -714,9 +750,8 @@ Phase USB3-FS-1 adds a fourth governed matrix as an expansion scaffold:
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
-3. USB 3.x feature selector expansion scaffold (USB3-FS-1) is in place with 6
-   reviewed entries and verified gate CLOSED. Next step is USB3-FS-2 (verified
-   promotion) when ready; manifest/baseline inclusion deferred to EXPORT-1.1.
+3. EXPORT-CONTRACT-1.1: include `ss_feature_selector_matrix` in the unified
+   manifest and re-baseline the fingerprint to cover 13 governed tables.
 
 ## Cannot Claim
 

@@ -1,0 +1,58 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_feature_selector_matrix
+  entry_id: usb3_port_u2_timeout
+
+evidence:
+  spec: usb32
+  section: "10.14"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14 Table 10-8 defines PORT_U2_TIMEOUT as a SS-only
+    port feature selector with numeric value 24 (0x18), applicable to port
+    recipients via SetFeature only. The wValue field carries the timeout
+    parameter but its encoding is outside this packet's verified scope.
+  reviewer_note: >
+    Reviewed for selector identity only: selector name PORT_U2_TIMEOUT,
+    value 24/0x18, port recipient, SetFeature applicability.
+    Does not verify U2 inactivity timeout encoding semantics, wValue
+    field behavior, LTSSM transition timing, or firmware compliance.
+
+review_checklist:
+  - Confirm Section 10.14 Table 10-8 is the correct SS feature selector surface.
+  - Confirm PORT_U2_TIMEOUT selector value is 24 (0x18) for port recipient.
+  - Confirm SetFeature is the applicable request (not ClearFeature).
+  - Confirm no timeout encoding semantics or LTSSM timing are claimed.
+
+verification_scope:
+  claim: selector_name_value_applicability_recipient_identity_only
+  excludes:
+    - U2 inactivity timeout encoding semantics
+    - wValue timeout field encoding behavior
+    - LTSSM transition timing
+    - U2 entry/exit behavior
+    - firmware compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_port_u2_timeout`.
+    Promotion limited to selector name, value (24/0x18), port recipient,
+    and SetFeature applicability identity only. wValue timeout encoding
+    and U2 behavior are outside scope.
+
+non_claims:
+  - This packet does not verify U2 inactivity timeout encoding semantics.
+  - This packet does not verify wValue timeout field encoding behavior.
+  - This packet does not verify LTSSM transition timing.
+  - This packet does not establish table-level verification.

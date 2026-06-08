@@ -1,0 +1,58 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_feature_selector_matrix
+  entry_id: usb3_port_remote_wake_mask
+
+evidence:
+  spec: usb32
+  section: "10.14"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14 Table 10-8 defines PORT_REMOTE_WAKE_MASK as a
+    SS-only port feature selector with numeric value 27 (0x1B), applicable
+    to port recipients via SetFeature only. Wake mask encoding and routing
+    behavior are outside this packet's verified scope.
+  reviewer_note: >
+    Reviewed for selector identity only: selector name PORT_REMOTE_WAKE_MASK,
+    value 27/0x1B, port recipient, SetFeature applicability.
+    Does not verify remote wake event routing behavior, platform wake policy,
+    OS power management, xHCI wake management, or firmware compliance.
+
+review_checklist:
+  - Confirm Section 10.14 Table 10-8 is the correct SS feature selector surface.
+  - Confirm PORT_REMOTE_WAKE_MASK selector value is 27 (0x1B) for port recipient.
+  - Confirm SetFeature is the applicable request.
+  - Confirm no wake mask encoding or routing behavior is claimed.
+
+verification_scope:
+  claim: selector_name_value_applicability_recipient_identity_only
+  excludes:
+    - remote wake event routing behavior
+    - platform or OS wake policy
+    - xHCI wake management behavior
+    - wValue wake mask encoding semantics
+    - firmware compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_port_remote_wake_mask`.
+    Promotion limited to selector name, value (27/0x1B), port recipient,
+    and SetFeature applicability identity only. Wake mask encoding,
+    routing, and platform policy are outside scope.
+
+non_claims:
+  - This packet does not verify remote wake event routing behavior.
+  - This packet does not verify platform or OS wake policy.
+  - This packet does not verify xHCI wake management behavior.
+  - This packet does not establish table-level verification.
