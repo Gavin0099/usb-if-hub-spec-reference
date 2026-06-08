@@ -1,12 +1,13 @@
 manifest_id: hub_governed_surface_manifest
-manifest_version: "0.1"
+manifest_version: "0.2"
 export_type: governed_surface_reference
-generated_at: "2026-06-07"
+generated_at: "2026-06-08"
 description: >
   Unified machine-readable manifest for the USB hub governed reference surface.
-  Covers all USB 2.0 and USB 3.x / SuperSpeed governed matrices.
+  Covers all USB 2.0 and USB 3.x / SuperSpeed governed matrices (13 tables).
   Authority ceiling: spec_reference_only for all surfaces.
   Supersedes: exports/usb20_hub_class_request_manifest.yaml (USB 2.0 only).
+  EXPORT-CONTRACT-1.1: added usb3_ss_feature_selector_matrix (USB3-FS-2).
 
 # ── Governed surface summary by spec family ────────────────────────────────
 
@@ -24,16 +25,17 @@ authority_surface:
     reviewed_meaning: reserved_bits_and_boundary_placeholders
     pending_semantic_promotion: 0
   usb3:
-    state: matrix_level_closeout
+    state: partial_verified_expansion
     summary: >
-      USB 3.x governed matrix defined entries are all verified. Remaining
-      reviewed entries are reserved boundaries only. USB 3.x reference
-      surface is matrix-defined only; not equivalent to full USB 3.x spec
-      coverage.
-    tracked: 38
-    verified: 34
+      USB 3.x governed matrix defined entries are all verified (38 tracked,
+      34 verified, 4 reserved boundaries). Additionally, 6 SS-only port
+      feature selector entries are verified (USB3-FS-2). Remaining reviewed
+      entries are reserved boundaries only. USB 3.x reference surface is
+      matrix-defined only; not equivalent to full USB 3.x spec coverage.
+    tracked: 44
+    verified: 40
     reviewed: 4
-    evidence_packets: 34
+    evidence_packets: 40
     reviewed_meaning: reserved_boundary_only
     pending_semantic_promotion: 0
 
@@ -187,3 +189,12 @@ governed_tables:
       bit_name_and_position_only (13 single-bit entries);
       bit_name_range_and_encoding_identity_only (PORT_LINK_STATE, PORT_SPEED)
     reviewed_meaning: reserved_boundary_only
+
+  - id: usb3_ss_feature_selector_matrix
+    spec_family: usb3
+    path: tables/ss_feature_selector_matrix.yaml
+    validator: scripts/validate_ss_feature_selector_matrix.py
+    state: partial_verified
+    verified: 6
+    reviewed: 0
+    verified_scope: selector_name_value_applicability_recipient_identity_only

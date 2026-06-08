@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-07
+> **Last Updated**: 2026-06-08
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -669,6 +669,31 @@ USB 2.0 freeze unaffected: tracked=151, verified=105, reviewed=46.
 USB 3.x surface unaffected: tracked=38, verified=34, reviewed=4.
 
 Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
+
+### Phase EXPORT-CONTRACT-1.1 - Feature Selector Expansion Manifest + Fingerprint Re-baseline
+
+- `exports/hub_governed_surface_manifest.yaml` v0.2: added 13th governed table
+  (`usb3_ss_feature_selector_matrix`, state=partial_verified, verified=6, reviewed=0,
+  verified_scope=selector_name_value_applicability_recipient_identity_only).
+  `authority_surface.usb3` updated: state=partial_verified_expansion,
+  tracked=44 (was 38), verified=40 (was 34), reviewed=4, evidence_packets=40 (was 34).
+  `manifest_version` bumped to "0.2".
+- `scripts/validate_hub_governed_surface_manifest.py`: added `partial_verified`
+  to VALID_STATES (previously only freeze and matrix_level_closeout).
+- `evidence/table_fingerprint_baseline.jsonl`: re-baselined for all 13 tables.
+  Fixed 5 stale USB 2.0 table hashes (class_request, feature_selector,
+  port_status_bit, interrupt_endpoint, standard_device_request) that had
+  accumulated since EXPORT-CONTRACT-1.0.
+  Fingerprint check PASSES: 13 tables, 0 drift.
+- `scripts/smoke_consumer_integration_fixtures.py`: updated `fingerprint_no_drift`
+  case to expect 13 tables (was 12). Consumer smoke PASSES: 3/3 cases.
+- No USB 2.0 table changes. USB 2.0 freeze unaffected: tracked=151, verified=105,
+  reviewed=46.
+- USB 3.x matrix-level closeout unaffected: tracked=38, verified=34, reviewed=4.
+- Feature selector expansion now included in export contract surface.
+
+Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
+Authority ceiling: governed_matrix_identity_and_boundary_reference_only.
 
 ## Active Validators
 

@@ -112,16 +112,16 @@ def case_fingerprint_no_drift() -> dict:
 
     passed = (
         exit_code == 0
-        and tables_checked == 12
+        and tables_checked == 13
         and drift_count == 0
         and error_count == 0
     )
     result = {
         "name": name,
-        "note": "fingerprint check on real manifest + real baseline; expect 12 tables, 0 drift",
+        "note": "fingerprint check on real manifest + real baseline; expect 13 tables, 0 drift",
         "expected_exit": 0,
         "actual_exit": exit_code,
-        "expected_tables_checked": 12,
+        "expected_tables_checked": 13,
         "actual_tables_checked": tables_checked,
         "expected_drift_count": 0,
         "actual_drift_count": drift_count,

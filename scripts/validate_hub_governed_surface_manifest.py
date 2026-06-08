@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "exports" / "hub_governed_surface_manifest.yaml"
 
 VALID_SPEC_FAMILIES = {"usb20", "usb3"}
-VALID_STATES = {"freeze", "matrix_level_closeout"}
+VALID_STATES = {"freeze", "matrix_level_closeout", "partial_verified"}
 
 
 def main() -> int:
