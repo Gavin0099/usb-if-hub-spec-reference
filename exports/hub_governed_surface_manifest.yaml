@@ -1,13 +1,15 @@
 manifest_id: hub_governed_surface_manifest
-manifest_version: "0.2"
+manifest_version: "0.3"
 export_type: governed_surface_reference
 generated_at: "2026-06-08"
 description: >
   Unified machine-readable manifest for the USB hub governed reference surface.
-  Covers all USB 2.0 and USB 3.x / SuperSpeed governed matrices (13 tables).
+  Covers all USB 2.0 and USB 3.x / SuperSpeed governed matrices (15 tables).
   Authority ceiling: spec_reference_only for all surfaces.
   Supersedes: exports/usb20_hub_class_request_manifest.yaml (USB 2.0 only).
   EXPORT-CONTRACT-1.1: added usb3_ss_feature_selector_matrix (USB3-FS-2).
+  MANIFEST-UPDATE-2: added usb3_ss_hub_characteristics_bit_matrix (USB3-WHC-1)
+    and usb3_ss_hub_interrupt_endpoint_matrix (USB3-IEP-1).
 
 # ── Governed surface summary by spec family ────────────────────────────────
 
@@ -29,13 +31,15 @@ authority_surface:
     summary: >
       USB 3.x governed matrix defined entries are all verified (38 tracked,
       34 verified, 4 reserved boundaries). Additionally, 6 SS-only port
-      feature selector entries are verified (USB3-FS-2). Remaining reviewed
+      feature selector entries are verified (USB3-FS-2), 4 SS hub
+      wHubCharacteristics bit groups are verified (USB3-WHC-1), and 4 SS hub
+      interrupt endpoint fields are verified (USB3-IEP-1). Remaining reviewed
       entries are reserved boundaries only. USB 3.x reference surface is
       matrix-defined only; not equivalent to full USB 3.x spec coverage.
-    tracked: 44
-    verified: 40
-    reviewed: 4
-    evidence_packets: 40
+    tracked: 53
+    verified: 48
+    reviewed: 5
+    evidence_packets: 48
     reviewed_meaning: reserved_boundary_only
     pending_semantic_promotion: 0
 
@@ -155,7 +159,7 @@ governed_tables:
     verified_scope: bit_group_name_and_value_encoding_identity_only
     reviewed_meaning: reserved_high_byte_boundary_only
 
-  # ── USB 3.x tables (3 tables, state: matrix_level_closeout) ──────────
+  # ── USB 3.x tables (6 tables) ────────────────────────────────────────
 
   - id: usb3_ss_hub_descriptor_field_matrix
     spec_family: usb3
@@ -198,3 +202,22 @@ governed_tables:
     verified: 6
     reviewed: 0
     verified_scope: selector_name_value_applicability_recipient_identity_only
+
+  - id: usb3_ss_hub_characteristics_bit_matrix
+    spec_family: usb3
+    path: tables/ss_hub_characteristics_bit_matrix.yaml
+    validator: scripts/validate_ss_hub_characteristics_bit_matrix.py
+    state: partial_verified
+    verified: 4
+    reviewed: 1
+    verified_scope: bit_group_name_value_encoding_identity_only
+    reviewed_meaning: reserved_high_bit_boundary_only
+
+  - id: usb3_ss_hub_interrupt_endpoint_matrix
+    spec_family: usb3
+    path: tables/ss_hub_interrupt_endpoint_matrix.yaml
+    validator: scripts/validate_ss_hub_interrupt_endpoint_matrix.py
+    state: partial_verified
+    verified: 4
+    reviewed: 0
+    verified_scope: field_identity_constraint_encoding_only

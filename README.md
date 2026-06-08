@@ -22,12 +22,14 @@ It must not override confirmed project facts in consuming firmware repositories.
   request-linkage identity, bit-group name and value-encoding identity.
 - No page-level, table-level, firmware-behavior, or full USB compliance verification is claimed.
 
-### USB 3.x / SuperSpeed Hub — Governed Surface (USB3-FS-2)
+### USB 3.x / SuperSpeed Hub — Governed Surface (USB3-IEP-1)
 
-- Four governed matrices: SS hub descriptor (9 verified), SS hub class requests (10 verified),
+- Six governed matrices: SS hub descriptor (9 verified), SS hub class requests (10 verified),
   SS port status/change bits (15 verified, 4 reviewed reserved boundary),
-  SS feature selectors (6 verified, USB3-FS-2).
-- Governed tracked entries: 44. Entry-level verified: 40. Reviewed: 4.
+  SS feature selectors (6 verified, USB3-FS-2),
+  SS wHubCharacteristics bit groups (4 verified, 1 reviewed reserved, USB3-WHC-1),
+  SS hub interrupt endpoint (4 verified, USB3-IEP-1).
+- Governed tracked entries: 53. Entry-level verified: 48. Reviewed: 5.
 - Reference surface is matrix-defined only; not equivalent to full USB 3.x spec coverage.
 - No LTSSM, xHCI, electrical, or USB-IF certification claims.
 
@@ -51,13 +53,13 @@ English pages are available under [specs/en/](specs/en/).
 
 ## Machine-Readable Surfaces
 
-- `tables/`: governed structured matrices for USB 2.0 (9 tables) and USB 3.x (4 tables).
+- `tables/`: governed structured matrices for USB 2.0 (9 tables) and USB 3.x (6 tables).
 - `exports/hub_governed_surface_manifest.yaml`: unified consumer-facing manifest
-  covering all 13 governed tables with per-family authority surface, claim ceiling,
+  covering all 15 governed tables with per-family authority surface, claim ceiling,
   and consumer usage contract. Supersedes `exports/usb20_hub_class_request_manifest.yaml`.
 - `evidence/entry_verification_packets/`: entry-level verification packets for promoted
-  verified entries (105 USB 2.0 + 40 USB 3.x packets).
-- `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for all 13 governed
+  verified entries (105 USB 2.0 + 48 USB 3.x packets).
+- `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for all 15 governed
   table drift detection.
 - `scripts/validate_reference_surface_statistics.py`: consistency check for manually
   maintained visible counts across README, PLAN, homepages, and verification status pages.

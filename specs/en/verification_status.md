@@ -216,13 +216,15 @@ The following are outside the verified scope for all entries:
 | SS hub class requests | 10 | 10 | 0 | 0 | 0 |
 | SS port status bits | 19 | 15 | 4 | 0 | 0 |
 | SS feature selectors (USB3-FS-2) | 6 | 6 | 0 | 0 | 0 |
-| **USB 3.x Total** | **44** | **40** | **4** | **0** | **0** |
+| SS wHubCharacteristics bit groups (USB3-WHC-1) | 5 | 4 | 1 | 0 | 0 |
+| SS hub interrupt endpoint (USB3-IEP-1) | 4 | 4 | 0 | 0 | 0 |
+| **USB 3.x Total** | **53** | **48** | **5** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 40 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B), 15 for SS port status bits (USB3-3C), 6 for SS feature selectors (USB3-FS-2) |
+| USB 3.x evidence packets | 48 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B), 15 for SS port status bits (USB3-3C), 6 for SS feature selectors (USB3-FS-2), 4 for SS wHubCharacteristics bit groups (USB3-WHC-1), 4 for SS hub interrupt endpoint (USB3-IEP-1) |
 
-The SS port status bit matrix USB3-3C pilot is complete: 15 defined entries promoted to verified. The SS feature selector matrix USB3-FS-2 pilot is complete: 6 SS-only port feature selector entries promoted to verified (selector name/value/applicability/recipient identity only); 4 port status reserved boundary entries remain reviewed (permanent boundaries).
+The SS port status bit matrix USB3-3C pilot is complete: 15 defined entries promoted to verified. The SS feature selector matrix USB3-FS-2 pilot is complete: 6 SS-only port feature selector entries promoted to verified (selector name/value/applicability/recipient identity only); 4 port status reserved boundary entries remain reviewed (permanent boundaries). The SS wHubCharacteristics bit matrix USB3-WHC-1 pilot is complete: 4 defined bit groups promoted to verified (bit group name/value encoding identity only); 1 reserved boundary remains reviewed. The SS hub interrupt endpoint matrix USB3-IEP-1 pilot is complete: all 4 descriptor fields promoted to verified (field identity/constraint encoding only).
 
 ## What This Page Does Not Claim
 
@@ -302,7 +304,37 @@ Evidence packets (6 total, `evidence/entry_verification_packets/usb3/`):
 - Does not verify U1/U2 timeout encoding semantics or wValue field behavior.
 - Does not verify remote wake event routing, platform wake policy, or OS power management.
 - Does not verify BH/warm reset sequence timing, LFPS signaling, or link recovery outcome.
-- Manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
+
+## USB 3.x wHubCharacteristics Bit Matrix (USB3-WHC-1)
+
+> Verified gate: PARTIAL / allowlist-only (USB3-WHC-1 pilot, 4 defined bit groups promoted).
+> USB 3.x has no Transaction Translator; Port Indicators is at bit[5] (bit[7] in USB 2.0).
+
+| Entry | Field | Bit range | Claim level | Verified scope |
+|---|---|---|---|---|
+| usb3_ss_whc_power_switching | `wHubCharacteristics` | bits[1:0] | **verified** | bit group name/value encoding identity only |
+| usb3_ss_whc_compound_device | `wHubCharacteristics` | bit[2] | **verified** | bit group name/value encoding identity only |
+| usb3_ss_whc_over_current_mode | `wHubCharacteristics` | bits[4:3] | **verified** | bit group name/value encoding identity only |
+| usb3_ss_whc_port_indicators | `wHubCharacteristics` | bit[5] | **verified** | bit group name/value encoding identity only |
+| usb3_ss_whc_reserved_high | `wHubCharacteristics` | bits[15:6] | reviewed | reserved boundary (permanent) |
+| **Total** | | | **4 verified / 1 reviewed** | gate: **PARTIAL (allowlist, 4 entries)** |
+
+Evidence packets (4 total, `evidence/entry_verification_packets/usb3/ss_whc_*.yaml`).
+
+## USB 3.x Hub Interrupt Endpoint Matrix (USB3-IEP-1)
+
+> Verified gate: PARTIAL / allowlist-only (USB3-IEP-1 pilot, all 4 entries promoted).
+> USB 3.x SuperSpeed bInterval uses 2^(n-1)×125 μs microframe encoding (range 1–16); no direct-ms FS/LS encoding.
+
+| Entry | Field | Claim level | Verified scope |
+|---|---|---|---|
+| usb3_ss_hub_ep_bEndpointAddress | `bEndpointAddress` | **verified** | field identity/constraint encoding only |
+| usb3_ss_hub_ep_bmAttributes | `bmAttributes` | **verified** | field identity/constraint encoding only |
+| usb3_ss_hub_ep_wMaxPacketSize | `wMaxPacketSize` | **verified** | field identity/constraint encoding only |
+| usb3_ss_hub_ep_bInterval | `bInterval` | **verified** | field identity/constraint encoding only |
+| **Total** | | **4 verified / 0 reviewed** | gate: **PARTIAL (allowlist, 4 entries)** |
+
+Evidence packets (4 total, `evidence/entry_verification_packets/usb3/ss_iep_*.yaml`).
 
 ## Export Contract Surface
 
@@ -310,8 +342,8 @@ The hub governed surface now has a complete machine-readable export contract for
 
 | Component | Path | Role |
 |---|---|---|
-| Unified manifest | `exports/hub_governed_surface_manifest.yaml` | Governed truth index: authority surface, claim ceiling, and consumer usage contract for all 12 tables |
-| Fingerprint baseline | `evidence/table_fingerprint_baseline.jsonl` | Content-hash baseline for all 12 governed tables for CI drift detection |
+| Unified manifest | `exports/hub_governed_surface_manifest.yaml` | Governed truth index: authority surface, claim ceiling, and consumer usage contract for all 15 tables |
+| Fingerprint baseline | `evidence/table_fingerprint_baseline.jsonl` | Content-hash baseline for all 15 governed tables for CI drift detection |
 | Consumer contract | `docs/CONSUMER_INTEGRATION_CONTRACT.md` | Allowed / forbidden usage, failure interpretation, governance layer model |
 | Manifest validator | `scripts/validate_hub_governed_surface_manifest.py` | Consistency gate between manifest summary and actual table entries (R1–R8) |
 | Fingerprint probe | `scripts/probe_table_fingerprint.py --mode check` | Table content drift gate (exit 1 + names the drifted table) |
@@ -321,12 +353,12 @@ The hub governed surface now has a complete machine-readable export contract for
 
 ```
 Step 1  python scripts/validate_hub_governed_surface_manifest.py
-        → PASS: 12 tables, usb20 freeze, usb3 matrix_level_closeout
+        → PASS: 15 tables, usb20 freeze, usb3 partial_verified_expansion
 
 Step 2  python scripts/probe_table_fingerprint.py --mode check \
           --manifest exports/hub_governed_surface_manifest.yaml \
           --baseline-in evidence/table_fingerprint_baseline.jsonl
-        → PASS: 12 tables, 0 drift
+        → PASS: 15 tables, 0 drift
 ```
 
 **Export contract non-claims:**
