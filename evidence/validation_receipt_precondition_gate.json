@@ -1,0 +1,14 @@
+{
+  "artifact_type": "precondition_gate",
+  "validator": "validate_entry_verification_gate",
+  "generated_utc": "2026-06-05T10:56:15.734375+00:00",
+  "matrices": [
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\port_status_bit_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\hub_descriptor_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\class_request_matrix.yaml"
+  ],
+  "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\entry_verification_packets",
+  "result": "PASS",
+  "errors": [],
+  "authority_ceiling": "entry_level_verified_gate_only"
+}
