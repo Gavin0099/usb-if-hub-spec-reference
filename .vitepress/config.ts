@@ -40,6 +40,19 @@ const ZH_LABELS: Labels = {
   ss_hub_descriptor: "SuperSpeed Hub Descriptor",
   ss_port_status_bits: "SS Port Status Bits",
   ss_hub_class_requests: "SS Hub Class Requests",
+  ss_feature_selectors: "SS 特性選擇器",
+  ss_hub_characteristics: "SS Hub 特性位元",
+  ss_hub_interrupt_endpoint: "SS Hub 中斷端點",
+  ss_hub_power: "SS Hub 電源管理",
+  ss_hub_enumeration: "SS Hub 枚舉序列",
+  ss_port_state_machine: "SS 埠狀態機",
+  ss_lpm: "SS 鏈路電源管理",
+  ss_signaling: "SS 訊號",
+  ss_standard_device_requests: "SS 標準裝置請求",
+  ss_hub_compound_device: "SS 複合裝置 Hub",
+  ss_packet_types: "SS 封包類型",
+  ss_transactions: "SS 事務",
+  ss_test_modes: "SS 測試模式",
 };
 
 const EN_LABELS: Labels = {
@@ -75,6 +88,19 @@ const EN_LABELS: Labels = {
   ss_hub_descriptor: "SuperSpeed Hub Descriptor",
   ss_port_status_bits: "SS Port Status Bits",
   ss_hub_class_requests: "SS Hub Class Requests",
+  ss_feature_selectors: "SS Feature Selectors",
+  ss_hub_characteristics: "SS Hub Characteristics",
+  ss_hub_interrupt_endpoint: "SS Hub Interrupt Endpoint",
+  ss_hub_power: "SS Hub Power Management",
+  ss_hub_enumeration: "SS Hub Enumeration",
+  ss_port_state_machine: "SS Port State Machine",
+  ss_lpm: "SS Link Power Management",
+  ss_signaling: "SS Signaling",
+  ss_standard_device_requests: "SS Standard Device Requests",
+  ss_hub_compound_device: "SS Hub Compound Device",
+  ss_packet_types: "SS Packet Types",
+  ss_transactions: "SS Transactions",
+  ss_test_modes: "SS Test Modes",
 };
 
 function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, prefix = "") {
@@ -136,6 +162,19 @@ const zhUsb3Items = [
   { text: "SuperSpeed Hub Descriptor", link: "/usb3/ss_hub_descriptor" },
   { text: "SS Port Status Bits", link: "/usb3/ss_port_status_bits" },
   { text: "SS Hub Class Requests", link: "/usb3/ss_hub_class_requests" },
+  { text: "SS 特性選擇器", link: "/usb3/ss_feature_selectors" },
+  { text: "SS Hub 特性位元", link: "/usb3/ss_hub_characteristics" },
+  { text: "SS Hub 中斷端點", link: "/usb3/ss_hub_interrupt_endpoint" },
+  { text: "SS Hub 電源管理", link: "/usb3/ss_hub_power" },
+  { text: "SS Hub 枚舉序列", link: "/usb3/ss_hub_enumeration" },
+  { text: "SS 埠狀態機", link: "/usb3/ss_port_state_machine" },
+  { text: "SS 鏈路電源管理", link: "/usb3/ss_lpm" },
+  { text: "SS 訊號", link: "/usb3/ss_signaling" },
+  { text: "SS 標準裝置請求", link: "/usb3/ss_standard_device_requests" },
+  { text: "SS 複合裝置 Hub", link: "/usb3/ss_hub_compound_device" },
+  { text: "SS 封包類型", link: "/usb3/ss_packet_types" },
+  { text: "SS 事務", link: "/usb3/ss_transactions" },
+  { text: "SS 測試模式", link: "/usb3/ss_test_modes" },
 ];
 
 const enUsb2Items = [
@@ -173,6 +212,19 @@ const enUsb3Items = [
   { text: "SuperSpeed Hub Descriptor", link: "/en/usb3/ss_hub_descriptor" },
   { text: "SS Port Status Bits", link: "/en/usb3/ss_port_status_bits" },
   { text: "SS Hub Class Requests", link: "/en/usb3/ss_hub_class_requests" },
+  { text: "SS Feature Selectors", link: "/en/usb3/ss_feature_selectors" },
+  { text: "SS Hub Characteristics", link: "/en/usb3/ss_hub_characteristics" },
+  { text: "SS Hub Interrupt Endpoint", link: "/en/usb3/ss_hub_interrupt_endpoint" },
+  { text: "SS Hub Power Management", link: "/en/usb3/ss_hub_power" },
+  { text: "SS Hub Enumeration", link: "/en/usb3/ss_hub_enumeration" },
+  { text: "SS Port State Machine", link: "/en/usb3/ss_port_state_machine" },
+  { text: "SS Link Power Management", link: "/en/usb3/ss_lpm" },
+  { text: "SS Signaling", link: "/en/usb3/ss_signaling" },
+  { text: "SS Standard Device Requests", link: "/en/usb3/ss_standard_device_requests" },
+  { text: "SS Hub Compound Device", link: "/en/usb3/ss_hub_compound_device" },
+  { text: "SS Packet Types", link: "/en/usb3/ss_packet_types" },
+  { text: "SS Transactions", link: "/en/usb3/ss_transactions" },
+  { text: "SS Test Modes", link: "/en/usb3/ss_test_modes" },
 ];
 
 const zhReferenceItems = [

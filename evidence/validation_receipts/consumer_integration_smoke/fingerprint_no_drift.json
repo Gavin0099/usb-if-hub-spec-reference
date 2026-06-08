@@ -1,10 +1,10 @@
 {
   "name": "fingerprint_no_drift",
-  "note": "fingerprint check on real manifest + real baseline; expect 12 tables, 0 drift",
+  "note": "fingerprint check on real manifest + real baseline; expect 15 tables, 0 drift",
   "expected_exit": 0,
   "actual_exit": 0,
-  "expected_tables_checked": 12,
-  "actual_tables_checked": 12,
+  "expected_tables_checked": 15,
+  "actual_tables_checked": 15,
   "expected_drift_count": 0,
   "actual_drift_count": 0,
   "expected_error_count": 0,

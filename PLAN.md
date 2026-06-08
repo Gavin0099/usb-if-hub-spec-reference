@@ -670,6 +670,115 @@ USB 3.x surface unaffected: tracked=38, verified=34, reviewed=4.
 
 Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
 
+### Phase USB3-WHC-1 - SS Hub Characteristics Bit Matrix
+
+- NEW `tables/ss_hub_characteristics_bit_matrix.yaml`: 5 entries covering USB 3.x
+  wHubCharacteristics bit groups (version 0.1, spec_family: usb3, verified_gate: PARTIAL).
+  - `usb3_ss_whc_power_switching` (bits[1:0]): Logical Power Switching Mode — verified
+  - `usb3_ss_whc_compound_device` (bit[2]): Compound Device flag — verified
+  - `usb3_ss_whc_over_current_mode` (bits[4:3]): Over-Current Protection Mode — verified
+  - `usb3_ss_whc_port_indicators` (bit[5]): Port Indicators Supported — verified
+  - `usb3_ss_whc_reserved_high` (bits[15:6]): Reserved boundary — permanent reviewed
+  Key USB 3.x difference: NO TT Think Time bits (USB 3.x hubs have no Transaction Translator);
+  Port Indicators at bit[5] (not bit[7] as in USB 2.0); reserved range bits[15:6] (not bits[15:8]).
+  Source: USB 3.2 §10.14.2 Table 10-10 (wHubCharacteristics for SuperSpeed Hub).
+- NEW `scripts/validate_ss_hub_characteristics_bit_matrix.py`: R1–R8 structural validator;
+  ALLOWLIST_VERIFIED_IDS = 4 ids; EXPECTED_ENTRY_IDS = 5 ids.
+- 4 evidence packets in `evidence/entry_verification_packets/usb3/` (ss_whc_*.yaml):
+  `verification_scope.claim: bit_group_name_value_encoding_identity_only`.
+- USB 3.x authority_surface: tracked=53, verified=48, reviewed=5, evidence_packets=48
+  (WHC adds 5 tracked entries: 4 verified + 1 reviewed, 4 new evidence packets).
+
+Claim ceiling: bit_group_name_value_encoding_identity_only. Does not claim wHubCharacteristics
+runtime behavior, power switching firmware implementation, or OCP hardware behavior.
+
+### Phase USB3-IEP-1 - SS Hub Interrupt Endpoint Matrix
+
+- NEW `tables/ss_hub_interrupt_endpoint_matrix.yaml`: 4 entries covering USB 3.x SuperSpeed
+  hub interrupt endpoint descriptor fields (version 0.1, spec_family: usb3, verified_gate: PARTIAL).
+  All 4 entries: `claim_level: verified`.
+  - `usb3_ss_hub_ep_bEndpointAddress`: 0x81 (IN, endpoint 1) — verified
+  - `usb3_ss_hub_ep_bmAttributes`: 0x03 (Interrupt transfer type) — verified
+  - `usb3_ss_hub_ep_wMaxPacketSize`: 1 byte (1 bit per port + hub status) — verified
+  - `usb3_ss_hub_ep_bInterval`: 2^(bInterval-1) × 125 μs; bInterval range 1–16 — verified
+  USB 3.x bInterval encoding: microframe-based (same as USB 2.0 HS), NOT direct ms.
+  Source: USB 3.2 §10.14.2 and §10.15.1.
+- NEW `scripts/validate_ss_hub_interrupt_endpoint_matrix.py`: R1–R8 structural validator;
+  ALLOWLIST_VERIFIED_IDS = all 4 field ids; uses field_id as key.
+- 4 evidence packets in `evidence/entry_verification_packets/usb3/` (ss_iep_*.yaml):
+  `verification_scope.claim: field_identity_constraint_encoding_only`.
+
+Claim ceiling: field_identity_constraint_encoding_only. Does not claim interrupt endpoint
+runtime behavior, xHCI interrupt scheduling, or hub status change reporting behavior.
+
+### Phase MANIFEST-UPDATE-2 - Manifest v0.3 + 15-Table Re-baseline
+
+- `exports/hub_governed_surface_manifest.yaml` → v0.3: added entries 14 and 15
+  (usb3_ss_hub_characteristics_bit_matrix, usb3_ss_hub_interrupt_endpoint_matrix).
+  `authority_surface.usb3` updated: tracked=44→53, verified=40→48, reviewed=4→5,
+  evidence_packets=40→48. USB3 section comment updated to "(6 tables)".
+- `evidence/table_fingerprint_baseline.jsonl`: re-baselined for all 15 tables.
+  Fingerprint check PASSES: 15 tables, 0 drift.
+- `scripts/smoke_consumer_integration_fixtures.py`: updated `fingerprint_no_drift`
+  case to expect 15 tables (was 13). Consumer smoke PASSES: 3/3 cases.
+- `specs/verification_status.md` + EN: added USB3-WHC-1 and USB3-IEP-1 rows to
+  USB 3.x stats table; totals updated to tracked=53, verified=48, reviewed=5;
+  evidence packets updated to 48; added new sections for each matrix.
+  CI gate example updated (12→15 tables). Export Contract table updated (12→15).
+- `README.md`: updated USB3 stats (tracked 44→53, verified 40→48, tables 13→15,
+  evidence packets 40→48).
+
+Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
+
+### Phase USB3-WIKI-CORE - SS Hub Core Wiki Pages (6 Topic Pairs ZH+EN)
+
+All pages: `claim_level: inferred`, `semantic_verification_claimed: false`,
+`spec_family: usb3`, `last_reviewed: 2026-06-08`.
+
+- NEW `specs/usb3/ss_feature_selectors.md` + EN: 6 SS-only port feature selectors table
+  (PORT_U1_ENABLE/U2_ENABLE/U1_TIMEOUT/U2_TIMEOUT/REMOTE_WAKE_MASK/BH_PORT_RESET),
+  U1/U2 LPM explanations, Verified Gate note linking to ss_feature_selector_matrix.
+- NEW `specs/usb3/ss_hub_characteristics.md` + EN: wHubCharacteristics bit layout table,
+  USB3 vs USB2 diff table (NO TT Think Time bits, Port Indicators at bit[5]).
+  Cross-link to governed ss_hub_characteristics_bit_matrix.
+- NEW `specs/usb3/ss_hub_interrupt_endpoint.md` + EN: 4 descriptor fields,
+  bInterval microframe encoding table, wMaxPacketSize formula.
+  Cross-link to governed ss_hub_interrupt_endpoint_matrix.
+- NEW `specs/usb3/ss_hub_power.md` + EN: power control modes, U1/U2/U3 states,
+  bPwrOn2PwrGood, OC protection, USB3 vs USB2 diff table.
+- NEW `specs/usb3/ss_hub_enumeration.md` + EN: 8-step enumeration sequence,
+  SET_HUB_DEPTH mandatory, USB3 vs USB2 diff table.
+- NEW `specs/usb3/ss_port_state_machine.md` + EN: port states table, Warm/Hot Reset types,
+  PORT_LINK_STATE 12-value encoding table, PORT_SPEED table.
+
+No new governed matrix entries. No new verified claims beyond existing matrices.
+
+Claim ceiling: reviewed reference summary only; inferred from spec reading.
+
+### Phase USB3-WIKI-EXT - SS Hub Extended Wiki Pages (7 Topic Pairs ZH+EN)
+
+All pages: `claim_level: inferred`, `semantic_verification_claimed: false`,
+`spec_family: usb3`, `last_reviewed: 2026-06-08`.
+
+- NEW `specs/usb3/ss_lpm.md` + EN: U0-U3 states table, U1/U2 entry/exit, timeout selectors,
+  U3 suspend, wPortStatus LPM bits.
+- NEW `specs/usb3/ss_signaling.md` + EN: SS differential serial (TX+/TX-/RX+/RX-),
+  LFPS uses, Gen1 (5 Gbps, 8b10b) vs Gen2 (10 Gbps, 128b132b) diff table.
+- NEW `specs/usb3/ss_standard_device_requests.md` + EN: retained USB2 requests table,
+  U1/U2/LTM feature selectors, new descriptor types (BOS 0x0F, SSP 0x10, SS Hub 0x2A).
+- NEW `specs/usb3/ss_hub_compound_device.md` + EN: wHubCharacteristics bit[2],
+  compound device definition, USB3 vs USB2 encoding diff.
+- NEW `specs/usb3/ss_packet_types.md` + EN: LMP/TP/DP/ITP overview table,
+  TP subtypes (ACK/NRDY/ERDY/STATUS/STALL/DEV_NOTIFICATION/PING/PING_RESPONSE).
+- NEW `specs/usb3/ss_transactions.md` + EN: point-to-point full-duplex model,
+  NRDY/ERDY flow control, no TT, hub packet routing role.
+- NEW `specs/usb3/ss_test_modes.md` + EN: Compliance Mode (PORT_LINK_STATE=0xA),
+  Loopback (0xB), PORT_LINK_STATE mapping table, USB2 vs USB3 test mode diff table.
+
+No new governed matrix entries. No new verified claims.
+
+Claim ceiling: reviewed reference summary only; inferred from spec reading.
+
 ### Phase EXPORT-CONTRACT-1.1 - Feature Selector Expansion Manifest + Fingerprint Re-baseline
 
 - `exports/hub_governed_surface_manifest.yaml` v0.2: added 13th governed table
@@ -714,6 +823,8 @@ Authority ceiling: governed_matrix_identity_and_boundary_reference_only.
 - `python scripts\validate_ss_hub_class_request_matrix.py`
 - `python scripts\validate_ss_hub_descriptor_matrix.py`
 - `python scripts\validate_ss_feature_selector_matrix.py`
+- `python scripts\validate_ss_hub_characteristics_bit_matrix.py`
+- `python scripts\validate_ss_hub_interrupt_endpoint_matrix.py`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\smoke_consumer_integration_fixtures.py`
@@ -735,25 +846,31 @@ governed surface.
 
 ## USB 3.x Governed Matrix State
 
-USB 3.x governed matrix surface has reached stable closeout state (Phase USB3-3C).
+USB 3.x governed matrix and wiki surface has reached Wiki Parity state (Phase USB3-WIKI-EXT).
 
-The three USB 3.x governed matrices now track 38 entries:
-- 34 entry-level verified entries (all defined entries across all three matrices)
-- 4 reviewed permanent-boundary entries (reserved bits only, not pending promotion)
+The six USB 3.x governed tables now track 53 entries across 6 matrices:
+- 48 entry-level verified entries (all defined entries across all six matrices)
+- 5 reviewed permanent-boundary entries (reserved bits only, not pending promotion)
 
-All defined entries across the current three USB 3.x governed matrices have
-completed verified promotion:
+Governed matrices (6 total):
 - SS hub descriptor fields: 9 / 9 verified
 - SS hub class requests: 10 / 10 verified
-- SS port status/change bits: 15 defined entries verified, 4 reserved boundary
-  entries reviewed
+- SS port status/change bits: 15 defined entries verified, 4 reserved boundary reviewed
+- SS feature selectors: 6 / 6 verified
+- SS wHubCharacteristics bit groups: 4 / 5 entries verified (1 reserved boundary reviewed)
+- SS hub interrupt endpoint fields: 4 / 4 verified
 
-No defined USB 3.x matrix entry is pending semantic promotion.
-The remaining 4 reviewed entries are reserved boundary entries only.
+Wiki surface (13 topic pairs, ZH + EN):
+- CORE topics (6): ss_feature_selectors, ss_hub_characteristics, ss_hub_interrupt_endpoint,
+  ss_hub_power, ss_hub_enumeration, ss_port_state_machine
+- EXT topics (7): ss_lpm, ss_signaling, ss_standard_device_requests, ss_hub_compound_device,
+  ss_packet_types, ss_transactions, ss_test_modes
 
-USB 3.x reference surface is matrix-defined only — it covers these three
-governed matrices, not the full USB 3.x specification surface. It does not
-have the equivalent wiki/reference depth of USB 2.0 (28 topic pairs).
+Plus 3 earlier pages (ss_hub_descriptor, ss_port_status_bits, ss_hub_class_requests)
+= 16 pages per locale (32 total), approaching USB 2.0's 28-topic pair depth.
+
+USB 3.x authority_surface: tracked=53, verified=48, reviewed=5, evidence_packets=48.
+USB 3.x manifest: 15 governed tables (manifest v0.3).
 
 USB 2.0 freeze remains unchanged at 151 / 105 / 46.
 
@@ -766,7 +883,7 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
 - All 6 entries: `claim_level: verified`, verified gate PARTIAL/allowlist.
 - 6 evidence packets in `evidence/entry_verification_packets/usb3/`.
 - Included in the unified manifest (13th governed table) and fingerprint baseline.
-- USB 3.x authority_surface: tracked=44, verified=40, reviewed=4, evidence_packets=40.
+- Now included in the MANIFEST-UPDATE-2 (v0.3) re-baseline (15 tables total).
 
 ## Open Work
 
@@ -774,6 +891,8 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
+3. USB 3.x wiki parity is complete (16 pages per locale). Any future expansion
+   requires explicit scope definition and governance approval.
 
 ## Cannot Claim
 
@@ -784,7 +903,7 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
 - Fleet governance is enabled.
 - Runtime profile validation or response envelope enforcement is active.
 - USB 3.x governed matrix surface is equivalent to full USB 3.x spec coverage.
-- USB 3.x hub spec reference has converged to the same depth as USB 2.0.
+- USB 3.x wiki surface covers the full USB 3.2 specification (it covers reference depth only).
 - LTSSM runtime state transitions are verified.
 - xHCI port state management or xHCI enumeration behavior is verified.
 - SuperSpeed hub firmware compliance truth is established.
