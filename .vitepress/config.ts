@@ -61,6 +61,9 @@ const ZH_LABELS: Labels = {
   ss_usb_transfer_types: "SS USB 傳輸類型",
   ss_port_indicators: "SS Port 指示燈",
   ss_hub_power_budget: "SS Hub 電源預算",
+  // USB3-WIKI-FULL-2 difference and shared reference pages
+  ss_no_transaction_translator: "SS Hub 無 Transaction Translator",
+  ss_speed_detection: "SS Speed Detection",
 };
 
 const EN_LABELS: Labels = {
@@ -117,6 +120,9 @@ const EN_LABELS: Labels = {
   ss_usb_transfer_types: "SS USB Transfer Types",
   ss_port_indicators: "SS Port Indicators",
   ss_hub_power_budget: "SS Hub Power Budget",
+  // USB3-WIKI-FULL-2 difference and shared reference pages
+  ss_no_transaction_translator: "SS Hub — No Transaction Translator",
+  ss_speed_detection: "SS Speed Detection",
 };
 
 function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, prefix = "") {
@@ -198,6 +204,8 @@ const zhUsb3Items = [
   { text: "SS USB 傳輸類型", link: "/usb3/ss_usb_transfer_types" },
   { text: "SS Port 指示燈", link: "/usb3/ss_port_indicators" },
   { text: "SS Hub 電源預算", link: "/usb3/ss_hub_power_budget" },
+  { text: "SS Hub 無 Transaction Translator", link: "/usb3/ss_no_transaction_translator" },
+  { text: "SS Speed Detection", link: "/usb3/ss_speed_detection" },
 ];
 
 const enUsb2Items = [
@@ -255,6 +263,8 @@ const enUsb3Items = [
   { text: "SS USB Transfer Types", link: "/en/usb3/ss_usb_transfer_types" },
   { text: "SS Port Indicators", link: "/en/usb3/ss_port_indicators" },
   { text: "SS Hub Power Budget", link: "/en/usb3/ss_hub_power_budget" },
+  { text: "SS Hub — No Transaction Translator", link: "/en/usb3/ss_no_transaction_translator" },
+  { text: "SS Speed Detection", link: "/en/usb3/ss_speed_detection" },
 ];
 
 const zhReferenceItems = [

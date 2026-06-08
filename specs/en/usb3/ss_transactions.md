@@ -75,6 +75,20 @@ USB 3.x isochronous transactions use ITP (Isochronous Timestamp Packet) to provi
 
 Isochronous transfer runtime scheduling behavior is outside this page's verified scope.
 
+## Split Transaction Does Not Apply in the SS Context
+
+USB 2.0 High-Speed hubs use Split Transactions (SSPLIT/CSPLIT Tokens) to allow the host to issue requests across speed domains to FS/LS devices. This relies on a Transaction Translator (TT) to complete the transfer in the FS/LS speed domain before reporting completion to the host.
+
+In the USB 3.x SuperSpeed context:
+
+- All ports operate at SuperSpeed; there is no HS/FS/LS mixed-speed-domain issue.
+- SS hubs do not include a TT; the split transaction mechanism does not exist in the USB 3.x architecture.
+- The "Split Transaction: Not required" row in the §USB 2.0 vs USB 3.x Transaction Comparison table above captures this architectural difference.
+
+This section is a contrast note; USB 2.0 split transaction runtime behavior is outside this repo's verified scope.
+
+See [SS Hub — No Transaction Translator](ss_no_transaction_translator.md) for the full TT contrast.
+
 ## This Page Does Not Claim
 
 - Transaction layer runtime behavior or retry mechanisms.
@@ -82,5 +96,6 @@ Isochronous transfer runtime scheduling behavior is outside this page's verified
 - NRDY/ERDY runtime flow control behavior.
 - Link layer ACK/NACK timing.
 - USB-IF transaction compliance or interoperability testing.
+- USB 2.0 Split Transaction runtime timing (this belongs to the USB 2.0 TT domain).
 
-→ [SS Packet Types](ss_packet_types.md) | [SS Hub Class Requests](ss_hub_class_requests.md) | [Verification Status](../verification_status.md)
+→ [SS Packet Types](ss_packet_types.md) | [SS Hub Class Requests](ss_hub_class_requests.md) | [SS Hub — No Transaction Translator](ss_no_transaction_translator.md) | [Verification Status](../verification_status.md)

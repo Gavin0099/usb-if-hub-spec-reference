@@ -77,6 +77,20 @@ USB 3.x isochronous transactions 使用 ITP（Isochronous Timestamp Packet）提
 
 等時傳輸的 runtime scheduling 行為超出本頁 verified scope。
 
+## Split Transaction 在 SS 環境下不適用
+
+USB 2.0 High-Speed hub 使用 Split Transaction（SSPLIT/CSPLIT Token）讓 host 能跨速度域向 FS/LS 裝置發出請求。這依賴 Transaction Translator（TT）在 FS/LS 速度域完成實際傳輸後，再向 host 回報完成狀態。
+
+USB 3.x SuperSpeed 環境中：
+
+- 所有端口均以 SuperSpeed 運作，不存在 HS/FS/LS 速度域混合問題。
+- SS hub 不含 TT；split transaction 機制在 USB 3.x 架構中不存在。
+- 本頁 §「USB 2.0 vs USB 3.x Transaction 比較」表中的「Split Transaction: 不需要」一欄即反映此架構差異。
+
+本節為對比說明；USB 2.0 split transaction 的 runtime behavior 不在本 repo verified scope 內。
+
+詳見 [SS Hub 無 Transaction Translator](ss_no_transaction_translator.md)。
+
 ## 本頁不宣告
 
 - Transaction layer runtime behavior 或 retry 機制。
@@ -84,5 +98,6 @@ USB 3.x isochronous transactions 使用 ITP（Isochronous Timestamp Packet）提
 - NRDY/ERDY runtime flow control behavior。
 - Link layer ACK/NACK 機制的時序。
 - USB-IF transaction 合規性或互操作性測試。
+- USB 2.0 Split Transaction 的 runtime timing（屬 USB 2.0 TT 範疇）。
 
-→ [SS Packet Types](ss_packet_types.md) | [SS Hub Class Requests](ss_hub_class_requests.md) | [Verification Status](../verification_status.md)
+→ [SS Packet Types](ss_packet_types.md) | [SS Hub Class Requests](ss_hub_class_requests.md) | [SS Hub 無 Transaction Translator](ss_no_transaction_translator.md) | [Verification Status](../verification_status.md)

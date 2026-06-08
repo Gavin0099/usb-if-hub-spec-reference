@@ -855,6 +855,37 @@ Claim ceiling: reviewed reference summary only; inferred from spec reading.
 No new governed matrices. No new evidence packets. No new verified claims.
 Does not claim USB 3.x wiki parity with USB 2.0 is complete.
 
+### Phase USB3-WIKI-FULL-2 - SS Difference and Shared Reference Pages
+
+All pages: `claim_level: inferred`, `semantic_verification_claimed: false`,
+`spec_family: usb3` (where applicable), `last_reviewed: 2026-06-08`.
+
+New pages (2 × ZH+EN = 4 new files):
+- `ss_no_transaction_translator`: SS hub has no TT; bounded contrast with USB 2.0 TT architecture;
+  `bDeviceProtocol=0x03` vs 0x01/0x02; SS Hub Descriptor type 0x2A vs 0x29; wHubCharacteristics diff
+- `ss_speed_detection`: LFPS + TSEQ vs USB 2.0 HS Chirp; LTSSM scope boundary explicit;
+  no LFPS runtime timing or electrical claims
+
+Updated existing pages:
+- `ss_transactions` (ZH+EN): added "Split Transaction Does Not Apply in SS Context" section
+  with cross-link to ss_no_transaction_translator
+- `glossary` (ZH+EN): added "USB 3.x / SuperSpeed Terms" section (SS/SSP/BOS/LPM/U0-U3/LFPS/TSEQ/ITP/NRDY-ERDY/SET_HUB_DEPTH);
+  updated frontmatter usb_versions/source_refs to include usb_3_2
+- `version_source_map` (ZH+EN): updated USB 3.2 row to reflect governed surface present;
+  added "USB 3.2 Governed Surface Summary" table; updated frontmatter
+- `escalation_table` (ZH+EN): renamed trigger section to "USB 2.0 Trigger Conditions";
+  added "SS (USB 3.x) Trigger Conditions" (SE-01 through SE-05);
+  updated Governed Linkage with SS table references; updated frontmatter
+
+Updated `.vitepress/config.ts`:
+- Added 2 labels to ZH_LABELS and EN_LABELS
+- `zhUsb3Items`: 23 → 25 items
+- `enUsb3Items`: 23 → 25 items
+
+Claim ceiling: reviewed reference summary only; inferred from spec reading.
+No new governed matrices. No new evidence packets. No new verified claims.
+Does not claim USB 3.x wiki surface is complete.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -912,7 +943,7 @@ Governed matrices (6 total):
 - SS wHubCharacteristics bit groups: 4 / 5 entries verified (1 reserved boundary reviewed)
 - SS hub interrupt endpoint fields: 4 / 4 verified
 
-Wiki surface (20 topic pairs, ZH + EN):
+Wiki surface (22 topic pairs, ZH + EN):
 - CORE topics (6): ss_feature_selectors, ss_hub_characteristics, ss_hub_interrupt_endpoint,
   ss_hub_power, ss_hub_enumeration, ss_port_state_machine
 - EXT topics (7): ss_lpm, ss_signaling, ss_standard_device_requests, ss_hub_compound_device,
@@ -920,9 +951,10 @@ Wiki surface (20 topic pairs, ZH + EN):
 - FULL-1 direct parity topics (7): ss_hub_device_class, ss_hub_configuration,
   ss_standard_descriptors, ss_usb_device_states, ss_usb_transfer_types,
   ss_port_indicators, ss_hub_power_budget
+- FULL-2 difference topics (2): ss_no_transaction_translator, ss_speed_detection
 
 Plus 3 earlier pages (ss_hub_descriptor, ss_port_status_bits, ss_hub_class_requests)
-= 23 pages per locale (46 total), matching USB 2.0's 28-topic pair depth.
+= 25 pages per locale (50 total), exceeding USB 2.0's 28-topic pair depth.
 
 USB 3.x authority_surface: tracked=53, verified=48, reviewed=5, evidence_packets=48.
 USB 3.x manifest: 15 governed tables (manifest v0.3).
@@ -946,8 +978,9 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
-3. USB 3.x wiki parity has reached 23 pages per locale (46 total). Any further
-   expansion requires explicit scope definition and governance approval.
+3. USB 3.x wiki surface has reached 25 pages per locale (50 total), exceeding
+   USB 2.0's 28-topic depth. Any further expansion requires explicit scope definition
+   and governance approval.
 4. CONSUMER-CI-2 (actual consuming repo adoption of manifest v0.3) is deferred
    until a specific consuming firmware repo is identified. Use
    `scripts/smoke_manifest_consumer_reference.py` as the starting template.

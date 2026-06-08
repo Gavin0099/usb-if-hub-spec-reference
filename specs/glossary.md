@@ -2,11 +2,13 @@
 title: Glossary
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-03"
+last_reviewed: "2026-06-08"
 usb_versions:
   - usb_2_0
+  - usb_3_2
 source_refs:
   - usb20_spec
+  - usb32_spec
 semantic_verification_claimed: false
 ---
 
@@ -67,6 +69,21 @@ semantic_verification_claimed: false
 | removable bitmap | `DeviceRemovable` 的高層摘要說法。 |
 | Power Switching Mode | 可安全用於 descriptor prose。 |
 | Over-current Protection Mode | 可安全用於 descriptor prose。 |
+
+## USB 3.x / SuperSpeed 術語
+
+| 偏好用語 | 說明 |
+|---|---|
+| SS / SuperSpeed | USB 3.x 速率，指 Gen 1 5Gbps 或 Gen 2 10Gbps 的 SuperSpeed 模式。 |
+| SSP / SuperSpeed Plus | USB 3.2 Gen 2 10Gbps 或 Gen 2×2 20Gbps；USB 3.1/3.2 的高速變體。 |
+| BOS（Binary Device Object Store） | USB 3.x 必需的描述符（type 0x0F）；由 GET_DESCRIPTOR(BOS) 取得；包含 Device Capability Descriptor。 |
+| LPM（Link Power Management） | SS 鏈路電源管理；包含 U1/U2 自動轉換（短暫待機）與 U3 暫停（Suspend）。 |
+| U0 / U1 / U2 / U3 | SS 鏈路電源狀態：U0 = Active、U1 = Idle（短延遲）、U2 = Idle（較長延遲）、U3 = Suspend。 |
+| LFPS（Low-Frequency Periodic Signaling） | SS link 電源狀態轉換與喚醒的低頻脈衝訊號；由 LTSSM 管理，runtime timing 超出本 repo verified scope。 |
+| TSEQ（Training Sequence EQ） | SS link training 的均衡訓練 ordered set；LTSSM Polling.RxEQ 階段使用；詳細 timing 超出本 repo verified scope。 |
+| ITP（Isochronous Timestamp Packet） | SS 等時傳輸的同步時間戳記封包，取代 USB 2.0 SOF（Start of Frame）。 |
+| NRDY / ERDY | SS 端點流量控制封包：NRDY = 端點未就緒（Not Ready）；ERDY = 端點主動通知就緒（Endpoint Ready）。 |
+| SET_HUB_DEPTH | SS-only hub 請求；在 SET_CONFIGURATION 後強制發送，設定 hub 在 SS 路由樹中的深度。 |
 
 ## Boundary Reminder
 
