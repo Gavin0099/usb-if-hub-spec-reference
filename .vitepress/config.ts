@@ -53,6 +53,14 @@ const ZH_LABELS: Labels = {
   ss_packet_types: "SS 封包類型",
   ss_transactions: "SS 事務",
   ss_test_modes: "SS 測試模式",
+  // USB3-WIKI-FULL-1 direct parity pages
+  ss_hub_device_class: "SS Hub 設備類別碼",
+  ss_hub_configuration: "SS Hub 配置描述符",
+  ss_standard_descriptors: "SS 標準描述符",
+  ss_usb_device_states: "SS USB 裝置狀態",
+  ss_usb_transfer_types: "SS USB 傳輸類型",
+  ss_port_indicators: "SS Port 指示燈",
+  ss_hub_power_budget: "SS Hub 電源預算",
 };
 
 const EN_LABELS: Labels = {
@@ -101,6 +109,14 @@ const EN_LABELS: Labels = {
   ss_packet_types: "SS Packet Types",
   ss_transactions: "SS Transactions",
   ss_test_modes: "SS Test Modes",
+  // USB3-WIKI-FULL-1 direct parity pages
+  ss_hub_device_class: "SS Hub Device Class Codes",
+  ss_hub_configuration: "SS Hub Configuration Descriptors",
+  ss_standard_descriptors: "SS Standard Descriptors",
+  ss_usb_device_states: "SS USB Device States",
+  ss_usb_transfer_types: "SS USB Transfer Types",
+  ss_port_indicators: "SS Port Indicators",
+  ss_hub_power_budget: "SS Hub Power Budget",
 };
 
 function buildSidebar(relativeDir: string, labels: Labels, sectionText: string, prefix = "") {
@@ -175,6 +191,13 @@ const zhUsb3Items = [
   { text: "SS 封包類型", link: "/usb3/ss_packet_types" },
   { text: "SS 事務", link: "/usb3/ss_transactions" },
   { text: "SS 測試模式", link: "/usb3/ss_test_modes" },
+  { text: "SS Hub 設備類別碼", link: "/usb3/ss_hub_device_class" },
+  { text: "SS Hub 配置描述符", link: "/usb3/ss_hub_configuration" },
+  { text: "SS 標準描述符", link: "/usb3/ss_standard_descriptors" },
+  { text: "SS USB 裝置狀態", link: "/usb3/ss_usb_device_states" },
+  { text: "SS USB 傳輸類型", link: "/usb3/ss_usb_transfer_types" },
+  { text: "SS Port 指示燈", link: "/usb3/ss_port_indicators" },
+  { text: "SS Hub 電源預算", link: "/usb3/ss_hub_power_budget" },
 ];
 
 const enUsb2Items = [
@@ -225,6 +248,13 @@ const enUsb3Items = [
   { text: "SS Packet Types", link: "/en/usb3/ss_packet_types" },
   { text: "SS Transactions", link: "/en/usb3/ss_transactions" },
   { text: "SS Test Modes", link: "/en/usb3/ss_test_modes" },
+  { text: "SS Hub Device Class Codes", link: "/en/usb3/ss_hub_device_class" },
+  { text: "SS Hub Configuration Descriptors", link: "/en/usb3/ss_hub_configuration" },
+  { text: "SS Standard Descriptors", link: "/en/usb3/ss_standard_descriptors" },
+  { text: "SS USB Device States", link: "/en/usb3/ss_usb_device_states" },
+  { text: "SS USB Transfer Types", link: "/en/usb3/ss_usb_transfer_types" },
+  { text: "SS Port Indicators", link: "/en/usb3/ss_port_indicators" },
+  { text: "SS Hub Power Budget", link: "/en/usb3/ss_hub_power_budget" },
 ];
 
 const zhReferenceItems = [

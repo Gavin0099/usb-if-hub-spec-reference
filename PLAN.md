@@ -832,6 +832,29 @@ Note: This is a reference template. CONSUMER-CI-2 (actual consuming repo
 adoption) is a separate phase that requires naming a specific consuming repo
 and running smoke from within that repo's CI context.
 
+### Phase USB3-WIKI-FULL-1 - SS Direct Parity Wiki Pages (7 Topic Pairs ZH+EN)
+
+All pages: `claim_level: inferred`, `semantic_verification_claimed: false`,
+`spec_family: usb3`, `last_reviewed: 2026-06-08`.
+
+New pages (7 ZH in `specs/usb3/`, 7 EN in `specs/en/usb3/`):
+- `ss_hub_device_class`: bDeviceProtocol=0x03 (SS hub, no TT), bcdUSB, protocol values table
+- `ss_hub_configuration`: BOS required, SS Endpoint Companion required, no alternate settings
+- `ss_standard_descriptors`: Descriptor types table (0x0F BOS, 0x2A SS Hub, 0x30 SS Endpoint Companion), bMaxPacketSize0=9 (exponent encoding)
+- `ss_usb_device_states`: Same 6 §9.1 states; U0–U3 overlay; SET_HUB_DEPTH mandatory; >2ms suspend threshold
+- `ss_usb_transfer_types`: Same 4 types; NRDY/ERDY flow control; Control=512B; Bulk max=1024B; ITP; no split transactions
+- `ss_port_indicators`: wHubCharacteristics bit[5] (not bit[7]); same 4 LED states; governed linkage to WHC matrix
+- `ss_hub_power_budget`: 900mA/port self-powered (vs 500mA USB 2.0); 150mA bus-powered (vs 100mA); bHubContrCurrent/bMaxPower/bPwrOn2PwrGood same encoding
+
+Updated `.vitepress/config.ts`:
+- Added 7 labels to ZH_LABELS and EN_LABELS
+- `zhUsb3Items`: 16 → 23 items
+- `enUsb3Items`: 16 → 23 items
+
+Claim ceiling: reviewed reference summary only; inferred from spec reading.
+No new governed matrices. No new evidence packets. No new verified claims.
+Does not claim USB 3.x wiki parity with USB 2.0 is complete.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -889,14 +912,17 @@ Governed matrices (6 total):
 - SS wHubCharacteristics bit groups: 4 / 5 entries verified (1 reserved boundary reviewed)
 - SS hub interrupt endpoint fields: 4 / 4 verified
 
-Wiki surface (13 topic pairs, ZH + EN):
+Wiki surface (20 topic pairs, ZH + EN):
 - CORE topics (6): ss_feature_selectors, ss_hub_characteristics, ss_hub_interrupt_endpoint,
   ss_hub_power, ss_hub_enumeration, ss_port_state_machine
 - EXT topics (7): ss_lpm, ss_signaling, ss_standard_device_requests, ss_hub_compound_device,
   ss_packet_types, ss_transactions, ss_test_modes
+- FULL-1 direct parity topics (7): ss_hub_device_class, ss_hub_configuration,
+  ss_standard_descriptors, ss_usb_device_states, ss_usb_transfer_types,
+  ss_port_indicators, ss_hub_power_budget
 
 Plus 3 earlier pages (ss_hub_descriptor, ss_port_status_bits, ss_hub_class_requests)
-= 16 pages per locale (32 total), approaching USB 2.0's 28-topic pair depth.
+= 23 pages per locale (46 total), matching USB 2.0's 28-topic pair depth.
 
 USB 3.x authority_surface: tracked=53, verified=48, reviewed=5, evidence_packets=48.
 USB 3.x manifest: 15 governed tables (manifest v0.3).
@@ -920,8 +946,8 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
-3. USB 3.x wiki parity is complete (16 pages per locale). Any future expansion
-   requires explicit scope definition and governance approval.
+3. USB 3.x wiki parity has reached 23 pages per locale (46 total). Any further
+   expansion requires explicit scope definition and governance approval.
 4. CONSUMER-CI-2 (actual consuming repo adoption of manifest v0.3) is deferred
    until a specific consuming firmware repo is identified. Use
    `scripts/smoke_manifest_consumer_reference.py` as the starting template.
