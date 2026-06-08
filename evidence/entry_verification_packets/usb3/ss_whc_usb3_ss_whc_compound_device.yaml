@@ -1,0 +1,56 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_characteristics_bit_matrix
+  entry_id: usb3_ss_whc_compound_device
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bit[2]
+    as the Compound Device flag for SuperSpeed hubs. Encoding: 0=not a compound
+    device, 1=hub is part of a compound device. This field retains the same
+    encoding as the USB 2.0 equivalent.
+  reviewer_note: >
+    Reviewed for bit identity only: field name wHubCharacteristics, bit range
+    bit[2], semantic group compound_device, and value encoding (0/1). Does not
+    verify compound device topology behavior, DeviceRemovable bitmap interpretation,
+    link routing, or firmware compliance.
+
+review_checklist:
+  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm bit[2] is the Compound Device indicator.
+  - Confirm encoding: 0=not compound, 1=compound device.
+  - Confirm no topology, routing, or firmware behavior is claimed.
+
+verification_scope:
+  claim: bit_group_name_value_encoding_identity_only
+  excludes:
+    - compound device topology behavior or link routing
+    - DeviceRemovable bitmap interpretation
+    - USB-IF compound device certification
+    - firmware compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_whc_compound_device`.
+    Promotion limited to bit name (compound_device), bit position (bit[2]),
+    and value encoding identity only. Device topology and firmware behavior
+    are outside scope.
+
+non_claims:
+  - This packet does not verify compound device topology behavior or link routing.
+  - This packet does not verify DeviceRemovable bitmap interpretation.
+  - This packet does not establish table-level verification.

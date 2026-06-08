@@ -1,0 +1,58 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_characteristics_bit_matrix
+  entry_id: usb3_ss_whc_power_switching
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bits[1:0]
+    as the Hub Power Switching Mode field for SuperSpeed hubs. Encoding: 00=ganged
+    power switching, 01=individual port power switching, 1x=no power switching.
+    This field retains the same encoding as the USB 2.0 equivalent.
+  reviewer_note: >
+    Reviewed for bit group identity only: field name wHubCharacteristics,
+    bit range bits[1:0], semantic group power_switching, and value encoding
+    (00/01/1x). Does not verify SET_FEATURE(PORT_POWER) firmware behavior,
+    per-port power sequencing, timing, or hardware compliance.
+
+review_checklist:
+  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm bits[1:0] encode Hub Power Switching Mode.
+  - Confirm encoding: 00=ganged, 01=individual, 1x=no power switching.
+  - Confirm no power sequencing, timing, or firmware behavior is claimed.
+
+verification_scope:
+  claim: bit_group_name_value_encoding_identity_only
+  excludes:
+    - SET_FEATURE(PORT_POWER) firmware behavior
+    - per-port power sequencing or timing
+    - hardware power delivery compliance
+    - firmware enforcement of power switching mode
+    - USB-IF certification completeness
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_whc_power_switching`.
+    Promotion limited to bit group name (power_switching), bit range (bits[1:0]),
+    and value encoding identity only. Power behavior and firmware compliance
+    are outside scope.
+
+non_claims:
+  - This packet does not verify SET_FEATURE(PORT_POWER) firmware behavior.
+  - This packet does not verify per-port power sequencing or timing.
+  - This packet does not verify hardware power delivery compliance.
+  - This packet does not establish table-level verification.

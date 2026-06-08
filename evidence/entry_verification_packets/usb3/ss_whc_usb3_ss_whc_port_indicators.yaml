@@ -1,0 +1,60 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_characteristics_bit_matrix
+  entry_id: usb3_ss_whc_port_indicators
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bit[5]
+    as the Port Indicators Supported flag for SuperSpeed hubs. Encoding:
+    0=port indicators not supported, 1=port indicators supported. Note that
+    in USB 3.x, this field occupies bit[5] rather than bit[7] as in USB 2.0,
+    because the two TT Think Time bits[6:5] present in USB 2.0 are absent in
+    USB 3.x (SuperSpeed hubs have no Transaction Translator).
+  reviewer_note: >
+    Reviewed for bit identity only: field name wHubCharacteristics, bit range
+    bit[5] (USB 3.x position), semantic group port_indicators, and value encoding
+    (0/1). Notes the bit position shift from bit[7] in USB 2.0 to bit[5] in USB 3.x
+    due to TT Think Time bit removal. Does not verify LED hardware behavior, indicator
+    color encoding, SET_FEATURE(PORT_INDICATOR) routing, or firmware compliance.
+
+review_checklist:
+  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm bit[5] is the Port Indicators Supported flag in USB 3.x.
+  - Confirm encoding: 0=not supported, 1=supported.
+  - Confirm bit position difference from USB 2.0 (bit[7]) is documented.
+  - Confirm no LED behavior, color encoding, or firmware behavior is claimed.
+
+verification_scope:
+  claim: bit_group_name_value_encoding_identity_only
+  excludes:
+    - LED indicator hardware behavior or color encoding
+    - SET_FEATURE(PORT_INDICATOR) request routing
+    - firmware indicator state management
+    - USB-IF indicator compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_whc_port_indicators`.
+    Promotion limited to bit name (port_indicators), bit position (bit[5] in USB 3.x),
+    and value encoding identity only. LED behavior and firmware compliance
+    are outside scope.
+
+non_claims:
+  - This packet does not verify LED indicator hardware behavior or color encoding.
+  - This packet does not verify SET_FEATURE(PORT_INDICATOR) routing or firmware behavior.
+  - This packet does not establish table-level verification.

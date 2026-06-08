@@ -1,0 +1,57 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_characteristics_bit_matrix
+  entry_id: usb3_ss_whc_over_current_mode
+
+evidence:
+  spec: usb32
+  section: "10.14.2"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bits[4:3]
+    as the Over-current Protection Mode field for SuperSpeed hubs. Encoding:
+    00=global (hub-level) OC protection, 01=individual port OC protection,
+    1x=no OC protection. This field retains the same encoding as USB 2.0.
+  reviewer_note: >
+    Reviewed for bit group identity only: field name wHubCharacteristics,
+    bit range bits[4:3], semantic group over_current_protection, and value
+    encoding (00/01/1x). Does not verify OC detection thresholds, hardware
+    OC event behavior, C_PORT_OVER_CURRENT notification, or firmware compliance.
+
+review_checklist:
+  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm bits[4:3] encode Over-current Protection Mode.
+  - Confirm encoding: 00=global, 01=individual, 1x=no protection.
+  - Confirm no OC threshold, event behavior, or notification is claimed.
+
+verification_scope:
+  claim: bit_group_name_value_encoding_identity_only
+  excludes:
+    - over-current detection hardware behavior or thresholds
+    - C_PORT_OVER_CURRENT change notification behavior
+    - firmware OC event handling
+    - USB-IF power delivery compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_whc_over_current_mode`.
+    Promotion limited to bit group name (over_current_protection), bit range
+    (bits[4:3]), and value encoding identity only. OC behavior and firmware
+    compliance are outside scope.
+
+non_claims:
+  - This packet does not verify over-current detection hardware behavior or thresholds.
+  - This packet does not verify C_PORT_OVER_CURRENT notification behavior.
+  - This packet does not verify firmware OC event handling.
+  - This packet does not establish table-level verification.
