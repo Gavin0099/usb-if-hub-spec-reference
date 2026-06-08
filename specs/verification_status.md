@@ -215,13 +215,14 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 | SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
 | SS hub class requests | 10 | 10 | 0 | 0 | 0 |
 | SS port status bits | 19 | 15 | 4 | 0 | 0 |
-| **USB 3.x Total** | **38** | **34** | **4** | **0** | **0** |
+| SS feature selectors (USB3-FS-2) | 6 | 6 | 0 | 0 | 0 |
+| **USB 3.x Total** | **44** | **40** | **4** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 34 | `evidence/entry_verification_packets/usb3/`；9 筆對應 SS hub descriptor (USB3-3A)，10 筆對應 SS hub class requests (USB3-3B)，15 筆對應 SS port status bits (USB3-3C) |
+| USB 3.x evidence packets | 40 | `evidence/entry_verification_packets/usb3/`；9 筆對應 SS hub descriptor (USB3-3A)，10 筆對應 SS hub class requests (USB3-3B)，15 筆對應 SS port status bits (USB3-3C)，6 筆對應 SS feature selectors (USB3-FS-2) |
 
-SS port status bit matrix 已完成 USB3-3C pilot：15 個 defined entries 升為 verified（bit name and position/range identity only）；4 個 reserved boundary entries 維持 reviewed（永久邊界）。
+SS port status bit matrix 已完成 USB3-3C pilot：15 個 defined entries 升為 verified。SS feature selector matrix 已完成 USB3-FS-2 pilot：6 個 SS-only port feature selector entries 升為 verified（selector name/value/applicability/recipient identity only）；4 個 port status reserved boundary entries 維持 reviewed（永久邊界）。
 
 ## What This Page Does Not Claim
 

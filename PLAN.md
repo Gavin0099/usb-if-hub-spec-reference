@@ -757,17 +757,16 @@ have the equivalent wiki/reference depth of USB 2.0 (28 topic pairs).
 
 USB 2.0 freeze remains unchanged at 151 / 105 / 46.
 
-## USB 3.x Feature Selector Expansion (USB3-FS-2 Complete)
+## USB 3.x Feature Selector Expansion (USB3-FS-2 + EXPORT-CONTRACT-1.1 Complete)
 
-Phase USB3-FS-2 completes verified promotion for the fourth governed matrix:
+Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
 - `tables/ss_feature_selector_matrix.yaml` v0.2: 6 SS-only port feature selector
   entries (PORT_U1_ENABLE, PORT_U2_ENABLE, PORT_U1_TIMEOUT, PORT_U2_TIMEOUT,
   PORT_REMOTE_WAKE_MASK, BH_PORT_RESET).
 - All 6 entries: `claim_level: verified`, verified gate PARTIAL/allowlist.
 - 6 evidence packets in `evidence/entry_verification_packets/usb3/`.
-- Tracked separately from the 38/34/4 matrix-level closeout baseline.
-- Not yet included in the unified manifest or fingerprint baseline.
-- Manifest/baseline inclusion requires EXPORT-CONTRACT-1.1.
+- Included in the unified manifest (13th governed table) and fingerprint baseline.
+- USB 3.x authority_surface: tracked=44, verified=40, reviewed=4, evidence_packets=40.
 
 ## Open Work
 
@@ -775,8 +774,6 @@ Phase USB3-FS-2 completes verified promotion for the fourth governed matrix:
    scope are explicit.
 2. Keep consuming-repo integration as reference-only; any firmware behavior
    change still belongs in the consuming repo's Standard Escalation Mode.
-3. EXPORT-CONTRACT-1.1: include `ss_feature_selector_matrix` in the unified
-   manifest and re-baseline the fingerprint to cover 13 governed tables.
 
 ## Cannot Claim
 

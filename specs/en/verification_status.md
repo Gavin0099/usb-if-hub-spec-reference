@@ -215,13 +215,14 @@ The following are outside the verified scope for all entries:
 | SS hub descriptor fields | 9 | 9 | 0 | 0 | 0 |
 | SS hub class requests | 10 | 10 | 0 | 0 | 0 |
 | SS port status bits | 19 | 15 | 4 | 0 | 0 |
-| **USB 3.x Total** | **38** | **34** | **4** | **0** | **0** |
+| SS feature selectors (USB3-FS-2) | 6 | 6 | 0 | 0 | 0 |
+| **USB 3.x Total** | **44** | **40** | **4** | **0** | **0** |
 
 | Artifact type | Count | Status |
 |---|---:|---|
-| USB 3.x evidence packets | 34 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B), 15 for SS port status bits (USB3-3C) |
+| USB 3.x evidence packets | 40 | `evidence/entry_verification_packets/usb3/`; 9 for SS hub descriptor (USB3-3A), 10 for SS hub class requests (USB3-3B), 15 for SS port status bits (USB3-3C), 6 for SS feature selectors (USB3-FS-2) |
 
-The SS port status bit matrix USB3-3C pilot is complete: 15 defined entries promoted to verified (bit name and position/range identity only); 4 reserved boundary entries remain reviewed (permanent boundaries).
+The SS port status bit matrix USB3-3C pilot is complete: 15 defined entries promoted to verified. The SS feature selector matrix USB3-FS-2 pilot is complete: 6 SS-only port feature selector entries promoted to verified (selector name/value/applicability/recipient identity only); 4 port status reserved boundary entries remain reviewed (permanent boundaries).
 
 ## What This Page Does Not Claim
 
