@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_interrupt_endpoint_matrix
+  entry_id: usb3_ss_hub_ep_bEndpointAddress
+
+evidence:
+  spec: usb32
+  section: "10.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.15.1 specifies the SuperSpeed hub status-change endpoint
+    descriptor. bEndpointAddress encodes the endpoint address: bit 7 must be 1
+    (IN direction), and bits[3:0] encode the endpoint number which is
+    implementation-defined by hub firmware. This constraint is identical to the
+    USB 2.0 hub interrupt endpoint address requirement.
+  reviewer_note: >
+    Reviewed for field identity only: field name bEndpointAddress, direction
+    constraint (bit 7=1, IN), and endpoint number role (bits[3:0],
+    implementation-defined). Does not verify firmware endpoint address assignment,
+    enumeration order, or any runtime endpoint behavior.
+
+review_checklist:
+  - Confirm §10.15.1 is the correct USB 3.x hub interrupt endpoint surface.
+  - Confirm bEndpointAddress direction constraint: bit 7=1 (IN direction).
+  - Confirm endpoint number in bits[3:0] is implementation-defined.
+  - Confirm no firmware assignment, enumeration, or runtime behavior is claimed.
+
+verification_scope:
+  claim: field_identity_constraint_encoding_only
+  excludes:
+    - firmware endpoint address assignment or enumeration order
+    - runtime endpoint behavior
+    - USB-IF endpoint address compliance
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_hub_ep_bEndpointAddress`.
+    Promotion limited to field name, direction constraint (bit 7=1, IN), and
+    endpoint number role identity only.
+
+non_claims:
+  - This packet does not verify firmware endpoint address assignment.
+  - This packet does not verify enumeration order or runtime endpoint behavior.
+  - This packet does not establish table-level verification.

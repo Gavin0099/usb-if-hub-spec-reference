@@ -1,0 +1,55 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_interrupt_endpoint_matrix
+  entry_id: usb3_ss_hub_ep_bmAttributes
+
+evidence:
+  spec: usb32
+  section: "10.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.15.1 specifies the SuperSpeed hub status-change endpoint
+    as an Interrupt endpoint. bmAttributes bits[1:0] must be 0b11 (Interrupt
+    transfer type). Bits[7:2] are reserved/zero for non-isochronous SuperSpeed
+    endpoints. This transfer-type constraint is identical to the USB 2.0 hub
+    interrupt endpoint bmAttributes requirement.
+  reviewer_note: >
+    Reviewed for field identity only: field name bmAttributes, transfer type
+    constraint (bits[1:0]=0b11, Interrupt). Does not verify USB 3.x interrupt
+    endpoint burst behavior, stream behavior, firmware bmAttributes assignment,
+    or any runtime transfer behavior.
+
+review_checklist:
+  - Confirm §10.15.1 is the correct USB 3.x hub interrupt endpoint surface.
+  - Confirm bmAttributes bits[1:0]=0b11 specifies Interrupt transfer type.
+  - Confirm no burst, stream, or runtime transfer behavior is claimed.
+
+verification_scope:
+  claim: field_identity_constraint_encoding_only
+  excludes:
+    - USB 3.x interrupt endpoint burst or stream behavior
+    - firmware bmAttributes assignment
+    - runtime transfer scheduling or behavior
+    - USB-IF transfer type compliance testing
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_hub_ep_bmAttributes`.
+    Promotion limited to field name and transfer type constraint identity
+    (bits[1:0]=0b11, Interrupt) only.
+
+non_claims:
+  - This packet does not verify USB 3.x interrupt endpoint burst or stream behavior.
+  - This packet does not verify firmware bmAttributes assignment.
+  - This packet does not establish table-level verification.

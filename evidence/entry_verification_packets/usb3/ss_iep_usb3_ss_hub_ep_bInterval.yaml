@@ -1,0 +1,58 @@
+packet_version: 1
+status: reviewed_pilot
+created_at: 2026-06-08
+
+target:
+  surface: governed_table_entry
+  table: ss_hub_interrupt_endpoint_matrix
+  entry_id: usb3_ss_hub_ep_bInterval
+
+evidence:
+  spec: usb32
+  section: "10.15.1"
+  page: null
+  document_ref:
+    primary_source_id: usb32_spec
+    fallback_source_id: archive_usb32_pdf
+    authority_expectation: normative_official_preferred
+  quoted_surface: reviewer_paraphrase_only
+  quoted_surface_summary: >
+    USB 3.2 Section 10.15.1 specifies bInterval for the SuperSpeed hub
+    status-change endpoint using microframe-based encoding: bInterval value
+    1–16 maps to a polling period of 2^(bInterval-1) × 125 microseconds.
+    This is identical to the USB 2.0 High-Speed encoding. USB 3.x does not
+    use the direct-millisecond encoding that applies to USB 2.0 Full-Speed
+    and Low-Speed hubs.
+  reviewer_note: >
+    Reviewed for field identity only: field name bInterval, encoding unit
+    (125 μs microframe), valid range (1–16), and formula (2^(bInterval-1)×125μs).
+    Does not verify actual host scheduling, polling latency, interrupt delivery
+    timing, or firmware bInterval assignment correctness.
+
+review_checklist:
+  - Confirm §10.15.1 is the correct USB 3.x hub interrupt endpoint surface.
+  - Confirm bInterval uses microframe encoding: 2^(bInterval-1) × 125 μs.
+  - Confirm valid range is bInterval 1–16.
+  - Confirm USB 3.x does not use direct-ms encoding.
+  - Confirm no scheduling, latency, or firmware behavior is claimed.
+
+verification_scope:
+  claim: field_identity_constraint_encoding_only
+  excludes:
+    - actual host scheduling or polling latency guarantees
+    - interrupt delivery timing behavior
+    - firmware bInterval assignment correctness
+    - USB-IF polling compliance testing
+
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed
+  promotion_note: >
+    Eligible for entry-level verified promotion for `usb3_ss_hub_ep_bInterval`.
+    Promotion limited to field name, encoding unit (125 μs microframe), valid
+    range (1–16), and formula identity only.
+
+non_claims:
+  - This packet does not verify actual host scheduling or polling latency.
+  - This packet does not verify firmware bInterval assignment correctness.
+  - This packet does not establish table-level verification.

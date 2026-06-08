@@ -1,0 +1,125 @@
+matrix_id: usb3_ss_hub_interrupt_endpoint_matrix
+version: "0.1"
+description: >
+  USB 3.x SuperSpeed hub status-change (interrupt) endpoint descriptor field
+  governance. Covers the 4 endpoint descriptor fields for the SuperSpeed hub
+  interrupt endpoint. Scope: field identity and constraint encoding only.
+  USB 3.x SuperSpeed endpoints use 125 μs microframe units for bInterval
+  (same encoding as USB 2.0 High-Speed; bInterval 1–16 mapping to 2^(n-1)
+  × 125 μs).
+  Does not claim firmware endpoint address assignment, polling behavior
+  verification, or runtime latency guarantees.
+spec_family: usb3
+verified_gate: PARTIAL
+scope:
+  usb_versions:
+    - usb_3_2
+  topic: ss_hub_interrupt_endpoint_descriptor
+
+entries:
+  - field_id: usb3_ss_hub_ep_bEndpointAddress
+    field_name: bEndpointAddress
+    namespace: hub_interrupt_endpoint_descriptor
+    role: >
+      Status change endpoint address for the SuperSpeed hub. Direction must be
+      IN (bit 7=1); endpoint number is implementation-defined by hub firmware.
+    encoding:
+      direction_bit: "bit 7 = 1 (IN direction)"
+      endpoint_number: "bits 3:0, implementation-defined by hub firmware"
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification §10.15.1"
+    claim_level: verified
+    evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_iep_usb3_ss_hub_ep_bEndpointAddress.yaml
+      verified_scope: field_identity_constraint_encoding_only
+    non_claims:
+      - Does not verify firmware endpoint address assignment or enumeration order.
+      - Does not establish table-level verification.
+    notes: >
+      Reviewed field identity only: direction constraint (IN, bit 7=1) and endpoint
+      number role (implementation-defined). Not a firmware address assignment
+      constraint or enumeration behavior verification.
+
+  - field_id: usb3_ss_hub_ep_bmAttributes
+    field_name: bmAttributes
+    namespace: hub_interrupt_endpoint_descriptor
+    role: >
+      Transfer type for the SuperSpeed hub status-change endpoint. Must be
+      Interrupt transfer (bits[1:0] = 0b11). For SuperSpeed bulk and interrupt
+      endpoints, additional bits may apply; hub status-change endpoint is
+      interrupt only.
+    encoding:
+      transfer_type_bits: "bits[1:0] = 0b11 (Interrupt)"
+      reserved_bits: "bits[7:2] = 0 for non-isochronous SuperSpeed endpoints"
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification §10.15.1"
+    claim_level: verified
+    evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_iep_usb3_ss_hub_ep_bmAttributes.yaml
+      verified_scope: field_identity_constraint_encoding_only
+    non_claims:
+      - Does not verify USB 3.x interrupt endpoint burst or stream behavior.
+      - Does not verify firmware bmAttributes assignment.
+      - Does not establish table-level verification.
+    notes: >
+      Reviewed field identity only: interrupt transfer-type constraint (bits[1:0]=0b11).
+      Not a firmware behavior verification.
+
+  - field_id: usb3_ss_hub_ep_wMaxPacketSize
+    field_name: wMaxPacketSize
+    namespace: hub_interrupt_endpoint_descriptor
+    role: >
+      Maximum packet size for the SuperSpeed hub status-change endpoint. Must be
+      large enough to report status change bits for the hub and all downstream ports.
+    encoding:
+      calculation: "ceil((bNbrPorts + 1) / 8) bytes minimum"
+      examples:
+        - "1 to 7 downstream ports: 1 byte"
+        - "8 to 15 downstream ports: 2 bytes"
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification §10.15.1"
+    claim_level: verified
+    evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_iep_usb3_ss_hub_ep_wMaxPacketSize.yaml
+      verified_scope: field_identity_constraint_encoding_only
+    non_claims:
+      - Does not verify firmware packet-size assignment correctness.
+      - Does not verify runtime packet delivery or flow control.
+      - Does not establish table-level verification.
+    notes: >
+      Reviewed field identity only: minimum size calculation and port-count linkage.
+      Not a firmware packet-size correctness verification. Calculation identical
+      to USB 2.0 hub interrupt endpoint.
+
+  - field_id: usb3_ss_hub_ep_bInterval
+    field_name: bInterval
+    namespace: hub_interrupt_endpoint_descriptor
+    role: >
+      Polling interval for the SuperSpeed hub status-change endpoint. USB 3.x
+      SuperSpeed interrupt endpoints use microframe-based encoding identical to
+      USB 2.0 High-Speed: bInterval 1–16, mapping to 2^(bInterval-1) × 125 μs.
+    encoding:
+      superspeed: "2^(bInterval-1) x 125 microseconds; bInterval must be 1 to 16"
+    source_refs:
+      - usb32_spec
+    section_anchor: "USB 3.2 Specification §10.15.1"
+    claim_level: verified
+    evidence_status: reviewed
+    evidence:
+      verification_packet: evidence/entry_verification_packets/usb3/ss_iep_usb3_ss_hub_ep_bInterval.yaml
+      verified_scope: field_identity_constraint_encoding_only
+    non_claims:
+      - Does not verify actual polling behavior or host scheduling latency.
+      - Does not verify firmware bInterval assignment correctness.
+      - Does not establish table-level verification.
+    notes: >
+      Reviewed field identity only: interval unit (125 μs microframe) and
+      bInterval encoding range (1–16). SuperSpeed hubs use the same microframe
+      encoding as USB 2.0 High-Speed; the direct-ms encoding used by USB 2.0 FS/LS
+      hubs does not apply. Not a polling-behavior or latency guarantee.
