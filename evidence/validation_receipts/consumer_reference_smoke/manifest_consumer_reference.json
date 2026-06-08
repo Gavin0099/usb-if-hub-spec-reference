@@ -1,0 +1,71 @@
+{
+  "smoke_runner": "smoke_manifest_consumer_reference.py",
+  "phase": "REFERENCE-CONSUMER-SMOKE-1",
+  "authority_ceiling": "consumer_reference_template_only",
+  "cannot_establish": [
+    "consuming_repo_CI_integrated",
+    "firmware_behavior_compliance",
+    "USB_IF_certification_readiness",
+    "LTSSM_xHCI_electrical_validation",
+    "reviewed_entries_equivalent_to_verified"
+  ],
+  "ran_at": "2026-06-08T03:56:11+00:00",
+  "repo_root_used": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference",
+  "manifest_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\exports\\hub_governed_surface_manifest.yaml",
+  "manifest_version_asserted": "0.3",
+  "total_cases": 5,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "case": "manifest_version_check",
+      "note": "assert manifest_version == '0.3'",
+      "expected": "0.3",
+      "actual": "0.3",
+      "result": "PASS"
+    },
+    {
+      "case": "table_count_check",
+      "note": "assert len(governed_tables) == 15",
+      "expected": 15,
+      "actual": 15,
+      "result": "PASS"
+    },
+    {
+      "case": "usb2_stats_check",
+      "note": "assert USB2 authority_surface tracked/verified/reviewed",
+      "expected": {
+        "tracked": 151,
+        "verified": 105,
+        "reviewed": 46
+      },
+      "actual": {
+        "tracked": 151,
+        "verified": 105,
+        "reviewed": 46
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "usb3_stats_check",
+      "note": "assert USB3 authority_surface tracked=53/verified=48/reviewed=5",
+      "expected": {
+        "tracked": 53,
+        "verified": 48,
+        "reviewed": 5
+      },
+      "actual": {
+        "tracked": 53,
+        "verified": 48,
+        "reviewed": 5
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "table_paths_exist_check",
+      "note": "assert all 15 governed table paths exist on disk",
+      "tables_checked": 15,
+      "result": "PASS"
+    }
+  ]
+}

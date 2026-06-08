@@ -804,6 +804,34 @@ Claim ceiling: reviewed reference summary only; inferred from spec reading.
 Claim ceiling: manifest_structural_integrity_only; does not re-verify table contents.
 Authority ceiling: governed_matrix_identity_and_boundary_reference_only.
 
+### Phase REFERENCE-CONSUMER-SMOKE-1 - Manifest v0.3 Consumer Reference Smoke
+
+- NEW `scripts/smoke_manifest_consumer_reference.py`: standalone consumer smoke
+  template for downstream repos adopting manifest v0.3.
+  Asserts 5 cases (pure YAML read, no subprocess):
+  1. `manifest_version_check`: manifest_version == "0.3"
+  2. `table_count_check`: governed_tables count == 15
+  3. `usb2_stats_check`: USB2 tracked=151 / verified=105 / reviewed=46
+  4. `usb3_stats_check`: USB3 tracked=53 / verified=48 / reviewed=5
+  5. `table_paths_exist_check`: all 15 governed table paths exist on disk
+  All 5 cases PASS against the live repo.
+- Accepts `--repo-root` argument: consuming repos pass their pinned checkout path.
+- Auto-detects repo root from script location for in-repo use.
+- Outputs JSON receipt to `evidence/validation_receipts/consumer_reference_smoke/`.
+- Docstring documents the adaptation workflow for consuming repos
+  (pin commit 537319e, copy script, adapt path, assert exit 0).
+
+Claim ceiling:
+- CAN establish: reference manifest v0.3 is structurally present and passes
+  boundary assertions at the pinned checkout.
+- CANNOT establish: consuming repo CI integrated, firmware behavior compliance,
+  USB-IF certification readiness, LTSSM/xHCI/electrical validation, or
+  reviewed entries as equivalent to verified.
+
+Note: This is a reference template. CONSUMER-CI-2 (actual consuming repo
+adoption) is a separate phase that requires naming a specific consuming repo
+and running smoke from within that repo's CI context.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -828,6 +856,7 @@ Authority ceiling: governed_matrix_identity_and_boundary_reference_only.
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\smoke_consumer_integration_fixtures.py`
+- `python scripts\smoke_manifest_consumer_reference.py`
 - `npm.cmd run build`
 
 ## USB 2.0 Governed Surface Freeze
@@ -893,6 +922,9 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
    change still belongs in the consuming repo's Standard Escalation Mode.
 3. USB 3.x wiki parity is complete (16 pages per locale). Any future expansion
    requires explicit scope definition and governance approval.
+4. CONSUMER-CI-2 (actual consuming repo adoption of manifest v0.3) is deferred
+   until a specific consuming firmware repo is identified. Use
+   `scripts/smoke_manifest_consumer_reference.py` as the starting template.
 
 ## Cannot Claim
 
