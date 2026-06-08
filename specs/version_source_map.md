@@ -61,7 +61,7 @@ This page defines which USB source materials this repo uses for hub semantics an
 | SS wHubCharacteristics bits | §10.14.2 Table 10-10 | 4 entries verified, 1 reviewed |
 | SS Hub Interrupt Endpoint fields | §10.14.2 | 4 entries verified |
 
-Wiki 頁面（ZH + EN）：23 頁每語系（含 CORE、EXT、FULL-1、FULL-2）。
+Wiki 頁面（ZH + EN）：25 頁每語系（含 CORE、EXT、FULL-1、FULL-2）。
 
 ## Notes
 

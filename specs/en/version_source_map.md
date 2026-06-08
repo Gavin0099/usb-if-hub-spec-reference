@@ -62,7 +62,7 @@ This repo's USB 3.2 coverage:
 | SS wHubCharacteristics bits | §10.14.2 Table 10-10 | 4 entries verified, 1 reviewed |
 | SS Hub Interrupt Endpoint fields | §10.14.2 | 4 entries verified |
 
-Wiki pages (ZH + EN): 23 pages per locale (CORE, EXT, FULL-1, FULL-2 phases).
+Wiki pages (ZH + EN): 25 pages per locale (CORE, EXT, FULL-1, FULL-2 phases).
 
 ## Notes
 
