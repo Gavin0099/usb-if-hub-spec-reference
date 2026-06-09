@@ -86,6 +86,31 @@ Source: USB 3.2 Specification §10.14.2 Table 10-9.
 
 **Verified scope**: encoding table identity only (bit range [8:5] and 12 values). LTSSM runtime state transition behavior is outside the verified scope.
 
+## U-State Transition Rules (Hub Port Management Layer)
+
+The U0/U1/U2/U3 transitions below are hub-class-observable via `PORT_LINK_STATE`. This is a hub layer summary; the underlying LFPS signaling and link recovery sequence are LTSSM behaviors outside this page's scope.
+
+| From | To | Direction | How |
+|---|---|---|---|
+| U0 | U1 | Device or host | Device-initiated LGOU1 (requires `PORT_U1_ENABLE=1`); or host directed |
+| U1 | U0 | Either | LFPS handshake exit; link returns to U0 |
+| U0 | U2 | Device-initiated | LGOU2 after U2 inactivity timeout (requires `PORT_U2_ENABLE=1`) |
+| U2 | U0 | Either | LFPS handshake exit; link returns to U0 |
+| U1 | U2 | Device-initiated | U2 inactivity timer expires while in U1 (deeper power saving) |
+| U0 | U3 | Host | `SET_FEATURE(PORT_SUSPEND)` |
+| U3 | U0 | Host or device | Host resume or device-initiated remote wakeup (LFPS + link resume sequence) |
+
+**Transition constraints:**
+
+| Scenario | Direct? | Notes |
+|---|---|---|
+| U3 → U1 or U2 | **No** | Must exit U3 to U0 first; U-state LPM may re-enter after that |
+| U2 → U1 | **No** | U2 is a deeper power state than U1; exit to U0 required |
+| U0 → U1 without PORT_U1_ENABLE | **No** | `SET_FEATURE(PORT_U1_ENABLE)` must be issued first |
+| U0 → U2 without PORT_U2_ENABLE | **No** | `SET_FEATURE(PORT_U2_ENABLE)` must be issued first |
+
+> **LTSSM boundary:** The states in the PORT_LINK_STATE encoding table below — Disabled (0x4), RxDetect (0x5), Polling (0x7), Recovery (0x8), Hot Reset (0x9), Compliance Mode (0xA), Loopback (0xB) — are LTSSM physical layer states. The transitions between these states (e.g., SS.Disabled → Rx.Detect → Polling → U0) are not hub class behaviors. For an orientation reference of LTSSM state groups and high-level transition paths, see [SS LTSSM State Reference](ss_ltssm.md). A complete normative LTSSM state machine is in USB 3.2 Spec §7 (Physical Layer).
+
 ## PORT_SPEED Encoding (wPortStatus bits[12:10])
 
 | Value | Speed |

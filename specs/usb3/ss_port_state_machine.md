@@ -86,6 +86,31 @@ Source: USB 3.2 Specification §10.14.2 Table 10-9。
 
 **Verified scope**：encoding table identity only（bit range [8:5] 與 12 values）。LTSSM runtime state transition behavior 超出 verified scope。
 
+## U-State Transition 規則（Hub Port Management 層）
+
+以下 U0/U1/U2/U3 轉換可透過 `PORT_LINK_STATE` 從 hub class 層觀察。這是 hub 層的摘要說明；底層的 LFPS signaling 與 link recovery 序列屬於 LTSSM 行為，超出本頁範圍。
+
+| 起始 | 目標 | 發起方 | 方式 |
+|---|---|---|---|
+| U0 | U1 | 裝置或 host | 裝置發起 LGOU1（需 `PORT_U1_ENABLE=1`）；或由 host directed |
+| U1 | U0 | 任一方 | LFPS handshake exit；link 回到 U0 |
+| U0 | U2 | 裝置發起 | U2 inactivity timeout 後 LGOU2（需 `PORT_U2_ENABLE=1`） |
+| U2 | U0 | 任一方 | LFPS handshake exit；link 回到 U0 |
+| U1 | U2 | 裝置發起 | U1 中 U2 inactivity timer 到期（進入更深省電） |
+| U0 | U3 | Host | `SET_FEATURE(PORT_SUSPEND)` |
+| U3 | U0 | Host 或裝置 | Host resume 或裝置 remote wakeup（LFPS + link resume 序列） |
+
+**Transition 限制：**
+
+| 情境 | 可直接跳？ | 說明 |
+|---|---|---|
+| U3 → U1 或 U2 | **不可** | 必須先從 U3 退出到 U0，之後再重新進入 LPM |
+| U2 → U1 | **不可** | U2 省電比 U1 更深，需退出到 U0 才能切換 |
+| U0 → U1（未啟用） | **不可** | 必須先發出 `SET_FEATURE(PORT_U1_ENABLE)` |
+| U0 → U2（未啟用） | **不可** | 必須先發出 `SET_FEATURE(PORT_U2_ENABLE)` |
+
+> **LTSSM 邊界：** 下方 PORT_LINK_STATE encoding 表中的 Disabled（0x4）、RxDetect（0x5）、Polling（0x7）、Recovery（0x8）、Hot Reset（0x9）、Compliance Mode（0xA）、Loopback（0xB）是 LTSSM 物理層狀態。這些狀態之間的轉換（例如 SS.Disabled → Rx.Detect → Polling → U0）屬於 physical layer 行為，不屬於 hub class。LTSSM 狀態群組與高層次轉換路徑的導向參考，請見 [SS LTSSM 狀態參考](ss_ltssm.md)。完整的 normative LTSSM state machine 請參閱 USB 3.2 Spec §7（Physical Layer）。
+
 ## PORT_SPEED Encoding（wPortStatus bits[12:10]）
 
 | Value | Speed |

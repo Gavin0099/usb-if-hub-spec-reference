@@ -72,6 +72,21 @@ Disconnected ──CLEAR_FEATURE(PORT_POWER)──> Powered-off
 | 任意（上電）| 過電流偵測 | Disabled / Port Error |
 | 任意（上電） | `CLEAR_FEATURE(PORT_POWER)` | Powered-off |
 
+## Transition 限制 — 哪些路徑不能直接跳
+
+有些 state transition 必須經過中間狀態，不能直接跳。以下限制來自 §11.5：
+
+| 情境 | 可直接跳？ | 說明 |
+|---|---|---|
+| 設備連接 → Enabled | **不可** | 必須經過 Disabled → Resetting → Enabled。Host 必須明確發出 `SET_FEATURE(PORT_RESET)`。 |
+| Powered-off → Enabled | **不可** | 必須經過 Disconnected → Disabled → Resetting → Enabled。 |
+| Port Error → Enabled | **不可** | 錯誤導致 port 進入 Disabled。Host 必須重新發出 `PORT_RESET`，再走 Resetting → Enabled。 |
+| Suspended → Resetting | **可以** | 在 Suspended 狀態下發出 `SET_FEATURE(PORT_RESET)` 有效。Hub 退出 Suspend 並進入 Resetting。 |
+| 任何上電狀態 → Powered-off | **可以** | `CLEAR_FEATURE(PORT_POWER)` 在任何上電狀態均有效（ganged 或 per-port power switching）。 |
+| Enabled → Disconnected | **可以** | 硬體設備斷開事件，不需要 host 指令。 |
+
+> **關鍵規則：** 新連接的設備一律先進入 **Disabled** 狀態。沒有 host 明確發出 `PORT_RESET`，port 就無法變成 Enabled——Disabled 到 Enabled 之間沒有自動路徑。
+
 ## `wPortStatus` Bits 與 Port State 的對應
 
 | `wPortStatus` bit | 名稱 | State 中為 `1` 的狀態 |

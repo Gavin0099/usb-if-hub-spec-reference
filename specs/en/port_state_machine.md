@@ -72,6 +72,21 @@ Any powered state ──overcurrent or hardware error──> Disabled / Port Err
 | Any (powered) | Overcurrent detected | Disabled / Port Error |
 | Any (powered) | `CLEAR_FEATURE(PORT_POWER)` | Powered-off |
 
+## Transition Constraints — Which Paths Are Not Direct
+
+Some transitions require passing through intermediate states. These constraints are defined in §11.5.
+
+| Scenario | Direct? | Notes |
+|---|---|---|
+| Device attach → Enabled | **No** | Must pass through Disabled → Resetting → Enabled. The host must explicitly issue `SET_FEATURE(PORT_RESET)`. |
+| Powered-off → Enabled | **No** | Must pass through Disconnected → Disabled → Resetting → Enabled. |
+| Port Error → Enabled | **No** | Error causes the port to become Disabled. Host must re-issue `PORT_RESET` to re-enter Resetting → Enabled. |
+| Suspended → Resetting | **Yes** | `SET_FEATURE(PORT_RESET)` is valid from Suspended. The hub exits Suspend and enters Resetting. |
+| Any powered state → Powered-off | **Yes** | `CLEAR_FEATURE(PORT_POWER)` is valid from any powered state (ganged or per-port switching). |
+| Enabled → Disconnected | **Yes** | Hardware device detach event; no host command needed. |
+
+> **Key rule:** A newly attached device always enters **Disabled** first. The port cannot become Enabled without the host explicitly issuing `PORT_RESET` — there is no automatic path from Disabled to Enabled.
+
 ## `wPortStatus` Bits and Port State Relationship
 
 | `wPortStatus` bit | Name | Set to `1` in these states |
