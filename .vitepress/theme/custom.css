@@ -10,3 +10,14 @@
   white-space: pre-wrap !important;
   word-break: break-all !important;
 }
+
+/* Mermaid diagrams: allow horizontal scroll and prevent SVG from being compressed */
+.vp-doc .mermaid,
+.vp-doc .mermaid > svg {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+.vp-doc .mermaid > svg {
+  min-width: 520px;
+}

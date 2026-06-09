@@ -51,63 +51,65 @@ This page does not answer:
 
 ---
 
-## Simplified LTSSM Orientation Diagram
+## Simplified LTSSM Orientation Diagrams
 
-> **Orientation only.** This diagram shows common high-level transition paths between LTSSM state groups.
-> It is not a complete normative transition matrix. Timing, LFPS signaling, PHY, equalization, and compliance details are not shown.
+> **Orientation only.** These diagrams show common high-level transition paths between LTSSM state groups.
+> They are not a complete normative transition matrix. Timing, LFPS signaling, PHY, equalization, and compliance details are not shown.
 > **Click any state node** to navigate to related reference content on this site.
 
+### Diagram 1 — Link Startup & Training Path
+
 ```mermaid
-flowchart TD
+flowchart LR
     classDef disabled fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
     classDef inactive fill:#f3f4f6,stroke:#9ca3af,color:#374151
     classDef training fill:#fef9c3,stroke:#ca8a04,color:#713f12
     classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef lowpower fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
-    classDef recovery fill:#ffedd5,stroke:#ea580c,color:#7c2d12
     classDef test fill:#f3e8ff,stroke:#9333ea,color:#581c87
 
-    subgraph DD["Disabled / Detect"]
-        SS_Disabled["SS.Disabled"]:::disabled
-        Rx_Detect["Rx.Detect"]:::disabled
-    end
-
-    subgraph IA["Inactive"]
-        SS_Inactive["SS.Inactive"]:::inactive
-    end
-
-    subgraph TR["Training"]
-        Polling["Polling"]:::training
-    end
-
-    subgraph AL["Active Link"]
-        U0["U0"]:::active
-    end
-
-    subgraph LP["Low Power (LPM)"]
-        U1["U1"]:::lowpower
-        U2["U2"]:::lowpower
-        U3["U3 (Suspended)"]:::lowpower
-    end
-
-    subgraph RR["Recovery / Reset"]
-        Recovery["Recovery"]:::recovery
-        HotReset["Hot Reset"]:::recovery
-    end
-
-    subgraph TS["Test / Special"]
-        Compliance["Compliance Mode"]:::test
-        Loopback["Loopback"]:::test
-    end
+    SS_Disabled["SS.Disabled"]:::disabled
+    Rx_Detect["Rx.Detect"]:::disabled
+    SS_Inactive["SS.Inactive"]:::inactive
+    Polling["Polling"]:::training
+    U0["U0\n(Active)"]:::active
+    Compliance["Compliance Mode"]:::test
+    Loopback["Loopback"]:::test
 
     SS_Disabled -->|"device attach"| Rx_Detect
-    SS_Inactive -->|"Warm Reset\n(BH_PORT_RESET)"| Rx_Detect
+    SS_Inactive -->|"Warm Reset (BH_PORT_RESET)"| Rx_Detect
     Rx_Detect -->|"receiver detected"| Polling
     Rx_Detect -->|"no receiver"| SS_Disabled
     Polling -->|"training success"| U0
-    Polling -->|"failure"| Recovery
+    Polling -->|"failure"| SS_Disabled
     Polling --> Compliance
     Polling --> Loopback
+
+    click SS_Disabled "#high-level-transition-orientation" "Transition Orientation Table"
+    click Rx_Detect "#high-level-transition-orientation" "Transition Orientation Table"
+    click SS_Inactive "#high-level-transition-orientation" "Transition Orientation Table"
+    click Polling "#high-level-transition-orientation" "Transition Orientation Table"
+    click U0 "./ss_port_state_machine#u-state-transition-rules-hub-port-management-layer" "U-State Transition Rules"
+    click Compliance "#hub-port-state-relationship" "Hub Port State Relationship"
+    click Loopback "#hub-port-state-relationship" "Hub Port State Relationship"
+```
+
+### Diagram 2 — U-State Power Management & Recovery
+
+```mermaid
+flowchart LR
+    classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef lowpower fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef recovery fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef training fill:#fef9c3,stroke:#ca8a04,color:#713f12
+
+    U0["U0\n(Active)"]:::active
+    U1["U1"]:::lowpower
+    U2["U2"]:::lowpower
+    U3["U3\n(Suspended)"]:::lowpower
+    Recovery["Recovery"]:::recovery
+    HotReset["Hot Reset"]:::recovery
+    Polling["Polling\n(re-train)"]:::training
+
     U0 -->|"LGOU1"| U1
     U0 -->|"LGOU2"| U2
     U0 -->|"PORT_SUSPEND"| U3
@@ -120,19 +122,15 @@ flowchart TD
     Recovery -->|"re-train"| Polling
     Recovery -->|"escalation"| HotReset
     HotReset -->|"complete"| U0
+    Polling -->|"training success"| U0
 
     click U0 "./ss_port_state_machine#u-state-transition-rules-hub-port-management-layer" "U-State Transition Rules"
     click U1 "./ss_port_state_machine#u-state-transition-rules-hub-port-management-layer" "U-State Transition Rules"
     click U2 "./ss_port_state_machine#u-state-transition-rules-hub-port-management-layer" "U-State Transition Rules"
     click U3 "./ss_port_state_machine#u-state-transition-rules-hub-port-management-layer" "U-State Transition Rules"
-    click SS_Disabled "#high-level-transition-orientation" "Transition Orientation Table"
-    click Rx_Detect "#high-level-transition-orientation" "Transition Orientation Table"
-    click Polling "#high-level-transition-orientation" "Transition Orientation Table"
     click Recovery "#high-level-transition-orientation" "Transition Orientation Table"
     click HotReset "#high-level-transition-orientation" "Transition Orientation Table"
-    click SS_Inactive "#high-level-transition-orientation" "Transition Orientation Table"
-    click Compliance "#hub-port-state-relationship" "Hub Port State Relationship"
-    click Loopback "#hub-port-state-relationship" "Hub Port State Relationship"
+    click Polling "#high-level-transition-orientation" "Transition Orientation Table"
 ```
 
 ---

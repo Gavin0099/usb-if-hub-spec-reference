@@ -57,57 +57,59 @@ semantic_verification_claimed: false
 > 這不是完整的 normative transition matrix。時序、LFPS 信號、PHY、均衡器、compliance 細節均未顯示。
 > **點擊任一狀態節點**可跳轉至本站相關參考頁面。
 
+### 圖一 — Link 啟動與 Training 路徑
+
 ```mermaid
-flowchart TD
+flowchart LR
     classDef disabled fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
     classDef inactive fill:#f3f4f6,stroke:#9ca3af,color:#374151
     classDef training fill:#fef9c3,stroke:#ca8a04,color:#713f12
     classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef lowpower fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
-    classDef recovery fill:#ffedd5,stroke:#ea580c,color:#7c2d12
     classDef test fill:#f3e8ff,stroke:#9333ea,color:#581c87
 
-    subgraph DD["Disabled / Detect"]
-        SS_Disabled["SS.Disabled"]:::disabled
-        Rx_Detect["Rx.Detect"]:::disabled
-    end
-
-    subgraph IA["Inactive"]
-        SS_Inactive["SS.Inactive"]:::inactive
-    end
-
-    subgraph TR["Training"]
-        Polling["Polling"]:::training
-    end
-
-    subgraph AL["Active Link"]
-        U0["U0"]:::active
-    end
-
-    subgraph LP["Low Power (LPM)"]
-        U1["U1"]:::lowpower
-        U2["U2"]:::lowpower
-        U3["U3 (Suspended)"]:::lowpower
-    end
-
-    subgraph RR["Recovery / Reset"]
-        Recovery["Recovery"]:::recovery
-        HotReset["Hot Reset"]:::recovery
-    end
-
-    subgraph TS["Test / Special"]
-        Compliance["Compliance Mode"]:::test
-        Loopback["Loopback"]:::test
-    end
+    SS_Disabled["SS.Disabled"]:::disabled
+    Rx_Detect["Rx.Detect"]:::disabled
+    SS_Inactive["SS.Inactive"]:::inactive
+    Polling["Polling"]:::training
+    U0["U0\n(Active)"]:::active
+    Compliance["Compliance Mode"]:::test
+    Loopback["Loopback"]:::test
 
     SS_Disabled -->|"設備連接"| Rx_Detect
-    SS_Inactive -->|"Warm Reset\n(BH_PORT_RESET)"| Rx_Detect
+    SS_Inactive -->|"Warm Reset (BH_PORT_RESET)"| Rx_Detect
     Rx_Detect -->|"偵測到接收端"| Polling
     Rx_Detect -->|"未偵測到接收端"| SS_Disabled
     Polling -->|"training 成功"| U0
-    Polling -->|"training 失敗"| Recovery
+    Polling -->|"training 失敗"| SS_Disabled
     Polling --> Compliance
     Polling --> Loopback
+
+    click SS_Disabled "#高層次轉換導向" "轉換導向表"
+    click Rx_Detect "#高層次轉換導向" "轉換導向表"
+    click SS_Inactive "#高層次轉換導向" "轉換導向表"
+    click Polling "#高層次轉換導向" "轉換導向表"
+    click U0 "./ss_port_state_machine" "U-State 轉換規則"
+    click Compliance "#hub-port-state-對應關係" "Hub Port State 對應"
+    click Loopback "#hub-port-state-對應關係" "Hub Port State 對應"
+```
+
+### 圖二 — U-State 電源管理與 Recovery
+
+```mermaid
+flowchart LR
+    classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef lowpower fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef recovery fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef training fill:#fef9c3,stroke:#ca8a04,color:#713f12
+
+    U0["U0\n(Active)"]:::active
+    U1["U1"]:::lowpower
+    U2["U2"]:::lowpower
+    U3["U3\n(Suspended)"]:::lowpower
+    Recovery["Recovery"]:::recovery
+    HotReset["Hot Reset"]:::recovery
+    Polling["Polling\n(重新 training)"]:::training
+
     U0 -->|"LGOU1"| U1
     U0 -->|"LGOU2"| U2
     U0 -->|"PORT_SUSPEND"| U3
@@ -120,19 +122,15 @@ flowchart TD
     Recovery -->|"重新 training"| Polling
     Recovery -->|"escalation"| HotReset
     HotReset -->|"reset 完成"| U0
+    Polling -->|"training 成功"| U0
 
     click U0 "./ss_port_state_machine" "U-State 轉換規則"
     click U1 "./ss_port_state_machine" "U-State 轉換規則"
     click U2 "./ss_port_state_machine" "U-State 轉換規則"
     click U3 "./ss_port_state_machine" "U-State 轉換規則"
-    click SS_Disabled "#高層次轉換導向" "轉換導向表"
-    click Rx_Detect "#高層次轉換導向" "轉換導向表"
-    click Polling "#高層次轉換導向" "轉換導向表"
     click Recovery "#高層次轉換導向" "轉換導向表"
     click HotReset "#高層次轉換導向" "轉換導向表"
-    click SS_Inactive "#高層次轉換導向" "轉換導向表"
-    click Compliance "#hub-port-state-對應關係" "Hub Port State 對應"
-    click Loopback "#hub-port-state-對應關係" "Hub Port State 對應"
+    click Polling "#高層次轉換導向" "轉換導向表"
 ```
 
 ---
