@@ -273,6 +273,27 @@ The following are outside the verified scope for all USB 3.x entries, now and pe
 - USB 3.x reference surface covers the current three governed matrices only; **this is not complete USB 3.x spec coverage** and is not equivalent to the USB 2.0 28 topic-pair reference surface.
 - USB 3.x entries are not counted in the USB 2.0 evidence packet total (USB 2.0 remains at 105 packets).
 
+## LTSSM-0 Orientation Reference (not governed surface)
+
+Phase LTSSM-0 added `ss_ltssm.md` (ZH + EN) as an orientation reference for LTSSM state names, state groups, and high-level transition paths. This is a readability layer; it is **not a governed surface addition** and does not change any governed matrix statistics.
+
+**Included in LTSSM-0:**
+- LTSSM state group overview (7 groups: Disabled/Detect, Inactive, Training, Active Link, Low Power, Recovery/Reset, Test/Special)
+- High-level transition orientation table (common next-state paths only)
+- Hub `PORT_LINK_STATE` mapping to LTSSM state names
+
+**Not included (permanent boundaries):**
+- Complete normative LTSSM transition matrix
+- LFPS signaling waveforms or timing parameters
+- PHY equalization, receiver sensitivity, or link training convergence
+- xHCI warm reset or port reset interaction with LTSSM
+- USB-IF compliance or interoperability certification
+- Firmware correctness or driver implementation behavior
+
+**Claim ceiling:** `claim_level: inferred`, `semantic_verification_claimed: false`, `governed_surface: false`. LTSSM-0 does not expand the USB 3.x verified or reviewed entry counts.
+
+---
+
 ## USB 3.x Feature Selector Expansion (USB3-FS-2)
 
 > This section is **independent of and separate from** the 38/34/4 matrix-level closeout baseline above.

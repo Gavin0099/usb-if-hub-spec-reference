@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-08
+> **Last Updated**: 2026-06-09
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -972,6 +972,38 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
 - Included in the unified manifest (13th governed table) and fingerprint baseline.
 - Now included in the MANIFEST-UPDATE-2 (v0.3) re-baseline (15 tables total).
 
+### Phase LTSSM-0 — LTSSM Orientation Reference (orientation only, not governed)
+
+**Status:** Phase A complete (2026-06-09).
+
+Added `ss_ltssm.md` (ZH + EN) as an orientation reference for LTSSM state names,
+state groups, and high-level transition paths. This is a readability / orientation
+layer only.
+
+Also added U-state transition rules to SS port_state_machine.md (ZH + EN), and
+Transition Constraints table to USB 2.0 port_state_machine.md (ZH + EN).
+Triggered by Hub PM (Yihsun) review gap: "某些state只能從哪裡跳到哪裡，不能跳到那裏".
+
+Claim ceiling: `claim_level: inferred`, `semantic_verification_claimed: false`.
+LTSSM-0 does not expand USB 3.x governed matrix statistics.
+
+Included:
+- LTSSM state group overview (7 groups)
+- High-level transition orientation table (common next-state paths; not normative)
+- Hub PORT_LINK_STATE relationship table
+
+Not included (permanent boundaries):
+- Complete normative LTSSM transition matrix
+- LFPS timing, PHY electrical, equalization behavior
+- xHCI/firmware interaction with LTSSM
+- USB-IF compliance or interoperability behavior
+
+**Phase B** (Mermaid simplified orientation diagram): deferred. Requires Mermaid
+plugin installation. Diagram must be titled "Simplified LTSSM Orientation Diagram",
+not "USB3 LTSSM State Machine", to maintain correct claim framing.
+
+---
+
 ## Open Work
 
 1. Continue entry-level verification only when narrow evidence packets and gate
@@ -984,6 +1016,9 @@ Phase USB3-FS-2 and EXPORT-CONTRACT-1.1 are both complete:
 4. CONSUMER-CI-2 (actual consuming repo adoption of manifest v0.3) is deferred
    until a specific consuming firmware repo is identified. Use
    `scripts/smoke_manifest_consumer_reference.py` as the starting template.
+5. LTSSM-0 Phase B (Mermaid diagram) deferred. Install `vitepress-plugin-mermaid`
+   or equivalent, then create simplified orientation diagram with correct title.
+   Do not proceed until claim ceiling and diagram naming policy are confirmed.
 
 ## Cannot Claim
 
