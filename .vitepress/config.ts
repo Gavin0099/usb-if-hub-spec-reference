@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import { withMermaid } from "vitepress-plugin-mermaid";
 import { existsSync, readdirSync } from "fs";
 import { join } from "path";
 
@@ -281,7 +282,7 @@ const enReferenceItems = [
   { text: "USB 3.x / SuperSpeed Hub", items: enUsb3Items },
 ];
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: "USB-IF Hub Spec Reference",
   description:
     "USB Hub specification reference site for standards clarification only, claim_level: inferred",
@@ -359,4 +360,8 @@ export default defineConfig({
   markdown: {
     lineNumbers: false,
   },
-});
+
+  mermaid: {
+    securityLevel: "loose",
+  },
+}));
