@@ -6,7 +6,7 @@ titleTemplate: false
 hero:
   name: USB-IF Hub Spec Reference
   text: USB Hub standards clarification layer
-  tagline: "claim_level: inferred, semantic_verification_claimed: false, for standards clarification only"
+  tagline: "A structured reference for USB hub specification details — descriptor fields, class requests, port status bits, and feature selectors for USB 2.0 and USB 3.2 hubs."
   actions:
     - theme: brand
       text: Hub Class Requests
@@ -108,6 +108,6 @@ features:
     link: /en/glossary
 ---
 
-> **Important boundary:** This repository is a standards clarification layer, not a project-fact authority for consuming firmware repositories.
-> Governed surface export: `exports/hub_governed_surface_manifest.yaml` (12 tables, USB 2.0 freeze + USB 3.x matrix-level closeout).
-> Consumer integration contract: `docs/CONSUMER_INTEGRATION_CONTRACT.md`.
+> **What this is:** A structured reference for USB hub spec details — descriptor fields, request codes, and status bit definitions for USB 2.0 and USB 3.2. Each entry has a clear source and defined scope.
+>
+> **What this is not:** This is not a guide for hub runtime behavior. It does not cover timing, state machines, or compliance testing. It clarifies what the spec says; it does not override firmware design decisions.

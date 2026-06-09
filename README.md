@@ -1,14 +1,46 @@
 # USB-IF Hub Spec Reference
 
-Governed USB hub specification reference and LLM wiki surface.
+A reference guide for USB hub specification details — descriptor fields, class requests,
+and status bit definitions for USB 2.0 and USB 3.2 hubs.
 
-## Purpose
+## What Is This?
 
-This repository provides controlled reference content from USB-IF hub-related
-specifications for consumption by firmware governance contracts.
+### The Problem
 
-It does **not** govern firmware behavior. It clarifies standard semantics only.
-It must not override confirmed project facts in consuming firmware repositories.
+Writing firmware for a USB hub requires precise knowledge of specific details from the
+USB specification: which bit in a status register means "device connected", what value
+a feature selector should have, what fields a hub descriptor must contain. The USB spec
+is a large PDF document spanning hundreds of pages, and getting these details wrong leads
+to subtle firmware bugs that are hard to trace.
+
+Two things make this harder in practice:
+
+- Relevant details are scattered across many spec sections.
+- USB 2.0 and USB 3.2 hubs have different rules, and it is easy to apply the wrong
+  version's rules by mistake.
+
+### What This Repo Provides
+
+- A **structured, searchable reference** for USB 2.0 and USB 3.2 hub descriptor fields,
+  class requests, port status bits, and feature selectors.
+- Clear **claim boundaries**: each entry states exactly what is verified and what is out
+  of scope. This prevents the reference from claiming more than the spec actually says.
+- An **escalation guide** (`specs/escalation_table.md`): a checklist of conditions where
+  firmware behavior may conflict with the spec and requires a closer review.
+- **Machine-readable tables** that a CI system can use to detect unexpected changes in
+  the reference content.
+
+### What This Repo Does Not Cover
+
+- How hubs behave at runtime (state machines, timing, error recovery sequences).
+- Host-side driver behavior (Windows, Linux, xHCI controller internals).
+- USB electrical compliance or certification testing.
+- USB4 or Thunderbolt hub semantics.
+
+This repo clarifies what the spec says. It does not make decisions about firmware
+implementation, and it does not override engineering judgment on project-specific behavior.
+
+## Purpose (Technical Summary)
 
 ## Governed Surface Status
 
