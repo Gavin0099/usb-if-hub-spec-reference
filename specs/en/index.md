@@ -9,102 +9,34 @@ hero:
   tagline: "Engineers writing firmware or software for USB hubs often need to look up specific details from the USB specification — which bit means \"device connected\", what value a request code should have, what fields a descriptor must contain. The USB specification is a large document, and getting these details wrong causes subtle bugs. This site extracts those details into searchable pages for USB 2.0 and USB 3.2 hubs. It covers descriptor fields, class requests, port status bits, and feature selectors. It does not cover runtime timing, state machine behavior, host-side driver behavior, or compliance testing."
   actions:
     - theme: brand
-      text: Hub Class Requests
-      link: /en/hub_class_requests
+      text: USB 2.0 Hub Reference
+      link: /en/usb2
+    - theme: brand
+      text: USB 3.2 / SuperSpeed Hub
+      link: /en/usb3/
     - theme: alt
       text: Verification Status
       link: /en/verification_status
-    - theme: alt
-      text: Glossary
-      link: /en/glossary
 
 features:
-  - title: Hub Class Requests
-    details: Summarizes USB 2.0 hub class-specific requests, including GET_STATUS, SET_FEATURE, CLEAR_FEATURE, and TT-related requests.
-    link: /en/hub_class_requests
-  - title: Feature Selectors
-    details: Fully exposes the USB 2.0 hub/port selector namespace, including reviewed selector boundaries, reserved boundaries, and non-claims.
-    link: /en/feature_selectors
-  - title: Port Status Bits
-    details: Organizes wPortStatus, wPortChange, wHubStatus, and wHubChange bit semantics, verified entries, and boundary placeholders.
-    link: /en/port_status_bits
-  - title: Hub Descriptor
-    details: Explains USB 2.0 hub descriptor fields and the meaning of wHubCharacteristics.
-    link: /en/hub_descriptor
-  - title: Transaction Translator
-    details: Summarizes TT rules and the request boundaries specific to HS hubs with embedded TT.
-    link: /en/transaction_translator
-  - title: Escalation Table
-    details: Lists when a consuming firmware repository should enter Standard Escalation Mode.
+  - title: USB 2.0 Hub Reference
+    details: "28 pages covering hub descriptors, class requests, port status bits, feature selectors, Transaction Translator, High-Speed detection, and USB 2.0 protocol foundations. Governed surface: 151 tracked entries, 105 verified."
+    link: /en/usb2
+
+  - title: USB 3.2 / SuperSpeed Hub Reference
+    details: "25 pages covering SS hub descriptors, SS class requests, SS port status bits, SS feature selectors, link power management, speed detection, and differences from USB 2.0 hubs. Governed surface: 53 tracked entries, 48 verified."
+    link: /en/usb3/
+
+  - title: Escalation Guide
+    details: A checklist of conditions where firmware behavior may conflict with the spec and requires a closer review. USB 2.0 conditions E-01 to E-10. USB 3.x conditions SE-01 to SE-05.
     link: /en/escalation_table
-  - title: Version Source Map
-    details: Maps hub-related USB 2.0, 2.1, 3.2, and USB4 sources and authority boundaries.
-    link: /en/version_source_map
-  - title: Port State Machine
-    details: Describes the 7 standard USB 2.0 hub port states and state transition triggers. Reviewed boundary only.
-    link: /en/port_state_machine
-  - title: Hub Device Class Codes
-    details: Documents bDeviceClass, bDeviceSubClass, and bDeviceProtocol values for hub class identification and TT type advertising.
-    link: /en/hub_device_class
-  - title: Hub Interrupt Endpoint
-    details: Describes the status change endpoint descriptor fields, wMaxPacketSize calculation, and bInterval encoding for FS and HS hubs.
-    link: /en/hub_interrupt_endpoint
-  - title: Hub Power Management
-    details: Power switching modes (ganged vs. per-port), bPwrOn2PwrGood timing, over-current protection, and suspend/resume semantics.
-    link: /en/hub_power_management
-  - title: Hub Configuration Descriptors
-    details: Configuration and interface descriptor fields for hub class, including bInterfaceClass=0x09, bNumEndpoints, and alternate settings for multi-TT hubs.
-    link: /en/hub_configuration
-  - title: Hub Enumeration Sequence
-    details: The USB 2.0 hub enumeration request sequence, GET_STATUS 4-byte response format, speed detection after port reset, and port power-on timing constraints.
-    link: /en/hub_enumeration
-  - title: Hub Compound Device
-    details: Compound device identification via wHubCharacteristics bit 2, DeviceRemovable bitmap semantics, and PortPwrCtrlMask interpretation in USB 2.0.
-    link: /en/hub_compound_device
-  - title: Standard Device Requests
-    details: All standard USB 2.0 device requests (Chapter 9 §9.4) applicable to hubs — setup packet format, bmRequestType breakdown, GET_DESCRIPTOR, SET_ADDRESS, SET_CONFIGURATION, and standard feature selectors.
-    link: /en/standard_device_requests
-  - title: Standard USB Descriptors
-    details: Standard USB 2.0 descriptor field tables — device, Device_Qualifier, configuration, interface, endpoint, and string descriptors with hub-specific values.
-    link: /en/standard_descriptors
-  - title: USB Device States
-    details: USB device-level states (Chapter 9 §9.1) — Attached, Powered, Default, Address, Configured, Suspended — and how they differ from hub port states.
-    link: /en/usb_device_states
-  - title: USB Transfer Types
-    details: The four USB 2.0 transfer types (Control, Interrupt, Bulk, Isochronous) and which ones a hub uses — endpoint 0 for Control, interrupt IN for status change.
-    link: /en/usb_transfer_types
-  - title: USB Signaling
-    details: USB bus signal states (J, K, SE0), NRZI encoding, bit stuffing, reset/suspend/resume signaling events, and FS vs. HS bus differences.
-    link: /en/usb_signaling
-  - title: High-Speed Detection
-    details: HS chirp handshake sequence during port reset — device Chirp K, hub KJ response pattern, outcome matrix, and timing reference for HS speed negotiation.
-    link: /en/hs_detection
-  - title: USB Packet Types
-    details: PID encoding (4-bit type + 4-bit complement), all token/data/handshake/special packet types, PID values, and hub operation packet table (Chapter 8).
-    link: /en/usb_packet_types
-  - title: USB Transactions
-    details: Transaction structure (token + data + handshake), SETUP/IN/OUT flows, control transfer 3-phase sequence, data toggle, and error response table.
-    link: /en/usb_transactions
-  - title: Split Transaction Packets
-    details: SPLIT PID structure (4-byte SSPLIT/CSPLIT), SSPLIT/CSPLIT transaction flows, NYET retry behavior, and endpoint type split semantics for TT hubs.
-    link: /en/split_transaction_packets
-  - title: USB Test Modes
-    details: HS electrical compliance test modes (TEST_J/K/SE0_NAK/PACKET/FORCE_ENABLE), SET_FEATURE(TEST_MODE) encoding, entry rules, and power-cycle-only exit.
-    link: /en/usb_test_modes
-  - title: Port Indicators
-    details: PORT_INDICATOR LED control (Auto/Amber/Green/Off), wHubCharacteristics bit 7 indicator support flag, and PORT_TEST feature selector encoding.
-    link: /en/port_indicators
-  - title: Hub Power Budget
-    details: Self-powered vs. bus-powered hub power rules, per-port current limits (500 mA vs. 100 mA), bHubContrCurrent (mA direct) vs. bMaxPower (×2) units.
-    link: /en/hub_power_budget
-  - title: Consumer Integration Contract
-    details: "Consuming repo CI contract: unified governed surface manifest (12 tables), fingerprint drift baseline, two-step CI gate, allowed/forbidden usage, and failure interpretation. Smoke-tested: manifest PASS, no-drift PASS, drift FAIL with table attribution."
+
+  - title: Governed Surface & Verification
+    details: "15 governed machine-readable tables (USB 2.0: 9 tables, USB 3.2: 6 tables). Each entry has a verified scope and evidence packet. Includes consumer CI integration guide and fingerprint drift detection baseline."
     link: /en/verification_status
-  - title: Verification Status
-    details: "Current entry-level verification maturity, reviewed packet status, and non-claims. USB 2.0: 151 tracked / 105 verified / 46 reviewed (freeze). USB 3.x: 38 tracked / 34 verified / 4 reviewed (matrix-level closeout)."
-    link: /en/verification_status
-  - title: Glossary
-    details: Standardizes terminology for this repo to reduce document and LLM answer drift.
+
+  - title: Glossary & Source Map
+    details: USB terminology definitions and version source authority mapping for USB 2.0 through USB 3.2. Covers SS, SSP, BOS, LPM, U-states, LFPS, and more.
     link: /en/glossary
 ---
 
