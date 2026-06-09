@@ -5,8 +5,8 @@ titleTemplate: false
 
 hero:
   name: USB-IF Hub Spec Reference
-  text: USB Hub standards clarification layer
-  tagline: "A structured reference for USB hub specification details — descriptor fields, class requests, port status bits, and feature selectors for USB 2.0 and USB 3.2 hubs."
+  text: Specification reference for USB 2.0 and USB 3.2 hub firmware
+  tagline: "Engineers writing firmware or software for USB hubs often need to look up specific details from the USB specification — which bit means \"device connected\", what value a request code should have, what fields a descriptor must contain. The USB specification is a large document, and getting these details wrong causes subtle bugs. This site extracts those details into searchable pages for USB 2.0 and USB 3.2 hubs. It covers descriptor fields, class requests, port status bits, and feature selectors. It does not cover runtime timing, state machine behavior, host-side driver behavior, or compliance testing."
   actions:
     - theme: brand
       text: Hub Class Requests
