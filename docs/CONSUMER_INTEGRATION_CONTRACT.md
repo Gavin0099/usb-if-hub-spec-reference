@@ -17,8 +17,8 @@ exports/hub_governed_surface_manifest.yaml
 
 This manifest is the **governed truth index** for this repository. It covers:
 - 9 USB 2.0 freeze tables (151 tracked / 105 verified / 46 reviewed)
-- 3 USB 3.x matrix-level closeout tables (38 tracked / 34 verified / 4 reviewed)
-- 12 governed tables total
+- 6 USB 3.x tables (53 tracked / 48 verified / 5 reviewed)
+- 15 governed tables total
 
 Consuming repos should **not** read individual YAML tables directly as a primary source of truth. The manifest is the stable contract surface; individual tables are its implementation.
 
@@ -38,9 +38,9 @@ Expected output:
 ```
 PASS: hub_governed_surface_manifest validation
   manifest_id: hub_governed_surface_manifest
-  governed_tables: 12 (usb20=9, usb3=3)
+  governed_tables: 15 (usb20=9, usb3=6)
   usb20: state=freeze tracked=151 verified=105 reviewed=46
-  usb3: state=matrix_level_closeout tracked=38 verified=34 reviewed=4
+  usb3: state=partial_verified tracked=53 verified=48 reviewed=5
 ```
 
 ### Step 2 — Table Content Drift Detection
@@ -54,7 +54,7 @@ python scripts/probe_table_fingerprint.py \
 
 Expected output:
 ```
-Table fingerprint check PASSED: 12 table(s), 0 drift
+Table fingerprint check PASSED: 15 table(s), 0 drift
 ```
 
 Both checks must PASS before treating any governed surface output as stable.
@@ -153,5 +153,5 @@ This contract operates at layers L1–L3 of the five-layer governance model defi
 - PORT_LINK_STATE runtime behavior or LTSSM transitions are verified
 - xHCI enumeration behavior is verified
 - The governed surface is equivalent to USB-IF certification
-- USB 3.x reference depth is equivalent to USB 2.0 reference depth (USB 3.x covers three governed matrices only, not a 28-topic-pair wiki surface)
+- USB 3.x reference depth is equivalent to USB 2.0 reference depth (USB 3.x covers six governed matrices; wiki surface is expanding but does not yet match USB 2.0 28-topic-pair depth)
 - Consuming repo firmware behavior can be derived solely from this reference

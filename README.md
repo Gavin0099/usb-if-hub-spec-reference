@@ -40,8 +40,6 @@ Two things make this harder in practice:
 This repo clarifies what the spec says. It does not make decisions about firmware
 implementation, and it does not override engineering judgment on project-specific behavior.
 
-## Purpose (Technical Summary)
-
 ## Governed Surface Status
 
 ### USB 2.0 — Freeze
@@ -115,7 +113,7 @@ documents allowed usage, forbidden usage, and failure interpretation:
 - [`docs/CONSUMER_INTEGRATION_CONTRACT.md`](docs/CONSUMER_INTEGRATION_CONTRACT.md)
 
 This contract is smoke-tested. The smoke fixture verifies manifest integrity, zero drift
-on 12 governed tables, and drift detection with table-level attribution when a hash is
+on 15 governed tables, and drift detection with table-level attribution when a hash is
 corrupted.
 
 ## Governance Layers
@@ -160,16 +158,24 @@ or response envelope enforcement.
 Core repo-local checks:
 
 ```powershell
-# USB 2.0 + USB 3.x matrix validators
+# USB 2.0 matrix validators (9 tables)
 python scripts\validate_hub_descriptor_matrix.py
 python scripts\validate_feature_selector_matrix.py
 python scripts\validate_port_status_bit_matrix.py
 python scripts\validate_class_request_matrix.py
 python scripts\validate_standard_device_request_matrix.py
 python scripts\validate_wHubCharacteristics_bit_matrix.py
+python scripts\validate_hub_interrupt_endpoint_matrix.py
+python scripts\validate_escalation_trigger_matrix.py
+python scripts\validate_transaction_translator_matrix.py
+
+# USB 3.x matrix validators (6 tables)
 python scripts\validate_ss_hub_descriptor_matrix.py
 python scripts\validate_ss_hub_class_request_matrix.py
 python scripts\validate_ss_port_status_bit_matrix.py
+python scripts\validate_ss_feature_selector_matrix.py
+python scripts\validate_ss_hub_characteristics_bit_matrix.py
+python scripts\validate_ss_hub_interrupt_endpoint_matrix.py
 
 # Export contract validators
 python scripts\validate_hub_governed_surface_manifest.py
