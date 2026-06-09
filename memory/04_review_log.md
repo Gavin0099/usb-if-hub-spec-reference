@@ -55,3 +55,61 @@
 - Anti-patterns checked: 0
 - Regression notes checked: 0
 - Result: Pass
+
+---
+
+## 2026-06-09 Hub PM Review — Yihsun (State Transition Readability)
+
+### Review Type
+External functional review — Hub PM user perspective.
+
+### Reviewer
+Yihsun (Hub PM). Context: shared site URL after HOME-IA-1 cleanup.
+
+### Initial Feedback
+> 看得懂，很清楚。
+
+Positive reception after HOME-IA-1 homepage redesign (categorical cards replacing flat 28-topic list).
+
+### Gap Identified
+Follow-up question: "有沒有你最常需要查但這裡找不到的東西？"
+
+Reviewer response:
+> 就是某些state只能從哪裡跳到哪裡，不能跳到那裏。USB3就像是SS.disable state, Rx.detect state, recovery state…很多state, 不能隨便跳到哪。U2也有。那種要用流程圖比較看得懂。
+
+### Root Cause Analysis
+
+Two distinct gaps were identified:
+
+1. **Hub-class port state transitions** (USB 2.0 and USB 3.x U-states): which transitions require intermediate states; no direct path rules.
+2. **LTSSM physical-layer states** (USB 3.x SS.Disabled, Rx.Detect, Polling, Recovery, etc.): orientation of how these states relate to each other.
+
+### Response
+
+| Gap | Response | Claim ceiling |
+|---|---|---|
+| USB 2.0 hub port transition constraints | Added "Transition Constraints" table to `port_state_machine.md` (ZH+EN) | `claim_level: inferred` |
+| USB 3.x U-state transition constraints | Added "U-State Transition Rules" to `ss_port_state_machine.md` (ZH+EN) | `claim_level: inferred` |
+| LTSSM state orientation | New `ss_ltssm.md` (ZH+EN): state groups + high-level transition orientation | `claim_level: inferred`, `governed_surface: false` |
+
+### Governance Decision
+
+LTSSM was incorporated as **orientation reference only**. It was not added to the governed/verified surface.
+
+- `governed_surface: false`
+- `verified_count_delta: 0`
+- LTSSM governed matrix: not created
+
+Rationale: LTSSM behavior (LFPS, equalization, timing, compliance mode) is physical-layer scope far outside the hub class descriptor / request / status bit surface this repo governs. Incorporating it as orientation reference addresses the reviewer's readability need without expanding the governed claim boundary.
+
+### Mermaid Diagram Request
+
+Reviewer noted: "那種要用流程圖比較看得懂."
+
+Decision: deferred as LTSSM-0 Phase B. Requires:
+1. Mermaid plugin installation (`vitepress-plugin-mermaid` or equivalent)
+2. Diagram title locked to "Simplified LTSSM Orientation Diagram" (not "USB3 LTSSM State Machine")
+3. Diagram scope limited to orientation — not a normative transition matrix
+
+### Status
+CLOSED. Readability gap addressed. Governed surface unchanged.
