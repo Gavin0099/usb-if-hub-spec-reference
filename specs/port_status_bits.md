@@ -249,6 +249,7 @@ section_refs:
 - `tables/port_status_bit_matrix.yaml`：selector 狀態位元 namespace 的主要機器可讀來源
 - `specs/hub_class_requests.md`：`GET_STATUS`、`SET_FEATURE`、`CLEAR_FEATURE` request 摘要
 - `specs/feature_selectors.md`：`C_PORT_*` 的 selector 邊界
+- `specs/port_feature_change_vocabulary.md`：`PORT_*` / `C_PORT_*` 詞彙對齊頁
 - `specs/escalation_table.md`：如 E-02、E-03、E-09 escalation 觸發
 
 ## Non-claims

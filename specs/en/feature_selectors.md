@@ -185,6 +185,7 @@ This table records encoding identity only. It does not verify indicator hardware
 - `tables/feature_selector_matrix.yaml`: primary machine-readable source for selector namespaces.
 - `specs/hub_class_requests.md`: request-family summary for `SET_FEATURE` / `CLEAR_FEATURE`.
 - `specs/port_status_bits.md`: relationship between `GET_STATUS`, change bits, and `CLEAR_FEATURE`.
+- `specs/port_feature_change_vocabulary.md`: PORT_/C_PORT_* vocabulary alignment between selector and status/change pages.
 - `specs/escalation_table.md`: E-05 escalation trigger.
 
 ## Non-claims

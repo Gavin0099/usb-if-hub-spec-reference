@@ -27,6 +27,7 @@ These pages cover hub-specific descriptor fields, requests, and behaviors define
 | [Hub Class Requests](/en/hub_class_requests) | GET_STATUS, SET_FEATURE, CLEAR_FEATURE, GET_DESCRIPTOR, CLEAR_TT_BUFFER, RESET_TT, and related |
 | [Feature Selectors](/en/feature_selectors) | Hub and port feature selector namespace, selector values 0–22 |
 | [Port Status Bits](/en/port_status_bits) | wPortStatus, wPortChange, wHubStatus, wHubChange bit definitions |
+| [Port Feature / Change Vocabulary](/en/port_feature_change_vocabulary) | Terminology alignment for `PORT_*` and `C_PORT_*` |
 | [Port State Machine](/en/port_state_machine) | 7 hub port states and state transition triggers |
 | [Port Indicators](/en/port_indicators) | LED control, wHubCharacteristics bit 7, PORT_INDICATOR feature selector |
 | [Hub Device Class Codes](/en/hub_device_class) | bDeviceClass=0x09, bDeviceSubClass, bDeviceProtocol TT type encoding |

@@ -179,6 +179,7 @@ semantic_verification_claimed: false
 - `tables/feature_selector_matrix.yaml`：selector namespace 的主要 machine-readable source
 - `specs/hub_class_requests.md`：`SET_FEATURE` / `CLEAR_FEATURE` request-family 摘要
 - `specs/port_status_bits.md`：`GET_STATUS` 與 change bits、`CLEAR_FEATURE` 的關聯
+- `specs/port_feature_change_vocabulary.md`：`PORT_*` / `C_PORT_*` 詞彙對齊頁
 - `specs/escalation_table.md`：E-05 相關 escalation trigger 參考
 
 ## Non-claims
