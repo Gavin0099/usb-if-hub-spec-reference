@@ -4,7 +4,7 @@ layout: doc
 claim_level: inferred
 spec_family: usb2
 status: review_required
-last_reviewed: "2026-06-09"
+last_reviewed: "2026-06-16"
 usb_versions:
   - usb_2_0
 source_refs:
@@ -25,7 +25,7 @@ These pages cover hub-specific descriptor fields, requests, and behaviors define
 |---|---|
 | [Hub Descriptor](/en/hub_descriptor) | Descriptor fields, bDescriptorType=0x29, wHubCharacteristics, bPwrOn2PwrGood |
 | [Hub Class Requests](/en/hub_class_requests) | GET_STATUS, SET_FEATURE, CLEAR_FEATURE, GET_DESCRIPTOR, CLEAR_TT_BUFFER, RESET_TT, and related |
-| [Feature Selectors](/en/feature_selectors) | Hub and port feature selector namespace, selector values 0–22 |
+| [Feature Selectors](/en/feature_selectors) | Hub and port feature selector namespace, selector values 0-22 |
 | [Port Status Bits](/en/port_status_bits) | wPortStatus, wPortChange, wHubStatus, wHubChange bit definitions |
 | [Port Feature / Change Vocabulary](/en/port_feature_change_vocabulary) | Terminology alignment for `PORT_*` and `C_PORT_*` |
 | [Port State Machine](/en/port_state_machine) | 7 hub port states and state transition triggers |
@@ -46,10 +46,10 @@ These pages cover USB 2.0 protocol fundamentals that apply to hub operation.
 
 | Topic | Description |
 |---|---|
-| [Standard Device Requests](/en/standard_device_requests) | Chapter 9 §9.4 requests — GET_DESCRIPTOR, SET_ADDRESS, SET_CONFIGURATION, standard feature selectors |
+| [Standard Device Requests](/en/standard_device_requests) | Chapter 9.4 requests (`GET_DESCRIPTOR`, `SET_ADDRESS`, `SET_CONFIGURATION`, standard feature selectors) |
 | [Standard USB Descriptors](/en/standard_descriptors) | Device, configuration, interface, endpoint, and string descriptor field tables |
-| [USB Device States](/en/usb_device_states) | §9.1 states — Attached, Powered, Default, Address, Configured, Suspended |
-| [USB Transfer Types](/en/usb_transfer_types) | Control, Interrupt, Bulk, Isochronous — which types a hub uses |
+| [USB Device States](/en/usb_device_states) | Chapter 9.1 states: Attached, Powered, Default, Address, Configured, Suspended |
+| [USB Transfer Types](/en/usb_transfer_types) | Control, Interrupt, Bulk, Isochronous and the hub-relevant types |
 | [USB Signaling](/en/usb_signaling) | J/K/SE0 states, NRZI encoding, reset/suspend/resume signaling |
 | [USB Packet Types](/en/usb_packet_types) | PID encoding, all token/data/handshake/special packet types |
 | [USB Transactions](/en/usb_transactions) | SETUP/IN/OUT flows, control transfer 3-phase sequence, data toggle |
@@ -64,5 +64,3 @@ These pages cover USB 2.0 protocol fundamentals that apply to hub operation.
 | [Version Source Map](/en/version_source_map) | USB 2.0 / 2.1 / 3.2 source authority mapping |
 | [Verification Status](/en/verification_status) | Evidence maturity: 151 tracked / 105 verified / 46 reviewed |
 | [Glossary](/en/glossary) | USB terminology and abbreviations |
-
-→ [USB 3.2 / SuperSpeed Hub Reference](/en/usb3/) | [Verification Status](/en/verification_status) | [Escalation Table](/en/escalation_table)

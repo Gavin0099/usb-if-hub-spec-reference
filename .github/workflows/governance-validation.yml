@@ -157,6 +157,14 @@ jobs:
             --wiki-dir specs/ \
             --receipt-out ci-receipts/staleness_impact.json
 
+      - name: USB2 reference navigation validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb2_reference_navigation.py \
+            --zh-page specs/usb2.md \
+            --en-page specs/en/usb2.md \
+            --receipt-out ci-receipts/usb2_reference_navigation.json
+
       - name: Class request matrix validation
         continue-on-error: true
         run: |
