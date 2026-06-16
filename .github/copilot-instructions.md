@@ -1,7 +1,7 @@
 # Copilot Workspace Instructions
 <!-- AI Governance Framework: copilot-instructions v1.0 -->
 <!-- Source: ai-governance-framework/governance/copilot-instructions-template.md -->
-<!-- Imported into this repo from ai-governance-framework commit 70a54b3 -->
+<!-- Deploy via: bash scripts/install-hooks.sh --target /path/to/repo -->
 
 ## DONE Boundary Rules (MANDATORY)
 
@@ -38,6 +38,14 @@ Do not read, explain, stage, or modify unrelated dirty or untracked files.
 ### Rule 4: Structured Report Format
 
 When reporting task completion, use this exact format. Fixed vocabulary only — no free-form narrative in these fields.
+
+Event-driven response envelope:
+- When using a `mode` field, follow `governance/RESPONSE_ENVELOPE_CONTRACT.md`.
+- `mode` must be event-derived, not agent-selected.
+- Keep `mode_source`, `task_authority`, `scope`, `done`, `not_claimed`, `evidence_refs`, and `risk` separate.
+- `task_authority` distinguishes authorized work from autonomous expansion.
+- `evidence_refs` records commands, artifacts, or reviewer sources supporting the DONE claim; it does not upgrade semantic authority.
+- Do not replace claim ceiling or risk disclosure with confidence scores, effort estimates, or broad impact analysis.
 
 Vocabulary definitions:
 - `NOT PRESENT` = the mechanism, artifact, or enforcement does not exist
@@ -87,26 +95,6 @@ Chinese format (when session language is Chinese):
 ```
 
 Do NOT omit `Cannot claim` / `本次無法宣告`. It is required in every completion report.
-
-### Rule 5: Canonical Memory Writer Only
-
-All new session-derived memory entries under `memory/` MUST be written through
-the framework canonical writer:
-
-```powershell
-python E:/BackUp/Git_EE/ai-governance-framework/governance_tools/memory_record.py `
-  --what-changed "..." `
-  --commit <git-sha> `
-  --test-evidence "..." `
-  --next-step "..." `
-  --project-root .
-```
-
-Direct markdown append using `- what changed:` or `- what_changed:` is
-PROHIBITED for new entries because it triggers `non_canonical_writer`.
-
-Do not write memory until commit/push state and validation evidence are known.
-Do not repair historical memory entries unless explicitly scoped.
 
 **Examples:**
 

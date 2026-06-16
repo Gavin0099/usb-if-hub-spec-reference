@@ -1,7 +1,6 @@
 # .governance/baseline.yaml
 # Written by governance_tools/adopt_governance.py — do not edit manually.
-# Verified by external ai-governance-framework drift checker during import.
-# This repo does not currently carry a repo-local governance_drift_checker.py path.
+# Verified by: python governance_tools/governance_drift_checker.py --repo .
 #
 # Semantic layers in this file:
 #   PROVENANCE  — who generated this baseline and from which commit
@@ -12,18 +11,18 @@
 # ── PROVENANCE ────────────────────────────────────────────────────────────────
 schema_version: "1"
 baseline_version: 1.0.0
-source_commit: 70a54b3056c7662d0a2a6ed6fd69a7bf5d37abfd
-framework_root: https://github.com/Gavin0099/ai-governance-framework.git
-initialized_at: 2026-06-03T02:41:16Z
+source_commit: 55cc5e71b96b09475c3d5918a60e0c6c3984102f
+framework_root: E:\BackUp\Git_EE\ai-governance-framework
+initialized_at: 2026-06-16T03:25:42Z
 initialized_by: governance_tools/adopt_governance.py
 
 # ── INTEGRITY ─────────────────────────────────────────────────────────────────
 # sha256.<file>: hash recorded at init/refresh time; "protected" files are hash-verified
 # overridable.<file>: protected = must not change | overridable = repo may extend freely
 sha256.AGENTS.base.md: f3daf5037a36606d546dc8d621dbb32963c6e3067f419187e4afd6f2d6dc14a7
-sha256.PLAN.md: ac5d947328c6f937f72585e5653c4d82c79a58c31298acba3ac751974014e237
-sha256.contract.yaml: 57359cbd6ed0774aae6909877d981c61bfd134b08c9058f7ae59882f466b51ba
-sha256.AGENTS.md: 7502b27279f910398897674ff5eda476e4dfef32dfa99c6e8fb1d71627153925
+sha256.PLAN.md: 78fd5cc96c9f464ab01326f0ba2e242a9fe149264a8befcd33895f18b64404b0
+sha256.contract.yaml: aeda3494329edbdb977ed83474f169763c071c3e3ddd308f7e2bff3e168baeab
+sha256.AGENTS.md: e97928978d5269a71b806fd9c3bc599abc21f2ef896ea15bb39b9ab948574186
 overridable.AGENTS.base.md: protected
 overridable.PLAN.md: overridable
 overridable.contract.yaml: overridable
@@ -46,3 +45,12 @@ contract_required_fields:
 # ── OBSERVED (repo snapshot — informational only, never enforced) ──────────────
 # plan_section_inventory: ## headings detected in PLAN.md at adoption/refresh time.
 #   Drift checker surfaces these for visibility but never fails on missing inventory items.
+plan_section_inventory:
+  - "## Current State"
+  - "## Completed Phases"
+  - "## Active Validators"
+  - "## USB 2.0 Governed Surface Freeze"
+  - "## USB 3.x Governed Matrix State"
+  - "## USB 3.x Feature Selector Expansion (USB3-FS-2 + EXPORT-CONTRACT-1.1 Complete)"
+  - "## Open Work"
+  - "## Cannot Claim"

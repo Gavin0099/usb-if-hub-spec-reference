@@ -1,6 +1,6 @@
 payload_layering:
   version: '1.0.0'
-  repo_type: generic
+  repo_type: product
   l0_context:
     always_load:
     - governance/SYSTEM_PROMPT.md
