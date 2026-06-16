@@ -20,7 +20,7 @@ hero:
 
 features:
   - title: USB 2.0 Hub Reference
-    details: "28 pages covering hub descriptors, class requests, port status bits, feature selectors, Transaction Translator, High-Speed detection, and USB 2.0 protocol foundations. Governed surface: 151 tracked entries, 105 verified."
+    details: "28 pages covering hub descriptors, class requests, port status bits, feature selectors, Transaction Translator, High-Speed detection, and USB 2.0 protocol foundations. Governed surface: 151 tracked entries, 105 verified, 46 reviewed, 0 inferred."
     link: /en/usb2
 
   - title: USB 3.2 / SuperSpeed Hub Reference
