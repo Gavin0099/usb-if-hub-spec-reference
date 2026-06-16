@@ -107,3 +107,8 @@ Only HS hubs (`bDeviceProtocol=0x01` or `0x02`) participate in chirp detection. 
 - This page does not claim the chirp handshake sequence has been verified against a physical hub or device.
 - This page does not specify all electrical timing tolerances for the chirp sequence.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hs_detection.md: 中文對應主題（中文頁）

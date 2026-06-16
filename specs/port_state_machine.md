@@ -148,3 +148,8 @@ Port reset 完成並清除 `C_PORT_RESET` 後，host 讀取 `wPortStatus` 以判
 - 本頁不宣告任何 hub 的 port state machine 實作已驗證。
 - 本頁不宣告 state transition 時序或設備回應的完整規格。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/port_state_machine.md: English counterpart topic (en).

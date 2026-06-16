@@ -103,3 +103,8 @@ Host 收到非零 bitmap 後，對相應的 port 或 hub 發送 `GET_STATUS` 請
 - 本頁不宣告任何 hub 的 interrupt endpoint 實作已經過驗證。
 - 本頁不描述 host driver 的 interrupt 輪詢行為或 latency 保證。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_interrupt_endpoint.md: English counterpart topic (en).

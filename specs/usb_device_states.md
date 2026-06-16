@@ -102,3 +102,8 @@ Hub 同時是一個 **USB device**（擁有 §9.1 設備狀態）和一個 **hub
 - 本頁不宣告設備 state transition 已針對實體 hub 驗證。
 - 本頁不建立 reset 後的完整恢復行為。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_device_states.md: English counterpart topic (en).

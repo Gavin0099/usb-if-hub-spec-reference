@@ -102,3 +102,8 @@ A hub is simultaneously a **USB device** (with its own §9.1 device states) and 
 - This page does not claim device state transitions have been verified against a physical hub.
 - This page does not establish complete recovery behavior after reset.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/usb_device_states.md: 中文對應主題（中文頁）

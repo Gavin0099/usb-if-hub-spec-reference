@@ -112,3 +112,8 @@ For FS/LS downstream devices connected to an HS hub, the hub's Transaction Trans
 - This page does not claim transfer type implementation has been verified against a physical hub.
 - This page does not specify the full USB 2.0 scheduler or bandwidth allocation algorithm.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/usb_transfer_types.md: 中文對應主題（中文頁）

@@ -117,3 +117,8 @@ Host 在枚舉後依需要選擇 alternate setting。
 - 本頁不是任何特定 hub 的 descriptor dump 驗證。
 - 本頁不宣告 `bMaxPower`、`bmAttributes` 等廠商相關欄位的正確值。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_configuration.md: English counterpart topic (en).

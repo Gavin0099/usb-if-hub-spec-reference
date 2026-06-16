@@ -100,3 +100,8 @@ When `wHubCharacteristics bit 2 = 1` (compound device):
 - This page does not override the hub descriptor field definitions in `specs/en/hub_descriptor.md`.
 - This page does not claim `PortPwrCtrlMask` carries actionable information in USB 2.0.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_compound_device.md: 中文對應主題（中文頁）

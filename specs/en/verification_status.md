@@ -417,3 +417,8 @@ This page must be updated manually when any of the following change:
 - Packets added or modified in `evidence/entry_verification_packets/`
 
 The governed YAML tables are the source of truth; this page is a visibility summary only.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/verification_status.md: 中文對應主題（中文頁）

@@ -149,3 +149,8 @@ Multi-TT hub 用於切換 single-TT（`bAlternateSetting=0`）和 multi-TT（`bA
 - 本頁不宣告 GET_STATUS（標準，2 bytes）與 GET_STATUS（hub class，4 bytes）可互換。
 - 本頁不宣告 TEST_MODE 或 ENDPOINT_HALT 語意已針對 hub 完成 correctness-verified。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/standard_device_requests.md: English counterpart topic (en).

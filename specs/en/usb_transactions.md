@@ -164,3 +164,8 @@ This allows silent recovery when an ACK is lost but the data was actually delive
 - This page does not specify the complete USB 2.0 host controller scheduling algorithm.
 - This page does not claim error recovery timing is implementation-verified.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/usb_transactions.md: 中文對應主題（中文頁）

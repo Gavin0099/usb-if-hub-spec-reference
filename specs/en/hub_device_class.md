@@ -82,3 +82,8 @@ TT capability is only meaningful for HS hubs. FS hubs use `0x00` because they do
 - This page is not a complete field verification for the USB device descriptor.
 - This page does not claim any hub's `bDeviceClass`, `bDeviceSubClass`, or `bDeviceProtocol` values have been verified as correct.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_device_class.md: 中文對應主題（中文頁）

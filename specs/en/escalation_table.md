@@ -93,3 +93,8 @@ Classification: Project Implementation Constraint | Standards Compliance Risk | 
 
 Resolution: <chosen path>
 ```
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/escalation_table.md: 中文對應主題（中文頁）

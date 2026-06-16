@@ -107,3 +107,8 @@ Both `PORT_INDICATOR` and `PORT_TEST` use `bmRequestType=0x23` (class, other rec
 - This page does not claim PORT_TEST behavior is implementation-verified.
 - This page does not define the complete automatic indicator color logic for any specific hub.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/port_indicators.md: 中文對應主題（中文頁）

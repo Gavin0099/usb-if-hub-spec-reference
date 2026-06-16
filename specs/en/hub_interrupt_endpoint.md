@@ -103,3 +103,8 @@ When the host receives a non-zero bitmap, it issues a `GET_STATUS` request (§11
 - This page does not claim that the interrupt endpoint implementation on any hub has been verified.
 - This page does not describe host driver interrupt polling behavior or latency guarantees.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_interrupt_endpoint.md: 中文對應主題（中文頁）

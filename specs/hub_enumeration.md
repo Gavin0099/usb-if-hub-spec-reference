@@ -123,3 +123,8 @@ Port 上電後，host 監聽 status change endpoint 並處理變化事件：
 - 本頁不宣告 hub enumeration sequence 已針對實體 hub 逐步驗證。
 - 本頁不建立任何枚舉步驟的 firmware 時序正確性。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_enumeration.md: English counterpart topic (en).

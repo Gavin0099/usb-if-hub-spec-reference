@@ -164,3 +164,8 @@ Host → Device：ACK（若收到資料）
 - 本頁不規定完整的 USB 2.0 host controller 排程演算法。
 - 本頁不宣告錯誤恢復時序已 implementation-verified。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_transactions.md: English counterpart topic (en).

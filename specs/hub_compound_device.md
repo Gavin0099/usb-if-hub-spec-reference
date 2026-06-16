@@ -100,3 +100,8 @@ Bit 編碼：
 - 本頁不覆蓋 `specs/hub_descriptor.md` 中的 hub descriptor 欄位定義。
 - 本頁不宣告 `PortPwrCtrlMask` 在 USB 2.0 中攜帶可操作資訊。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_compound_device.md: English counterpart topic (en).

@@ -117,3 +117,8 @@ The host selects the alternate setting after enumeration based on its needs.
 - This page is not a descriptor dump verification for any specific hub.
 - This page does not claim correct values for vendor-specific fields like `bMaxPower` or `bmAttributes`.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_configuration.md: 中文對應主題（中文頁）

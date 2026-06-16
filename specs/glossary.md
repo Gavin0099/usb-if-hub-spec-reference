@@ -90,3 +90,8 @@ semantic_verification_claimed: false
 - 本頁只統一用語，不建立新的 spec truth。
 - 本頁不會把術語選擇升級成 verified authority。
 - 若 consuming repo 發現 project facts 與本 repo 的 terminology summary 衝突，仍應套用 Standard Escalation Mode。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/glossary.md: English counterpart topic (en).

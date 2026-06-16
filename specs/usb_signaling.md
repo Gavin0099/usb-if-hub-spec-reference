@@ -115,3 +115,8 @@ HS 設備和 hub 在 reset 期間透過 chirp sequence 協商速度。請見 `sp
 - 本頁不宣告 NRZI 或 bit-stuffing 實作已驗證。
 - 本頁不定義完整的 USB 2.0 protocol layer 行為。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_signaling.md: English counterpart topic (en).

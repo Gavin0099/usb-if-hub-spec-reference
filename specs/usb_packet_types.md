@@ -114,3 +114,8 @@ Handshake packets 確認或拒絕資料 transaction，**僅 1 byte**（只有 PI
 - 本頁不宣告 CRC 計算演算法已 correctness-verified。
 - 本頁不建立完整的 USB protocol layer 實作規格。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_packet_types.md: English counterpart topic (en).

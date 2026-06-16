@@ -118,3 +118,8 @@ Isochronous split transactions do not use CSPLIT; the hub discards the result if
 - This page does not claim isochronous split transaction behavior is correctness-verified.
 - This page does not define a complete TT scheduling model.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/split_transaction_packets.md: 中文對應主題（中文頁）

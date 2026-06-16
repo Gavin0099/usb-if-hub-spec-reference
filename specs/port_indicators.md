@@ -107,3 +107,8 @@ wLength:       0
 - 本頁不宣告 PORT_TEST 行為已 implementation-verified。
 - 本頁不為任何特定 hub 定義完整的 automatic 指示燈顏色邏輯。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/port_indicators.md: English counterpart topic (en).

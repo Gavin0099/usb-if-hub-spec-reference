@@ -115,3 +115,8 @@ HS devices and hubs negotiate speed during reset via the chirp sequence. See `sp
 - This page does not claim NRZI or bit-stuffing implementation has been verified.
 - This page does not define complete USB 2.0 protocol layer behavior.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/usb_signaling.md: 中文對應主題（中文頁）

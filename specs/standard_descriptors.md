@@ -155,3 +155,8 @@ Hub 不強制要求 String 0 以外的字串描述符，但 iManufacturer、iPro
 - 本頁不宣告任何描述符欄位已針對實體 hub 完成 correctness-verified。
 - 本頁不宣告 `bMaxPower` 或 `bmAttributes` 的 self-powered vs. bus-powered 語意已驗證。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/standard_descriptors.md: English counterpart topic (en).

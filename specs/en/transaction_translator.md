@@ -84,3 +84,8 @@ The TT table is a reviewed reference boundary only. It does not verify split-tra
 - This page must not override a confirmed project decision about Single TT vs Multiple TT.
 - A mismatch between TT think time and descriptor-declared settings is an escalation trigger.
 - If firmware behavior would change because of this page, architecture review should happen first.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/transaction_translator.md: 中文對應主題（中文頁）

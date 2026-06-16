@@ -111,3 +111,8 @@ USB 2.0 spec §11.7 說明 hub 本身也可能進入 suspend（透過 USB suspen
 - 本頁不宣告任何 hub 的電源管理實作已驗證。
 - 本頁不提供電源時序保證或電氣規格。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_power_management.md: English counterpart topic (en).

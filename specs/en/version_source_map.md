@@ -69,3 +69,8 @@ Wiki pages (ZH + EN): 25 pages per locale (CORE, EXT, FULL-1, FULL-2 phases).
 - This repo was originally scoped as a USB 2.0 hub standard-side reference layer; the USB 3.x governed surface was added in subsequent phases.
 - Canonical authority bindings are defined in `contract/*.yaml` and `evidence/source_registry.yaml`.
 - Any scope expansion to new version/authority inputs must go through the existing review artifacts and evidence update workflow.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/version_source_map.md: 中文對應主題（中文頁）

@@ -149,3 +149,8 @@ Standard feature selectors used with `SET_FEATURE` / `CLEAR_FEATURE`:
 - This page does not claim GET_STATUS (standard, 2 bytes) behavior is interchangeable with GET_STATUS (hub class, 4 bytes).
 - This page does not claim TEST_MODE or ENDPOINT_HALT semantics have been correctness-verified for hubs.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/standard_device_requests.md: 中文對應主題（中文頁）

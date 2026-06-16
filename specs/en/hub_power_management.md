@@ -111,3 +111,8 @@ USB 2.0 spec §11.7 describes how a hub itself may enter suspend via USB suspend
 - This page does not claim that the power management implementation on any hub has been verified.
 - This page does not provide power sequencing guarantees or electrical specifications.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_power_management.md: 中文對應主題（中文頁）

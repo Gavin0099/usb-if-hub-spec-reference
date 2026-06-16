@@ -68,3 +68,8 @@ Wiki 頁面（ZH + EN）：25 頁每語系（含 CORE、EXT、FULL-1、FULL-2）
 - 本 repo 最初定位為 USB 2.0 hub 標準側說明層；USB 3.x governed surface 已於後續階段加入。
 - 正式 authority bindings 定義於 `contract/*.yaml` 與 `evidence/source_registry.yaml`。
 - 任何新 version / authority input 的 scope 擴充，都需通過既有的 review artifacts 與 evidence 更新流程。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/version_source_map.md: English counterpart topic (en).

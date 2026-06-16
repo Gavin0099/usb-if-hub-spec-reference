@@ -110,3 +110,8 @@ Hub controller 消耗：100 mA（來自電源）
 - 本頁不宣告 host 電源分配演算法已 implementation-verified。
 - 本頁不定義 USB-IF 認證電源要求。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/hub_power_budget.md: English counterpart topic (en).

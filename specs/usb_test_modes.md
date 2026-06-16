@@ -99,3 +99,8 @@ Hub 下行 port 測試：`wIndex[7:0]` = port 編號（1-based）。
 - 本頁不規定 USB 2.0 合規測試程序。
 - 本頁不宣告 53-byte TEST_PACKET 內容已在此完整重現。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_test_modes.md: English counterpart topic (en).

@@ -148,3 +148,8 @@ After port reset completes and `C_PORT_RESET` is cleared, the host reads `wPortS
 - This page does not claim that the port state machine implementation on any hub has been verified.
 - This page does not claim complete specifications for state transition timing or device responses.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/port_state_machine.md: 中文對應主題（中文頁）

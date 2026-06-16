@@ -84,3 +84,8 @@ TT table 僅為 reviewed reference boundary。未覆蓋 split-transaction timing
 - 本頁不應覆蓋 consuming repo 對 Single TT / Multiple TT 的既有決策。
 - TT think time 與 descriptor 聲明不一致，應視為 escalation trigger。
 - 若有行為變更需求，需先經架構層級審核後再套用到實作。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/transaction_translator.md: English counterpart topic (en).

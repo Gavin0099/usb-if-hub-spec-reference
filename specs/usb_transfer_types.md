@@ -112,3 +112,8 @@ Hub endpoint 0 固定為 Control；唯一的附加 hub endpoint 的 `bmAttribute
 - 本頁不宣告傳輸類型實作已針對實體 hub 驗證。
 - 本頁不定義完整的 USB 2.0 排程器或頻寬分配演算法。
 - 本頁不覆蓋 consuming repo 已確認的 project facts。
+
+## Reference Navigation
+
+- specs/usb2.md: USB 2.0 topic index (zh).
+- specs/en/usb_transfer_types.md: English counterpart topic (en).

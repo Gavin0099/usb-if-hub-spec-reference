@@ -123,3 +123,8 @@ After `SET_FEATURE(PORT_RESET)` and reset completes (`C_PORT_RESET=1`), the host
 - This page does not claim the hub enumeration sequence has been step-by-step verified against a physical hub.
 - This page does not establish firmware-level timing correctness for any enumeration step.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/hub_enumeration.md: 中文對應主題（中文頁）

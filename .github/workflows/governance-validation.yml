@@ -171,6 +171,12 @@ jobs:
           python scripts/validate_usb2_topic_cross_references.py \
             --receipt-out ci-receipts/usb2_topic_cross_references.json
 
+      - name: USB2 topic pair reachability validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb2_topic_pair_reachability.py \
+            --receipt-out ci-receipts/usb2_topic_pair_reachability.json
+
       - name: Class request matrix validation
         continue-on-error: true
         run: |

@@ -155,3 +155,8 @@ Hubs are not required to implement string descriptors beyond string 0, but iManu
 - This page does not claim any descriptor field has been correctness-verified against a physical hub.
 - This page does not claim `bMaxPower` or `bmAttributes` semantics have been verified for self-powered vs. bus-powered hub behavior.
 - This page does not override confirmed project facts in consuming repos.
+
+## Reference Navigation
+
+- specs/en/usb2.md: USB 2.0 topic index (en).
+- specs/standard_descriptors.md: 中文對應主題（中文頁）
