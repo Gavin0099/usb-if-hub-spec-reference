@@ -95,5 +95,6 @@ semantic_verification_claimed: false
 - `specs/en/port_status_bits.md`: main status/change bit summary (English page)
 - `specs/en/feature_selectors.md`: selector namespace summary for hub requests (English page)
 - `specs/hub_class_requests.md`: request-family context for `GET_STATUS` / `SET_FEATURE` / `CLEAR_FEATURE` (Chinese page)
+- `specs/en/hub_class_requests.md`: request-family context for `GET_STATUS` / `SET_FEATURE` / `CLEAR_FEATURE` (English page)
 - `tables/port_status_bit_matrix.yaml`: source matrix for status bits
 - `tables/feature_selector_matrix.yaml`: source matrix for selectors

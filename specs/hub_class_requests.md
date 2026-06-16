@@ -471,8 +471,12 @@ semantic_verification_claimed: false
 - `tables/class_request_matrix.yaml`：hub class request family 的主要結構來源。
 - `tables/feature_selector_matrix.yaml`：`SET_FEATURE` / `CLEAR_FEATURE` selector 邊界參考。
 - `tables/port_status_bit_matrix.yaml`：`GET_STATUS` 與 change-bit 解讀對照來源。
+- `specs/feature_selectors.md`：`PORT_*` / `C_PORT_*` selector 邊界對應。
+- `specs/port_status_bits.md`：`GET_STATUS`、`wPortStatus`、`wPortChange` 對照。
+- `specs/port_feature_change_vocabulary.md`：`PORT_*` / `C_PORT_*` 詞彙對齊頁。
 - `specs/hub_descriptor.md`：`GET_DESCRIPTOR` / `SET_DESCRIPTOR` 的 descriptor-side 參考頁。
 - `specs/transaction_translator.md`：TT request family 的高階語義參考。
+- `specs/usb2.md`：USB 2.0 入口與題目分類（`zh`）。
 
 ## Non-claims
 
@@ -481,4 +485,3 @@ semantic_verification_claimed: false
 - 本頁不聲明 TT request 欄位編碼已完成 correctness 驗證。
 - 本頁不將 request 摘要提升為韌體控制真值。
 - 本頁不會覆蓋 consuming repo 已確認 project fact。
-

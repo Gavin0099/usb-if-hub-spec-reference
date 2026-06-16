@@ -244,9 +244,9 @@ That metadata block is evidence attachment only. It does not automatically promo
 ## Governed Linkage
 
 - `tables/port_status_bit_matrix.yaml`: primary machine-readable source for hub/port status bit namespaces
-- `specs/hub_class_requests.md`: request-family summary for `GET_STATUS`, `SET_FEATURE`, and `CLEAR_FEATURE`
-- `specs/feature_selectors.md`: feature-selector boundary for `C_PORT_*` selectors
-- `specs/port_feature_change_vocabulary.md`: PORT_/C_PORT_* vocabulary alignment page
+- `specs/en/hub_class_requests.md`: request-family summary for `GET_STATUS`, `SET_FEATURE`, and `CLEAR_FEATURE`
+- `specs/en/feature_selectors.md`: feature-selector boundary for `C_PORT_*` selectors
+- `specs/en/port_feature_change_vocabulary.md`: PORT_/C_PORT_* vocabulary alignment page
 - `specs/escalation_table.md`: escalation triggers such as E-02, E-03, and E-09
 
 ## Non-claims

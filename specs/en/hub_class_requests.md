@@ -470,8 +470,12 @@ This page does not answer:
 - `tables/class_request_matrix.yaml`: primary structural source for the 9 hub class request families.
 - `tables/feature_selector_matrix.yaml`: selector boundary reference for `SET_FEATURE` / `CLEAR_FEATURE`.
 - `tables/port_status_bit_matrix.yaml`: comparison source for `GET_STATUS` and change-bit interpretation.
-- `specs/hub_descriptor.md`: descriptor-side reference page for `GET_DESCRIPTOR` / `SET_DESCRIPTOR`.
+- `specs/en/feature_selectors.md`: selector boundary page for `SET_FEATURE` / `CLEAR_FEATURE` contexts.
+- `specs/en/port_status_bits.md`: status/change bit interpretation page for request-family context.
+- `specs/en/port_feature_change_vocabulary.md`: `PORT_*` / `C_PORT_*` terminology alignment page.
 - `specs/transaction_translator.md`: high-level semantic summary for the TT request family.
+- `specs/en/usb2.md`: USB 2.0 entry and topic index (`en`).
+- `specs/en/hub_descriptor.md`: request-linked descriptor reference page.
 
 ## Non-claims
 

@@ -165,6 +165,12 @@ jobs:
             --en-page specs/en/usb2.md \
             --receipt-out ci-receipts/usb2_reference_navigation.json
 
+      - name: USB2 topic cross-reference validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb2_topic_cross_references.py \
+            --receipt-out ci-receipts/usb2_topic_cross_references.json
+
       - name: Class request matrix validation
         continue-on-error: true
         run: |
