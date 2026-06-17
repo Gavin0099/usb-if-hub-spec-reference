@@ -183,6 +183,7 @@ python scripts\validate_entry_gate_coverage.py
 python scripts\validate_reviewed_boundary_lock.py
 python scripts\validate_usb2_claim_partition.py
 python scripts\validate_usb2_claim_partition_packet.py
+python scripts\validate_usb2_completion_surface.py
 python scripts\validate_hub_governed_surface_manifest.py
 python scripts\probe_table_fingerprint.py --mode check `
   --manifest exports\hub_governed_surface_manifest.yaml `
