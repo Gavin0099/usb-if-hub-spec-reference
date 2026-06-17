@@ -1,9 +1,9 @@
 {
   "validator": "validate_entry_verification_gate",
   "matrices": [
-    "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\valid_verified_port_enable\\matrix.yaml"
+    "tests\\fixtures\\entry_verification_gate\\valid_verified_port_enable\\matrix.yaml"
   ],
-  "packet_dir": "D:\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\valid_verified_port_enable\\packets",
+  "packet_dir": "tests\\fixtures\\entry_verification_gate\\valid_verified_port_enable\\packets",
   "result": "PASS",
   "authority_ceiling": "entry_level_verified_gate_only",
   "errors": [],
@@ -77,6 +77,43 @@
         "firmware behavior",
         "full USB compliance",
         "host-stack interpretation",
+        "state transition behavior",
+        "timing behavior"
+      ]
+    },
+    "feature_selector_matrix": {
+      "allowed_entries": [
+        "usb20_c_port_connection",
+        "usb20_c_port_enable",
+        "usb20_c_port_over_current",
+        "usb20_c_port_reset",
+        "usb20_c_port_suspend",
+        "usb20_hub_c_hub_local_power",
+        "usb20_hub_c_hub_over_current",
+        "usb20_port_connection",
+        "usb20_port_enable",
+        "usb20_port_high_speed",
+        "usb20_port_indicator",
+        "usb20_port_low_speed",
+        "usb20_port_over_current",
+        "usb20_port_power",
+        "usb20_port_reserved_11",
+        "usb20_port_reserved_12",
+        "usb20_port_reserved_13",
+        "usb20_port_reserved_14",
+        "usb20_port_reserved_15",
+        "usb20_port_reserved_5",
+        "usb20_port_reserved_6",
+        "usb20_port_reserved_7",
+        "usb20_port_reset",
+        "usb20_port_suspend",
+        "usb20_port_test"
+      ],
+      "required_scope": "selector_name_and_value_only",
+      "required_excludes": [
+        "full USB compliance",
+        "host-stack interpretation",
+        "selector side effects",
         "state transition behavior",
         "timing behavior"
       ]

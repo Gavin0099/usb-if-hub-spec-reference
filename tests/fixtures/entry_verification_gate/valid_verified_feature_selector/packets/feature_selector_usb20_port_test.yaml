@@ -1,0 +1,20 @@
+target:
+  surface: governed_table_entry
+  table: feature_selector_matrix
+  entry_id: usb20_port_test
+evidence:
+  spec: usb20
+  section: "11.24.2"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: selector_name_and_value_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - selector side effects
+    - host-stack interpretation
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

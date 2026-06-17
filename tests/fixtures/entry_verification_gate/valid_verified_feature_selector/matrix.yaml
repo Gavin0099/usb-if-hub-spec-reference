@@ -1,0 +1,10 @@
+matrix_id: usb_hub_feature_selector_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - selector_id: usb20_port_test
+    selector_value: 21
+    selector_name: PORT_TEST
+    applies_to: port
+    claim_level: verified
+    evidence_status: reviewed

@@ -46,6 +46,12 @@ CASES = [
         "note": "Phase 8H: PORT_ENABLE with reviewed, eligible, narrow packet may pass the gate",
     },
     {
+        "name": "valid_verified_feature_selector",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "feature selector entry with reviewed, eligible, selector-name/value packet may pass the gate",
+    },
+    {
         "name": "invalid_verified_nonpilot",
         "expected_exit": 1,
         "expected_error_codes": ["VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"],
@@ -58,18 +64,22 @@ def run_case(case: dict) -> dict:
     fdir = FIXTURE_DIR / case["name"]
     RECEIPT_DIR.mkdir(parents=True, exist_ok=True)
     receipt_path = RECEIPT_DIR / f"{case['name']}_receipt.json"
+    matrix_arg = (fdir / "matrix.yaml").relative_to(ROOT)
+    packet_dir_arg = (fdir / "packets").relative_to(ROOT)
+    receipt_arg = receipt_path.relative_to(ROOT)
 
     result = subprocess.run(
         [
             sys.executable,
             str(VALIDATOR),
             "--matrix",
-            str(fdir / "matrix.yaml"),
+            str(matrix_arg),
             "--packet-dir",
-            str(fdir / "packets"),
+            str(packet_dir_arg),
             "--receipt-out",
-            str(receipt_path),
+            str(receipt_arg),
         ],
+        cwd=ROOT,
         capture_output=True,
         text=True,
     )
@@ -95,7 +105,7 @@ def run_case(case: dict) -> dict:
         "expected_error_codes": case["expected_error_codes"],
         "actual_error_codes": actual_error_codes,
         "result": "PASS" if passed else "FAIL",
-        "receipt_path": str(receipt_path),
+        "receipt_path": str(receipt_arg),
         "receipt_parse_error": receipt_parse_error,
         "stdout": result.stdout,
         "stderr": result.stderr,

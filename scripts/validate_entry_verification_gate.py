@@ -9,11 +9,14 @@ reviewable evidence packet.
 
 Current scope:
   - `tables/port_status_bit_matrix.yaml`
-    - allowed entries: the eight promoted hub/port status-change bit entries
+    - allowed entries: promoted hub/port status-change bit entries
     - required scope: `bit_name_and_position_only`
   - `tables/hub_descriptor_matrix.yaml`
     - allowed entries: the eight tracked USB 2.0 hub descriptor field entries
     - required scope: `descriptor_field_identity_only`
+  - `tables/feature_selector_matrix.yaml`
+    - allowed entries: the 25 tracked USB 2.0 feature selector entries
+    - required scope: `selector_name_and_value_only`
 """
 
 from __future__ import annotations
@@ -32,6 +35,7 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "port_status_bit_matrix.yaml",
     ROOT / "tables" / "hub_descriptor_matrix.yaml",
     ROOT / "tables" / "class_request_matrix.yaml",
+    ROOT / "tables" / "feature_selector_matrix.yaml",
 ]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 
@@ -109,6 +113,43 @@ TABLE_RULES = {
             "full USB compliance",
         },
     },
+    "feature_selector_matrix": {
+        "allowed_entries": {
+            "usb20_hub_c_hub_local_power",
+            "usb20_hub_c_hub_over_current",
+            "usb20_port_connection",
+            "usb20_port_enable",
+            "usb20_port_suspend",
+            "usb20_port_over_current",
+            "usb20_port_reset",
+            "usb20_port_reserved_5",
+            "usb20_port_reserved_6",
+            "usb20_port_reserved_7",
+            "usb20_port_power",
+            "usb20_port_low_speed",
+            "usb20_port_high_speed",
+            "usb20_port_reserved_11",
+            "usb20_port_reserved_12",
+            "usb20_port_reserved_13",
+            "usb20_port_reserved_14",
+            "usb20_port_reserved_15",
+            "usb20_c_port_connection",
+            "usb20_c_port_enable",
+            "usb20_c_port_suspend",
+            "usb20_c_port_over_current",
+            "usb20_c_port_reset",
+            "usb20_port_test",
+            "usb20_port_indicator",
+        },
+        "required_scope": "selector_name_and_value_only",
+        "required_excludes": {
+            "timing behavior",
+            "state transition behavior",
+            "selector side effects",
+            "host-stack interpretation",
+            "full USB compliance",
+        },
+    },
 }
 
 MATRIX_ID_SUFFIX_ALIASES = {
@@ -122,6 +163,8 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 
 def _entry_id(entry: dict[str, Any]) -> str:
+    if "selector_id" in entry:
+        return str(entry.get("selector_id"))
     if "request_id" in entry:
         return str(entry.get("request_id"))
     if "field_id" in entry:

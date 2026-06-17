@@ -1,9 +1,9 @@
 {
   "validator": "validate_entry_verification_gate",
   "matrices": [
-    "tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\matrix.yaml"
+    "tests\\fixtures\\entry_verification_gate\\valid_verified_feature_selector\\matrix.yaml"
   ],
-  "packet_dir": "tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\packets",
+  "packet_dir": "tests\\fixtures\\entry_verification_gate\\valid_verified_feature_selector\\packets",
   "result": "PASS",
   "authority_ceiling": "entry_level_verified_gate_only",
   "errors": [],

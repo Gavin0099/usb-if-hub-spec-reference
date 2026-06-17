@@ -2,7 +2,7 @@
   "validator": "validate_entry_verification_gate.py",
   "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "total_cases": 6,
+  "total_cases": 7,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -13,7 +13,7 @@
       "expected_error_codes": [],
       "actual_error_codes": [],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\no_verified_entries_pass_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\no_verified_entries_pass_receipt.json",
       "receipt_parse_error": "",
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
@@ -30,9 +30,9 @@
         "VERIFIED_ENTRY_MISSING_PACKET"
       ],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_without_packet_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_without_packet_receipt.json",
       "receipt_parse_error": "",
-      "stdout": "[FAIL] VERIFIED_ENTRY_MISSING_PACKET: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: verified promotion requires a matching evidence packet in D:\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets\n\nEntry verification gate validation FAIL\n",
+      "stdout": "[FAIL] VERIFIED_ENTRY_MISSING_PACKET: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: verified promotion requires a matching evidence packet in tests\\fixtures\\entry_verification_gate\\invalid_verified_without_packet\\packets\n\nEntry verification gate validation FAIL\n",
       "stderr": "",
       "note": "verified entry without packet must fail"
     },
@@ -47,7 +47,7 @@
         "PACKET_SCOPE_TOO_BROAD"
       ],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_wrong_scope_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_wrong_scope_receipt.json",
       "receipt_parse_error": "",
       "stdout": "[FAIL] PACKET_SCOPE_TOO_BROAD: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'\n\nEntry verification gate validation FAIL\n",
       "stderr": "",
@@ -60,7 +60,7 @@
       "expected_error_codes": [],
       "actual_error_codes": [],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_pilot_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_pilot_receipt.json",
       "receipt_parse_error": "",
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
@@ -73,11 +73,24 @@
       "expected_error_codes": [],
       "actual_error_codes": [],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_port_enable_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_port_enable_receipt.json",
       "receipt_parse_error": "",
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
       "note": "Phase 8H: PORT_ENABLE with reviewed, eligible, narrow packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_feature_selector",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_feature_selector_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "feature selector entry with reviewed, eligible, selector-name/value packet may pass the gate"
     },
     {
       "name": "invalid_verified_nonpilot",
@@ -90,7 +103,7 @@
         "VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"
       ],
       "result": "PASS",
-      "receipt_path": "D:\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_nonpilot_receipt.json",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_verified_nonpilot_receipt.json",
       "receipt_parse_error": "",
       "stdout": "[FAIL] VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE: verified_entry[0] wPortStatus.bit15.PORT_STATUS_HIGH_BIT_BOUNDARY: only registered entries ['wHubChange.bit0.C_HUB_LOCAL_POWER', 'wHubChange.bit1.C_HUB_OVER_CURRENT', 'wHubStatus.bit0.HUB_LOCAL_POWER', 'wHubStatus.bit1.HUB_OVER_CURRENT', 'wPortChange.bit0.C_PORT_CONNECTION', 'wPortChange.bit1.C_PORT_ENABLE', 'wPortChange.bit2.C_PORT_SUSPEND', 'wPortChange.bit3.C_PORT_OVER_CURRENT', 'wPortChange.bit4.C_PORT_RESET', 'wPortStatus.bit0.PORT_CONNECTION', 'wPortStatus.bit1.PORT_ENABLE', 'wPortStatus.bit10.PORT_HIGH_SPEED', 'wPortStatus.bit11.PORT_TEST', 'wPortStatus.bit12.PORT_INDICATOR', 'wPortStatus.bit2.PORT_SUSPEND', 'wPortStatus.bit3.PORT_OVER_CURRENT', 'wPortStatus.bit4.PORT_RESET', 'wPortStatus.bit8.PORT_POWER', 'wPortStatus.bit9.PORT_LOW_SPEED'] may be promoted for port_status_bit_matrix\n\nEntry verification gate validation FAIL\n",
       "stderr": "",
