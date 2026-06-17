@@ -18,6 +18,7 @@ on:
       - "tests/**"
       - "tables/**"
       - "exports/**"
+      - "docs/**"
       - "evidence/entry_verification_packets/**"
       - "evidence/source_registry.yaml"
       - "contract/**"
@@ -30,6 +31,7 @@ on:
       - "tests/**"
       - "tables/**"
       - "exports/**"
+      - "docs/**"
       - "evidence/entry_verification_packets/**"
       - "evidence/source_registry.yaml"
       - "contract/**"
@@ -106,6 +108,9 @@ jobs:
       - name: USB2 claim partition fixture smoke
         run: python scripts/smoke_validate_usb2_claim_partition_fixtures.py
 
+      - name: USB2 claim partition packet fixture smoke
+        run: python scripts/smoke_validate_usb2_claim_partition_packet_fixtures.py
+
       - name: Entry verification precondition gate
         run: python scripts/precondition_gate.py --receipt-out evidence/validation_receipt_precondition_gate.json
 
@@ -118,6 +123,9 @@ jobs:
       - name: USB2 claim partition
         run: python scripts/validate_usb2_claim_partition.py --receipt-out evidence/validation_receipt_usb2_claim_partition.json
 
+      - name: USB2 claim partition packet
+        run: python scripts/validate_usb2_claim_partition_packet.py --receipt-out evidence/validation_receipt_usb2_claim_partition_packet.json
+
       - name: Upload precondition gate receipt
         if: always()
         uses: actions/upload-artifact@v5
@@ -128,6 +136,7 @@ jobs:
             evidence/validation_receipt_entry_gate_coverage.json
             evidence/validation_receipt_reviewed_boundary_lock.json
             evidence/validation_receipt_usb2_claim_partition.json
+            evidence/validation_receipt_usb2_claim_partition_packet.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -249,6 +258,12 @@ jobs:
         run: |
           python scripts/validate_usb2_claim_partition.py \
             --receipt-out ci-receipts/usb2_claim_partition.json
+
+      - name: USB2 claim partition packet validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb2_claim_partition_packet.py \
+            --receipt-out ci-receipts/usb2_claim_partition_packet.json
 
       - name: Manifest access contract validation
         continue-on-error: true
