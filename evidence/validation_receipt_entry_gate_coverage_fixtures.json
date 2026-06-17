@@ -1,0 +1,177 @@
+{
+  "validator": "validate_entry_gate_coverage.py",
+  "smoke_runner": "smoke_validate_entry_gate_coverage_fixtures.py",
+  "authority_ceiling": "gate_coverage_consistency_only",
+  "total_cases": 6,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_single_table",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 1,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\valid_single_table\\packets"
+      },
+      "errors": []
+    },
+    {
+      "name": "invalid_missing_default_matrix",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "DEFAULT_MATRIX_MISSING"
+      ],
+      "actual_error_codes": [
+        "DEFAULT_MATRIX_MISSING"
+      ],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 0,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\invalid_missing_default_matrix\\packets"
+      },
+      "errors": [
+        {
+          "code": "DEFAULT_MATRIX_MISSING",
+          "table": "class_request_matrix",
+          "message": "class_request_matrix: not present in DEFAULT_MATRICES"
+        }
+      ]
+    },
+    {
+      "name": "invalid_missing_table_rule",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "TABLE_RULE_MISSING"
+      ],
+      "actual_error_codes": [
+        "TABLE_RULE_MISSING"
+      ],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 1,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\invalid_missing_table_rule\\packets"
+      },
+      "errors": [
+        {
+          "code": "TABLE_RULE_MISSING",
+          "table": "class_request_matrix",
+          "message": "class_request_matrix: no TABLE_RULES entry"
+        }
+      ]
+    },
+    {
+      "name": "invalid_verified_not_gated",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "VERIFIED_ENTRIES_NOT_GATED"
+      ],
+      "actual_error_codes": [
+        "VERIFIED_ENTRIES_NOT_GATED"
+      ],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 1,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\invalid_verified_not_gated\\packets"
+      },
+      "errors": [
+        {
+          "code": "VERIFIED_ENTRIES_NOT_GATED",
+          "table": "class_request_matrix",
+          "entries": [
+            "usb20_get_status_hub"
+          ],
+          "message": "class_request_matrix: verified entries missing from gate allowlist"
+        }
+      ]
+    },
+    {
+      "name": "invalid_allowlist_extra",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "ALLOWLIST_HAS_NON_VERIFIED_ENTRIES"
+      ],
+      "actual_error_codes": [
+        "ALLOWLIST_HAS_NON_VERIFIED_ENTRIES"
+      ],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 1,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\invalid_allowlist_extra\\packets"
+      },
+      "errors": [
+        {
+          "code": "ALLOWLIST_HAS_NON_VERIFIED_ENTRIES",
+          "table": "class_request_matrix",
+          "entries": [
+            "usb20_extra_unverified"
+          ],
+          "message": "class_request_matrix: allowlist includes entries not verified in matrix"
+        }
+      ]
+    },
+    {
+      "name": "invalid_missing_packet",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "VERIFIED_ENTRIES_MISSING_PACKETS"
+      ],
+      "actual_error_codes": [
+        "VERIFIED_ENTRIES_MISSING_PACKETS"
+      ],
+      "result": "PASS",
+      "coverage": {
+        "expected_table_count": 1,
+        "default_matrix_count": 1,
+        "covered_tables": [
+          "class_request_matrix"
+        ],
+        "verified_entry_count": 1,
+        "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\entry_gate_coverage\\invalid_missing_packet\\missing_packets"
+      },
+      "errors": [
+        {
+          "code": "VERIFIED_ENTRIES_MISSING_PACKETS",
+          "table": "class_request_matrix",
+          "entries": [
+            "usb20_get_status_hub"
+          ],
+          "message": "class_request_matrix: verified entries missing evidence packets"
+        }
+      ]
+    }
+  ]
+}

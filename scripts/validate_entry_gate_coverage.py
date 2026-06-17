@@ -51,17 +51,25 @@ def _verified_entry_ids(matrix_path: Path) -> set[str]:
     }
 
 
-def validate(packet_dir: Path = DEFAULT_PACKET_DIR) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+def validate(
+    packet_dir: Path = DEFAULT_PACKET_DIR,
+    expected_tables: dict[str, Path] | None = None,
+    default_matrices: list[Path] | None = None,
+    table_rules: dict[str, dict[str, Any]] | None = None,
+) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     errors: list[dict[str, Any]] = []
+    expected_tables = EXPECTED_USB2_TABLES if expected_tables is None else expected_tables
+    default_matrices = DEFAULT_MATRICES if default_matrices is None else default_matrices
+    table_rules = TABLE_RULES if table_rules is None else table_rules
     packets = _load_packets(packet_dir)
 
     default_keys: dict[str, str] = {}
-    for matrix_path in DEFAULT_MATRICES:
+    for matrix_path in default_matrices:
         matrix = _load_yaml(matrix_path)
         key = _matrix_table_key(matrix_path, matrix)
         default_keys[key] = str(matrix_path.relative_to(ROOT))
 
-    for table_key, matrix_path in EXPECTED_USB2_TABLES.items():
+    for table_key, matrix_path in expected_tables.items():
         if table_key not in default_keys:
             errors.append({
                 "code": "DEFAULT_MATRIX_MISSING",
@@ -69,7 +77,7 @@ def validate(packet_dir: Path = DEFAULT_PACKET_DIR) -> tuple[str, list[dict[str,
                 "message": f"{table_key}: not present in DEFAULT_MATRICES",
             })
 
-        if table_key not in TABLE_RULES:
+        if table_key not in table_rules:
             errors.append({
                 "code": "TABLE_RULE_MISSING",
                 "table": table_key,
@@ -78,7 +86,7 @@ def validate(packet_dir: Path = DEFAULT_PACKET_DIR) -> tuple[str, list[dict[str,
             continue
 
         verified = _verified_entry_ids(matrix_path)
-        allowed = set(TABLE_RULES[table_key].get("allowed_entries") or [])
+        allowed = set(table_rules[table_key].get("allowed_entries") or [])
 
         extra_allowed = sorted(allowed - verified)
         missing_allowed = sorted(verified - allowed)
@@ -108,7 +116,7 @@ def validate(packet_dir: Path = DEFAULT_PACKET_DIR) -> tuple[str, list[dict[str,
                 "message": f"{table_key}: verified entries missing evidence packets",
             })
 
-    unexpected_default = sorted(set(default_keys) - set(EXPECTED_USB2_TABLES))
+    unexpected_default = sorted(set(default_keys) - set(expected_tables))
     if unexpected_default:
         errors.append({
             "code": "DEFAULT_MATRIX_OUTSIDE_USB2_COVERAGE",
@@ -117,10 +125,10 @@ def validate(packet_dir: Path = DEFAULT_PACKET_DIR) -> tuple[str, list[dict[str,
         })
 
     coverage = {
-        "expected_table_count": len(EXPECTED_USB2_TABLES),
-        "default_matrix_count": len(DEFAULT_MATRICES),
-        "covered_tables": sorted(EXPECTED_USB2_TABLES),
-        "verified_entry_count": sum(len(_verified_entry_ids(path)) for path in EXPECTED_USB2_TABLES.values()),
+        "expected_table_count": len(expected_tables),
+        "default_matrix_count": len(default_matrices),
+        "covered_tables": sorted(expected_tables),
+        "verified_entry_count": sum(len(_verified_entry_ids(path)) for path in expected_tables.values()),
         "packet_dir": str(packet_dir),
     }
     return ("FAIL" if errors else "PASS"), errors, coverage
@@ -157,4 +165,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

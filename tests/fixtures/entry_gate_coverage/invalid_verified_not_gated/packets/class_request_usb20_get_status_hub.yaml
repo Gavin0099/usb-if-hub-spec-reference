@@ -1,0 +1,7 @@
+target:
+  surface: governed_table_entry
+  table: class_request_matrix
+  entry_id: usb20_get_status_hub
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

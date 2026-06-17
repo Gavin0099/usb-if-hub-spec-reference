@@ -1,0 +1,8 @@
+matrix_id: usb20_hub_class_request_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - request_id: usb20_get_status_hub
+    request_name: GET_STATUS
+    claim_level: verified
+    evidence_status: reviewed
