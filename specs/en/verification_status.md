@@ -39,6 +39,20 @@ Term definitions:
 - **Reviewed**: Repo-local review is complete and the surface has been narrowed to a clearer field role, selector boundary, or request linkage, but it has not been promoted to entry-level verified.
 - **Inferred**: Organized but not yet reviewed or verified; `claim_level: inferred`.
 
+## USB2 Completion Surface Guard
+
+| Guard | Status | Scope |
+|---|---|---|
+| Entry verification gate | PASS | 105 verified entries must have narrow evidence packets |
+| Entry gate coverage | PASS | Verified entries across 9 USB2 governed tables must all be covered by the gate allowlist |
+| Reviewed boundary lock | PASS | 46 reviewed entries must remain permanent boundaries and must not gain evidence packets |
+| Claim partition guard | PASS | `151 = 105 verified + 46 reviewed + 0 inferred + 0 missing` |
+| Completion surface aggregate | PASS | Navigation, cross-reference, reachability, claim partition, frontmatter, and statistics guards all pass |
+
+These guards only show that the USB2 LLM wiki reference surface, navigation, and
+claim partition are currently consistent. They do not verify USB 2.0 hub runtime
+behavior, firmware correctness, or host-stack behavior.
+
 ## Coverage Map
 
 | Area | Current maturity center | Notes |

@@ -39,6 +39,18 @@ semantic_verification_claimed: false
 - **Reviewed**：repo-local review 已完成，surface 已收斂成較清楚的 field role、selector boundary 或 request linkage，但尚未升級為 entry-level verified。
 - **Inferred**：已整理但尚未完成 reviewed 或 verified；`claim_level: inferred`。
 
+## USB2 Completion Surface Guard
+
+| Guard | Status | Scope |
+|---|---|---|
+| Entry verification gate | PASS | 105 verified entries 必須有 narrow evidence packet |
+| Entry gate coverage | PASS | 9 USB2 governed tables 的 verified entries 必須全部被 gate allowlist 覆蓋 |
+| Reviewed boundary lock | PASS | 46 reviewed entries 必須維持 permanent boundary，不得升 verified 或取得 evidence packet |
+| Claim partition guard | PASS | `151 = 105 verified + 46 reviewed + 0 inferred + 0 missing` |
+| Completion surface aggregate | PASS | navigation、cross-reference、reachability、claim partition、frontmatter 與 statistics guard 全部通過 |
+
+這些 guard 只證明 USB2 LLM wiki 的 reference surface、導覽與 claim partition 目前一致；不代表 USB 2.0 hub runtime behavior、firmware correctness 或 host-stack behavior 已驗證。
+
 ## Coverage Map
 
 | Area | Current maturity center | Notes |

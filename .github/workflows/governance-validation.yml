@@ -114,6 +114,9 @@ jobs:
       - name: USB2 completion surface fixture smoke
         run: python scripts/smoke_validate_usb2_completion_surface_fixtures.py
 
+      - name: USB2 completion status surface fixture smoke
+        run: python scripts/smoke_validate_usb2_completion_status_surface_fixtures.py
+
       - name: Entry verification precondition gate
         run: python scripts/precondition_gate.py --receipt-out evidence/validation_receipt_precondition_gate.json
 
@@ -132,6 +135,9 @@ jobs:
       - name: USB2 completion surface
         run: python scripts/validate_usb2_completion_surface.py --receipt-out evidence/validation_receipt_usb2_completion_surface.json
 
+      - name: USB2 completion status surface
+        run: python scripts/validate_usb2_completion_status_surface.py --receipt-out evidence/validation_receipt_usb2_completion_status_surface.json
+
       - name: Upload precondition gate receipt
         if: always()
         uses: actions/upload-artifact@v5
@@ -144,6 +150,7 @@ jobs:
             evidence/validation_receipt_usb2_claim_partition.json
             evidence/validation_receipt_usb2_claim_partition_packet.json
             evidence/validation_receipt_usb2_completion_surface.json
+            evidence/validation_receipt_usb2_completion_status_surface.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -277,6 +284,12 @@ jobs:
         run: |
           python scripts/validate_usb2_completion_surface.py \
             --receipt-out ci-receipts/usb2_completion_surface.json
+
+      - name: USB2 completion status surface validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb2_completion_status_surface.py \
+            --receipt-out ci-receipts/usb2_completion_status_surface.json
 
       - name: Manifest access contract validation
         continue-on-error: true

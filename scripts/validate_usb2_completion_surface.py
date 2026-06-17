@@ -82,6 +82,11 @@ DEFAULT_COMMANDS = [
         authority_ceiling="usb2_claim_partition_packet_consistency_only",
     ),
     CommandSpec(
+        name="usb2_completion_status_surface",
+        command=["scripts/validate_usb2_completion_status_surface.py"],
+        authority_ceiling="usb2_completion_status_visibility_only",
+    ),
+    CommandSpec(
         name="reference_surface_statistics",
         command=["scripts/validate_reference_surface_statistics.py"],
         authority_ceiling="visible_statistics_consistency_only",
