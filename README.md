@@ -180,6 +180,7 @@ python scripts\validate_ss_hub_interrupt_endpoint_matrix.py
 # Export contract validators
 python scripts\validate_entry_verification_gate.py
 python scripts\validate_entry_gate_coverage.py
+python scripts\validate_reviewed_boundary_lock.py
 python scripts\validate_hub_governed_surface_manifest.py
 python scripts\probe_table_fingerprint.py --mode check `
   --manifest exports\hub_governed_surface_manifest.yaml `

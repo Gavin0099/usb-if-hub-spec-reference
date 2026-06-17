@@ -100,11 +100,17 @@ jobs:
       - name: Entry gate coverage fixture smoke
         run: python scripts/smoke_validate_entry_gate_coverage_fixtures.py
 
+      - name: Reviewed boundary lock fixture smoke
+        run: python scripts/smoke_validate_reviewed_boundary_lock_fixtures.py
+
       - name: Entry verification precondition gate
         run: python scripts/precondition_gate.py --receipt-out evidence/validation_receipt_precondition_gate.json
 
       - name: Entry verification gate coverage
         run: python scripts/validate_entry_gate_coverage.py --receipt-out evidence/validation_receipt_entry_gate_coverage.json
+
+      - name: Reviewed boundary lock
+        run: python scripts/validate_reviewed_boundary_lock.py --receipt-out evidence/validation_receipt_reviewed_boundary_lock.json
 
       - name: Upload precondition gate receipt
         if: always()
@@ -114,6 +120,7 @@ jobs:
           path: |
             evidence/validation_receipt_precondition_gate.json
             evidence/validation_receipt_entry_gate_coverage.json
+            evidence/validation_receipt_reviewed_boundary_lock.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -223,6 +230,12 @@ jobs:
           python scripts/validate_port_status_bit_matrix.py \
             --matrix tables/port_status_bit_matrix.yaml \
             --receipt-out ci-receipts/port_status_bit_matrix.json
+
+      - name: Reviewed boundary lock validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_reviewed_boundary_lock.py \
+            --receipt-out ci-receipts/reviewed_boundary_lock.json
 
       - name: Manifest access contract validation
         continue-on-error: true
