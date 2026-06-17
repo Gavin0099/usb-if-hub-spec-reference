@@ -1,0 +1,8 @@
+matrix_id: usb20_hub_interrupt_endpoint_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - field_id: usb20_hub_ep_bInterval
+    field_name: bInterval
+    claim_level: verified
+    evidence_status: reviewed

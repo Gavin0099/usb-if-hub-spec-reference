@@ -1,0 +1,20 @@
+target:
+  surface: governed_table_entry
+  table: standard_device_request_matrix
+  entry_id: usb20_std_get_descriptor
+evidence:
+  spec: usb20
+  section: "9.4.3"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: request_linkage_only
+  excludes:
+    - timing behavior
+    - state transition behavior
+    - firmware behavior
+    - host-stack interpretation
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

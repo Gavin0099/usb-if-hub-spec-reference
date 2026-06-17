@@ -234,6 +234,75 @@
           ]
         }
       }
+    },
+    "standard_device_request_matrix": {
+      "allowed_entries": [
+        "usb20_std_clear_feature_device",
+        "usb20_std_clear_feature_endpoint",
+        "usb20_std_get_configuration",
+        "usb20_std_get_descriptor",
+        "usb20_std_get_interface",
+        "usb20_std_get_status_device",
+        "usb20_std_get_status_endpoint",
+        "usb20_std_get_status_interface",
+        "usb20_std_set_address",
+        "usb20_std_set_configuration",
+        "usb20_std_set_feature_device",
+        "usb20_std_set_interface"
+      ],
+      "required_scope": "request_linkage_only",
+      "required_excludes": [
+        "firmware behavior",
+        "full USB compliance",
+        "host-stack interpretation",
+        "state transition behavior",
+        "timing behavior"
+      ]
+    },
+    "hub_interrupt_endpoint_matrix": {
+      "allowed_entries": [
+        "usb20_hub_ep_bEndpointAddress",
+        "usb20_hub_ep_bInterval",
+        "usb20_hub_ep_bmAttributes",
+        "usb20_hub_ep_wMaxPacketSize"
+      ],
+      "required_scope": "descriptor_field_identity_only",
+      "required_excludes": [
+        "full USB compliance"
+      ]
+    },
+    "wHubCharacteristics_bit_matrix": {
+      "allowed_entries": [
+        "usb20_whc_compound_device",
+        "usb20_whc_over_current_mode",
+        "usb20_whc_port_indicators",
+        "usb20_whc_power_switching",
+        "usb20_whc_tt_think_time"
+      ],
+      "required_scope": "bit_group_name_and_value_encoding_identity_only",
+      "required_excludes": [
+        "firmware descriptor dump correctness",
+        "full USB compliance"
+      ]
+    },
+    "escalation_trigger_matrix": {
+      "allowed_entries": [
+        "E-01",
+        "E-02",
+        "E-03",
+        "E-04",
+        "E-05",
+        "E-06",
+        "E-07",
+        "E-08",
+        "E-09",
+        "E-10"
+      ],
+      "required_scope": "escalation_trigger_boundary_only",
+      "required_excludes": [
+        "firmware behavior",
+        "full USB compliance"
+      ]
     }
   }
 }

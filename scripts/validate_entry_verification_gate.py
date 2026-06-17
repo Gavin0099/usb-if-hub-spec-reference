@@ -20,6 +20,18 @@ Current scope:
   - `tables/transaction_translator_matrix.yaml`
     - allowed entries: the 10 tracked USB 2.0 Transaction Translator entries
     - required scopes: per-entry TT type / think-time / request-linkage boundary only
+  - `tables/standard_device_request_matrix.yaml`
+    - allowed entries: the 12 tracked USB 2.0 standard device request entries
+    - required scope: `request_linkage_only`
+  - `tables/hub_interrupt_endpoint_matrix.yaml`
+    - allowed entries: the 4 tracked USB 2.0 hub interrupt endpoint descriptor fields
+    - required scope: `descriptor_field_identity_only`
+  - `tables/wHubCharacteristics_bit_matrix.yaml`
+    - allowed entries: the 5 verified USB 2.0 wHubCharacteristics bit groups
+    - required scope: `bit_group_name_and_value_encoding_identity_only`
+  - `tables/escalation_trigger_matrix.yaml`
+    - allowed entries: the 10 tracked USB 2.0 escalation triggers
+    - required scope: `escalation_trigger_boundary_only`
 """
 
 from __future__ import annotations
@@ -40,6 +52,10 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "class_request_matrix.yaml",
     ROOT / "tables" / "feature_selector_matrix.yaml",
     ROOT / "tables" / "transaction_translator_matrix.yaml",
+    ROOT / "tables" / "standard_device_request_matrix.yaml",
+    ROOT / "tables" / "hub_interrupt_endpoint_matrix.yaml",
+    ROOT / "tables" / "wHubCharacteristics_bit_matrix.yaml",
+    ROOT / "tables" / "escalation_trigger_matrix.yaml",
 ]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 
@@ -266,10 +282,80 @@ TABLE_RULES = {
             },
         },
     },
+    "standard_device_request_matrix": {
+        "allowed_entries": {
+            "usb20_std_get_status_device",
+            "usb20_std_get_status_interface",
+            "usb20_std_get_status_endpoint",
+            "usb20_std_clear_feature_device",
+            "usb20_std_clear_feature_endpoint",
+            "usb20_std_set_feature_device",
+            "usb20_std_set_address",
+            "usb20_std_get_descriptor",
+            "usb20_std_get_configuration",
+            "usb20_std_set_configuration",
+            "usb20_std_get_interface",
+            "usb20_std_set_interface",
+        },
+        "required_scope": "request_linkage_only",
+        "required_excludes": {
+            "timing behavior",
+            "state transition behavior",
+            "firmware behavior",
+            "host-stack interpretation",
+            "full USB compliance",
+        },
+    },
+    "hub_interrupt_endpoint_matrix": {
+        "allowed_entries": {
+            "usb20_hub_ep_bEndpointAddress",
+            "usb20_hub_ep_bmAttributes",
+            "usb20_hub_ep_wMaxPacketSize",
+            "usb20_hub_ep_bInterval",
+        },
+        "required_scope": "descriptor_field_identity_only",
+        "required_excludes": {
+            "full USB compliance",
+        },
+    },
+    "wHubCharacteristics_bit_matrix": {
+        "allowed_entries": {
+            "usb20_whc_power_switching",
+            "usb20_whc_compound_device",
+            "usb20_whc_over_current_mode",
+            "usb20_whc_tt_think_time",
+            "usb20_whc_port_indicators",
+        },
+        "required_scope": "bit_group_name_and_value_encoding_identity_only",
+        "required_excludes": {
+            "firmware descriptor dump correctness",
+            "full USB compliance",
+        },
+    },
+    "escalation_trigger_matrix": {
+        "allowed_entries": {
+            "E-01",
+            "E-02",
+            "E-03",
+            "E-04",
+            "E-05",
+            "E-06",
+            "E-07",
+            "E-08",
+            "E-09",
+            "E-10",
+        },
+        "required_scope": "escalation_trigger_boundary_only",
+        "required_excludes": {
+            "firmware behavior",
+            "full USB compliance",
+        },
+    },
 }
 
 MATRIX_ID_SUFFIX_ALIASES = {
     "hub_descriptor_field_matrix": "hub_descriptor_matrix",
+    "hub_characteristics_bit_matrix": "wHubCharacteristics_bit_matrix",
 }
 
 
@@ -279,6 +365,8 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 
 def _entry_id(entry: dict[str, Any]) -> str:
+    if "trigger_id" in entry:
+        return str(entry.get("trigger_id"))
     if "tt_id" in entry:
         return str(entry.get("tt_id"))
     if "selector_id" in entry:
@@ -287,6 +375,8 @@ def _entry_id(entry: dict[str, Any]) -> str:
         return str(entry.get("request_id"))
     if "field_id" in entry:
         return str(entry.get("field_id"))
+    if "id" in entry:
+        return str(entry.get("id"))
     return f"{entry.get('field')}.bit{entry.get('bit')}.{entry.get('name')}"
 
 

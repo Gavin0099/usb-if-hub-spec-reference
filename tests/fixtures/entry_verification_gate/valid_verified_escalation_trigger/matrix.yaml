@@ -1,0 +1,8 @@
+matrix_id: usb20_escalation_trigger_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - trigger_id: E-05
+    condition: A vendor command selector overlaps with the standard selector range 0-22.
+    claim_level: verified
+    evidence_status: reviewed

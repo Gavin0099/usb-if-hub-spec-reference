@@ -1,0 +1,9 @@
+matrix_id: usb20_standard_device_request_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - request_id: usb20_std_get_descriptor
+    request_name: GET_DESCRIPTOR
+    recipient: device
+    claim_level: verified
+    evidence_status: reviewed

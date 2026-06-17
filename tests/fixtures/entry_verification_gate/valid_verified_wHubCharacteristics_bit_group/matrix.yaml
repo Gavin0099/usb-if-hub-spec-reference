@@ -1,0 +1,9 @@
+matrix_id: usb20_hub_characteristics_bit_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - id: usb20_whc_port_indicators
+    field: wHubCharacteristics
+    bit_range: "7"
+    claim_level: verified
+    evidence_status: reviewed

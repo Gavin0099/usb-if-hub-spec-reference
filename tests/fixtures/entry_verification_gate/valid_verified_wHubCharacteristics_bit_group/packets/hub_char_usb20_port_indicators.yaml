@@ -1,0 +1,19 @@
+target:
+  surface: governed_table_entry
+  table: wHubCharacteristics_bit_matrix
+  entry_id: usb20_whc_port_indicators
+evidence:
+  spec: usb20
+  section: "11.23.2.1"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: bit_group_name_and_value_encoding_identity_only
+  excludes:
+    - LED hardware behavior or color accuracy
+    - PORT_INDICATOR request behavioral correctness
+    - firmware descriptor dump correctness
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

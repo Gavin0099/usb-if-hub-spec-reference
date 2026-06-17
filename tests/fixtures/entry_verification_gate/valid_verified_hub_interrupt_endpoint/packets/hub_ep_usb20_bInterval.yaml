@@ -1,0 +1,18 @@
+target:
+  surface: governed_table_entry
+  table: hub_interrupt_endpoint_matrix
+  entry_id: usb20_hub_ep_bInterval
+evidence:
+  spec: usb20
+  section: "11.15.1"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: descriptor_field_identity_only
+  excludes:
+    - actual polling latency guarantees
+    - host scheduling behavior
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

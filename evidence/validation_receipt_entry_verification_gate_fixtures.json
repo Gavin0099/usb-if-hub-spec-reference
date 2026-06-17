@@ -2,7 +2,7 @@
   "validator": "validate_entry_verification_gate.py",
   "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "total_cases": 8,
+  "total_cases": 12,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -104,6 +104,58 @@
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
       "note": "Transaction Translator entry with reviewed, eligible, per-entry boundary packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_standard_device_request",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_standard_device_request_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "standard device request entry with reviewed, eligible, request-linkage packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_hub_interrupt_endpoint",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_hub_interrupt_endpoint_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "hub interrupt endpoint field with reviewed, eligible, descriptor-field packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_wHubCharacteristics_bit_group",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_wHubCharacteristics_bit_group_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "wHubCharacteristics bit group with reviewed, eligible, value-encoding packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_escalation_trigger",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_escalation_trigger_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "escalation trigger with reviewed, eligible, trigger-boundary packet may pass the gate"
     },
     {
       "name": "invalid_verified_nonpilot",

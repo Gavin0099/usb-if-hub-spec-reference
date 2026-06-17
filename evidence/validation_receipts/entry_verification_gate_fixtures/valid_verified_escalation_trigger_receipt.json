@@ -1,17 +1,12 @@
 {
   "validator": "validate_entry_verification_gate",
   "matrices": [
-    "tests\\fixtures\\entry_verification_gate\\invalid_verified_wrong_scope\\matrix.yaml"
+    "tests\\fixtures\\entry_verification_gate\\valid_verified_escalation_trigger\\matrix.yaml"
   ],
-  "packet_dir": "tests\\fixtures\\entry_verification_gate\\invalid_verified_wrong_scope\\packets",
-  "result": "FAIL",
+  "packet_dir": "tests\\fixtures\\entry_verification_gate\\valid_verified_escalation_trigger\\packets",
+  "result": "PASS",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "errors": [
-    {
-      "code": "PACKET_SCOPE_TOO_BROAD",
-      "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'"
-    }
-  ],
+  "errors": [],
   "table_rules": {
     "port_status_bit_matrix": {
       "allowed_entries": [

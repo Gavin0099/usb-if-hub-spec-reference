@@ -58,6 +58,30 @@ CASES = [
         "note": "Transaction Translator entry with reviewed, eligible, per-entry boundary packet may pass the gate",
     },
     {
+        "name": "valid_verified_standard_device_request",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "standard device request entry with reviewed, eligible, request-linkage packet may pass the gate",
+    },
+    {
+        "name": "valid_verified_hub_interrupt_endpoint",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "hub interrupt endpoint field with reviewed, eligible, descriptor-field packet may pass the gate",
+    },
+    {
+        "name": "valid_verified_wHubCharacteristics_bit_group",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "wHubCharacteristics bit group with reviewed, eligible, value-encoding packet may pass the gate",
+    },
+    {
+        "name": "valid_verified_escalation_trigger",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "escalation trigger with reviewed, eligible, trigger-boundary packet may pass the gate",
+    },
+    {
         "name": "invalid_verified_nonpilot",
         "expected_exit": 1,
         "expected_error_codes": ["VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"],
