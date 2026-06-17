@@ -1,0 +1,9 @@
+matrix_id: usb20_transaction_translator_matrix
+claim_level: inferred
+evidence_status: review_required
+entries:
+  - tt_id: usb20_tt_think_time_00
+    category: tt_think_time
+    name: TT Think Time 00
+    claim_level: verified
+    evidence_status: reviewed

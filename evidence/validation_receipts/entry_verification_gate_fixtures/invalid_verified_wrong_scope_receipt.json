@@ -122,6 +122,118 @@
         "state transition behavior",
         "timing behavior"
       ]
+    },
+    "transaction_translator_matrix": {
+      "allowed_entries": [
+        "usb20_tt_request_clear_tt_buffer",
+        "usb20_tt_request_get_tt_state",
+        "usb20_tt_request_reset_tt",
+        "usb20_tt_request_stop_tt",
+        "usb20_tt_think_time_00",
+        "usb20_tt_think_time_01",
+        "usb20_tt_think_time_10",
+        "usb20_tt_think_time_11",
+        "usb20_tt_type_multiple",
+        "usb20_tt_type_single"
+      ],
+      "entry_rules": {
+        "usb20_tt_request_clear_tt_buffer": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_get_tt_state": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_reset_tt": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_stop_tt": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_00": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_01": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_10": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_11": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_type_multiple": {
+          "required_scope": "tt_type_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "split-transaction behavior",
+            "timing behavior"
+          ]
+        },
+        "usb20_tt_type_single": {
+          "required_scope": "tt_type_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "split-transaction behavior",
+            "timing behavior"
+          ]
+        }
+      }
     }
   }
 }

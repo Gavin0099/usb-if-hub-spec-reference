@@ -17,6 +17,9 @@ Current scope:
   - `tables/feature_selector_matrix.yaml`
     - allowed entries: the 25 tracked USB 2.0 feature selector entries
     - required scope: `selector_name_and_value_only`
+  - `tables/transaction_translator_matrix.yaml`
+    - allowed entries: the 10 tracked USB 2.0 Transaction Translator entries
+    - required scopes: per-entry TT type / think-time / request-linkage boundary only
 """
 
 from __future__ import annotations
@@ -36,6 +39,7 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "hub_descriptor_matrix.yaml",
     ROOT / "tables" / "class_request_matrix.yaml",
     ROOT / "tables" / "feature_selector_matrix.yaml",
+    ROOT / "tables" / "transaction_translator_matrix.yaml",
 ]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 
@@ -150,6 +154,118 @@ TABLE_RULES = {
             "full USB compliance",
         },
     },
+    "transaction_translator_matrix": {
+        "allowed_entries": {
+            "usb20_tt_type_single",
+            "usb20_tt_type_multiple",
+            "usb20_tt_think_time_00",
+            "usb20_tt_think_time_01",
+            "usb20_tt_think_time_10",
+            "usb20_tt_think_time_11",
+            "usb20_tt_request_clear_tt_buffer",
+            "usb20_tt_request_reset_tt",
+            "usb20_tt_request_get_tt_state",
+            "usb20_tt_request_stop_tt",
+        },
+        "entry_rules": {
+            "usb20_tt_type_single": {
+                "required_scope": "tt_type_boundary_only",
+                "required_excludes": {
+                    "split-transaction behavior",
+                    "timing behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+            "usb20_tt_type_multiple": {
+                "required_scope": "tt_type_boundary_only",
+                "required_excludes": {
+                    "split-transaction behavior",
+                    "timing behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+            "usb20_tt_think_time_00": {
+                "required_scope": "tt_think_time_boundary_only",
+                "required_excludes": {
+                    "hardware timing behavior",
+                    "split-transaction timing",
+                    "firmware behavior",
+                    "state transition behavior",
+                    "full USB compliance",
+                },
+            },
+            "usb20_tt_think_time_01": {
+                "required_scope": "tt_think_time_boundary_only",
+                "required_excludes": {
+                    "hardware timing behavior",
+                    "split-transaction timing",
+                    "firmware behavior",
+                    "state transition behavior",
+                    "full USB compliance",
+                },
+            },
+            "usb20_tt_think_time_10": {
+                "required_scope": "tt_think_time_boundary_only",
+                "required_excludes": {
+                    "hardware timing behavior",
+                    "split-transaction timing",
+                    "firmware behavior",
+                    "state transition behavior",
+                    "full USB compliance",
+                },
+            },
+            "usb20_tt_think_time_11": {
+                "required_scope": "tt_think_time_boundary_only",
+                "required_excludes": {
+                    "hardware timing behavior",
+                    "split-transaction timing",
+                    "firmware behavior",
+                    "state transition behavior",
+                    "full USB compliance",
+                },
+            },
+            "usb20_tt_request_clear_tt_buffer": {
+                "required_scope": "request_linkage_boundary_only",
+                "required_excludes": {
+                    "state transition behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+            "usb20_tt_request_reset_tt": {
+                "required_scope": "request_linkage_boundary_only",
+                "required_excludes": {
+                    "state transition behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+            "usb20_tt_request_get_tt_state": {
+                "required_scope": "request_linkage_boundary_only",
+                "required_excludes": {
+                    "state transition behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+            "usb20_tt_request_stop_tt": {
+                "required_scope": "request_linkage_boundary_only",
+                "required_excludes": {
+                    "state transition behavior",
+                    "firmware behavior",
+                    "full USB compliance",
+                    "host-stack interpretation",
+                },
+            },
+        },
+    },
 }
 
 MATRIX_ID_SUFFIX_ALIASES = {
@@ -163,6 +279,8 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 
 def _entry_id(entry: dict[str, Any]) -> str:
+    if "tt_id" in entry:
+        return str(entry.get("tt_id"))
     if "selector_id" in entry:
         return str(entry.get("selector_id"))
     if "request_id" in entry:
@@ -211,6 +329,13 @@ def _matrix_table_key(matrix_path: Path, matrix: dict[str, Any] | None = None) -
     return stem
 
 
+def _entry_gate_rule(rule: dict[str, Any], entry_id: str) -> dict[str, Any]:
+    entry_rules = rule.get("entry_rules") or {}
+    if entry_id in entry_rules:
+        return entry_rules[entry_id]
+    return rule
+
+
 def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
 
@@ -256,6 +381,7 @@ def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dic
         result = packet.get("result") or {}
         scope = packet.get("verification_scope") or {}
         target = packet.get("target") or {}
+        gate_rule = _entry_gate_rule(rule, entry_id)
 
         if target.get("surface") != "governed_table_entry" or target.get("table") != table_key:
             fail(
@@ -275,17 +401,17 @@ def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dic
                 f"{loc}: packet result.evidence_status must be 'reviewed' before verified promotion",
             )
 
-        if scope.get("claim") != rule["required_scope"]:
+        if scope.get("claim") != gate_rule["required_scope"]:
             fail(
                 "PACKET_SCOPE_TOO_BROAD",
-                f"{loc}: packet verification_scope.claim must be '{rule['required_scope']}'",
+                f"{loc}: packet verification_scope.claim must be '{gate_rule['required_scope']}'",
             )
 
         excludes = scope.get("excludes") or []
         if not isinstance(excludes, list):
             fail("PACKET_EXCLUDES_INVALID", f"{loc}: packet verification_scope.excludes must be a list")
         else:
-            missing_excludes = sorted(rule["required_excludes"] - set(excludes))
+            missing_excludes = sorted(gate_rule["required_excludes"] - set(excludes))
             if missing_excludes:
                 fail(
                     "PACKET_EXCLUDES_INCOMPLETE",
@@ -329,8 +455,27 @@ def main() -> None:
             "table_rules": {
                 key: {
                     "allowed_entries": sorted(rule["allowed_entries"]),
-                    "required_scope": rule["required_scope"],
-                    "required_excludes": sorted(rule["required_excludes"]),
+                    **(
+                        {
+                            "required_scope": rule["required_scope"],
+                            "required_excludes": sorted(rule["required_excludes"]),
+                        }
+                        if "required_scope" in rule
+                        else {}
+                    ),
+                    **(
+                        {
+                            "entry_rules": {
+                                entry_id: {
+                                    "required_scope": entry_rule["required_scope"],
+                                    "required_excludes": sorted(entry_rule["required_excludes"]),
+                                }
+                                for entry_id, entry_rule in sorted((rule.get("entry_rules") or {}).items())
+                            }
+                        }
+                        if "entry_rules" in rule
+                        else {}
+                    ),
                 }
                 for key, rule in TABLE_RULES.items()
             },

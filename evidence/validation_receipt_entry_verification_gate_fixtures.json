@@ -2,7 +2,7 @@
   "validator": "validate_entry_verification_gate.py",
   "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "total_cases": 7,
+  "total_cases": 8,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -91,6 +91,19 @@
       "stdout": "\nEntry verification gate validation PASS\n",
       "stderr": "",
       "note": "feature selector entry with reviewed, eligible, selector-name/value packet may pass the gate"
+    },
+    {
+      "name": "valid_verified_transaction_translator",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\valid_verified_transaction_translator_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "\nEntry verification gate validation PASS\n",
+      "stderr": "",
+      "note": "Transaction Translator entry with reviewed, eligible, per-entry boundary packet may pass the gate"
     },
     {
       "name": "invalid_verified_nonpilot",

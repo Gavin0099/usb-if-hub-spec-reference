@@ -1,0 +1,20 @@
+target:
+  surface: governed_table_entry
+  table: transaction_translator_matrix
+  entry_id: usb20_tt_think_time_00
+evidence:
+  spec: usb20
+  section: "11.23.2.1"
+  quoted_surface: short_reference_only
+  reviewer_note: "fixture"
+verification_scope:
+  claim: tt_think_time_boundary_only
+  excludes:
+    - hardware timing behavior
+    - split-transaction timing
+    - firmware behavior
+    - state transition behavior
+    - full USB compliance
+result:
+  eligible_for_verified: true
+  evidence_status: reviewed

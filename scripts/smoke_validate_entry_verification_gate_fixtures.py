@@ -52,6 +52,12 @@ CASES = [
         "note": "feature selector entry with reviewed, eligible, selector-name/value packet may pass the gate",
     },
     {
+        "name": "valid_verified_transaction_translator",
+        "expected_exit": 0,
+        "expected_error_codes": [],
+        "note": "Transaction Translator entry with reviewed, eligible, per-entry boundary packet may pass the gate",
+    },
+    {
         "name": "invalid_verified_nonpilot",
         "expected_exit": 1,
         "expected_error_codes": ["VERIFIED_ENTRY_NOT_IN_PILOT_SCOPE"],
