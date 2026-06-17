@@ -18,6 +18,7 @@ on:
       - "tests/**"
       - "tables/**"
       - "exports/**"
+      - "evidence/entry_verification_packets/**"
       - "evidence/source_registry.yaml"
       - "contract/**"
       - "specs/**"
@@ -29,6 +30,7 @@ on:
       - "tests/**"
       - "tables/**"
       - "exports/**"
+      - "evidence/entry_verification_packets/**"
       - "evidence/source_registry.yaml"
       - "contract/**"
       - "specs/**"
@@ -98,12 +100,17 @@ jobs:
       - name: Entry verification precondition gate
         run: python scripts/precondition_gate.py --receipt-out evidence/validation_receipt_precondition_gate.json
 
+      - name: Entry verification gate coverage
+        run: python scripts/validate_entry_gate_coverage.py --receipt-out evidence/validation_receipt_entry_gate_coverage.json
+
       - name: Upload precondition gate receipt
         if: always()
         uses: actions/upload-artifact@v5
         with:
           name: precondition-gate-receipt
-          path: evidence/validation_receipt_precondition_gate.json
+          path: |
+            evidence/validation_receipt_precondition_gate.json
+            evidence/validation_receipt_entry_gate_coverage.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
