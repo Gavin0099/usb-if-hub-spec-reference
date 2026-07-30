@@ -10,6 +10,8 @@ documents:
   - governance/ARCHITECTURE.md
   - governance/RESPONSE_ENVELOPE_CONTRACT.md
   - governance/TRUST_BOUNDARY_TAXONOMY.md
+  - governance/AI_GOVERNANCE_UPDATE_PROTOCOL.md
+  - governance/F7_FULL_UPDATE.md
   - specs/hub_descriptor.md
   - specs/port_status_bits.md
   - specs/hub_class_requests.md

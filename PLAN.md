@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-06-09
+> **Last Updated**: 2026-07-30
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -885,6 +885,21 @@ Updated `.vitepress/config.ts`:
 Claim ceiling: reviewed reference summary only; inferred from spec reading.
 No new governed matrices. No new evidence packets. No new verified claims.
 Does not claim USB 3.x wiki surface is complete.
+
+### Phase 17 - Governance Topology Migration and Unified Consumer CI
+
+- Registered `ai-governance-framework` as a submodule pinned to framework main commit
+  `9a78e76a5b4d379610f9248e312a0d4b67eb8008` (release line remains v1.2.0).
+- Refreshed the managed consumer `AGENTS.base.md`, update protocol, F-7 protocol,
+  framework lock, authority registration, and repo-local topology guidance.
+- Switched the default table fingerprint manifest and GitHub Actions consumer checks
+  from the deprecated 6-table USB 2.0 manifest to the unified 15-table manifest.
+- Added deterministic unified consumer-contract smoke coverage and advisory USB 3.x
+  matrix validation to GitHub Actions.
+
+Claim ceiling: manual topology migration and static/CI wiring only. This phase does
+not claim F-7 full-update completion, installed local hooks, runtime enforcement,
+memory normalization, semantic USB verification, or full governance adoption.
 
 ## Active Validators
 

@@ -30,7 +30,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MANIFEST = ROOT / "exports" / "usb20_hub_class_request_manifest.yaml"
+DEFAULT_MANIFEST = ROOT / "exports" / "hub_governed_surface_manifest.yaml"
 DEFAULT_BASELINE = ROOT / "evidence" / "table_fingerprint_baseline.jsonl"
 
 GOVERNANCE_METADATA = {

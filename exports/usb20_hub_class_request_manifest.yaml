@@ -3,7 +3,7 @@ manifest_version: "0.1"
 export_type: governed_table_reference
 
 # DEPRECATED: This manifest is superseded by exports/hub_governed_surface_manifest.yaml
-# which covers all USB 2.0 and USB 3.x governed matrices (12 tables total).
+# which covers all USB 2.0 and USB 3.x governed matrices (15 tables total).
 # This file is retained for backward compatibility. New consumers should use
 # hub_governed_surface_manifest.yaml instead.
 #

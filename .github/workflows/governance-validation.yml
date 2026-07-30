@@ -3,8 +3,8 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 # Two-tier CI:
-#   fixture-smoke   ??required gate. Deterministic. No network. Protects validator logic.
-#   advisory        ??informational. Real repo content. Does not block PRs.
+#   fixture-smoke   — required deterministic gate. No network. Protects validator logic and the unified consumer contract.
+#   advisory        — informational. Real repo content. Does not block PRs.
 #
 # Authority ceiling: fixture-smoke certifies validator logic only.
 #                    advisory certifies nothing ??receipts are evidence artifacts, not semantic correctness claims.
@@ -98,6 +98,9 @@ jobs:
 
       - name: Wiki consistency fixture smoke
         run: python scripts/smoke_probe_wiki_consistency_fixtures.py
+
+      - name: Unified consumer integration contract smoke
+        run: python scripts/smoke_consumer_integration_fixtures.py
 
       - name: Entry gate coverage fixture smoke
         run: python scripts/smoke_validate_entry_gate_coverage_fixtures.py
@@ -291,19 +294,47 @@ jobs:
           python scripts/validate_usb2_completion_status_surface.py \
             --receipt-out ci-receipts/usb2_completion_status_surface.json
 
-      - name: Manifest access contract validation
+      - name: USB 3.x SS hub descriptor matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_hub_descriptor_matrix.py
+
+      - name: USB 3.x SS hub class request matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_hub_class_request_matrix.py
+
+      - name: USB 3.x SS port status matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_port_status_bit_matrix.py
+
+      - name: USB 3.x SS feature selector matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_feature_selector_matrix.py
+
+      - name: USB 3.x SS hub characteristics matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_hub_characteristics_bit_matrix.py
+
+      - name: USB 3.x SS hub interrupt endpoint matrix validation
+        continue-on-error: true
+        run: python scripts/validate_ss_hub_interrupt_endpoint_matrix.py
+
+      - name: Legacy USB 2.0 manifest compatibility validation
         continue-on-error: true
         run: |
           python scripts/validate_usb20_hub_class_request_manifest.py \
             --manifest exports/usb20_hub_class_request_manifest.yaml \
             --receipt-out ci-receipts/usb20_hub_class_request_manifest.json
 
+      - name: Unified hub governed surface manifest validation
+        continue-on-error: true
+        run: python scripts/validate_hub_governed_surface_manifest.py
+
       - name: Table fingerprint drift check
         continue-on-error: true
         run: |
           python scripts/probe_table_fingerprint.py \
             --mode check \
-            --manifest exports/usb20_hub_class_request_manifest.yaml \
+            --manifest exports/hub_governed_surface_manifest.yaml \
             --baseline-in evidence/table_fingerprint_baseline.jsonl \
             --receipt-out ci-receipts/table_fingerprint_drift.json
 
