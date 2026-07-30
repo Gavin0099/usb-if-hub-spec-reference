@@ -11,7 +11,7 @@ Cases:
 
   fingerprint_no_drift
     Run probe_table_fingerprint.py --mode check against the real manifest
-    and real baseline. Expect exit 0, 12 tables checked, 0 drift.
+    and real baseline. Expect exit 0, 15 tables checked, 0 drift.
 
   fingerprint_drift_detected
     Build a temp baseline copy with one hash corrupted

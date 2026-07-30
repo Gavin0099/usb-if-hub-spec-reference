@@ -9,8 +9,8 @@ operational_records_must_stay_under_memory_root: true
 
 This repository is a **read-only spec reference layer**.
 
-Its only permitted role is to clarify the semantics of USB 2.0 hub class
-specifications for consuming firmware repositories.
+Its only permitted role is to clarify the semantics of USB 2.0 and USB 3.x
+hub specifications for consuming firmware repositories.
 
 It does **not** govern firmware behavior directly. It does **not** override
 confirmed project facts.
@@ -137,7 +137,7 @@ entries under `memory/`.
   canonical writer:
 
   ```powershell
-  python E:/BackUp/Git_EE/ai-governance-framework/governance_tools/memory_record.py `
+  python ai-governance-framework/governance_tools/memory_record.py `
     --what-changed "..." `
     --commit <git-sha> `
     --test-evidence "..." `
@@ -156,7 +156,7 @@ entries under `memory/`.
 
 <!-- governance:key=f7_update_boundary -->
 - F-7 updates must preserve existing repo-specific AGENTS.md rules.
-- Validate F-7 state with `python -X utf8 -m governance_tools.f7_full_update --repo . --format json` from the framework environment.
+- Validate F-7 state with `python -X utf8 ai-governance-framework/governance_tools/f7_full_update.py --repo . --framework-root ai-governance-framework --format json`.
 - Required external contract surfaces: contract.yaml, governance/framework.lock.json, .git/hooks/pre-commit, .git/hooks/pre-push, .github/copilot-instructions.md.
 
 
@@ -165,3 +165,11 @@ entries under `memory/`.
 - For memory completion claims, run `python -m governance_tools.memory_workflow --check --repo . --run-guard` and report blockers before claiming DONE.
 - Use the canonical memory writer for session-derived memory; do not edit memory records as ordinary markdown.
 
+
+## AI Governance Framework Topology
+
+- Registered submodule path: `ai-governance-framework`.
+- The pinned commit is recorded in `governance/framework.lock.json`; the lock and gitlink must move together.
+- Repo-local USB reference rules in this file remain authoritative for this repository's domain boundary.
+- Framework updates must use the F-7 governed updater after this migration; direct lock-only or gitlink-only changes are manual updates.
+- Submodule presence does not prove hooks, runtime enforcement, memory normalization, or full governance adoption.

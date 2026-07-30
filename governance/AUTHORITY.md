@@ -2,7 +2,7 @@
 
 > machine-readable: true
 > version: 1.2.0
-> updated: 2026-06-04
+> updated: 2026-07-30
 
 ## Authority Levels
 
@@ -44,6 +44,10 @@
 | `governance/REVIEW_CRITERIA.md` | human-only | reference | false | ~ | never |
 | `governance/RESPONSE_ENVELOPE_CONTRACT.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `governance/TRUST_BOUNDARY_TAXONOMY.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `governance/AI_GOVERNANCE_UPDATE_PROTOCOL.md` | agent-on-demand | reference | false | AGENTS.base.md | on-demand |
+| `governance/F7_FULL_UPDATE.md` | agent-on-demand | reference | false | AGENTS.base.md | on-demand |
+| `governance/framework.lock.json` | agent-on-demand | derived | false | contract.yaml | on-demand |
+| `ai-governance-framework/` (registered submodule) | agent-on-demand | reference | false | repo-local canonical governance | on-demand |
 | `governance/PHASE_D_CLOSE_AUTHORITY.md` | human-only | canonical | false | ~ | never |
 | `AGENTS.md` (workspace) | agent-runtime | derived | false | AGENT.md | always |
 | `.github/copilot-instructions.md` | agent-runtime | derived | false | AGENT.md | always |
@@ -104,3 +108,12 @@ Rules:
 | L1 | canonical runtime core | boundary, testing, and domain reference | candidates only | human-only docs |
 | L2 | canonical runtime core | broader reference plus contract context | candidates only | human-only docs |
 | any | canonical runtime core | relevant reference documents | relevant memory records | human-only surfaces |
+
+## Framework Topology Boundary
+
+The `ai-governance-framework/` submodule supplies the pinned framework implementation
+and upstream reference contracts. It does not override this repository's canonical USB
+reference boundary, confirmed project facts in consuming firmware repositories, or the
+repo-local domain contract. A synchronized gitlink and lock establish pin identity only;
+they do not prove hook installation, runtime enforcement, semantic correctness, memory
+normalization, or complete governance adoption.

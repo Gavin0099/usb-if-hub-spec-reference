@@ -1,19 +1,25 @@
 {
   "framework_repo": "https://github.com/Gavin0099/ai-governance-framework.git",
   "adopted_release": "1.2.0",
-  "adopted_commit": "08c6ffa3d64748e172d343de51df3cc16c80bad7",
+  "adopted_commit": "9a78e76a5b4d379610f9248e312a0d4b67eb8008",
   "framework_interface_version": "1",
   "framework_compatible": ">=1.0.0,<2.0.0",
-  "_self_reference_note": "This lock records the framework version used by this repo to evaluate itself. It does not prove framework correctness; it only fixes the self-assessment baseline.",
-  "framework_baseline_version": "2026-05-27",
+  "adoption_topology": "submodule_consumer",
+  "submodule_path": "ai-governance-framework",
+  "update_mode": "manual_migration",
+  "claim_boundary": "Exact gitlink/lock pin and imported instruction surfaces only; does not prove F-7 completion, hook installation, runtime enforcement, memory normalization, or full governance adoption.",
+  "framework_baseline_version": "2026-07-30",
   "adopted_surfaces": [
-    "hooks_config",
+    "framework_submodule",
     "framework_lock",
     "agents_calibration",
+    "f7_update_protocol",
+    "governance_maturity_reporting_contract",
+    "single_pr_closeout_policy",
     "expected_dirty",
     "closeout_evidence",
     "head_commit_match",
     "timestamp_freshness"
   ],
-  "updated_at": "2026-06-16T03:37:39.960146+00:00"
+  "updated_at": "2026-07-30T08:03:41.006Z"
 }

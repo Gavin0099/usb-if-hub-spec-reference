@@ -146,12 +146,15 @@ behavior decisions.
 
 ## Governance Import Status
 
-Adopted baseline: [ai-governance-framework](https://github.com/Gavin0099/ai-governance-framework)
-v1.2.0.
+Registered framework topology: `ai-governance-framework` submodule pinned to
+[`9a78e76a5b4d379610f9248e312a0d4b67eb8008`](https://github.com/Gavin0099/ai-governance-framework/commit/9a78e76a5b4d379610f9248e312a0d4b67eb8008).
+The release line remains v1.2.0; the exact pin includes post-release main-branch
+fixes and policy updates and must not be described as a separately published release.
 
-Current repo-local import includes reporting and reviewer-facing boundary
-surfaces only. It does not enable fleet governance, runtime profile validation,
-or response envelope enforcement.
+Repo-local adoption includes governed reporting surfaces, USB reference validators,
+and unified 15-table consumer CI checks. Submodule presence and a synchronized lock
+do not prove that local hooks are installed, runtime enforcement is active, memory is
+normalized, or full F-7 adoption is complete.
 
 ## Validation
 

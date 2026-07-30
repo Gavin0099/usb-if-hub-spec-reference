@@ -38,6 +38,20 @@ Do not skip a step when the omission would hide risk.
 - If a secret appears in conversation context, do not persist it anywhere
 - `.env` files and credentials must be in `.gitignore` and never staged
 
+## AI Governance Update Routing
+
+When the user says "幫我更新最新版 AI Governance" or uses equivalent update
+wording, route the request to `governance_tools.f7_full_update` even if F-7 was
+not named explicitly. The governed updater is an F-7 backend, not the complete
+update-report surface.
+
+For updated, already-current, blocked, and fallback/manual terminal results,
+relay the complete `[human_readable_adoption_summary]` table when available.
+If it is unavailable or omitted, report
+`human_readable_adoption_summary: NOT REPORTED`,
+`update_report_complete=false`, and `completion_claim_allowed=false`; do not
+claim a complete AI Governance update report.
+
 ## Memory Update Triggers
 
 The following events require updating PLAN.md and/or the relevant memory/ file:
@@ -48,7 +62,21 @@ The following events require updating PLAN.md and/or the relevant memory/ file:
 | Architecture decision made | PLAN.md decision log + memory/knowledge_base |
 | Bug fixed with root cause identified | memory/knowledge_base |
 | Risk or incident encountered | PLAN.md risk section + memory/active_task |
-| Session end | memory/active_task (current status) + session_end hook |
+| Session end | canonical `memory/YYYY-MM-DD.md` record when closeout is non-stateless |
+
+Automatic closeout has one write boundary: `session_end` may append the daily
+canonical record through `governance_tools.memory_record`. Pre-commit and
+`memory_workflow` only inspect or validate memory state; they do not write it.
+`memory/01_active_task.md`, `memory/03_knowledge_base.md`, and `PLAN.md` remain
+milestone, decision, or human-curation surfaces and are not rewritten after
+every session.
+
+When an implementation requires a canonical closeout companion, keep the
+implementation and closeout as separate commits on the same branch and in one
+pull request by default. A successful merge, push, or remote verification is
+delivery evidence only; it must not create another memory commit or second pull
+request. Open a follow-up slice only for a new defect, omitted required
+governance state, or explicit owner authorization.
 
 ## Session Closeout Obligation
 
@@ -57,8 +85,9 @@ obligation**, not a suggestion.
 
 The stop hook always calls `session_end` at session end. If the closeout artifact
 is missing or insufficient, the runtime records `closeout_missing` or
-`closeout_insufficient` in the verdict. Memory will not update. The gap is
-auditable and visible to reviewers.
+`closeout_insufficient` in the verdict and writes a fail-closed canonical daily
+record when the session is non-stateless. The invalid closeout content is not
+promoted. The gap remains auditable and visible to reviewers.
 
 ### Required fields
 
