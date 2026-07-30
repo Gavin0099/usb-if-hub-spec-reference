@@ -1,0 +1,26 @@
+{
+  "name": "usb-if-hub-spec-reference-mcp-server",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Read-only MCP server exposing the usb-if-hub-spec-reference governed surface (9 lookup tools). Status: pilot MVP, API-key auth. Not part of the governed reference surface itself.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "express": "^4.21.2",
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}

@@ -17,6 +17,13 @@ documents:
   - specs/hub_class_requests.md
   - specs/transaction_translator.md
   - specs/escalation_table.md
+  # DRAFT/PROPOSAL documents only — not adopted, not part of the governed
+  # surface (claim_ceiling: proposal_only per docs/mcp_proposal/README.md).
+  # Registered here for governance tracking/freshness purposes only; this
+  # does NOT constitute approval to build the MCP server described within.
+  - docs/mcp_proposal/README.md
+  - docs/mcp_proposal/mcp_tool_schema.md
+  - docs/mcp_proposal/copilot_studio_agent_instructions.md
 ai_behavior_override:
   - AGENTS.md
   - AGENTS.base.md

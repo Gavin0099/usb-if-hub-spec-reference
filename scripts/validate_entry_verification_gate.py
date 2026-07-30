@@ -56,6 +56,12 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "hub_interrupt_endpoint_matrix.yaml",
     ROOT / "tables" / "wHubCharacteristics_bit_matrix.yaml",
     ROOT / "tables" / "escalation_trigger_matrix.yaml",
+    ROOT / "tables" / "ss_hub_descriptor_matrix.yaml",
+    ROOT / "tables" / "ss_port_status_bit_matrix.yaml",
+    ROOT / "tables" / "ss_feature_selector_matrix.yaml",
+    ROOT / "tables" / "ss_hub_class_request_matrix.yaml",
+    ROOT / "tables" / "ss_hub_interrupt_endpoint_matrix.yaml",
+    ROOT / "tables" / "ss_hub_characteristics_bit_matrix.yaml",
 ]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 
@@ -351,6 +357,154 @@ TABLE_RULES = {
             "full USB compliance",
         },
     },
+    # ── USB 3.x (SuperSpeed) governed tables ──────────────────────────────
+    # required_excludes for each ss_* table below is the boundary phrase
+    # confirmed present in every evidence packet for that table (verified
+    # by grep across evidence/entry_verification_packets/usb3/). Where no
+    # single exclude phrase is shared by all entries in a table (ss_hub_
+    # interrupt_endpoint_matrix, ss_hub_characteristics_bit_matrix), the set
+    # is left empty rather than asserting a boundary the packets don't
+    # actually carry in common.
+    "ss_hub_descriptor_matrix": {
+        "allowed_entries": {
+            "usb3_hub_desc_bLength",
+            "usb3_hub_desc_bDescriptorType",
+            "usb3_hub_desc_bNbrPorts",
+            "usb3_hub_desc_wHubCharacteristics",
+            "usb3_hub_desc_bPwrOn2PwrGood",
+            "usb3_hub_desc_bHubContrCurrent",
+            "usb3_hub_desc_bHubDecLat",
+            "usb3_hub_desc_wHubDelay",
+            "usb3_hub_desc_DeviceRemovable",
+        },
+        "required_scope": "descriptor_field_identity_only",
+        "required_excludes": {
+            "full USB 3.x compliance",
+        },
+    },
+    "ss_port_status_bit_matrix": {
+        "allowed_entries": {
+            "ss_wPortStatus.bit0.PORT_CONNECTION",
+            "ss_wPortStatus.bit1.PORT_ENABLE",
+            "ss_wPortStatus.bit2.PORT_OVER_CURRENT",
+            "ss_wPortStatus.bit3.PORT_RESET",
+            "ss_wPortStatus.bits85.PORT_LINK_STATE",
+            "ss_wPortStatus.bit9.PORT_POWER",
+            "ss_wPortStatus.bits1210.PORT_SPEED",
+            "ss_wPortStatus.bit13.PORT_U1_ENABLE",
+            "ss_wPortStatus.bit14.PORT_U2_ENABLE",
+            "ss_wPortChange.bit0.C_PORT_CONNECTION",
+            "ss_wPortChange.bit2.C_PORT_OVER_CURRENT",
+            "ss_wPortChange.bit3.C_PORT_RESET",
+            "ss_wPortChange.bit4.C_BH_PORT_RESET",
+            "ss_wPortChange.bit5.C_PORT_LINK_STATE",
+            "ss_wPortChange.bit6.C_PORT_CONFIG_ERROR",
+        },
+        "required_scope": "bit_name_and_position_only",
+        "required_excludes": {
+            "full USB 3.x compliance",
+        },
+        "entry_rules": {
+            "ss_wPortStatus.bits85.PORT_LINK_STATE": {
+                "required_scope": "bit_name_range_and_encoding_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "ss_wPortStatus.bits1210.PORT_SPEED": {
+                "required_scope": "bit_name_range_and_encoding_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+        },
+    },
+    "ss_feature_selector_matrix": {
+        "allowed_entries": {
+            "usb3_port_u1_enable",
+            "usb3_port_u2_enable",
+            "usb3_port_u1_timeout",
+            "usb3_port_u2_timeout",
+            "usb3_port_remote_wake_mask",
+            "usb3_port_bh_port_reset",
+        },
+        "required_scope": "selector_name_value_applicability_recipient_identity_only",
+        "required_excludes": {
+            "firmware compliance",
+        },
+    },
+    "ss_hub_class_request_matrix": {
+        "allowed_entries": {
+            "usb3_get_status_hub",
+            "usb3_get_status_port",
+            "usb3_set_feature_hub",
+            "usb3_set_feature_port",
+            "usb3_clear_feature_hub",
+            "usb3_clear_feature_port",
+            "usb3_get_descriptor_hub",
+            "usb3_set_descriptor_hub",
+            "usb3_set_hub_depth",
+            "usb3_get_port_err_count",
+        },
+        "entry_rules": {
+            "usb3_get_status_hub": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_get_status_port": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_set_feature_hub": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_set_feature_port": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_clear_feature_hub": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_clear_feature_port": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_get_descriptor_hub": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_set_descriptor_hub": {
+                "required_scope": "request_linkage_identity_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_set_hub_depth": {
+                "required_scope": "request_identity_requiredness_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+            "usb3_get_port_err_count": {
+                "required_scope": "request_identity_optionality_only",
+                "required_excludes": {"full USB 3.x compliance"},
+            },
+        },
+    },
+    "ss_hub_interrupt_endpoint_matrix": {
+        "allowed_entries": {
+            "usb3_ss_hub_ep_bEndpointAddress",
+            "usb3_ss_hub_ep_bmAttributes",
+            "usb3_ss_hub_ep_wMaxPacketSize",
+            "usb3_ss_hub_ep_bInterval",
+        },
+        "required_scope": "field_identity_constraint_encoding_only",
+        "required_excludes": set(),
+    },
+    "ss_hub_characteristics_bit_matrix": {
+        "allowed_entries": {
+            "usb3_ss_whc_power_switching",
+            "usb3_ss_whc_compound_device",
+            "usb3_ss_whc_over_current_mode",
+            "usb3_ss_whc_port_indicators",
+        },
+        "required_scope": "bit_group_name_value_encoding_identity_only",
+        "required_excludes": set(),
+    },
 }
 
 MATRIX_ID_SUFFIX_ALIASES = {
@@ -384,7 +538,7 @@ def _load_packets(packet_dir: Path) -> dict[str, dict[str, Any]]:
     packets: dict[str, dict[str, Any]] = {}
     if not packet_dir.exists():
         return packets
-    for path in sorted(packet_dir.glob("*.yaml")):
+    for path in sorted(packet_dir.rglob("*.yaml")):
         doc = _load_yaml(path)
         target = doc.get("target") or {}
         entry_id = target.get("entry_id")

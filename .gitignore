@@ -6,6 +6,10 @@ node_modules/
 .vitepress/cache/
 .vitepress/dist/
 
+# MCP server
+mcp-server/dist/
+mcp-server/.env
+
 # Local tool state
 .claude/settings.local.json
 .codex/

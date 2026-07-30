@@ -2,7 +2,20 @@
   "validator": "validate_entry_verification_gate",
   "matrices": [
     "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\port_status_bit_matrix.yaml",
-    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\hub_descriptor_matrix.yaml"
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\hub_descriptor_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\class_request_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\feature_selector_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\transaction_translator_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\standard_device_request_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\hub_interrupt_endpoint_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\wHubCharacteristics_bit_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\escalation_trigger_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_hub_descriptor_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_port_status_bit_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_feature_selector_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_hub_class_request_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_hub_interrupt_endpoint_matrix.yaml",
+    "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tables\\ss_hub_characteristics_bit_matrix.yaml"
   ],
   "packet_dir": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\entry_verification_packets",
   "result": "PASS",
@@ -17,8 +30,19 @@
         "wHubStatus.bit1.HUB_OVER_CURRENT",
         "wPortChange.bit0.C_PORT_CONNECTION",
         "wPortChange.bit1.C_PORT_ENABLE",
+        "wPortChange.bit2.C_PORT_SUSPEND",
+        "wPortChange.bit3.C_PORT_OVER_CURRENT",
+        "wPortChange.bit4.C_PORT_RESET",
         "wPortStatus.bit0.PORT_CONNECTION",
-        "wPortStatus.bit1.PORT_ENABLE"
+        "wPortStatus.bit1.PORT_ENABLE",
+        "wPortStatus.bit10.PORT_HIGH_SPEED",
+        "wPortStatus.bit11.PORT_TEST",
+        "wPortStatus.bit12.PORT_INDICATOR",
+        "wPortStatus.bit2.PORT_SUSPEND",
+        "wPortStatus.bit3.PORT_OVER_CURRENT",
+        "wPortStatus.bit4.PORT_RESET",
+        "wPortStatus.bit8.PORT_POWER",
+        "wPortStatus.bit9.PORT_LOW_SPEED"
       ],
       "required_scope": "bit_name_and_position_only",
       "required_excludes": [
@@ -46,6 +70,412 @@
         "device behavior",
         "full USB compliance"
       ]
+    },
+    "class_request_matrix": {
+      "allowed_entries": [
+        "usb20_clear_feature_hub",
+        "usb20_clear_feature_port",
+        "usb20_clear_tt_buffer",
+        "usb20_get_descriptor_hub",
+        "usb20_get_status_hub",
+        "usb20_get_status_port",
+        "usb20_get_tt_state",
+        "usb20_reset_tt",
+        "usb20_set_descriptor_hub",
+        "usb20_set_feature_hub",
+        "usb20_set_feature_port",
+        "usb20_stop_tt"
+      ],
+      "required_scope": "request_linkage_only",
+      "required_excludes": [
+        "firmware behavior",
+        "full USB compliance",
+        "host-stack interpretation",
+        "state transition behavior",
+        "timing behavior"
+      ]
+    },
+    "feature_selector_matrix": {
+      "allowed_entries": [
+        "usb20_c_port_connection",
+        "usb20_c_port_enable",
+        "usb20_c_port_over_current",
+        "usb20_c_port_reset",
+        "usb20_c_port_suspend",
+        "usb20_hub_c_hub_local_power",
+        "usb20_hub_c_hub_over_current",
+        "usb20_port_connection",
+        "usb20_port_enable",
+        "usb20_port_high_speed",
+        "usb20_port_indicator",
+        "usb20_port_low_speed",
+        "usb20_port_over_current",
+        "usb20_port_power",
+        "usb20_port_reserved_11",
+        "usb20_port_reserved_12",
+        "usb20_port_reserved_13",
+        "usb20_port_reserved_14",
+        "usb20_port_reserved_15",
+        "usb20_port_reserved_5",
+        "usb20_port_reserved_6",
+        "usb20_port_reserved_7",
+        "usb20_port_reset",
+        "usb20_port_suspend",
+        "usb20_port_test"
+      ],
+      "required_scope": "selector_name_and_value_only",
+      "required_excludes": [
+        "full USB compliance",
+        "host-stack interpretation",
+        "selector side effects",
+        "state transition behavior",
+        "timing behavior"
+      ]
+    },
+    "transaction_translator_matrix": {
+      "allowed_entries": [
+        "usb20_tt_request_clear_tt_buffer",
+        "usb20_tt_request_get_tt_state",
+        "usb20_tt_request_reset_tt",
+        "usb20_tt_request_stop_tt",
+        "usb20_tt_think_time_00",
+        "usb20_tt_think_time_01",
+        "usb20_tt_think_time_10",
+        "usb20_tt_think_time_11",
+        "usb20_tt_type_multiple",
+        "usb20_tt_type_single"
+      ],
+      "entry_rules": {
+        "usb20_tt_request_clear_tt_buffer": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_get_tt_state": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_reset_tt": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_request_stop_tt": {
+          "required_scope": "request_linkage_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_00": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_01": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_10": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_think_time_11": {
+          "required_scope": "tt_think_time_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "hardware timing behavior",
+            "split-transaction timing",
+            "state transition behavior"
+          ]
+        },
+        "usb20_tt_type_multiple": {
+          "required_scope": "tt_type_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "split-transaction behavior",
+            "timing behavior"
+          ]
+        },
+        "usb20_tt_type_single": {
+          "required_scope": "tt_type_boundary_only",
+          "required_excludes": [
+            "firmware behavior",
+            "full USB compliance",
+            "host-stack interpretation",
+            "split-transaction behavior",
+            "timing behavior"
+          ]
+        }
+      }
+    },
+    "standard_device_request_matrix": {
+      "allowed_entries": [
+        "usb20_std_clear_feature_device",
+        "usb20_std_clear_feature_endpoint",
+        "usb20_std_get_configuration",
+        "usb20_std_get_descriptor",
+        "usb20_std_get_interface",
+        "usb20_std_get_status_device",
+        "usb20_std_get_status_endpoint",
+        "usb20_std_get_status_interface",
+        "usb20_std_set_address",
+        "usb20_std_set_configuration",
+        "usb20_std_set_feature_device",
+        "usb20_std_set_interface"
+      ],
+      "required_scope": "request_linkage_only",
+      "required_excludes": [
+        "firmware behavior",
+        "full USB compliance",
+        "host-stack interpretation",
+        "state transition behavior",
+        "timing behavior"
+      ]
+    },
+    "hub_interrupt_endpoint_matrix": {
+      "allowed_entries": [
+        "usb20_hub_ep_bEndpointAddress",
+        "usb20_hub_ep_bInterval",
+        "usb20_hub_ep_bmAttributes",
+        "usb20_hub_ep_wMaxPacketSize"
+      ],
+      "required_scope": "descriptor_field_identity_only",
+      "required_excludes": [
+        "full USB compliance"
+      ]
+    },
+    "wHubCharacteristics_bit_matrix": {
+      "allowed_entries": [
+        "usb20_whc_compound_device",
+        "usb20_whc_over_current_mode",
+        "usb20_whc_port_indicators",
+        "usb20_whc_power_switching",
+        "usb20_whc_tt_think_time"
+      ],
+      "required_scope": "bit_group_name_and_value_encoding_identity_only",
+      "required_excludes": [
+        "firmware descriptor dump correctness",
+        "full USB compliance"
+      ]
+    },
+    "escalation_trigger_matrix": {
+      "allowed_entries": [
+        "E-01",
+        "E-02",
+        "E-03",
+        "E-04",
+        "E-05",
+        "E-06",
+        "E-07",
+        "E-08",
+        "E-09",
+        "E-10"
+      ],
+      "required_scope": "escalation_trigger_boundary_only",
+      "required_excludes": [
+        "firmware behavior",
+        "full USB compliance"
+      ]
+    },
+    "ss_hub_descriptor_matrix": {
+      "allowed_entries": [
+        "usb3_hub_desc_DeviceRemovable",
+        "usb3_hub_desc_bDescriptorType",
+        "usb3_hub_desc_bHubContrCurrent",
+        "usb3_hub_desc_bHubDecLat",
+        "usb3_hub_desc_bLength",
+        "usb3_hub_desc_bNbrPorts",
+        "usb3_hub_desc_bPwrOn2PwrGood",
+        "usb3_hub_desc_wHubCharacteristics",
+        "usb3_hub_desc_wHubDelay"
+      ],
+      "required_scope": "descriptor_field_identity_only",
+      "required_excludes": [
+        "full USB 3.x compliance"
+      ]
+    },
+    "ss_port_status_bit_matrix": {
+      "allowed_entries": [
+        "ss_wPortChange.bit0.C_PORT_CONNECTION",
+        "ss_wPortChange.bit2.C_PORT_OVER_CURRENT",
+        "ss_wPortChange.bit3.C_PORT_RESET",
+        "ss_wPortChange.bit4.C_BH_PORT_RESET",
+        "ss_wPortChange.bit5.C_PORT_LINK_STATE",
+        "ss_wPortChange.bit6.C_PORT_CONFIG_ERROR",
+        "ss_wPortStatus.bit0.PORT_CONNECTION",
+        "ss_wPortStatus.bit1.PORT_ENABLE",
+        "ss_wPortStatus.bit13.PORT_U1_ENABLE",
+        "ss_wPortStatus.bit14.PORT_U2_ENABLE",
+        "ss_wPortStatus.bit2.PORT_OVER_CURRENT",
+        "ss_wPortStatus.bit3.PORT_RESET",
+        "ss_wPortStatus.bit9.PORT_POWER",
+        "ss_wPortStatus.bits1210.PORT_SPEED",
+        "ss_wPortStatus.bits85.PORT_LINK_STATE"
+      ],
+      "required_scope": "bit_name_and_position_only",
+      "required_excludes": [
+        "full USB 3.x compliance"
+      ],
+      "entry_rules": {
+        "ss_wPortStatus.bits1210.PORT_SPEED": {
+          "required_scope": "bit_name_range_and_encoding_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "ss_wPortStatus.bits85.PORT_LINK_STATE": {
+          "required_scope": "bit_name_range_and_encoding_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        }
+      }
+    },
+    "ss_feature_selector_matrix": {
+      "allowed_entries": [
+        "usb3_port_bh_port_reset",
+        "usb3_port_remote_wake_mask",
+        "usb3_port_u1_enable",
+        "usb3_port_u1_timeout",
+        "usb3_port_u2_enable",
+        "usb3_port_u2_timeout"
+      ],
+      "required_scope": "selector_name_value_applicability_recipient_identity_only",
+      "required_excludes": [
+        "firmware compliance"
+      ]
+    },
+    "ss_hub_class_request_matrix": {
+      "allowed_entries": [
+        "usb3_clear_feature_hub",
+        "usb3_clear_feature_port",
+        "usb3_get_descriptor_hub",
+        "usb3_get_port_err_count",
+        "usb3_get_status_hub",
+        "usb3_get_status_port",
+        "usb3_set_descriptor_hub",
+        "usb3_set_feature_hub",
+        "usb3_set_feature_port",
+        "usb3_set_hub_depth"
+      ],
+      "entry_rules": {
+        "usb3_clear_feature_hub": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_clear_feature_port": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_get_descriptor_hub": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_get_port_err_count": {
+          "required_scope": "request_identity_optionality_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_get_status_hub": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_get_status_port": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_set_descriptor_hub": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_set_feature_hub": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_set_feature_port": {
+          "required_scope": "request_linkage_identity_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        },
+        "usb3_set_hub_depth": {
+          "required_scope": "request_identity_requiredness_only",
+          "required_excludes": [
+            "full USB 3.x compliance"
+          ]
+        }
+      }
+    },
+    "ss_hub_interrupt_endpoint_matrix": {
+      "allowed_entries": [
+        "usb3_ss_hub_ep_bEndpointAddress",
+        "usb3_ss_hub_ep_bInterval",
+        "usb3_ss_hub_ep_bmAttributes",
+        "usb3_ss_hub_ep_wMaxPacketSize"
+      ],
+      "required_scope": "field_identity_constraint_encoding_only",
+      "required_excludes": []
+    },
+    "ss_hub_characteristics_bit_matrix": {
+      "allowed_entries": [
+        "usb3_ss_whc_compound_device",
+        "usb3_ss_whc_over_current_mode",
+        "usb3_ss_whc_port_indicators",
+        "usb3_ss_whc_power_switching"
+      ],
+      "required_scope": "bit_group_name_value_encoding_identity_only",
+      "required_excludes": []
     }
   }
 }
