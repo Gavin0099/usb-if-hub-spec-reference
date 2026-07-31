@@ -14,16 +14,21 @@ origin: >
 scope: >
   This registry is the single, checkable precondition gate for any future
   work that treats specs/usb3/** content as a stable input to a shared/
-  cross-pack Framework (see PLAN.md priority P3: "抽出最小 Core Framework").
-  It replaces scattered per-page prose disclaimers as the enforcement point:
-  P3 (and any earlier step that depends on USB3 semantic stability) MUST NOT
-  proceed while `quarantine_status: active` and any listed page still fails
-  its `release_conditions`.
+  cross-pack Framework. No such work item is currently recorded in this
+  repo's own PLAN.md as of 2026-07-31 (a review-session reference to "PLAN.md
+  priority P3: 抽出最小 Core Framework" was found to not resolve to any
+  entry in this repo's PLAN.md and has been removed). It replaces scattered
+  per-page prose disclaimers as the enforcement point: any such future work
+  item (and any earlier step that depends on USB3 semantic stability) MUST
+  NOT proceed while `quarantine_status: active` and any listed page still
+  fails its `release_conditions`.
 
 quarantine_status: active
 
 blocks:
-  - PLAN.md priority P3 (抽出最小 Core Framework)
+  - Any future work item that treats specs/usb3/** as a stable input to a
+    shared/cross-pack Framework (no such work item is currently recorded in
+    this repo's PLAN.md).
   - Any cross-pack schema unification that treats specs/usb3/** as a
     semantically-verified source rather than an inferred/orientation-only
     reference.
