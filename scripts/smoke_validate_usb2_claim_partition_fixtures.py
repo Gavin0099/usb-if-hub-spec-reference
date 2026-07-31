@@ -105,7 +105,13 @@ def _run_case(case: dict[str, Any], root: Path) -> dict[str, Any]:
 
     for entry_id in case["packets"]:
         packet_name = f"{entry_id.replace('.', '_')}.yaml"
-        _write_yaml(packet_dir / packet_name, {"target": {"entry_id": entry_id}})
+        _write_yaml(
+            packet_dir / packet_name,
+            {
+                "target": {"entry_id": entry_id},
+                "evidence": {"spec": "usb20"},
+            },
+        )
 
     expected = case["expected"]
     result, errors, counts = validate(
