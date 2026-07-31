@@ -4,6 +4,7 @@
     "tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\matrix.yaml"
   ],
   "packet_dir": "tests\\fixtures\\entry_verification_gate\\no_verified_entries_pass\\packets",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\source_registry.yaml",
   "result": "PASS",
   "authority_ceiling": "entry_level_verified_gate_only",
   "errors": [],
@@ -302,10 +303,10 @@
     "ss_hub_descriptor_matrix": {
       "allowed_entries": [
         "usb3_hub_desc_DeviceRemovable",
+        "usb3_hub_desc_bDescLength",
         "usb3_hub_desc_bDescriptorType",
         "usb3_hub_desc_bHubContrCurrent",
-        "usb3_hub_desc_bHubDecLat",
-        "usb3_hub_desc_bLength",
+        "usb3_hub_desc_bHubHdrDecLat",
         "usb3_hub_desc_bNbrPorts",
         "usb3_hub_desc_bPwrOn2PwrGood",
         "usb3_hub_desc_wHubCharacteristics",

@@ -2,7 +2,7 @@
   "validator": "validate_entry_verification_gate.py",
   "smoke_runner": "smoke_validate_entry_verification_gate_fixtures.py",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "total_cases": 12,
+  "total_cases": 14,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -52,6 +52,40 @@
       "stdout": "[FAIL] PACKET_SCOPE_TOO_BROAD: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: packet verification_scope.claim must be 'bit_name_and_position_only'\n\nEntry verification gate validation FAIL\n",
       "stderr": "",
       "note": "verified entry with a packet but broad scope must fail"
+    },
+    {
+      "name": "invalid_packet_spec_outside_schema",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "PACKET_VALUE_OUTSIDE_SCHEMA"
+      ],
+      "actual_error_codes": [
+        "PACKET_VALUE_OUTSIDE_SCHEMA"
+      ],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_packet_spec_outside_schema_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] PACKET_VALUE_OUTSIDE_SCHEMA: verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: evidence.spec value 'usb999' is not in schema valid_values\n\nEntry verification gate validation FAIL\n",
+      "stderr": "",
+      "note": "packet spec value must be admitted by the executable packet schema"
+    },
+    {
+      "name": "invalid_unregistered_packet_source",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "PACKET_SOURCE_ID_UNREGISTERED"
+      ],
+      "actual_error_codes": [
+        "PACKET_SOURCE_ID_UNREGISTERED"
+      ],
+      "result": "PASS",
+      "receipt_path": "evidence\\validation_receipts\\entry_verification_gate_fixtures\\invalid_unregistered_packet_source_receipt.json",
+      "receipt_parse_error": "",
+      "stdout": "[FAIL] PACKET_SOURCE_ID_UNREGISTERED: packet tests\\fixtures\\entry_verification_gate\\invalid_unregistered_packet_source\\packets\\port_status_wPortStatus.bit0.PORT_CONNECTION.yaml: evidence.document_ref.fallback_source_id value 'unregistered_fixture_source' is not registered in the source registry\n\nEntry verification gate validation FAIL\n",
+      "stderr": "",
+      "note": "even non-promoted packet document_ref source IDs must resolve through the source registry"
     },
     {
       "name": "valid_verified_pilot",

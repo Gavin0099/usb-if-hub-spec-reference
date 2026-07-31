@@ -1,13 +1,18 @@
 {
   "validator": "validate_entry_verification_gate",
   "matrices": [
-    "tests\\fixtures\\entry_verification_gate\\valid_verified_transaction_translator\\matrix.yaml"
+    "tests\\fixtures\\entry_verification_gate\\invalid_packet_spec_outside_schema\\matrix.yaml"
   ],
-  "packet_dir": "tests\\fixtures\\entry_verification_gate\\valid_verified_transaction_translator\\packets",
+  "packet_dir": "tests\\fixtures\\entry_verification_gate\\invalid_packet_spec_outside_schema\\packets",
   "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\source_registry.yaml",
-  "result": "PASS",
+  "result": "FAIL",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "errors": [],
+  "errors": [
+    {
+      "code": "PACKET_VALUE_OUTSIDE_SCHEMA",
+      "message": "verified_entry[0] wPortStatus.bit0.PORT_CONNECTION: evidence.spec value 'usb999' is not in schema valid_values"
+    }
+  ],
   "table_rules": {
     "port_status_bit_matrix": {
       "allowed_entries": [

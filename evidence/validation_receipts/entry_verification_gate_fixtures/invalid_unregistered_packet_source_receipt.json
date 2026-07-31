@@ -1,13 +1,18 @@
 {
   "validator": "validate_entry_verification_gate",
   "matrices": [
-    "tests\\fixtures\\entry_verification_gate\\valid_verified_transaction_translator\\matrix.yaml"
+    "tests\\fixtures\\entry_verification_gate\\invalid_unregistered_packet_source\\matrix.yaml"
   ],
-  "packet_dir": "tests\\fixtures\\entry_verification_gate\\valid_verified_transaction_translator\\packets",
+  "packet_dir": "tests\\fixtures\\entry_verification_gate\\invalid_unregistered_packet_source\\packets",
   "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\source_registry.yaml",
-  "result": "PASS",
+  "result": "FAIL",
   "authority_ceiling": "entry_level_verified_gate_only",
-  "errors": [],
+  "errors": [
+    {
+      "code": "PACKET_SOURCE_ID_UNREGISTERED",
+      "message": "packet tests\\fixtures\\entry_verification_gate\\invalid_unregistered_packet_source\\packets\\port_status_wPortStatus.bit0.PORT_CONNECTION.yaml: evidence.document_ref.fallback_source_id value 'unregistered_fixture_source' is not registered in the source registry"
+    }
+  ],
   "table_rules": {
     "port_status_bit_matrix": {
       "allowed_entries": [
