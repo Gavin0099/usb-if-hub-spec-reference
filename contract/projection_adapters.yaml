@@ -1,0 +1,43 @@
+schema_version: 1
+title: Canonical Projection Adapters — Governed Exceptions
+last_updated: 2026-07-31
+origin: >
+  Per governance review commit 6ff1c56 (round 2, Verdict: CHANGES_REQUESTED,
+  Risk: Medium): the generic three-column projection heuristic in
+  scripts/probe_canonical_entry_projection.py does not recognize every
+  table's existing identity/source-ref convention, and its source_ref
+  fallback was conflating evidence-packet paths with normative source IDs.
+  Rather than accept a lossy projection or bulk-edit any of the 15 governed
+  tables, a table needing special handling gets an explicit, reviewed
+  adapter entry here instead. This file is read by
+  scripts/probe_canonical_entry_projection.py; it does not alter any
+  governed table, and it is not itself a governed table.
+
+adapters:
+  usb20_hub_port_status_bit_matrix:
+    table_path: tables/port_status_bit_matrix.yaml
+    identity:
+      strategy: composite
+      fields:
+        - field
+        - bit
+        - name
+      format: "{field}.bit{bit}.{name}"
+    source:
+      strategy: section_spec_mapping
+      section_spec: usb20
+      source_ref: usb20_spec
+    evidence_packet_glob: "evidence/entry_verification_packets/port_status_*.yaml"
+    rationale: >
+      Matches the composite entry_id convention already implemented by
+      scripts/validate_port_status_bit_matrix.py's _entry_id()
+      (f"{field}.bit{bit}.{name}") and independently reused as the fallback
+      in scripts/validate_entry_verification_gate.py's _entry_id(). Also
+      matches evidence/entry_verification_packets/port_status_*.yaml's
+      target.entry_id values verbatim (e.g. "wHubStatus.bit0.HUB_LOCAL_POWER").
+      Confirmed 2026-07-31 (read-only check against
+      tables/port_status_bit_matrix.yaml): 64/64 entries produce unique
+      composite IDs, and 64/64 entries carry section_refs with
+      spec: usb20 — so the usb20 -> usb20_spec source mapping is complete,
+      not a guess. usb20_spec is a registered source_id in
+      evidence/source_registry.yaml.
