@@ -41,7 +41,7 @@ semantic_verification_claimed: false
 | Connected (not enabled) | PORT_CONNECTION=1, PORT_ENABLE=0 | 裝置已連接但 port 未啟用 |
 | Enabled | PORT_CONNECTION=1, PORT_ENABLE=1 | Port 啟用，link 在 U0 |
 | U1/U2 (LPM) | PORT_LINK_STATE=U1/U2 | Link 在低功耗待機狀態 |
-| U3 (Suspended) | PORT_LINK_STATE=U3, PORT_SUSPEND=1 | Port 已暫停 |
+| U3 (Suspended) | PORT_LINK_STATE=U3 | Port 已暫停；SuperSpeed 沒有 PORT_SUSPEND status bit |
 | In Reset | PORT_RESET=1 | Port 正在執行 Warm Reset 或 Hot Reset |
 | Over-current | PORT_OVER_CURRENT=1 | Port 偵測到 over-current |
 
@@ -97,7 +97,7 @@ Source: USB 3.2 Specification §10.14.2 Table 10-9。
 | U0 | U2 | 裝置發起 | U2 inactivity timeout 後 LGOU2（需 `PORT_U2_ENABLE=1`） |
 | U2 | U0 | 任一方 | LFPS handshake exit；link 回到 U0 |
 | U1 | U2 | 裝置發起 | U1 中 U2 inactivity timer 到期（進入更深省電） |
-| U0 | U3 | Host | `SET_FEATURE(PORT_SUSPEND)` |
+| U0 | U3 | Host | `SetPortFeature(PORT_LINK_STATE)`，`wIndex` 高位元組指定 link-state value `3`；port 未 Enabled 時為 no-op |
 | U3 | U0 | Host 或裝置 | Host resume 或裝置 remote wakeup（LFPS + link resume 序列） |
 
 **Transition 限制：**

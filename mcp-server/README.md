@@ -12,6 +12,11 @@ Exposes the repo's 15 governed USB 2.0 / USB 3.x hub spec tables
 Streamable HTTP, so an MCP client (e.g. Microsoft Copilot Studio) can query
 field/bit/selector/request identity instead of reading raw YAML.
 
+The current implementation uses `@modelcontextprotocol/sdk` v1 and negotiates
+the legacy 2025-era protocol supported by the client. It does not claim MCP
+`2026-07-28` conformance; moving to the v2 SDK is a separate compatibility
+and deployment decision.
+
 ## What this server does NOT do
 
 Every tool response carries a `cannot_establish` list

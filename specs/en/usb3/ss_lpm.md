@@ -61,8 +61,8 @@ The timeout encoding semantics in the wValue high byte are outside this page's v
 ## U3 (Suspend)
 
 - U3 is the deepest power-saving state; the USB 3.x equivalent of USB 2.0 Suspend.
-- The host triggers U3 via SET_FEATURE(PORT_SUSPEND).
-- The `PORT_SUSPEND` bit (wPortStatus bit 2) reflects U3 state (verified).
+- The host requests U3 with `SetPortFeature(PORT_LINK_STATE)` and link-state value `3` in the high byte of `wIndex`; the request is a no-op unless the port is Enabled.
+- SuperSpeed has no `PORT_SUSPEND` status bit. `wPortStatus` bit 2 is `PORT_OVER_CURRENT`.
 - The full U3 entry and exit sequence (including resume signaling) is outside this page's verified scope.
 
 ## LPM-Related Bits in wPortStatus
@@ -71,7 +71,7 @@ The following bits have been promoted to verified in `ss_port_status_bit_matrix`
 
 | Bit | Name | Description |
 |---|---|---|
-| wPortStatus bit 2 | PORT_SUSPEND | Port is in U3 suspend state |
+| wPortStatus bit 2 | PORT_OVER_CURRENT | Port over-current status |
 | wPortStatus bits[8:5] | PORT_LINK_STATE | Current link state (12 values) |
 
 ## This Page Does Not Claim

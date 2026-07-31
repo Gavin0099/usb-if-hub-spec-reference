@@ -32,6 +32,7 @@ GOVERNANCE_METADATA = {
     "does_not_change_claim_level": True,
 }
 NETWORK_TIMEOUT = 20
+MAX_CONTENT_BYTES = 10_000_000
 
 
 def _utc_now_iso() -> str:
@@ -79,11 +80,16 @@ def _load_mock_responses(path: Path) -> dict[str, Any]:
 
 
 def _fetch_live(url: str) -> dict[str, Any]:
-    req = Request(url, method="HEAD", headers={"User-Agent": "usb-hub-spec-monitor/1.0"})
+    # GET is required for a meaningful content hash. HEAD usually returns no
+    # body, which previously left content_hash empty.
+    req = Request(url, method="GET", headers={"User-Agent": "usb-hub-spec-monitor/1.0"})
     try:
         with urlopen(req, timeout=NETWORK_TIMEOUT) as resp:
-            data = resp.read() if resp.length and resp.length < 10_000_000 else b""
             headers = dict(resp.headers.items())
+            data = resp.read(MAX_CONTENT_BYTES + 1)
+            body_too_large = len(data) > MAX_CONTENT_BYTES
+            if body_too_large:
+                data = b""
             return {
                 "reachable": True,
                 "http_status": getattr(resp, "status", 200),
@@ -91,6 +97,7 @@ def _fetch_live(url: str) -> dict[str, Any]:
                 "content_length": int(headers.get("Content-Length", 0)) or None,
                 "etag": headers.get("ETag"),
                 "last_modified": headers.get("Last-Modified"),
+                "advisory_note": "response body exceeds hash limit" if body_too_large else None,
             }
     except HTTPError as e:
         reachable = e.code in (200, 301, 302, 403, 405, 429)
@@ -122,12 +129,36 @@ def _compare(previous: dict, current: dict, source: dict) -> dict[str, Any] | No
     curr_hash = current.get("content_hash")
     prev_status = previous.get("http_status")
     curr_status = current.get("http_status")
+    prev_etag = previous.get("etag")
+    curr_etag = current.get("etag")
+    prev_last_modified = previous.get("last_modified")
+    curr_last_modified = current.get("last_modified")
 
-    changed = (prev_hash != curr_hash) or (prev_status != curr_status)
+    changed = (
+        (prev_hash != curr_hash)
+        or (prev_status != curr_status)
+        or (
+            prev_etag is not None
+            and curr_etag is not None
+            and prev_etag != curr_etag
+        )
+        or (
+            prev_last_modified is not None
+            and curr_last_modified is not None
+            and prev_last_modified != curr_last_modified
+        )
+    )
     if not changed:
         return None
 
-    change_type = "content_hash_changed" if prev_hash != curr_hash else "http_status_changed"
+    if prev_hash != curr_hash:
+        change_type = "content_hash_changed"
+    elif prev_status != curr_status:
+        change_type = "http_status_changed"
+    elif prev_etag is not None and curr_etag is not None and prev_etag != curr_etag:
+        change_type = "etag_changed"
+    else:
+        change_type = "last_modified_changed"
     return {
         "event_id": _event_id(source["id"], current["checked_at"]),
         "source_id": source["id"],
@@ -139,6 +170,10 @@ def _compare(previous: dict, current: dict, source: dict) -> dict[str, Any] | No
         "current_hash": curr_hash,
         "previous_http_status": prev_status,
         "current_http_status": curr_status,
+        "previous_etag": prev_etag,
+        "current_etag": curr_etag,
+        "previous_last_modified": prev_last_modified,
+        "current_last_modified": curr_last_modified,
         "affected_scopes": source.get("scope", []),
         "required_action": "review_required",
         **GOVERNANCE_METADATA,

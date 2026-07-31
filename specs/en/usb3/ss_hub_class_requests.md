@@ -66,7 +66,9 @@ The following USB 2.0 hub class requests do not apply to SS hubs because SS hubs
 | GET_TT_STATE | 0x0A | SS hub has no TT |
 | STOP_TT | 0x0B | SS hub has no TT |
 
-SET_FEATURE PORT_SUSPEND / CLEAR_FEATURE PORT_SUSPEND also do not apply: SS hubs use U1/U2 link state policy instead of PORT_SUSPEND.
+SET_FEATURE PORT_SUSPEND / CLEAR_FEATURE PORT_SUSPEND also do not apply:
+SuperSpeed hubs represent suspend through U1/U2/U3 link states and use
+`SetPortFeature(PORT_LINK_STATE)` for a host-directed U3 request.
 
 ## SS-Specific Feature Selectors
 

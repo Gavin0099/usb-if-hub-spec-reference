@@ -45,7 +45,11 @@ def _utc_now_iso() -> str:
 
 
 def _sha256_file(path: Path) -> str:
-    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+    # Governed YAML is textual content. Canonicalize line endings so a clean
+    # Windows checkout (CRLF) and Linux CI checkout (LF) produce the same
+    # fingerprint; semantic content changes still change the digest.
+    data = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return "sha256:" + hashlib.sha256(data).hexdigest()
 
 
 def _load_manifest(path: Path) -> list[dict]:

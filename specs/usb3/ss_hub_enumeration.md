@@ -36,12 +36,12 @@ semantic_verification_claimed: false
 2. **GET_DESCRIPTOR(DeviceDescriptor)**：取得裝置描述符，確認 bDeviceClass=0x09（Hub）。
 3. **SET_ADDRESS**：指定 USB address。
 4. **GET_DESCRIPTOR(HubDescriptor)**：取得 SS Hub Descriptor（USB 3.x 專用 type bDescriptorType=0x2A）。
-5. **SET_HUB_DEPTH**（SS hub 必要步驟）：通知 hub 其在 bus topology 中的層次深度。
-6. **SET_CONFIGURATION**：啟用 configuration。
+5. **SET_CONFIGURATION**：啟用 configuration。
+6. **SET_HUB_DEPTH**（SS hub 必要步驟）：對已完成 configuration 的 hub 設定 bus topology depth。
 7. **Port power on**：依 wHubCharacteristics 選擇 ganged 或 per-port power on。
 8. **Wait bPwrOn2PwrGood × 2 ms**：等待 port 電源穩定。
 
-> **Step 5 (SET_HUB_DEPTH) 是 USB 3.x SS hub 特有的必要步驟**；USB 2.0 hub 不需要此請求。
+> **Step 6 (`SET_HUB_DEPTH`) 是 USB 3.x SS hub 特有的必要步驟，且必須在 configuration 後發出**；hub 尚未 configured 時，此 request 的回應未定義。
 
 ## SET_HUB_DEPTH 請求
 
@@ -55,7 +55,7 @@ semantic_verification_claimed: false
 
 - Root hub 或直接連接 root hub 的 SS hub：depth = 0。
 - 每多一層 hub：depth +1，最大 depth = 5。
-- xHCI 必須在完成 hub 配置前發送此請求。
+- Host 必須在 `SET_CONFIGURATION` 後、啟用 downstream ports 前發出此 request。
 
 ## USB 3.x 枚舉與 USB 2.0 枚舉的主要差異
 

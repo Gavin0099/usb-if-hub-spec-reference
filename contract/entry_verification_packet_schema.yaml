@@ -58,6 +58,7 @@ valid_values:
     - wiki_claim_block
   spec:
     - usb20
+    - usb32
   result_evidence_status:
     - review_required
     - reviewed

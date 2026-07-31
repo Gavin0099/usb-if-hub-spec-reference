@@ -1,17 +1,15 @@
-# MCP Tool Schema (Draft)
+# MCP Tool Schema (Tier 1 Pilot)
 
-> **Status**: DRAFT / PROPOSAL — not implemented, not validated, not part of
-> the governed surface. See [README.md](README.md) for constraints this draft
-> must honor.
+> **Status**: implemented as a Tier 1 pilot in `mcp-server/`; not part of the
+> governed USB reference surface. See [README.md](README.md) for the
+> constraints the implementation must honor.
 >
-> **Protocol alignment**: this draft targets MCP specification revision
-> `2026-07-28` (confirmed current at draft time via
-> `modelcontextprotocol.io/specification/versioning`). All tools here are
-> single-round-trip, read-only lookups with no cross-call state, so none of
-> them depend on the removed protocol-level sessions, the removed
-> `initialize` handshake, or the deprecated Roots/Sampling/Logging features.
-> No server-minted cross-call handles (per `SEP-2567`) are needed for this
-> tool set.
+> **Protocol alignment**: the current server uses
+> `@modelcontextprotocol/sdk` v1 with Streamable HTTP and negotiates the
+> legacy 2025-era MCP protocol supported by that SDK and client. It does
+> **not** implement or claim MCP `2026-07-28`. A future v2 migration must be
+> handled as a separate compatibility slice. The tools remain stateless,
+> single-round-trip, and read-only.
 
 ## Response envelope (shared by every tool)
 
@@ -57,10 +55,8 @@ verified, and provenance fields are non-null only when the value is shared by
 all matches. A mixed result must never inherit the strongest claim or source
 from its first item.
 
-`resultType` is the field the 2026-07-28 spec requires on every result
-(`"complete"` for ordinary results; `"input_required"` is only used by the
-Multi Round-Trip Requests pattern, which none of these tools use since they
-never need server-initiated sampling/elicitation/roots).
+`resultType` is a repository-defined envelope field used by this Tier 1 pilot.
+Its presence does not claim MCP `2026-07-28` protocol conformance.
 
 `cannot_establish` is copied verbatim from
 `exports/hub_governed_surface_manifest.yaml#/claim_ceiling/cannot_establish`
@@ -270,19 +266,9 @@ user) can see whether the underlying data is currently trusted.
 }
 ```
 
-Per the 2026-07-28 spec's `CacheableResult` interface, this tool's result
-carries `ttlMs`/`cacheScope` as a freshness hint: `ttlMs: 60000` tells callers
-the drift/count summary is safe to cache for up to 60 seconds without
-re-querying, and `cacheScope: "public"` allows shared intermediaries (e.g. a
-gateway in front of multiple Copilot Studio tenants) to cache it too, since
-the governed surface summary contains no per-caller or per-tenant data. The
-exact `ttlMs` value is an implementation tuning choice, not a protocol
-requirement — it must never exceed the MCP server's own re-check interval
-for `scripts/probe_table_fingerprint.py`, otherwise a cached `"clean"` result
-could outlive the check that justified it. The other 8 tools intentionally
-do **not** set `ttlMs`/`cacheScope`: their answers are keyed to a specific
-query term, so per-query caching is a client/gateway decision, not something
-this draft prescribes.
+`ttlMs`/`cacheScope` below are design-time advisory hints only. The current
+v1 SDK server does not emit or enforce a 2026 `CacheableResult` contract.
+Callers must use the returned `drift_status` and their own cache policy.
 
 **Server-side requirement**: before answering `drift_status: "clean"`, the
 server must have run `scripts/probe_table_fingerprint.py --mode check`

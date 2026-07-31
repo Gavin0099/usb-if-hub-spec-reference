@@ -41,7 +41,7 @@ These states are derived from `wPortStatus` bits (verified entries in `tables/ss
 | Connected (not enabled) | PORT_CONNECTION=1, PORT_ENABLE=0 | Device connected but port not enabled |
 | Enabled | PORT_CONNECTION=1, PORT_ENABLE=1 | Port enabled; link in U0 |
 | U1/U2 (LPM) | PORT_LINK_STATE=U1/U2 | Link in low-power standby |
-| U3 (Suspended) | PORT_LINK_STATE=U3, PORT_SUSPEND=1 | Port suspended |
+| U3 (Suspended) | PORT_LINK_STATE=U3 | Port suspended; SuperSpeed has no PORT_SUSPEND status bit |
 | In Reset | PORT_RESET=1 | Port executing Warm Reset or Hot Reset |
 | Over-current | PORT_OVER_CURRENT=1 | Port detected over-current condition |
 
@@ -97,7 +97,7 @@ The U0/U1/U2/U3 transitions below are hub-class-observable via `PORT_LINK_STATE`
 | U0 | U2 | Device-initiated | LGOU2 after U2 inactivity timeout (requires `PORT_U2_ENABLE=1`) |
 | U2 | U0 | Either | LFPS handshake exit; link returns to U0 |
 | U1 | U2 | Device-initiated | U2 inactivity timer expires while in U1 (deeper power saving) |
-| U0 | U3 | Host | `SET_FEATURE(PORT_SUSPEND)` |
+| U0 | U3 | Host | `SetPortFeature(PORT_LINK_STATE)` with link-state value `3` in the high byte of `wIndex`; no-op unless the port is Enabled |
 | U3 | U0 | Host or device | Host resume or device-initiated remote wakeup (LFPS + link resume sequence) |
 
 **Transition constraints:**

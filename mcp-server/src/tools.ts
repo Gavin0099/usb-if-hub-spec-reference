@@ -11,6 +11,8 @@ import { findGovernedTable, loadManifest } from "./manifest.js";
 import { getDriftStatus } from "./fingerprint.js";
 
 const SPEC_FAMILY_ENUM = ["usb20", "usb3", "any"] as const;
+const TERM_TYPE_ENUM = ["field", "bit", "selector", "request", "any"] as const;
+type TermType = (typeof TERM_TYPE_ENUM)[number];
 
 function normStr(v: unknown): string {
   return typeof v === "string" ? v.trim().toLowerCase() : "";
@@ -144,6 +146,18 @@ function registerLookupFeatureSelector(server: McpServer) {
 
 const PORT_STATUS_BIT_TABLES = ["usb20_hub_port_status_bit_matrix", "usb3_ss_hub_port_status_bit_matrix"];
 
+export function portStatusResultItem(entry: NormalizedEntry): Record<string, unknown> {
+  return {
+    ...baseResultItem(entry),
+    field: entry.raw["field"] ?? null,
+    bit: entry.raw["bit"] ?? null,
+    bit_range: entry.raw["bit_range"] ?? null,
+    name: entry.raw["name"] ?? null,
+    status: entry.raw["status"] ?? null,
+    value_encoding: entry.raw["value_encoding"] ?? null,
+  };
+}
+
 function registerLookupPortStatusBit(server: McpServer) {
   server.registerTool(
     "lookup_port_status_bit",
@@ -164,14 +178,7 @@ function registerLookupPortStatusBit(server: McpServer) {
         })
       );
 
-      const envelope = buildEnvelope(bit_name, matches, (entry) => ({
-        ...baseResultItem(entry),
-        field: entry.raw["field"] ?? null,
-        bit: entry.raw["bit"] ?? null,
-        name: entry.raw["name"] ?? null,
-        status: entry.raw["status"] ?? null,
-        description: entry.raw["description"] ?? null,
-      }));
+      const envelope = buildEnvelope(bit_name, matches, portStatusResultItem);
       return textResult(envelope);
     }
   );
@@ -227,6 +234,31 @@ const ALL_TERM_TABLES = [
   ...CLASS_REQUEST_TABLES,
 ];
 
+function tablesForTermType(termType: TermType): string[] {
+  switch (termType) {
+    case "field":
+      return HUB_FIELD_TABLES;
+    case "bit":
+      return PORT_STATUS_BIT_TABLES;
+    case "selector":
+      return FEATURE_SELECTOR_TABLES;
+    case "request":
+      return CLASS_REQUEST_TABLES;
+    default:
+      return ALL_TERM_TABLES;
+  }
+}
+
+export function findVersionComparisonMatches(
+  term: string,
+  termType: TermType = "any"
+): NormalizedEntry[] {
+  const q = normStr(term).replace(/[^a-z0-9]+/g, "");
+  return tablesForTermType(termType).flatMap((tableId) =>
+    entriesOf(tableId).filter((entry) => entry.searchKeys.includes(q))
+  );
+}
+
 function registerCompareUsbVersions(server: McpServer) {
   server.registerTool(
     "compare_usb_versions",
@@ -235,14 +267,11 @@ function registerCompareUsbVersions(server: McpServer) {
         "Compare a field, bit, selector, or request name across USB 2.0 and USB 3.x governed tables. Returns both entries (or 'not_governed_in_this_family' for the missing side) side by side. Never infers that identical naming implies identical runtime behavior.",
       inputSchema: {
         term: z.string(),
-        term_type: z.enum(["field", "bit", "selector", "request", "any"]).default("any"),
+        term_type: z.enum(TERM_TYPE_ENUM).default("any"),
       },
     },
-    async ({ term }) => {
-      const q = normStr(term);
-      const matches = ALL_TERM_TABLES.flatMap((tableId) =>
-        entriesOf(tableId).filter((entry) => entry.searchKeys.includes(q.replace(/[^a-z0-9]+/g, "")))
-      );
+    async ({ term, term_type }) => {
+      const matches = findVersionComparisonMatches(term, term_type);
 
       const usb20 = matches.filter((m) => m.specFamily === "usb20");
       const usb3 = matches.filter((m) => m.specFamily === "usb3");

@@ -20,9 +20,9 @@ from pathlib import Path
 from typing import Any
 
 from validate_entry_verification_gate import (
-    DEFAULT_MATRICES,
     DEFAULT_PACKET_DIR,
     TABLE_RULES,
+    USB2_DEFAULT_MATRICES,
     _entry_id,
     _load_packets,
     _load_yaml,
@@ -119,8 +119,15 @@ def _allowed_verified_ids(table_rules: dict[str, dict[str, Any]]) -> set[str]:
     return allowed
 
 
-def _packet_target_ids(packet_dir: Path) -> set[str]:
-    return set(_load_packets(packet_dir))
+def _packet_target_ids(packet_dir: Path, spec: str | None = None) -> set[str]:
+    packets = _load_packets(packet_dir)
+    if spec is None:
+        return set(packets)
+    return {
+        entry_id
+        for entry_id, packet in packets.items()
+        if ((packet.get("doc") or {}).get("evidence") or {}).get("spec") == spec
+    }
 
 
 def _add_count_error(
@@ -150,8 +157,17 @@ def validate(
     expected_inferred: int = EXPECTED_INFERRED,
     expected_missing: int = EXPECTED_MISSING,
 ) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
-    matrices = DEFAULT_MATRICES if matrices is None else matrices
-    table_rules = TABLE_RULES if table_rules is None else table_rules
+    matrices = USB2_DEFAULT_MATRICES if matrices is None else matrices
+    if table_rules is None:
+        usb2_table_keys = {
+            _matrix_table_key(path, _load_yaml(path))
+            for path in matrices
+        }
+        table_rules = {
+            key: rule
+            for key, rule in TABLE_RULES.items()
+            if key in usb2_table_keys
+        }
     locked_reviewed_ids = _locked_reviewed_boundary_ids() if locked_reviewed_ids is None else locked_reviewed_ids
 
     entries = _collect_entries(matrices)
@@ -161,7 +177,7 @@ def validate(
     inferred_ids = buckets["inferred"]
     missing_ids = buckets["missing"]
     allowed_verified = _allowed_verified_ids(table_rules)
-    packet_targets = _packet_target_ids(packet_dir)
+    packet_targets = _packet_target_ids(packet_dir, spec="usb20")
 
     errors: list[dict[str, Any]] = []
     _add_count_error(errors, "TRACKED_COUNT_MISMATCH", "tracked", expected_tracked, len(entries))

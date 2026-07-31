@@ -46,7 +46,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MATRICES = [
+USB2_DEFAULT_MATRICES = [
     ROOT / "tables" / "port_status_bit_matrix.yaml",
     ROOT / "tables" / "hub_descriptor_matrix.yaml",
     ROOT / "tables" / "class_request_matrix.yaml",
@@ -56,6 +56,8 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "hub_interrupt_endpoint_matrix.yaml",
     ROOT / "tables" / "wHubCharacteristics_bit_matrix.yaml",
     ROOT / "tables" / "escalation_trigger_matrix.yaml",
+]
+USB3_DEFAULT_MATRICES = [
     ROOT / "tables" / "ss_hub_descriptor_matrix.yaml",
     ROOT / "tables" / "ss_port_status_bit_matrix.yaml",
     ROOT / "tables" / "ss_feature_selector_matrix.yaml",
@@ -63,7 +65,9 @@ DEFAULT_MATRICES = [
     ROOT / "tables" / "ss_hub_interrupt_endpoint_matrix.yaml",
     ROOT / "tables" / "ss_hub_characteristics_bit_matrix.yaml",
 ]
+DEFAULT_MATRICES = [*USB2_DEFAULT_MATRICES, *USB3_DEFAULT_MATRICES]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
+DEFAULT_PACKET_SCHEMA = ROOT / "contract" / "entry_verification_packet_schema.yaml"
 
 TABLE_RULES = {
     "port_status_bit_matrix": {
@@ -580,6 +584,59 @@ def _entry_gate_rule(rule: dict[str, Any], entry_id: str) -> dict[str, Any]:
     return rule
 
 
+def _packet_schema_errors(packet: dict[str, Any], loc: str) -> list[dict[str, str]]:
+    """Apply the executable subset of entry_verification_packet_schema.yaml."""
+    schema = _load_yaml(DEFAULT_PACKET_SCHEMA)
+    errors: list[dict[str, str]] = []
+
+    def fail(code: str, message: str) -> None:
+        errors.append({"code": code, "message": f"{loc}: {message}"})
+
+    for field in schema.get("packet_required_fields") or []:
+        if field not in packet:
+            fail("PACKET_REQUIRED_FIELD_MISSING", f"packet missing required field '{field}'")
+
+    for container_name, schema_key in (
+        ("target", "target_required_fields"),
+        ("evidence", "evidence_required_fields"),
+        ("verification_scope", "verification_scope_required_fields"),
+        ("result", "result_required_fields"),
+    ):
+        container = packet.get(container_name)
+        if not isinstance(container, dict):
+            fail("PACKET_REQUIRED_OBJECT_INVALID", f"packet field '{container_name}' must be an object")
+            continue
+        for field in schema.get(schema_key) or []:
+            if field not in container:
+                fail(
+                    "PACKET_NESTED_REQUIRED_FIELD_MISSING",
+                    f"packet {container_name} missing required field '{field}'",
+                )
+
+    valid = schema.get("valid_values") or {}
+    target = packet.get("target") or {}
+    evidence = packet.get("evidence") or {}
+    result = packet.get("result") or {}
+    checks = (
+        ("target.surface", target.get("surface"), valid.get("target_surface") or []),
+        ("evidence.spec", evidence.get("spec"), valid.get("spec") or []),
+        ("evidence.quoted_surface", evidence.get("quoted_surface"), valid.get("quoted_surface") or []),
+        (
+            "result.evidence_status",
+            result.get("evidence_status"),
+            valid.get("result_evidence_status") or [],
+        ),
+    )
+    for field, value, allowed in checks:
+        if value not in allowed:
+            fail(
+                "PACKET_VALUE_OUTSIDE_SCHEMA",
+                f"{field} value {value!r} is not in schema valid_values",
+            )
+
+    return errors
+
+
 def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
 
@@ -622,6 +679,7 @@ def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dic
             continue
 
         packet = packet_info["doc"]
+        errors.extend(_packet_schema_errors(packet, loc))
         result = packet.get("result") or {}
         scope = packet.get("verification_scope") or {}
         target = packet.get("target") or {}

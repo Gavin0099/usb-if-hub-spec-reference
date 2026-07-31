@@ -112,7 +112,7 @@ flowchart LR
 
     U0 -->|"LGOU1"| U1
     U0 -->|"LGOU2"| U2
-    U0 -->|"PORT_SUSPEND"| U3
+    U0 -->|"PORT_LINK_STATE=U3"| U3
     U0 -->|"錯誤"| Recovery
     U1 -->|"LFPS 退出"| U0
     U1 -->|"U2 timer"| U2
@@ -147,7 +147,7 @@ flowchart LR
 | Polling | U0 | Training 成功；link 進入 active |
 | Polling | Recovery, SS.Disabled | Training 失敗；進入 recovery 或 disabled |
 | U0 | U1, U2 | 裝置或 host 發起 LPM entry |
-| U0 | U3 | Host 發出 `SET_FEATURE(PORT_SUSPEND)` |
+| U0 | U3 | Host 發出 `SetPortFeature(PORT_LINK_STATE)` 並指定 link-state value `3`；port 未 Enabled 時為 no-op |
 | U0 | Recovery | 發生錯誤；link 進入 recovery |
 | U1 | U0 | LPM 退出（LFPS handshake） |
 | U1 | U2 | 在 U1 期間 U2 inactivity timer 到期 |

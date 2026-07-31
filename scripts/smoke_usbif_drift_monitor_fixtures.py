@@ -34,6 +34,20 @@ CASES = [
         "note": "different hash → drift event produced",
     },
     {
+        "name": "changed_etag",
+        "fixture_dir": "changed_etag",
+        "expected_drift_events": 1,
+        "expected_snapshots": 1,
+        "note": "same hash but different ETag → drift event produced",
+    },
+    {
+        "name": "etag_first_observation",
+        "fixture_dir": "etag_first_observation",
+        "expected_drift_events": 0,
+        "expected_snapshots": 1,
+        "note": "first observed ETag does not create false drift",
+    },
+    {
         "name": "missing_previous",
         "fixture_dir": "missing_previous",
         "expected_drift_events": 0,

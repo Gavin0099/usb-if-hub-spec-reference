@@ -66,7 +66,9 @@ semantic_verification_claimed: false
 | GET_TT_STATE | 0x0A | SS hub 無 TT |
 | STOP_TT | 0x0B | SS hub 無 TT |
 
-SET_FEATURE PORT_SUSPEND / CLEAR_FEATURE PORT_SUSPEND 亦不適用：SS hub 以 U1/U2 policy 取代 suspend。
+SET_FEATURE PORT_SUSPEND / CLEAR_FEATURE PORT_SUSPEND 亦不適用：SuperSpeed hub
+以 U1/U2/U3 link states 表示 suspend，host-directed U3 使用
+`SetPortFeature(PORT_LINK_STATE)`。
 
 ## SS 專用 Feature Selectors
 

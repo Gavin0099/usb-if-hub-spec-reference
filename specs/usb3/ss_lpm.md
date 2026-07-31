@@ -61,8 +61,8 @@ wValue high byte 的 timeout 編碼語意超出本頁 verified scope；timeout �
 ## U3（Suspend）
 
 - U3 是最深的省電狀態；對應 USB 2.0 的 Suspend。
-- Host 透過 SET_FEATURE(PORT_SUSPEND) 觸發 U3。
-- `PORT_SUSPEND` bit（wPortStatus bit 2）反映 U3 狀態（verified）。
+- Host 以 `SetPortFeature(PORT_LINK_STATE)` 並在 `wIndex` 高位元組指定 link-state value `3` 請求進入 U3；port 未 Enabled 時此請求為 no-op。
+- SuperSpeed 沒有 `PORT_SUSPEND` status bit；`wPortStatus` bit 2 是 `PORT_OVER_CURRENT`。
 - U3 進入和離場的完整序列（包含 resume signaling）超出本頁 verified scope。
 
 ## wPortStatus 中的 LPM 相關 bits
@@ -71,7 +71,7 @@ wValue high byte 的 timeout 編碼語意超出本頁 verified scope；timeout �
 
 | Bit | 名稱 | 說明 |
 |---|---|---|
-| wPortStatus bit 2 | PORT_SUSPEND | Port 處於 U3 suspend 狀態 |
+| wPortStatus bit 2 | PORT_OVER_CURRENT | Port over-current status |
 | wPortStatus bits[8:5] | PORT_LINK_STATE | 目前 link state（12 個值） |
 
 ## 本頁不宣告

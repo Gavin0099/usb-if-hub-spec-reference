@@ -36,12 +36,12 @@ This page does not answer:
 2. **GET_DESCRIPTOR(DeviceDescriptor)**: Read device descriptor; confirm bDeviceClass=0x09 (Hub).
 3. **SET_ADDRESS**: Assign USB address.
 4. **GET_DESCRIPTOR(HubDescriptor)**: Read SS Hub Descriptor (USB 3.x-specific bDescriptorType=0x2A).
-5. **SET_HUB_DEPTH** (required for SS hubs): Inform hub of its depth in the bus topology.
-6. **SET_CONFIGURATION**: Activate configuration.
+5. **SET_CONFIGURATION**: Activate configuration.
+6. **SET_HUB_DEPTH** (required for SS hubs): Inform the configured hub of its depth in the bus topology.
 7. **Port power on**: Apply port power per wHubCharacteristics (ganged or per-port).
 8. **Wait bPwrOn2PwrGood × 2 ms**: Wait for port power to stabilize.
 
-> **Step 5 (SET_HUB_DEPTH) is a mandatory step unique to USB 3.x SS hubs**; USB 2.0 hubs do not require this request.
+> **Step 6 (SET_HUB_DEPTH) is a mandatory step unique to USB 3.x SS hubs and must be issued after configuration**; a hub that is not configured has undefined response behavior for this request.
 
 ## SET_HUB_DEPTH Request
 
@@ -55,7 +55,7 @@ This page does not answer:
 
 - Root hub or SS hub directly attached to root hub: depth = 0.
 - Each additional hub tier: depth +1; maximum depth = 5.
-- xHCI must send this request before completing hub configuration.
+- The host must send this request after `SET_CONFIGURATION` and before enabling downstream ports.
 
 ## Key Differences from USB 2.0 Hub Enumeration
 

@@ -34,6 +34,12 @@ CASES = [
         "note": "verified entry with a packet but broad scope must fail",
     },
     {
+        "name": "invalid_packet_spec_outside_schema",
+        "expected_exit": 1,
+        "expected_error_codes": ["PACKET_VALUE_OUTSIDE_SCHEMA"],
+        "note": "packet spec value must be admitted by the executable packet schema",
+    },
+    {
         "name": "valid_verified_pilot",
         "expected_exit": 0,
         "expected_error_codes": [],

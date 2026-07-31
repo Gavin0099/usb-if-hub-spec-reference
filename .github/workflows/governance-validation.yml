@@ -24,6 +24,8 @@ on:
       - "contract/**"
       - "specs/**"
       - "wiki/**"
+      - "mcp-server/**"
+      - "monitor/**"
   pull_request:
     branches: [main]
     paths:
@@ -37,6 +39,8 @@ on:
       - "contract/**"
       - "specs/**"
       - "wiki/**"
+      - "mcp-server/**"
+      - "monitor/**"
   workflow_dispatch:
 
 jobs:
@@ -54,8 +58,20 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
       - name: Install dependencies
         run: pip install pyyaml
+
+      - name: Install MCP dependencies
+        working-directory: mcp-server
+        run: npm ci
+
+      - name: MCP build and regression tests
+        working-directory: mcp-server
+        run: npm test
 
       - name: Source registry fixture smoke
         run: python scripts/smoke_validate_source_registry_fixtures.py

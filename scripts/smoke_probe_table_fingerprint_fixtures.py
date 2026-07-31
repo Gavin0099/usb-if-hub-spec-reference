@@ -6,10 +6,12 @@ Cases:
   hash_changed   pre-written stale baseline, table was modified, exit 1, drift_count=1
   baseline_fresh run baseline mode with no prior baseline, exit 0, 1 table fingerprinted
   compact_latest compact duplicate baseline entries, exit 0, 1 entry retained
+  newline_equivalent CRLF and LF forms produce the same governed-text hash
 """
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -60,6 +62,15 @@ CASES = [
         "expected_entries_removed": 1,
         "note": "duplicate baseline entries compacted to latest table_id entry",
     },
+    {
+        "name": "newline_equivalent",
+        "fixture_dir": "no_drift",
+        "mode": "check",
+        "setup": "baseline_then_rewrite_line_endings",
+        "expected_exit": 0,
+        "expected_drift_count": 0,
+        "note": "CRLF/LF checkout differences do not create false drift",
+    },
 ]
 
 
@@ -84,7 +95,52 @@ def run_case(case: dict) -> dict:
         result_exit = -1
         stderr_text = ""
 
-        if case["setup"] == "baseline_then_check":
+        if case["setup"] == "baseline_then_rewrite_line_endings":
+            copied_fixture = tmpdir_path / "fixture"
+            shutil.copytree(fdir, copied_fixture)
+            manifest_path = copied_fixture / "manifest.yaml"
+            table_path = next((copied_fixture / "tables").glob("*.yaml"))
+            manifest_path.write_text(
+                manifest_path.read_text(encoding="utf-8").replace(
+                    "tables/test_table_a.yaml", table_path.as_posix()
+                ),
+                encoding="utf-8",
+            )
+            canonical = table_path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+            table_path.write_bytes(canonical.replace(b"\n", b"\r\n"))
+            r1 = subprocess.run(
+                [
+                    sys.executable, str(PROBE),
+                    "--mode", "baseline",
+                    "--manifest", str(manifest_path),
+                    "--baseline-out", str(baseline_path),
+                ],
+                capture_output=True, text=True,
+            )
+            if r1.returncode != 0:
+                return {
+                    "name": case["name"],
+                    "result": "FAIL",
+                    "note": case["note"],
+                    "detail": f"baseline step failed: {r1.stderr[:200]}",
+                    "expected_exit": case["expected_exit"],
+                    "actual_exit": r1.returncode,
+                }
+            table_path.write_bytes(canonical)
+            r2 = subprocess.run(
+                [
+                    sys.executable, str(PROBE),
+                    "--mode", "check",
+                    "--manifest", str(manifest_path),
+                    "--baseline-in", str(baseline_path),
+                    "--receipt-out", str(receipt_path),
+                ],
+                capture_output=True, text=True,
+            )
+            result_exit = r2.returncode
+            stderr_text = r2.stderr
+
+        elif case["setup"] == "baseline_then_check":
             # Step 1: run baseline to record hashes.
             r1 = subprocess.run(
                 [

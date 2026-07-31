@@ -8,7 +8,11 @@ import {
 } from "../dist/envelope.js";
 import { loadManifest } from "../dist/manifest.js";
 import { getTable } from "../dist/tableStore.js";
-import { findHubFieldMatches } from "../dist/tools.js";
+import {
+  findHubFieldMatches,
+  findVersionComparisonMatches,
+  portStatusResultItem,
+} from "../dist/tools.js";
 
 test("wHubCharacteristics lookup does not absorb child bit groups", () => {
   const matches = findHubFieldMatches("wHubCharacteristics", "any");
@@ -57,4 +61,27 @@ test("claim ceiling is loaded from the governed manifest", () => {
     getCannotEstablish(),
     loadManifest().claim_ceiling.cannot_establish
   );
+});
+
+test("PORT_LINK_STATE exposes range and encoding identity without behavior prose", () => {
+  const table = getTable("usb3_ss_hub_port_status_bit_matrix");
+  const entry = table.entries.find((candidate) => candidate.raw.name === "PORT_LINK_STATE");
+
+  assert.ok(entry);
+  const result = portStatusResultItem(entry);
+  assert.equal(result.bit_range, "8:5");
+  assert.equal(result.value_encoding["0011"], "U3");
+  assert.equal(Object.hasOwn(result, "description"), false);
+});
+
+test("compare term_type restricts matching to the requested governed surface", () => {
+  const anyMatches = findVersionComparisonMatches("PORT_RESET", "any");
+  const selectorMatches = findVersionComparisonMatches("PORT_RESET", "selector");
+  const bitMatches = findVersionComparisonMatches("PORT_RESET", "bit");
+
+  assert.ok(anyMatches.length > selectorMatches.length);
+  assert.ok(selectorMatches.length > 0);
+  assert.ok(bitMatches.length > 0);
+  assert.ok(selectorMatches.every((entry) => entry.tableId.includes("feature_selector")));
+  assert.ok(bitMatches.every((entry) => entry.tableId.includes("port_status_bit")));
 });

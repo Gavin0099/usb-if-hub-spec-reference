@@ -17,9 +17,9 @@ from pathlib import Path
 from typing import Any
 
 from validate_entry_verification_gate import (
-    DEFAULT_MATRICES,
     DEFAULT_PACKET_DIR,
     TABLE_RULES,
+    USB2_DEFAULT_MATRICES,
     _entry_id,
     _load_packets,
     _load_yaml,
@@ -59,7 +59,7 @@ def validate(
 ) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     errors: list[dict[str, Any]] = []
     expected_tables = EXPECTED_USB2_TABLES if expected_tables is None else expected_tables
-    default_matrices = DEFAULT_MATRICES if default_matrices is None else default_matrices
+    default_matrices = USB2_DEFAULT_MATRICES if default_matrices is None else default_matrices
     table_rules = TABLE_RULES if table_rules is None else table_rules
     packets = _load_packets(packet_dir)
 

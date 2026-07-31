@@ -112,7 +112,7 @@ flowchart LR
 
     U0 -->|"LGOU1"| U1
     U0 -->|"LGOU2"| U2
-    U0 -->|"PORT_SUSPEND"| U3
+    U0 -->|"PORT_LINK_STATE=U3"| U3
     U0 -->|"error"| Recovery
     U1 -->|"LFPS exit"| U0
     U1 -->|"U2 timer"| U2
@@ -147,7 +147,7 @@ The following table shows common next-state paths. This is an orientation summar
 | Polling | U0 | Training succeeded; link becomes active |
 | Polling | Recovery, SS.Disabled | Training failed; recovery or disable |
 | U0 | U1, U2 | Device or host initiates LPM entry |
-| U0 | U3 | Host issues `SET_FEATURE(PORT_SUSPEND)` |
+| U0 | U3 | Host issues `SetPortFeature(PORT_LINK_STATE)` with link-state value `3`; no-op unless the port is Enabled |
 | U0 | Recovery | Error condition; link enters recovery |
 | U1 | U0 | LPM exit (LFPS handshake) |
 | U1 | U2 | U2 inactivity timer expires while in U1 |
