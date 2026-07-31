@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "npm.cmd --prefix mcp-server test",
+  "exit_code": 0,
+  "started_at": "2026-07-31T03:53:17Z",
+  "finished_at": "2026-07-31T03:53:21Z",
+  "runner": "npm-node-test",
+  "linked_commit": "1586aaa76e55254922e6289dc963e63a9792a3b4",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/mcp-envelope-20260731.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
