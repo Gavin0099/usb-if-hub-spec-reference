@@ -185,6 +185,8 @@ jobs:
     timeout-minutes: 15
     needs: fixture-smoke
     continue-on-error: true
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v6
 
@@ -385,10 +387,8 @@ jobs:
             --receipt-out ci-receipts/wiki_consistency_feature_selector_matrix.json
 
       - name: Wiki QA probe ??hub class requests (observation-only, requires ANTHROPIC_API_KEY secret)
-        if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+        if: ${{ env.ANTHROPIC_API_KEY != '' }}
         continue-on-error: true
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python scripts/probe_wiki_qa.py \
             --page specs/hub_class_requests.md \
