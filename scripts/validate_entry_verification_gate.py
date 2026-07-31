@@ -857,7 +857,18 @@ def main() -> None:
                 for key, rule in TABLE_RULES.items()
             },
         }
-        args.receipt_out.write_text(json.dumps(receipt, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
+        try:
+            args.receipt_out.write_text(
+                json.dumps(receipt, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
+            )
+        except OSError as exc:
+            # A receipt-write I/O failure (e.g. transient file lock) is an
+            # infrastructure error, not a validation result. Keep it out of
+            # the PASS/FAIL exit-code space (0/1) so callers never confuse
+            # it with an actual gate failure, and avoid an unhandled
+            # traceback polluting stderr/exit code.
+            print(f"[RECEIPT_WRITE_ERROR] failed to write receipt to {args.receipt_out}: {exc}", file=sys.stderr)
+            sys.exit(2)
 
     sys.exit(0 if result == "PASS" else 1)
 

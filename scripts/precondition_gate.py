@@ -48,7 +48,15 @@ def main() -> int:
             "errors": errors,
             "authority_ceiling": "entry_level_verified_gate_only",
         }
-        args.receipt_out.write_text(json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
+        try:
+            args.receipt_out.write_text(
+                json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
+            )
+        except OSError as exc:
+            # See scripts/validate_entry_verification_gate.py: keep receipt-write
+            # I/O failures out of the PASS/FAIL exit-code space (0/1).
+            print(f"[RECEIPT_WRITE_ERROR] failed to write receipt to {args.receipt_out}: {exc}", file=sys.stderr)
+            return 2
 
     return 0 if result == "PASS" else 1
 
