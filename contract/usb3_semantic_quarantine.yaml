@@ -1,0 +1,150 @@
+schema_version: 1
+title: USB 3.x Semantic Quarantine Registry
+last_updated: 2026-07-31
+origin: >
+  Recorded per governance review commit 6ff1c56 (Verdict: CHANGES_REQUESTED),
+  finding 1 [BLOCKING]: "不應立刻抽出共用 Framework" — the USB3 wiki/spec
+  surface is uniformly claim_level: inferred with
+  semantic_verification_claimed: false, while covering behavioral content
+  (LTSSM transitions, wake/latency values, enumeration sequencing). Extracting
+  a shared cross-pack Framework before this is formally quarantined risks
+  formalizing an unverified semantic model that could be copied to future
+  Spec Packs (e.g. USB PD).
+
+scope: >
+  This registry is the single, checkable precondition gate for any future
+  work that treats specs/usb3/** content as a stable input to a shared/
+  cross-pack Framework (see PLAN.md priority P3: "抽出最小 Core Framework").
+  It replaces scattered per-page prose disclaimers as the enforcement point:
+  P3 (and any earlier step that depends on USB3 semantic stability) MUST NOT
+  proceed while `quarantine_status: active` and any listed page still fails
+  its `release_conditions`.
+
+quarantine_status: active
+
+blocks:
+  - PLAN.md priority P3 (抽出最小 Core Framework)
+  - Any cross-pack schema unification that treats specs/usb3/** as a
+    semantically-verified source rather than an inferred/orientation-only
+    reference.
+
+release_conditions:
+  - id: per_page_semantic_review
+    description: >
+      Each quarantined page below has had its behavioral claims (state
+      transitions, timing/latency values, enumeration ordering) reviewed
+      against an authority-A USB 3.2 source section and either (a) promoted
+      to claim_level: verified with semantic_verification_claimed: true and
+      explicit section_reference, or (b) explicitly re-confirmed as
+      orientation-only with unchanged inferred status.
+  - id: behavioral_content_boundary_explicit
+    description: >
+      Every page that describes LTSSM transitions, link power (U1/U2/U3)
+      timing, or hub enumeration sequencing carries an explicit "本頁不宣告"
+      boundary list naming the specific behavioral claims excluded (already
+      present on ss_ltssm.md and ss_lpm.md as of this registry's creation;
+      not yet audited page-by-page for the remaining 25 pages).
+  - id: validator_coverage
+    description: >
+      A validator script (analogous to scripts/validate_entry_verification_gate.py)
+      exists and passes, confirming every page listed below still declares
+      claim_level: inferred and semantic_verification_claimed: false, so this
+      registry cannot silently drift out of sync with the actual frontmatter.
+      NOT YET IMPLEMENTED as of this registry's creation (2026-07-31).
+
+not_yet_satisfied:
+  - per_page_semantic_review
+  - validator_coverage
+
+# All pages currently under specs/usb3/** (27 of 27, confirmed by grep on
+# 2026-07-31) declare claim_level: inferred and semantic_verification_claimed:
+# false. Listed here individually so future partial promotion (per-page, not
+# all-or-nothing) can be tracked without editing this file's structure.
+quarantined_pages:
+  - path: specs/usb3/index.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_feature_selectors.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_characteristics.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_class_requests.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_compound_device.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_configuration.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_descriptor.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_device_class.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_enumeration.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_interrupt_endpoint.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_power_budget.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_hub_power.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_lpm.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_ltssm.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_no_transaction_translator.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_packet_types.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_port_indicators.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_port_state_machine.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_port_status_bits.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_signaling.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_speed_detection.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_standard_descriptors.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_standard_device_requests.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_test_modes.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_transactions.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_usb_device_states.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+  - path: specs/usb3/ss_usb_transfer_types.md
+    claim_level: inferred
+    semantic_verification_claimed: false
+
+notes: >
+  This registry does NOT itself change any page's frontmatter or claim_level.
+  It only records the precondition gate. Promoting any page out of quarantine
+  requires a separate, evidence-backed edit to that page's frontmatter plus an
+  update to this file removing/updating its entry — not a bulk status change.
