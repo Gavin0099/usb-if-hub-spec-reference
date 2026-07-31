@@ -1,0 +1,16 @@
+# .governance/version_manifest.yaml
+#
+# Repo-side governance layout version declaration. These values describe the
+# governance components deliberately adopted and validated in this repository;
+# they are compared with ai-governance-framework/governance/runtime/
+# required_versions.yaml during session start.
+
+schema_version: "1.0"
+last_updated: "2026-07-31"
+governance_version: "0.4.0"
+
+contract_schema_version: "1.2.0"
+runtime_entrypoint_version: "1.1.0"
+hook_wiring_version: "1.0.0"
+artifact_layout_version: "1.0.0"
+memory_layout_version: "1.0.0"

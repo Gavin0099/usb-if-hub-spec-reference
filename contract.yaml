@@ -29,4 +29,7 @@ ai_behavior_override:
   - AGENTS.base.md
 rule_roots:
   - governance/rules
-validators: []
+validators:
+  - scripts/validate_hub_governed_surface_manifest.py
+  - scripts/validate_entry_verification_gate.py
+  - scripts/validate_reviewed_boundary_lock.py

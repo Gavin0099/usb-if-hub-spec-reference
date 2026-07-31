@@ -1,0 +1,41 @@
+{
+  "result_schema": "external_repo_smoke_result.v0.2",
+  "generated_at": "2026-07-31T03:49:33Z",
+  "ok": true,
+  "repo_root": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference",
+  "plan_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\PLAN.md",
+  "contract_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\contract.yaml",
+  "framework_root": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\ai-governance-framework",
+  "framework_commit": "61111f5fa732b61a12c38ff0b2c0f6e3b4cde287",
+  "framework_worktree_clean": true,
+  "framework_worktree_changes": [],
+  "rules": [
+    "common",
+    "avalonia",
+    "cpp",
+    "csharp",
+    "gl-hub-vendor-cmd",
+    "kernel-driver",
+    "python",
+    "refactor",
+    "swift"
+  ],
+  "pre_task_ok": true,
+  "session_start_ok": true,
+  "post_task_ok": null,
+  "post_task_cases": [],
+  "token_summary": {
+    "prompt_tokens": null,
+    "completion_tokens": null,
+    "total_tokens": null,
+    "token_source_summary": "unknown",
+    "token_observability_level": "none",
+    "provenance_warning": "not_provided_by_smoke",
+    "decision_usage_allowed": false,
+    "analysis_safe_for_decision": false
+  },
+  "warnings": [
+    "Decision policy advisory: proceeding under assumption: missing=confirmed evidence for the premise; why=this is a provisional action, not proof that the change is correct; next=keep the change reversible and run the targeted verification"
+  ],
+  "errors": []
+}
