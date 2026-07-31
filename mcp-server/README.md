@@ -28,8 +28,15 @@ field names, bit positions, encodings — never runtime/firmware behavior. See
 cd mcp-server
 npm install
 npm run build
-copy .env.example .env   # then edit MCP_API_KEYS to a real random value
 $env:MCP_API_KEYS = "<your-key>"; node dist/index.js
+```
+
+In a Codespaces **Bash** terminal, use this equivalent command (do not prefix
+`env` with `$`):
+
+```bash
+export MCP_API_KEYS='<your-key>'
+node dist/index.js
 ```
 
 - `GET /healthz` — unauthenticated liveness check.
@@ -45,8 +52,9 @@ account, and the code is already in this repo:
 
 1. Open a Codespace on this repo.
 2. `cd mcp-server && npm install && npm run build`
-3. Set a real key: `$env:MCP_API_KEYS = "<random-key>"` (or add it as a
-   Codespace secret instead of typing it inline).
+3. Set a real key in the Codespaces **Bash** terminal:
+   `export MCP_API_KEYS='<random-key>'` (or add it as a Codespace secret
+   instead of typing it inline).
 4. `node dist/index.js`
 5. In the **Ports** panel, forward port `8787` and set visibility to
    **Public**. Copy the generated `https://<name>-8787.app.github.dev` URL.

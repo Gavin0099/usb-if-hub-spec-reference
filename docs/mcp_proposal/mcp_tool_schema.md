@@ -49,6 +49,14 @@ envelope. No tool may return a bare value without it.
 }
 ```
 
+Each object in `result` also carries its own `claim_level`,
+`verified_scope`, `reviewed_meaning`, `spec_family`, `source`, and
+`evidence_packet_id`. For a multi-match response, the root fields are a
+conservative summary: `claim_level` is `verified` only when every match is
+verified, and provenance fields are non-null only when the value is shared by
+all matches. A mixed result must never inherit the strongest claim or source
+from its first item.
+
 `resultType` is the field the 2026-07-28 spec requires on every result
 (`"complete"` for ordinary results; `"input_required"` is only used by the
 Multi Round-Trip Requests pattern, which none of these tools use since they
@@ -65,6 +73,11 @@ If `match_found` is `false`, `result` is an empty array and `claim_level` is
 `"not_governed"`. The MCP server must **not** attempt to answer from general
 USB knowledge — that is the agent's job to refuse, not the server's job to
 guess.
+
+For `lookup_hub_field`, a descriptor field name matches `field_name`; a
+characteristics bit group matches `semantic_group`. The parent `field` value
+on a bit-group row is not a lookup alias, so querying `wHubCharacteristics`
+does not implicitly return every child bit group.
 
 ---
 

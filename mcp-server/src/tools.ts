@@ -1,7 +1,12 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { getTable, specFamilyMatches, type NormalizedEntry } from "./tableStore.js";
-import { buildEnvelope, resolveEvidencePacketId, CANNOT_ESTABLISH } from "./envelope.js";
+import {
+  buildEnvelope,
+  entryEnvelopeMetadata,
+  getCannotEstablish,
+  summarizeMatches,
+} from "./envelope.js";
 import { findGovernedTable, loadManifest } from "./manifest.js";
 import { getDriftStatus } from "./fingerprint.js";
 
@@ -24,14 +29,10 @@ function entriesOf(tableId: string): NormalizedEntry[] {
 /** Common result-item shape: identity/position/encoding fields only, plus provenance pointers. */
 function baseResultItem(entry: NormalizedEntry): Record<string, unknown> {
   return {
-    table_id: entry.tableId,
-    entry_id: entry.entryId,
-    spec_family: entry.specFamily,
-    claim_level: entry.claimLevel ?? null,
+    ...entryEnvelopeMetadata(entry),
     evidence_status: entry.evidenceStatus ?? null,
     section_anchor: entry.sectionAnchor ?? null,
     notes: entry.notes ?? null,
-    evidence_packet_id: resolveEvidencePacketId(entry),
   };
 }
 
@@ -46,6 +47,29 @@ const HUB_FIELD_TABLES = [
   "usb3_ss_hub_interrupt_endpoint_matrix",
 ];
 
+export function findHubFieldMatches(
+  fieldName: string,
+  specFamily: (typeof SPEC_FAMILY_ENUM)[number] = "any"
+): NormalizedEntry[] {
+  const q = normStr(fieldName);
+  return HUB_FIELD_TABLES.flatMap((tableId) =>
+    entriesOf(tableId).filter((entry) => {
+      if (!specFamilyMatches(entry.specFamily, specFamily)) return false;
+      const raw = entry.raw;
+      // raw.field is a parent/container field on bit-group entries. Including
+      // it makes a query for wHubCharacteristics return every child bit group
+      // and incorrectly merges their claim boundaries with the descriptor
+      // field itself.
+      const candidates = [
+        raw["field_name"],
+        raw["semantic_group"],
+        entry.entryId,
+      ].map(normStr);
+      return candidates.includes(q);
+    })
+  );
+}
+
 function registerLookupHubField(server: McpServer) {
   server.registerTool(
     "lookup_hub_field",
@@ -58,20 +82,7 @@ function registerLookupHubField(server: McpServer) {
       },
     },
     async ({ field_name, spec_family }) => {
-      const q = normStr(field_name);
-      const matches = HUB_FIELD_TABLES.flatMap((tableId) =>
-        entriesOf(tableId).filter((entry) => {
-          if (!specFamilyMatches(entry.specFamily, spec_family)) return false;
-          const raw = entry.raw;
-          const candidates = [
-            raw["field_name"],
-            raw["semantic_group"],
-            raw["field"],
-            entry.entryId,
-          ].map(normStr);
-          return candidates.includes(q);
-        })
-      );
+      const matches = findHubFieldMatches(field_name, spec_family);
 
       const envelope = buildEnvelope(field_name, matches, (entry) => ({
         ...baseResultItem(entry),
@@ -236,6 +247,7 @@ function registerCompareUsbVersions(server: McpServer) {
       const usb20 = matches.filter((m) => m.specFamily === "usb20");
       const usb3 = matches.filter((m) => m.specFamily === "usb3");
       const { driftStatus } = getDriftStatus();
+      const summary = summarizeMatches(matches);
 
       const toItem = (entry: NormalizedEntry) => ({
         ...baseResultItem(entry),
@@ -257,17 +269,8 @@ function registerCompareUsbVersions(server: McpServer) {
             usb3: usb3.length > 0 ? usb3.map(toItem) : "not_governed_in_this_family",
           },
         ],
-        claim_level: matches.some((m) => m.claimLevel === "verified")
-          ? ("verified" as const)
-          : matches.length > 0
-            ? ("reviewed" as const)
-            : ("not_governed" as const),
-        verified_scope: null,
-        reviewed_meaning: null,
-        spec_family: null,
-        source: null,
-        evidence_packet_id: null,
-        cannot_establish: CANNOT_ESTABLISH,
+        ...summary,
+        cannot_establish: getCannotEstablish(),
         drift_status: driftStatus,
         non_claim: "Identical naming across usb20/usb3 does not imply identical runtime behavior.",
       };
@@ -395,7 +398,7 @@ function registerEscalateSpecConflict(server: McpServer) {
         spec_family: null,
         source: null,
         evidence_packet_id: null,
-        cannot_establish: CANNOT_ESTABLISH,
+        cannot_establish: getCannotEstablish(),
         drift_status: driftStatus,
         disclaimer:
           "This tool does not resolve standard/project/observed fact conflicts. Per AGENTS.md, conflict resolution belongs to the consuming repo's escalation process. project_fact and observed_fact are unverified caller input, not endorsed by this server.",

@@ -6,6 +6,9 @@ import { apiKeyAuth } from "./auth.js";
 import { registerAllTools } from "./tools.js";
 
 const PORT = Number(process.env.MCP_PORT ?? 8787);
+// Bind explicitly to every IPv4 interface. This lets a Codespaces forwarded
+// port reach the process instead of only the loopback interface.
+const HOST = process.env.MCP_HOST ?? "0.0.0.0";
 
 function createMcpServer(): McpServer {
   const server = new McpServer({
@@ -54,8 +57,8 @@ async function main() {
     }
   });
 
-  app.listen(PORT, () => {
-    console.log(`usb-if-hub-spec-reference MCP server listening on :${PORT} (Streamable HTTP, stateless)`);
+  app.listen(PORT, HOST, () => {
+    console.log(`usb-if-hub-spec-reference MCP server listening on ${HOST}:${PORT} (Streamable HTTP, stateless)`);
     console.log(`Health check: GET /healthz (no auth). MCP endpoint: ALL /mcp (API key required).`);
   });
 }
