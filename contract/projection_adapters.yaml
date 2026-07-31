@@ -10,8 +10,15 @@ origin: >
   Rather than accept a lossy projection or bulk-edit any of the 15 governed
   tables, a table needing special handling gets an explicit, reviewed
   adapter entry here instead. This file is read by
-  scripts/probe_canonical_entry_projection.py; it does not alter any
-  governed table, and it is not itself a governed table.
+  scripts/probe_canonical_entry_projection.py (advisory probe),
+  scripts/export_canonical_entry_index.py, and
+  scripts/validate_canonical_entry_projection_invariants.py (P2' canonical
+  projection promotion — see PLAN.md). It does not alter any governed
+  table, and it is not itself one of the 15 governed tables — but it is now
+  a load-bearing input to the committed derivative export
+  exports/canonical_entry_index.yaml: an incorrect or incomplete adapter
+  entry here can make that export wrong even though every governed table
+  stays untouched.
 
 adapters:
   usb20_hub_port_status_bit_matrix:

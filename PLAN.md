@@ -901,6 +901,52 @@ Claim ceiling: manual topology migration and static/CI wiring only. This phase d
 not claim F-7 full-update completion, installed local hooks, runtime enforcement,
 memory normalization, semantic USB verification, or full governance adoption.
 
+### Phase P2-CANON-1 - Canonical Entry Projection: Pilot, then Promotion (not migration)
+
+- P1 (`scripts/probe_canonical_entry_projection.py`, read-only) proved that all
+  15 governed tables project losslessly into a three-column canonical view
+  (`entry_id` / `claim_level` / `source_ref`): 204/204 entries, 0 identity
+  gaps, 0 claim-level defaults, 0 source-ref gaps, adapter validation passed.
+  Wired into advisory/report-only CI as P1-CI; no governed table was modified.
+- 2026-07-31 P2 decision: do **not** migrate any of the 15 governed tables to
+  a unified schema. The projection already delivers what migration would buy
+  (a unified entry model), at zero cost/risk to the 15 tables, their 38
+  validators, 24 smoke scripts, 153 evidence packets, the fingerprint
+  baseline, and the published consumer CI contract. Migrating the tables
+  instead would trade a delivered result for a large, asymmetric, and
+  reversible-only-by-plan cost. This confirms round 1's `[WARNING]` against
+  direct migration (commit 6ff1c56) as a data-backed conclusion, not caution.
+- P2 is therefore **canonical projection promotion**, not schema migration:
+  - `scripts/export_canonical_entry_index.py` promotes the projection from an
+    advisory report to a versioned, committed export,
+    `exports/canonical_entry_index.yaml` (parallel to
+    `exports/hub_governed_surface_manifest.yaml`). Derivative artifact only —
+    its `claim_ceiling` block explicitly establishes no claim beyond what
+    already exists on the source governed table entry.
+  - `scripts/validate_canonical_entry_projection_invariants.py` is the real
+    gate: it fails if the live projection stops being lossless, or if the
+    committed export no longer matches a fresh regeneration from the current
+    governed tables/adapters (drift detection). Registered in `contract.yaml`
+    `validators:`.
+  - `contract/projection_adapters.yaml` updated to reflect that it is now a
+    load-bearing input to a committed derivative export, not only an
+    advisory-probe input.
+- Explicit non-goals for this phase (unchanged from P1): no modification to
+  any of the 15 governed tables' field names, id keys, or structure; no
+  modification to evidence packets or the fingerprint baseline; no change to
+  the consumer CI gate contract; the USB2/USB3 `status:` naming divergence is
+  a known, accepted difference handled at the projection layer, not
+  retrofitted onto the original tables.
+- Deferred (not part of this phase): promoting the P1-CI advisory CI step (or
+  the new invariants validator) to the Required CI tier. That is a separate
+  decision to be made after this phase accumulates verified green runs.
+- Rollback: revert the export, validator, and contract-registration commits.
+  No table data migration ever occurred, so there is nothing to roll back at
+  the data layer.
+
+Claim ceiling: derivative projection/export promotion only. Establishes no new
+USB semantic claim; the 15 governed tables remain the sole source of truth.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -924,6 +970,7 @@ memory normalization, semantic USB verification, or full governance adoption.
 - `python scripts\validate_ss_hub_interrupt_endpoint_matrix.py`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
+- `python scripts\validate_canonical_entry_projection_invariants.py`
 - `python scripts\smoke_consumer_integration_fixtures.py`
 - `python scripts\smoke_manifest_consumer_reference.py`
 - `npm.cmd run build`

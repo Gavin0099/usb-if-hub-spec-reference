@@ -38,3 +38,4 @@ validators:
   - scripts/validate_hub_governed_surface_manifest.py
   - scripts/validate_entry_verification_gate.py
   - scripts/validate_reviewed_boundary_lock.py
+  - scripts/validate_canonical_entry_projection_invariants.py
