@@ -40,6 +40,12 @@ CASES = [
         "note": "packet spec value must be admitted by the executable packet schema",
     },
     {
+        "name": "invalid_unregistered_packet_source",
+        "expected_exit": 1,
+        "expected_error_codes": ["PACKET_SOURCE_ID_UNREGISTERED"],
+        "note": "even non-promoted packet document_ref source IDs must resolve through the source registry",
+    },
+    {
         "name": "valid_verified_pilot",
         "expected_exit": 0,
         "expected_error_codes": [],

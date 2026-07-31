@@ -19,6 +19,8 @@ invariants:
   - A packet may exist while evidence_status remains review_required.
   - eligible_for_verified=false is the safe default.
   - verification_scope must list exclusions explicitly.
+  - Any primary_source_id or fallback_source_id in evidence.document_ref must
+    resolve through evidence/source_registry.yaml.
   - Human-reviewable packet fields may exist before promotion occurs.
 
 packet_required_fields:

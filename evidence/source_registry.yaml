@@ -122,19 +122,9 @@ sources:
 notes:
   - This registry maps source authority and intended claim usage before runtime monitor/validator integration.
   - >-
-    Known gap (2026-07-30, intentionally unresolved): 48 files under
-    evidence/entry_verification_packets/usb3/*.yaml carry
-    document_ref.fallback_source_id: archive_usb32_pdf, which is NOT
-    registered here. An archive.org search (advancedsearch API,
-    title:(USB 3.2 Specification)) returned zero results, so no verifiable
-    free mirror exists to register as authority_level archive_fallback.
-    Separately, usb.org's document-library terms restrict USB-IF
-    specification documents to limited, personal, internal use and
-    prohibit redistribution, so downloading and committing the actual
-    spec PDF/ZIP into this (public) repo as a substitute fallback is out
-    of scope. No validator currently cross-checks packet document_ref
-    source_ids against this registry, so this dangling reference does not
-    fail any existing gate. Resolution options if revisited: (a) obtain a
-    licensed/permitted mirror URL, (b) remove the fallback_source_id field
-    from the 48 packets and rely on usb32_spec (primary) only, or (c)
-    accept as documented residual risk.
+    Resolved 2026-07-31: the unregistered archive_usb32_pdf fallback was
+    removed from all 48 USB 3.x entry packets. Those packets now rely on
+    the registered normative official usb32_spec primary source. The entry
+    verification gate now fails when a packet document_ref names an
+    unregistered primary or fallback source, preventing recurrence without
+    promoting an unverified mirror or redistributing USB-IF documents.

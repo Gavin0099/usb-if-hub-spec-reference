@@ -68,6 +68,7 @@ USB3_DEFAULT_MATRICES = [
 DEFAULT_MATRICES = [*USB2_DEFAULT_MATRICES, *USB3_DEFAULT_MATRICES]
 DEFAULT_PACKET_DIR = ROOT / "evidence" / "entry_verification_packets"
 DEFAULT_PACKET_SCHEMA = ROOT / "contract" / "entry_verification_packet_schema.yaml"
+DEFAULT_SOURCE_REGISTRY = ROOT / "evidence" / "source_registry.yaml"
 
 TABLE_RULES = {
     "port_status_bit_matrix": {
@@ -584,7 +585,52 @@ def _entry_gate_rule(rule: dict[str, Any], entry_id: str) -> dict[str, Any]:
     return rule
 
 
-def _packet_schema_errors(packet: dict[str, Any], loc: str) -> list[dict[str, str]]:
+def _registered_source_ids(source_registry_path: Path) -> set[str]:
+    registry = _load_yaml(source_registry_path)
+    return {
+        str(source.get("source_id"))
+        for source in (registry.get("sources") or [])
+        if isinstance(source, dict) and source.get("source_id")
+    }
+
+
+def _packet_source_errors(
+    packet: dict[str, Any],
+    loc: str,
+    registered_source_ids: set[str],
+) -> list[dict[str, str]]:
+    errors: list[dict[str, str]] = []
+    evidence = packet.get("evidence") or {}
+    document_ref = evidence.get("document_ref")
+    if document_ref is None:
+        return errors
+    if not isinstance(document_ref, dict):
+        return [
+            {
+                "code": "PACKET_DOCUMENT_REF_INVALID",
+                "message": f"{loc}: evidence.document_ref must be an object when present",
+            }
+        ]
+
+    for source_field in ("primary_source_id", "fallback_source_id"):
+        source_id = document_ref.get(source_field)
+        if source_id and source_id not in registered_source_ids:
+            errors.append(
+                {
+                    "code": "PACKET_SOURCE_ID_UNREGISTERED",
+                    "message": (
+                        f"{loc}: evidence.document_ref.{source_field} value "
+                        f"{source_id!r} is not registered in the source registry"
+                    ),
+                }
+            )
+    return errors
+
+
+def _packet_schema_errors(
+    packet: dict[str, Any],
+    loc: str,
+) -> list[dict[str, str]]:
     """Apply the executable subset of entry_verification_packet_schema.yaml."""
     schema = _load_yaml(DEFAULT_PACKET_SCHEMA)
     errors: list[dict[str, str]] = []
@@ -637,7 +683,11 @@ def _packet_schema_errors(packet: dict[str, Any], loc: str) -> list[dict[str, st
     return errors
 
 
-def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
+def _validate_matrix(
+    matrix_path: Path,
+    packet_dir: Path,
+    packets: dict[str, dict[str, Any]],
+) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
 
     def fail(code: str, message: str) -> None:
@@ -723,11 +773,30 @@ def _validate_matrix(matrix_path: Path, packet_dir: Path, packets: dict[str, dic
     return errors
 
 
-def validate(matrix_paths: list[Path], packet_dir: Path) -> tuple[str, list[dict[str, str]]]:
+def validate(
+    matrix_paths: list[Path],
+    packet_dir: Path,
+    source_registry_path: Path = DEFAULT_SOURCE_REGISTRY,
+) -> tuple[str, list[dict[str, str]]]:
     packets = _load_packets(packet_dir)
+    registered_source_ids = _registered_source_ids(source_registry_path)
     errors: list[dict[str, str]] = []
+    for packet_info in packets.values():
+        errors.extend(
+            _packet_source_errors(
+                packet_info["doc"],
+                f"packet {packet_info['path']}",
+                registered_source_ids,
+            )
+        )
     for matrix_path in matrix_paths:
-        errors.extend(_validate_matrix(matrix_path, packet_dir, packets))
+        errors.extend(
+            _validate_matrix(
+                matrix_path,
+                packet_dir,
+                packets,
+            )
+        )
     return ("FAIL" if errors else "PASS"), errors
 
 
@@ -735,11 +804,16 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--matrix", type=Path, action="append")
     parser.add_argument("--packet-dir", type=Path, default=DEFAULT_PACKET_DIR)
+    parser.add_argument(
+        "--source-registry",
+        type=Path,
+        default=DEFAULT_SOURCE_REGISTRY,
+    )
     parser.add_argument("--receipt-out", type=Path)
     args = parser.parse_args()
 
     matrix_paths = args.matrix if args.matrix else DEFAULT_MATRICES
-    result, errors = validate(matrix_paths, args.packet_dir)
+    result, errors = validate(matrix_paths, args.packet_dir, args.source_registry)
 
     for e in errors:
         print(f"[FAIL] {e['code']}: {e['message']}")
@@ -751,6 +825,7 @@ def main() -> None:
             "validator": "validate_entry_verification_gate",
             "matrices": [str(p) for p in matrix_paths],
             "packet_dir": str(args.packet_dir),
+            "source_registry": str(args.source_registry),
             "result": result,
             "authority_ceiling": "entry_level_verified_gate_only",
             "errors": errors,

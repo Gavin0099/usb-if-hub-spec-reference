@@ -123,6 +123,9 @@ jobs:
       - name: Entry gate coverage fixture smoke
         run: python scripts/smoke_validate_entry_gate_coverage_fixtures.py
 
+      - name: Entry verification gate fixture smoke
+        run: python scripts/smoke_validate_entry_verification_gate_fixtures.py
+
       - name: Reviewed boundary lock fixture smoke
         run: python scripts/smoke_validate_reviewed_boundary_lock_fixtures.py
 

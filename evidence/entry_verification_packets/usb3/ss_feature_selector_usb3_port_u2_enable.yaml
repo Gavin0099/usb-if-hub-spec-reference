@@ -13,7 +13,6 @@ evidence:
   page: null
   document_ref:
     primary_source_id: usb32_spec
-    fallback_source_id: archive_usb32_pdf
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
