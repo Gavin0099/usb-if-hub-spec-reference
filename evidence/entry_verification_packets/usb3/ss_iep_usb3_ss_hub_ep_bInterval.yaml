@@ -17,23 +17,18 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.15.1 specifies bInterval for the SuperSpeed hub
-    status-change endpoint using microframe-based encoding: bInterval value
-    1–16 maps to a polling period of 2^(bInterval-1) × 125 microseconds.
-    This is identical to the USB 2.0 High-Speed encoding. USB 3.x does not
-    use the direct-millisecond encoding that applies to USB 2.0 Full-Speed
-    and Low-Speed hubs.
+    USB 3.2 Revision 1.1 Section 10.15.1 specifies bInterval value 8 for
+    the SuperSpeed hub status-change endpoint and identifies it as the
+    maximum allowable interval.
   reviewer_note: >
-    Reviewed for field identity only: field name bInterval, encoding unit
-    (125 μs microframe), valid range (1–16), and formula (2^(bInterval-1)×125μs).
+    Reviewed for field identity only: field name bInterval, required value 8,
+    and the maximum-allowable-interval boundary.
     Does not verify actual host scheduling, polling latency, interrupt delivery
     timing, or firmware bInterval assignment correctness.
 
 review_checklist:
   - Confirm §10.15.1 is the correct USB 3.x hub interrupt endpoint surface.
-  - Confirm bInterval uses microframe encoding: 2^(bInterval-1) × 125 μs.
-  - Confirm valid range is bInterval 1–16.
-  - Confirm USB 3.x does not use direct-ms encoding.
+  - Confirm bInterval is 8 and is labeled as the maximum allowable interval.
   - Confirm no scheduling, latency, or firmware behavior is claimed.
 
 verification_scope:
@@ -49,8 +44,7 @@ result:
   evidence_status: reviewed
   promotion_note: >
     Eligible for entry-level verified promotion for `usb3_ss_hub_ep_bInterval`.
-    Promotion limited to field name, encoding unit (125 μs microframe), valid
-    range (1–16), and formula identity only.
+    Promotion limited to field name, required value 8, and boundary identity only.
 
 non_claims:
   - This packet does not verify actual host scheduling or polling latency.

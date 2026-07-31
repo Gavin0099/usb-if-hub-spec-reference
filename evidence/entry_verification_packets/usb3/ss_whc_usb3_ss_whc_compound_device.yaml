@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bit[2]
+    USB 3.2 Section 10.15.2.1 Table 10-5 defines wHubCharacteristics bit[2]
     as the Compound Device flag for SuperSpeed hubs. Encoding: 0=not a compound
     device, 1=hub is part of a compound device. This field retains the same
     encoding as the USB 2.0 equivalent.
@@ -28,7 +28,7 @@ evidence:
     link routing, or firmware compliance.
 
 review_checklist:
-  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm §10.15.2.1 Table 10-5 is the correct USB 3.x wHubCharacteristics surface.
   - Confirm bit[2] is the Compound Device indicator.
   - Confirm encoding: 0=not compound, 1=compound device.
   - Confirm no topology, routing, or firmware behavior is claimed.

@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines bDescriptorType for the SuperSpeed Hub
+    USB 3.2 Section 10.15.2.1 defines bDescriptorType for the SuperSpeed Hub
     Descriptor as 0x2A. This distinguishes it from the USB 2.0 Hub Descriptor
     type (0x29). The field is at offset 1, size 1 byte.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     Does not claim descriptor dump correctness or firmware behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
   - Confirm bDescriptorType=0x2A for SuperSpeed Hub Descriptor (not 0x29).
   - Confirm offset=1, size=1B.
   - Confirm no descriptor dump or device behavior is claimed.

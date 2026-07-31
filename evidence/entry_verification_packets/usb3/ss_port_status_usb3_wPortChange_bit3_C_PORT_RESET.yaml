@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 3 as
+    USB 3.2 Section 10.16.2.6.2 Table 10-14 defines wPortChange bit 3 as
     C_PORT_RESET: set when a standard (non-BH) port reset sequence has
     completed. Distinct from C_BH_PORT_RESET (bit 4) which covers Warm Reset.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     completion timing, LTSSM post-reset state, or host stack behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm Section 10.16.2.6.2 Table 10-14 is the correct SS port change surface.
   - Confirm C_PORT_RESET is at wPortChange bit 3.
   - Confirm spec_family=usb3 is consistent.
   - Confirm no reset completion timing or LTSSM post-reset behavior is claimed.

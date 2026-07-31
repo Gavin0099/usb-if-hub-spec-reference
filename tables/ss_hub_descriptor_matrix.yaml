@@ -2,7 +2,7 @@ matrix_id: usb3_ss_hub_descriptor_field_matrix
 version: "0.2"
 description: >
   USB 3.x SuperSpeed hub descriptor field governance.
-  USB 3.2 Specification Rev 1.0, Section 10.14.2.1.
+  USB 3.2 Specification Rev 1.1, Section 10.15.2.1, Table 10-5.
   Verified scope: descriptor field identity only (field name, offset, size).
   Does not claim descriptor dump correctness, firmware behavior, or
   electrical compliance.
@@ -13,18 +13,21 @@ scope:
   topic: ss_hub_descriptor_field
 
 entries:
-  - field_id: usb3_hub_desc_bLength
+  - field_id: usb3_hub_desc_bDescLength
+    legacy_entry_ids:
+      - usb3_hub_desc_bLength
     offset: 0
-    field_name: bLength
+    field_name: bDescLength
     size: 1 byte
-    role: Total hub descriptor length (minimum 12 bytes, excluding DeviceRemovable).
+    role: Number of bytes in the Enhanced SuperSpeed hub descriptor, including this byte.
+    expected_value: 12
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
-      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bLength.yaml
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bDescLength.yaml
       verified_scope: descriptor_field_identity_only
     notes: "Verified: field name, offset, and size identity only."
 
@@ -36,7 +39,7 @@ entries:
     expected_value: "0x2A"
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -51,7 +54,7 @@ entries:
     role: Number of downstream-facing ports; maximum 15.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -69,7 +72,7 @@ entries:
       No TT Think Time field (SS hubs have no TT). Bits[15:6] reserved.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -84,7 +87,7 @@ entries:
     role: Time from power-on to power-good, in units of 2ms.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -96,10 +99,12 @@ entries:
     offset: 6
     field_name: bHubContrCurrent
     size: 1 byte
-    role: Maximum current consumed by hub controller in mA.
+    role: >
+      Maximum current required by the hub controller electronics, encoded in
+      the applicable aCurrentUnit for the bus on which the hub is operating.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -107,35 +112,34 @@ entries:
       verified_scope: descriptor_field_identity_only
     notes: "Verified: field name, offset, and size identity only."
 
-  - field_id: usb3_hub_desc_bHubDecLat
+  - field_id: usb3_hub_desc_bHubHdrDecLat
+    legacy_entry_ids:
+      - usb3_hub_desc_bHubDecLat
     offset: 7
-    field_name: bHubDecLat
+    field_name: bHubHdrDecLat
     size: 1 byte
     role: >
-      Hub packet header decode latency in units of 0.1 μs.
-      Root hubs report 0. Used by the system to calculate U1/U2 exit
-      latency budget. Not present in USB 2.0 hub descriptor.
+      Hub packet header decode latency encoding. Values 01H through 0AH
+      represent 0.1 through 1.0 microseconds; 00H means much less than
+      0.1 microseconds.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
-      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bHubDecLat.yaml
+      verification_packet: evidence/entry_verification_packets/usb3/ss_hub_descriptor_usb3_bHubHdrDecLat.yaml
       verified_scope: descriptor_field_identity_only
-    notes: "Verified: field name, offset, size, and unit (0.1μs) identity only. USB 3.x-only field."
+    notes: "Verified: field name, offset, size, and bounded latency encoding identity only."
 
   - field_id: usb3_hub_desc_wHubDelay
     offset: 8
     field_name: wHubDelay
     size: 2 bytes
-    role: >
-      Average delay added by the hub in nanoseconds. Used by xHCI to
-      calculate the allowed U1/U2 entry latency budget. Not present in
-      USB 2.0 hub descriptor.
+    role: Maximum hub packet-forwarding delay in nanoseconds.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -146,14 +150,13 @@ entries:
   - field_id: usb3_hub_desc_DeviceRemovable
     offset: 10
     field_name: DeviceRemovable
-    size: variable
+    size: 2 bytes
     role: >
-      Bit-per-port bitmap. Bit N=1 means port N+1 is non-removable.
-      Variable length based on bNbrPorts. Same semantics as USB 2.0,
-      but USB 3.x does not include the PortPwrCtrlMask field.
+      Two-byte bit-per-port bitmap. Bit 0 is reserved; bit n describes port n.
+      A value of 0 means removable and 1 means non-removable.
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.1 Table 10-3"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     claim_level: verified
     evidence_status: reviewed
     evidence:

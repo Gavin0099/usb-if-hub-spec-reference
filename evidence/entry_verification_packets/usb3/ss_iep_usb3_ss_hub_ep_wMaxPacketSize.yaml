@@ -17,21 +17,17 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.15.1 specifies the minimum wMaxPacketSize for the
-    SuperSpeed hub status-change endpoint as sufficient to carry status change
-    bits for the hub itself and all downstream ports. The minimum size is
-    ceil((bNbrPorts + 1) / 8) bytes, where the +1 accounts for the hub's own
-    status bit. This calculation is identical to the USB 2.0 requirement.
+    USB 3.2 Revision 1.1 Section 10.15.1 specifies wMaxPacketSize value 2
+    for the SuperSpeed hub status-change endpoint.
   reviewer_note: >
-    Reviewed for field identity only: field name wMaxPacketSize, minimum size
-    calculation (ceil((bNbrPorts+1)/8)), and port-count linkage. Does not verify
+    Reviewed for field identity only: field name wMaxPacketSize and required
+    value 2. Does not verify
     firmware packet-size assignment correctness, runtime packet delivery,
     or flow control behavior.
 
 review_checklist:
   - Confirm §10.15.1 is the correct USB 3.x hub interrupt endpoint surface.
-  - Confirm minimum wMaxPacketSize = ceil((bNbrPorts + 1) / 8) bytes.
-  - Confirm the +1 accounts for the hub's own status bit.
+  - Confirm wMaxPacketSize is 2.
   - Confirm no firmware assignment or runtime delivery behavior is claimed.
 
 verification_scope:
@@ -46,8 +42,7 @@ result:
   evidence_status: reviewed
   promotion_note: >
     Eligible for entry-level verified promotion for `usb3_ss_hub_ep_wMaxPacketSize`.
-    Promotion limited to field name and minimum size calculation identity
-    (ceil((bNbrPorts+1)/8)) only.
+    Promotion limited to field name and required value 2 only.
 
 non_claims:
   - This packet does not verify firmware packet-size assignment correctness.

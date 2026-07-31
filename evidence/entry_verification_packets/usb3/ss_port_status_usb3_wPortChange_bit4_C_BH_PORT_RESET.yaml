@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 4 as
+    USB 3.2 Section 10.16.2.6.2 Table 10-14 defines wPortChange bit 4 as
     C_BH_PORT_RESET: set when a Warm Reset (BH Port Reset) sequence has
     completed. This bit is SS-only; USB 2.0 ports do not have this change bit.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     BH Reset timing, LFPS signaling, or warm reset recovery behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm Section 10.16.2.6.2 Table 10-14 is the correct SS port change surface.
   - Confirm C_BH_PORT_RESET is at wPortChange bit 4.
   - Confirm this is SS-only (not present in USB 2.0).
   - Confirm spec_family=usb3 is consistent.

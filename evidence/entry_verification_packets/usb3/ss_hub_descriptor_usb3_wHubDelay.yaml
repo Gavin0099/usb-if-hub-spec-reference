@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,21 +17,19 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines wHubDelay at offset 8, size 2 bytes.
-    Represents the average delay added by the hub in nanoseconds. Used by
-    xHCI to calculate U1/U2 entry latency budget. This field is new in USB 3.x
-    and not present in the USB 2.0 hub descriptor.
+    USB 3.2 Revision 1.1 Section 10.15.2.1 Table 10-5 defines wHubDelay
+    at offset 8, size 2 bytes. It represents the maximum hub-introduced
+    packet-forwarding delay in nanoseconds.
   reviewer_note: >
     Reviewed for descriptor field identity only: field name, offset=8, size=2B,
     unit boundary (ns). The narrow claim is that wHubDelay exists at this
-    position with this unit. Does not claim U1/U2 latency budget correctness
-    or xHCI behavior.
+    position with this unit. Does not claim runtime latency correctness.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
   - Confirm wHubDelay at offset 8, size 2B, unit ns.
   - Confirm this field is absent from USB 2.0 hub descriptor.
-  - Confirm no U1/U2 latency budget behavior or xHCI behavior is claimed.
+  - Confirm no runtime packet-forwarding latency behavior is claimed.
 
 verification_scope:
   claim: descriptor_field_identity_only

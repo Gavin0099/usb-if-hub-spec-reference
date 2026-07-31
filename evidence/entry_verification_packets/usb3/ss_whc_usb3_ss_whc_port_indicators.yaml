@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bit[5]
+    USB 3.2 Section 10.15.2.1 Table 10-5 defines wHubCharacteristics bit[5]
     as the Port Indicators Supported flag for SuperSpeed hubs. Encoding:
     0=port indicators not supported, 1=port indicators supported. Note that
     in USB 3.x, this field occupies bit[5] rather than bit[7] as in USB 2.0,
@@ -31,7 +31,7 @@ evidence:
     color encoding, SET_FEATURE(PORT_INDICATOR) routing, or firmware compliance.
 
 review_checklist:
-  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm §10.15.2.1 Table 10-5 is the correct USB 3.x wHubCharacteristics surface.
   - Confirm bit[5] is the Port Indicators Supported flag in USB 3.x.
   - Confirm encoding: 0=not supported, 1=supported.
   - Confirm bit position difference from USB 2.0 (bit[7]) is documented.

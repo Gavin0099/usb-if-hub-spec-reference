@@ -2,7 +2,7 @@
 title: Version Source Map
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-08"
+last_reviewed: "2026-07-31"
 usb_versions:
   - usb_2_0
   - usb_3_2
@@ -39,7 +39,7 @@ semantic_verification_claimed: false
 |---|---|---|
 | USB 2.0 | USB 2.0 Specification | Current primary anchor for this repo |
 | USB 2.1 | USB 2.0 plus LPM / ECN material | Usually a supplement, not a separate hub semantic baseline |
-| USB 3.2 | USB 3.2 Specification Rev 1.0 | USB 3.x hub class governed surface added (6 matrices, 53 entries); primary source for SS hub descriptor, port status, characteristics, feature selectors, interrupt endpoint |
+| USB 3.2 | USB 3.2 Specification Rev 1.1 | Primary source for the six governed USB 3.x hub matrices; this does not promote the wider USB 3.x wiki surface |
 | USB4 | USB4 specification family | Not directly equivalent to traditional USB 2.0 hub class semantics |
 
 ## Review Flow
@@ -53,14 +53,14 @@ semantic_verification_claimed: false
 
 This repo's USB 3.2 coverage:
 
-| Category | Section (USB 3.2 Rev 1.0) | Governed State |
+| Category | Section (USB 3.2 Rev 1.1) | Governed State |
 |---|---|---|
-| SS Hub Descriptor fields | §10.14.2 | 9 entries verified |
-| SS Hub Class Requests | §10.14.1 | 10 entries verified |
-| SS Port Status / Change bits | §10.14.2 | 15 defined entries verified |
-| SS Feature Selectors | §10.14.1 | 6 entries verified |
-| SS wHubCharacteristics bits | §10.14.2 Table 10-10 | 4 entries verified, 1 reviewed |
-| SS Hub Interrupt Endpoint fields | §10.14.2 | 4 entries verified |
+| SS Hub Descriptor fields | §10.15.2.1, Table 10-5 | 9 entries verified |
+| SS Hub Class Requests | §10.16.2, Table 10-7 | 10 entries verified |
+| SS Port Status / Change bits | §10.16.2.6.1 / §10.16.2.6.2, Tables 10-13 / 10-14 | 15 defined entries verified |
+| SS Feature Selectors | §10.16.2, Table 10-9 | 6 entries verified |
+| SS wHubCharacteristics bits | §10.15.2.1, Table 10-5 | 4 entries verified, 1 reviewed |
+| SS Hub Interrupt Endpoint fields | §10.15.1 | 4 entries verified |
 
 Wiki pages (ZH + EN): 25 pages per locale (CORE, EXT, FULL-1, FULL-2 phases).
 
@@ -68,6 +68,9 @@ Wiki pages (ZH + EN): 25 pages per locale (CORE, EXT, FULL-1, FULL-2 phases).
 
 - This repo was originally scoped as a USB 2.0 hub standard-side reference layer; the USB 3.x governed surface was added in subsequent phases.
 - Canonical authority bindings are defined in `contract/*.yaml` and `evidence/source_registry.yaml`.
+- The section map above was rechecked against the official USB 3.2 Revision 1.1
+  package and its Revision 1.0 redline. The claim remains limited to the
+  governed entry identity and encoding scopes recorded in each table.
 - Any scope expansion to new version/authority inputs must go through the existing review artifacts and evidence update workflow.
 
 ## Reference Navigation

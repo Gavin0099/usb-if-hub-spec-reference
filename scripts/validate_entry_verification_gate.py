@@ -371,13 +371,13 @@ TABLE_RULES = {
     # actually carry in common.
     "ss_hub_descriptor_matrix": {
         "allowed_entries": {
-            "usb3_hub_desc_bLength",
+            "usb3_hub_desc_bDescLength",
             "usb3_hub_desc_bDescriptorType",
             "usb3_hub_desc_bNbrPorts",
             "usb3_hub_desc_wHubCharacteristics",
             "usb3_hub_desc_bPwrOn2PwrGood",
             "usb3_hub_desc_bHubContrCurrent",
-            "usb3_hub_desc_bHubDecLat",
+            "usb3_hub_desc_bHubHdrDecLat",
             "usb3_hub_desc_wHubDelay",
             "usb3_hub_desc_DeviceRemovable",
         },

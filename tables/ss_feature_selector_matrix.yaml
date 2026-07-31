@@ -2,7 +2,7 @@ matrix_id: usb3_ss_feature_selector_matrix
 version: "0.2"
 description: >
   USB 3.x SuperSpeed hub feature selector governance.
-  USB 3.2 Specification Rev 1.0, Section 10.14 / Table 10-8.
+  USB 3.2 Specification Rev 1.1, Section 10.16.2 / Table 10-9.
   Verified scope: selector name / value / applicability / recipient identity only.
   Verified gate: PARTIAL / allowlist-only (USB3-FS-2 pilot, 6 entries).
   Does not claim U-state transition behavior, LTSSM behavior, xHCI policy,
@@ -18,7 +18,7 @@ entries:
 
   # ── SS-only port feature selectors ──────────────────────────────────────────
   # These selectors exist only in the SuperSpeed hub port feature selector
-  # namespace (USB 3.2 §10.14 Table 10-8). They are not present in USB 2.0
+  # namespace (USB 3.2 Rev 1.1 §10.16.2 Table 10-9). They are not present in USB 2.0
   # hub_feature_selector_matrix.
 
   - selector_id: usb3_port_u1_enable
@@ -31,7 +31,7 @@ entries:
       - ClearFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -54,7 +54,7 @@ entries:
       - ClearFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -76,7 +76,7 @@ entries:
       - SetFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -98,7 +98,7 @@ entries:
       - SetFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -120,7 +120,7 @@ entries:
       - SetFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -142,7 +142,7 @@ entries:
       - SetFeature
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14 Table 10-8"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9"
     claim_level: verified
     evidence_status: reviewed
     evidence:

@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14 Table 10-8 defines PORT_U2_ENABLE as a SS-only
+    USB 3.2 Section 10.16.2 Table 10-9 defines PORT_U2_ENABLE as a SS-only
     port feature selector with numeric value 18 (0x12), applicable to port
     recipients via SetFeature and ClearFeature requests.
   reviewer_note: >
@@ -27,7 +27,7 @@ evidence:
     port power policy, or firmware compliance.
 
 review_checklist:
-  - Confirm Section 10.14 Table 10-8 is the correct SS feature selector surface.
+  - Confirm Section 10.16.2 Table 10-9 is the correct SS feature selector surface.
   - Confirm PORT_U2_ENABLE selector value is 18 (0x12) for port recipient.
   - Confirm SetFeature and ClearFeature are the applicable requests.
   - Confirm no U2 state behavior or LTSSM transition is claimed.

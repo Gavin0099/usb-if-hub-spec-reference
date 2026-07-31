@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 5 as
+    USB 3.2 Section 10.16.2.6.2 Table 10-14 defines wPortChange bit 5 as
     C_PORT_LINK_STATE: set when the PORT_LINK_STATE field (wPortStatus
     bits[8:5]) has changed. This bit is SS-only; USB 2.0 does not have
     a link-state change bit.
@@ -28,7 +28,7 @@ evidence:
     transition behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm Section 10.16.2.6.2 Table 10-14 is the correct SS port change surface.
   - Confirm C_PORT_LINK_STATE is at wPortChange bit 5.
   - Confirm this is SS-only (not present in USB 2.0).
   - Confirm spec_family=usb3 is consistent.

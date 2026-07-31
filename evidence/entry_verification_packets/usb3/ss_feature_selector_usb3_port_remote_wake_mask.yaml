@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14 Table 10-8 defines PORT_REMOTE_WAKE_MASK as a
+    USB 3.2 Section 10.16.2 Table 10-9 defines PORT_REMOTE_WAKE_MASK as a
     SS-only port feature selector with numeric value 27 (0x1B), applicable
     to port recipients via SetFeature only. Wake mask encoding and routing
     behavior are outside this packet's verified scope.
@@ -28,7 +28,7 @@ evidence:
     OS power management, xHCI wake management, or firmware compliance.
 
 review_checklist:
-  - Confirm Section 10.14 Table 10-8 is the correct SS feature selector surface.
+  - Confirm Section 10.16.2 Table 10-9 is the correct SS feature selector surface.
   - Confirm PORT_REMOTE_WAKE_MASK selector value is 27 (0x1B) for port recipient.
   - Confirm SetFeature is the applicable request.
   - Confirm no wake mask encoding or routing behavior is claimed.

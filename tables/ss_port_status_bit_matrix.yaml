@@ -2,7 +2,7 @@ matrix_id: usb3_ss_hub_port_status_bit_matrix
 version: "0.2"
 description: >
   SuperSpeed hub wPortStatus / wPortChange bit-field governance.
-  USB 3.2 Specification Rev 1.0, Section 10.14.2.6.
+  USB 3.2 Specification Rev 1.1, Section 10.16.2.6.
   Version 0.2: 15 defined entries promoted to verified (bit name and bit
   position/range identity only). 4 reserved entries remain reviewed.
   Does not claim LTSSM behavior, xHCI interaction, U1/U2 power management
@@ -10,7 +10,7 @@ description: >
 spec_family: usb3
 source_spec:
   spec: USB 3.2
-  section: 10.14.2.6 / Hub port status and change fields
+  section: 10.16.2.6 / Hub port status and change fields
 
 entries:
   # ── wPortStatus bits ──────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit1.PORT_ENABLE
     field: wPortStatus
@@ -37,7 +37,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit2.PORT_OVER_CURRENT
     field: wPortStatus
@@ -49,7 +49,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit3.PORT_RESET
     field: wPortStatus
@@ -61,7 +61,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit4.RESERVED
     field: wPortStatus
@@ -73,7 +73,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bits85.PORT_LINK_STATE
     field: wPortStatus
@@ -104,7 +104,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit9.PORT_POWER
     field: wPortStatus
@@ -116,7 +116,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bits1210.PORT_SPEED
     field: wPortStatus
@@ -137,7 +137,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit13.PORT_U1_ENABLE
     field: wPortStatus
@@ -149,7 +149,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit14.PORT_U2_ENABLE
     field: wPortStatus
@@ -161,7 +161,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   - id: ss_wPortStatus.bit15.RESERVED
     field: wPortStatus
@@ -173,7 +173,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-11"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13"
 
   # ── wPortChange bits ──────────────────────────────────────────────────────
 
@@ -187,7 +187,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit1.RESERVED
     field: wPortChange
@@ -199,7 +199,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit2.C_PORT_OVER_CURRENT
     field: wPortChange
@@ -211,7 +211,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit3.C_PORT_RESET
     field: wPortChange
@@ -223,7 +223,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit4.C_BH_PORT_RESET
     field: wPortChange
@@ -235,7 +235,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit5.C_PORT_LINK_STATE
     field: wPortChange
@@ -247,7 +247,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bit6.C_PORT_CONFIG_ERROR
     field: wPortChange
@@ -259,7 +259,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"
 
   - id: ss_wPortChange.bits157.RESERVED
     field: wPortChange
@@ -271,4 +271,4 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2.6 Table 10-12"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2.6.2 Table 10-14"

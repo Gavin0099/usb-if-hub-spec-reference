@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,17 +17,17 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines bHubContrCurrent at offset 6, size 1 byte.
-    Represents the maximum current consumed by the hub controller in mA.
-    Same semantics as USB 2.0 hub descriptor bHubContrCurrent.
+    USB 3.2 Revision 1.1 Section 10.15.2.1 Table 10-5 defines
+    bHubContrCurrent at offset 6, size 1 byte. It encodes the maximum current
+    requirement using the applicable aCurrentUnit for the active bus.
   reviewer_note: >
     Reviewed for descriptor field identity only: field name, offset=6, size=1B.
-    Units are direct mA (not multiplied). Does not claim specific current values
+    The unit is bus-dependent. Does not claim specific current values
     or hub power delivery behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
-  - Confirm bHubContrCurrent at offset 6, size 1B, units=mA direct.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm bHubContrCurrent at offset 6, size 1B, with bus-dependent aCurrentUnit.
   - Confirm no current value or power delivery behavior is claimed.
 
 verification_scope:

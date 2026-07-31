@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bits[12:10]
+    USB 3.2 Section 10.16.2.6.1 Table 10-13 defines wPortStatus bits[12:10]
     as PORT_SPEED: a 3-bit field encoding the current connection speed.
     Values: 000=undefined, 001=Full_Speed (12 Mbps), 010=Low_Speed (1.5 Mbps),
     011=High_Speed (480 Mbps), 100=SuperSpeed (5 Gbps),
@@ -29,7 +29,7 @@ evidence:
     hardware, LTSSM training outcome, or xHCI speed negotiation.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm Section 10.16.2.6.1 Table 10-13 is the correct SS port status surface.
   - Confirm PORT_SPEED occupies wPortStatus bits[12:10].
   - Confirm the 6-value encoding table matches the specification.
   - Confirm spec_family=usb3 is consistent.

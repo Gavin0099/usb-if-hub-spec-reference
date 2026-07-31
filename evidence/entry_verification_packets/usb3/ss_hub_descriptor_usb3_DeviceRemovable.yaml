@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,20 +17,17 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines DeviceRemovable at offset 10, variable
-    size. Bit N=1 means port N+1 is non-removable. Same semantics as USB 2.0.
-    Note: USB 3.x hub descriptor does not include a PortPwrCtrlMask field
-    (present in USB 2.0 descriptor).
+    USB 3.2 Revision 1.1 Section 10.15.2.1 Table 10-5 defines
+    DeviceRemovable at offset 10, size 2 bytes. Bit 0 is reserved; bit n
+    describes port n. Zero means removable and one means non-removable.
   reviewer_note: >
     Reviewed for descriptor field identity only: field name, offset=10,
-    variable size, bit-per-port semantics boundary. Notes absence of
-    PortPwrCtrlMask vs USB 2.0. Does not verify port removability for
+    size 2 bytes and bit-per-port semantics boundary. Does not verify removability for
     any specific hub.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
-  - Confirm DeviceRemovable at offset 10, variable size, bit-per-port layout.
-  - Confirm PortPwrCtrlMask is absent from USB 3.x descriptor.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm DeviceRemovable at offset 10, size 2 bytes, bit-per-port layout.
   - Confirm no specific hub port removability is claimed.
 
 verification_scope:

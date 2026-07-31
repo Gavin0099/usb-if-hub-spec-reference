@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bits[8:5] as
+    USB 3.2 Section 10.16.2.6.1 Table 10-13 defines wPortStatus bits[8:5] as
     PORT_LINK_STATE: a 4-bit field encoding the current SS link state.
     Values: 0000=U0, 0001=U1, 0010=U2, 0011=U3, 0100=SS.Disabled,
     0101=Rx.Detect, 0110=SS.Inactive, 0111=Polling, 1000=Recovery,
@@ -29,7 +29,7 @@ evidence:
     transitions, U1/U2/U3 entry/exit timing, or link training behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm Section 10.16.2.6.1 Table 10-13 is the correct SS port status surface.
   - Confirm PORT_LINK_STATE occupies wPortStatus bits[8:5].
   - Confirm the 12-value encoding table matches the specification.
   - Confirm spec_family=usb3 is consistent.

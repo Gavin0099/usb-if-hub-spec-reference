@@ -71,10 +71,11 @@ sources:
       primary_source_id referenced by all 48 evidence/entry_verification_packets/usb3/*.yaml
       document_ref blocks. Document page confirmed live via fetch (title
       "USB 3.2 Revision 1.1 - June 2022", official download artifact
-      usb_32_202206_0.zip, 06/03/2022). This entry does not itself re-verify
-      any USB 3.2 section content; it only closes the source-registry
-      identity gap. Existing per-entry verified_scope boundaries in the
-      ss_* tables are unchanged.
+      usb_32_202206_0.zip, 06/03/2022). On 2026-07-31, the six governed
+      USB 3.x hub matrices and their entry packets were rechecked against
+      the Revision 1.1 document and its Revision 1.0 redline. This does
+      not promote any wider USB 3.x wiki claim or expand the per-entry
+      verified_scope boundaries.
 
   - source_id: usb4_spec_page
     title: USB4 Specification Page

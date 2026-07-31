@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 defines SET_HUB_DEPTH (bRequest=0x0C) as a
+    USB 3.2 Section 10.16.2 defines SET_HUB_DEPTH (bRequest=0x0C) as a
     SuperSpeed-only request (bmRequestType=0x20, wValue=hub_depth, wLength=0).
     Presence and requiredness: mandatory for all SS hubs. The xHCI must issue
     this request before addressing devices downstream of the hub.
@@ -30,7 +30,7 @@ evidence:
     algorithm, or firmware compliance.
 
 review_checklist:
-  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm Section 10.16.2 is the correct SS hub class request surface.
   - Confirm SET_HUB_DEPTH is bRequest=0x0C (SS-only, not in USB 2.0).
   - Confirm bmRequestType=0x20 (host-to-device, class, device).
   - Confirm SS-only mandatory status (not optional).

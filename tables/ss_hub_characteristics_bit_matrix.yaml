@@ -2,6 +2,7 @@ matrix_id: usb3_ss_hub_characteristics_bit_matrix
 version: "0.1"
 description: >
   wHubCharacteristics bit-group semantic governance for USB 3.x SuperSpeed hub descriptor.
+  USB 3.2 Specification Rev 1.1, Section 10.15.2.1, Table 10-5.
   Covers the 4 defined bit groups and the reserved high-bit boundary.
   Scope: bit group name, bit range, and value encoding identity only.
   USB 3.x hubs have no Transaction Translator; TT Think Time bits are absent.
@@ -25,12 +26,12 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.14.2 Table 10-10"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     value_encoding:
       "00": ganged_power_switching
       "01": individual_port_power_switching
-      "10": no_power_switching
-      "11": no_power_switching
+      "10": reserved
+      "11": reserved
     evidence:
       verification_packet: evidence/entry_verification_packets/usb3/ss_whc_usb3_ss_whc_power_switching.yaml
       verified_scope: bit_group_name_value_encoding_identity_only
@@ -53,7 +54,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.14.2 Table 10-10"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     value_encoding:
       "0": not_compound_device
       "1": compound_device
@@ -78,7 +79,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.14.2 Table 10-10"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     value_encoding:
       "00": global_over_current_protection
       "01": individual_port_over_current_protection
@@ -106,7 +107,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.14.2 Table 10-10"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     value_encoding:
       "0": port_indicators_not_supported
       "1": port_indicators_supported
@@ -132,7 +133,7 @@ entries:
     evidence_status: reviewed
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.14.2 Table 10-10"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5"
     value_encoding: {}
     notes: >
       Reserved bits; shall be zero per USB 3.2 specification. This entry closes

@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bit 1 as
+    USB 3.2 Section 10.16.2.6.1 Table 10-13 defines wPortStatus bit 1 as
     PORT_ENABLE. In SS, this bit is always 1 when a SuperSpeed device is
     connected; it cannot be cleared by software (unlike USB 2.0).
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     the always-1 semantics in firmware, nor any state machine behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm Section 10.16.2.6.1 Table 10-13 is the correct SS port status surface.
   - Confirm PORT_ENABLE is at wPortStatus bit 1.
   - Confirm spec_family=usb3 is consistent.
   - Confirm no PORT_ENABLE state machine behavior is claimed.

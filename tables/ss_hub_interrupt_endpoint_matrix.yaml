@@ -4,9 +4,8 @@ description: >
   USB 3.x SuperSpeed hub status-change (interrupt) endpoint descriptor field
   governance. Covers the 4 endpoint descriptor fields for the SuperSpeed hub
   interrupt endpoint. Scope: field identity and constraint encoding only.
-  USB 3.x SuperSpeed endpoints use 125 μs microframe units for bInterval
-  (same encoding as USB 2.0 High-Speed; bInterval 1–16 mapping to 2^(n-1)
-  × 125 μs).
+  USB 3.2 Specification Rev 1.1, Section 10.15.1. For the SuperSpeed hub
+  status-change endpoint, wMaxPacketSize is 2 and bInterval is 8.
   Does not claim firmware endpoint address assignment, polling behavior
   verification, or runtime latency guarantees.
 spec_family: usb3
@@ -28,7 +27,7 @@ entries:
       endpoint_number: "bits 3:0, implementation-defined by hub firmware"
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.15.1"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.1"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -55,7 +54,7 @@ entries:
       reserved_bits: "bits[7:2] = 0 for non-isochronous SuperSpeed endpoints"
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.15.1"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.1"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -73,16 +72,12 @@ entries:
     field_name: wMaxPacketSize
     namespace: hub_interrupt_endpoint_descriptor
     role: >
-      Maximum packet size for the SuperSpeed hub status-change endpoint. Must be
-      large enough to report status change bits for the hub and all downstream ports.
+      Maximum packet size for the SuperSpeed hub status-change endpoint.
     encoding:
-      calculation: "ceil((bNbrPorts + 1) / 8) bytes minimum"
-      examples:
-        - "1 to 7 downstream ports: 1 byte"
-        - "8 to 15 downstream ports: 2 bytes"
+      required_value: 2
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.15.1"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.1"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -93,22 +88,20 @@ entries:
       - Does not verify runtime packet delivery or flow control.
       - Does not establish table-level verification.
     notes: >
-      Reviewed field identity only: minimum size calculation and port-count linkage.
-      Not a firmware packet-size correctness verification. Calculation identical
-      to USB 2.0 hub interrupt endpoint.
+      Reviewed field identity and required value only. Not a firmware
+      packet-size correctness verification.
 
   - field_id: usb3_ss_hub_ep_bInterval
     field_name: bInterval
     namespace: hub_interrupt_endpoint_descriptor
     role: >
-      Polling interval for the SuperSpeed hub status-change endpoint. USB 3.x
-      SuperSpeed interrupt endpoints use microframe-based encoding identical to
-      USB 2.0 High-Speed: bInterval 1–16, mapping to 2^(bInterval-1) × 125 μs.
+      Polling interval field for the SuperSpeed hub status-change endpoint.
     encoding:
-      superspeed: "2^(bInterval-1) x 125 microseconds; bInterval must be 1 to 16"
+      required_value: 8
+      boundary: maximum_allowable_interval
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification §10.15.1"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.15.1"
     claim_level: verified
     evidence_status: reviewed
     evidence:
@@ -119,7 +112,5 @@ entries:
       - Does not verify firmware bInterval assignment correctness.
       - Does not establish table-level verification.
     notes: >
-      Reviewed field identity only: interval unit (125 μs microframe) and
-      bInterval encoding range (1–16). SuperSpeed hubs use the same microframe
-      encoding as USB 2.0 High-Speed; the direct-ms encoding used by USB 2.0 FS/LS
-      hubs does not apply. Not a polling-behavior or latency guarantee.
+      Reviewed field identity and required value 8 only. The table labels this
+      as the maximum allowable interval; no polling-behavior guarantee is made.

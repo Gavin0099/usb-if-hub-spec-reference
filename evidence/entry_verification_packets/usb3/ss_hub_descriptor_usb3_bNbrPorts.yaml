@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines bNbrPorts as the number of downstream-facing
+    USB 3.2 Section 10.15.2.1 defines bNbrPorts as the number of downstream-facing
     ports at offset 2, size 1 byte. Maximum value is 15 for a SuperSpeed hub.
   reviewer_note: >
     Reviewed for descriptor field identity only: field name, offset=2, size=1B.
@@ -25,7 +25,7 @@ evidence:
     constraint.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
   - Confirm bNbrPorts is at offset 2, size 1 byte.
   - Confirm no device port count value or firmware behavior is claimed.
 

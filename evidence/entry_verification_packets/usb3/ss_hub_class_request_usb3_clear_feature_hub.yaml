@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 defines CLEAR_FEATURE (bRequest=0x01) addressed
+    USB 3.2 Section 10.16.2 defines CLEAR_FEATURE (bRequest=0x01) addressed
     to the hub recipient (bmRequestType=0x20, wValue=feature_selector,
     wLength=0). Used to clear hub-level features.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     feature selector semantics or hub state change behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm Section 10.16.2 is the correct SS hub class request surface.
   - Confirm CLEAR_FEATURE is bRequest=0x01 for hub recipient.
   - Confirm bmRequestType=0x20 (host-to-device, class, device).
   - Confirm no feature selector semantics or hub behavior is claimed.

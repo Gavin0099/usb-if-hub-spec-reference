@@ -2,7 +2,7 @@
 title: Version Source Map
 claim_level: inferred
 status: review_required
-last_reviewed: "2026-06-08"
+last_reviewed: "2026-07-31"
 usb_versions:
   - usb_2_0
   - usb_3_2
@@ -38,7 +38,7 @@ This page defines which USB source materials this repo uses for hub semantics an
 |---|---|---|
 | USB 2.0 | USB 2.0 Specification | Primary source boundary for this repo's hub reference layer. |
 | USB 2.1 | USB 2.0 / 2.1 LPM and relevant ECN updates | Used only when this repo explicitly documents that delta. |
-| USB 3.2 | USB 3.2 Specification Rev 1.0 | USB 3.x hub class governed surface added (6 matrices, 53 entries); primary source for SS hub descriptor, port status, characteristics, feature selectors, interrupt endpoint. |
+| USB 3.2 | USB 3.2 Specification Rev 1.1 | 六張 USB 3.x Hub governed matrices 的主要來源；不因此提升其他 USB 3.x wiki 頁面的驗證狀態。 |
 | USB4 | USB4 specification family | Out-of-scope as primary authority; for cross-family context only. |
 
 ## Review Flow
@@ -52,14 +52,14 @@ This page defines which USB source materials this repo uses for hub semantics an
 
 本 repo 對 USB 3.2 的覆蓋範圍：
 
-| 類別 | 章節（USB 3.2 Rev 1.0） | Governed 狀態 |
+| 類別 | 章節（USB 3.2 Rev 1.1） | Governed 狀態 |
 |---|---|---|
-| SS Hub Descriptor fields | §10.14.2 | 9 entries verified |
-| SS Hub Class Requests | §10.14.1 | 10 entries verified |
-| SS Port Status / Change bits | §10.14.2 | 15 defined entries verified |
-| SS Feature Selectors | §10.14.1 | 6 entries verified |
-| SS wHubCharacteristics bits | §10.14.2 Table 10-10 | 4 entries verified, 1 reviewed |
-| SS Hub Interrupt Endpoint fields | §10.14.2 | 4 entries verified |
+| SS Hub Descriptor fields | §10.15.2.1，Table 10-5 | 9 entries verified |
+| SS Hub Class Requests | §10.16.2，Table 10-7 | 10 entries verified |
+| SS Port Status / Change bits | §10.16.2.6.1 / §10.16.2.6.2，Tables 10-13 / 10-14 | 15 defined entries verified |
+| SS Feature Selectors | §10.16.2，Table 10-9 | 6 entries verified |
+| SS wHubCharacteristics bits | §10.15.2.1，Table 10-5 | 4 entries verified, 1 reviewed |
+| SS Hub Interrupt Endpoint fields | §10.15.1 | 4 entries verified |
 
 Wiki 頁面（ZH + EN）：25 頁每語系（含 CORE、EXT、FULL-1、FULL-2）。
 

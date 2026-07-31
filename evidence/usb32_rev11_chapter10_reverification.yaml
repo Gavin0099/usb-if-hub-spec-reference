@@ -1,0 +1,66 @@
+artifact_type: governed_surface_reverification
+schema_version: 1
+reviewed_at: "2026-07-31"
+
+source:
+  source_id: usb32_spec
+  official_document_page: https://www.usb.org/document-library/usb-32-revision-11-june-2022
+  official_package: usb_32_202206_0.zip
+  specification_artifact: USB 3.2 Revision 1.1.pdf
+  redline_artifact: USB 3.2 Revision 1.1 Redline against 3.2 R1.0.pdf
+
+review_surface:
+  redline_pdf_pages_reviewed:
+    first: 464
+    last: 484
+  controlled_content_pages:
+    first: 469
+    last: 484
+  revision_delta_probe:
+    method: rendered_page_non_grayscale_pixel_count
+    known_changed_page:
+      pdf_page: 2
+      non_grayscale_pixels: 3735
+    controlled_content_pages_non_grayscale_pixels: 0
+    interpretation: >
+      The rendered redline contained visible revision markup on the known
+      changed page and none on the controlled Chapter 10 pages. This supports
+      the absence of visible Revision 1.0-to-1.1 edits on those pages; it does
+      not independently prove semantic correctness.
+
+governed_mappings:
+  - table: ss_hub_descriptor_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5
+  - table: ss_hub_class_request_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7
+  - table: ss_feature_selector_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-9
+  - table: ss_port_status_bit_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.16.2.6.1 Table 10-13 and §10.16.2.6.2 Table 10-14
+  - table: ss_hub_characteristics_bit_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.15.2.1 Table 10-5
+  - table: ss_hub_interrupt_endpoint_matrix
+    anchor: USB 3.2 Specification Rev 1.1 §10.15.1
+
+identity_corrections:
+  - bLength corrected to bDescLength with expected value 12
+  - bHubDecLat corrected to bHubHdrDecLat
+  - DeviceRemovable corrected to a two-byte bitmap with bit zero reserved
+  - bHubContrCurrent unit claim bounded to the applicable aCurrentUnit
+  - wHubDelay corrected from average to maximum packet-forwarding delay
+  - wHubCharacteristics power switching encodings 10 and 11 corrected to reserved
+  - status-change endpoint wMaxPacketSize corrected to required value 2
+  - status-change endpoint bInterval corrected to required value 8
+
+claim_boundary:
+  establishes:
+    - governed table entry identity
+    - governed field offset and size where recorded
+    - governed value encoding where recorded
+    - source section mapping
+  cannot_establish:
+    - firmware behavior
+    - runtime behavior
+    - electrical compliance
+    - USB-IF certification
+    - correctness of non-governed USB 3.x wiki pages

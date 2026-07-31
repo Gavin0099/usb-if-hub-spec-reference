@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines wHubCharacteristics at offset 3, size 2 bytes.
+    USB 3.2 Section 10.15.2.1 defines wHubCharacteristics at offset 3, size 2 bytes.
     Key USB 3.x differences from USB 2.0: Port Indicators bit at bit[5] (not bit[7]);
     no TT Think Time field (bits[9:8] absent); bits[15:6] reserved.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     Think Time bits. Does not verify wHubCharacteristics values in any firmware.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
+  - Confirm Section 10.15.2.1 is the correct USB 3.2 SS hub descriptor surface.
   - Confirm wHubCharacteristics is at offset 3, size 2 bytes.
   - Confirm Port Indicators is at bit[5] in USB 3.x (vs bit[7] in USB 2.0).
   - Confirm no TT Think Time field exists in USB 3.x wHubCharacteristics.

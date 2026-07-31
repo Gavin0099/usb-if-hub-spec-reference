@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 defines GET_STATUS (bRequest=0x00) addressed to
+    USB 3.2 Section 10.16.2 defines GET_STATUS (bRequest=0x00) addressed to
     the hub recipient (bmRequestType=0xA0). Returns 4 bytes: wHubStatus (2B)
     + wHubChange (2B). SS hub status bit layout differs from USB 2.0.
   reviewer_note: >
@@ -26,7 +26,7 @@ evidence:
     status bit semantics, hub power state behavior, or any runtime response.
 
 review_checklist:
-  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm Section 10.16.2 is the correct SS hub class request surface.
   - Confirm GET_STATUS is bRequest=0x00 for hub recipient.
   - Confirm bmRequestType=0xA0 (device-to-host, class, device).
   - Confirm no hub status bit behavior or runtime state is claimed.

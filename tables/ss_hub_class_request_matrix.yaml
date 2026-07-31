@@ -2,7 +2,7 @@ matrix_id: usb3_ss_hub_class_request_matrix
 version: "0.2"
 description: >
   USB 3.x SuperSpeed hub class request governance.
-  USB 3.2 Specification Rev 1.0, Section 10.14.2.
+  USB 3.2 Specification Rev 1.1, Section 10.16.2, Table 10-7.
   Verified scope: request linkage identity only for shared requests;
   request identity and requiredness/optionality for SS-only requests.
   TT-related requests (CLEAR_TT_BUFFER, RESET_TT, GET_TT_STATE, STOP_TT)
@@ -35,7 +35,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_get_status_port
     request_name: GET_STATUS
@@ -58,7 +58,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_set_feature_hub
     request_name: SET_FEATURE
@@ -77,7 +77,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_set_feature_port
     request_name: SET_FEATURE
@@ -99,7 +99,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_clear_feature_hub
     request_name: CLEAR_FEATURE
@@ -118,7 +118,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_clear_feature_port
     request_name: CLEAR_FEATURE
@@ -140,7 +140,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_get_descriptor_hub
     request_name: GET_DESCRIPTOR
@@ -162,7 +162,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_set_descriptor_hub
     request_name: SET_DESCRIPTOR
@@ -181,7 +181,7 @@ entries:
       verified_scope: request_linkage_identity_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_set_hub_depth
     request_name: SET_HUB_DEPTH
@@ -207,7 +207,7 @@ entries:
       verified_scope: request_identity_requiredness_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"
 
   - request_id: usb3_get_port_err_count
     request_name: GET_PORT_ERR_COUNT
@@ -232,4 +232,4 @@ entries:
       verified_scope: request_identity_optionality_only
     source_refs:
       - usb32_spec
-    section_anchor: "USB 3.2 Specification Rev 1.0 §10.14.2"
+    section_anchor: "USB 3.2 Specification Rev 1.1 §10.16.2 Table 10-7"

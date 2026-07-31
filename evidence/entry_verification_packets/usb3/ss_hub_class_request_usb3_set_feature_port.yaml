@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 defines SET_FEATURE (bRequest=0x03) addressed
+    USB 3.2 Section 10.16.2 defines SET_FEATURE (bRequest=0x03) addressed
     to a port recipient (bmRequestType=0x23, wValue=feature_selector,
     wIndex=port_number, wLength=0). SS-specific feature selectors include
     PORT_U1_TIMEOUT (0x23), PORT_U2_TIMEOUT (0x24), PORT_BH_PORT_RESET (0x1C).
@@ -27,7 +27,7 @@ evidence:
     U1/U2 timeout behavior, BH reset behavior, or any port state change.
 
 review_checklist:
-  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm Section 10.16.2 is the correct SS hub class request surface.
   - Confirm SET_FEATURE is bRequest=0x03 for port recipient.
   - Confirm bmRequestType=0x23 (host-to-device, class, other).
   - Confirm no feature selector behavior or port state is claimed.

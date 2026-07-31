@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-11 defines wPortStatus bit 2 as
+    USB 3.2 Section 10.16.2.6.1 Table 10-13 defines wPortStatus bit 2 as
     PORT_OVER_CURRENT: indicates an over-current condition is active on
     the port. Value 1 when over-current condition is present.
   reviewer_note: >
@@ -27,7 +27,7 @@ evidence:
     response to over-current events.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-11 is the correct SS port status surface.
+  - Confirm Section 10.16.2.6.1 Table 10-13 is the correct SS port status surface.
   - Confirm PORT_OVER_CURRENT is at wPortStatus bit 2.
   - Confirm spec_family=usb3 is consistent.
   - Confirm no OC detection hardware behavior is claimed.

@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.16.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 defines GET_PORT_ERR_COUNT (bRequest=0x0D) as a
+    USB 3.2 Section 10.16.2 defines GET_PORT_ERR_COUNT (bRequest=0x0D) as a
     SuperSpeed-only request (bmRequestType=0xA0, wIndex=port_number, wLength=2).
     Presence and optionality: optional for SS hubs. Returns a 16-bit link
     error count for the specified port; counter resets to 0 on read.
@@ -29,7 +29,7 @@ evidence:
     or link quality measurement accuracy.
 
 review_checklist:
-  - Confirm Section 10.14.2 is the correct SS hub class request surface.
+  - Confirm Section 10.16.2 is the correct SS hub class request surface.
   - Confirm GET_PORT_ERR_COUNT is bRequest=0x0D (SS-only, not in USB 2.0).
   - Confirm bmRequestType=0xA0 (device-to-host, class, device).
   - Confirm SS-only optional status (not mandatory).

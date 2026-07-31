@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2 Table 10-10 defines wHubCharacteristics bits[4:3]
+    USB 3.2 Section 10.15.2.1 Table 10-5 defines wHubCharacteristics bits[4:3]
     as the Over-current Protection Mode field for SuperSpeed hubs. Encoding:
     00=global (hub-level) OC protection, 01=individual port OC protection,
     1x=no OC protection. This field retains the same encoding as USB 2.0.
@@ -28,7 +28,7 @@ evidence:
     OC event behavior, C_PORT_OVER_CURRENT notification, or firmware compliance.
 
 review_checklist:
-  - Confirm §10.14.2 Table 10-10 is the correct USB 3.x wHubCharacteristics surface.
+  - Confirm §10.15.2.1 Table 10-5 is the correct USB 3.x wHubCharacteristics surface.
   - Confirm bits[4:3] encode Over-current Protection Mode.
   - Confirm encoding: 00=global, 01=individual, 1x=no protection.
   - Confirm no OC threshold, event behavior, or notification is claimed.

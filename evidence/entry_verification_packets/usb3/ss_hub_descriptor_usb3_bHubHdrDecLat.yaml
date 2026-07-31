@@ -5,11 +5,11 @@ created_at: 2026-06-07
 target:
   surface: governed_table_entry
   table: ss_hub_descriptor_matrix
-  entry_id: usb3_hub_desc_bHubDecLat
+  entry_id: usb3_hub_desc_bHubHdrDecLat
 
 evidence:
   spec: usb32
-  section: "10.14.2.1"
+  section: "10.15.2.1"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,19 +17,17 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.1 defines bHubDecLat at offset 7, size 1 byte.
-    Represents the hub's packet header decode latency in units of 0.1μs.
-    Root hubs report 0. This field is new in USB 3.x and not present in the
-    USB 2.0 hub descriptor.
+    USB 3.2 Revision 1.1 Section 10.15.2.1 Table 10-5 defines
+    bHubHdrDecLat at offset 7, size 1 byte. Values 01H through 0AH encode
+    0.1 through 1.0 microseconds; 00H means much less than 0.1 microseconds.
   reviewer_note: >
     Reviewed for descriptor field identity only: field name, offset=7, size=1B,
-    unit boundary (0.1μs). The narrow claim is that bHubDecLat exists at this
-    position with this unit. Does not claim U1/U2 exit latency calculation
-    behavior or xHCI internal handling.
+    bounded latency encoding. The narrow claim is that bHubHdrDecLat exists
+    at this position with this encoding. Does not claim runtime behavior.
 
 review_checklist:
-  - Confirm Section 10.14.2.1 is the correct USB 3.2 SS hub descriptor surface.
-  - Confirm bHubDecLat at offset 7, size 1B, unit 0.1μs.
+  - Confirm Section 10.15.2.1 Table 10-5 is the Rev 1.1 hub descriptor surface.
+  - Confirm bHubHdrDecLat at offset 7, size 1B, with its bounded encoding.
   - Confirm this field is absent from USB 2.0 hub descriptor.
   - Confirm no U1/U2 exit latency behavior or xHCI behavior is claimed.
 
@@ -38,7 +36,7 @@ verification_scope:
   excludes:
     - U1/U2 exit latency budget calculation behavior
     - xHCI internal decode latency handling
-    - specific bHubDecLat values for any hub
+    - specific bHubHdrDecLat values for any hub
     - firmware correctness
     - full USB 3.x compliance
 
@@ -47,11 +45,11 @@ result:
   evidence_status: reviewed
   promotion_note: >
     Eligible for single-entry descriptor field identity promotion for
-    `usb3_hub_desc_bHubDecLat`. Promotion limited to field name, offset,
-    size, and unit (0.1μs) identity only.
+    `usb3_hub_desc_bHubHdrDecLat`. Promotion limited to field name, offset,
+    size, and bounded encoding identity only.
 
 non_claims:
   - This packet does not claim that U1/U2 exit latency is correctly calculated
     by any host or hub firmware.
-  - This packet does not claim xHCI behavior related to bHubDecLat.
+  - This packet does not claim xHCI behavior related to bHubHdrDecLat.
   - This packet does not claim USB 3.x compliance for any hub.

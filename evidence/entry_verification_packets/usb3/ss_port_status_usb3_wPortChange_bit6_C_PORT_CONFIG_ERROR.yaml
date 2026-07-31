@@ -9,7 +9,7 @@ target:
 
 evidence:
   spec: usb32
-  section: "10.14.2.6"
+  section: "10.16.2.6.2"
   page: null
   document_ref:
     primary_source_id: usb32_spec
@@ -17,7 +17,7 @@ evidence:
     authority_expectation: normative_official_preferred
   quoted_surface: reviewer_paraphrase_only
   quoted_surface_summary: >
-    USB 3.2 Section 10.14.2.6 Table 10-12 defines wPortChange bit 6 as
+    USB 3.2 Section 10.16.2.6.2 Table 10-14 defines wPortChange bit 6 as
     C_PORT_CONFIG_ERROR: set when a port configuration error has occurred,
     meaning a SuperSpeed device attached to the port failed to configure
     successfully. This bit is SS-only.
@@ -28,7 +28,7 @@ evidence:
     enumeration error handling.
 
 review_checklist:
-  - Confirm Section 10.14.2.6 Table 10-12 is the correct SS port change surface.
+  - Confirm Section 10.16.2.6.2 Table 10-14 is the correct SS port change surface.
   - Confirm C_PORT_CONFIG_ERROR is at wPortChange bit 6.
   - Confirm this is SS-only (not present in USB 2.0).
   - Confirm spec_family=usb3 is consistent.
