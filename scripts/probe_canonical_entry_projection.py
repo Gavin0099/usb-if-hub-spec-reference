@@ -37,6 +37,7 @@ Usage:
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -278,7 +279,26 @@ def validate_adapters(
     return results
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--receipt-out",
+        type=Path,
+        default=OUTPUT_PATH,
+        help=(
+            "Where to write the JSON report (default: "
+            "artifacts/governance/canonical_entry_projection_report.json). "
+            "This is a report-only probe (P1-CI); it never modifies the "
+            "governed tables it reads."
+        ),
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    output_path = args.receipt_out
+
     manifest = yaml.safe_load(MANIFEST_PATH.read_text(encoding="utf-8"))
     tables = manifest.get("governed_tables", [])
     adapters = load_adapters()
@@ -297,11 +317,13 @@ def main() -> int:
 
     report = {
         "report_id": "canonical_entry_projection_pilot",
+        "ci_tier": "advisory_report_only",
         "mode": "report_only_read_only",
         "modifies_original_tables": False,
         "origin": (
             "governance review commit 6ff1c56, round 1 finding 3 [WARNING] + "
-            "round 2 findings 1/2 [BLOCKING]"
+            "round 2 findings 1/2 [BLOCKING]; wired into CI as P1-CI "
+            "(advisory/report-only tier, see .github/workflows/governance-validation.yml)"
         ),
         "manifest_source": "exports/hub_governed_surface_manifest.yaml",
         "adapters_source": "contract/projection_adapters.yaml",
@@ -323,11 +345,11 @@ def main() -> int:
         "tables": projected_tables,
     }
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     summary = report["summary"]
-    print("Canonical entry projection pilot — report_only, no tables modified.")
+    print("Canonical entry projection pilot (P1-CI, advisory/report-only) — no tables modified.")
     print(f"Tables: {summary['table_count']}  Entries: {summary['total_entries']}")
     print(f"Ungoverned/synthesized identity keys: {summary['total_identity_key_ungoverned']}")
     print(f"Claim levels defaulted from table-level: {summary['total_claim_level_defaulted']}")
@@ -336,7 +358,11 @@ def main() -> int:
         status = "PASS" if result["passed"] else "FAIL"
         print(f"Adapter [{result['table_id']}]: {status} — {result['checks']}")
     print(f"Lossless 3-column projection: {summary['lossless_projection']}")
-    print(f"Full report written to: {OUTPUT_PATH.relative_to(REPO_ROOT)}")
+    try:
+        report_display_path = output_path.relative_to(REPO_ROOT)
+    except ValueError:
+        report_display_path = output_path
+    print(f"Full report written to: {report_display_path}")
 
     if not summary["lossless_projection"]:
         return 1
