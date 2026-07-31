@@ -1,10 +1,24 @@
 # MCP Integration Proposal — Draft Index
 
-> **Status**: DRAFT / PROPOSAL — not adopted, not part of the governed surface.
-> **Claim ceiling**: `proposal_only`. Nothing in this folder is validated, tracked,
-> or referenced by `exports/hub_governed_surface_manifest.yaml`.
-> **Owner decision required before build**: this folder documents a design, not
-> an approved implementation plan.
+> **Status**: PILOT — Tier 1 implemented, built, and covered by Required CI
+> (`mcp-server/**` triggers the `fixture-smoke` job's `npm test` step); a live
+> Copilot Studio agent is connected to it for manual pilot testing
+> (owner-approved to build, 2026-07-30). This is no longer a pure design draft.
+> **Not part of the governed reference surface**: no entry in
+> `exports/hub_governed_surface_manifest.yaml`, no manifest/validator gate
+> coverage — the 15 governed tables' validation pipeline does not cover this
+> server.
+> **Claim ceiling**: `pilot_not_governed_surface`. Server-side Tier 1
+> (static-identity field/bit/selector/request lookups) is implemented and
+> pilot-validated (see "Open items" below). Agent-layer enforcement —
+> red-team checklist rows 3 (rephrasing resistance), 7 (live drift-status
+> surfacing), and 8 (disclaimer attachment) — is **not verified** under the
+> live Copilot Studio deployment; a failure there would be an agent
+> configuration finding, not an MCP server defect.
+> Tier 2 (runtime-semantics/state-machine, e.g. LTSSM transition validation)
+> remains unbuilt and out of scope here; it would need its own governed
+> table, evidence packets, and explicit claim-ceiling re-scoping before any
+> work starts.
 
 ## Why this exists
 

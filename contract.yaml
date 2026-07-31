@@ -17,10 +17,15 @@ documents:
   - specs/hub_class_requests.md
   - specs/transaction_translator.md
   - specs/escalation_table.md
-  # DRAFT/PROPOSAL documents only — not adopted, not part of the governed
-  # surface (claim_ceiling: proposal_only per docs/mcp_proposal/README.md).
-  # Registered here for governance tracking/freshness purposes only; this
-  # does NOT constitute approval to build the MCP server described within.
+  # PILOT documents — Tier 1 MCP server implemented, built, and covered by
+  # Required CI (mcp-server/** triggers fixture-smoke's `npm test`); a live
+  # Copilot Studio agent is connected for manual pilot testing (owner
+  # approved to build, 2026-07-30). claim_ceiling: pilot_not_governed_surface
+  # — still NOT part of the governed reference surface (no
+  # exports/hub_governed_surface_manifest.yaml entry, no manifest/validator
+  # gate coverage); agent-layer enforcement (red-team checklist rows 3/7/8)
+  # is unverified under the live deployment. See
+  # docs/mcp_proposal/README.md for current status detail.
   - docs/mcp_proposal/README.md
   - docs/mcp_proposal/mcp_tool_schema.md
   - docs/mcp_proposal/copilot_studio_agent_instructions.md
