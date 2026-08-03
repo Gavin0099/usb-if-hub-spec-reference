@@ -1,0 +1,3 @@
+USB3 semantic quarantine validation: PASS
+- registry pages: 27
+- pages checked: 27

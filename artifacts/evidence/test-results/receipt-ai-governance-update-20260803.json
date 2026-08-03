@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "python scripts/validate_usb3_semantic_quarantine.py",
+  "exit_code": 0,
+  "started_at": "2026-08-03T02:40:25Z",
+  "finished_at": "2026-08-03T02:40:25Z",
+  "runner": "github-copilot",
+  "linked_commit": "24b991de3fbdd9834c3aaeffabab9d1f425a162e",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/receipt-ai-governance-update-20260803.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
