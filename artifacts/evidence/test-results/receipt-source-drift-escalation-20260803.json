@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "python ..\\scripts\\smoke_build_source_drift_escalation_fixtures.py",
+  "exit_code": 0,
+  "started_at": "2026-08-03T02:59:36Z",
+  "finished_at": "2026-08-03T02:59:37Z",
+  "runner": "copilot",
+  "linked_commit": "95ab5531373b7086d522c63e9358f045c1519d09",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/receipt-source-drift-escalation-20260803.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
