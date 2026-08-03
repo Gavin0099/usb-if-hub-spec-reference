@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "python ..\\scripts\\smoke_validate_source_monitor_parity_fixtures.py",
+  "exit_code": 0,
+  "started_at": "2026-08-03T02:57:44Z",
+  "finished_at": "2026-08-03T02:57:45Z",
+  "runner": "copilot",
+  "linked_commit": "f6c4acb789daf051e8582835adc3e16815b56b2e",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/receipt-source-monitor-parity-20260803.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
