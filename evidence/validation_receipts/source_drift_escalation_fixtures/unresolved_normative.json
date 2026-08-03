@@ -1,0 +1,27 @@
+{
+  "validator": "build_source_drift_escalation.py",
+  "authority_ceiling": "source_drift_escalation_observation_only",
+  "drift_events": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_drift_escalation\\unresolved_normative.jsonl",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_drift_escalation\\source_registry.yaml",
+  "staleness_rules": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\contract\\staleness_rules.yaml",
+  "status": "ESCALATION_REQUIRED",
+  "result": "FAIL",
+  "unresolved_event_count": 1,
+  "blocking_review_count": 1,
+  "advisory_review_count": 0,
+  "errors": [],
+  "findings": [
+    {
+      "code": "NORMATIVE_DRIFT_ESCALATION",
+      "source_id": "normative_source",
+      "authority_level": "normative_official",
+      "event_id": "drift-normative-1",
+      "required_action": "blocking review: stop new normative claims and review dependent claims",
+      "observation_only": true,
+      "does_not_change_claim_level": true
+    }
+  ],
+  "does_not_fetch_sources": true,
+  "does_not_change_claim_level": true,
+  "does_not_create_issues": true
+}

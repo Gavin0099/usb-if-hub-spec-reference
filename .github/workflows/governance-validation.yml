@@ -81,6 +81,9 @@ jobs:
       - name: Source monitor parity fixture smoke
         run: python scripts/smoke_validate_source_monitor_parity_fixtures.py
 
+      - name: Source drift escalation fixture smoke
+        run: python scripts/smoke_build_source_drift_escalation_fixtures.py
+
       - name: Source reachability fixture smoke
         run: python scripts/smoke_validate_source_reachability_fixtures.py
 
@@ -183,6 +186,7 @@ jobs:
             evidence/validation_receipt_usb2_completion_status_surface.json
             evidence/validation_receipt_usb3_semantic_quarantine_fixtures.json
             evidence/validation_receipt_source_monitor_parity_fixtures.json
+            evidence/validation_receipt_source_drift_escalation_fixtures.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -253,6 +257,16 @@ jobs:
             --source-registry evidence/source_registry.yaml \
             --monitor-registry monitor/monitored_sources.yaml \
             --receipt-out ci-receipts/source_monitor_parity.json
+
+      - name: Source drift escalation report
+        continue-on-error: true
+        run: |
+          python scripts/build_source_drift_escalation.py \
+            --drift-events evidence/drift_events.jsonl \
+            --source-registry evidence/source_registry.yaml \
+            --staleness-rules contract/staleness_rules.yaml \
+            --receipt-out ci-receipts/source_drift_escalation.json \
+            --summary-out "$GITHUB_STEP_SUMMARY"
 
       - name: USB2 reference navigation validation
         continue-on-error: true

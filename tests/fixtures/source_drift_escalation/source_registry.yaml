@@ -1,0 +1,8 @@
+schema_version: 1
+sources:
+  - source_id: normative_source
+    title: Normative source
+    authority_level: normative_official
+  - source_id: index_source
+    title: Official index
+    authority_level: official_index

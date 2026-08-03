@@ -970,6 +970,7 @@ USB semantic claim; the 15 governed tables remain the sole source of truth.
 - `python scripts\validate_ss_hub_interrupt_endpoint_matrix.py`
 - `python scripts\validate_usb3_semantic_quarantine.py --quarantine contract\usb3_semantic_quarantine.yaml --specs-dir specs\usb3`
 - `python scripts\validate_source_monitor_parity.py --source-registry evidence\source_registry.yaml --monitor-registry monitor\monitored_sources.yaml`
+- `python scripts\build_source_drift_escalation.py --drift-events evidence\drift_events.jsonl --source-registry evidence\source_registry.yaml --staleness-rules contract\staleness_rules.yaml`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\validate_canonical_entry_projection_invariants.py`
@@ -977,6 +978,7 @@ USB semantic claim; the 15 governed tables remain the sole source of truth.
 - `python scripts\smoke_manifest_consumer_reference.py`
 - `python scripts\smoke_validate_usb3_semantic_quarantine_fixtures.py`
 - `python scripts\smoke_validate_source_monitor_parity_fixtures.py`
+- `python scripts\smoke_build_source_drift_escalation_fixtures.py`
 - `npm.cmd run build`
 
 ## USB 2.0 Governed Surface Freeze

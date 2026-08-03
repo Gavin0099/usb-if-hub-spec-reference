@@ -1,0 +1,17 @@
+{
+  "validator": "build_source_drift_escalation.py",
+  "authority_ceiling": "source_drift_escalation_observation_only",
+  "drift_events": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_drift_escalation\\no_drift.jsonl",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_drift_escalation\\source_registry.yaml",
+  "staleness_rules": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\contract\\staleness_rules.yaml",
+  "status": "CLEAR",
+  "result": "PASS",
+  "unresolved_event_count": 0,
+  "blocking_review_count": 0,
+  "advisory_review_count": 0,
+  "errors": [],
+  "findings": [],
+  "does_not_fetch_sources": true,
+  "does_not_change_claim_level": true,
+  "does_not_create_issues": true
+}
