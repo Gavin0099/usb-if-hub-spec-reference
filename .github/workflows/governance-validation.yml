@@ -368,12 +368,22 @@ jobs:
         # probe_canonical_entry_projection.py) into the advisory tier so its
         # PASS/FAIL is captured on every push/PR, instead of only on local
         # runs. It does not modify tables/ or exports/, and it does not
-        # promote the 3-column canonical schema to anything migratable —
-        # that remains a separate, not-yet-started decision (tracked as P2).
+        # promote the 3-column canonical schema to a migration — the
+        # projection promotion is tracked as P2'-CANON-1; schema migration
+        # remains explicitly out of scope.
         continue-on-error: true
         run: |
           python scripts/probe_canonical_entry_projection.py \
             --receipt-out ci-receipts/canonical_entry_projection.json
+
+      - name: Canonical entry projection invariants (P2'-CI, advisory/report-only)
+        # This validates the promoted derivative export without modifying any
+        # governed table. It remains advisory until a separate required-tier
+        # decision is made after verified green runs accumulate.
+        continue-on-error: true
+        run: |
+          python scripts/validate_canonical_entry_projection_invariants.py \
+            --receipt-out ci-receipts/canonical_entry_projection_invariants.json
 
       - name: Wiki consistency probe ??class request matrix
         continue-on-error: true
