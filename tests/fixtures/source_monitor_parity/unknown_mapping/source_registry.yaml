@@ -1,0 +1,11 @@
+schema_version: 1
+sources:
+  - source_id: normative_source
+    title: Normative source
+    authority_level: normative_official
+    usb_version_scope: [usb20]
+    topics: [hub_descriptor]
+    url: https://example.test/normative
+    url_type: official_document_page
+    monitor_status: active
+    claim_usage: allowed_normative

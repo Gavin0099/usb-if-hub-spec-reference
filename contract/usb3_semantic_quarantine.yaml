@@ -1,6 +1,6 @@
 schema_version: 1
 title: USB 3.x Semantic Quarantine Registry
-last_updated: 2026-07-31
+last_updated: 2026-08-03
 origin: >
   Recorded per governance review commit 6ff1c56 (Verdict: CHANGES_REQUESTED),
   finding 1 [BLOCKING]: "不應立刻抽出共用 Framework" — the USB3 wiki/spec
@@ -55,11 +55,13 @@ release_conditions:
       exists and passes, confirming every page listed below still declares
       claim_level: inferred and semantic_verification_claimed: false, so this
       registry cannot silently drift out of sync with the actual frontmatter.
-      NOT YET IMPLEMENTED as of this registry's creation (2026-07-31).
+      Implemented by scripts/validate_usb3_semantic_quarantine.py and covered
+      by deterministic fixture smoke in
+      scripts/smoke_validate_usb3_semantic_quarantine_fixtures.py.
 
 not_yet_satisfied:
   - per_page_semantic_review
-  - validator_coverage
+  - behavioral_content_boundary_explicit
 
 # All pages currently under specs/usb3/** (27 of 27, confirmed by grep on
 # 2026-07-31) declare claim_level: inferred and semantic_verification_claimed:

@@ -1,0 +1,10 @@
+schema_version: 1
+sources:
+  - id: normative_monitor
+    source_registry_id: normative_source
+    title: Normative source
+    url: https://example.test/normative
+    authority_level: normative_official
+    scope: [usb_2_0]
+    drift_policy:
+      on_change: mark_dependent_claims_needs_review

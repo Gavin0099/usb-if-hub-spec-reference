@@ -1,0 +1,8 @@
+schema_version: 1
+sources:
+  - id: monitor
+    source_registry_id: normative_source
+    title: Normative source
+    url: https://example.test/changed
+    authority_level: official_index
+    scope: [usb_2_0]

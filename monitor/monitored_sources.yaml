@@ -1,8 +1,9 @@
 schema_version: 1
-last_updated: 2026-05-30
+last_updated: 2026-08-03
 
 sources:
   - id: usb20_spec_page
+    source_registry_id: usb20_spec
     title: USB 2.0 Specification
     url: https://www.usb.org/document-library/usb-20-specification
     authority_level: normative_official
@@ -16,6 +17,7 @@ sources:
       on_change: mark_dependent_claims_needs_review
 
   - id: usb32_page
+    source_registry_id: usb32_spec_page
     title: USB 3.2
     url: https://www.usb.org/usb-32-0
     authority_level: official_index
@@ -26,6 +28,7 @@ sources:
       on_change: mark_scope_needs_review
 
   - id: usb32_spec
+    source_registry_id: usb32_spec
     title: USB 3.2 Specification, Revision 1.1 (June 2022)
     url: https://www.usb.org/document-library/usb-32-revision-11-june-2022
     authority_level: normative_official
@@ -41,9 +44,10 @@ sources:
       on_change: mark_dependent_claims_needs_review
 
   - id: usb4_v20_page
+    source_registry_id: usb4_spec_page
     title: USB4 Specification v2.0
     url: https://www.usb.org/document-library/usb4r-specification-v20
-    authority_level: normative_official
+    authority_level: official_index
     scope:
       - usb4
       - topology_router_boundary
@@ -51,6 +55,7 @@ sources:
       on_change: mark_dependent_claims_needs_review
 
   - id: usb_if_document_index
+    source_registry_id: usb_if_document_index
     title: USB-IF Document Index
     url: https://www.usb.org/documents
     authority_level: official_index

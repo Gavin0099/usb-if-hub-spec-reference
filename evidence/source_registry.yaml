@@ -1,5 +1,5 @@
 schema_version: 1
-last_updated: 2026-05-30
+last_updated: 2026-08-03
 
 sources:
   - source_id: usb20_spec
@@ -14,7 +14,7 @@ sources:
       - transaction_translator
     url: https://www.usb.org/document-library/usb-20-specification
     url_type: official_document_page
-    monitor_status: planned
+    monitor_status: active
     claim_usage: allowed_normative
 
   - source_id: usb21_lpm_addenda
@@ -41,7 +41,7 @@ sources:
       - topology
     url: https://www.usb.org/usb-32-0
     url_type: official_index_page
-    monitor_status: planned
+    monitor_status: active
     claim_usage: discovery_only_until_download_registered
     notes: >
       Superseded for normative claim purposes by source_id usb32_spec
@@ -64,7 +64,7 @@ sources:
       - class_specific_request
     url: https://www.usb.org/document-library/usb-32-revision-11-june-2022
     url_type: official_document_page
-    monitor_status: planned
+    monitor_status: active
     claim_usage: allowed_normative
     notes: >
       Registered 2026-07-30 to resolve the previously-unregistered
@@ -88,8 +88,23 @@ sources:
       - router
     url: https://www.usb.org/document-library/usb4r-specification-v20
     url_type: official_index_page
-    monitor_status: planned
+    monitor_status: active
     claim_usage: boundary_context_only
+
+  - source_id: usb_if_document_index
+    title: USB-IF Document Index
+    authority_level: official_index
+    usb_version_scope:
+      - usb20
+      - usb32
+      - usb4
+    topics:
+      - discovery
+      - lineage
+    url: https://www.usb.org/documents
+    url_type: official_index_page
+    monitor_status: active
+    claim_usage: discovery_only
 
   - source_id: osdev_usb_hubs
     title: OSDev Wiki - USB Hubs

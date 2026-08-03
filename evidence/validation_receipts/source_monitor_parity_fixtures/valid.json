@@ -1,0 +1,12 @@
+{
+  "validator": "validate_source_monitor_parity.py",
+  "authority_ceiling": "source_monitor_registry_parity_only",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\valid\\source_registry.yaml",
+  "monitor_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\valid\\monitored_sources.yaml",
+  "result": "PASS",
+  "checked_sources": 2,
+  "checked_monitors": 1,
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

@@ -1,0 +1,13 @@
+{
+  "validator": "validate_usb3_semantic_quarantine.py",
+  "quarantine_yaml": "contract/usb3_semantic_quarantine.yaml",
+  "specs_dir": "specs/usb3",
+  "authority_ceiling": "structural_frontmatter_presence_only",
+  "note": "PASS verifies quarantine coverage and frontmatter markers only; it does not verify USB3 semantic claims.",
+  "result": "PASS",
+  "registry_pages": 27,
+  "pages_checked": 27,
+  "pages_valid": 27,
+  "error_count": 0,
+  "errors": []
+}

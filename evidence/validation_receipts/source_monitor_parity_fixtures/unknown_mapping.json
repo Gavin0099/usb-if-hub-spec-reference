@@ -1,0 +1,24 @@
+{
+  "validator": "validate_source_monitor_parity.py",
+  "authority_ceiling": "source_monitor_registry_parity_only",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\unknown_mapping\\source_registry.yaml",
+  "monitor_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\unknown_mapping\\monitored_sources.yaml",
+  "result": "FAIL",
+  "checked_sources": 1,
+  "checked_monitors": 1,
+  "error_count": 2,
+  "errors": [
+    "monitor: unknown source_registry_id 'missing_source'",
+    "normative_source: active source has no monitor mapping"
+  ],
+  "findings": [
+    {
+      "code": "MONITOR_SOURCE_MAPPING_UNKNOWN",
+      "message": "monitor: unknown source_registry_id 'missing_source'"
+    },
+    {
+      "code": "ACTIVE_SOURCE_UNMONITORED",
+      "message": "normative_source: active source has no monitor mapping"
+    }
+  ]
+}

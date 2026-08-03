@@ -1,0 +1,19 @@
+{
+  "validator": "validate_source_monitor_parity.py",
+  "authority_ceiling": "source_monitor_registry_parity_only",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\active_source_unmonitored\\source_registry.yaml",
+  "monitor_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\source_monitor_parity\\active_source_unmonitored\\monitored_sources.yaml",
+  "result": "FAIL",
+  "checked_sources": 1,
+  "checked_monitors": 0,
+  "error_count": 1,
+  "errors": [
+    "normative_source: active source has no monitor mapping"
+  ],
+  "findings": [
+    {
+      "code": "ACTIVE_SOURCE_UNMONITORED",
+      "message": "normative_source: active source has no monitor mapping"
+    }
+  ]
+}

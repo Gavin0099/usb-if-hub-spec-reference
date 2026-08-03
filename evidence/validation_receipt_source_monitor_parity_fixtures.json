@@ -1,0 +1,90 @@
+{
+  "validator": "validate_source_monitor_parity.py",
+  "smoke_runner": "smoke_validate_source_monitor_parity_fixtures.py",
+  "authority_ceiling": "source_monitor_registry_parity_only",
+  "total_cases": 5,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "fixture": "valid",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_reason_codes": [],
+      "actual_reason_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_monitor_parity_fixtures\\valid.json",
+      "receipt_parse_error": "",
+      "stdout": "Source/monitor parity validation PASSED\n- checked sources: 2\n- checked monitors: 1\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "active_source_unmonitored",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED"
+      ],
+      "actual_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_monitor_parity_fixtures\\active_source_unmonitored.json",
+      "receipt_parse_error": "",
+      "stdout": "Source/monitor parity validation FAILED\n- normative_source: active source has no monitor mapping\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "unknown_mapping",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED",
+        "MONITOR_SOURCE_MAPPING_UNKNOWN"
+      ],
+      "actual_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED",
+        "MONITOR_SOURCE_MAPPING_UNKNOWN"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_monitor_parity_fixtures\\unknown_mapping.json",
+      "receipt_parse_error": "",
+      "stdout": "Source/monitor parity validation FAILED\n- monitor: unknown source_registry_id 'missing_source'\n- normative_source: active source has no monitor mapping\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "metadata_mismatch",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "MONITOR_METADATA_MISMATCH"
+      ],
+      "actual_reason_codes": [
+        "MONITOR_METADATA_MISMATCH"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_monitor_parity_fixtures\\metadata_mismatch.json",
+      "receipt_parse_error": "",
+      "stdout": "Source/monitor parity validation FAILED\n- monitor: url does not match source registry 'normative_source'\n- monitor: authority_level does not match source registry 'normative_source'\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "mapping_missing",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED",
+        "MONITOR_SOURCE_MAPPING_MISSING"
+      ],
+      "actual_reason_codes": [
+        "ACTIVE_SOURCE_UNMONITORED",
+        "MONITOR_SOURCE_MAPPING_MISSING"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\source_monitor_parity_fixtures\\mapping_missing.json",
+      "receipt_parse_error": "",
+      "stdout": "Source/monitor parity validation FAILED\n- monitor: source_registry_id is required\n- normative_source: active source has no monitor mapping\n",
+      "stderr": ""
+    }
+  ]
+}

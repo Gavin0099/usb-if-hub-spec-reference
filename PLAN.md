@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-07-30
+> **Last Updated**: 2026-08-03
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -968,11 +968,15 @@ USB semantic claim; the 15 governed tables remain the sole source of truth.
 - `python scripts\validate_ss_feature_selector_matrix.py`
 - `python scripts\validate_ss_hub_characteristics_bit_matrix.py`
 - `python scripts\validate_ss_hub_interrupt_endpoint_matrix.py`
+- `python scripts\validate_usb3_semantic_quarantine.py --quarantine contract\usb3_semantic_quarantine.yaml --specs-dir specs\usb3`
+- `python scripts\validate_source_monitor_parity.py --source-registry evidence\source_registry.yaml --monitor-registry monitor\monitored_sources.yaml`
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\validate_canonical_entry_projection_invariants.py`
 - `python scripts\smoke_consumer_integration_fixtures.py`
 - `python scripts\smoke_manifest_consumer_reference.py`
+- `python scripts\smoke_validate_usb3_semantic_quarantine_fixtures.py`
+- `python scripts\smoke_validate_source_monitor_parity_fixtures.py`
 - `npm.cmd run build`
 
 ## USB 2.0 Governed Surface Freeze
