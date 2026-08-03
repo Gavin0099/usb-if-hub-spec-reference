@@ -341,6 +341,22 @@ function registerGetVerifiedEvidence(server: McpServer) {
 
 // ── Tool 7 — check_reserved_usage ───────────────────────────────────────────
 
+export function reservedUsageResultItem(entry: NormalizedEntry): Record<string, unknown> {
+  const rawStatus = entry.raw["status"];
+  const statusReserved = typeof rawStatus === "string" && rawStatus.toLowerCase() === "reserved";
+  const descriptiveText = [entry.reviewedMeaning, entry.notes, entry.raw["description"]]
+    .filter((value): value is string => typeof value === "string")
+    .join(" ");
+
+  return {
+    ...baseResultItem(entry),
+    is_reserved:
+      entry.claimLevel === "reviewed" &&
+      (statusReserved || /reserved/i.test(descriptiveText)),
+    reviewed_meaning: entry.reviewedMeaning ?? null,
+  };
+}
+
 function registerCheckReservedUsage(server: McpServer) {
   server.registerTool(
     "check_reserved_usage",
@@ -361,13 +377,7 @@ function registerCheckReservedUsage(server: McpServer) {
         })
       );
 
-      const envelope = buildEnvelope(identifier, matches, (entry) => ({
-        ...baseResultItem(entry),
-        is_reserved:
-          entry.claimLevel === "reviewed" &&
-          /reserved/i.test(String(entry.reviewedMeaning ?? entry.notes ?? "")),
-        reviewed_meaning: entry.reviewedMeaning ?? null,
-      }));
+      const envelope = buildEnvelope(identifier, matches, reservedUsageResultItem);
       return textResult(envelope);
     }
   );

@@ -12,6 +12,7 @@ import {
   findHubFieldMatches,
   findVersionComparisonMatches,
   portStatusResultItem,
+  reservedUsageResultItem,
 } from "../dist/tools.js";
 
 test("wHubCharacteristics lookup does not absorb child bit groups", () => {
@@ -72,6 +73,28 @@ test("PORT_LINK_STATE exposes range and encoding identity without behavior prose
   assert.equal(result.bit_range, "8:5");
   assert.equal(result.value_encoding["0011"], "U3");
   assert.equal(Object.hasOwn(result, "description"), false);
+});
+
+test("check_reserved_usage identifies USB3 reserved boundary entries", () => {
+  const table = getTable("usb3_ss_hub_port_status_bit_matrix");
+  assert.ok(table);
+
+  const reservedIds = [
+    "ss_wPortStatus.bit4.RESERVED",
+    "ss_wPortStatus.bit15.RESERVED",
+    "ss_wPortChange.bit1.RESERVED",
+    "ss_wPortChange.bits157.RESERVED",
+  ];
+  const entries = reservedIds.map((entryId) => {
+    const entry = table.entries.find((candidate) => candidate.entryId === entryId);
+    assert.ok(entry, `missing reserved entry ${entryId}`);
+    return entry;
+  });
+
+  assert.deepEqual(
+    entries.map((entry) => reservedUsageResultItem(entry).is_reserved),
+    [true, true, true, true]
+  );
 });
 
 test("compare term_type restricts matching to the requested governed surface", () => {
