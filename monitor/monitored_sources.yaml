@@ -25,6 +25,21 @@ sources:
     drift_policy:
       on_change: mark_scope_needs_review
 
+  - id: usb32_spec
+    title: USB 3.2 Specification, Revision 1.1 (June 2022)
+    url: https://www.usb.org/document-library/usb-32-revision-11-june-2022
+    authority_level: normative_official
+    scope:
+      - usb_3_2
+      - superspeed_hub_delta
+      - link_state
+      - topology
+      - hub_descriptor
+      - port_status
+      - class_specific_requests
+    drift_policy:
+      on_change: mark_dependent_claims_needs_review
+
   - id: usb4_v20_page
     title: USB4 Specification v2.0
     url: https://www.usb.org/document-library/usb4r-specification-v20

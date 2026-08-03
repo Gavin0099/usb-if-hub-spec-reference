@@ -67,7 +67,7 @@ semantic_verification_claimed: false
 
 ## Reviewed Surface Inventory
 
-剩餘的 45 個 `reviewed` entries 屬於**永久邊界**，不是未完成的升級缺口。
+剩餘的 46 個 `reviewed` entries 屬於**永久邊界**，不是未完成的升級缺口。
 
 ### 1 筆 wHubCharacteristics reserved high-byte boundary（無語意可驗證，不可升級）
 
@@ -91,7 +91,7 @@ USB 2.0 §11.24 / Table 11-19 明確定義以下 bit positions 為 reserved（sh
 - wHubStatus reserved：BIT2–BIT14（13 筆）
 - wHubChange reserved：BIT2–BIT14（13 筆）
 
-**這 45 筆 reviewed entries 是正確的終態。** 將它們升為 verified 不會增加語意覆蓋，因為 reserved bits 沒有行為語意可驗證，boundary placeholder entries 也不是真實 bit 定義。
+**這 46 筆 reviewed entries 是正確的終態。** 將它們升為 verified 不會增加語意覆蓋，因為 reserved bits 沒有行為語意可驗證，boundary placeholder entries 也不是真實 bit 定義。
 
 ## Verified Entries
 

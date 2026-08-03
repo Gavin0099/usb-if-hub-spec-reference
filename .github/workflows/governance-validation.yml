@@ -87,6 +87,9 @@ jobs:
       - name: Wiki frontmatter fixture smoke
         run: python scripts/smoke_validate_wiki_frontmatter_fixtures.py
 
+      - name: USB3 semantic quarantine fixture smoke
+        run: python scripts/smoke_validate_usb3_semantic_quarantine_fixtures.py
+
       - name: Drift monitor fixture smoke
         run: python scripts/smoke_usbif_drift_monitor_fixtures.py
 
@@ -162,7 +165,7 @@ jobs:
       - name: USB2 completion status surface
         run: python scripts/validate_usb2_completion_status_surface.py --receipt-out evidence/validation_receipt_usb2_completion_status_surface.json
 
-      - name: Upload precondition gate receipt
+      - name: Upload fixture-smoke receipts
         if: always()
         uses: actions/upload-artifact@v5
         with:
@@ -175,6 +178,7 @@ jobs:
             evidence/validation_receipt_usb2_claim_partition_packet.json
             evidence/validation_receipt_usb2_completion_surface.json
             evidence/validation_receipt_usb2_completion_status_surface.json
+            evidence/validation_receipt_usb3_semantic_quarantine_fixtures.json
           if-no-files-found: ignore
 
   # ???? Advisory job ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -211,6 +215,14 @@ jobs:
           python scripts/validate_wiki_frontmatter.py \
             --dir specs/ \
             --receipt-out ci-receipts/wiki_frontmatter.json
+
+      - name: USB3 semantic quarantine validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_usb3_semantic_quarantine.py \
+            --quarantine contract/usb3_semantic_quarantine.yaml \
+            --specs-dir specs/usb3 \
+            --receipt-out ci-receipts/usb3_semantic_quarantine.json
 
       - name: Wiki source coverage validation
         continue-on-error: true

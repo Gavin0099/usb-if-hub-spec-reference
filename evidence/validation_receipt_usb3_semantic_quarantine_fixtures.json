@@ -1,0 +1,100 @@
+{
+  "validator": "validate_usb3_semantic_quarantine.py",
+  "smoke_runner": "smoke_validate_usb3_semantic_quarantine_fixtures.py",
+  "authority_ceiling": "structural_frontmatter_presence_only",
+  "total_cases": 7,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_codes": [],
+      "actual_codes": [],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: PASS\n- registry pages: 2\n- pages checked: 2\n",
+      "stderr": ""
+    },
+    {
+      "name": "missing_page",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "QUARANTINE_PAGE_MISSING"
+      ],
+      "actual_codes": [
+        "QUARANTINE_PAGE_MISSING"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [QUARANTINE_PAGE_MISSING] specs/usb3/missing.md: registry page does not exist\n",
+      "stderr": ""
+    },
+    {
+      "name": "wrong_claim_level",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "CLAIM_LEVEL_INVALID"
+      ],
+      "actual_codes": [
+        "CLAIM_LEVEL_INVALID"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [CLAIM_LEVEL_INVALID] specs/usb3/page_one.md: frontmatter claim_level must be 'inferred'\n",
+      "stderr": ""
+    },
+    {
+      "name": "semantic_verification_claimed",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "SEMANTIC_VERIFICATION_CLAIMED_INVALID"
+      ],
+      "actual_codes": [
+        "SEMANTIC_VERIFICATION_CLAIMED_INVALID"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [SEMANTIC_VERIFICATION_CLAIMED_INVALID] specs/usb3/page_one.md: frontmatter semantic_verification_claimed must be false\n",
+      "stderr": ""
+    },
+    {
+      "name": "missing_frontmatter",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "FRONTMATTER_MISSING"
+      ],
+      "actual_codes": [
+        "FRONTMATTER_MISSING"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [FRONTMATTER_MISSING] specs/usb3/page_one.md: page has no YAML frontmatter mapping\n",
+      "stderr": ""
+    },
+    {
+      "name": "duplicate_path",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "QUARANTINE_PATH_DUPLICATE"
+      ],
+      "actual_codes": [
+        "QUARANTINE_PATH_DUPLICATE"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [QUARANTINE_PATH_DUPLICATE] contract/usb3_semantic_quarantine.yaml: quarantined_pages contains duplicate paths\n",
+      "stderr": ""
+    },
+    {
+      "name": "embedded_delimiter",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_codes": [],
+      "actual_codes": [],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: PASS\n- registry pages: 1\n- pages checked: 1\n",
+      "stderr": ""
+    }
+  ]
+}
