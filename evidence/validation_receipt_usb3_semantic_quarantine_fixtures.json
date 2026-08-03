@@ -1,8 +1,8 @@
 {
   "validator": "validate_usb3_semantic_quarantine.py",
   "smoke_runner": "smoke_validate_usb3_semantic_quarantine_fixtures.py",
-  "authority_ceiling": "structural_frontmatter_presence_only",
-  "total_cases": 7,
+  "authority_ceiling": "structural_frontmatter_and_behavioral_boundary_presence",
+  "total_cases": 8,
   "failed_cases": 0,
   "result": "PASS",
   "cases": [
@@ -14,6 +14,20 @@
       "actual_codes": [],
       "result": "PASS",
       "stdout": "USB3 semantic quarantine validation: PASS\n- registry pages: 2\n- pages checked: 2\n",
+      "stderr": ""
+    },
+    {
+      "name": "behavioral_boundary_missing",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_codes": [
+        "BEHAVIORAL_BOUNDARY_SECTION_MISSING"
+      ],
+      "actual_codes": [
+        "BEHAVIORAL_BOUNDARY_SECTION_MISSING"
+      ],
+      "result": "PASS",
+      "stdout": "USB3 semantic quarantine validation: FAIL\n- [BEHAVIORAL_BOUNDARY_SECTION_MISSING] specs/usb3/page_one.md: behavioral page has no registered non-claim boundary heading\n",
       "stderr": ""
     },
     {

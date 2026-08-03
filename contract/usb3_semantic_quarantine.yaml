@@ -45,10 +45,11 @@ release_conditions:
   - id: behavioral_content_boundary_explicit
     description: >
       Every page that describes LTSSM transitions, link power (U1/U2/U3)
-      timing, or hub enumeration sequencing carries an explicit "本頁不宣告"
-      boundary list naming the specific behavioral claims excluded (already
-      present on ss_ltssm.md and ss_lpm.md as of this registry's creation;
-      not yet audited page-by-page for the remaining 25 pages).
+      timing, or hub enumeration sequencing carries an explicit non-claim
+      boundary list naming the specific behavioral claims excluded. The
+      page-level audit below records the behavioral topics for every
+      quarantined page and accepts the registered headings "本頁不宣告",
+      "Non-claims", or "不宣告".
   - id: validator_coverage
     description: >
       A validator script (analogous to scripts/validate_entry_verification_gate.py)
@@ -61,12 +62,100 @@ release_conditions:
 
 not_yet_satisfied:
   - per_page_semantic_review
-  - behavioral_content_boundary_explicit
+
+behavioral_boundary_audit:
+  version: 1
+  boundary_headings:
+    - 本頁不宣告
+    - Non-claims
+    - 不宣告
+  topic_terms:
+    ltssm_transitions:
+      - LTSSM
+    link_power_behavior:
+      - U1
+      - U2
+      - U3
+      - LPM
+      - timeout
+      - latency
+    hub_enumeration:
+      - SET_HUB_DEPTH
+      - enumeration
+  pages:
+    - path: specs/usb3/index.md
+      topics: []
+    - path: specs/usb3/ss_feature_selectors.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_hub_characteristics.md
+      topics: []
+    - path: specs/usb3/ss_hub_class_requests.md
+      topics:
+        - hub_enumeration
+        - link_power_behavior
+    - path: specs/usb3/ss_hub_compound_device.md
+      topics: []
+    - path: specs/usb3/ss_hub_configuration.md
+      topics: []
+    - path: specs/usb3/ss_hub_descriptor.md
+      topics: []
+    - path: specs/usb3/ss_hub_device_class.md
+      topics: []
+    - path: specs/usb3/ss_hub_enumeration.md
+      topics:
+        - hub_enumeration
+    - path: specs/usb3/ss_hub_interrupt_endpoint.md
+      topics: []
+    - path: specs/usb3/ss_hub_power_budget.md
+      topics: []
+    - path: specs/usb3/ss_hub_power.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_lpm.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_ltssm.md
+      topics:
+        - ltssm_transitions
+    - path: specs/usb3/ss_no_transaction_translator.md
+      topics: []
+    - path: specs/usb3/ss_packet_types.md
+      topics: []
+    - path: specs/usb3/ss_port_indicators.md
+      topics: []
+    - path: specs/usb3/ss_port_state_machine.md
+      topics:
+        - ltssm_transitions
+        - link_power_behavior
+    - path: specs/usb3/ss_port_status_bits.md
+      topics: []
+    - path: specs/usb3/ss_signaling.md
+      topics: []
+    - path: specs/usb3/ss_speed_detection.md
+      topics:
+        - ltssm_transitions
+    - path: specs/usb3/ss_standard_descriptors.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_standard_device_requests.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_test_modes.md
+      topics: []
+    - path: specs/usb3/ss_transactions.md
+      topics: []
+    - path: specs/usb3/ss_usb_device_states.md
+      topics:
+        - link_power_behavior
+    - path: specs/usb3/ss_usb_transfer_types.md
+      topics: []
 
 # All pages currently under specs/usb3/** (27 of 27, confirmed by grep on
 # 2026-07-31) declare claim_level: inferred and semantic_verification_claimed:
 # false. Listed here individually so future partial promotion (per-page, not
-# all-or-nothing) can be tracked without editing this file's structure.
+# all-or-nothing) can be tracked without editing this file's structure. The
+# behavioral_boundary_audit above is the separate boundary coverage inventory.
 quarantined_pages:
   - path: specs/usb3/index.md
     claim_level: inferred

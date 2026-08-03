@@ -947,6 +947,27 @@ memory normalization, semantic USB verification, or full governance adoption.
 Claim ceiling: derivative projection/export promotion only. Establishes no new
 USB semantic claim; the 15 governed tables remain the sole source of truth.
 
+### Phase USB3-Q-1 - Behavioral Boundary Audit
+
+- Extended `contract/usb3_semantic_quarantine.yaml` with a page-level
+  `behavioral_boundary_audit` inventory covering all 27 quarantined USB 3.x
+  pages.
+- Registered three structural topic classes: LTSSM transitions, link-power
+  behavior, and hub enumeration. Existing `本頁不宣告`, `Non-claims`, and
+  `不宣告` headings are accepted as boundary markers.
+- Extended `scripts/validate_usb3_semantic_quarantine.py` to verify every
+  audited behavioral topic has a registered non-claim boundary section and
+  topic term. Added a negative fixture for a missing boundary section.
+- Normalized `ss_hub_class_requests.md` and `ss_port_state_machine.md` so
+  SET_HUB_DEPTH enumeration ordering and U1/U2/U3 entry/exit behavior are
+  explicitly excluded from their claims.
+- `behavioral_content_boundary_explicit` is now structurally satisfied;
+  `per_page_semantic_review` remains unsatisfied and USB3 quarantine remains
+  active.
+
+Claim ceiling: structural behavioral-boundary presence only. This phase does
+not verify USB 3.x semantics, promote any page, or release the quarantine.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`

@@ -92,8 +92,10 @@ SET_FEATURE PORT_SUSPEND / CLEAR_FEATURE PORT_SUSPEND 亦不適用：SuperSpeed 
 | SET_FEATURE / CLEAR_FEATURE（hub/port） | 設定或清除功能（SS 有新增 selectors） |
 | GET_DESCRIPTOR / SET_DESCRIPTOR | 取得或設定 hub descriptor（SS 使用 0x2A descriptor） |
 
-## Non-claims
+## 本頁不宣告
 
+- 不宣告 `SET_HUB_DEPTH` 在 SS hub enumeration sequence 中的 ordering、
+  hub depth calculation 或 firmware implementation 已被驗證。
 - 不宣告 SET_HUB_DEPTH 的 hub depth 計算方式已在任何 firmware 中驗證為正確。
 - 不宣告 xHCI 與 SS hub 之間的完整 request 交互序列。
 - 不宣告 U1/U2 timeout policy 的最佳實踐或合規要求。

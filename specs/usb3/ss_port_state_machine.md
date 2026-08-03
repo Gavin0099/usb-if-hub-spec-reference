@@ -127,6 +127,7 @@ Source: USB 3.2 Specification §10.14.2 Table 10-9。
 ## 本頁不宣告
 
 - LTSSM runtime state transition timing 或 behavior。
+- U1/U2/U3 link power state entry/exit behavior 或 timeout semantics。
 - xHCI port management 行為。
 - firmware port state machine 實作正確性。
 - Link training 或 speed negotiation outcome。
