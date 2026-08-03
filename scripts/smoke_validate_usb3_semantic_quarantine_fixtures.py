@@ -20,8 +20,18 @@ CASES = [
         "name": "valid",
         "pages": {"page_one.md": ("inferred", False), "page_two.md": ("inferred", False)},
         "registry": ["page_one.md", "page_two.md"],
+        "topics": {"page_two.md": ["ltssm_transitions"]},
         "expected_exit": 0,
         "expected_codes": [],
+    },
+    {
+        "name": "behavioral_boundary_missing",
+        "pages": {"page_one.md": ("inferred", False)},
+        "registry": ["page_one.md"],
+        "topics": {"page_one.md": ["ltssm_transitions"]},
+        "omit_boundary": True,
+        "expected_exit": 1,
+        "expected_codes": ["BEHAVIORAL_BOUNDARY_SECTION_MISSING"],
     },
     {
         "name": "missing_page",
@@ -69,13 +79,29 @@ CASES = [
 ]
 
 
-def _write_page(path: Path, values: tuple[str, bool] | None, embedded_delimiter: bool) -> None:
+def _write_page(
+    path: Path,
+    values: tuple[str, bool] | None,
+    embedded_delimiter: bool,
+    topics: list[str],
+    omit_boundary: bool,
+) -> None:
     if values is None:
         path.write_text("Fixture content without frontmatter.\n", encoding="utf-8")
         return
 
     claim_level, semantic_verification_claimed = values
     notes = "notes: |\n  ---\n" if embedded_delimiter else ""
+    body = "Fixture content.\n"
+    if topics and not omit_boundary:
+        body += "\n## 本頁不宣告\n\n"
+        for topic in topics:
+            marker = {
+                "ltssm_transitions": "LTSSM runtime behavior is not claimed.",
+                "link_power_behavior": "U1/U2/U3 link power behavior is not claimed.",
+                "hub_enumeration": "SET_HUB_DEPTH enumeration ordering is not claimed.",
+            }[topic]
+            body += f"- {marker}\n"
     path.write_text(
         "---\n"
         "title: Fixture page\n"
@@ -84,7 +110,7 @@ def _write_page(path: Path, values: tuple[str, bool] | None, embedded_delimiter:
         "status: review_required\n"
         "last_reviewed: '2026-08-03'\n"
         f"semantic_verification_claimed: {'true' if semantic_verification_claimed else 'false'}\n"
-        "---\n\nFixture content.\n",
+        "---\n\n" + body,
         encoding="utf-8",
     )
 
@@ -97,8 +123,15 @@ def run_case(case: dict) -> dict:
         specs_dir.mkdir(parents=True)
         quarantine_path.parent.mkdir(parents=True)
 
+        topics = case.get("topics", {})
         for name, values in case["pages"].items():
-            _write_page(specs_dir / name, values, case.get("embedded_delimiter", False))
+            _write_page(
+                specs_dir / name,
+                values,
+                case.get("embedded_delimiter", False),
+                topics.get(name, []),
+                case.get("omit_boundary", False),
+            )
 
         registry = {
             "schema_version": 1,
@@ -111,6 +144,22 @@ def run_case(case: dict) -> dict:
                 }
                 for name in case["registry"]
             ],
+            "behavioral_boundary_audit": {
+                "version": 1,
+                "boundary_headings": ["本頁不宣告", "Non-claims", "不宣告"],
+                "topic_terms": {
+                    "ltssm_transitions": ["LTSSM"],
+                    "link_power_behavior": ["U1", "U2", "U3", "LPM", "timeout", "latency"],
+                    "hub_enumeration": ["SET_HUB_DEPTH", "enumeration"],
+                },
+                "pages": [
+                    {
+                        "path": f"specs/usb3/{name}",
+                        "topics": topics.get(name, []),
+                    }
+                    for name in dict.fromkeys(case["registry"])
+                ],
+            },
         }
         quarantine_path.write_text(yaml.safe_dump(registry, sort_keys=False), encoding="utf-8")
         receipt_path = root / "receipt.json"
@@ -156,7 +205,7 @@ def main() -> int:
     summary = {
         "validator": "validate_usb3_semantic_quarantine.py",
         "smoke_runner": "smoke_validate_usb3_semantic_quarantine_fixtures.py",
-        "authority_ceiling": "structural_frontmatter_presence_only",
+        "authority_ceiling": "structural_frontmatter_and_behavioral_boundary_presence",
         "total_cases": len(results),
         "failed_cases": len(failed),
         "result": "PASS" if not failed else "FAIL",

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,7 @@ DEFAULT_QUARANTINE = ROOT / "contract" / "usb3_semantic_quarantine.yaml"
 DEFAULT_SPECS_DIR = ROOT / "specs" / "usb3"
 EXPECTED_CLAIM_LEVEL = "inferred"
 EXPECTED_SEMANTIC_FLAG = False
+BOUNDARY_HEADING_RE = re.compile(r"^#{1,6}\s+(.+?)\s*$")
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -51,6 +53,139 @@ def _relative_page_path(page_path: Path, repo_root: Path) -> str:
         return page_path.relative_to(repo_root).as_posix()
     except ValueError:
         return page_path.as_posix()
+
+
+def _boundary_section(page_path: Path, headings: list[str]) -> str | None:
+    lines = page_path.read_text(encoding="utf-8").splitlines()
+    expected_headings = {heading.casefold() for heading in headings}
+    start_index: int | None = None
+    for index, line in enumerate(lines):
+        match = BOUNDARY_HEADING_RE.match(line.strip())
+        if match and match.group(1).casefold() in expected_headings:
+            start_index = index + 1
+            break
+    if start_index is None:
+        return None
+
+    end_index = len(lines)
+    for index in range(start_index, len(lines)):
+        if BOUNDARY_HEADING_RE.match(lines[index].strip()):
+            end_index = index
+            break
+    return "\n".join(lines[start_index:end_index])
+
+
+def _validate_behavioral_boundary_audit(
+    document: dict[str, Any],
+    repo_root: Path,
+    declared_paths: set[str],
+    actual_paths: set[str],
+) -> list[dict[str, str]]:
+    audit = document.get("behavioral_boundary_audit")
+    errors: list[dict[str, str]] = []
+    audit_path = "contract/usb3_semantic_quarantine.yaml"
+    if not isinstance(audit, dict):
+        return [_error(
+            "BEHAVIORAL_AUDIT_MISSING",
+            audit_path,
+            "behavioral_boundary_audit must be a mapping",
+        )]
+
+    headings = audit.get("boundary_headings")
+    topic_terms = audit.get("topic_terms")
+    pages = audit.get("pages")
+    if (
+        not isinstance(headings, list)
+        or not all(isinstance(value, str) for value in headings)
+        or not isinstance(topic_terms, dict)
+        or not isinstance(pages, list)
+    ):
+        return [_error(
+            "BEHAVIORAL_AUDIT_INVALID",
+            audit_path,
+            "audit requires boundary_headings, topic_terms, and pages",
+        )]
+
+    audit_entries: dict[str, dict[str, Any]] = {}
+    for entry in pages:
+        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
+            errors.append(_error(
+                "BEHAVIORAL_AUDIT_ENTRY_INVALID",
+                audit_path,
+                "each audit page must contain a path",
+            ))
+            continue
+        path = Path(entry["path"]).as_posix()
+        if path in audit_entries:
+            errors.append(_error(
+                "BEHAVIORAL_AUDIT_PATH_DUPLICATE",
+                path,
+                "behavioral audit contains duplicate paths",
+            ))
+            continue
+        topics = entry.get("topics")
+        if not isinstance(topics, list) or not all(isinstance(value, str) for value in topics):
+            errors.append(_error(
+                "BEHAVIORAL_AUDIT_TOPICS_INVALID",
+                path,
+                "audit topics must be a list of strings",
+            ))
+            continue
+        audit_entries[path] = {"topics": topics}
+
+    audit_paths = set(audit_entries)
+    for path in sorted(declared_paths - audit_paths):
+        errors.append(_error(
+            "BEHAVIORAL_AUDIT_PAGE_MISSING",
+            path,
+            "quarantined page has no behavioral audit entry",
+        ))
+    for path in sorted(audit_paths - declared_paths):
+        errors.append(_error(
+            "BEHAVIORAL_AUDIT_PAGE_EXTRA",
+            path,
+            "behavioral audit page is not in quarantined_pages",
+        ))
+
+    known_topics = set(topic_terms)
+    for path, entry in sorted(audit_entries.items()):
+        page_topics = entry["topics"]
+        for topic in page_topics:
+            terms = topic_terms.get(topic)
+            if not isinstance(terms, list) or not all(isinstance(value, str) for value in terms):
+                errors.append(_error(
+                    "BEHAVIORAL_TOPIC_INVALID",
+                    path,
+                    f"topic {topic!r} is not defined in topic_terms",
+                ))
+                continue
+            if path not in actual_paths:
+                continue
+            page_path = repo_root / Path(path)
+            section = _boundary_section(page_path, headings)
+            if section is None:
+                errors.append(_error(
+                    "BEHAVIORAL_BOUNDARY_SECTION_MISSING",
+                    path,
+                    "behavioral page has no registered non-claim boundary heading",
+                ))
+                continue
+            section_folded = section.casefold()
+            if not any(term.casefold() in section_folded for term in terms):
+                errors.append(_error(
+                    "BEHAVIORAL_BOUNDARY_TERM_MISSING",
+                    path,
+                    f"boundary does not name topic {topic!r}",
+                ))
+
+        unknown_topics = set(page_topics) - known_topics
+        for topic in sorted(unknown_topics):
+            errors.append(_error(
+                "BEHAVIORAL_TOPIC_INVALID",
+                path,
+                f"topic {topic!r} is not defined in topic_terms",
+            ))
+    return errors
 
 
 def validate(quarantine_path: Path, repo_root: Path, specs_dir: Path) -> dict[str, Any]:
@@ -136,12 +271,19 @@ def validate(quarantine_path: Path, repo_root: Path, specs_dir: Path) -> dict[st
         if len(errors) == page_error_count:
             pages_valid += 1
 
+    errors.extend(_validate_behavioral_boundary_audit(
+        document,
+        repo_root,
+        declared_paths,
+        actual_paths,
+    ))
+
     return {
         "validator": "validate_usb3_semantic_quarantine.py",
         "quarantine_yaml": _relative_page_path(quarantine_path, repo_root),
         "specs_dir": _relative_page_path(specs_dir, repo_root),
-        "authority_ceiling": "structural_frontmatter_presence_only",
-        "note": "PASS verifies quarantine coverage and frontmatter markers only; it does not verify USB3 semantic claims.",
+        "authority_ceiling": "structural_frontmatter_and_behavioral_boundary_presence",
+        "note": "PASS verifies quarantine coverage, frontmatter markers, and registered non-claim boundary terms only; it does not verify USB3 semantic claims.",
         "result": "PASS" if not errors else "FAIL",
         "registry_pages": len(registry_paths),
         "pages_checked": pages_checked,
