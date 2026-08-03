@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "python -c \"import yaml,pathlib; yaml.safe_load(pathlib.Path('../.github/workflows/governance-validation.yml').read_text(encoding='utf-8')); print('workflow YAML parse PASS')\"",
+  "exit_code": 0,
+  "started_at": "2026-08-03T03:00:27Z",
+  "finished_at": "2026-08-03T03:00:27Z",
+  "runner": "copilot",
+  "linked_commit": "ca16f4051a47723a6d17494cf9978a3617d4cf41",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/receipt-ci-required-trigger-20260803.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
