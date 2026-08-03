@@ -13,36 +13,8 @@ env:
 on:
   push:
     branches: [main]
-    paths:
-      - ".github/workflows/governance-validation.yml"
-      - "scripts/**"
-      - "tests/**"
-      - "tables/**"
-      - "exports/**"
-      - "docs/**"
-      - "evidence/entry_verification_packets/**"
-      - "evidence/source_registry.yaml"
-      - "contract/**"
-      - "specs/**"
-      - "wiki/**"
-      - "mcp-server/**"
-      - "monitor/**"
   pull_request:
     branches: [main]
-    paths:
-      - ".github/workflows/governance-validation.yml"
-      - "scripts/**"
-      - "tests/**"
-      - "tables/**"
-      - "exports/**"
-      - "docs/**"
-      - "evidence/entry_verification_packets/**"
-      - "evidence/source_registry.yaml"
-      - "contract/**"
-      - "specs/**"
-      - "wiki/**"
-      - "mcp-server/**"
-      - "monitor/**"
   workflow_dispatch:
 
 jobs:
