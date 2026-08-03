@@ -1,0 +1,17 @@
+{
+  "receipt_schema": "test_evidence_receipt.v0.1",
+  "status": "report_only",
+  "command": "python ../scripts/validate_usb3_semantic_quarantine.py --quarantine contract/usb3_semantic_quarantine.yaml --specs-dir specs/usb3",
+  "exit_code": 0,
+  "started_at": "2026-08-03T03:22:42Z",
+  "finished_at": "2026-08-03T03:22:43Z",
+  "runner": "copilot",
+  "linked_commit": "175fc33c138ddff57fc66ee59da7d4c669b99626",
+  "output_artifacts": [
+    "artifacts/evidence/test-results/receipt-usb3-boundary-audit-20260803.txt"
+  ],
+  "cannot_claim": [
+    "semantic correctness of the tested behavior",
+    "receipt authenticity: every field is fabricatable by a direct writer"
+  ]
+}
