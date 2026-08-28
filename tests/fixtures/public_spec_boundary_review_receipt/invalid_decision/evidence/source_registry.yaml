@@ -1,0 +1,4 @@
+schema_version: 1
+sources:
+  - source_id: usb20_spec
+    title: USB 2.0 Specification

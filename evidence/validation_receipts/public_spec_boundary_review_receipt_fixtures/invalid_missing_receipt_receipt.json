@@ -1,7 +1,7 @@
 {
   "validator": "validate_public_spec_boundary_inventory",
-  "inventory": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_inventory\\invalid_review_state\\governance\\inventory.yaml",
-  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_inventory\\invalid_review_state\\evidence\\source_registry.yaml",
+  "inventory": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_review_receipt\\invalid_missing_receipt\\governance\\inventory.yaml",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_review_receipt\\invalid_missing_receipt\\evidence\\source_registry.yaml",
   "result": "FAIL",
   "authority_ceiling": "public_page_boundary_inventory_structural_only",
   "legal_clearance": "NOT CLAIMED",

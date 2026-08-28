@@ -1,0 +1,102 @@
+{
+  "validator": "validate_public_spec_boundary_inventory.py",
+  "smoke_runner": "smoke_validate_public_spec_boundary_review_receipt_fixtures.py",
+  "authority_ceiling": "review_receipt_content_binding_integrity_only",
+  "reviewer_identity_authentication": "NOT CLAIMED",
+  "legal_clearance": "NOT CLAIMED",
+  "total_cases": 6,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "invalid_arbitrary_self_attestation",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "INLINE_REVIEW_EVIDENCE_NOT_ALLOWED",
+        "REVIEW_RECEIPT_REQUIRED"
+      ],
+      "actual_error_codes": [
+        "INLINE_REVIEW_EVIDENCE_NOT_ALLOWED",
+        "REVIEW_RECEIPT_REQUIRED"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\invalid_arbitrary_self_attestation_receipt.json",
+      "receipt_parse_error": "",
+      "note": "inline self-attestation cannot approve a high-risk page"
+    },
+    {
+      "name": "invalid_missing_receipt",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "REVIEW_RECEIPT_REQUIRED"
+      ],
+      "actual_error_codes": [
+        "REVIEW_RECEIPT_REQUIRED"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\invalid_missing_receipt_receipt.json",
+      "receipt_parse_error": "",
+      "note": "cleared entries require a structured receipt"
+    },
+    {
+      "name": "invalid_wrong_page",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "REVIEW_RECEIPT_PAGE_MISMATCH"
+      ],
+      "actual_error_codes": [
+        "REVIEW_RECEIPT_PAGE_MISMATCH",
+        "REVIEW_RECEIPT_HASH_MISMATCH"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\invalid_wrong_page_receipt.json",
+      "receipt_parse_error": "",
+      "note": "receipt page must match its inventory entry"
+    },
+    {
+      "name": "invalid_stale_hash",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "REVIEW_RECEIPT_HASH_MISMATCH"
+      ],
+      "actual_error_codes": [
+        "REVIEW_RECEIPT_HASH_MISMATCH"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\invalid_stale_hash_receipt.json",
+      "receipt_parse_error": "",
+      "note": "old page content hash must fail closed"
+    },
+    {
+      "name": "invalid_decision",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "REVIEW_RECEIPT_DECISION_INVALID"
+      ],
+      "actual_error_codes": [
+        "REVIEW_RECEIPT_DECISION_INVALID",
+        "REVIEW_RECEIPT_HASH_MISMATCH"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\invalid_decision_receipt.json",
+      "receipt_parse_error": "",
+      "note": "only approved is an acceptable receipt decision"
+    },
+    {
+      "name": "valid_bound_receipt",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_review_receipt_fixtures\\valid_bound_receipt_receipt.json",
+      "receipt_parse_error": "",
+      "note": "structured receipt is bound to the current page content"
+    }
+  ]
+}

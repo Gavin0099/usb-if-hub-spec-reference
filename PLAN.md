@@ -28,6 +28,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 - Public spec boundary enforcement now has a machine-readable inventory and a
   required blocking page-accounting gate; page review remains pending and no
   legal or semantic clearance is claimed.
+- Review-state integrity now requires a structured receipt with a current-page
+  content hash for any future `reviewed` or `cleared` entry; reviewer identity
+  and legal clearance remain outside the validator claim ceiling.
 
 ## Completed Phases
 
@@ -995,6 +998,20 @@ Claim ceiling: public attribution, policy structure, and page-accounting
 controls only; no legal opinion, copyright clearance, plagiarism detection, or
 semantic verification upgrade.
 
+### Phase BOUNDARY-REVIEW-1 - Review Receipt Integrity
+
+- Replaced free-form inline review evidence with a structured receipt reference
+  for `reviewed` and `cleared` inventory entries.
+- Added receipt schema checks for page identity, approved decision, review type,
+  reviewer/date shape, source commit shape, and current-page SHA-256 binding.
+- Added regression fixtures for self-attestation, missing receipt, wrong page,
+  stale hash, invalid decision, and a valid bound receipt.
+- Kept all 118 live public pages at `pending`; no 118-page receipt batch or
+  legal clearance is claimed.
+
+Claim ceiling: receipt and content-binding integrity only; no reviewer identity
+authentication, content reproduction review, legal opinion, or hosted CI proof.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -1024,6 +1041,7 @@ semantic verification upgrade.
 - `python scripts\validate_canonical_entry_projection_invariants.py`
 - `python scripts\validate_public_spec_copy_policy.py`
 - `python scripts\validate_public_spec_boundary_inventory.py`
+- `python scripts\smoke_validate_public_spec_boundary_review_receipt_fixtures.py`
 - `python scripts\smoke_consumer_integration_fixtures.py`
 - `python scripts\smoke_validate_public_spec_copy_policy_fixtures.py`
 - `python scripts\smoke_validate_public_spec_boundary_inventory_fixtures.py`

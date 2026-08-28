@@ -1,0 +1,13 @@
+{
+  "validator": "validate_public_spec_boundary_inventory",
+  "inventory": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_review_receipt\\valid_bound_receipt\\governance\\inventory.yaml",
+  "source_registry": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_boundary_review_receipt\\valid_bound_receipt\\evidence\\source_registry.yaml",
+  "result": "PASS",
+  "authority_ceiling": "public_page_boundary_inventory_structural_only",
+  "legal_clearance": "NOT CLAIMED",
+  "semantic_copy_detection": "NOT CLAIMED",
+  "does_not_modify_public_content": true,
+  "checked_pages": 1,
+  "inventory_pages": 1,
+  "errors": []
+}

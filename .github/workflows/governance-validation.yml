@@ -85,6 +85,9 @@ jobs:
       - name: Public Spec boundary inventory fixture smoke
         run: python scripts/smoke_validate_public_spec_boundary_inventory_fixtures.py
 
+      - name: Public Spec boundary review receipt fixture smoke
+        run: python scripts/smoke_validate_public_spec_boundary_review_receipt_fixtures.py
+
       - name: Public Spec boundary inventory validation
         run: python scripts/validate_public_spec_boundary_inventory.py \
           --inventory governance/public_spec_boundary_inventory.yaml \
@@ -171,6 +174,7 @@ jobs:
             evidence/validation_receipt_usb2_completion_status_surface.json
             evidence/validation_receipt_public_spec_boundary_inventory.json
             evidence/validation_receipt_public_spec_boundary_inventory_fixtures.json
+            evidence/validation_receipt_public_spec_boundary_review_receipt_fixtures.json
             evidence/validation_receipt_usb3_semantic_quarantine_fixtures.json
             evidence/validation_receipt_source_monitor_parity_fixtures.json
             evidence/validation_receipt_source_drift_escalation_fixtures.json

@@ -13,6 +13,7 @@ documents:
   - governance/AI_GOVERNANCE_UPDATE_PROTOCOL.md
   - governance/F7_FULL_UPDATE.md
   - governance/PUBLIC_SPEC_COPY_POLICY.md
+  - governance/PUBLIC_SPEC_BOUNDARY_REVIEW_RECEIPT.md
   - governance/public_spec_boundary_inventory.yaml
   - specs/hub_descriptor.md
   - specs/port_status_bits.md

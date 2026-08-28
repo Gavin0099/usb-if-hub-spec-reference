@@ -1,0 +1,8 @@
+schema_version: 1
+page: specs/en/other.md
+decision: approved
+review_type: human_boundary_review
+reviewer: reviewer-1
+reviewed_at: "2026-08-28"
+content_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+source_commit: 281b327865b0f7888ad959cc0e6a980a8e78ad6b

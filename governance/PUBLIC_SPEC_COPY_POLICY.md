@@ -94,6 +94,12 @@ frontmatter and inventory source references. It does not inspect an external
 specification, detect plagiarism, decide copyrightability, or prove legal
 compliance.
 
+For `reviewed` or `cleared` entries, the inventory must reference a structured
+receipt described in `governance/PUBLIC_SPEC_BOUNDARY_REVIEW_RECEIPT.md`.
+The validator checks receipt schema, page identity, decision/type fields,
+source commit shape, and current-page SHA-256 binding. It does not authenticate
+reviewer identity or turn a receipt into legal clearance.
+
 `validate_public_spec_copy_policy.py` verifies that this policy and its public
 authority anchors remain structurally present. It does not detect plagiarism,
 decide copyrightability, or prove legal compliance.

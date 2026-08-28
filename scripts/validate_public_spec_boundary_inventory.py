@@ -12,9 +12,11 @@ detect plagiarism, decide copyrightability, or grant legal clearance.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -34,7 +36,11 @@ ALLOWED_RISK_CLASSES = {
     "high_density_normative_table",
 }
 ALLOWED_REVIEW_STATES = {"pending", "reviewed", "cleared", "blocked"}
-HIGH_RISK_CLASSES = {"structured_spec_reproduction", "high_density_normative_table"}
+ALLOWED_REVIEW_TYPES = {"human_boundary_review"}
+SHA256_RE = re.compile(r"\A[a-f0-9]{64}\Z")
+COMMIT_SHA_RE = re.compile(r"\A[a-f0-9]{40}\Z")
+REVIEW_DATE_RE = re.compile(r"\A\d{4}-\d{2}-\d{2}\Z")
+REVIEW_RECEIPT_PREFIX = "governance/reviews/"
 
 
 def resolve_path(repo_root: Path, value: str | Path) -> Path:
@@ -88,6 +94,119 @@ def source_ids(source_registry: Any) -> set[str]:
         for source in sources
         if isinstance(source, dict) and source.get("source_id")
     }
+
+
+def validate_review_receipt(
+    repo_root: Path,
+    page: str,
+    page_path: Path,
+    entry: dict[str, Any],
+    fail: Any,
+) -> None:
+    """Validate a structured receipt without making an identity claim."""
+
+    if "review_evidence" in entry:
+        fail(
+            "INLINE_REVIEW_EVIDENCE_NOT_ALLOWED",
+            f"{page}: use review_receipt.path instead of inline review_evidence",
+        )
+
+    receipt_ref = entry.get("review_receipt")
+    if not isinstance(receipt_ref, dict):
+        fail("REVIEW_RECEIPT_REQUIRED", f"{page}: reviewed/cleared requires review_receipt.path")
+        return
+
+    receipt_path_value = receipt_ref.get("path")
+    if (
+        not isinstance(receipt_path_value, str)
+        or not is_safe_relative_path(receipt_path_value)
+        or not normalize_repo_path(receipt_path_value).startswith(REVIEW_RECEIPT_PREFIX)
+    ):
+        fail(
+            "REVIEW_RECEIPT_PATH_INVALID",
+            f"{page}: review receipt path must be under {REVIEW_RECEIPT_PREFIX}",
+        )
+        return
+
+    receipt_path = repo_root / Path(normalize_repo_path(receipt_path_value))
+    if not receipt_path.is_file():
+        fail("REVIEW_RECEIPT_MISSING", f"{page}: review receipt does not exist: {receipt_path_value}")
+        return
+
+    receipt, receipt_error = load_yaml(receipt_path)
+    if receipt_error or not isinstance(receipt, dict):
+        fail(
+            "REVIEW_RECEIPT_SCHEMA_INVALID",
+            f"{page}: review receipt must be a YAML mapping ({receipt_error or 'invalid root'})",
+        )
+        return
+
+    required_fields = {
+        "schema_version",
+        "page",
+        "decision",
+        "review_type",
+        "reviewer",
+        "reviewed_at",
+        "content_sha256",
+        "source_commit",
+    }
+    missing_fields = sorted(field for field in required_fields if field not in receipt)
+    if missing_fields:
+        fail(
+            "REVIEW_RECEIPT_SCHEMA_INVALID",
+            f"{page}: receipt missing fields: {', '.join(missing_fields)}",
+        )
+
+    if receipt.get("schema_version") != 1:
+        fail("REVIEW_RECEIPT_SCHEMA_INVALID", f"{page}: receipt schema_version must be 1")
+    if receipt.get("page") != page:
+        fail(
+            "REVIEW_RECEIPT_PAGE_MISMATCH",
+            f"{page}: receipt page is {receipt.get('page')!r}",
+        )
+    if receipt.get("decision") != "approved":
+        fail("REVIEW_RECEIPT_DECISION_INVALID", f"{page}: receipt decision must be approved")
+    if receipt.get("review_type") not in ALLOWED_REVIEW_TYPES:
+        fail(
+            "REVIEW_RECEIPT_TYPE_INVALID",
+            f"{page}: unsupported review_type: {receipt.get('review_type')!r}",
+        )
+
+    reviewer = receipt.get("reviewer")
+    if not isinstance(reviewer, str) or not reviewer.strip():
+        fail("REVIEW_RECEIPT_SCHEMA_INVALID", f"{page}: receipt reviewer is required")
+
+    reviewed_at = receipt.get("reviewed_at")
+    if (
+        not isinstance(reviewed_at, str)
+        or not REVIEW_DATE_RE.fullmatch(reviewed_at)
+        or _invalid_review_date(reviewed_at)
+    ):
+        fail("REVIEW_RECEIPT_DATE_INVALID", f"{page}: receipt reviewed_at must be YYYY-MM-DD")
+
+    content_hash = receipt.get("content_sha256")
+    if not isinstance(content_hash, str) or not SHA256_RE.fullmatch(content_hash):
+        fail("REVIEW_RECEIPT_HASH_INVALID", f"{page}: receipt content_sha256 must be 64 hex characters")
+    elif page_path.is_file():
+        actual_hash = hashlib.sha256(page_path.read_bytes()).hexdigest()
+        if content_hash.casefold() != actual_hash:
+            fail(
+                "REVIEW_RECEIPT_HASH_MISMATCH",
+                f"{page}: receipt content_sha256 does not match current page content",
+            )
+
+    source_commit = receipt.get("source_commit")
+    if not isinstance(source_commit, str) or not COMMIT_SHA_RE.fullmatch(source_commit):
+        fail("REVIEW_RECEIPT_SOURCE_COMMIT_INVALID", f"{page}: receipt source_commit must be a 40-hex SHA")
+
+
+def _invalid_review_date(value: str) -> bool:
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return True
+    return False
 
 
 def validate(
@@ -209,9 +328,12 @@ def validate(
             fail("LEGAL_CLEARANCE_CLAIM", f"{page}: legal clearance cannot be claimed")
 
         if review_status in {"reviewed", "cleared"}:
-            evidence = entry.get("review_evidence")
-            if not evidence or (isinstance(evidence, list) and not any(str(item).strip() for item in evidence)):
-                fail("CLEARED_REQUIRES_EVIDENCE", f"{page}: {review_status} requires review_evidence")
+            validate_review_receipt(repo_root, page, page_path, entry, fail)
+        elif "review_evidence" in entry:
+            fail(
+                "INLINE_REVIEW_EVIDENCE_NOT_ALLOWED",
+                f"{page}: use review_receipt.path instead of inline review_evidence",
+            )
 
         if refs:
             unknown = sorted(set(refs) - valid_source_ids)

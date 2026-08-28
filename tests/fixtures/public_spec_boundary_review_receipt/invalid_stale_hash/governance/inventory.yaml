@@ -1,0 +1,13 @@
+schema_version: 1
+public_root: specs
+legal_clearance: not_claimed
+no_source_allowed_pages: []
+entries:
+  - page: specs/en/page.md
+    source_refs:
+      - usb20_spec
+    source_scope: USB 2.0 Specification Rev 2.0
+    risk_class: high_density_normative_table
+    review_status: cleared
+    review_receipt:
+      path: governance/reviews/review.yaml

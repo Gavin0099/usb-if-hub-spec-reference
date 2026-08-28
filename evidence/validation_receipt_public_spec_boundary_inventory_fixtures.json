@@ -70,15 +70,15 @@
       "expected_exit": 1,
       "actual_exit": 1,
       "expected_error_codes": [
-        "CLEARED_REQUIRES_EVIDENCE"
+        "REVIEW_RECEIPT_REQUIRED"
       ],
       "actual_error_codes": [
-        "CLEARED_REQUIRES_EVIDENCE"
+        "REVIEW_RECEIPT_REQUIRED"
       ],
       "result": "PASS",
       "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_boundary_inventory_fixtures\\invalid_review_state_receipt.json",
       "receipt_parse_error": "",
-      "note": "cleared pages require review evidence"
+      "note": "cleared pages require a structured review receipt"
     },
     {
       "name": "invalid_risk_class",
