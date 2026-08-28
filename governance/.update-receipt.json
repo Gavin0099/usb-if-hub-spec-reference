@@ -10,7 +10,7 @@
   "lock_adopted_commit": "9b6d0826c23fae4ccc5a0398cf6f24ddf2a145ac",
   "lock_matches_checkout": true,
   "update_status": "already_current",
-  "generated_at_utc": "2026-08-28T09:08:59Z",
+  "generated_at_utc": "2026-08-28T09:10:56Z",
   "claim_boundary": [
     "receipt is review evidence, not proof",
     "no fetch truth is implied unless explicitly recorded",
