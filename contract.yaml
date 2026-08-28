@@ -12,6 +12,7 @@ documents:
   - governance/TRUST_BOUNDARY_TAXONOMY.md
   - governance/AI_GOVERNANCE_UPDATE_PROTOCOL.md
   - governance/F7_FULL_UPDATE.md
+  - governance/PUBLIC_SPEC_COPY_POLICY.md
   - specs/hub_descriptor.md
   - specs/port_status_bits.md
   - specs/hub_class_requests.md
@@ -39,3 +40,4 @@ validators:
   - scripts/validate_entry_verification_gate.py
   - scripts/validate_reviewed_boundary_lock.py
   - scripts/validate_canonical_entry_projection_invariants.py
+  - scripts/validate_public_spec_copy_policy.py

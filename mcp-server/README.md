@@ -1,4 +1,4 @@
-# USB-IF Hub Spec Reference — MCP Server
+# Unofficial USB Hub Engineering Reference — MCP Server
 
 > **Status**: Tier 1 (static identity) implementation. See
 > [../docs/mcp_proposal/README.md](../docs/mcp_proposal/README.md) for the
@@ -7,10 +7,14 @@
 > for the tool contract. **Not yet published/adopted** — this is a working
 > implementation used for pilot validation, not a released product.
 
-Exposes the repo's 15 governed USB 2.0 / USB 3.x hub spec tables
+Exposes this independent reference's 15 governed USB 2.0 / USB 3.x hub tables
 (`exports/hub_governed_surface_manifest.yaml`) as 9 read-only MCP tools over
 Streamable HTTP, so an MCP client (e.g. Microsoft Copilot Studio) can query
 field/bit/selector/request identity instead of reading raw YAML.
+
+This server is not affiliated with or endorsed by USB Implementers Forum, Inc.
+It exposes independently authored structured metadata only; the official USB
+specifications remain the authoritative source.
 
 The current implementation uses `@modelcontextprotocol/sdk` v1 and negotiates
 the legacy 2025-era protocol supported by the client. It does not claim MCP

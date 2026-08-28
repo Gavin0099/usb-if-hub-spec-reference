@@ -77,6 +77,9 @@ jobs:
       - name: Wiki source coverage fixture smoke
         run: python scripts/smoke_validate_wiki_source_coverage_fixtures.py
 
+      - name: Public Spec copy policy fixture smoke
+        run: python scripts/smoke_validate_public_spec_copy_policy_fixtures.py
+
       - name: Class request matrix fixture smoke
         run: python scripts/smoke_validate_class_request_matrix_fixtures.py
 
@@ -229,6 +232,13 @@ jobs:
             --source-registry evidence/source_registry.yaml \
             --monitor-registry monitor/monitored_sources.yaml \
             --receipt-out ci-receipts/source_monitor_parity.json
+
+      - name: Public Spec copy policy validation
+        continue-on-error: true
+        run: |
+          python scripts/validate_public_spec_copy_policy.py \
+            --policy governance/PUBLIC_SPEC_COPY_POLICY.md \
+            --receipt-out ci-receipts/public_spec_copy_policy.json
 
       - name: Source drift escalation report
         continue-on-error: true

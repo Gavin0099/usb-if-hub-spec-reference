@@ -1,0 +1,18 @@
+{
+  "validator": "validate_public_spec_copy_policy",
+  "policy": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_copy_policy\\invalid_missing_authority_anchor\\policy.md",
+  "result": "FAIL",
+  "authority_ceiling": "policy_structure_only",
+  "legal_review": "NOT CLAIMED",
+  "semantic_copy_detection": "NOT CLAIMED",
+  "errors": [
+    {
+      "code": "MISSING_AUTHORITY_ANCHOR",
+      "message": "missing authority/attribution anchor: independent, unofficial engineering reference"
+    },
+    {
+      "code": "MISSING_AUTHORITY_ANCHOR",
+      "message": "missing authority/attribution anchor: not affiliated with or endorsed by USB"
+    }
+  ]
+}

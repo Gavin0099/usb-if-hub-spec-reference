@@ -1,0 +1,69 @@
+{
+  "validator": "validate_public_spec_copy_policy.py",
+  "smoke_runner": "smoke_validate_public_spec_copy_policy_fixtures.py",
+  "authority_ceiling": "policy_structure_only",
+  "total_cases": 4,
+  "failed_cases": 0,
+  "result": "PASS",
+  "cases": [
+    {
+      "name": "valid_policy",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_error_codes": [],
+      "actual_error_codes": [],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_copy_policy_fixtures\\valid_policy_receipt.json",
+      "receipt_parse_error": "",
+      "note": "complete policy boundary and attribution anchors"
+    },
+    {
+      "name": "invalid_missing_must_not_rule",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "MISSING_MUST_NOT_RULE"
+      ],
+      "actual_error_codes": [
+        "MISSING_MUST_NOT_RULE"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_copy_policy_fixtures\\invalid_missing_must_not_rule_receipt.json",
+      "receipt_parse_error": "",
+      "note": "omitting a reproduction prohibition must fail"
+    },
+    {
+      "name": "invalid_missing_authority_anchor",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "MISSING_AUTHORITY_ANCHOR"
+      ],
+      "actual_error_codes": [
+        "MISSING_AUTHORITY_ANCHOR",
+        "MISSING_AUTHORITY_ANCHOR"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_copy_policy_fixtures\\invalid_missing_authority_anchor_receipt.json",
+      "receipt_parse_error": "",
+      "note": "omitting the non-affiliation boundary must fail"
+    },
+    {
+      "name": "invalid_missing_licensing_boundary",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_error_codes": [
+        "MISSING_LICENSING_BOUNDARY"
+      ],
+      "actual_error_codes": [
+        "MISSING_LICENSING_BOUNDARY",
+        "MISSING_LICENSING_BOUNDARY",
+        "MISSING_LICENSING_BOUNDARY"
+      ],
+      "result": "PASS",
+      "receipt_path": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\evidence\\validation_receipts\\public_spec_copy_policy_fixtures\\invalid_missing_licensing_boundary_receipt.json",
+      "receipt_parse_error": "",
+      "note": "omitting the third-party licensing boundary must fail"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "validator": "validate_public_spec_copy_policy",
+  "policy": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_copy_policy\\invalid_missing_must_not_rule\\policy.md",
+  "result": "FAIL",
+  "authority_ceiling": "policy_structure_only",
+  "legal_review": "NOT CLAIMED",
+  "semantic_copy_detection": "NOT CLAIMED",
+  "errors": [
+    {
+      "code": "MISSING_MUST_NOT_RULE",
+      "message": "missing MUST NOT rule: reproduce full specification sections"
+    }
+  ]
+}

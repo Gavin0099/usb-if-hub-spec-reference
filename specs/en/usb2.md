@@ -1,5 +1,5 @@
 ---
-title: USB 2.0 Hub Reference
+title: USB 2.0 Hub Engineering Reference
 layout: doc
 claim_level: inferred
 spec_family: usb2
@@ -12,10 +12,11 @@ source_refs:
 semantic_verification_claimed: false
 ---
 
-# USB 2.0 Hub Reference
+# USB 2.0 Hub Engineering Reference
 
 > Scope: USB 2.0 Specification, Chapter 11 (Hub Class).
 > This page is the USB 2.0 topic index. For USB 3.2 SuperSpeed hubs, see [USB 3.2 / SuperSpeed Hub Reference](/en/usb3/).
+> This is an independent summary. For normative requirements, consult the [official USB 2.0 Specification](https://www.usb.org/document-library/usb-20-specification).
 
 ## Hub Class Topics
 

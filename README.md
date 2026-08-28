@@ -1,7 +1,12 @@
-# USB-IF Hub Spec Reference
+# Unofficial USB Hub Engineering Reference
 
-A reference guide for USB hub specification details — descriptor fields, class requests,
-and status bit definitions for USB 2.0 and USB 3.2 hubs.
+An independent, unofficial reference guide for USB hub specification details —
+descriptor fields, class requests, and status bit definitions for USB 2.0 and
+USB 3.2 hubs.
+
+This repository is not affiliated with or endorsed by USB Implementers Forum,
+Inc. USB specifications remain the authoritative source. For normative
+requirements, consult the [USB-IF Document Library](https://www.usb.org/document-library).
 
 ## What Is This?
 
@@ -37,8 +42,22 @@ Two things make this harder in practice:
 - USB electrical compliance or certification testing.
 - USB4 or Thunderbolt hub semantics.
 
-This repo clarifies what the spec says. It does not make decisions about firmware
-implementation, and it does not override engineering judgment on project-specific behavior.
+This repo clarifies selected standard semantics. It does not make decisions
+about firmware implementation, and it does not override engineering judgment
+on project-specific behavior.
+
+## Public reference and licensing boundary
+
+The public site contains independently authored summaries and structured
+engineering references. It must not be treated as an HTML replacement for the
+official specifications. The repository does not reproduce full specification
+sections, verbatim paragraphs, original figures or diagrams, large original
+tables, or a complete sequential reconstruction.
+
+Specification names, trademarks, and associated rights remain with their
+respective rights holders. Third-party standards and trademarks are not
+licensed by this repository. The contributor gate is defined in
+[`governance/PUBLIC_SPEC_COPY_POLICY.md`](governance/PUBLIC_SPEC_COPY_POLICY.md).
 
 ## Governed Surface Status
 
@@ -147,7 +166,7 @@ behavior decisions.
 ## Governance Import Status
 
 Registered framework topology: `ai-governance-framework` submodule pinned to
-[`9a78e76a5b4d379610f9248e312a0d4b67eb8008`](https://github.com/Gavin0099/ai-governance-framework/commit/9a78e76a5b4d379610f9248e312a0d4b67eb8008).
+[`9b6d0826c23fae4ccc5a0398cf6f24ddf2a145ac`](https://github.com/Gavin0099/ai-governance-framework/commit/9b6d0826c23fae4ccc5a0398cf6f24ddf2a145ac).
 The release line remains v1.2.0; the exact pin includes post-release main-branch
 fixes and policy updates and must not be described as a separately published release.
 

@@ -1,4 +1,4 @@
-> **Last Updated**: 2026-08-03
+> **Last Updated**: 2026-08-28
 > **Owner**: USB-IF Hub Spec Reference
 > **Freshness**: Sprint (14d)
 
@@ -22,6 +22,9 @@ does not govern firmware behavior and does not override confirmed project facts.
   identity, selector-name/value, or bit name and bit position.
 - No page-level, table-level, firmware-behavior, or full USB compliance
   verification is claimed.
+- Public-facing site identity now uses an independent, unofficial engineering
+  reference position with fixed non-affiliation, authority, and licensing
+  notices.
 
 ## Completed Phases
 
@@ -968,6 +971,22 @@ USB semantic claim; the 15 governed tables remain the sole source of truth.
 Claim ceiling: structural behavioral-boundary presence only. This phase does
 not verify USB 3.x semantics, promote any page, or release the quarantine.
 
+### Phase Public Reference Boundary - Independent Attribution and Copy Gate
+
+- Renamed the public site presentation to `Unofficial USB Hub Engineering
+  Reference` without changing the repository's technical reference scope.
+- Added bilingual reference notices, fixed footer attribution, and official
+  USB-IF source links.
+- Added `governance/PUBLIC_SPEC_COPY_POLICY.md` with explicit MUST NOT / MAY
+  boundaries for public specification-derived content and a third-party rights
+  licensing boundary.
+- Added a structural policy validator and required fixture smoke gate. The
+  validator does not detect plagiarism, decide copyrightability, or prove legal
+  compliance.
+
+Claim ceiling: public attribution and policy-structure controls only; no legal
+opinion, copyright clearance, or semantic verification upgrade.
+
 ## Active Validators
 
 - `python scripts\validate_wiki_frontmatter.py`
@@ -995,7 +1014,9 @@ not verify USB 3.x semantics, promote any page, or release the quarantine.
 - `python scripts\validate_hub_governed_surface_manifest.py`
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\validate_canonical_entry_projection_invariants.py`
+- `python scripts\validate_public_spec_copy_policy.py`
 - `python scripts\smoke_consumer_integration_fixtures.py`
+- `python scripts\smoke_validate_public_spec_copy_policy_fixtures.py`
 - `python scripts\smoke_manifest_consumer_reference.py`
 - `python scripts\smoke_validate_usb3_semantic_quarantine_fixtures.py`
 - `python scripts\smoke_validate_source_monitor_parity_fixtures.py`

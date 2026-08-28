@@ -1,12 +1,12 @@
 ---
 layout: home
-title: USB-IF Hub Spec Reference
+title: Unofficial USB Hub Engineering Reference
 titleTemplate: false
 
 hero:
-  name: USB-IF Hub Spec Reference
-  text: Specification reference for USB 2.0 and USB 3.2 hub firmware
-  tagline: "Engineers writing firmware or software for USB hubs often need to look up specific details from the USB specification — which bit means \"device connected\", what value a request code should have, what fields a descriptor must contain. The USB specification is a large document, and getting these details wrong causes subtle bugs. This site extracts those details into searchable pages for USB 2.0 and USB 3.2 hubs. It covers descriptor fields, class requests, port status bits, and feature selectors. It does not cover runtime timing, state machine behavior, host-side driver behavior, or compliance testing."
+  name: Unofficial USB Hub Engineering Reference
+  text: An independent reference for USB 2.0 and USB 3.2 hub engineering
+  tagline: "Engineers writing firmware or software for USB hubs often need to look up specific details from the USB specification — which bit means \"device connected\", what value a request code should have, what fields a descriptor must contain. This site reorganizes selected details into searchable pages for USB 2.0 and USB 3.2 hubs. It covers descriptor fields, class requests, port status bits, and feature selectors. It does not replace the official specifications or establish runtime behavior, firmware compliance, or certification."
   actions:
     - theme: brand
       text: USB 2.0 Hub Reference
@@ -42,4 +42,15 @@ features:
 
 > **What this is:** A structured reference for USB hub spec details — descriptor fields, request codes, and status bit definitions for USB 2.0 and USB 3.2. Each entry has a clear source and defined scope.
 >
-> **What this is not:** This is not a guide for hub runtime behavior. It does not cover timing, state machines, or compliance testing. It clarifies what the spec says; it does not override firmware design decisions.
+> **What this is not:** This is not a guide for hub runtime behavior. It does not cover timing, state machines, or compliance testing. It clarifies selected standard semantics; it does not replace the official specifications or override firmware design decisions.
+
+## Independent reference notice
+
+This is an independent, unofficial engineering reference and is not affiliated
+with or endorsed by USB Implementers Forum, Inc. USB specifications remain the
+authoritative source. For normative requirements, consult the [USB 2.0
+Specification in the USB-IF Document Library](https://www.usb.org/document-library/usb-20-specification)
+and the [USB-IF Document Library](https://www.usb.org/document-library).
+
+The [Reference Notice](/en/reference_notice) explains the source, attribution,
+licensing, and public-content boundaries used by this site.

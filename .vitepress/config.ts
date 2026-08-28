@@ -31,6 +31,7 @@ const ZH_LABELS: Labels = {
   usb_transfer_types: "USB Transfer Types",
   verification_status: "Verification Status",
   version_source_map: "Version Source Map",
+  reference_notice: "參考聲明",
   usb_packet_types: "USB Packet Types",
   usb_transactions: "USB Transactions",
   split_transaction_packets: "Split Transaction Packets",
@@ -91,6 +92,7 @@ const EN_LABELS: Labels = {
   usb_transfer_types: "USB Transfer Types",
   verification_status: "Verification Status",
   version_source_map: "Version Source Map",
+  reference_notice: "Reference Notice",
   usb_packet_types: "USB Packet Types",
   usb_transactions: "USB Transactions",
   split_transaction_packets: "Split Transaction Packets",
@@ -283,9 +285,9 @@ const enReferenceItems = [
 ];
 
 export default withMermaid(defineConfig({
-  title: "USB-IF Hub Spec Reference",
+  title: "Unofficial USB Hub Engineering Reference",
   description:
-    "USB Hub specification reference site for standards clarification only, claim_level: inferred",
+    "Independent, unofficial USB hub engineering reference for standards clarification only",
   srcDir: "./specs",
   base: process.env.BASE_URL ?? "/",
   head: [["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }]],
@@ -322,7 +324,7 @@ export default withMermaid(defineConfig({
         },
         footer: {
           message:
-            "本參考站是受治理的規格澄清層；不宣告完整 PDF section-level verification、runtime behavior model、firmware compliance truth，亦不宣告 USB-IF certification completeness。",
+            "獨立、非官方的 USB Hub 工程參考；本網站與 USB Implementers Forum, Inc. 無隸屬、認可或背書關係。USB 規格仍是權威來源，請參閱 <a href=\"https://www.usb.org/document-library\" target=\"_blank\" rel=\"noreferrer\">USB-IF Document Library</a>。",
         },
       },
     },
@@ -330,9 +332,9 @@ export default withMermaid(defineConfig({
       lang: "en-US",
       label: "English",
       link: "/en/",
-      title: "USB-IF Hub Spec Reference",
+      title: "Unofficial USB Hub Engineering Reference",
       description:
-        "USB Hub specification reference site for standards clarification only, claim_level: inferred",
+        "Independent, unofficial USB hub engineering reference for standards clarification only",
       themeConfig: {
         nav: [
           { text: "Home", link: "/en/" },
@@ -347,7 +349,7 @@ export default withMermaid(defineConfig({
         },
         footer: {
           message:
-            "This reference is a governed standards-clarification layer. It does not claim full PDF section-level verification, runtime behavior modeling, firmware compliance truth, or USB-IF certification completeness.",
+            "Independent, unofficial USB hub engineering reference. This site is not affiliated with or endorsed by USB Implementers Forum, Inc. USB specifications remain the authoritative source; consult the <a href=\"https://www.usb.org/document-library\" target=\"_blank\" rel=\"noreferrer\">USB-IF Document Library</a> for normative requirements.",
         },
       },
     },

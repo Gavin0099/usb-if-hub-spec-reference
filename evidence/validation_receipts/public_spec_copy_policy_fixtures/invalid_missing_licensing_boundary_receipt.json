@@ -1,0 +1,22 @@
+{
+  "validator": "validate_public_spec_copy_policy",
+  "policy": "E:\\BackUp\\Git_EE\\usb-if-hub-spec-reference\\tests\\fixtures\\public_spec_copy_policy\\invalid_missing_licensing_boundary\\policy.md",
+  "result": "FAIL",
+  "authority_ceiling": "policy_structure_only",
+  "legal_review": "NOT CLAIMED",
+  "semantic_copy_detection": "NOT CLAIMED",
+  "errors": [
+    {
+      "code": "MISSING_LICENSING_BOUNDARY",
+      "message": "missing licensing boundary: Third-party standards and trademarks are not licensed"
+    },
+    {
+      "code": "MISSING_LICENSING_BOUNDARY",
+      "message": "missing licensing boundary: blanket statement"
+    },
+    {
+      "code": "MISSING_LICENSING_BOUNDARY",
+      "message": "missing licensing boundary: file-specific license"
+    }
+  ]
+}

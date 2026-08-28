@@ -1,0 +1,9 @@
+{
+  "validator": "validate_public_spec_copy_policy",
+  "policy": "governance\\PUBLIC_SPEC_COPY_POLICY.md",
+  "result": "PASS",
+  "authority_ceiling": "policy_structure_only",
+  "legal_review": "NOT CLAIMED",
+  "semantic_copy_detection": "NOT CLAIMED",
+  "errors": []
+}
