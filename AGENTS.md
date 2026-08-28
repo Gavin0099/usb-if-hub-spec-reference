@@ -473,6 +473,18 @@ NOT CLAIMED unless separately implemented and validated:
 - artifact schema changed
 - existing memory was normalized
 
+## Repo-Specific Risk Levels
+<!-- governance:key=risk_levels -->
+
+- HIGH: changing normative USB reference claims, source traceability, or the
+  public Spec-copy boundary; these changes can mislead consuming firmware repos
+  or create affiliation/copyright confusion.
+- MEDIUM: changing machine-readable reference tables, validators, or consumer
+  access contracts; these changes can alter downstream interpretation without
+  changing firmware behavior directly.
+- LOW: documentation wording, navigation, and presentation-only changes that
+  preserve the reference boundary and do not alter technical claims.
+
 ## AI Governance Memory Workflow Router
 <!-- governance:key=memory_workflow -->
 
