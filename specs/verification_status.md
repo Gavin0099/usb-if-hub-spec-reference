@@ -4,6 +4,8 @@ claim_level: inferred
 status: review_required
 last_reviewed: "2026-06-06"
 semantic_verification_claimed: false
+source_refs:
+  - usb20_spec
 ---
 
 # Verification Status

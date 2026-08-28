@@ -6,7 +6,9 @@ env:
 #   fixture-smoke   — required deterministic gate. No network. Protects validator logic and the unified consumer contract.
 #   advisory        — informational. Real repo content. Does not block PRs.
 #
-# Authority ceiling: fixture-smoke certifies validator logic only.
+# Authority ceiling: fixture-smoke certifies validator logic and the public-page
+#                    inventory accounting gate. It does not certify legal or
+#                    semantic copyright clearance.
 #                    advisory certifies nothing ??receipts are evidence artifacts, not semantic correctness claims.
 # See: docs/local_governance_freeze_point.md
 
@@ -79,6 +81,14 @@ jobs:
 
       - name: Public Spec copy policy fixture smoke
         run: python scripts/smoke_validate_public_spec_copy_policy_fixtures.py
+
+      - name: Public Spec boundary inventory fixture smoke
+        run: python scripts/smoke_validate_public_spec_boundary_inventory_fixtures.py
+
+      - name: Public Spec boundary inventory validation
+        run: python scripts/validate_public_spec_boundary_inventory.py \
+          --inventory governance/public_spec_boundary_inventory.yaml \
+          --receipt-out evidence/validation_receipt_public_spec_boundary_inventory.json
 
       - name: Class request matrix fixture smoke
         run: python scripts/smoke_validate_class_request_matrix_fixtures.py
@@ -159,6 +169,8 @@ jobs:
             evidence/validation_receipt_usb2_claim_partition_packet.json
             evidence/validation_receipt_usb2_completion_surface.json
             evidence/validation_receipt_usb2_completion_status_surface.json
+            evidence/validation_receipt_public_spec_boundary_inventory.json
+            evidence/validation_receipt_public_spec_boundary_inventory_fixtures.json
             evidence/validation_receipt_usb3_semantic_quarantine_fixtures.json
             evidence/validation_receipt_source_monitor_parity_fixtures.json
             evidence/validation_receipt_source_drift_escalation_fixtures.json

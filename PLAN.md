@@ -25,6 +25,9 @@ does not govern firmware behavior and does not override confirmed project facts.
 - Public-facing site identity now uses an independent, unofficial engineering
   reference position with fixed non-affiliation, authority, and licensing
   notices.
+- Public spec boundary enforcement now has a machine-readable inventory and a
+  required blocking page-accounting gate; page review remains pending and no
+  legal or semantic clearance is claimed.
 
 ## Completed Phases
 
@@ -983,9 +986,14 @@ not verify USB 3.x semantics, promote any page, or release the quarantine.
 - Added a structural policy validator and required fixture smoke gate. The
   validator does not detect plagiarism, decide copyrightability, or prove legal
   compliance.
+- Added `governance/public_spec_boundary_inventory.yaml` and a blocking
+  structural inventory validator that accounts for every `specs/**/*.md` page,
+  checks source metadata alignment, and exercises failure fixtures for
+  untracked pages, source mismatch, missing metadata, and invalid review state.
 
-Claim ceiling: public attribution and policy-structure controls only; no legal
-opinion, copyright clearance, or semantic verification upgrade.
+Claim ceiling: public attribution, policy structure, and page-accounting
+controls only; no legal opinion, copyright clearance, plagiarism detection, or
+semantic verification upgrade.
 
 ## Active Validators
 
@@ -1015,8 +1023,10 @@ opinion, copyright clearance, or semantic verification upgrade.
 - `python scripts\probe_table_fingerprint.py --mode check --manifest exports\hub_governed_surface_manifest.yaml --baseline-in evidence\table_fingerprint_baseline.jsonl`
 - `python scripts\validate_canonical_entry_projection_invariants.py`
 - `python scripts\validate_public_spec_copy_policy.py`
+- `python scripts\validate_public_spec_boundary_inventory.py`
 - `python scripts\smoke_consumer_integration_fixtures.py`
 - `python scripts\smoke_validate_public_spec_copy_policy_fixtures.py`
+- `python scripts\smoke_validate_public_spec_boundary_inventory_fixtures.py`
 - `python scripts\smoke_manifest_consumer_reference.py`
 - `python scripts\smoke_validate_usb3_semantic_quarantine_fixtures.py`
 - `python scripts\smoke_validate_source_monitor_parity_fixtures.py`

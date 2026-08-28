@@ -1,0 +1,22 @@
+schema_version: 1
+public_root: specs
+legal_clearance: not_claimed
+risk_class_values:
+  - index_or_notice
+  - engineering_summary
+  - normative_prose
+  - structured_spec_reproduction
+  - high_density_normative_table
+review_status_values:
+  - pending
+  - reviewed
+  - cleared
+  - blocked
+no_source_allowed_pages: []
+entries:
+  - page: specs/en/page.md
+    source_refs:
+      - usb20_spec
+    source_scope: USB 2.0 Specification Rev 2.0
+    risk_class: structured_spec_reproduction
+    review_status: pending

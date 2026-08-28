@@ -1,0 +1,11 @@
+schema_version: 1
+public_root: specs
+legal_clearance: not_claimed
+no_source_allowed_pages: []
+entries:
+  - page: specs/en/page.md
+    source_refs:
+      - usb32_spec
+    source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+    risk_class: engineering_summary
+    review_status: pending

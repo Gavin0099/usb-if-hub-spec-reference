@@ -1,0 +1,730 @@
+schema_version: 1
+public_root: specs
+legal_clearance: not_claimed
+risk_class_values:
+- index_or_notice
+- engineering_summary
+- normative_prose
+- structured_spec_reproduction
+- high_density_normative_table
+review_status_values:
+- pending
+- reviewed
+- cleared
+- blocked
+no_source_allowed_pages:
+- specs/en/index.md
+- specs/en/reference_notice.md
+- specs/index.md
+- specs/reference_notice.md
+entries:
+- page: specs/en/escalation_table.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/feature_selectors.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/glossary.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/hs_detection.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/hub_class_requests.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/hub_compound_device.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/hub_configuration.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/hub_descriptor.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/hub_device_class.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/hub_enumeration.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/hub_interrupt_endpoint.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/hub_power_budget.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/hub_power_management.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/index.md
+  source_refs: []
+  source_scope: Public reference homepage and navigation; no single normative source
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/en/port_feature_change_vocabulary.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/port_indicators.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/port_state_machine.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/port_status_bits.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/reference_notice.md
+  source_refs: []
+  source_scope: Attribution and publication notice; no normative source
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/en/split_transaction_packets.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/standard_descriptors.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/standard_device_requests.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/transaction_translator.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb2.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/index.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/en/usb3/ss_feature_selectors.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_characteristics.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_class_requests.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_compound_device.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_hub_configuration.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_descriptor.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_device_class.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_enumeration.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_hub_interrupt_endpoint.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_hub_power.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_hub_power_budget.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_lpm.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_ltssm.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/usb3/ss_no_transaction_translator.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_packet_types.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_port_indicators.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_port_state_machine.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/usb3/ss_port_status_bits.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/usb3/ss_signaling.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_speed_detection.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_standard_descriptors.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/en/usb3/ss_standard_device_requests.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_test_modes.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_transactions.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb3/ss_usb_device_states.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb3/ss_usb_transfer_types.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb_device_states.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb_packet_types.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/en/usb_signaling.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb_test_modes.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb_transactions.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/usb_transfer_types.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/en/verification_status.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/en/version_source_map.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/escalation_table.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/feature_selectors.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/glossary.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/hs_detection.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/hub_class_requests.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/hub_compound_device.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/hub_configuration.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/hub_descriptor.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/hub_device_class.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/hub_enumeration.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/hub_interrupt_endpoint.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/hub_power_budget.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/hub_power_management.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/index.md
+  source_refs: []
+  source_scope: Public reference navigation surface; no single normative source
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/port_feature_change_vocabulary.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/port_indicators.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/port_state_machine.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/port_status_bits.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/reference_notice.md
+  source_refs: []
+  source_scope: Attribution and publication notice; no normative source
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/split_transaction_packets.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/standard_descriptors.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/standard_device_requests.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/transaction_translator.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb2.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/index.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/usb3/ss_feature_selectors.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_characteristics.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_class_requests.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_compound_device.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_hub_configuration.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_descriptor.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_device_class.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_enumeration.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_hub_interrupt_endpoint.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_hub_power.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_hub_power_budget.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_lpm.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_ltssm.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/usb3/ss_no_transaction_translator.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_packet_types.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_port_indicators.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_port_state_machine.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/usb3/ss_port_status_bits.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/usb3/ss_signaling.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_speed_detection.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_standard_descriptors.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: high_density_normative_table
+  review_status: pending
+- page: specs/usb3/ss_standard_device_requests.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_test_modes.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_transactions.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb3/ss_usb_device_states.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb3/ss_usb_transfer_types.md
+  source_refs:
+  - usb32_spec
+  source_scope: USB 3.2 Specification, Revision 1.1 (June 2022)
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb_device_states.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb_packet_types.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: structured_spec_reproduction
+  review_status: pending
+- page: specs/usb_signaling.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb_test_modes.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb_transactions.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/usb_transfer_types.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: normative_prose
+  review_status: pending
+- page: specs/verification_status.md
+  source_refs:
+  - usb20_spec
+  source_scope: USB 2.0 Specification Rev 2.0
+  risk_class: index_or_notice
+  review_status: pending
+- page: specs/version_source_map.md
+  source_refs:
+  - usb20_spec
+  - usb32_spec
+  source_scope: USB 2.0 + USB 3.2 specifications
+  risk_class: structured_spec_reproduction
+  review_status: pending

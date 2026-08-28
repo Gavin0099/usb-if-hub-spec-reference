@@ -80,6 +80,20 @@ must confirm:
 4. any uncertain boundary is marked for review and is not promoted by the
    structural validator into a legal or semantic approval.
 
+## Machine enforcement
+
+`governance/public_spec_boundary_inventory.yaml` accounts for every Markdown
+page under `specs/`. Each entry records its source references, source scope,
+risk class, and review status. The inventory is an accounting and metadata
+boundary; `review_status: cleared` is not legal clearance.
+
+`scripts/validate_public_spec_boundary_inventory.py` is the blocking structural
+gate for this inventory. It detects untracked or missing public pages, duplicate
+entries, invalid states, missing source metadata, and disagreement between page
+frontmatter and inventory source references. It does not inspect an external
+specification, detect plagiarism, decide copyrightability, or prove legal
+compliance.
+
 `validate_public_spec_copy_policy.py` verifies that this policy and its public
 authority anchors remain structurally present. It does not detect plagiarism,
 decide copyrightability, or prove legal compliance.

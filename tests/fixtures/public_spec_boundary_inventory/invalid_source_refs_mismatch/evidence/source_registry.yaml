@@ -1,0 +1,6 @@
+schema_version: 1
+sources:
+  - source_id: usb20_spec
+    title: USB 2.0 Specification
+  - source_id: usb32_spec
+    title: USB 3.2 Specification, Revision 1.1

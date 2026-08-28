@@ -3,6 +3,8 @@ layout: home
 title: USB 3.x / SuperSpeed Hub Reference
 titleTemplate: false
 spec_family: usb3
+source_refs:
+  - usb32_spec
 ---
 
 <script setup>
